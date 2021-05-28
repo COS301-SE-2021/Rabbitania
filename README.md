@@ -1,4 +1,2 @@
 
 # Rabbitania Beginning stages
-
-## Introduction 
