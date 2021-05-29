@@ -44,9 +44,6 @@
 
 <div style="margin-left: 4%">
 
-The following links are the live demo videos held on blackboard collaborate to present the different <br/>
-phases of the project to the stakeholders of the GeoCode project.
-
 * <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 1 </a>
 * <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 2 </a>
 * <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 3 </a>
@@ -55,4 +52,4 @@ phases of the project to the stakeholders of the GeoCode project.
 
 ## Project Management Tools
 
-- :open_book: [GitHub](https://github.com/COS301-SE-2021/CrowdBook_Alpha/projects
+- :open_book: [GitHub](https://github.com/COS301-SE-2021/Rabbitania/projects/1)
