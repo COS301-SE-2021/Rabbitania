@@ -1,18 +1,18 @@
-# Recommender Package
-
-Description of your package
+# Runtime Terrors - Rabbitania 
 
 ---
+# Rabbitania
 
-## Recommender Team Members
+
+## Runtime Terrors Team Members
 
 |                                                                **Team Member**                                                                |                                                                                  **Profiles**                                                                                  |                                     **Skills/Interest**                                     |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
 |![Firstname Lastname](https://i.ibb.co/whjLgpf/Joseph-Image.jpg "Joseph Harraway") <br/> Joseph Harraway <br/> u16049943  |       [GitHub](https://github.com/JojoMojo-svg) <br/> [Profile Page](https://JojoMojo-svg.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/joseph-harraway-968113210/) <br/> |  Software Development   <br/> Artificial Intelligence <br/>  Java <br/> C++ |
-![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> u16049943  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
-![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> u16049943  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
-![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> u16049943  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
-![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> u16049943  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
+![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> uXXXXXXXX  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
+![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> uXXXXXXXX  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
+![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> uXXXXXXXX  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
+![Firstname Lastname](Profile Picture "Firstname Lastname") <br/> Firstname Lastname <br/> uXXXXXXXX  |       [GitHub](github link) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
 
 ---
 
