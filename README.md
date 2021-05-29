@@ -1,10 +1,27 @@
-# Runtime Terrors - Rabbitania 
+<h1 style="text-align: center; font-weight: bold; ">Runtime Terrors - Retro Rabbit</h1> 
+
+
+<h1 style="text-align: center">Rabbitania</h1>
 
 ---
-# Rabbitania
+
+<div style="margin-left: 4%">
+
+- [Project Overview](#project-overview)
+- [Runtime Terrors Team Members](#Runtime Terrors Team Members)
+- [GitHub Management](#GitHub-Management)
+- [Documentation](#doc)
+- [Project Management Tools](#project-management-tools)
+- [Demo Video Links](#Demo-Video-Links)
+- [Mentors](#mentors)
 
 
+</div>
 
+---
+<div>
+
+</div>
 
 ## Runtime Terrors Team Members
 
@@ -18,15 +35,23 @@
 
 ---
 
-## Demo 1
+## GitHub-Management
 
-- :tv: [Demo Video](https://drive.google.com/open?id=)
-- :open_book: [Overleaf Document](https://www.overleaf.com/read/)
+---
 
-## Demo 2
 
-- :tv: [Demo Video](https://drive.google.com/open?id=)
-- :open_book: [Overleaf Document](https://www.overleaf.com/read/)
+## Demo-Video-Links
+
+<div style="margin-left: 4%">
+
+The following links are the live demo videos held on blackboard collaborate to present the different <br/>
+phases of the project to the stakeholders of the GeoCode project.
+
+* <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 1 </a>
+* <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 2 </a>
+* <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 3 </a>
+* <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 4 </a>
+</div>
 
 ## Project Management Tools
 
