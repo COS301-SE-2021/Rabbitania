@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="184adca4-66f4-4338-8b54-49bf6ca735ca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/backend_api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/backend_api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1tGaw0KcmldTjd7jru9mofXsymK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenDatabaseViewOnStart" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+</project>
