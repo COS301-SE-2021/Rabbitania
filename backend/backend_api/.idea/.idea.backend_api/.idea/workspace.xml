@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Installed EF and Npgsql">
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Added database connection and scaffolded dbcontext. Connection working.">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/backend_api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/backend_api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
@@ -16,7 +15,6 @@
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.assets.json" afterDir="false" />
@@ -62,6 +60,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected=".NET Launch Settings Profile.backend_api">
@@ -105,6 +104,8 @@
       <option name="presentableId" value="Default" />
       <updated>1622369723264</updated>
       <workItem from="1622369728737" duration="2388000" />
+      <workItem from="1622398080582" duration="3496000" />
+      <workItem from="1622403060973" duration="432000" />
       <workItem from="1622398080582" duration="2774000" />
       <workItem from="1622401438447" duration="21000" />
       <workItem from="1622401505756" duration="17000" />
@@ -117,7 +118,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622370084964</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added database connection and scaffolded dbcontext. Connection working.">
+      <created>1622401074425</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1622401074425</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added database connection and scaffolded dbcontext. Connection working.">
+      <created>1622401337006</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1622401337006</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +154,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Installed EF and Npgsql" />
-    <option name="LAST_COMMIT_MESSAGE" value="Installed EF and Npgsql" />
+    <MESSAGE value="Added database connection and scaffolded dbcontext. Connection working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added database connection and scaffolded dbcontext. Connection working." />
   </component>
 </project>
