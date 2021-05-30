@@ -45,9 +45,10 @@
 
 - master (build)
     - development (build)
-        - module−development (build)
-            - feature-module
-
+        - development_backend (build)
+            - development_backend_feature (build)
+        - development_frontend (build)
+            - development_frontend_feature (build)
 
 # Documentation
 
