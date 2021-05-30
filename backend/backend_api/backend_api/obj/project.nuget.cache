@@ -1,13 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "IhfOpe6aIQDwjxmsmQhsBjgaN7LRQzPUPTOkAH8HYvwK18qxu68DBk0Ef1dc4J8Sb1IutcxeshholHoG8cwdiA==",
+  "dgSpecHash": "4DOx8a5dxHpLBKgxZEQZhLQz96vViJK8UNf5L/tZ4DrWvjmh3oMQZ96CAFbsAVMAKOl4lXmw0UpGG/StSdgpdw==",
   "success": true,
   "projectFilePath": "C:\\Users\\James\\Desktop\\Work\\2021\\COS 301\\Capstone Project\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\James\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.6.0.0-preview.4.21253.1.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.abstractions.6.0.0-preview.4.21253.1.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.analyzers.6.0.0-preview.4.21253.1.nupkg.sha512",
+    "C:\\Users\\James\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.design.6.0.0-preview.4.21253.1.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.relational.6.0.0-preview.4.21253.1.nupkg.sha512",
+    "C:\\Users\\James\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.tools.6.0.0-preview.4.21253.1.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0-preview.4.21253.7\\microsoft.extensions.caching.abstractions.6.0.0-preview.4.21253.7.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.0-preview.4.21253.7\\microsoft.extensions.caching.memory.6.0.0-preview.4.21253.7.nupkg.sha512",
