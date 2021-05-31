@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Models
 {
-    public class UserContext : DbContext, IUserContext
+    public class DatabaseContext : DbContext, IDatabaseContext
     {
-        public UserContext(DbContextOptions options) : base(options)
+        public DatabaseContext(DbContextOptions options) : base(options)
         {
 
         }
 
-        public UserContext()
+        public DatabaseContext()
         {
 
         }
