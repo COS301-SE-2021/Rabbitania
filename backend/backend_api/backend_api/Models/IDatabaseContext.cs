@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace backend_api.Models
 {
-    public interface IUserContext
+    public interface IDatabaseContext
     {
         DbSet<User> users { get; set; }
 

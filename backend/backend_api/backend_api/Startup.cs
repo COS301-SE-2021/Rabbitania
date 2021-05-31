@@ -32,17 +32,17 @@ namespace backend_api
         public void ConfigureServices(IServiceCollection services)
         {
             /*
-            Line #3 defined the name of the context class to be added. In our cases it is UserContext.
+            Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.
             Line #4 states that we are using Npgsql as ourPostgres Database Provider.
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-            services.AddDbContext<UserContext>(options =>
+            services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName)));
 
-            services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
+            services.AddScoped<IDatabaseContext>(provider => provider.GetService<DatabaseContext>());
 
 
             services.AddControllers();
