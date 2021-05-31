@@ -12,7 +12,7 @@ namespace backend_api.Models
 
         public DatabaseContext()
         {
-
+            
         }
         public DbSet<User> users { get; set; }
 
