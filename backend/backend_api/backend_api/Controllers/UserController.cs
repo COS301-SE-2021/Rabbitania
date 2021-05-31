@@ -46,7 +46,7 @@ namespace backend_api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.UserId)
+            if (id != user.ID )
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace backend_api.Controllers
             db.users.Add(user);
             await db.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUser", new { id = user.ID }, user);
         }
 
         // DELETE: api/User/5
