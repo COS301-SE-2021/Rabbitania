@@ -2,8 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="184adca4-66f4-4338-8b54-49bf6ca735ca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.vs/backend_api/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vs/backend_api/v16/.suo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend_api/Models/IUserContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend_api/Models/UserContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bf51ecde-0b21-4f92-995b-7e2bbffe869d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bf51ecde-0b21-4f92-995b-7e2bbffe869d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bf51ecde-0b21-4f92-995b-7e2bbffe869d/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bf51ecde-0b21-4f92-995b-7e2bbffe869d/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/RepositoryContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +34,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1tGaw0KcmldTjd7jru9mofXsymK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -25,6 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.General" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
 </project>

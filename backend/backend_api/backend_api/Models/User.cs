@@ -15,5 +15,10 @@ namespace backend_api.Models
         public string password { get; set; }
         public bool isAdmin { get; set; }
         public string userType { get; set; }
+
+        public override string ToString()
+        {
+            return ID.ToString() + " " + firstName + " " + lastName;
+        }
     }
 }

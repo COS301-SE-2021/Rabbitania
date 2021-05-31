@@ -1406,9 +1406,9 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>810</IntrospectionStateNumber>
+      <IntrospectionStateNumber>10126</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16402|16404|1
+      <Relations>sequence|table|16419|16421|1
 </Relations>
     </database>
     <role id="4" parent="1" name="_dodb">
@@ -1487,7 +1487,7 @@ true posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>812</IntrospectionStateNumber>
+      <IntrospectionStateNumber>10127</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">
@@ -1587,85 +1587,115 @@ true posixrules
       <HandlerId>335</HandlerId>
       <Type>index</Type>
     </access-method>
-    <sequence id="32" parent="19" name="Users_user_id_seq">
-      <ObjectId>16402</ObjectId>
+    <sequence id="32" parent="19" name="users_ID_seq">
+      <ObjectId>16419</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>579</StateNumber>
+      <StateNumber>10123</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="33" parent="19" name="Users">
-      <ObjectId>16404</ObjectId>
+    <table id="33" parent="19" name="__EFMigrationsHistory">
+      <ObjectId>16414</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>579</StateNumber>
+      <StateNumber>10122</StateNumber>
     </table>
-    <column id="34" parent="33" name="user_id">
+    <table id="34" parent="19" name="users">
+      <ObjectId>16421</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>10123</StateNumber>
+    </table>
+    <column id="35" parent="33" name="MigrationId">
+      <Position>1</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>10122</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="36" parent="33" name="ProductVersion">
+      <Position>2</Position>
+      <DataType>varchar(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>10122</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="37" parent="33" name="PK___EFMigrationsHistory">
+      <ObjectId>16417</ObjectId>
+      <StateNumber>10122</StateNumber>
+      <ColNames>MigrationId</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>100</CollationIds>
+      <CollationNames>default</CollationNames>
+      <ClassIds>3126</ClassIds>
+    </index>
+    <key id="38" parent="33" name="PK___EFMigrationsHistory">
+      <ObjectId>16418</ObjectId>
+      <StateNumber>10122</StateNumber>
+      <ColNames>MigrationId</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
+    </key>
+    <column id="39" parent="34" name="ID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>579</StateNumber>
-      <DefaultExpression>nextval(&apos;&quot;Users_user_id_seq&quot;&apos;::regclass)</DefaultExpression>
+      <StateNumber>10123</StateNumber>
       <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="35" parent="33" name="firstname">
+    <column id="40" parent="34" name="email">
       <Position>2</Position>
-      <DataType>varchar|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>579</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>text|0s</DataType>
+      <StateNumber>10123</StateNumber>
+      <TypeId>25</TypeId>
     </column>
-    <column id="36" parent="33" name="lastname">
+    <column id="41" parent="34" name="firstName">
       <Position>3</Position>
-      <DataType>varchar|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>579</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>text|0s</DataType>
+      <StateNumber>10123</StateNumber>
+      <TypeId>25</TypeId>
     </column>
-    <column id="37" parent="33" name="email">
+    <column id="42" parent="34" name="lastName">
       <Position>4</Position>
-      <DataType>varchar|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>579</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>text|0s</DataType>
+      <StateNumber>10123</StateNumber>
+      <TypeId>25</TypeId>
     </column>
-    <column id="38" parent="33" name="password">
+    <column id="43" parent="34" name="password">
       <Position>5</Position>
-      <DataType>varchar|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>579</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>text|0s</DataType>
+      <StateNumber>10123</StateNumber>
+      <TypeId>25</TypeId>
     </column>
-    <column id="39" parent="33" name="user_type">
+    <column id="44" parent="34" name="isAdmin">
       <Position>6</Position>
-      <DataType>varchar|0s</DataType>
+      <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>579</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>10123</StateNumber>
+      <TypeId>16</TypeId>
     </column>
-    <index id="40" parent="33" name="users_pk">
-      <ObjectId>16412</ObjectId>
-      <StateNumber>581</StateNumber>
-      <ColNames>user_id</ColNames>
+    <column id="45" parent="34" name="userType">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>10123</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="46" parent="34" name="PK_users">
+      <ObjectId>16427</ObjectId>
+      <StateNumber>10123</StateNumber>
+      <ColNames>ID</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
       <AccessMethodId>403</AccessMethodId>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="41" parent="33" name="users_user_id_uindex">
-      <ObjectId>16411</ObjectId>
-      <StateNumber>580</StateNumber>
-      <ColNames>user_id</ColNames>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationIds>0</CollationIds>
-      <ClassIds>1978</ClassIds>
-    </index>
-    <key id="42" parent="33" name="users_pk">
-      <ObjectId>16413</ObjectId>
-      <StateNumber>581</StateNumber>
-      <ColNames>user_id</ColNames>
+    <key id="47" parent="34" name="PK_users">
+      <ObjectId>16428</ObjectId>
+      <StateNumber>10123</StateNumber>
+      <ColNames>ID</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>users_pk</UnderlyingIndexName>
+      <UnderlyingIndexName>PK_users</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

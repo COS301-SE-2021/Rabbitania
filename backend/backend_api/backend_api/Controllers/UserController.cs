@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend_api.Models;
 
+
 namespace backend_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private RepositoryContext db;
+        private UserContext db;
 
         public UserController()
         {
-            db = new RepositoryContext();
+            db = new UserContext();
         }
 
         // GET: api/User

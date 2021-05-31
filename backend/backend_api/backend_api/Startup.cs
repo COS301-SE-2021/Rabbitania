@@ -31,17 +31,31 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
+            Line #3 defined the name of the context class to be added. In our cases it is UserContext.
+            Line #4 states that we are using Npgsql as ourPostgres Database Provider.
+            Line #5 mentions the Connection string name that we have already defined in appsettings.json.
+            Line #6 Binds the Concrete Class and the Interface into our Application Container.
+            */
+            services.AddDbContext<UserContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
+
+            services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
+
+
             services.AddControllers();
+            #region Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "backend_api", Version = "v1"});
             });
+            #endregion
             services.AddAuthorization();
             
             //Npgsql connection for Postresql
-            var connString = Configuration["ConnectionStrings:DefaultConnection"];
-            var builder = new NpgsqlConnectionStringBuilder(connString);
-            services.AddDbContext<RepositoryContext>(i => i.UseNpgsql(builder.ConnectionString));
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,10 +64,11 @@ namespace backend_api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                #region Swagger
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "backend_api v1"));
             }
-
+            #endregion
             app.UseHttpsRedirection();
 
             app.UseRouting();
