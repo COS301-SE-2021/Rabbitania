@@ -7,32 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend_api.Models;
 
-
 namespace backend_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserContext db;
+        private readonly UserContext _context;
 
-        public UserController()
+        public UserController(UserContext context)
         {
-            db = new UserContext();
+            _context = context;
         }
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+        public async Task<ActionResult<IEnumerable<User>>> Getusers()
         {
-            return await db.users.ToListAsync();
+            return await _context.users.ToListAsync();
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await db.users.FindAsync(id);
+            var user = await _context.users.FindAsync(id);
 
             if (user == null)
             {
@@ -47,16 +46,16 @@ namespace backend_api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.ID )
+            if (id != user.ID)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -78,8 +77,8 @@ namespace backend_api.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            db.users.Add(user);
-            await db.SaveChangesAsync();
+            _context.users.Add(user);
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.ID }, user);
         }
@@ -88,21 +87,21 @@ namespace backend_api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await db.users.FindAsync(id);
+            var user = await _context.users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.users.Remove(user);
-            await db.SaveChangesAsync();
+            _context.users.Remove(user);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool UserExists(int id)
         {
-            return db.users.Any(e => e.ID == id);
+            return _context.users.Any(e => e.ID == id);
         }
     }
 }
