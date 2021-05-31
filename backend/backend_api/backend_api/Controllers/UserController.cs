@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using backend_api;
+using backend_api.Models;
 
 namespace backend_api.Controllers
 {
@@ -13,25 +13,25 @@ namespace backend_api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private defaultdbContext db;
+        private RepositoryContext db;
 
         public UserController()
         {
-            db = new defaultdbContext();
+            db = new RepositoryContext();
         }
 
         // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
-            return await db.Users.ToListAsync();
+            return await db.users.ToListAsync();
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await db.Users.FindAsync(id);
+            var user = await db.users.FindAsync(id);
 
             if (user == null)
             {
@@ -77,7 +77,7 @@ namespace backend_api.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            db.Users.Add(user);
+            db.users.Add(user);
             await db.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserId }, user);
@@ -87,13 +87,13 @@ namespace backend_api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await db.Users.FindAsync(id);
+            var user = await db.users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.users.Remove(user);
             await db.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace backend_api.Controllers
 
         private bool UserExists(int id)
         {
-            return db.Users.Any(e => e.UserId == id);
+            return db.users.Any(e => e.ID == id);
         }
     }
 }

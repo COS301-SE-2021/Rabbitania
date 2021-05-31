@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace backend_api
@@ -25,7 +27,7 @@ namespace backend_api
         }
 
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,6 +37,11 @@ namespace backend_api
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "backend_api", Version = "v1"});
             });
             services.AddAuthorization();
+            
+            //Npgsql connection for Postresql
+            var connString = Configuration["ConnectionStrings:DefaultConnection"];
+            var builder = new NpgsqlConnectionStringBuilder(connString);
+            services.AddDbContext<RepositoryContext>(i => i.UseNpgsql(builder.ConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

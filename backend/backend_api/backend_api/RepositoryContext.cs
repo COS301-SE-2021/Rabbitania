@@ -7,9 +7,9 @@ namespace backend_api.Models
     {
         public RepositoryContext(DbContextOptions options)
                     :base(options){}
-        
+        public RepositoryContext(){}
         public DbSet<User> users { get; set; }
         //other table dBsets go here
-
+        
     }
 }
