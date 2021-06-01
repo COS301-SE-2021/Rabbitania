@@ -12,7 +12,7 @@
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Rabbitania)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788293813-682cc4757b474114e1dd0230)
 
-## Project Description
+## Project Description 🐇
 <p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
 
 ---
@@ -26,7 +26,6 @@
 - [Project Management Tools](#project-management-tools)
 - [Demo Video Links](#Demo-Video-Links)
 
-
 </div>
 
 ---
@@ -38,13 +37,13 @@
 
 |                                                                **Team Members**                                                                |                                                                                  **Profiles**                                                                                  |                                     **Profile Description**                                     |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-|<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="200" height="250"> <br/> Joseph Harraway <br/> u16049943  |       [GitHub](https://github.com/JojoMojo-svg) <br/> [Profile Page](https://JojoMojo-svg.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/joseph-harraway-968113210/) <br/> |  Software Development   <br/> Artificial Intelligence <br/>  Java <br/> C++ |
-|<img src="https://i.ibb.co/2ZZ6Gcz/Matt.png" width="250" height="250"> <br/> Matthew Harty <br/> u17005486 | [GitHub](https://github.com/M-Harty21) <br/> [Profile Page](https://gitusername.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/matthew-harty-8a40a3204) <br/> | Full stack Web Devlopment<br>Sport |
-|<img src= "https://media-exp1.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1624492800&v=beta&t=WhbO7lyVpiaPDtohJWB8JqbQOFK1PJ7LZ5fYJVVoOPg" width="250" height="250"> <br/> Dean Nortje <br/> u17326622 <br/> | [GitHub](https://github.com/Deannortje) <br/> [Profile Page](https://Deannortje.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/dean-nortje-63419b210) <br/> | Gaming, Motocross, Formula 1, Rock Climbing and Drumming |
-|<img src="https://media-exp1.licdn.com/dms/image/C4D03AQGcLJTVqfu0yQ/profile-displayphoto-shrink_200_200/0/1619101131263?e=1627516800&v=beta&t=3Zd7eXUkQwAUBKb5PSjuSzDtydWomCrX9MmOreQcfNo" width="250" height="250"> <br/> James Hulett <br/> u16003251  |       [GitHub](https://github.com/jmshltt) <br/> [Profile Page](https://jmshltt.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/james-hulett-255748177/) <br/> | Gym <br/> Gaming <br/> Tennis <br/> 3D printing and modding mice |
-|<img src="https://media-exp1.licdn.com/dms/image/C4D03AQElb-QF13hlpA/profile-displayphoto-shrink_800_800/0/1621416128906?e=1627516800&v=beta&t=-g-O584VxhaZ6N7IsJ5ZNYBrX1I6XuNUlr_NDeEsW98" width="250" height="250"> <br/> DeVilliers Meiring <br/> u17074292  |       [GitHub](https://github.com/DeMeiring) <br/> [Profile Page](github profile page) <br/> [LinkedIn](linkedin url) <br/> | Skills and interests |
+|<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="100" height="150"><br/> Joseph Harraway <br/> u16049943  |       [GitHub](https://github.com/JojoMojo-svg) <br/> [Profile Page](https://JojoMojo-svg.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/joseph-harraway-968113210/) <br/> |  Software Development   <br/> Artificial Intelligence <br/>  Java <br/> C++ |
+|<img src="https://i.ibb.co/2ZZ6Gcz/Matt.png" width="150" height="150" style="border-radius:30%;"> <br/> Matthew Harty <br/> u17005486 | [GitHub](https://github.com/M-Harty21) <br/> [Profile Page](https://M-Harty21.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/matthew-harty-8a40a3204) <br/> | Full Stack Web Devlopment<br>Sport 🤽‍♂️🏌️|
+|<img src= "https://media-exp1.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1624492800&v=beta&t=WhbO7lyVpiaPDtohJWB8JqbQOFK1PJ7LZ5fYJVVoOPg" width="150" height="150" style="border-radius:30%;"> <br/> Dean Nortje <br/> u17326622 <br/> | [GitHub](https://github.com/Deannortje) <br/> [Profile Page](https://Deannortje.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/dean-nortje-63419b210) <br/> | Gaming<br> Motocross<br> Formula 1<br> Rock Climbing <br> Drumming |
+|<img src="https://media-exp1.licdn.com/dms/image/C4D03AQGcLJTVqfu0yQ/profile-displayphoto-shrink_200_200/0/1619101131263?e=1627516800&v=beta&t=3Zd7eXUkQwAUBKb5PSjuSzDtydWomCrX9MmOreQcfNo" width="150" height="150" style="border-radius:30%;"> <br/> James Hulett <br/> u16003251  |       [GitHub](https://github.com/jmshltt) <br/> [Profile Page](https://jmshltt.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/james-hulett-255748177/) <br/> | Gym <br/> Gaming <br/> Tennis <br/> 3D printing and modding mice |
+|<img src="https://media-exp1.licdn.com/dms/image/C4D03AQElb-QF13hlpA/profile-displayphoto-shrink_800_800/0/1621416128906?e=1627516800&v=beta&t=-g-O584VxhaZ6N7IsJ5ZNYBrX1I6XuNUlr_NDeEsW98" width="150" height="150" style="border-radius:30%;"> <br/> DeVilliers Meiring <br/> u17074292  |       [GitHub](https://github.com/DeMeiring) <br/> [Profile Page](https://DeMeiring.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/devilliers-meiring-b3b1661a0/) <br/> | Brazillian jiu-jitsu<br> Front-end Development <br> UX/UI Design|
 
----
+
 
 # GitHub-Management
 
@@ -52,14 +51,13 @@
 
 ### Branching Strategy
 
-*master (build)
-    - development (build)
-        -> development_backend
-            --> backend_subsystem
-        -> development_frontend
-            --> frontend_feature
-
-
+* master
+    * development
+        * development_backend
+            * backend_subsystem
+        * development_frontend
+            * frontend_subsystem  
+         
 # Documentation
 
 - [Software Requirements Specification - Rabbitania](https://github.com/COS301-SE-2021/Rabbitania/projects/1)
