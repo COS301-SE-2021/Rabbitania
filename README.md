@@ -55,9 +55,9 @@
 *master (build)
     - development (build)
         -> development_backend
-            --> development_backend_feature
+            --> backend_subsystem
         -> development_frontend
-            --> development_frontend_feature
+            --> frontend_feature
 
 
 # Documentation
