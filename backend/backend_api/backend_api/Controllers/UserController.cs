@@ -21,30 +21,30 @@ namespace backend_api.Controllers
         }
 
         // GET: api/User
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Getusers()
+        [HttpGet("/GetAllUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             return await _context.users.ToListAsync();
         }
 
         // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("/ViewUserDetails/{id}")]
+        public async Task<ActionResult<User>> ViewUserDetails(int userID)
         {
-            var user = await _context.users.FindAsync(id);
+            var returnedUser = await _context.users.FindAsync(userID);
 
-            if (user == null)
+            if (returnedUser == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return returnedUser;
         }
 
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("/EditUser/{id}")]
+        public async Task<IActionResult> EditUser(int id, User user)
         {
             if (id != user.UserID)
             {
@@ -74,17 +74,17 @@ namespace backend_api.Controllers
 
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [HttpPost ("/CreateNewUser")]
+        public async Task<ActionResult<User>> CreateNewUser(User user)
         {
             _context.users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserID }, user);
+            return CreatedAtAction("ViewUserDetails", new { id = user.UserID }, user);
         }
 
         // DELETE: api/User/5
-        [HttpDelete("{id}")]
+        [HttpDelete("/Delete/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _context.users.FindAsync(id);

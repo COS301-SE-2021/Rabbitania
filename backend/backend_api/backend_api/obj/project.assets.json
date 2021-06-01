@@ -7664,19 +7664,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\James\\.nuget\\packages\\": {}
+    "C:\\Users\\Joe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\James\\Desktop\\Work\\2021\\COS 301\\Capstone Project\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+      "projectUniqueName": "C:\\Users\\Joe\\RiderProjects\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
       "projectName": "backend_api",
-      "projectPath": "C:\\Users\\James\\Desktop\\Work\\2021\\COS 301\\Capstone Project\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
-      "packagesPath": "C:\\Users\\James\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\James\\Desktop\\Work\\2021\\COS 301\\Capstone Project\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
+      "projectPath": "C:\\Users\\Joe\\RiderProjects\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+      "packagesPath": "C:\\Users\\Joe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Joe\\RiderProjects\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\James\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Joe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
