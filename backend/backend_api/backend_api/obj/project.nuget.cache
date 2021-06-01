@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "LEb7H8FipQdLAaHznqbWh8zm7NJ6z7GEcPjf5HpTJM4fQgvohQLI+aDAVGY/19u9NTDswpB7xyVpTp1hIdEUbg==",
+  "dgSpecHash": "7K6RKX3h15n9BcsMcqTGrzelKPjT7Q1X/mOw2Gco7nnNflmvHmUDXyhECodrD1yrAGChFvJeCTZUYJn+ZCjjfw==",
   "success": true,
   "projectFilePath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\matth\\.nuget\\packages\\google.apis.core\\1.51.0\\google.apis.core.1.51.0.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
@@ -61,7 +60,7 @@
     "C:\\Users\\matth\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\5.0.2\\microsoft.visualstudio.web.codegenerators.mvc.5.0.2.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\matth\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\npgsql\\6.0.0-preview4\\npgsql.6.0.0-preview4.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.0-preview4\\npgsql.entityframeworkcore.postgresql.6.0.0-preview4.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
