@@ -4,14 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend_api.Models
 {
-    public class NoticeBoardThread
+    public class ForumThread
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int threadID { get; set; }
         
-        public string threadTitle{ get; set; }
+        public string threadTitle { get; set; }
         public string threadContent { get; set; }
+        public List<Comment> comments { get; set; }
         public User creator { get; set; }
         public int level { get; set; }
     }
