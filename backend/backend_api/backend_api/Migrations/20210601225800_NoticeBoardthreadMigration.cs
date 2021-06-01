@@ -4,10 +4,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Migrations
 {
-    public partial class NoticeBoardThreadMigration : Migration
+    public partial class NoticeBoardthreadMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "noticeBoardThreads",
+                columns: table => new
+                {
+                    threadID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    threadTitle = table.Column<string>(type: "text", nullable: true),
+                    threadContent = table.Column<string>(type: "text", nullable: true),
+                    UserID = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_noticeBoardThreads", x => x.threadID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
@@ -32,27 +47,6 @@ namespace backend_api.Migrations
                     table.PrimaryKey("PK_users", x => x.UserID);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "noticeBoardThreads",
-                columns: table => new
-                {
-                    threadID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    threadTitle = table.Column<string>(type: "text", nullable: true),
-                    threadContent = table.Column<string>(type: "text", nullable: true),
-                    creatorUserID = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_noticeBoardThreads", x => x.threadID);
-                    table.ForeignKey(
-                        name: "FK_noticeBoardThreads_users_creatorUserID",
-                        column: x => x.creatorUserID,
-                        principalTable: "users",
-                        principalColumn: "UserID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "users",
                 columns: new[] { "UserID", "email", "employeeLevel", "firstname", "isAdmin", "isOnline", "lastname", "officeLocation", "phoneNumber", "pinnedUserIDs", "userDescription", "userImage", "userRoles" },
@@ -66,11 +60,6 @@ namespace backend_api.Migrations
                     { 6, "josephharraway@retrorabbit.co.za", 2, "Joe", true, false, "Harraway", 0, "0112345667", null, "Love coding", "image5.png", 2 },
                     { 7, "devilliersmeiring@retrorabbit.co.za", 5, "DeVilliers", false, false, "Meiring", 0, "08611112567", null, "Fighting life", "image1.png", 0 }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_noticeBoardThreads_creatorUserID",
-                table: "noticeBoardThreads",
-                column: "creatorUserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

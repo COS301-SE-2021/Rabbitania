@@ -4,25 +4,23 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Resolved merge issues with Models">
-      <change afterPath="$PROJECT_DIR$/backend_api/Controllers/NoticeBoardThreadController.cs" afterDir="false" />
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_52__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_52__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_55__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_55__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Merge_at_2021_06_01_22_53__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Merge_at_2021_06_01_22_53__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Update_at_2021_06_01_22_52__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Update_at_2021_06_01_22_52__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601210057_NoticeBoardThreadMigration.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601210057_NoticeBoardThreadMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601210057_NoticeBoardThreadMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601225800_NoticeBoardthreadMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601210057_NoticeBoardThreadMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601225800_NoticeBoardthreadMigration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
     </list>
@@ -151,6 +149,7 @@
       <workItem from="1622489234954" duration="36000" />
       <workItem from="1622491132919" duration="759000" />
       <workItem from="1622492032559" duration="2304000" />
+      <workItem from="1622582531870" duration="2586000" />
     </task>
     <task id="LOCAL-00001" summary="Installed EF and Npgsql">
       <created>1622370084964</created>
@@ -222,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622581165459</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table">
+      <created>1622581862193</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622581862193</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +258,8 @@
     <MESSAGE value="Fixed and added UserController" />
     <MESSAGE value="Fixed bugs withing User subsystem" />
     <MESSAGE value="Resolved merge issues with Models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Resolved merge issues with Models" />
+    <MESSAGE value="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

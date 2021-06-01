@@ -12,9 +12,10 @@ namespace backend_api.Models
         
         public string threadTitle{ get; set; }
         public string threadContent { get; set; }
-        //TODO: change from user object to Foreign key User ID
-        //
-        public User creator { get; set; }
+        
+        [ForeignKey("User")]
+        public int UserID { get; set; }
+        
         private const int LEVEL = 4;
 
         public int getLevel()
