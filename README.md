@@ -7,7 +7,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/COS301-SE-2021/Rabbitania)](https://github.com/COS301-SE-2021/Rabbitania/issues)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Rabbitania)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/COS301-SE-2021/Rabbitania/workflow)
-[contributors-url]: https://github.com/COS301-SE-2021/Rabbitania/graphs/contributors
+![contributors-url](https://github.com/COS301-SE-2021/Rabbitania/graphs/contributors)
 
 <h2 style="text-align: center">Project Description</h2>
 <p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
