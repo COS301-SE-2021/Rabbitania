@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Merge backend_user into backend_noticeboard">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_13_34__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_13_34__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/UserRole.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +31,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/backend_api/Models/UserRole.cs" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/backend_api/Controllers/WeatherForecastController.cs" />
@@ -53,6 +51,7 @@
       <option value="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tFfNzlkLJk29q0xgUyp8uryD9N" />
@@ -130,6 +129,8 @@
       <workItem from="1622489234954" duration="36000" />
       <workItem from="1622491132919" duration="759000" />
       <workItem from="1622492032559" duration="2304000" />
+      <workItem from="1622565576681" duration="100000" />
+      <workItem from="1622565714945" duration="164000" />
     </task>
     <task id="LOCAL-00001" summary="Installed EF and Npgsql">
       <created>1622370084964</created>
@@ -208,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622565422354</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Merge backend_user into backend_noticeboard">
+      <created>1622565630689</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622565630689</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
