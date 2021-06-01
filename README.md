@@ -1,5 +1,5 @@
 
-## Rabbitania
+# Rabbitania
 
 [![codecov](https://codecov.io/gh/COS301-SE-2021/Rabbitania/branch/master/graph/badge.svg?token=IVQUTWBTTT)](https://codecov.io/gh/COS301-SE-2021/Rabbitania)
 [![CircleC>](https://circleci.com/gh/COS301-SE-2021/Rabbitania.svg?style=svg)](https://app.circleci.com/pipelines/github/COS301-SE-2021/Rabbitania)
