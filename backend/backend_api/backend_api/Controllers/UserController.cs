@@ -83,7 +83,7 @@ namespace backend_api.Controllers
             _context.users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("ViewUserDetails", new { id = user.UserID }, user);
+            return CreatedAtAction("ViewUserDetails", new { userID = user.UserID }, user);
         }
 
         // DELETE: api/User/5
