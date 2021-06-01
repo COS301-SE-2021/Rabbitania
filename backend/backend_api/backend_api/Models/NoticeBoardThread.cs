@@ -13,6 +13,11 @@ namespace backend_api.Models
         public string threadTitle{ get; set; }
         public string threadContent { get; set; }
         public User creator { get; set; }
-        public int level { get; set; }
+        private const int LEVEL = 4;
+
+        public int getLevel()
+        {
+            return LEVEL;
+        }
     }
 }
