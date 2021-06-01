@@ -4,25 +4,30 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Deleted UserRole.cs and updated NoticeBoard.cs to accommodate">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Updates">
+      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601204853_NoticeBoardThreadMigration.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601204853_NoticeBoardThreadMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/User/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,17 +63,13 @@
       <option value="$PROJECT_DIR$/backend_api/Migrations/UserContextModelSnapshot.cs" />
       <option value="$PROJECT_DIR$/backend_api/Controllers/ForumController.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/UserContext.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Startup.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Controllers/NoticBoardThreadController.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Controllers/NoticeBoardThreadController.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Migrations/20210601204853_NoticeBoardThreadMigration.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Startup.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tFfNzlkLJk29q0xgUyp8uryD9N" />
@@ -82,6 +83,8 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -146,8 +149,6 @@
       <workItem from="1622489234954" duration="36000" />
       <workItem from="1622491132919" duration="759000" />
       <workItem from="1622492032559" duration="2304000" />
-      <workItem from="1622565576681" duration="100000" />
-      <workItem from="1622565714945" duration="5668000" />
     </task>
     <task id="LOCAL-00001" summary="Installed EF and Npgsql">
       <created>1622370084964</created>
@@ -212,35 +213,7 @@
       <option name="project" value="LOCAL" />
       <updated>1622561940996</updated>
     </task>
-    <task id="LOCAL-00010" summary="Created gitignore">
-      <created>1622565397776</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1622565397776</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Merge backend_user into backend_noticeboard">
-      <created>1622565422354</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1622565422354</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Merge backend_user into backend_noticeboard">
-      <created>1622565630689</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1622565630689</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Deleted UserRole.cs and updated NoticeBoard.cs to accommodate">
-      <created>1622565999658</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1622565999658</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,10 +242,7 @@
     <MESSAGE value="Changed from DB first approach to code first with new RepositoryContext.cs in place of defaultdbContext.cs" />
     <MESSAGE value="Fixed and added UserController" />
     <MESSAGE value="Fixed bugs withing User subsystem" />
-    <MESSAGE value="Created gitignore" />
-    <MESSAGE value="Merge backend_user into backend_noticeboard" />
-    <MESSAGE value="Deleted UserRole.cs and updated NoticeBoard.cs to accommodate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Deleted UserRole.cs and updated NoticeBoard.cs to accommodate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs withing User subsystem" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
