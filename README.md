@@ -1,6 +1,10 @@
 
 # Rabbitania
 
+<img src="banners_logos/Rabbitania_Banner.png" width="150%" height="100%">
+<br>
+<br>
+
 [![codecov](https://codecov.io/gh/COS301-SE-2021/Rabbitania/branch/master/graph/badge.svg?token=IVQUTWBTTT)](https://codecov.io/gh/COS301-SE-2021/Rabbitania)
 [![CircleC>](https://circleci.com/gh/COS301-SE-2021/Rabbitania.svg?style=svg)](https://app.circleci.com/pipelines/github/COS301-SE-2021/Rabbitania)
 [![Requires](https://requires.io/github/COS301-SE-2021/Rabbitania/requirments.svg?branch=master)](https://requires.io/)
