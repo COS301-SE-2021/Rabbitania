@@ -13,14 +13,17 @@ namespace backend_api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        // Context variable
         private readonly DatabaseContext _context;
 
-        public UserController(DatabaseContext context)
-        {
-            _context = context;
+        public UserController(DatabaseContext context){
+            // Dependency Injection 
+            this._context = context;
         }
 
-        // GET: api/User
+        /// <summary>
+        /// My method does stuff.
+        /// </summary>
         [HttpGet("/GetAllUsers")]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
@@ -28,7 +31,7 @@ namespace backend_api.Controllers
         }
 
         // GET: api/User/5
-        [HttpGet("/ViewUserDetails/{id}")]
+        [HttpGet("/ViewUserDetails/{userID}")]
         public async Task<ActionResult<User>> ViewUserDetails(int userID)
         {
             var returnedUser = await _context.users.FindAsync(userID);
@@ -43,10 +46,10 @@ namespace backend_api.Controllers
 
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("/EditUser/{id}")]
-        public async Task<IActionResult> EditUser(int id, User user)
+        [HttpPut("/EditUser/{userID}")]
+        public async Task<IActionResult> EditUser(int userID, User user)
         {
-            if (id != user.UserID)
+            if (userID != user.UserID)
             {
                 return BadRequest();
             }
@@ -59,7 +62,7 @@ namespace backend_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(userID))
                 {
                     return NotFound();
                 }
@@ -84,10 +87,10 @@ namespace backend_api.Controllers
         }
 
         // DELETE: api/User/5
-        [HttpDelete("/Delete/{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("/Delete/{userID}")]
+        public async Task<IActionResult> DeleteUser(int userID)
         {
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.users.FindAsync(userID);
             if (user == null)
             {
                 return NotFound();
