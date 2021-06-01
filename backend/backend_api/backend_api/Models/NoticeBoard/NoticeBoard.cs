@@ -8,6 +8,5 @@ namespace backend_api.Models
     {
         public List<NoticeBoardThread> threads;
         public string title { get; set; }
-        public List<UserRoles> permittedUserRoles { get; set; }
     }
 }

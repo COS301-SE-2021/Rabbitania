@@ -14,7 +14,9 @@ namespace backend_api.Models
         {
             
         }
-        public DbSet<User> users { get; set; }
+        //public DbSet<User> users { get; set; }
+        
+        public DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
 
         public async Task<int> SaveChanges()
         {
