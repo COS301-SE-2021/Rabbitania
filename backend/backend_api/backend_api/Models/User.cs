@@ -14,7 +14,7 @@ namespace backend_api.Models
         public string lastName { get; set; }
         public string password { get; set; }
         public bool isAdmin { get; set; }
-        public string userType { get; set; }
+        public UserRole userType { get; set; }
 
         public override string ToString()
         {

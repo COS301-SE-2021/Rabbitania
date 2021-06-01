@@ -19,5 +19,10 @@ namespace backend_api.Models
         {
             return LEVEL;
         }
+
+        public NoticeBoardThread()
+        {
+            
+        }
     }
 }
