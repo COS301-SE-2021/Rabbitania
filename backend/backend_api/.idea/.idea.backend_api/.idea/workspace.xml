@@ -4,28 +4,7 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Fixed bugs withing User subsystem">
-      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210531205151_UserMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210531205151_UserMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/User/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Models/UserProfile/UserProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" afterDir="false" />
-    </list>
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Checked out branch" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,10 +25,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/matth/Desktop/Varsity/COS 301/Rabbitania/backend/backend_api/.idea/.idea.backend_api/.idea/dataSources/0a4c934d-082b-4cf5-baf5-df4681c4467e/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/matth/Desktop/Varsity/COS 301/Rabbitania/backend/backend_api/backend_api/Migrations/DatabaseContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
