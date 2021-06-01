@@ -1,0 +1,16 @@
+Index: backend_api/obj/rider.project.restore.info
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>16225649969976457
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend_api/obj/rider.project.restore.info b/backend_api/obj/rider.project.restore.info
+--- a/backend_api/obj/rider.project.restore.info	(revision b6a6051a584bf7a464400b4372510eda7634deba)
++++ b/backend_api/obj/rider.project.restore.info	(date 1622565326590)
+@@ -1,1 +1,2 @@
+-16225649969976457
+\ No newline at end of file
++16225649969976457
++16225652243917297
+\ No newline at end of file
