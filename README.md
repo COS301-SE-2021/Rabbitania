@@ -1,7 +1,7 @@
 
 # Rabbitania
 
-<img src="banners_logos/FinalRabbitania_Banner.png" width="150%" height="100%">
+<img src="images_banners_logos/Rabbitania_Banner.png" width="150%" height="100%">
 <br>
 <br>
 
