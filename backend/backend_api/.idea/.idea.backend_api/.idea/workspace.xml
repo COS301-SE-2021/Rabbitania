@@ -4,7 +4,11 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Checked out branch" />
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Merge backend_user into backend_noticeboard">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_13_34__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_13_34__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +29,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/backend_api/Models/UserRole.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -187,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622561940996</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Created gitignore">
+      <created>1622565397776</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1622565397776</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Merge backend_user into backend_noticeboard">
+      <created>1622565422354</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622565422354</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +237,9 @@
     <MESSAGE value="Changed from DB first approach to code first with new RepositoryContext.cs in place of defaultdbContext.cs" />
     <MESSAGE value="Fixed and added UserController" />
     <MESSAGE value="Fixed bugs withing User subsystem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bugs withing User subsystem" />
+    <MESSAGE value="Created gitignore" />
+    <MESSAGE value="Merge backend_user into backend_noticeboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge backend_user into backend_noticeboard" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
