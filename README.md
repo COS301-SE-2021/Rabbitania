@@ -4,6 +4,7 @@
 <h1 style="text-align: center">Rabbitania</h1>
 
 [![codecov](https://codecov.io/gh/COS301-SE-2021/Rabbitania/branch/master/graph/badge.svg?token=IVQUTWBTTT)](https://codecov.io/gh/COS301-SE-2021/Rabbitania)
+[![CircleC>](https://circleci.com/gh/COS301-SE-2021/Rabbitania.svg?style=svg)](https://app.circleci.com/pipelines/github/COS301-SE-2021/Rabbitania)
 
 <h2 style="text-align: center">Project Description</h2>
 <p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
