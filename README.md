@@ -52,12 +52,12 @@
 
 ### Branching Strategy
 
-- master (build)
+*master (build)
     - development (build)
-        -development_backend
-            - development_backend_feature
-        - development_frontend
-            - development_frontend_feature
+        -> development_backend
+            --> development_backend_feature
+        -> development_frontend
+            --> development_frontend_feature
 
 
 # Documentation
