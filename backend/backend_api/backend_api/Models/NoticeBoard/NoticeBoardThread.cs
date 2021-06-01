@@ -12,6 +12,8 @@ namespace backend_api.Models
         
         public string threadTitle{ get; set; }
         public string threadContent { get; set; }
+        //TODO: change from user object to Foreign key User ID
+        //
         public User creator { get; set; }
         private const int LEVEL = 4;
 
