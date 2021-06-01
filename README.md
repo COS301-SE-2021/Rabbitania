@@ -1,5 +1,5 @@
 
-# Rabbitania
+## Rabbitania
 
 [![codecov](https://codecov.io/gh/COS301-SE-2021/Rabbitania/branch/master/graph/badge.svg?token=IVQUTWBTTT)](https://codecov.io/gh/COS301-SE-2021/Rabbitania)
 [![CircleC>](https://circleci.com/gh/COS301-SE-2021/Rabbitania.svg?style=svg)](https://app.circleci.com/pipelines/github/COS301-SE-2021/Rabbitania)
@@ -29,7 +29,8 @@
 
 
 
-# Runtime_Terrors_Team_Members
+# Team Runtime Terrors
+## Team Members
 
 |                                                                **Team Members**                                                                |                                                                                  **Profiles**                                                                                  |                                     **Profile Description**                                     |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
@@ -43,20 +44,21 @@
 
 # GitHub-Management
 
-<p>Monorepo and Git Flow</p>
+## Monorepo and Git Flow
 
-<h3>Branching Strategy</h3>
+### Branching Strategy
 
 - master (build)
     - development (build)
-        - module−development (build)
-            - feature-module
+        -development_backend
+            - development_backend_feature
+        - development_frontend
+            - development_frontend_feature
 
 
 # Documentation
 
 - [Software Requirements Specification - Rabbitania](https://github.com/COS301-SE-2021/Rabbitania/projects/1)
-
 
 
 # Demo-Video-Links
