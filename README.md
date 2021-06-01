@@ -6,7 +6,6 @@
 [![Requires](https://requires.io/github/COS301-SE-2021/Rabbitania.svg?branch=master)
 [![GitHub issues](https://img.shields.io/github/issues/COS301-SE-2021/Rabbitania)](https://github.com/COS301-SE-2021/Rabbitania/issues)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Rabbitania)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/COS301-SE-2021/Rabbitania/master)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788293813-682cc4757b474114e1dd0230)
 
 ## Project Description
