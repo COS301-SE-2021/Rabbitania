@@ -4,15 +4,14 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Added TODOs">
-      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210602114123_DeletedThreadCreationDateAttribute.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210602114123_DeletedThreadCreationDateAttribute.cs" afterDir="false" />
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Completed TODOs for autoincrementation key and removed creationDate from NoticeBoardThread">
+      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210602115526_ReAddedThreadCreationDateAttribute.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210602115526_ReAddedThreadCreationDateAttribute.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/User/User.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
@@ -65,8 +64,8 @@
       <option value="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Controllers/NoticeBoardThreadController.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tFfNzlkLJk29q0xgUyp8uryD9N" />
@@ -147,7 +146,7 @@
       <workItem from="1622491132919" duration="759000" />
       <workItem from="1622492032559" duration="2304000" />
       <workItem from="1622582531870" duration="5377000" />
-      <workItem from="1622629537168" duration="2040000" />
+      <workItem from="1622629537168" duration="3313000" />
     </task>
     <task id="LOCAL-00001" summary="Installed EF and Npgsql">
       <created>1622370084964</created>
@@ -247,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622592824694</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Completed TODOs for autoincrementation key and removed creationDate from NoticeBoardThread">
+      <created>1622634826847</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1622634826847</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +287,8 @@
     <MESSAGE value="Added Foreign key Userid TO NoticeBoardThread.cs" />
     <MESSAGE value="Tested NoticeBoardThread Swagger endpoints" />
     <MESSAGE value="Added TODOs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added TODOs" />
+    <MESSAGE value="Completed TODOs for autoincrementation key and removed creationDate from NoticeBoardThread" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed TODOs for autoincrementation key and removed creationDate from NoticeBoardThread" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

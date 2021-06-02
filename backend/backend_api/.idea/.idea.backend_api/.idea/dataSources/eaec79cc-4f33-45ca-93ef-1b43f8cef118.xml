@@ -1406,7 +1406,7 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>24634</IntrospectionStateNumber>
+      <IntrospectionStateNumber>25047</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16589|16591|1
 </Relations>
@@ -1487,7 +1487,7 @@ true posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>24636</IntrospectionStateNumber>
+      <IntrospectionStateNumber>25049</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">
@@ -1601,7 +1601,7 @@ true posixrules
     <table id="34" parent="19" name="noticeBoardThreads">
       <ObjectId>16591</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>20234</StateNumber>
+      <StateNumber>25045</StateNumber>
     </table>
     <column id="35" parent="33" name="MigrationId">
       <Position>1</Position>
@@ -1662,7 +1662,19 @@ true posixrules
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="43" parent="34" name="PK_noticeBoardThreads">
+    <column id="43" parent="34" name="threadCreationDate">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>24720</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="44" parent="34" name="threadDueDate">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>25045</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="45" parent="34" name="PK_noticeBoardThreads">
       <ObjectId>16597</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>
@@ -1672,7 +1684,7 @@ true posixrules
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="44" parent="34" name="PK_noticeBoardThreads">
+    <key id="46" parent="34" name="PK_noticeBoardThreads">
       <ObjectId>16598</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>

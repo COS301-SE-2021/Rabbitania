@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Models;
 
 namespace backend_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210602115526_ReAddedThreadCreationDateAttribute")]
+    partial class ReAddedThreadCreationDateAttribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace backend_api.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("threadCreationDate")
-                        .HasColumnType("text");
-
-                    b.Property<string>("threadDueDate")
                         .HasColumnType("text");
 
                     b.Property<string>("threadTitle")
