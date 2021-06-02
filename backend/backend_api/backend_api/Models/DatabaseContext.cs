@@ -21,7 +21,7 @@ namespace backend_api.Models
         public DbSet<User> users { get; set; }
         
         // Creating Seed Mock Data for Users
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .HasData(
@@ -156,7 +156,7 @@ namespace backend_api.Models
                     officeLocation = (OfficeLocation) 0
                 }
             );
-        }
+        }*/
         public async Task<int> SaveChanges()
         {
             return await base.SaveChangesAsync();
