@@ -17,5 +17,18 @@ namespace backend_api.Tests
         {
             
         }
+        [Fact]
+        public void createUser()
+        {
+            User testUser = new User();
+            Assert.NotNull(testUser);
+        }
+
+        [Fact]
+        public void setUserID()
+        {
+            this._sut.UserID = 1;
+            Assert.Equal(1, _sut.UserID);
+        }
     }
 }
