@@ -13,40 +13,43 @@ namespace backend_api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        // Context variable
         private readonly DatabaseContext _context;
 
-        public UserController(DatabaseContext context)
-        {
-            _context = context;
+        public UserController(DatabaseContext context){
+            // Dependency Injection 
+            this._context = context;
         }
 
-        // GET: api/User
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Getusers()
+        /// <summary>
+        /// My method does stuff.
+        /// </summary>
+        [HttpGet("/GetAllUsers")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             return await _context.users.ToListAsync();
         }
 
         // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("/ViewUserDetails/{userID}")]
+        public async Task<ActionResult<User>> ViewUserDetails(int userID)
         {
-            var user = await _context.users.FindAsync(id);
+            var returnedUser = await _context.users.FindAsync(userID);
 
-            if (user == null)
+            if (returnedUser == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return returnedUser;
         }
 
         // PUT: api/User/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("/EditUser/{userID}")]
+        public async Task<IActionResult> EditUser(int userID, User user)
         {
-            if (id != user.ID)
+            if (userID != user.UserID)
             {
                 return BadRequest();
             }
@@ -59,7 +62,7 @@ namespace backend_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(userID))
                 {
                     return NotFound();
                 }
@@ -74,20 +77,20 @@ namespace backend_api.Controllers
 
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [HttpPost ("/CreateNewUser")]
+        public async Task<ActionResult<User>> CreateNewUser(User user)
         {
             _context.users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.ID }, user);
+            return CreatedAtAction("ViewUserDetails", new { userID = user.UserID }, user);
         }
 
         // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("/Delete/{userID}")]
+        public async Task<IActionResult> DeleteUser(int userID)
         {
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.users.FindAsync(userID);
             if (user == null)
             {
                 return NotFound();
@@ -101,7 +104,7 @@ namespace backend_api.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.users.Any(e => e.ID == id);
+            return _context.users.Any(e => e.UserID == id);
         }
     }
 }
