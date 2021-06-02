@@ -3,39 +3,23 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Models;
 
 namespace backend_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210602125409_UpdatedAttributeNamingConventions")]
+    partial class UpdatedAttributeNamingConventions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "6.0.0-preview.4.21253.1")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("backend_api.Models.NoticeBoard", b =>
-                {
-                    b.Property<int>("NoticeBoardID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<List<int>>("noticeBoardThreadIDs")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("title")
-                        .HasColumnType("text");
-
-                    b.HasKey("NoticeBoardID");
-
-                    b.ToTable("noticeBoard");
-                });
 
             modelBuilder.Entity("backend_api.Models.NoticeBoardThread", b =>
                 {

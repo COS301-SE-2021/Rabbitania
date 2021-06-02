@@ -10,11 +10,11 @@ namespace backend_api.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int threadID { get; set; }
+        public string ThreadTitle{ get; set; }
+        public string ThreadContent { get; set; }
+        public string ThreadCreationDate { get; set; }
+        public string ThreadDueDate { get; set; }
         
-        public string threadTitle{ get; set; }
-        public string threadContent { get; set; }
-        public string threadCreationDate { get; set; }
-        public string threadDueDate { get; set; }
         [ForeignKey("User")]
         public int UserID { get; set; }
         

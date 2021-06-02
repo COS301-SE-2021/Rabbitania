@@ -8,6 +8,7 @@ namespace backend_api.Models
         DbSet<User> users { get; set; }
         
         DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
+        DbSet<NoticeBoard> noticeBoard { get; set; }
         Task<int> SaveChanges();
     }
 }

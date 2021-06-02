@@ -1406,9 +1406,10 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>25047</IntrospectionStateNumber>
+      <IntrospectionStateNumber>25503</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16589|16591|1
+      <Relations>sequence|table|16654|16656|1
+sequence|table|16589|16591|1
 </Relations>
     </database>
     <role id="4" parent="1" name="_dodb">
@@ -1487,7 +1488,7 @@ true posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>25049</IntrospectionStateNumber>
+      <IntrospectionStateNumber>25504</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">
@@ -1593,31 +1594,42 @@ true posixrules
       <StateNumber>20205</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="33" parent="19" name="__EFMigrationsHistory">
+    <sequence id="33" parent="19" name="noticeBoard_NoticeBoardID_seq">
+      <ObjectId>16654</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>25395</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <table id="34" parent="19" name="__EFMigrationsHistory">
       <ObjectId>16414</ObjectId>
       <Owner>doadmin</Owner>
       <StateNumber>10122</StateNumber>
     </table>
-    <table id="34" parent="19" name="noticeBoardThreads">
+    <table id="35" parent="19" name="noticeBoard">
+      <ObjectId>16656</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>25493</StateNumber>
+    </table>
+    <table id="36" parent="19" name="noticeBoardThreads">
       <ObjectId>16591</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>25045</StateNumber>
+      <StateNumber>25419</StateNumber>
     </table>
-    <column id="35" parent="33" name="MigrationId">
+    <column id="37" parent="34" name="MigrationId">
       <Position>1</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>10122</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="36" parent="33" name="ProductVersion">
+    <column id="38" parent="34" name="ProductVersion">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>10122</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="37" parent="33" name="PK___EFMigrationsHistory">
+    <index id="39" parent="34" name="PK___EFMigrationsHistory">
       <ObjectId>16417</ObjectId>
       <StateNumber>10122</StateNumber>
       <ColNames>MigrationId</ColNames>
@@ -1628,14 +1640,51 @@ true posixrules
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="38" parent="33" name="PK___EFMigrationsHistory">
+    <key id="40" parent="34" name="PK___EFMigrationsHistory">
       <ObjectId>16418</ObjectId>
       <StateNumber>10122</StateNumber>
       <ColNames>MigrationId</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
     </key>
-    <column id="39" parent="34" name="threadID">
+    <column id="41" parent="35" name="NoticeBoardID">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>25395</StateNumber>
+      <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
+    </column>
+    <column id="42" parent="35" name="title">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>25395</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="43" parent="35" name="noticeBoardThreadIDs">
+      <Position>3</Position>
+      <DataType>integer[]|0s</DataType>
+      <StateNumber>25493</StateNumber>
+      <TypeId>1007</TypeId>
+    </column>
+    <index id="44" parent="35" name="PK_noticeBoard">
+      <ObjectId>16662</ObjectId>
+      <StateNumber>25395</StateNumber>
+      <ColNames>NoticeBoardID</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="45" parent="35" name="PK_noticeBoard">
+      <ObjectId>16663</ObjectId>
+      <StateNumber>25395</StateNumber>
+      <ColNames>NoticeBoardID</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_noticeBoard</UnderlyingIndexName>
+    </key>
+    <column id="46" parent="36" name="threadID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1643,38 +1692,38 @@ true posixrules
       <TypeId>23</TypeId>
       <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="40" parent="34" name="threadTitle">
+    <column id="47" parent="36" name="ThreadTitle">
       <Position>2</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>20205</StateNumber>
+      <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="41" parent="34" name="threadContent">
+    <column id="48" parent="36" name="ThreadContent">
       <Position>3</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>20205</StateNumber>
+      <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="42" parent="34" name="UserID">
+    <column id="49" parent="36" name="UserID">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="43" parent="34" name="threadCreationDate">
+    <column id="50" parent="36" name="ThreadCreationDate">
       <Position>6</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>24720</StateNumber>
+      <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="44" parent="34" name="threadDueDate">
+    <column id="51" parent="36" name="ThreadDueDate">
       <Position>7</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>25045</StateNumber>
+      <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="45" parent="34" name="PK_noticeBoardThreads">
+    <index id="52" parent="36" name="PK_noticeBoardThreads">
       <ObjectId>16597</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>
@@ -1684,7 +1733,7 @@ true posixrules
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="46" parent="34" name="PK_noticeBoardThreads">
+    <key id="53" parent="36" name="PK_noticeBoardThreads">
       <ObjectId>16598</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>

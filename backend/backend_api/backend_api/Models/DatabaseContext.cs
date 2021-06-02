@@ -22,6 +22,8 @@ namespace backend_api.Models
         
         public DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
         
+        public DbSet<NoticeBoard> noticeBoard { get; set; }
+        
         // Creating Seed Mock Data for Users
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
