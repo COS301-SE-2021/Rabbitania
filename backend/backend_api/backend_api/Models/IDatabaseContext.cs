@@ -7,8 +7,8 @@ namespace backend_api.Models
     {
         DbSet<User> users { get; set; }
         
-       
-
+        public DbSet<UserEmails> userEmails { get; set; }
+        
         Task<int> SaveChanges();
     }
 }

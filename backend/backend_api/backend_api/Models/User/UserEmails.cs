@@ -9,6 +9,6 @@ namespace backend_api.Models
          [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
          public int userEmailsID { get; set; }
 
-         public string[] userEmails { get; set; }
+         public string userEmail { get; set; }
     }
 }

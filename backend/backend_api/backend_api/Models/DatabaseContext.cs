@@ -6,7 +6,6 @@ namespace backend_api.Models
 {
     public class DatabaseContext : DbContext, IDatabaseContext
     {
-        private readonly List<int> mockIDs;
         public DatabaseContext(DbContextOptions options) : base(options)
         {
 
@@ -14,13 +13,11 @@ namespace backend_api.Models
 
         public DatabaseContext()
         {
-            this.mockIDs = new List<int>();
-            this.mockIDs.Add(1);
-            this.mockIDs.Add(2);
+            
         }
         public DbSet<User> users { get; set; }
         
-     
+        public DbSet<UserEmails> userEmails { get; set; }
         
         // Creating Seed Mock Data for Users
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)
