@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend_api.Models
 {
@@ -11,7 +12,7 @@ namespace backend_api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
         
-        public string email { get; set; }
+        //public string email { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         
@@ -32,8 +33,8 @@ namespace backend_api.Models
         public UserRoles userRoles { get; set; }
 
         public OfficeLocation officeLocation { get; set; }
-
-
+        public List<string> userEmails { get; set; }
+        
         public override string ToString()
         {
             return UserID.ToString() + " " + firstname + " " + lastname;

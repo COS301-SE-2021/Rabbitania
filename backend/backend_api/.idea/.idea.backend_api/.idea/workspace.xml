@@ -4,6 +4,15 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="4615a6e7-9673-4105-967e-d6a7de2043d9" name="Default Changelist" comment="Shelve">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Default_Changelist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Default_Changelist.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_13_34__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_13_34__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_52__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_52__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_55__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_01_22_55__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Merge_at_2021_06_01_18_34__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Merge_at_2021_06_01_18_34__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Merge_at_2021_06_01_22_53__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Merge_at_2021_06_01_22_53__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Update_at_2021_06_01_22_52__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Update_at_2021_06_01_22_52__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
     <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Updates">
       <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210602150942_userMigration.Designer.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210602150942_userMigration.cs" beforeDir="false" />
@@ -41,6 +50,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1003AE41-C1C6-41B1-8889-7EDA041418F7/4D/CSharpFormattingOptions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -143,6 +154,8 @@
       <workItem from="1622489234954" duration="36000" />
       <workItem from="1622491132919" duration="759000" />
       <workItem from="1622492032559" duration="2304000" />
+      <workItem from="1622582531870" duration="5377000" />
+      <workItem from="1622629537168" duration="6771000" />
     </task>
     <task id="LOCAL-00001" summary="Installed EF and Npgsql">
       <created>1622370084964</created>
@@ -207,14 +220,56 @@
       <option name="project" value="LOCAL" />
       <updated>1622561940996</updated>
     </task>
-    <task id="LOCAL-00010" summary="Updates">
-      <created>1622646638808</created>
+    <task id="LOCAL-00010" summary="Resolved merge issues with Models">
+      <created>1622581165458</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1622646638808</updated>
+      <updated>1622581165459</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table">
+      <created>1622581862193</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622581862193</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added Foreign key Userid TO NoticeBoardThread.cs">
+      <created>1622590294504</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1622590294504</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Tested NoticeBoardThread Swagger endpoints">
+      <created>1622592544954</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1622592544954</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added TODOs">
+      <created>1622592824694</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1622592824694</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Completed TODOs for autoincrementation key and removed creationDate from NoticeBoardThread">
+      <created>1622634826847</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1622634826847</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added threadDueDate to NoticeBoardThread.cs">
+      <created>1622638121987</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1622638121987</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,8 +298,14 @@
     <MESSAGE value="Changed from DB first approach to code first with new RepositoryContext.cs in place of defaultdbContext.cs" />
     <MESSAGE value="Fixed and added UserController" />
     <MESSAGE value="Fixed bugs withing User subsystem" />
-    <MESSAGE value="Updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates" />
+    <MESSAGE value="Resolved merge issues with Models" />
+    <MESSAGE value="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table" />
+    <MESSAGE value="Added Foreign key Userid TO NoticeBoardThread.cs" />
+    <MESSAGE value="Tested NoticeBoardThread Swagger endpoints" />
+    <MESSAGE value="Added TODOs" />
+    <MESSAGE value="Completed TODOs for autoincrementation key and removed creationDate from NoticeBoardThread" />
+    <MESSAGE value="Added threadDueDate to NoticeBoardThread.cs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added threadDueDate to NoticeBoardThread.cs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

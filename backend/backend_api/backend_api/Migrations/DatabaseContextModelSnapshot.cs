@@ -26,9 +26,6 @@ namespace backend_api.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("email")
-                        .HasColumnType("text");
-
                     b.Property<int>("employeeLevel")
                         .HasColumnType("integer");
 
@@ -55,6 +52,9 @@ namespace backend_api.Migrations
 
                     b.Property<string>("userDescription")
                         .HasColumnType("text");
+
+                    b.Property<List<string>>("userEmails")
+                        .HasColumnType("text[]");
 
                     b.Property<string>("userImage")
                         .HasColumnType("text");
