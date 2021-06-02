@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,68 +21,54 @@ namespace backend_api.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Notifications
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Notification>>> Getnotifications()
+        
+        /// <summary>
+        /// This function returns all of the notifications within the table
+        /// </summary>
+        /// <returns>A list of all of the notifications in the database</returns>
+        [HttpGet("/retrieveAllNotifications")]
+        public async Task<ActionResult<IEnumerable<Notification>>> retrieveAllNotifications()
         {
             return await _context.notifications.ToListAsync();
         }
 
-        // GET: api/Notifications/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Notification>> GetNotification(int id)
+        /// <summary>
+        /// Fetches the user in which the passed in ID correlates to. Then retreives all
+        /// of that users notifications.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns>list of all of a users notifications</returns>
+        [HttpGet("/retrieveAllUsersNotification/{userID}")]
+        public async Task<List<Notification>> retrieveAllUsersNotification(int userID)
         {
-            var notification = await _context.notifications.FindAsync(id);
-
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return notification;
-        }
-
-        // PUT: api/Notifications/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutNotification(int id, Notification notification)
-        {
-            if (id != notification.notificationID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(notification).State = EntityState.Modified;
-
+            // Linq/Lamba query to find all notifications where the FK UserID == userid given
             try
             {
-                await _context.SaveChangesAsync();
+                var selectedUserNotifications = await _context.notifications
+                    .Where(n => n.UserID == userID).ToListAsync();
+                
+                return selectedUserNotifications;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (WebException error)
             {
-                if (!NotificationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return null;
             }
-
-            return NoContent();
         }
 
-        // POST: api/Notifications
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Create notification, this is where the notification will be created either of type:
+        ///  - Push notification
+        ///  - Email notification
+        /// </summary>
+        /// <param name="notification"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Notification>> PostNotification(Notification notification)
         {
             _context.notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetNotification", new { id = notification.notificationID }, notification);
+            return CreatedAtAction("retrieveAllNotifications", new { id = notification.notificationID }, notification);
         }
 
         // DELETE: api/Notifications/5

@@ -6,7 +6,7 @@ namespace backend_api.Models
 {
     public interface IDatabaseContext
     {
-        DbSet<User> users { get; set; }
+        //DbSet<User> users { get; set; }
         
         DbSet<Notification> notifications { get; set; }
         

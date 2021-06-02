@@ -18,9 +18,8 @@ namespace backend_api.Models.Notifications
         public DateTime dateCreated { get; set; }
         
         // User ID foreign key
-        [ForeignKey("UserID")]
-        public int ID { get; set; }
-        public virtual User User { get; set; }
-        
+        [ForeignKey("UserID")] 
+        public int UserID { get; set; }
+
     }
 }

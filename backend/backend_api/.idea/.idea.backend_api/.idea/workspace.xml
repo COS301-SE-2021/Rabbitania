@@ -5,28 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Updates">
-      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/42fdbd42-2212-434a-beb6-25cb71f91372.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/42fdbd42-2212-434a-beb6-25cb71f91372/storage_v2/_src_/database/defaultdb.f1Z3pg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/42fdbd42-2212-434a-beb6-25cb71f91372/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/42fdbd42-2212-434a-beb6-25cb71f91372/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/42fdbd42-2212-434a-beb6-25cb71f91372/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601155312_UserMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Controllers/NotificationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Controllers/NotificationsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601124913_NotificationsMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601124913_NotificationsMigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/20210601203453_UserMigration.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/Notifications/Notification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/Notifications/Notification.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/User.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/backend_api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/backend_api.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.runtimeconfig.dev.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.genruntimeconfig.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/backend_api.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,12 +70,13 @@
       <option value="$PROJECT_DIR$/backend_api/Migrations/UserContextModelSnapshot.cs" />
       <option value="$PROJECT_DIR$/backend_api/Controllers/ForumController.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/UserContext.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" />
       <option value="$PROJECT_DIR$/backend_api/Startup.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Controllers/NotificationsController.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/IDatabaseContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" />
     </changedPaths>
   </component>
