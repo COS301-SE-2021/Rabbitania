@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Dynamic;
-using Microsoft.AspNetCore.Identity;
 
 namespace backend_api.Models
 {
@@ -33,7 +31,10 @@ namespace backend_api.Models
         public UserRoles userRoles { get; set; }
 
         public OfficeLocation officeLocation { get; set; }
-        public List<int> userEmails { get; set; }
+        // public List<int> userEmails { get; set; }
+        [ForeignKey("UserEmails")]
+        public int userEmailsID { get; set; }
+        
         
         public override string ToString()
         {
