@@ -6,13 +6,12 @@ namespace backend_api.Models
 {
     public class NoticeBoardThread
     {
-        //TODO: set threadID to auto-increment
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int threadID { get; set; }
         
         public string threadTitle{ get; set; }
-        public string threadCreationDate { get; set; }
         public string threadContent { get; set; }
         
         [ForeignKey("User")]

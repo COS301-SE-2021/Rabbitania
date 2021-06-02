@@ -9,7 +9,6 @@ namespace backend_api.Models
 {
     public class User
     {
-        //TODO: Set UserID to autoIncrement in DB
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
