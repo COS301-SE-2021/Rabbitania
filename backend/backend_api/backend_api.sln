@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend_api", "backend_api\backend_api.csproj", "{29A8924F-2CAC-4B51-8526-E841A68C1CE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend_api.Tests", "backend_api.Tests\backend_api.Tests.csproj", "{8CF62CBA-134E-4B00-B02C-5BB43FE250D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend_api.Tests", "backend_api.Tests\backend_api.Tests.csproj", "{08570503-8B7D-4DB8-A113-ECDED7E5ACFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{29A8924F-2CAC-4B51-8526-E841A68C1CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29A8924F-2CAC-4B51-8526-E841A68C1CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29A8924F-2CAC-4B51-8526-E841A68C1CE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CF62CBA-134E-4B00-B02C-5BB43FE250D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CF62CBA-134E-4B00-B02C-5BB43FE250D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CF62CBA-134E-4B00-B02C-5BB43FE250D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CF62CBA-134E-4B00-B02C-5BB43FE250D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08570503-8B7D-4DB8-A113-ECDED7E5ACFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08570503-8B7D-4DB8-A113-ECDED7E5ACFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08570503-8B7D-4DB8-A113-ECDED7E5ACFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08570503-8B7D-4DB8-A113-ECDED7E5ACFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
