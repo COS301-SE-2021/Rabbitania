@@ -11,6 +11,7 @@ namespace backend_api.Models
         public int threadID { get; set; }
         
         public string threadTitle{ get; set; }
+        public string threadCreationDate { get; set; }
         public string threadContent { get; set; }
         
         [ForeignKey("User")]
@@ -27,5 +28,6 @@ namespace backend_api.Models
         {
             
         }
+       
     }
 }

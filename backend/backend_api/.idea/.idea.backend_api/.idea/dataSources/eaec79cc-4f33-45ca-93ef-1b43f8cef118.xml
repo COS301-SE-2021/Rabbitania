@@ -1406,7 +1406,7 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>20207</IntrospectionStateNumber>
+      <IntrospectionStateNumber>20236</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16589|16591|1
 sequence|table|16599|16601|1
@@ -1488,7 +1488,7 @@ sequence|table|16599|16601|1
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>20208</IntrospectionStateNumber>
+      <IntrospectionStateNumber>20237</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">
@@ -1608,7 +1608,7 @@ sequence|table|16599|16601|1
     <table id="35" parent="19" name="noticeBoardThreads">
       <ObjectId>16591</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>20205</StateNumber>
+      <StateNumber>20234</StateNumber>
     </table>
     <table id="36" parent="19" name="users">
       <ObjectId>16601</ObjectId>
@@ -1674,7 +1674,13 @@ sequence|table|16599|16601|1
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="45" parent="35" name="PK_noticeBoardThreads">
+    <column id="45" parent="35" name="threadCreationDate">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>20234</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="46" parent="35" name="PK_noticeBoardThreads">
       <ObjectId>16597</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>
@@ -1684,14 +1690,14 @@ sequence|table|16599|16601|1
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="46" parent="35" name="PK_noticeBoardThreads">
+    <key id="47" parent="35" name="PK_noticeBoardThreads">
       <ObjectId>16598</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_noticeBoardThreads</UnderlyingIndexName>
     </key>
-    <column id="47" parent="36" name="UserID">
+    <column id="48" parent="36" name="UserID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1699,84 +1705,84 @@ sequence|table|16599|16601|1
       <TypeId>23</TypeId>
       <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="48" parent="36" name="email">
+    <column id="49" parent="36" name="email">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="49" parent="36" name="firstname">
+    <column id="50" parent="36" name="firstname">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="50" parent="36" name="lastname">
+    <column id="51" parent="36" name="lastname">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="51" parent="36" name="phoneNumber">
+    <column id="52" parent="36" name="phoneNumber">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="52" parent="36" name="pinnedUserIDs">
+    <column id="53" parent="36" name="pinnedUserIDs">
       <Position>6</Position>
       <DataType>integer[]|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>1007</TypeId>
     </column>
-    <column id="53" parent="36" name="userImage">
+    <column id="54" parent="36" name="userImage">
       <Position>7</Position>
       <DataType>text|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="54" parent="36" name="userDescription">
+    <column id="55" parent="36" name="userDescription">
       <Position>8</Position>
       <DataType>text|0s</DataType>
       <StateNumber>20205</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="55" parent="36" name="isOnline">
+    <column id="56" parent="36" name="isOnline">
       <Position>9</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="56" parent="36" name="isAdmin">
+    <column id="57" parent="36" name="isAdmin">
       <Position>10</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="57" parent="36" name="employeeLevel">
+    <column id="58" parent="36" name="employeeLevel">
       <Position>11</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="58" parent="36" name="userRoles">
+    <column id="59" parent="36" name="userRoles">
       <Position>12</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="59" parent="36" name="officeLocation">
+    <column id="60" parent="36" name="officeLocation">
       <Position>13</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="60" parent="36" name="PK_users">
+    <index id="61" parent="36" name="PK_users">
       <ObjectId>16607</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>UserID</ColNames>
@@ -1786,7 +1792,7 @@ sequence|table|16599|16601|1
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="61" parent="36" name="PK_users">
+    <key id="62" parent="36" name="PK_users">
       <ObjectId>16608</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>UserID</ColNames>
