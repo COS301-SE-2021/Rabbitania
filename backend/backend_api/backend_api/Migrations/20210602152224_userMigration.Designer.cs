@@ -10,7 +10,7 @@ using backend_api.Models;
 namespace backend_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210602150942_userMigration")]
+    [Migration("20210602152224_userMigration")]
     partial class userMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
