@@ -33,7 +33,7 @@ namespace backend_api.Models
         public UserRoles userRoles { get; set; }
 
         public OfficeLocation officeLocation { get; set; }
-        public List<string> userEmails { get; set; }
+        public List<int> userEmails { get; set; }
         
         public override string ToString()
         {
