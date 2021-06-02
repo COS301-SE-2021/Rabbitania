@@ -19,6 +19,51 @@ namespace backend_api.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0-preview.4.21253.1")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("backend_api.Models.NoticeBoard", b =>
+                {
+                    b.Property<int>("NoticeBoardID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<List<int>>("noticeBoardThreadIDs")
+                        .HasColumnType("integer[]");
+
+                    b.Property<string>("title")
+                        .HasColumnType("text");
+
+                    b.HasKey("NoticeBoardID");
+
+                    b.ToTable("noticeBoard");
+                });
+
+            modelBuilder.Entity("backend_api.Models.NoticeBoardThread", b =>
+                {
+                    b.Property<int>("threadID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ThreadContent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ThreadCreationDate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ThreadDueDate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ThreadTitle")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("threadID");
+
+                    b.ToTable("noticeBoardThreads");
+                });
+
             modelBuilder.Entity("backend_api.Models.User", b =>
                 {
                     b.Property<int>("UserID")

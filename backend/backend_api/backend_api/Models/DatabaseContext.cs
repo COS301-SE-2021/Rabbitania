@@ -6,6 +6,7 @@ namespace backend_api.Models
 {
     public class DatabaseContext : DbContext, IDatabaseContext
     {
+        private readonly List<int> mockIDs;
         public DatabaseContext(DbContextOptions options) : base(options)
         {
 
@@ -13,14 +14,19 @@ namespace backend_api.Models
 
         public DatabaseContext()
         {
-            
+            this.mockIDs = new List<int>();
+            this.mockIDs.Add(1);
+            this.mockIDs.Add(2);
         }
         public DbSet<User> users { get; set; }
         
         public DbSet<UserEmails> userEmails { get; set; }
+        public DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
+        
+        public DbSet<NoticeBoard> noticeBoard { get; set; }
         
         // Creating Seed Mock Data for Users
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .HasData(
@@ -155,7 +161,7 @@ namespace backend_api.Models
                     officeLocation = (OfficeLocation) 0
                 }
             );
-        }*/
+        }
         public async Task<int> SaveChanges()
         {
             return await base.SaveChangesAsync();

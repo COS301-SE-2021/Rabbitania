@@ -505,3 +505,5 @@ C:\Users\Joe\RiderProjects\Rabbitania\backend\backend_api\backend_api\obj\Debug\
 C:\Users\Joe\RiderProjects\Rabbitania\backend\backend_api\backend_api\obj\Debug\net5.0\ref\backend_api.dll
 C:\Users\Joe\RiderProjects\Rabbitania\backend\backend_api\backend_api\obj\Debug\net5.0\backend_api.pdb
 C:\Users\Joe\RiderProjects\Rabbitania\backend\backend_api\backend_api\obj\Debug\net5.0\backend_api.genruntimeconfig.cache
+C:\Users\James\Desktop\Work\2021\COS 301\Capstone Project\Rabbitania\backend\backend_api\backend_api\bin\Debug\net5.0\Google.Apis.Core.dll
+C:\Users\matth\Desktop\Varsity\COS 301\Rabbitania\backend\backend_api\backend_api\bin\Debug\net5.0\Google.Apis.Core.dll
