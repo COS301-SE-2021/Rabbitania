@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Dynamic;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace backend_api.Models
 {
     public class User
     {
+        //TODO: Set UserID to autoIncrement in DB
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
@@ -26,7 +29,7 @@ namespace backend_api.Models
         public bool isOnline { get; set; }
 
         public bool isAdmin { get; set; }
-
+        
         public int employeeLevel { get; set; }
         
         public UserRoles userRoles { get; set; }

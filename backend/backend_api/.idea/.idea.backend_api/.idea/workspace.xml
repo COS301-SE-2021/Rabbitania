@@ -4,21 +4,10 @@
     <projectFile>backend_api/backend_api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Added Foreign key Userid TO NoticeBoardThread.cs">
-      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601233411_AddCreationDateToNoticeBoardThread.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_api/Migrations/20210601233411_AddCreationDateToNoticeBoardThread.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/dataSources/eaec79cc-4f33-45ca-93ef-1b43f8cef118/storage_v2/_src_/database/defaultdb.f1Z3pg/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="0804d8e5-18c3-4790-8f2a-d04c834bbcbc" name="Default Changelist" comment="Tested NoticeBoardThread Swagger endpoints">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Migrations/DatabaseContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/bin/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/backend_api.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/obj/Debug/net5.0/ref/backend_api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_api/Models/User/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend_api/Models/User/User.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +47,6 @@
       <option value="$PROJECT_DIR$/backend_api/Controllers/ForumController.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/UserContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/UserRoles.cs" />
-      <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
       <option value="$PROJECT_DIR$/backend_api/Controllers/UserController.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/User/OfficeLocation.cs" />
       <option value="$PROJECT_DIR$/backend_api/Startup.cs" />
@@ -66,6 +54,7 @@
       <option value="$PROJECT_DIR$/backend_api/Models/DatabaseContext.cs" />
       <option value="$PROJECT_DIR$/backend_api/Controllers/NoticeBoardThreadController.cs" />
       <option value="$PROJECT_DIR$/backend_api/Models/NoticeBoard/NoticeBoardThread.cs" />
+      <option value="$PROJECT_DIR$/backend_api/Models/User/User.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tFfNzlkLJk29q0xgUyp8uryD9N" />
@@ -145,7 +134,7 @@
       <workItem from="1622489234954" duration="36000" />
       <workItem from="1622491132919" duration="759000" />
       <workItem from="1622492032559" duration="2304000" />
-      <workItem from="1622582531870" duration="4545000" />
+      <workItem from="1622582531870" duration="5107000" />
     </task>
     <task id="LOCAL-00001" summary="Installed EF and Npgsql">
       <created>1622370084964</created>
@@ -231,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622590294504</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Tested NoticeBoardThread Swagger endpoints">
+      <created>1622592544954</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1622592544954</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +259,8 @@
     <MESSAGE value="Resolved merge issues with Models" />
     <MESSAGE value="Added NoticeBoardThreadController as well as migrations for NoticeBoardThread to scaffold db table" />
     <MESSAGE value="Added Foreign key Userid TO NoticeBoardThread.cs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Foreign key Userid TO NoticeBoardThread.cs" />
+    <MESSAGE value="Tested NoticeBoardThread Swagger endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tested NoticeBoardThread Swagger endpoints" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
