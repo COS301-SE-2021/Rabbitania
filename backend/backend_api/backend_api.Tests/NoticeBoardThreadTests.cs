@@ -129,12 +129,37 @@ namespace backend_api.Tests
         [Fact]
         public async Task TestDeleteNoticeBoardThreadByID()
         {
-            //arrange
-            var request = "api/NoticeBoardThread/0";
-            //act
-            var response = await Client.DeleteAsync(request);
-            //assert
-            response.EnsureSuccessStatusCode();
+            var postRequest = new
+            {
+                Url = "api/NoticeBoardThread/",
+                Body = new
+                {
+                    threadID= 0,
+                    threadTitle= "newTestTitleForUpdate",
+                    threadContent= "test thread content",
+                    threadCreationDate= "2021/05/21",
+                    threadDueDate= "2021/05/21",
+                    userID= 0
+                }
+            };
+            
+            // Act
+            var postResponse = await Client.PostAsync(postRequest.Url, ContentHelper.GetStringContent(postRequest.Body));
+            var jsonFromPost = await postResponse.Content.ReadAsStringAsync();
+            NoticeBoardThread temp = await postResponse.Content.ReadAsAsync<NoticeBoardThread>();
+            
+
+            var deleteResponse = await Client.DeleteAsync(string.Format("api/NoticeBoardThread/{0}", temp.threadID));
+
+            // Assert
+            
+            //postResponse.EnsureSuccessStatusCode();
+            
+            Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
+            
+            //deleteResponse.EnsureSuccessStatusCode();
+            
+            Assert.Equal(HttpStatusCode.NoContent, deleteResponse.StatusCode);
         }
 
 

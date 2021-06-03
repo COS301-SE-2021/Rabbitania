@@ -521,3 +521,5 @@ D:\Rabbitania\backend\backend_api\backend_api.Tests\bin\Debug\net5.0\refs\System
 D:\Rabbitania\backend\backend_api\backend_api.Tests\bin\Debug\net5.0\refs\WindowsBase.dll
 D:\Rabbitania\backend\backend_api\backend_api.Tests\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Testing.dll
 D:\Rabbitania\backend\backend_api\backend_api.Tests\bin\Debug\net5.0\Microsoft.AspNetCore.TestHost.dll
+D:\Rabbitania\backend\backend_api\backend_api.Tests\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+D:\Rabbitania\backend\backend_api\backend_api.Tests\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

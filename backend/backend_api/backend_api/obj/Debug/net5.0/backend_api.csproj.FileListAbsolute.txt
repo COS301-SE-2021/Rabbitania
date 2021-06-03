@@ -679,3 +679,5 @@ D:\Rabbitania\backend\backend_api\backend_api\obj\Debug\net5.0\backend_api.pdb
 D:\Rabbitania\backend\backend_api\backend_api\obj\Debug\net5.0\backend_api.genruntimeconfig.cache
 C:\Users\James\Desktop\Work\2021\COS 301\Capstone Project\Rabbitania\backend\backend_api\backend_api\bin\Debug\net5.0\System.Net.Http.Formatting.dll
 C:\Users\James\Desktop\Work\2021\COS 301\Capstone Project\Rabbitania\backend\backend_api\backend_api\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\Rabbitania\backend\backend_api\backend_api\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+D:\Rabbitania\backend\backend_api\backend_api\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
