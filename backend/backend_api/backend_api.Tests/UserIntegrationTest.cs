@@ -35,20 +35,19 @@ namespace backend_api.Tests
             response.EnsureSuccessStatusCode();
             //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-        /*
         [Fact]
-        public async Task TestGetStockItemAsync()
+        public async Task TestGetUserAsync()
         {
             // Arrange
-            var request = "/api/v1/Warehouse/StockItem/1";
+            var request = "/api/User/1";
 
             // Act
             var response = await Client.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
+            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-        */
         [Fact]
         public async Task TestPostUserAsync()
         {
@@ -69,8 +68,7 @@ namespace backend_api.Tests
                     isAdmin = true,
                     employeeLevel = 4,
                     userRoles = 0,
-                    officeLocation = 0,
-                    userEmails = new List<int>{1},
+                    officeLocation = 0
                     //Tags = "[\"32GB\",\"USB Powered\"]"
                     /*"userID": 0,
                     "firstname": "string",
@@ -99,6 +97,39 @@ namespace backend_api.Tests
             // Assert
              response.EnsureSuccessStatusCode();
             //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+        [Fact]
+        public async Task TestPostUserExistsAsync()
+        {
+            // Arrange
+            var request = new
+            {
+                Url = "/api/User",
+                Body = new
+                {
+                    userID = 1,
+                    firstname = "Integration",
+                    lastname = "test2",
+                    phoneNumber = "1234567890",
+                    pinnedUserIDs = new List<int>{1,2},
+                    userImage = "Image.png",
+                    userDescription = "Integration test user",
+                    isOnline = false,
+                    isAdmin = true,
+                    employeeLevel = 4,
+                    userRoles = 0,
+                    officeLocation = 0,
+                    userEmails = new List<int>{1},
+                }
+            };
+
+            // Act
+            var response = await Client.PostAsync(request.Url, ContentHelper.GetStringContent(request.Body));
+            var value = await response.Content.ReadAsStringAsync();
+
+            // Assert
+            //response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
         
         [Fact]
