@@ -25,6 +25,7 @@ namespace backend_api.Tests
             GetSetNotificationContent();
             GetSetNotificationType();
             GetSetNotificationDateCreated();
+            GetSetUserId();
 
             Assert.NotNull(this._sutNotification);
 
@@ -59,7 +60,13 @@ namespace backend_api.Tests
             Assert.Equal(_dateTime, this._sutNotification.dateCreated);
         }
         
-        
+        [Fact]
+        public void GetSetUserId()
+        {
+            this._sutNotification.UserID = 5;
+            Assert.Equal(5, this._sutNotification.UserID);
+            
+        }
         
     }
     
