@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,8 +32,8 @@ namespace backend_api.Tests
             var response = await Client.GetAsync(request);
 
             // Assert
-            //response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            response.EnsureSuccessStatusCode();
+            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
         /*
         [Fact]
@@ -49,31 +50,45 @@ namespace backend_api.Tests
         }
         */
         [Fact]
-        public async Task TestPostStockItemAsync()
+        public async Task TestPostUserAsync()
         {
             // Arrange
             var request = new
             {
-                Url = "/api/v1/Warehouse/StockItem",
+                Url = "/api/User",
                 Body = new
                 {
-                    StockItemName = string.Format("USB anime flash drive - Vegeta {0}", Guid.NewGuid()),
-                    SupplierID = 12,
-                    UnitPackageID = 7,
-                    OuterPackageID = 7,
-                    LeadTimeDays = 14,
-                    QuantityPerOuter = 1,
-                    IsChillerStock = false,
-                    TaxRate = 15.000m,
-                    UnitPrice = 32.00m,
-                    RecommendedRetailPrice = 47.84m,
-                    TypicalWeightPerUnit = 0.050m,
-                    CustomFields = "{ \"CountryOfManufacture\": \"Japan\", \"Tags\": [\"32GB\",\"USB Powered\"] }",
-                    Tags = "[\"32GB\",\"USB Powered\"]",
-                    SearchDetails = "USB anime flash drive - Vegeta",
-                    LastEditedBy = 1,
-                    ValidFrom = DateTime.Now,
-                    ValidTo = DateTime.Now.AddYears(5)
+                    userID = 1,
+                    firstname = "Integration",
+                    lastname = "test1",
+                    phoneNumber = "1234567890",
+                    pinnedUserIDs = new List<int>{1,2},
+                    userImage = "Image.png",
+                    userDescription = "Integration test user",
+                    isOnline = false,
+                    isAdmin = true,
+                    employeeLevel = 4,
+                    userRoles = 0,
+                    officeLocation = 0,
+                    userEmails = new List<int>{1},
+                    //Tags = "[\"32GB\",\"USB Powered\"]"
+                    /*"userID": 0,
+                    "firstname": "string",
+                    "lastname": "string",
+                    "phoneNumber": "string",
+                    "pinnedUserIDs": [
+                    0
+                    ],
+                    "userImage": "string",
+                    "userDescription": "string",
+                    "isOnline": true,
+                    "isAdmin": true,
+                    "employeeLevel": 0,
+                    "userRoles": 0,
+                    "officeLocation": 0,
+                    "userEmails": [
+                    0
+                    ] */
                 }
             };
 
