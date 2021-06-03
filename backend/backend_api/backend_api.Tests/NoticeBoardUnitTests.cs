@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using backend_api.Models;
 using Xunit;
 namespace backend_api.Tests
@@ -11,35 +12,49 @@ namespace backend_api.Tests
         public NoticeBoardUnitTests()
         {
             this._sutNoticeBoard = new NoticeBoard();
+            GetNoticeBoardNotNull();
+            //GetEmptyNoticeBoardId();
+            //GetEmptyNoticeBoardTitle();
+            //GetEmptyNoticeBoardNumThreads();
+            //GetEmptyNoticeBoardThreadsList();
+            
+            SetEmptyNoticeBoardId();
+            SetEmptyNoticeBoardTitle();
+            SetEmptyNoticeBoardThreadsList();
+            
+            GetNoticeBoardId();
+            GetNoticeBoardTitle();
+            GetNoticeBoardNumThreads();
+            GetNoticeBoardThreadsList();
         }
         //Empty NoticeBoard Testing
         [Fact]
-        public void GetEmptyNoticeBoard()
+        public void GetNoticeBoardNotNull()
         {
             Assert.NotNull(_sutNoticeBoard);
         }
         //Get all empty variables
-        [Fact]
-        public void GetEmptyNoticeBoardId()
-        {
-            Assert.InRange<int>(_sutNoticeBoard.NoticeBoardID,0,100);
-        }
-        
-        [Fact]
-        public void GetEmptyNoticeBoardTitle()
-        {
-            Assert.Equal("",_sutNoticeBoard.title);
-        }
-        [Fact]
-        public void GetEmptyNoticeBoardNumThreads()
-        {
-            Assert.InRange<int>(_sutNoticeBoard.getNumberOfThreads(),0,100);
-        }
-        [Fact]
-        public void GetEmptyNoticeBoardThreadsList()
-        {
-            Assert.Null( _sutNoticeBoard.noticeBoardThreadIDs);
-        }
+        // [Fact]
+        // public void GetEmptyNoticeBoardId()
+        // {
+        //     Assert.Equal(101,_sutNoticeBoard.NoticeBoardID);
+        // }
+        //
+        // [Fact]
+        // public void GetEmptyNoticeBoardTitle()
+        // {
+        //     Assert.Null(_sutNoticeBoard.title);
+        // }
+        // [Fact]
+        // public void GetEmptyNoticeBoardNumThreads()
+        // {
+        //     Assert.Throws<NullReferenceException>(() =>  _sutNoticeBoard.getNumberOfThreads());
+        // }
+        // [Fact]
+        // public void GetEmptyNoticeBoardThreadsList()
+        // {
+        //     Assert.Null( _sutNoticeBoard.noticeBoardThreadIDs);
+        // }
         //set all variables
         //add threads
         [Fact]
