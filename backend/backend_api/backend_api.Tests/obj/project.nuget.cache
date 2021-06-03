@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "L/E1KPryhciNy5p2oiu1TSSXQROlDqOyL5sY4fKOfk4/u0xWbX1lkD6EVNbBAmEjDzH8A/OlH3afJR2WTGQ54w==",
+  "dgSpecHash": "d836dfDlXMBFY5iqClOxk/KHpv+0PLyN5CxjECV6Xbv34WqL4cjgWXUUCa24WZkSk8dvfrNhHuNsg6/60+H3ZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\James\\Desktop\\Work\\2021\\COS 301\\Capstone Project\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\James\\.nuget\\packages\\coverlet.collector\\1.3.0\\coverlet.collector.1.3.0.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\google.apis.core\\1.51.0\\google.apis.core.1.51.0.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\James\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.aspnetcore.mvc.testing\\5.0.0\\microsoft.aspnetcore.mvc.testing.5.0.0.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
@@ -87,6 +88,7 @@
     "C:\\Users\\James\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\James\\.nuget\\packages\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\npgsql\\6.0.0-preview4\\npgsql.6.0.0-preview4.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.0-preview4\\npgsql.entityframeworkcore.postgresql.6.0.0-preview4.nupkg.sha512",
     "C:\\Users\\James\\.nuget\\packages\\nuget.frameworks\\5.0.0\\nuget.frameworks.5.0.0.nupkg.sha512",
