@@ -7,7 +7,7 @@ namespace backend_api.Models
 {
     public class DatabaseContext : DbContext, IDatabaseContext
     {
-        private readonly List<int> mockIDs;
+        
         public DatabaseContext(DbContextOptions options) : base(options)
         {
 

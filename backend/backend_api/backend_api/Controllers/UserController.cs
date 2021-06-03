@@ -20,18 +20,25 @@ namespace backend_api.Controllers
             _context = context;
         }
 
-        // GET: api/User
-        [HttpGet]
+        /// <summary>
+        ///     Get all users, for Admin purposes.
+        /// </summary>
+        /// <returns> List of all users </returns>
+        [HttpGet("/GetUsers")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.users.ToListAsync();
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        /// <summary>
+        ///     Gets the user profile by their associated userIDs
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns> A User </returns>
+        [HttpGet("/ViewProfile/{userID}")]
+        public async Task<ActionResult<User>> GetUser(int userID)
         {
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.users.FindAsync(userID);
 
             if (user == null)
             {
@@ -41,12 +48,17 @@ namespace backend_api.Controllers
             return user;
         }
 
-        // PUT: api/User/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        /// <summary>
+        ///    Retrieves a user profile and sets the updates to the DB
+        ///    - Front-End will deal with the editing profile UI and information passed back.
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [HttpPut("/EditProfile/{userID}")]
+        public async Task<IActionResult> PutUser(int userID, User user)
         {
-            if (id != user.UserID)
+            if (userID != user.UserID)
             {
                 return BadRequest();
             }
@@ -59,12 +71,10 @@ namespace backend_api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
-                {
+                if (!UserExists(userID)){
                     return NotFound();
                 }
-                else
-                {
+                else{
                     throw;
                 }
             }
@@ -72,33 +82,41 @@ namespace backend_api.Controllers
             return NoContent();
         }
 
-        // POST: api/User
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        /// <summary>
+        ///     Creates a user and insert said into the database.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>The created User </returns>
+        [HttpPost("/CreateUser")]
+        public async Task<ActionResult<User>> CreateUser(User user)
         {
             _context.users.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
         }
-
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        
+        /// <summary>
+        ///     Logs user into the system using Google OAuth
+        ///     - Changes isOnline status to true
+        /// </summary>
+        [HttpGet("/Login")]
+        public void LoginUser()
         {
-            var user = await _context.users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            //TODO: Implement Login functionality using Google OAuth
         }
-
+        
+        /// <summary>
+        ///     Logs a user out of the system
+        ///     - Changes the isOnline status to false
+        /// </summary>
+        [HttpGet("/Logout")]
+        public void LogoutUser()
+        {
+            //TODO: Implement Logout functionality using Google OAuth
+        }
+        
+        
         private bool UserExists(int id)
         {
             return _context.users.Any(e => e.UserID == id);
