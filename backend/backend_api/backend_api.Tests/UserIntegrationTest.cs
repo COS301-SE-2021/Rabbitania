@@ -60,7 +60,7 @@ namespace backend_api.Tests
                 {
                     userID = 0,
                     firstname = "Integration",
-                    lastname = "test1",
+                    lastname = "test2",
                     phoneNumber = "1234567890",
                     pinnedUserIDs = new List<int>{1,2},
                     userImage = "Image.png",
@@ -97,22 +97,32 @@ namespace backend_api.Tests
             var value = await response.Content.ReadAsStringAsync();
 
             // Assert
-            response.EnsureSuccessStatusCode();
+             response.EnsureSuccessStatusCode();
+            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-        /*
+        
         [Fact]
-        public async Task TestPutStockItemAsync()
+        public async Task TestPutUserAsync()
         {
             // Arrange
             var request = new
             {
-                Url = "/api/v1/Warehouse/StockItem/1",
+                Url = "/api/User/1",
                 Body = new
                 {
-                    StockItemName = string.Format("USB anime flash drive - Vegeta {0}", Guid.NewGuid()),
-                    SupplierID = 12,
-                    Color = 3,
-                    UnitPrice = 39.00m
+                    userID = 1,
+                    firstname = "Updated User",
+                    lastname = "test2",
+                    phoneNumber = "111111111",
+                    pinnedUserIDs = new List<int>{1,2},
+                    userImage = "ImageUpdated.png",
+                    userDescription = "Integration test user",
+                    isOnline = false,
+                    isAdmin = true,
+                    employeeLevel = 4,
+                    userRoles = 0,
+                    officeLocation = 0,
+                    userEmails = new List<int>{1},
                 }
             };
 
@@ -122,7 +132,29 @@ namespace backend_api.Tests
             // Assert
             response.EnsureSuccessStatusCode();
         }
-        */
+        // public async Task TestPutNoticeBoardThreadAsync()
+        // {
+        //     // Arrange
+        //     var request = new
+        //     {
+        //         Url = "api/NoticeBoardThread/0",
+        //         Body= new
+        //         {
+        //             threadID= 0,
+        //             threadTitle= "newTestTitleForUpdate",
+        //             threadContent= "test thread content",
+        //             threadCreationDate= "2021/05/21",
+        //             threadDueDate= "2021/05/21",
+        //             userID= 0
+        //         }
+        //     };
+        //
+        //     // Act
+        //     var response = await Client.PutAsync(request.Url, ContentHelper.GetStringContent(request.Body));
+        //
+        //     // Assert
+        //     Assert.Equal(HttpStatusCode.NotFound,response.StatusCode);
+        // }
         [Fact]
         public async Task TestDeleteUserAsync()
         {
@@ -156,7 +188,6 @@ namespace backend_api.Tests
             
 
             var deleteResponse = await Client.DeleteAsync(string.Format("/api/User/{0}", temp.UserID));
-
             // Assert
             //postResponse.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
