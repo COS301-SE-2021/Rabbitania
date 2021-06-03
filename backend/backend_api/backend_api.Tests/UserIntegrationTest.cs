@@ -58,7 +58,7 @@ namespace backend_api.Tests
                 Url = "/api/User",
                 Body = new
                 {
-                    userID = 1,
+                    userID = 0,
                     firstname = "Integration",
                     lastname = "test1",
                     phoneNumber = "1234567890",
@@ -133,7 +133,7 @@ namespace backend_api.Tests
                 Url = "/api/User",
                 Body = new
                 {
-                    userID = 10,
+                    userID = 0,
                     firstname = "Integration2",
                     lastname = "test2",
                     phoneNumber = "1234567890",
