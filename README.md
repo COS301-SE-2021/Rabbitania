@@ -13,7 +13,7 @@
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788293813-682cc4757b474114e1dd0230)
 
 ## Project Description 🐇
-<p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
+### The COVID-19 pandemic has brought with it several challenges and a departure from the norm, because of this we have now entered an era where there is no longer a physical office for employees to get work done. The margin between the physical and digital work environment is becoming increasingly obscured and the need for a digital work environment is rapidly growing. The employees of Retro Rabbit are adapting to said changes and are working predominantly from home, they are in need of a digital home. Rabbitania's project vision and end goal is to provide this digital home for the employees of Retro Rabbit.
 
 ---
 
