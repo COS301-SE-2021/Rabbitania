@@ -18,7 +18,8 @@ jobs:
           # Update this line with the directory that contains your tests project file
           working_directory: ~/project/backend/backend_api
           name: Run tests
-          command: |
+          command:
+            dotnet restore |
             pwd
             ls
             dotnet test
