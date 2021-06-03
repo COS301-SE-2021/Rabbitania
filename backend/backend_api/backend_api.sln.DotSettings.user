@@ -11,5 +11,18 @@
     &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NoticeBoardThreadTest.TestPutNoticeBoardThreadNotFoundAsync&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NoticeBoardThreadTest.TestPutNoticeBoardThreadAsync&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NoticeBoardThreadTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.UserIntegrationTest.TestDeleteUserAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.UserIntegrationTest.TestPostUserAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.UserIntegrationTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationsIntegrationTests.TestGetNotifications&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationsIntegrationTests.TestNotificationPostAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationsIntegrationTests.TestGetNotificationsAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests.TestGetNoticeBoardAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests.TestGetNotificationAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests.TestNotificationPutNotFoundAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests.TestNotificationPostAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests.TestNotificationPutAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests.TestNotificationDeleteByID&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::B40F7132-0B5E-4F1E-A810-914B536F97C2::net5.0::backend_api.Tests.NotificationIntegrationTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
