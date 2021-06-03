@@ -20,8 +20,6 @@ jobs:
           name: Run tests
           command:
             dotnet restore |
-            pwd
-            ls
             dotnet test
             
 
