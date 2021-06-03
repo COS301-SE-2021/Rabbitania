@@ -25,6 +25,10 @@ namespace backend_api.Tests
             GetSetNotificationContent();
             GetSetNotificationType();
             GetSetNotificationDateCreated();
+
+            Assert.NotNull(this._sutNotification);
+
+
         }
         [Fact]
         public void GetSetNotificationId()
