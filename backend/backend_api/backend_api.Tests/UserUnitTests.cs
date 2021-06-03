@@ -356,9 +356,9 @@ namespace backend_api.Tests
         {
             // given
             int expectedID = 1;
-            this._sutUserEmails.userEmailsID = 1;
+            this._sutUserEmails.userEmailID = 1;
             //expected
-            Assert.Equal(expectedID, this._sutUserEmails.userEmailsID);
+            Assert.Equal(expectedID, this._sutUserEmails.userEmailID);
         }
         
         [Fact]
@@ -366,9 +366,9 @@ namespace backend_api.Tests
         {
             // given
             int expectedID = 1;
-            this._sutUserEmails.userEmailsID = 0;
+            this._sutUserEmails.userEmailID = 0;
             //expected
-            Assert.NotEqual(expectedID, this._sutUserEmails.userEmailsID);
+            Assert.NotEqual(expectedID, this._sutUserEmails.userEmailID);
         }
         
         [Fact]
