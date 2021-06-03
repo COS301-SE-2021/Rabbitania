@@ -7,8 +7,11 @@ namespace backend_api.Models
     {
          [Key]
          [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-         public int userEmailsID { get; set; }
+         public int userEmailID { get; set; }
 
          public string userEmail { get; set; }
+         
+         [ForeignKey("User")] 
+         public int UserID { get; set; }
     }
 }
