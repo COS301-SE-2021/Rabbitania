@@ -1,4 +1,5 @@
-﻿using backend_api.Models;
+﻿using System;
+using backend_api.Models;
 using Xunit;
 
 
@@ -30,6 +31,13 @@ namespace backend_api.Tests
         {
             this._sut.UserID = 1;
             Assert.Equal(1, _sut.UserID);
+        }
+
+        [Fact]
+        public void setUserEmail()
+        {
+            // this._sut.UserEmails.Insert(1, 1);
+            // Assert.Contains(1, _sut.UserEmails.ToArray());
         }
     }
 }
