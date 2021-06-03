@@ -7700,27 +7700,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matth\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\devil\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+      "projectUniqueName": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
       "projectName": "backend_api",
-      "projectPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
-      "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
+      "projectPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+      "packagesPath": "C:\\Users\\devil\\.nuget\\packages\\",
+      "outputPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
       ],
       "configFilePaths": [
-        "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\devil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

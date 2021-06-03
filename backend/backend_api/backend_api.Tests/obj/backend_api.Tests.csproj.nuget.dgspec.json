@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj": {}
+    "D:\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj": {
+    "D:\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj",
+        "projectUniqueName": "D:\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj",
         "projectName": "backend_api.Tests",
-        "projectPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj",
-        "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\obj\\",
+        "projectPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\backend_api.Tests.csproj",
+        "packagesPath": "C:\\Users\\devil\\.nuget\\packages\\",
+        "outputPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
         ],
         "configFilePaths": [
-          "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\devil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -33,8 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj": {
-                "projectPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj"
+              "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj": {
+                "projectPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj"
               }
             }
           }
@@ -49,6 +48,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Testing": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.TestHost": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.7.1, )"
@@ -92,23 +99,22 @@
         }
       }
     },
-    "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj": {
+    "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+        "projectUniqueName": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
         "projectName": "backend_api",
-        "projectPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
-        "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
+        "projectPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+        "packagesPath": "C:\\Users\\devil\\.nuget\\packages\\",
+        "outputPath": "D:\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
         ],
         "configFilePaths": [
-          "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\devil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
