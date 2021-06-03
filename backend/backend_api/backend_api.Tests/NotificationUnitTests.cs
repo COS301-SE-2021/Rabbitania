@@ -8,12 +8,13 @@ namespace backend_api.Tests
     {
         private readonly Notification _sutNotification;
         private readonly NotificationTypeEnum _sutNotificationTypeEnum;
-        private DateTime _dateTime;
+        private readonly DateTime _dateTime;
 
         public NotificationUnitTests()
         {
             this._sutNotification = new Notification();
             this._sutNotificationTypeEnum = new NotificationTypeEnum();
+            this._sutNotificationTypeEnum = NotificationTypeEnum.Email;
             this._dateTime = new DateTime();
 
         }
@@ -21,7 +22,6 @@ namespace backend_api.Tests
         [Fact]
         public void CreateNewNotification()
         {
-            
             SetNotificationId();
             SetNotificationContent();
             SetNotificationType();
@@ -31,24 +31,29 @@ namespace backend_api.Tests
         public void SetNotificationId()
         {
             this._sutNotification.notificationID = 100;
+            Assert.Equal(100, this._sutNotification.notificationID);
         }
         
         [Fact]
         public void SetNotificationContent()
         {
             this._sutNotification.notificationContent = "Notification unitTest for Setting content ";
+            Assert.Equal("Notification unitTest for Setting content ", this._sutNotification.notificationContent);
         }
         
         [Fact]
         public void SetNotificationType()
         {
             this._sutNotification.notificationType = _sutNotificationTypeEnum;
+            Assert.Equal( this._sutNotificationTypeEnum, this._sutNotification.notificationType);
+            
         }
         
         [Fact]
         public void SetNotificationDateCreated()
         {
             this._sutNotification.dateCreated = _dateTime;
+            Assert.Equal(_dateTime, this._sutNotification.dateCreated);
         }
         
         
