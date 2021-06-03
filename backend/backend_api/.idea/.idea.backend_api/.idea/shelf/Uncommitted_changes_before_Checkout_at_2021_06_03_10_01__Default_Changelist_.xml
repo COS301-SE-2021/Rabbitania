@@ -1,0 +1,34 @@
+﻿<changelist name="Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]" date="1622707395061" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2021/06/03 10:01 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" />
+    <option name="AFTER_PATH" value="backend_api/obj/Debug/net5.0/backend_api.csproj.CoreCompileInputs.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/backend_api.csproj.CoreCompileInputs.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" />
+    <option name="AFTER_PATH" value="backend_api/obj/Debug/net5.0/backend_api.csproj.AssemblyReference.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/backend_api.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend_api/bin/Debug/net5.0/backend_api.dll" />
+    <option name="AFTER_PATH" value="backend_api/bin/Debug/net5.0/backend_api.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/backend_api.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend_api/bin/Debug/net5.0/backend_api.pdb" />
+    <option name="AFTER_PATH" value="backend_api/bin/Debug/net5.0/backend_api.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/backend_api.pdb" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend_api/obj/Debug/net5.0/backend_api.dll" />
+    <option name="AFTER_PATH" value="backend_api/obj/Debug/net5.0/backend_api.dll" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/backend_api1.dll" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend_api/obj/Debug/net5.0/backend_api.pdb" />
+    <option name="AFTER_PATH" value="backend_api/obj/Debug/net5.0/backend_api.pdb" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_10_01_[Default_Changelist]/backend_api1.pdb" />
+  </binary>
+</changelist>
