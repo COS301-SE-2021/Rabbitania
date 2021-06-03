@@ -16,33 +16,32 @@ namespace backend_api.Tests
             this._sutNotificationTypeEnum = new NotificationTypeEnum();
             this._sutNotificationTypeEnum = NotificationTypeEnum.Email;
             this._dateTime = new DateTime();
-
         }
 
         [Fact]
         public void CreateNewNotification()
         {
-            SetNotificationId();
-            SetNotificationContent();
-            SetNotificationType();
-            SetNotificationDateCreated();
+            GetSetNotificationId();
+            GetSetNotificationContent();
+            GetSetNotificationType();
+            GetSetNotificationDateCreated();
         }
         [Fact]
-        public void SetNotificationId()
+        public void GetSetNotificationId()
         {
             this._sutNotification.notificationID = 100;
             Assert.Equal(100, this._sutNotification.notificationID);
         }
         
         [Fact]
-        public void SetNotificationContent()
+        public void GetSetNotificationContent()
         {
             this._sutNotification.notificationContent = "Notification unitTest for Setting content ";
             Assert.Equal("Notification unitTest for Setting content ", this._sutNotification.notificationContent);
         }
         
         [Fact]
-        public void SetNotificationType()
+        public void GetSetNotificationType()
         {
             this._sutNotification.notificationType = _sutNotificationTypeEnum;
             Assert.Equal( this._sutNotificationTypeEnum, this._sutNotification.notificationType);
@@ -50,34 +49,13 @@ namespace backend_api.Tests
         }
         
         [Fact]
-        public void SetNotificationDateCreated()
+        public void GetSetNotificationDateCreated()
         {
             this._sutNotification.dateCreated = _dateTime;
             Assert.Equal(_dateTime, this._sutNotification.dateCreated);
         }
         
         
-        
-        
-        [Fact]
-        public void GetNotificationId()
-        {
-    
-        }
-        [Fact]
-        public void NotificationContent()
-        {
-            
-        }
-        [Fact]
-        public void NotificationType()
-        {
-            
-        }
-        [Fact]
-        public void DateCreated()
-        {
-        }
         
     }
     
