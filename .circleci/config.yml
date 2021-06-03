@@ -153,14 +153,10 @@ workflows:
             - UnitTest_NoticeBoard
       - IntegrationTest_NotificationsIntegrationTests:
           requires:
-            - UnitTest_UserUnitTest
-            - UnitTest_Notification
-            - UnitTest_NoticeBoard
+            - NoticeBoardThreadTests
       - IntegrationTest_UserIntegrationTest:
           requires:
-            - UnitTest_UserUnitTest
-            - UnitTest_Notification
-            - UnitTest_NoticeBoard
+            - NotificationsIntegrationTests
 
 
 
