@@ -34,27 +34,24 @@ namespace backend_api.Tests
             Assert.NotNull(_sutNoticeBoard);
         }
         //Get all empty variables
-        // [Fact]
-        // public void GetEmptyNoticeBoardId()
-        // {
-        //     Assert.Equal(101,_sutNoticeBoard.NoticeBoardID);
-        // }
-        //
-        // [Fact]
-        // public void GetEmptyNoticeBoardTitle()
-        // {
-        //     Assert.Null(_sutNoticeBoard.title);
-        // }
-        // [Fact]
-        // public void GetEmptyNoticeBoardNumThreads()
-        // {
-        //     Assert.Throws<NullReferenceException>(() =>  _sutNoticeBoard.getNumberOfThreads());
-        // }
-        // [Fact]
-        // public void GetEmptyNoticeBoardThreadsList()
-        // {
-        //     Assert.Null( _sutNoticeBoard.noticeBoardThreadIDs);
-        // }
+        [Fact]
+        public void GetEmptyNoticeBoardTitle()
+        {
+            string title = "";
+            this._sutNoticeBoard.title = "";
+            //expected
+            Assert.Equal(title, this._sutNoticeBoard.title);
+        }
+        [Fact]
+        public void GetEmptyNoticeBoardNumThreads()
+        {
+            List<int> ids = new List<int>();
+            
+            this._sutNoticeBoard.noticeBoardThreadIDs = new List<int>();
+            //expected
+            Assert.Equal(ids, this._sutNoticeBoard.noticeBoardThreadIDs);
+        }
+        
         //set all variables
         //add threads
         [Fact]
