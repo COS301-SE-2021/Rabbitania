@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Models;
 
 namespace backend_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210603133412_BeginningMigration")]
+    partial class BeginningMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,6 +98,9 @@ namespace backend_api.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<List<int>>("UserEmails")
+                        .HasColumnType("integer[]");
+
                     b.Property<int>("employeeLevel")
                         .HasColumnType("integer");
 
@@ -136,33 +141,17 @@ namespace backend_api.Migrations
 
             modelBuilder.Entity("backend_api.Models.UserEmails", b =>
                 {
-                    b.Property<int>("userEmailID")
+                    b.Property<int>("userEmailsID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("integer");
-
                     b.Property<string>("userEmail")
                         .HasColumnType("text");
 
-                    b.HasKey("userEmailID");
-
-                    b.HasIndex("UserID");
+                    b.HasKey("userEmailsID");
 
                     b.ToTable("userEmails");
-                });
-
-            modelBuilder.Entity("backend_api.Models.UserEmails", b =>
-                {
-                    b.HasOne("backend_api.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

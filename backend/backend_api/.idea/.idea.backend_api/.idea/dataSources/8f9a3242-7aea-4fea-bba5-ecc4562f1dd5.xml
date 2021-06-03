@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="PostgreSQL - defaultdb@db-rabbitania-do-user-9312303-0.b.db.ondigitalocean.com">
+<dataSource name="defaultdb@db-rabbitania-do-user-9312303-0.b.db.ondigitalocean.com">
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.21">
     <root id="1">
       <ServerVersion>13.3</ServerVersion>
@@ -1406,7 +1406,7 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>34383</IntrospectionStateNumber>
+      <IntrospectionStateNumber>34305</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16848|16850|1
 sequence|table|16858|16860|1
@@ -1491,7 +1491,7 @@ sequence|table|16898|16880|3
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>34384</IntrospectionStateNumber>
+      <IntrospectionStateNumber>34308</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">

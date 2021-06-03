@@ -22,7 +22,7 @@ namespace backend_api.Controllers
 
         // GET: api/UserEmails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserEmails>>> GetUserEmails()
+        public async Task<ActionResult<IEnumerable<UserEmails>>> GetuserEmails()
         {
             return await _context.userEmails.ToListAsync();
         }
@@ -46,7 +46,7 @@ namespace backend_api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserEmails(int id, UserEmails userEmails)
         {
-            if (id != userEmails.userEmailsID)
+            if (id != userEmails.userEmailID)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace backend_api.Controllers
             _context.userEmails.Add(userEmails);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserEmails", new { id = userEmails.userEmailsID }, userEmails);
+            return CreatedAtAction("GetUserEmails", new { id = userEmails.userEmailID }, userEmails);
         }
 
         // DELETE: api/UserEmails/5
@@ -101,7 +101,7 @@ namespace backend_api.Controllers
 
         private bool UserEmailsExists(int id)
         {
-            return _context.userEmails.Any(e => e.userEmailsID == id);
+            return _context.userEmails.Any(e => e.userEmailID == id);
         }
     }
 }

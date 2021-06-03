@@ -31,10 +31,7 @@ namespace backend_api.Models
         public UserRoles userRoles { get; set; }
 
         public OfficeLocation officeLocation { get; set; }
-       
-        [ForeignKey("UserEmails")]
-        public List<int> UserEmails { get; set; }
-        
+
         public override string ToString()
         {
             return UserID.ToString() + " " + firstname + " " + lastname;

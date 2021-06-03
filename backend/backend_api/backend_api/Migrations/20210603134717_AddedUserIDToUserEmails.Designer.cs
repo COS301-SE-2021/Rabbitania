@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Models;
 
 namespace backend_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210603134717_AddedUserIDToUserEmails")]
+    partial class AddedUserIDToUserEmails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,20 +151,7 @@ namespace backend_api.Migrations
 
                     b.HasKey("userEmailID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("userEmails");
-                });
-
-            modelBuilder.Entity("backend_api.Models.UserEmails", b =>
-                {
-                    b.HasOne("backend_api.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
