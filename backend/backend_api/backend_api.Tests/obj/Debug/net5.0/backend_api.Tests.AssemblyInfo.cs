@@ -10,8 +10,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("backend_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\James\\Desktop\\Work\\2021\\COS 301\\Capstone Project\\Rabbitania\\backend\\back" +
-    "end_api\\backend_api", "backend_api.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("backend_api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\Rabbitania\\backend\\backend_api\\backend_api", "backend_api.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend_api.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
