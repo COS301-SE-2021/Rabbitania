@@ -45,8 +45,8 @@ namespace backend_api.Tests
             var response = await Client.GetAsync(request);
 
             // Assert
-            response.EnsureSuccessStatusCode();
-            //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            //response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
         [Fact]
         public async Task TestPostUserAsync()

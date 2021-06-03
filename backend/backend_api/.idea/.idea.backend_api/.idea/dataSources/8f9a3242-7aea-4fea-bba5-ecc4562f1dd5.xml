@@ -1406,13 +1406,13 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>34192</IntrospectionStateNumber>
+      <IntrospectionStateNumber>34383</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16848|16850|1
 sequence|table|16858|16860|1
 sequence|table|16868|16870|1
-sequence|table|16878|16880|1
 sequence|table|16888|16890|1
+sequence|table|16898|16880|3
 </Relations>
     </database>
     <role id="4" parent="1" name="_dodb">
@@ -1491,7 +1491,7 @@ sequence|table|16888|16890|1
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>34194</IntrospectionStateNumber>
+      <IntrospectionStateNumber>34384</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">
@@ -1609,10 +1609,10 @@ sequence|table|16888|16890|1
       <StateNumber>34172</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="35" parent="19" name="userEmails_userEmailsID_seq">
-      <ObjectId>16878</ObjectId>
+    <sequence id="35" parent="19" name="userEmails_userEmailID_seq">
+      <ObjectId>16898</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>34172</StateNumber>
+      <StateNumber>34269</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="36" parent="19" name="users_UserID_seq">
@@ -1644,12 +1644,12 @@ sequence|table|16888|16890|1
     <table id="41" parent="19" name="userEmails">
       <ObjectId>16880</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>34172</StateNumber>
+      <StateNumber>34302</StateNumber>
     </table>
     <table id="42" parent="19" name="users">
       <ObjectId>16890</ObjectId>
       <Owner>doadmin</Owner>
-      <StateNumber>34172</StateNumber>
+      <StateNumber>34302</StateNumber>
     </table>
     <column id="43" parent="37" name="MigrationId">
       <Position>1</Position>
@@ -1828,13 +1828,12 @@ sequence|table|16888|16890|1
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_notifications</UnderlyingIndexName>
     </key>
-    <column id="67" parent="41" name="userEmailsID">
+    <column id="67" parent="41" name="UserID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>34172</StateNumber>
+      <StateNumber>34269</StateNumber>
       <TypeId>23</TypeId>
-      <IdentityKind>by-default</IdentityKind>
     </column>
     <column id="68" parent="41" name="userEmail">
       <Position>2</Position>
@@ -1842,24 +1841,51 @@ sequence|table|16888|16890|1
       <StateNumber>34172</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="69" parent="41" name="PK_userEmails">
-      <ObjectId>16886</ObjectId>
-      <StateNumber>34172</StateNumber>
-      <ColNames>userEmailsID</ColNames>
+    <column id="69" parent="41" name="userEmailID">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>34269</StateNumber>
+      <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
+    </column>
+    <index id="70" parent="41" name="PK_userEmails">
+      <ObjectId>16906</ObjectId>
+      <StateNumber>34269</StateNumber>
+      <ColNames>userEmailID</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
       <AccessMethodId>403</AccessMethodId>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="70" parent="41" name="PK_userEmails">
-      <ObjectId>16887</ObjectId>
-      <StateNumber>34172</StateNumber>
-      <ColNames>userEmailsID</ColNames>
+    <index id="71" parent="41" name="IX_userEmails_UserID">
+      <ObjectId>16908</ObjectId>
+      <StateNumber>34302</StateNumber>
+      <ColNames>UserID</ColNames>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="72" parent="41" name="PK_userEmails">
+      <ObjectId>16907</ObjectId>
+      <StateNumber>34269</StateNumber>
+      <ColNames>userEmailID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_userEmails</UnderlyingIndexName>
     </key>
-    <column id="71" parent="42" name="UserID">
+    <foreign-key id="73" parent="41" name="FK_userEmails_users_UserID">
+      <ObjectId>16909</ObjectId>
+      <StateNumber>34302</StateNumber>
+      <ColNames>UserID</ColNames>
+      <RefTableId>16890</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>PK_users</RefKeyName>
+      <RefColNames>UserID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="74" parent="42" name="UserID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1867,84 +1893,78 @@ sequence|table|16888|16890|1
       <TypeId>23</TypeId>
       <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="72" parent="42" name="firstname">
+    <column id="75" parent="42" name="firstname">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>34172</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="73" parent="42" name="lastname">
+    <column id="76" parent="42" name="lastname">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>34172</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="74" parent="42" name="phoneNumber">
+    <column id="77" parent="42" name="phoneNumber">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <StateNumber>34172</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="75" parent="42" name="pinnedUserIDs">
+    <column id="78" parent="42" name="pinnedUserIDs">
       <Position>5</Position>
       <DataType>integer[]|0s</DataType>
       <StateNumber>34172</StateNumber>
       <TypeId>1007</TypeId>
     </column>
-    <column id="76" parent="42" name="userImage">
+    <column id="79" parent="42" name="userImage">
       <Position>6</Position>
       <DataType>text|0s</DataType>
       <StateNumber>34172</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="77" parent="42" name="userDescription">
+    <column id="80" parent="42" name="userDescription">
       <Position>7</Position>
       <DataType>text|0s</DataType>
       <StateNumber>34172</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="78" parent="42" name="isOnline">
+    <column id="81" parent="42" name="isOnline">
       <Position>8</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>34172</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="79" parent="42" name="isAdmin">
+    <column id="82" parent="42" name="isAdmin">
       <Position>9</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>34172</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="80" parent="42" name="employeeLevel">
+    <column id="83" parent="42" name="employeeLevel">
       <Position>10</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>34172</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="81" parent="42" name="userRoles">
+    <column id="84" parent="42" name="userRoles">
       <Position>11</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>34172</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="82" parent="42" name="officeLocation">
+    <column id="85" parent="42" name="officeLocation">
       <Position>12</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>34172</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="83" parent="42" name="UserEmails">
-      <Position>13</Position>
-      <DataType>integer[]|0s</DataType>
-      <StateNumber>34172</StateNumber>
-      <TypeId>1007</TypeId>
-    </column>
-    <index id="84" parent="42" name="PK_users">
+    <index id="86" parent="42" name="PK_users">
       <ObjectId>16896</ObjectId>
       <StateNumber>34172</StateNumber>
       <ColNames>UserID</ColNames>
@@ -1954,7 +1974,7 @@ sequence|table|16888|16890|1
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="85" parent="42" name="PK_users">
+    <key id="87" parent="42" name="PK_users">
       <ObjectId>16897</ObjectId>
       <StateNumber>34172</StateNumber>
       <ColNames>UserID</ColNames>
