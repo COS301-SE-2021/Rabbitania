@@ -28,12 +28,19 @@ namespace backend_api.Tests
         [Fact]
         public void GetEmptyNoticeBoardTitle()
         {
-            Assert.Equal("",_sutNoticeBoard.title);
+            string title = "";
+            this._sutNoticeBoard.title = "";
+            //expected
+            Assert.Equal(title, this._sutNoticeBoard.title);
         }
         [Fact]
         public void GetEmptyNoticeBoardNumThreads()
         {
-            Assert.InRange<int>(_sutNoticeBoard.getNumberOfThreads(),0,100);
+            List<int> ids = new List<int>();
+            
+            this._sutNoticeBoard.noticeBoardThreadIDs = new List<int>();
+            //expected
+            Assert.Equal(ids, this._sutNoticeBoard.noticeBoardThreadIDs);
         }
         [Fact]
         public void GetEmptyNoticeBoardThreadsList()

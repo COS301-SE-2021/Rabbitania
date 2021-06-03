@@ -9001,19 +9001,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dean\\.nuget\\packages\\": {}
+    "C:\\Users\\matth\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\2021-TUKS\\COS301\\Rabbitania\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+      "projectUniqueName": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
       "projectName": "backend_api",
-      "projectPath": "D:\\2021-TUKS\\COS301\\Rabbitania\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
-      "packagesPath": "C:\\Users\\Dean\\.nuget\\packages\\",
-      "outputPath": "D:\\2021-TUKS\\COS301\\Rabbitania\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
+      "projectPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\backend_api.csproj",
+      "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\matth\\Desktop\\Varsity\\COS 301\\Rabbitania\\backend\\backend_api\\backend_api\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dean\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
