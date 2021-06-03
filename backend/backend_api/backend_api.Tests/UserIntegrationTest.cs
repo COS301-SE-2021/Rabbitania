@@ -49,6 +49,18 @@ namespace backend_api.Tests
             //Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
         [Fact]
+        public async Task TestGetNullUserAsync()
+        {
+            // Arrange
+            var request = "/api/User/10000";
+
+            // Act
+            var response = await Client.GetAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+        [Fact]
         public async Task TestPostUserAsync()
         {
             // Arrange
@@ -98,8 +110,9 @@ namespace backend_api.Tests
              response.EnsureSuccessStatusCode();
             //Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
+        
         [Fact]
-        public async Task TestPostUserExistsAsync()
+        public async Task TestPostInvalidUserAsync()
         {
             // Arrange
             var request = new
@@ -107,9 +120,9 @@ namespace backend_api.Tests
                 Url = "/api/User",
                 Body = new
                 {
-                    userID = 1,
+                    userID = 0,
                     firstname = "Integration",
-                    lastname = "test2",
+                    lastname = 0,
                     phoneNumber = "1234567890",
                     pinnedUserIDs = new List<int>{1,2},
                     userImage = "Image.png",
@@ -118,8 +131,7 @@ namespace backend_api.Tests
                     isAdmin = true,
                     employeeLevel = 4,
                     userRoles = 0,
-                    officeLocation = 0,
-                    userEmails = new List<int>{1},
+                    officeLocation = 0
                 }
             };
 
@@ -129,7 +141,7 @@ namespace backend_api.Tests
 
             // Assert
             //response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
         
         [Fact]
@@ -152,8 +164,7 @@ namespace backend_api.Tests
                     isAdmin = true,
                     employeeLevel = 4,
                     userRoles = 0,
-                    officeLocation = 0,
-                    userEmails = new List<int>{1},
+                    officeLocation = 0
                 }
             };
 
@@ -163,29 +174,38 @@ namespace backend_api.Tests
             // Assert
             response.EnsureSuccessStatusCode();
         }
-        // public async Task TestPutNoticeBoardThreadAsync()
-        // {
-        //     // Arrange
-        //     var request = new
-        //     {
-        //         Url = "api/NoticeBoardThread/0",
-        //         Body= new
-        //         {
-        //             threadID= 0,
-        //             threadTitle= "newTestTitleForUpdate",
-        //             threadContent= "test thread content",
-        //             threadCreationDate= "2021/05/21",
-        //             threadDueDate= "2021/05/21",
-        //             userID= 0
-        //         }
-        //     };
-        //
-        //     // Act
-        //     var response = await Client.PutAsync(request.Url, ContentHelper.GetStringContent(request.Body));
-        //
-        //     // Assert
-        //     Assert.Equal(HttpStatusCode.NotFound,response.StatusCode);
-        // }
+        
+        [Fact]
+        public async Task TestPutNullUserAsync()
+        {
+            // Arrange
+            var request = new
+            {
+                Url = "/api/User/10000",
+                Body = new
+                {
+                    userID = 1,
+                    firstname = "Updated User",
+                    lastname = "test2",
+                    phoneNumber = "111111111",
+                    pinnedUserIDs = new List<int>{1,2},
+                    userImage = "ImageUpdated.png",
+                    userDescription = "Integration test user",
+                    isOnline = false,
+                    isAdmin = true,
+                    employeeLevel = 4,
+                    userRoles = 0,
+                    officeLocation = 0
+                }
+            };
+
+            // Act
+            var response = await Client.PutAsync(request.Url, ContentHelper.GetStringContent(request.Body));
+
+            // Assert
+            //response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
         [Fact]
         public async Task TestDeleteUserAsync()
         {
@@ -207,8 +227,7 @@ namespace backend_api.Tests
                     isAdmin = true,
                     employeeLevel = 4,
                     userRoles = 0,
-                    officeLocation = 0,
-                    userEmails = new List<int>{1}
+                    officeLocation = 0
                 }
             };
             
@@ -224,6 +243,20 @@ namespace backend_api.Tests
             Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
             //deleteResponse.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.NoContent, deleteResponse.StatusCode);
+        }
+        [Fact]
+        public async Task TestDeleteNullUserAsync()
+        {
+            // Arrange
+            /*
+            */
+            // Act
+          
+            
+
+            var deleteResponse = await Client.DeleteAsync("/api/User/10000");
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, deleteResponse.StatusCode);
         }
     }
 }
