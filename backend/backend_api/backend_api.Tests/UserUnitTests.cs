@@ -17,6 +17,9 @@ namespace backend_api.Tests
             this._sutUserEmails = new UserEmails();
         }
         
+        
+        /// VERY NB FOR DEMO! WE WILL BE USING THE DOTNET MOQ SERVICE FROM DEMO 1
+        ///
         /// <summary>
         ///  Creates a Moq enviornment for User Tests
         /// </summary>
@@ -344,7 +347,10 @@ namespace backend_api.Tests
             //expected
             Assert.NotEqual(offLocations, this._sutUser.officeLocation);
         }
-
+        
+        /// <summary>
+        /// TESTS USER EMAIL CLASSES AND IS A SUBSYSTEM OF THE USER SUBSYSTEM
+        /// </summary>
         [Fact]
         public void GetAndSetUserEmailsIdSuccess()
         {
