@@ -77,7 +77,7 @@ jobs:
             dotnet test --filter NoticeBoardUnitTests
 
 
-  IntegrationTest:  
+  IntegrationTest_NoticeBoardThreadTests:  
     # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
@@ -92,7 +92,42 @@ jobs:
           working_directory: ~/project/backend/backend_api
           name: Run tests
           command: |
-            dotnet test          
+            dotnet test --filter NoticeBoardThreadTests  
+
+  IntegrationTest_NotificationsIntegrationTests:  
+    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      # Then simply use the dotnet container as you'd expect and run your tests
+      - run:
+          # Update this line with the directory that contains your tests project file
+          working_directory: ~/project/backend/backend_api
+          name: Run tests
+          command: |
+            dotnet test --filter NotificationsIntegrationTests
+
+  IntegrationTest_UserIntegrationTest:  
+    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      # Then simply use the dotnet container as you'd expect and run your tests
+      - run:
+          # Update this line with the directory that contains your tests project file
+          working_directory: ~/project/backend/backend_api
+          name: Run tests
+          command: |
+            dotnet test --filter UserIntegrationTest
+
 
 workflows:
   # Below is the definition of your workflow.
@@ -111,8 +146,28 @@ workflows:
       - UnitTest_NoticeBoard:
           requires:
             - build
-      - IntegrationTest:
+      - IntegrationTest_NoticeBoardThreadTests:
           requires:
             - UnitTest_UserUnitTest
             - UnitTest_Notification
             - UnitTest_NoticeBoard
+      - IntegrationTest_NotificationsIntegrationTests:
+          requires:
+            - UnitTest_UserUnitTest
+            - UnitTest_Notification
+            - UnitTest_NoticeBoard
+      - IntegrationTest_UserIntegrationTest:
+          requires:
+            - UnitTest_UserUnitTest
+            - UnitTest_Notification
+            - UnitTest_NoticeBoard
+
+
+
+
+
+
+
+
+
+
