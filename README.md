@@ -39,16 +39,16 @@
 |                                                                **Team Members**                                                                |                                                                                  **Profiles**                                                                                  |                                     **Profile Description**                                     |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
 |<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="200" height="250"> <br/> Joseph Harraway <br/> u16049943  |       [GitHub](https://github.com/JojoMojo-svg) <br/> [Profile Page](https://JojoMojo-svg.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/joseph-harraway-968113210/) <br/> | 
-I am currently a final year BSc Computer Science student 
-studying at The University of Pretoria. I have a keen 
-interest in everything software and am always willing to 
-add to my knowledge base. The languages I am most 
-proficient at are: Java, C++, and Python. 
-I also have experience using several web-based 
-programming languages and technologies such as PHP, 
-JavaScript, HTML, CSS, Java Spring Boot and NodeJS. I 
-am extremely interested in the field of Artificial 
-Intelligence and I am hoping to broaden my expertise in 
+I am currently a final year BSc Computer Science student </br>
+studying at The University of Pretoria. I have a keen </br>
+interest in everything software and am always willing to </br>
+add to my knowledge base. The languages I am most </br>
+proficient at are: Java, C++, and Python. </br>
+I also have experience using several web-based </br>
+programming languages and technologies such as PHP, </br>
+JavaScript, HTML, CSS, Java Spring Boot and NodeJS. I </br>
+am extremely interested in the field of Artificial </br>
+Intelligence and I am hoping to broaden my expertise in </br>
 that area throughout this year and into honours. |
 |<img src="https://i.ibb.co/2ZZ6Gcz/Matt.png" width="250" height="250"> <br/> Matthew Harty <br/> u17005486 | [GitHub](https://github.com/M-Harty21) <br/> [Profile Page](https://gitusername.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/matthew-harty-8a40a3204) <br/> | Full stack Web Devlopment<br>Sport |
 |<img src= "https://media-exp1.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1624492800&v=beta&t=WhbO7lyVpiaPDtohJWB8JqbQOFK1PJ7LZ5fYJVVoOPg" width="250" height="250"> <br/> Dean Nortje <br/> u17326622 <br/> | [GitHub](https://github.com/Deannortje) <br/> [Profile Page](https://Deannortje.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/dean-nortje-63419b210) <br/> | Gaming, Motocross, Formula 1, Rock Climbing and Drumming |
