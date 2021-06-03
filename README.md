@@ -38,7 +38,8 @@
 
 |                                                                **Team Members**                                                                |                                                                                  **Profiles**                                                                                  |                                     **Profile Description**                                     |
 | :-------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-|<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="200" height="250"> <br/> Joseph Harraway <br/> u16049943  |       [GitHub](https://github.com/JojoMojo-svg) <br/> [Profile Page](https://JojoMojo-svg.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/joseph-harraway-968113210/) <br/> I am currently a final year BSc Computer Science student 
+|<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="200" height="250"> <br/> Joseph Harraway <br/> u16049943  |       [GitHub](https://github.com/JojoMojo-svg) <br/> [Profile Page](https://JojoMojo-svg.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/joseph-harraway-968113210/) <br/> | 
+I am currently a final year BSc Computer Science student 
 studying at The University of Pretoria. I have a keen 
 interest in everything software and am always willing to 
 add to my knowledge base. The languages I am most 
