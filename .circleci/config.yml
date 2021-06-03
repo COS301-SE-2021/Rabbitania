@@ -9,7 +9,7 @@ jobs:
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
-      - image: microsoft/dotnet:latest
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -18,8 +18,7 @@ jobs:
           # Update this line with the directory that contains your tests project file
           working_directory: ~/project/backend/backend_api
           name: Run tests
-          command:
-            dotnet restore |
+          command: |
             pwd
             ls
             dotnet test
