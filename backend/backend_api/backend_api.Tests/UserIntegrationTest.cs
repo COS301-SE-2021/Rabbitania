@@ -26,7 +26,7 @@ namespace backend_api.Tests
         public async Task TestGetUsersAsync()
         {
             // Arrange
-            var request = "/api/GetUsers";
+            var request = "/api/User";
 
             // Act
             var response = await Client.GetAsync(request);
@@ -39,7 +39,8 @@ namespace backend_api.Tests
         public async Task TestGetUserAsync()
         {
             // Arrange
-            var request = "/api/ViewProfile/1";
+            var request = "/api/User/1";
+           
 
             // Act
             var response = await Client.GetAsync(request);
@@ -52,7 +53,7 @@ namespace backend_api.Tests
         public async Task TestGetNullUserAsync()
         {
             // Arrange
-            var request = "/api/ViewProfile/10000";
+            var request = "/api/User/10000";
 
             // Act
             var response = await Client.GetAsync(request);
@@ -66,7 +67,7 @@ namespace backend_api.Tests
             // Arrange
             var request = new
             {
-                Url = "/api/GetUsers",
+                Url = "/api/User",
                 Body = new
                 {
                     userID = 0,
@@ -117,7 +118,7 @@ namespace backend_api.Tests
             // Arrange
             var request = new
             {
-                Url = "/api/GetUsers",
+                Url = "/api/User",
                 Body = new
                 {
                     userID = 0,
@@ -150,7 +151,7 @@ namespace backend_api.Tests
             // Arrange
             var request = new
             {
-                Url = "/api/ViewProfile/1",
+                Url = "/api/User/1",
                 Body = new
                 {
                     userID = 1,
@@ -181,7 +182,7 @@ namespace backend_api.Tests
             // Arrange
             var request = new
             {
-                Url = "/api/ViewProfile/10000",
+                Url = "/api/User/10000",
                 Body = new
                 {
                     userID = 1,
@@ -213,7 +214,7 @@ namespace backend_api.Tests
 
             var postRequest = new
             {
-                Url = "/api/GetUsers",
+                Url = "/api/User",
                 Body = new
                 {
                     userID = 0,
@@ -237,7 +238,7 @@ namespace backend_api.Tests
             User temp = await postResponse.Content.ReadAsAsync<User>();
             
 
-            var deleteResponse = await Client.DeleteAsync(string.Format("/api/ViewProfile/{0}", temp.UserID));
+            var deleteResponse = await Client.DeleteAsync(string.Format("/api/User/{0}", temp.UserID));
             // Assert
             //postResponse.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
@@ -254,7 +255,7 @@ namespace backend_api.Tests
           
             
 
-            var deleteResponse = await Client.DeleteAsync("/api/ViewProfile/10000");
+            var deleteResponse = await Client.DeleteAsync("/api/User/10000");
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, deleteResponse.StatusCode);
         }
