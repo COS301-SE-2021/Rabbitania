@@ -24,7 +24,7 @@ namespace backend_api.Controllers
         ///     Get all users, for Admin purposes.
         /// </summary>
         /// <returns> List of all users </returns>
-        [HttpGet("/GetUsers")]
+        [HttpGet("/api/GetUsers")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.users.ToListAsync();
@@ -35,7 +35,7 @@ namespace backend_api.Controllers
         /// </summary>
         /// <param name="userID"></param>
         /// <returns> A User </returns>
-        [HttpGet("/ViewProfile/{userID}")]
+        [HttpGet("/api/ViewProfile/{userID}")]
         public async Task<ActionResult<User>> GetUser(int userID)
         {
             var user = await _context.users.FindAsync(userID);
@@ -55,7 +55,7 @@ namespace backend_api.Controllers
         /// <param name="userID"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        [HttpPut("/EditProfile/{userID}")]
+        [HttpPut("/api/EditProfile/{userID}")]
         public async Task<IActionResult> PutUser(int userID, User user)
         {
             if (userID != user.UserID)
@@ -87,7 +87,7 @@ namespace backend_api.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns>The created User </returns>
-        [HttpPost("/CreateUser")]
+        [HttpPost("/api/CreateUser")]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
             _context.users.Add(user);
@@ -100,7 +100,7 @@ namespace backend_api.Controllers
         ///     Logs user into the system using Google OAuth
         ///     - Changes isOnline status to true
         /// </summary>
-        [HttpGet("/Login")]
+        [HttpGet("/api/Login")]
         public void LoginUser()
         {
             //TODO: Implement Login functionality using Google OAuth
@@ -110,7 +110,7 @@ namespace backend_api.Controllers
         ///     Logs a user out of the system
         ///     - Changes the isOnline status to false
         /// </summary>
-        [HttpGet("/Logout")]
+        [HttpGet("/api/Logout")]
         public void LogoutUser()
         {
             //TODO: Implement Logout functionality using Google OAuth

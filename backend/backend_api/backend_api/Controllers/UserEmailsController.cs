@@ -15,23 +15,37 @@ namespace backend_api.Controllers
     {
         private readonly DatabaseContext _context;
 
+        /// <summary>
+        ///     
+        ///     This class helps mainly to assist with user and the needs of the user subsystem
+        ///     It's main responsibilities are to assist with storing the emails of a user,
+        ///     as an employee of Retro Rabbit might have multiple different emails.
+        /// 
+        /// </summary>
         public UserEmailsController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/UserEmails
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserEmails>>> GetuserEmails()
+        /// <summary>
+        ///     Gets all users emails
+        /// </summary>
+        /// <returns>All the emails in UserEmails </returns>
+        [HttpGet("/api/GetAllEmails")]
+        public async Task<ActionResult<IEnumerable<UserEmails>>> GetAllUserEmails()
         {
             return await _context.userEmails.ToListAsync();
         }
 
-        // GET: api/UserEmails/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserEmails>> GetUserEmails(int id)
+        /// <summary>
+        ///     Gets a user's different emails, there could be one or many
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns> List of users emails </returns>
+        [HttpGet("/api/GetAUsersEmails/{userID}")]
+        public async Task<ActionResult<UserEmails>> GetEmails(int userID)
         {
-            var userEmails = await _context.userEmails.FindAsync(id);
+            var userEmails = await _context.userEmails.FindAsync(userID);
 
             if (userEmails == null)
             {
@@ -40,63 +54,24 @@ namespace backend_api.Controllers
 
             return userEmails;
         }
-
-        // PUT: api/UserEmails/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserEmails(int id, UserEmails userEmails)
+        
+        /// <summary>
+        ///     Adds a user's email to the database
+        /// </summary>
+        /// <param name="userEmail"></param>
+        /// <returns> a boolean that it has been saved succesfully </returns>
+        [HttpPost("/api/AddEmail")]
+        public async Task<ActionResult<UserEmails>> AddEmail(UserEmails userEmail)
         {
-            if (id != userEmails.userEmailID)
+            var userEmailId = userEmail.userEmailID;
+            if (UserEmailsExists(userEmailId))
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError, "User email already exists");
             }
-
-            _context.Entry(userEmails).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserEmailsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/UserEmails
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UserEmails>> PostUserEmails(UserEmails userEmails)
-        {
-            _context.userEmails.Add(userEmails);
+           
+            _context.userEmails.Add(userEmail);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUserEmails", new { id = userEmails.userEmailID }, userEmails);
-        }
-
-        // DELETE: api/UserEmails/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserEmails(int id)
-        {
-            var userEmails = await _context.userEmails.FindAsync(id);
-            if (userEmails == null)
-            {
-                return NotFound();
-            }
-
-            _context.userEmails.Remove(userEmails);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return CreatedAtAction("GetAllUserEmails", new { id = userEmail.userEmailID }, userEmail);
         }
 
         private bool UserEmailsExists(int id)
