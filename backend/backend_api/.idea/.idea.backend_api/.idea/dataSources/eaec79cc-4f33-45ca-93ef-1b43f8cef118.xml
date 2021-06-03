@@ -1406,9 +1406,11 @@ true posixrules
 14164||-9223372036854775808|U|G
 14164||10|U|G</Grants>
       <Owner>doadmin</Owner>
-      <IntrospectionStateNumber>25503</IntrospectionStateNumber>
+      <IntrospectionStateNumber>32724</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16654|16656|1
+      <Relations>sequence|table|16692|16694|1
+sequence|table|16702|16704|1
+sequence|table|16654|16656|1
 sequence|table|16589|16591|1
 </Relations>
     </database>
@@ -1488,7 +1490,7 @@ sequence|table|16589|16591|1
       <Comment>standard public schema</Comment>
       <StateNumber>286</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>25504</IntrospectionStateNumber>
+      <IntrospectionStateNumber>32726</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="3" name="plpgsql">
@@ -1588,48 +1590,70 @@ sequence|table|16589|16591|1
       <HandlerId>335</HandlerId>
       <Type>index</Type>
     </access-method>
-    <sequence id="32" parent="19" name="noticeBoardThreads_threadID_seq">
+    <sequence id="32" parent="19" name="UserEmails_userEmailsID_seq">
+      <ObjectId>16692</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>26452</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="33" parent="19" name="noticeBoardThreads_threadID_seq">
       <ObjectId>16589</ObjectId>
       <Owner>doadmin</Owner>
       <StateNumber>20205</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <sequence id="33" parent="19" name="noticeBoard_NoticeBoardID_seq">
+    <sequence id="34" parent="19" name="noticeBoard_NoticeBoardID_seq">
       <ObjectId>16654</ObjectId>
       <Owner>doadmin</Owner>
       <StateNumber>25395</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="34" parent="19" name="__EFMigrationsHistory">
+    <sequence id="35" parent="19" name="users_UserID_seq">
+      <ObjectId>16702</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>26452</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <table id="36" parent="19" name="__EFMigrationsHistory">
       <ObjectId>16414</ObjectId>
       <Owner>doadmin</Owner>
       <StateNumber>10122</StateNumber>
     </table>
-    <table id="35" parent="19" name="noticeBoard">
+    <table id="37" parent="19" name="noticeBoard">
       <ObjectId>16656</ObjectId>
       <Owner>doadmin</Owner>
       <StateNumber>25493</StateNumber>
     </table>
-    <table id="36" parent="19" name="noticeBoardThreads">
+    <table id="38" parent="19" name="noticeBoardThreads">
       <ObjectId>16591</ObjectId>
       <Owner>doadmin</Owner>
       <StateNumber>25419</StateNumber>
     </table>
-    <column id="37" parent="34" name="MigrationId">
+    <table id="39" parent="19" name="userEmails">
+      <ObjectId>16694</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>26740</StateNumber>
+    </table>
+    <table id="40" parent="19" name="users">
+      <ObjectId>16704</ObjectId>
+      <Owner>doadmin</Owner>
+      <StateNumber>26740</StateNumber>
+    </table>
+    <column id="41" parent="36" name="MigrationId">
       <Position>1</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>10122</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="38" parent="34" name="ProductVersion">
+    <column id="42" parent="36" name="ProductVersion">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>10122</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="39" parent="34" name="PK___EFMigrationsHistory">
+    <index id="43" parent="36" name="PK___EFMigrationsHistory">
       <ObjectId>16417</ObjectId>
       <StateNumber>10122</StateNumber>
       <ColNames>MigrationId</ColNames>
@@ -1640,14 +1664,14 @@ sequence|table|16589|16591|1
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="40" parent="34" name="PK___EFMigrationsHistory">
+    <key id="44" parent="36" name="PK___EFMigrationsHistory">
       <ObjectId>16418</ObjectId>
       <StateNumber>10122</StateNumber>
       <ColNames>MigrationId</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
     </key>
-    <column id="41" parent="35" name="NoticeBoardID">
+    <column id="45" parent="37" name="NoticeBoardID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1655,19 +1679,19 @@ sequence|table|16589|16591|1
       <TypeId>23</TypeId>
       <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="42" parent="35" name="title">
+    <column id="46" parent="37" name="title">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>25395</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="43" parent="35" name="noticeBoardThreadIDs">
+    <column id="47" parent="37" name="noticeBoardThreadIDs">
       <Position>3</Position>
       <DataType>integer[]|0s</DataType>
       <StateNumber>25493</StateNumber>
       <TypeId>1007</TypeId>
     </column>
-    <index id="44" parent="35" name="PK_noticeBoard">
+    <index id="48" parent="37" name="PK_noticeBoard">
       <ObjectId>16662</ObjectId>
       <StateNumber>25395</StateNumber>
       <ColNames>NoticeBoardID</ColNames>
@@ -1677,14 +1701,14 @@ sequence|table|16589|16591|1
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="45" parent="35" name="PK_noticeBoard">
+    <key id="49" parent="37" name="PK_noticeBoard">
       <ObjectId>16663</ObjectId>
       <StateNumber>25395</StateNumber>
       <ColNames>NoticeBoardID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_noticeBoard</UnderlyingIndexName>
     </key>
-    <column id="46" parent="36" name="threadID">
+    <column id="50" parent="38" name="threadID">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1692,38 +1716,38 @@ sequence|table|16589|16591|1
       <TypeId>23</TypeId>
       <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="47" parent="36" name="ThreadTitle">
+    <column id="51" parent="38" name="ThreadTitle">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="48" parent="36" name="ThreadContent">
+    <column id="52" parent="38" name="ThreadContent">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="49" parent="36" name="UserID">
+    <column id="53" parent="38" name="UserID">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>20205</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="50" parent="36" name="ThreadCreationDate">
+    <column id="54" parent="38" name="ThreadCreationDate">
       <Position>6</Position>
       <DataType>text|0s</DataType>
       <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="51" parent="36" name="ThreadDueDate">
+    <column id="55" parent="38" name="ThreadDueDate">
       <Position>7</Position>
       <DataType>text|0s</DataType>
       <StateNumber>25086</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="52" parent="36" name="PK_noticeBoardThreads">
+    <index id="56" parent="38" name="PK_noticeBoardThreads">
       <ObjectId>16597</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>
@@ -1733,12 +1757,145 @@ sequence|table|16589|16591|1
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="53" parent="36" name="PK_noticeBoardThreads">
+    <key id="57" parent="38" name="PK_noticeBoardThreads">
       <ObjectId>16598</ObjectId>
       <StateNumber>20205</StateNumber>
       <ColNames>threadID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PK_noticeBoardThreads</UnderlyingIndexName>
+    </key>
+    <column id="58" parent="39" name="userEmailsID">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
+    </column>
+    <column id="59" parent="39" name="userEmail">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="60" parent="39" name="PK_userEmails">
+      <ObjectId>16718</ObjectId>
+      <StateNumber>26740</StateNumber>
+      <ColNames>userEmailsID</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="61" parent="39" name="PK_userEmails">
+      <ObjectId>16719</ObjectId>
+      <StateNumber>26740</StateNumber>
+      <ColNames>userEmailsID</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_userEmails</UnderlyingIndexName>
+    </key>
+    <column id="62" parent="40" name="UserID">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
+    </column>
+    <column id="63" parent="40" name="firstname">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="64" parent="40" name="lastname">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="65" parent="40" name="phoneNumber">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="66" parent="40" name="pinnedUserIDs">
+      <Position>5</Position>
+      <DataType>integer[]|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>1007</TypeId>
+    </column>
+    <column id="67" parent="40" name="userImage">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="68" parent="40" name="userDescription">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>26452</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="69" parent="40" name="isOnline">
+      <Position>8</Position>
+      <DataType>boolean|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="70" parent="40" name="isAdmin">
+      <Position>9</Position>
+      <DataType>boolean|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="71" parent="40" name="employeeLevel">
+      <Position>10</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="72" parent="40" name="userRoles">
+      <Position>11</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="73" parent="40" name="officeLocation">
+      <Position>12</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>26452</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="74" parent="40" name="UserEmails">
+      <Position>14</Position>
+      <DataType>integer[]|0s</DataType>
+      <StateNumber>26740</StateNumber>
+      <TypeId>1007</TypeId>
+    </column>
+    <index id="75" parent="40" name="PK_users">
+      <ObjectId>16710</ObjectId>
+      <StateNumber>26452</StateNumber>
+      <ColNames>UserID</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="76" parent="40" name="PK_users">
+      <ObjectId>16711</ObjectId>
+      <StateNumber>26452</StateNumber>
+      <ColNames>UserID</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PK_users</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
