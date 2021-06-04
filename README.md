@@ -20,15 +20,11 @@
 <ul>
     <h4>Back-End:</h4>
     <li><img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=dot-net&logoColor=white"/></li>
-    <li><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"/></li>
-    <li><img src="https://img.shields.io/badge/NuGet-004880?style=for-the-badge&logo=nuget&logoColor=white"/></li>
     <h4>Front-End:</h4>
     <li><img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/></li>
-    <li><img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"/></li>
     <h4>Database:</h4>
     <li><img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"/></li>
     <h4>Other:</h4>
-    <li><img src="https://img.shields.io/badge/Digital_Ocean-0080FF?style=for-the-badge&logo=DigitalOcean&logoColor=white"/></li>
     <li><img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"/></li>
 </ul>
 
@@ -55,7 +51,7 @@
 ## Team Members
 
 
-<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="200" height="250">
+<img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="190" height="280">
 
 #### Joseph Harraway | u16049943
 
