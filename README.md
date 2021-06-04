@@ -18,7 +18,7 @@
 ## Technology Stack
 
    <h4>Back-End:</h4>
-   <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=dot-net&logoColor=white" >
+   <img src="https://img.shields.io/badge/.NET_Core-5C2D91?style=for-the-badge&logo=dot-net&logoColor=white" >
    <h4>Front-End:</h4>
    <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" >
    <h4>Database:</h4>
