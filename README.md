@@ -6,11 +6,12 @@
 <br>
 
 [![codecov](https://codecov.io/gh/COS301-SE-2021/Rabbitania/branch/master/graph/badge.svg?token=IVQUTWBTTT)](https://codecov.io/gh/COS301-SE-2021/Rabbitania)
-[![CircleC>](https://circleci.com/gh/COS301-SE-2021/Rabbitania.svg?style=svg)](https://app.circleci.com/pipelines/github/COS301-SE-2021/Rabbitania)
+[![CircleCI](https://circleci.com/gh/COS301-SE-2021/Rabbitania/tree/development.svg?style=svg))](https://circleci.com/gh/COS301-SE-2021/Rabbitania/tree/development)
 <!-- [![Requires](https://requires.io/github/COS301-SE-2021/Rabbitania/requirments.svg?branch=master)](https://requires.io/) -->
 [![GitHub issues](https://img.shields.io/github/issues/COS301-SE-2021/Rabbitania)](https://github.com/COS301-SE-2021/Rabbitania/issues)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Rabbitania)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788293813-682cc4757b474114e1dd0230)
+
 
 ## Project Description
 <p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
