@@ -6,7 +6,7 @@
 <br>
 
 [![codecov](https://codecov.io/gh/COS301-SE-2021/Rabbitania/branch/master/graph/badge.svg?token=IVQUTWBTTT)](https://codecov.io/gh/COS301-SE-2021/Rabbitania)
-[![CircleCI](https://circleci.com/gh/COS301-SE-2021/Rabbitania/tree/development.svg?style=svg))](https://circleci.com/gh/COS301-SE-2021/Rabbitania/tree/development)
+[![CircleCI](https://circleci.com/gh/COS301-SE-2021/Rabbitania/tree/development.svg?style=svg)](https://circleci.com/gh/COS301-SE-2021/Rabbitania/tree/development)
 <!-- [![Requires](https://requires.io/github/COS301-SE-2021/Rabbitania/requirments.svg?branch=master)](https://requires.io/) -->
 [![GitHub issues](https://img.shields.io/github/issues/COS301-SE-2021/Rabbitania)](https://github.com/COS301-SE-2021/Rabbitania/issues)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Rabbitania)
