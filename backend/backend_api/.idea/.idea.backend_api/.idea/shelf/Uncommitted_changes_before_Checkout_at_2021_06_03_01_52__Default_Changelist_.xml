@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Checkout_at_2021_06_03_01_52_[Default_Changelist]" date="1622677965181" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_01_52_[Default_Changelist]/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2021/06/03 01:52 [Default Changelist]" />
-  <binary>
-    <option name="BEFORE_PATH" value="backend_api.Tests/obj/project.nuget.cache" />
-    <option name="AFTER_PATH" value="backend_api.Tests/obj/project.nuget.cache" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.backend_api/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_06_03_01_52_[Default_Changelist]/project.nuget.cache" />
-  </binary>
-</changelist>

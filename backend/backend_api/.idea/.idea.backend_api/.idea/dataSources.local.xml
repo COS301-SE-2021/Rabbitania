@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="dataSourceStorageLocal" created-in="RD-211.7442.29">
-    <data-source name="PostgreSQL - defaultdb@db-rabbitania-do-user-9312303-0.b.db.ondigitalocean.com" uuid="8f9a3242-7aea-4fea-bba5-ecc4562f1dd5">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0" />
-      <schema-mapping />
-    </data-source>
-  </component>
-</project>
