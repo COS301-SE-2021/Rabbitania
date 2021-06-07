@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.VisualBasic;
 
 namespace backend_api.Models.Notifications
 {
-    public class Notification
+    public class Notification : INotification
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
