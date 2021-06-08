@@ -1,4 +1,4 @@
-﻿namespace backend_api.Models.Notifications
+﻿namespace backend_api.Notifications.Services
 {
     public interface INotificationService
     {

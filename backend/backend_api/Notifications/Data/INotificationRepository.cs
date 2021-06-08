@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using backend_api.Models.Notifications;
 
-namespace backend_api.Models.Notifications.Repository
+namespace backend_api.Notifications.Data
 {
     public interface INotificationRepository : INotification
     {
