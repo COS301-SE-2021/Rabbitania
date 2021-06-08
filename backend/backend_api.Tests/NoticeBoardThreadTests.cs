@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using backend_api.Models;
 using Xunit;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.TestHost;
 using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
 

@@ -17,7 +17,6 @@ using Microsoft.OpenApi.Models;
 using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 
-
 namespace backend_api
 {
     public class Startup
