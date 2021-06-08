@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using backend_api.Models;
+using backend_api.User.Data.User;
+using backend_api.User.Models.User;
 using Moq; 
 using Xunit;
 
@@ -8,12 +10,12 @@ namespace backend_api.Tests
 {
     public class UserUnitTests
     {
-        private readonly User _sutUser;
+        private readonly User.Models.User.User _sutUser;
         private readonly UserEmails _sutUserEmails;
         private IUserRepository userRepository;
         public UserUnitTests()
         {
-            this._sutUser = new User();
+            this._sutUser = new User.Models.User.User();
             this._sutUserEmails = new UserEmails();
         }
         
@@ -56,8 +58,8 @@ namespace backend_api.Tests
         public void CreateNewUserInstanceIsNotNull()
         {
             // given
-            User newTestUser;
-            newTestUser = new User();
+            User.Models.User.User newTestUser;
+            newTestUser = new User.Models.User.User();
             // expected 
             Assert.NotNull(newTestUser);
         }
@@ -76,7 +78,7 @@ namespace backend_api.Tests
         public void CreateNewUserInstanceIsNull()
         {
             //given
-            User newTestUser;
+            User.Models.User.User newTestUser;
             newTestUser = null;
             //excepted
             Assert.Null(newTestUser);

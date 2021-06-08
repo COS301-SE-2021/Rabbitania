@@ -7,6 +7,11 @@
 
     <ItemGroup>
       <Folder Include="Migrations" />
+      <Folder Include="Models\User" />
+      <Folder Include="User\Migrations" />
+      <Folder Include="User\Requests" />
+      <Folder Include="User\Responses" />
+      <Folder Include="User\Services" />
     </ItemGroup>
 
     <ItemGroup>

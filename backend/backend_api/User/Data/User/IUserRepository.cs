@@ -1,4 +1,4 @@
-﻿namespace backend_api.Models
+﻿namespace backend_api.User.Data.User
 {
     public interface IUserRepository
     {

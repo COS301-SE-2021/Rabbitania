@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models;
+using backend_api.User.Models.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using backend_api.Models;
 
-namespace backend_api.Controllers
+namespace backend_api.User.Controllers.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

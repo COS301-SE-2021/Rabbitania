@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Models.Notifications;
+using backend_api.User.Models.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Models
@@ -20,7 +21,7 @@ namespace backend_api.Models
             listOfMockIds.Add(4);
         }
         
-        public DbSet<User> users { get; set; }
+        public DbSet<User.Models.User.User> users { get; set; }
         public DbSet<Notification> notifications { get; set; }
         public DbSet<UserEmails> userEmails { get; set; }
         public DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }

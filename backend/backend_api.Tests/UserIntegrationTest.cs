@@ -235,7 +235,7 @@ namespace backend_api.Tests
             // Act
             var postResponse = await Client.PostAsync(postRequest.Url, ContentHelper.GetStringContent(postRequest.Body));
             var jsonFromPost = await postResponse.Content.ReadAsStringAsync();
-            User temp = await postResponse.Content.ReadAsAsync<User>();
+            User.Models.User.User temp = await postResponse.Content.ReadAsAsync<User.Models.User.User>();
             
 
             var deleteResponse = await Client.DeleteAsync(string.Format("/api/User/{0}", temp.UserID));
