@@ -1,21 +1,23 @@
 ﻿using System.Threading.Tasks;
 using backend_api.Models;
 using backend_api.User.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.User.Data.User
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DatabaseContext _dbContext;
+        private readonly IUserRepository _users;
         
-        public UserRepository(DatabaseContext DbContext)
+        public UserRepository(IUserRepository users)
         {
-            this._dbContext = DbContext;
+            this._users = users;
         }
 
         public async Task<Models.User.User[]> RetrieveUsers(int userID)
         {
-            return;
+            return await this.RetrieveUsers(userID);
         }
+        public DbSet<Models.User.User> users { get; set; }
     }
 }
