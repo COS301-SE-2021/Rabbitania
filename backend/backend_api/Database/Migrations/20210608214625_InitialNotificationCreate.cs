@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace backend_api.Notifications.Data.Migrations
+namespace backend_api.Database.Migrations
 {
     public partial class InitialNotificationCreate : Migration
     {

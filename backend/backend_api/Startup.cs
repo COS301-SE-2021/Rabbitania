@@ -38,12 +38,7 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName)));
-
-            services.AddScoped<IDatabaseContext>(provider => provider.GetService<DatabaseContext>());
+            
                 
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>

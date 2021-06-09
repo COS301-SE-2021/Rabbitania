@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.TestHost;
 using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
 
-namespace backend_api.Tests
+/*namespace backend_api.Tests
 {
     public class UserIntegrationTest : IClassFixture<TestFixture<Startup>>
     {
@@ -99,7 +99,7 @@ namespace backend_api.Tests
                     "officeLocation": 0,
                     "userEmails": [
                     0
-                    ] */
+                    ] 
                 }
             };
 
@@ -250,7 +250,7 @@ namespace backend_api.Tests
         {
             // Arrange
             /*
-            */
+            
             // Act
           
             
@@ -260,4 +260,4 @@ namespace backend_api.Tests
             Assert.Equal(HttpStatusCode.NotFound, deleteResponse.StatusCode);
         }
     }
-}
+} */
