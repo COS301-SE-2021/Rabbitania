@@ -2,6 +2,11 @@
 {
     public class RetrieveNotificationRequest
     {
-        
+        private int userID;
+
+        public RetrieveNotificationRequest()
+        {
+            
+        }
     }
 }
