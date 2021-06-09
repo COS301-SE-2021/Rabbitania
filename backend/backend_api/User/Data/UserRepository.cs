@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.User.Data
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : DbContext, IUserRepository
     {
         private readonly IUserRepository _users;
         
@@ -16,10 +18,15 @@ namespace backend_api.User.Data
         {
             
         }
-
-        public async Task<IAsyncEnumerable<Models.User.User>> GetAllUsers()
+        
+        // public async Task<List<Notification>> RetrieveNotifications(int userID)
+        // {
+        //     IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == userID);
+        //     return await retrieveUserNotifications.ToListAsync();
+        // }
+        public async Task<List<Models.User.User>> GetAllUsers()
         {
-            
+            IQueryable<Models.User.User> getAllUsers = 
         }
 
         public async Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID)
