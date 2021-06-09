@@ -178,7 +178,7 @@
 
 📧 cgovender@retrorabbit.co.za
 
-<img src="images_banners_logos/retrologo.svg">
+<img src="images_banners_logos/retrorabbit.png">
 
 🖥️ Website : https://retrorabbit.co.za<br><br>
 
