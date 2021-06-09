@@ -61,15 +61,20 @@ class _LoginState extends State<Login>{
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
+
+      body: Container(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
+        constraints: BoxConstraints.expand(),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("../assets/images/background.png"),
+              fit: BoxFit.fill,
+            )
+        ),
         child: Column(
+
+
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -86,21 +91,27 @@ class _LoginState extends State<Login>{
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.focused))
+                        return Colors.red;
+                      return Colors.green; // Defer to the widget's default.
+                    }
+                ),
+              ),
+              onPressed: () { },
+              child: Icon(Icons.login_sharp,
+                color: Colors.green,
+                size: 100.0,
+                semanticLabel: 'Login via Google',
+                ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
