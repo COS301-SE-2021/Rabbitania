@@ -5,15 +5,15 @@ namespace backend_api.User.Data
 {
     public interface IUserRepository
     {
-        Task<IAsyncEnumerable<Models.User.User>> GetUser(int userID);
+        Task<List<Models.User.User>> GetUser(int userID);
         
-        Task<IAsyncEnumerable<Models.User.User>> GetAllUsers();
+        Task<List<Models.User.User>> GetAllUsers();
 
-        Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
-
-        Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User user);
-
-        Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID);
+        // Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
+        //
+        // Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User user);
+        //
+        // Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID);
 
         // DbSet<Models.User.User> users { get; set; }
 
