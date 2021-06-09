@@ -10,6 +10,7 @@ namespace backend_api.User.Services
         {
             _userRepository = userRepo;
         }
+        
         //Logical functions
         public void verifyLogin()
         {
