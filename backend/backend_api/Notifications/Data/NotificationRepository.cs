@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Notifications.Data
 {
-    public class NotificationRepository
+    public class NotificationRepository : INotificationRepository
     {
         private readonly INotificationContext _context;
         
@@ -16,16 +16,12 @@ namespace backend_api.Notifications.Data
             this._context = context;
         }
         
-        /// <summary>
-        ///     Fetches all of the notifications of a particular user from the DBContext.
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <returns> A list of notifications </returns>
-        public async Task<Notification[]> RetrieveNotifications(int userID)
+     
+        /// <inheritdoc />
+        public async Task<List<Notification>> RetrieveNotifications(int userID)
         {
            IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == userID);
-           return await retrieveUserNotifications.ToArrayAsync();
-           return null;
+           return await retrieveUserNotifications.ToListAsync();
         }
     }
 }
