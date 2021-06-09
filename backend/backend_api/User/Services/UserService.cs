@@ -1,4 +1,4 @@
-﻿using backend_api.User.Data.User;
+﻿using backend_api.User.Data;
 
 namespace backend_api.User.Services
 {

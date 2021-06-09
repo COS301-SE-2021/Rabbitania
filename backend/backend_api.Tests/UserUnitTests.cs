@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using backend_api.Models;
-using backend_api.User.Data.User;
+using backend_api.User.Data;
 using backend_api.User.Models.User;
 using Moq; 
 using Xunit;

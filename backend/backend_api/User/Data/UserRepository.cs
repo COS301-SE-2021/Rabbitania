@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using backend_api.Models;
-using backend_api.User.Models;
-using Microsoft.EntityFrameworkCore;
 
-namespace backend_api.User.Data.User
+namespace backend_api.User.Data
 {
     public class UserRepository : IUserRepository
     {
