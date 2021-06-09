@@ -5,34 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using backend_api.Models;
 using backend_api.Models.Notifications;
+using backend_api.Notifications.Data;
 
-namespace backend_api.Controllers
+namespace backend_api.Notifications.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
     public class NotificationsController : ControllerBase
     {
-        private readonly DatabaseContext _context;
+        private readonly NotificationContext _context;
 
-        public NotificationsController(DatabaseContext context)
+        public NotificationsController(NotificationContext context)
         {
             _context = context;
         }
 
         // GET: api/Notifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Notification>>> Getnotifications()
+        public async Task<ActionResult<IEnumerable<Notification>>> GetNotifications()
         {
-            return await _context.notifications.ToListAsync();
+            return await _context.Notifications.ToListAsync();
         }
 
         // GET: api/Notifications/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Notification>> GetNotification(int id)
         {
-            var notification = await _context.notifications.FindAsync(id);
+            var notification = await _context.Notifications.FindAsync(id);
 
             if (notification == null)
             {
@@ -47,7 +47,7 @@ namespace backend_api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNotification(int id, Notification notification)
         {
-            if (id != notification.notificationID)
+            if (id != notification.NotificationId)
             {
                 return BadRequest();
             }
@@ -78,23 +78,23 @@ namespace backend_api.Controllers
         [HttpPost]
         public async Task<ActionResult<Notification>> PostNotification(Notification notification)
         {
-            _context.notifications.Add(notification);
+            _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetNotification", new { id = notification.notificationID }, notification);
+            return CreatedAtAction("GetNotification", new { id = notification.NotificationId }, notification);
         }
 
         // DELETE: api/Notifications/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNotification(int id)
         {
-            var notification = await _context.notifications.FindAsync(id);
+            var notification = await _context.Notifications.FindAsync(id);
             if (notification == null)
             {
                 return NotFound();
             }
 
-            _context.notifications.Remove(notification);
+            _context.Notifications.Remove(notification);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace backend_api.Controllers
 
         private bool NotificationExists(int id)
         {
-            return _context.notifications.Any(e => e.notificationID == id);
+            return _context.Notifications.Any(e => e.NotificationId == id);
         }
     }
 }

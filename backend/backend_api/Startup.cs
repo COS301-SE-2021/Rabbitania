@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models;
+using backend_api.Notifications.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,13 +44,21 @@ namespace backend_api
                     b => b.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName)));
 
             services.AddScoped<IDatabaseContext>(provider => provider.GetService<DatabaseContext>());
+                
+            // Notification DB Context
+            services.AddDbContext<NotificationContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
-
+            services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
+            /////
+            
             services.AddControllers();
             #region Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "backend_api", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v1"});
             });
             #endregion
             services.AddAuthorization();

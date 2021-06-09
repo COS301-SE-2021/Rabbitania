@@ -21,7 +21,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Database" />
       <Folder Include="Migrations" />
+      <Folder Include="Notifications\Controller" />
+      <Folder Include="Notifications\Data\Migrations" />
     </ItemGroup>
 
 </Project>
