@@ -14,9 +14,7 @@ namespace backend_api.User.Data
         // Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User user);
         //
         // Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID);
-
-        // DbSet<Models.User.User> users { get; set; }
-
+        
         // Task<int> SaveChanges();
 
     }
