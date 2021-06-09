@@ -33,7 +33,8 @@
 
 <div>
 
-- [Runtime Terrors Team Members](#Runtime_Terrors_Team_Members)
+- [Runtime Terrors Team Members](#Team-Runtime-Terrors)
+- [Industry Mentor](#Industry-Mentor) 🏆
 - [GitHub Management](#GitHub-Management) 💼
 - [Documentation](#Documentation) 📉
 - [Demo Video Links](#Demo-Video-Links) 🎥
@@ -58,12 +59,15 @@
 
   <div>
 
-              I am currently a final year BSc Computer Science student studying at The University of Pretoria.
-              I have a keen interest in everything software and am always willing to add to my knowledge base.
-              The languages I am most proficient at are: Java, C++, and Python. I also have experience using 
-              several web-based programming languages and technologies such as PHP, JavaScript, HTML, CSS, 
-              Java Spring Boot and NodeJS.I am extremely interested in the field of Artificial Intelligence and
-              I am hoping to broaden my expertise in that area throughout this year and into honours.
+                          I am currently a final year BSc Computer Science student studying
+                          at The University of Pretoria. I have a keen interest in everything
+                          software and am always willing to add to my knowledge base. The 
+                          languages I am most proficient at are: Java, C++, and Python. I also
+                          have experience using several web-based programming languages and 
+                          technologies such as PHP, JavaScript, HTML, CSS, Java Spring Boot 
+                          and NodeJS.I am extremely interested in the field of Artificial 
+                          Intelligence and I am hoping to broaden my expertise in that area
+                          throughout this year and into honours.
   </div>
   
 -----------------------------------------------------------------------------------
@@ -76,14 +80,17 @@
 
 <div>
 
-             I am currently a BSc Information and Knowledge Systems student with a passion for full stack web and 
-             mobile software development. Technologies that I am currently interested in and familiar are as follows:
-             JavaScript, TypeScript, Node.js, Java, HTML, CSS, PHP, Java, C++ and C# and database technologies such as
-             MySQL, PostgreSQL with some MongoDB </br>experience. I also have an interest in many full stack frameworks
-             such as ASP .NET Core, Angular, React, Ionic, Spring Boot.
+                           I am currently a BSc Information and Knowledge Systems student with 
+                           a passion for full stack web and mobile software development. 
+                           Technologies that I am currently interested in and familiar are as 
+                           follows: JavaScript, TypeScript, Node.js, Java, HTML, CSS, PHP, 
+                           Java, C++ and C# and database technologies such as MySQL, PostgreSQL
+                           with some MongoDB experience. I also have an interest in many full 
+                           stack frameworks such as ASP .NET Core, Angular, React, Ionic, Spring Boot.
 
-             I also have a passion for sports such as Water Polo, Golf and many more which make up a lot of my spare
-             time along with a healthy social life and plenty ofgetaways to my game farm to decompress.
+                           I also have a passion for sports such as Water Polo 🤽‍♂️ Golf 🏌️‍♂️ and many more
+                           which make up a lot of my spare time with plenty of getaways to my game farm
+                           to decompress 🐆
   </div>
 
 -----------------------------------------------------------------------------------
@@ -96,12 +103,15 @@
 
 <div>
 
-                 I am a final year BSc Information and Knowledge Systems student with a passion for software development.
-                 I am a hard-working and strategic individual. I enjoy teamwork but also function well as a leader, eager
-                 to take on any responsibility. I have experience with multiple technologies namely Java, C++, C#, Python,
-                 ASP.NET, Angular, NodeJS, PHP, Ionic, XML, HTML, CSS, TypeScript, JavaScript, Bootstrap, Spring Boot, SQL,
-                 and NoSQL Databases. I have a passion for doing activities such as rock climbing, motocross, and gaming.
-                 Other interests of mine include Formula 1 and stock/crypto markets.
+                             I am a final year BSc Information and Knowledge Systems student with 
+                             a passion for software development. I am a hard-working and strategic 
+                             individual. I enjoy teamwork but also function well as a leader, eager
+                             to take on any responsibility. I have experience with multiple technologies 
+                             namely Java, C++, C#, Python, ASP.NET, Angular, NodeJS, PHP, Ionic, XML, 
+                             HTML, CSS, TypeScript, JavaScript, Bootstrap, Spring Boot, SQL, and NoSQL 
+                             Databases. I have a passion for doing activities such as rock climbing, 
+                             motocross, and gaming. Other interests of mine include Formula 1 and 
+                             stock/crypto markets.
   </div>
   
 -----------------------------------------------------------------------------------
@@ -114,12 +124,14 @@
 
 <div>
                    
-                I am a final year BSc Knowledge and Information Sciences student at the University of
-                Pretoria and part time Web Developer at The Kulture Collab. I have experience with 
-                multiple languages/technologies such as Java, C++, C#, ASP.NET, Angular, NodeJS, 
-                JavaScript, NodeJS, Spring, XML, PHP, NoSQL, and SQL databases. I have also completed 
-                networking certificates such as my CCNP R&S certificate. I have a passion for knowledge
-                and enjoy gym, gaming and playing tennis in my spare time.
+                              I am a final year BSc Knowledge and Information Sciences student 
+                              at the University of Pretoria and part time Web Developer at The
+                              Kulture Collab. I have experience with multiple languages/technologies
+                              such as Java, C++, C#, ASP.NET, Angular, NodeJS, JavaScript, NodeJS, 
+                              Spring, XML, PHP, NoSQL, and SQL databases. I have also completed 
+                              networking certificates such as my CCNP R&S certificate. I have a
+                              passion for knowledgeand enjoy gym, gaming and playing tennis in my
+                              spare time.
   </div>
 
 -----------------------------------------------------------------------------------
@@ -132,28 +144,39 @@
 
 <div>
                    
-             Currently studying BSc Information and Knowledge Systems. I am hard working as well as eager to 
-             learn new technologies. Technologies I have experience with PHP, NodeJS, .NET Core, Java, JavaScript,
-             TypeScript, React, Angular, Ionic, C#, C++, XML, HTML, CSS, bootstrap, and Spring Boot for java web 
-             applications, as well as experience with database design and experience in both NoSQL as well as 
-             SQL database systems.
+                               Currently studying BSc Information and Knowledge Systems. I am 
+                               hard working as well as eager to learn new technologies. Technologies
+                               I have experience with PHP, NodeJS, .NET Core, Java, JavaScript,
+                               TypeScript, React, Angular, Ionic, C#, C++, XML, HTML, CSS, bootstrap,
+                               and Spring Boot for java web applications, as well as experience with 
+                               database design and experience in both NoSQL as well as SQL database
+                               systems.
 
   </div>
   
 -----------------------------------------------------------------------------------
 
+# Industry Mentor
+
+### Mr. Castello Govender 
+
+<img src="images_banners_logos/retrorabbitlogo.png" width="250" height="250">
+
+📧 cgovender@retrorabbit.co.za
+
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/CastelloGovender)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://za.linkedin.com/in/castello-govender-11918814a/)
+
+-----------------------------------------------------------------------------------
 # GitHub-Management
 
 ## Monorepo and Git Flow
 
 ### Branching Strategy
 
-- master (build)
+- master
     - development (build)
-        - development_backend
-            - backend_subsystem
-        - development_frontend
-            - frontend_feature
+        - backend-subsystem-feature
+        - frontend-subsystem-feature
 
 
 # Documentation
