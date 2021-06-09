@@ -34,7 +34,7 @@
 <div>
 
 - [Runtime Terrors Team Members](#Team-Runtime-Terrors)
-- [Industry Mentor](#Industry-Mentor) 🏆
+- [Industry Mentor](#Industry-Mentor-/-Retro-Rabbit) 🏆
 - [GitHub Management](#GitHub-Management) 💼
 - [Documentation](#Documentation) 📉
 - [Demo Video Links](#Demo-Video-Links) 🎥
@@ -155,7 +155,7 @@
 
 #### DeVilliers Meiring | u17074292
 
-[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DeMeiring)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/james-hulett-255748177/)<br>[![Profile Profile](https://img.shields.io/badge/ProfilePage-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=black)](https://jmshltt.github.io/)
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DeMeiring)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/james-hulett-255748177/)<br>[![Profile Profile](https://img.shields.io/badge/ProfilePage-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=black)](https://DeMeiring.github.io/)
 
 <div>
                    
@@ -176,13 +176,18 @@
 
 ### Mr. Castello Govender 
 
-<img src="images_banners_logos/retrorabbitlogo.png" width="175" height="220">
-
 📧 cgovender@retrorabbit.co.za
 
-[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/CastelloGovender)<br>[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://za.linkedin.com/in/castello-govender-11918814a/)
+<img src="images_banners_logos/retrologo.svg" width="175" height="220">
+
+🖥️ Website : https://retrorabbit.co.za<br><br>
+
+[![](https://img.shields.io/badge/RETRORABBIT-GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RetroRabbit)&nbsp;
+[![](https://img.shields.io/badge/RETRORABBIT-LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/retro-rabbit)&nbsp;
+[![](https://img.shields.io/badge/RETRORABBIT-Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/teamretrorabbit/)&nbsp;
 
 -----------------------------------------------------------------------------------
+
 # GitHub-Management
 
 ## Monorepo and Git Flow
