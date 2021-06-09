@@ -50,7 +50,8 @@
 # Team Runtime Terrors
 ## Team Members
 
-
+<div align="center">
+   
 <img src="https://i.ibb.co/whjLgpf/Joseph-Image.jpg" width="190" height="280">
 
 #### Joseph Harraway | u16049943
@@ -59,18 +60,22 @@
 
   <div>
 
-                          I am currently a final year BSc Computer Science student studying
-                          at The University of Pretoria. I have a keen interest in everything
-                          software and am always willing to add to my knowledge base. The 
-                          languages I am most proficient at are: Java, C++, and Python. I also
-                          have experience using several web-based programming languages and 
-                          technologies such as PHP, JavaScript, HTML, CSS, Java Spring Boot 
-                          and NodeJS.I am extremely interested in the field of Artificial 
-                          Intelligence and I am hoping to broaden my expertise in that area
-                          throughout this year and into honours.
+             I am currently a final year BSc Computer Science student studying
+             at The University of Pretoria. I have a keen interest in everything
+             software and am always willing to add to my knowledge base. The 
+             languages I am most proficient at are: Java, C++, and Python. I also
+             have experience using several web-based programming languages and 
+             technologies such as PHP, JavaScript, HTML, CSS, Java Spring Boot 
+             and NodeJS.I am extremely interested in the field of Artificial 
+             Intelligence and I am hoping to broaden my expertise in that area
+             throughout this year and into honours.
   </div>
   
+ </div>
+ 
 -----------------------------------------------------------------------------------
+
+<div align="center">
 
 <img src="https://i.ibb.co/2ZZ6Gcz/Matt.png" width="250" height="250" style="border-radius:50%;"> 
 
@@ -80,21 +85,25 @@
 
 <div>
 
-                           I am currently a BSc Information and Knowledge Systems student with 
-                           a passion for full stack web and mobile software development. 
-                           Technologies that I am currently interested in and familiar are as 
-                           follows: JavaScript, TypeScript, Node.js, Java, HTML, CSS, PHP, 
-                           Java, C++ and C# and database technologies such as MySQL, PostgreSQL
-                           with some MongoDB experience. I also have an interest in many full 
-                           stack frameworks such as ASP .NET Core, Angular, React, Ionic, Spring Boot.
+               I am currently a BSc Information and Knowledge Systems student with 
+               a passion for full stack web and mobile software development. 
+               Technologies that I am currently interested in and familiar are as 
+               follows: JavaScript, TypeScript, Node.js, Java, HTML, CSS, PHP, 
+               Java, C++ and C# and database technologies such as MySQL, PostgreSQL
+               with some MongoDB experience. I also have an interest in many full 
+               stack frameworks such as ASP .NET Core, Angular, React, Ionic, Spring Boot.
 
-                           I also have a passion for sports such as Water Polo 🤽‍♂️ Golf 🏌️‍♂️ and many more
-                           which make up a lot of my spare time with plenty of getaways to my game farm
-                           to decompress 🐆
+               I also have a passion for sports such as Water Polo 🤽‍♂️ Golf 🏌️‍♂️ and many more
+               which make up a lot of my spare time with plenty of getaways to my game farm
+               to decompress 🐆
   </div>
 
+</div>
+   
 -----------------------------------------------------------------------------------
 
+<div align="center">
+   
 <img src= "https://media-exp1.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1624492800&v=beta&t=WhbO7lyVpiaPDtohJWB8JqbQOFK1PJ7LZ5fYJVVoOPg" width="250" height="250">
 
 #### Dean Nortje | u17326622
@@ -103,19 +112,22 @@
 
 <div>
 
-                             I am a final year BSc Information and Knowledge Systems student with 
-                             a passion for software development. I am a hard-working and strategic 
-                             individual. I enjoy teamwork but also function well as a leader, eager
-                             to take on any responsibility. I have experience with multiple technologies 
-                             namely Java, C++, C#, Python, ASP.NET, Angular, NodeJS, PHP, Ionic, XML, 
-                             HTML, CSS, TypeScript, JavaScript, Bootstrap, Spring Boot, SQL, and NoSQL 
-                             Databases. I have a passion for doing activities such as rock climbing, 
-                             motocross, and gaming. Other interests of mine include Formula 1 and 
-                             stock/crypto markets.
+                 I am a final year BSc Information and Knowledge Systems student with 
+                 a passion for software development. I am a hard-working and strategic 
+                 individual. I enjoy teamwork but also function well as a leader, eager
+                 to take on any responsibility. I have experience with multiple technologies 
+                 namely Java, C++, C#, Python, ASP.NET, Angular, NodeJS, PHP, Ionic, XML, 
+                 HTML, CSS, TypeScript, JavaScript, Bootstrap, Spring Boot, SQL, and NoSQL 
+                 Databases. I have a passion for doing activities such as rock climbing, 
+                 motocross, and gaming. Other interests of mine include Formula 1 and 
+                 stock/crypto markets.
+   </div>
   </div>
   
 -----------------------------------------------------------------------------------
 
+<div align="center">
+   
 <img src="https://media-exp1.licdn.com/dms/image/C4D03AQGcLJTVqfu0yQ/profile-displayphoto-shrink_200_200/0/1619101131263?e=1627516800&v=beta&t=3Zd7eXUkQwAUBKb5PSjuSzDtydWomCrX9MmOreQcfNo" width="250" height="250">
 
 #### James Hulett | u16003251
@@ -124,18 +136,21 @@
 
 <div>
                    
-                              I am a final year BSc Knowledge and Information Sciences student 
-                              at the University of Pretoria and part time Web Developer at The
-                              Kulture Collab. I have experience with multiple languages/technologies
-                              such as Java, C++, C#, ASP.NET, Angular, NodeJS, JavaScript, NodeJS, 
-                              Spring, XML, PHP, NoSQL, and SQL databases. I have also completed 
-                              networking certificates such as my CCNP R&S certificate. I have a
-                              passion for knowledgeand enjoy gym, gaming and playing tennis in my
-                              spare time.
+            I am a final year BSc Knowledge and Information Sciences student 
+            at the University of Pretoria and part time Web Developer at The
+            Kulture Collab. I have experience with multiple languages/technologies
+            such as Java, C++, C#, ASP.NET, Angular, NodeJS, JavaScript, NodeJS, 
+            Spring, XML, PHP, NoSQL, and SQL databases. I have also completed 
+            networking certificates such as my CCNP R&S certificate. I have a
+            passion for knowledgeand enjoy gym, gaming and playing tennis in my
+            spare time.
   </div>
+</div>
 
 -----------------------------------------------------------------------------------
 
+<div align="center">
+   
 <img src="https://media-exp1.licdn.com/dms/image/C4D03AQElb-QF13hlpA/profile-displayphoto-shrink_800_800/0/1621416128906?e=1627516800&v=beta&t=-g-O584VxhaZ6N7IsJ5ZNYBrX1I6XuNUlr_NDeEsW98" width="250" height="250">
 
 #### DeVilliers Meiring | u17074292
@@ -144,14 +159,15 @@
 
 <div>
                    
-                               Currently studying BSc Information and Knowledge Systems. I am 
-                               hard working as well as eager to learn new technologies. Technologies
-                               I have experience with PHP, NodeJS, .NET Core, Java, JavaScript,
-                               TypeScript, React, Angular, Ionic, C#, C++, XML, HTML, CSS, bootstrap,
-                               and Spring Boot for java web applications, as well as experience with 
-                               database design and experience in both NoSQL as well as SQL database
-                               systems.
+             Currently studying BSc Information and Knowledge Systems. I am 
+             hard working as well as eager to learn new technologies. Technologies
+             I have experience with PHP, NodeJS, .NET Core, Java, JavaScript,
+             TypeScript, React, Angular, Ionic, C#, C++, XML, HTML, CSS, bootstrap,
+             and Spring Boot for java web applications, as well as experience with 
+             database design and experience in both NoSQL as well as SQL database
+             systems.
 
+  </div>
   </div>
   
 -----------------------------------------------------------------------------------
