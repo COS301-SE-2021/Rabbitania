@@ -23,8 +23,8 @@ namespace backend_api.Notifications.Data
         /// <returns> A list of notifications </returns>
         public async Task<Notification[]> RetrieveNotifications(int userID)
         {
-           // IQueryable<Notification> retrieveUserNotifications = _context.notifications.Where(notification => notification.UserID == userID);
-           // return await retrieveUserNotifications.ToArrayAsync();
+           IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == userID);
+           return await retrieveUserNotifications.ToArrayAsync();
            return null;
         }
     }
