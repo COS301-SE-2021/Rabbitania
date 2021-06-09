@@ -160,7 +160,7 @@
 
 ### Mr. Castello Govender 
 
-<img src="images_banners_logos/retrorabbitlogo.png" width="250" height="250">
+<img src="images_banners_logos/retrorabbitlogo.png" width="175" height="220">
 
 📧 cgovender@retrorabbit.co.za
 
