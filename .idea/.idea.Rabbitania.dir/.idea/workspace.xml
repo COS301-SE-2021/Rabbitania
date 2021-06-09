@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="52a0fbc9-4b57-437e-9d28-e6de4cb929dd" name="Default Changelist" comment="" />
+    <list default="true" id="52a0fbc9-4b57-437e-9d28-e6de4cb929dd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Rabbitania.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rabbitania.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +36,18 @@
       <workItem from="1622358965959" duration="5000" />
       <workItem from="1622363885314" duration="5000" />
       <workItem from="1622364152213" duration="801000" />
+      <workItem from="1623224600126" duration="144000" />
+      <workItem from="1623226241485" duration="43000" />
+      <workItem from="1623226351754" duration="29000" />
     </task>
+    <task id="LOCAL-00001" summary="Flutter framework">
+      <created>1623224675876</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623224675876</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -51,8 +65,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Flutter framework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flutter framework" />
   </component>
 </project>
