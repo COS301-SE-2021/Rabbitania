@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Models;
 using backend_api.User.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,30 @@ namespace backend_api.User.Data.User
             this._users = users;
         }
 
-        public async Task<Models.User.User[]> RetrieveUsers(int userID)
+        public async Task<IAsyncEnumerable<Models.User.User>> GetUser(int userID)
         {
-            return await this.RetrieveUsers(userID);
+            
         }
-        public DbSet<Models.User.User> users { get; set; }
+
+        public async Task<IAsyncEnumerable<Models.User.User>> GetAllUsers()
+        {
+            
+        }
+
+        public async Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID)
+        {
+            
+        }
+
+        public async Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User User)
+        {
+                        
+        }
+
+        public async Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User User)
+        {
+            
+        }
+        // public DbSet<Models.User.User> users { get; set; }
     }
 }
