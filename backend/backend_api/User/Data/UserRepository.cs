@@ -27,7 +27,7 @@ namespace backend_api.User.Data
         public async Task<List<Models.User.User>> GetAllUsers()
         {
             var users = _users.users;
-            List<Models.User.User> allUsers = new List<Models.User.User>();
+            List<Models.User.User> allUsers = users.Select(user=>user);
             foreach (var user in users)
             {
                 allUsers.Add(user);
