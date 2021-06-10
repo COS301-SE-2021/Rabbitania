@@ -35,7 +35,7 @@ namespace backend_api.User.Data
 
             return allUsers;
         }
-
+        //TODO: implement the rest of the functions needed in the repository class
         // public async Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID)
         // {
         //     
