@@ -19,21 +19,17 @@ namespace backend_api.User.Data
             return await _users.users.Where(x => x.UserID == userID).ToListAsync();
         }
         
-        // public async Task<List<Notification>> RetrieveNotifications(int userID)
-        // {
-        //     IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == userID);
-        //     return await retrieveUserNotifications.ToListAsync();
-        // }
-        public async Task<List<Models.User.User>> GetAllUsers()
+        public async Task<IEnumerable<Models.User.User>> GetAllUsers()
         {
             var users = _users.users;
-            List<Models.User.User> allUsers = users.Select(user=>user);
-            foreach (var user in users)
-            {
-                allUsers.Add(user);
-            }
-
-            return allUsers;
+            IEnumerable<Models.User.User> allUsers = users.Select(user => user);
+            
+            // foreach (var user in users)
+            // {
+            //     allUsers.Add(user);
+            // }
+            
+            return allUsers.ToList();
         }
         //TODO: implement the rest of the functions needed in the repository class
         // public async Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID)

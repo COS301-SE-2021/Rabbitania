@@ -7,7 +7,7 @@ namespace backend_api.User.Data
     {
         Task<List<Models.User.User>> GetUser(int userID);
         
-        Task<List<Models.User.User>> GetAllUsers();
+        Task<IEnumerable<Models.User.User>> GetAllUsers();
 
         // Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
         //
