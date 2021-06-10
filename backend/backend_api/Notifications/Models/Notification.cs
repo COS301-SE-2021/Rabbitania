@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using backend_api.Models.Notifications;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.VisualBasic;
 
-namespace backend_api.Models.Notifications
+namespace backend_api.Notifications.Models
 {
     public class Notification : INotification
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Models.Notifications;
+using backend_api.Notifications.Models;
 
 namespace backend_api.Notifications.Data
 {

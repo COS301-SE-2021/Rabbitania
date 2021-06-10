@@ -2,6 +2,7 @@
 using backend_api.Models.Notifications;
 using backend_api.Notifications.Services;
 using backend_api.Notifications.Data;
+using backend_api.Notifications.Models;
 
 namespace backend_api.Notifications.Services
 {

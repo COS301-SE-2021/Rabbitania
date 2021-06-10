@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models.Notifications;
+using backend_api.Notifications.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
