@@ -42,7 +42,7 @@ namespace backend_api
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection"),
+                    Configuration.GetConnectionString("NotificationsDB"),
                     b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
             services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());

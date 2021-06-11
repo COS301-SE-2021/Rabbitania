@@ -22,6 +22,6 @@ namespace backend_api.Notifications.Models
         // User ID foreign key
         [ForeignKey("UserID")] 
         public int UserId { get; set; }
-
+        
     }
 }

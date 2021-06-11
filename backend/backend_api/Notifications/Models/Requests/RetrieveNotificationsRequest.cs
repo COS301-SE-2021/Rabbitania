@@ -2,11 +2,17 @@
 {
     public class RetrieveNotificationRequest
     {
-        private int userID;
+        private int _userId;
 
-        public RetrieveNotificationRequest()
+        public RetrieveNotificationRequest(int userId)
         {
-            
+            this._userId = userId;
+        }
+        
+        public int UserId
+        {
+            get => _userId;
+            set => _userId = value;
         }
     }
 }
