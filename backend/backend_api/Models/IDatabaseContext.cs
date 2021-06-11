@@ -10,8 +10,9 @@ namespace backend_api.Models
         DbSet<User.Models.User.User> users { get; set; }
         DbSet<Notification> notifications { get; set; }
         DbSet<UserEmails> userEmails { get; set; }
-        DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
-        DbSet<NoticeBoard> noticeBoard { get; set; }
+        //TODO: Commented out old DBSets causing errors
+        //DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
+       // DbSet<NoticeBoard> noticeBoard { get; set; }
         Task<int> SaveChanges();
     }
 }

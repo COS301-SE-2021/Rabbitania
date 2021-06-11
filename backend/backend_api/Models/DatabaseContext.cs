@@ -24,9 +24,9 @@ namespace backend_api.Models
         public DbSet<User.Models.User.User> users { get; set; }
         public DbSet<Notification> notifications { get; set; }
         public DbSet<UserEmails> userEmails { get; set; }
-        public DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
+        //public DbSet<NoticeBoardThread> noticeBoardThreads { get; set; }
         
-        public DbSet<NoticeBoard> noticeBoard { get; set; }
+        //public DbSet<NoticeBoard> noticeBoard { get; set; }
         
         // Creating Seed Mock Data for User
 
