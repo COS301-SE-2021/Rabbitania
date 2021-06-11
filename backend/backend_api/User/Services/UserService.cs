@@ -9,6 +9,7 @@ namespace backend_api.User.Services
     public class UserService: IUserService
     {
         private readonly IUserRepository _userRepository;
+        
 
         public UserService(IUserRepository userRepo)
         {
@@ -27,10 +28,13 @@ namespace backend_api.User.Services
             //JsonWebToken token = request.getToken();
             //String email = token.getEmail();
 
-            String email = request.getEmail();
+            String firstname = request.getName();
+            String lastname = request.getSurname();
             //search for user
-            Models.User.User user = _userRepository.GetUser();
-            GetUserResponse response = new GetUserResponse();
+            Models.User.User user = _userRepository.GetUser(firstname, lastname).Result[0];
+            
+            GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocationID, user.pinnedUserIDs);
+            return response;
         }
     }
 }

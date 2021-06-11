@@ -23,16 +23,23 @@ namespace backend_api.User.Models.Requests
         //     return jwt;
         // }
         //----------------------------------------------------------------------------------
-        private String userEmail;
+        private String firstname;
+        private String surname;
 
-        public GetUserRequest(String email)
+        public GetUserRequest(String firstname, String lastname)
         {
-            this.userEmail = email;
+            this.firstname = firstname;
+            this.surname = lastname;
         }
 
-        public String getEmail()
+        public String getName()
         {
-            return this.userEmail;
+            return this.firstname;
+        }
+
+        public String getSurname()
+        {
+            return this.surname;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace backend_api.User.Models.User
         public string firstname { get; set; }
         public string lastname { get; set; }
         
-        public string phoneNumber { get; set; }
+        public int phoneNumber { get; set; }
         
         public List<int> pinnedUserIDs { get; set; }
         
@@ -28,9 +28,9 @@ namespace backend_api.User.Models.User
 
         public int employeeLevel { get; set; }
         
-        public UserRoles userRoles { get; set; }
+        public int userRole { get; set; }//corresponds to UserRoles enum
 
-        public OfficeLocation officeLocation { get; set; }
+        public int officeLocationID { get; set; }
 
         public override string ToString()
         {

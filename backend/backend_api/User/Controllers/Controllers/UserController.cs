@@ -3,6 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models;
 using backend_api.User.Data;
+using backend_api.User.Models.Requests;
+using backend_api.User.Models.Responses;
+using backend_api.User.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,18 +15,22 @@ namespace backend_api.User.Controllers.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUserService service;
         private readonly UserContext _context;
 
-        public UserController(UserContext context)
+        public UserController(IUserService _service, UserContext context)
         {
-            _context = context;
+            this.service = _service;
+            this._context = context;//not needed once other endpoints are configured
         }
 
         // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User.Models.User.User>>> GetUsers()
+        [Route("RetrieveUsers")]
+        public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
         {
-            return await _context.users.ToListAsync();
+            // return await _context.users.ToListAsync();
+            return service.getUser(request);
         }
 
         // GET: api/User/5

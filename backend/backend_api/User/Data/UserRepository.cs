@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ namespace backend_api.User.Data
         public async Task<List<Models.User.User>> GetUser(int userID)
         {
             return await _users.users.Where(x => x.UserID == userID).ToListAsync();
+        }
+        public async Task<List<Models.User.User>> GetUser(String firstname, String lastname)
+        {
+            return await _users.users.Where(x => x.firstname == firstname && x.lastname==lastname).ToListAsync();
         }
         
         public async Task<IEnumerable<Models.User.User>> GetAllUsers()
