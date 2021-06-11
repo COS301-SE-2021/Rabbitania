@@ -1,8 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Models.Notifications;
 using backend_api.Notifications.Services;
 using backend_api.Notifications.Data;
 using backend_api.Notifications.Models;
+using backend_api.Notifications.Models.Requests;
+using backend_api.Notifications.Models.Responses;
 
 namespace backend_api.Notifications.Services
 {
@@ -10,15 +14,16 @@ namespace backend_api.Notifications.Services
     {
         private readonly INotificationRepository _repository;
 
-        public NotificationService(INotificationRepository _repository)
+        public NotificationService(INotificationRepository repository)
         {
-            this._repository = _repository;
+            this._repository = repository;
         }
 
-        public async Task<Notification[]> RetrieveNotifications(int userID)
+        public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            // returns null for now
-            return null;
+            // No validation for now to test services
+
+            return _repository.RetrieveNotifications(request);
         }
     }
 }

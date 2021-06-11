@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models.Notifications;
 using backend_api.Notifications.Models;
+using backend_api.Notifications.Models.Requests;
+using backend_api.Notifications.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,10 +21,15 @@ namespace backend_api.Notifications.Data
         
      
         /// <inheritdoc />
-        public async Task<List<Notification>> RetrieveNotifications(int userID)
+        public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
         {
-           IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == userID);
-           return await retrieveUserNotifications.ToListAsync();
+            IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == request.UserId);
+
+            RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
+                "Notification successfully retrieved", retrieveUserNotifications
+            );
+            
+            return response;
         }
     }
 }

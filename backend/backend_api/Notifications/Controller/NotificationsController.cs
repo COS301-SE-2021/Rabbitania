@@ -8,6 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using backend_api.Models.Notifications;
 using backend_api.Notifications.Data;
 using backend_api.Notifications.Models;
+using backend_api.Notifications.Models.Requests;
+using backend_api.Notifications.Models.Responses;
+using backend_api.Notifications.Services;
+using Newtonsoft.Json;
 
 namespace backend_api.Notifications.Controller
 {
@@ -15,95 +19,24 @@ namespace backend_api.Notifications.Controller
     [ApiController]
     public class NotificationsController : ControllerBase
     {
-        private readonly NotificationContext _context;
+        private readonly INotificationService _service;
 
-        public NotificationsController(NotificationContext context)
+        public NotificationsController(INotificationService service)
         {
-            _context = context;
+            this._service = service;
         }
 
-        // GET: api/Notifications
+        /// <summary>
+        ///     API endpoint for retrieveNotifications
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Notification>>> GetNotifications()
+        [Route("RetrieveNotifications")]
+        public RetrieveNotificationsResponse RetriveNotifiations([FromQuery] RetrieveNotificationRequest request)
         {
-            return await _context.Notifications.ToListAsync();
+            return _service.RetrieveNotifications(request);
         }
-
-        // GET: api/Notifications/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Notification>> GetNotification(int id)
-        {
-            var notification = await _context.Notifications.FindAsync(id);
-
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return notification;
-        }
-
-        // PUT: api/Notifications/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutNotification(int id, Notification notification)
-        {
-            if (id != notification.NotificationId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(notification).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NotificationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Notifications
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Notification>> PostNotification(Notification notification)
-        {
-            _context.Notifications.Add(notification);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetNotification", new { id = notification.NotificationId }, notification);
-        }
-
-        // DELETE: api/Notifications/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNotification(int id)
-        {
-            var notification = await _context.Notifications.FindAsync(id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            _context.Notifications.Remove(notification);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool NotificationExists(int id)
-        {
-            return _context.Notifications.Any(e => e.NotificationId == id);
-        }
+        
     }
 }

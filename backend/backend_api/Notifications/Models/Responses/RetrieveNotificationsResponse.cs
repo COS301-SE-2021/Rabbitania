@@ -1,28 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace backend_api.Notifications.Models.Responses
 {
     public class RetrieveNotificationsResponse
     {
-        private string _message;
-        private List<Notification> _notifications;
-
-        public RetrieveNotificationsResponse(string message, List<Notification> notifications)
+        public RetrieveNotificationsResponse(string message, IEnumerable<Notification> notifications)
         {
-            this._message = message;
-            this._notifications = notifications;
+            this.Message = message;
+            this.Notifications = notifications;
         }
         
-        public string Message
-        {
-            get => _message;
-            set => _message = value;
-        }
-
-        public List<Notification> Notifications
-        {
-            get => _notifications;
-            set => _notifications = value;
-        }
+        public string Message { get; set; }
+        public IEnumerable<Notification> Notifications { get; set; }
     }
 }
