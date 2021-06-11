@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models;
+using backend_api.User.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,9 +12,9 @@ namespace backend_api.User.Controllers.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly DatabaseContext _context;
+        private readonly UserContext _context;
 
-        public UserController(DatabaseContext context)
+        public UserController(UserContext context)
         {
             _context = context;
         }
