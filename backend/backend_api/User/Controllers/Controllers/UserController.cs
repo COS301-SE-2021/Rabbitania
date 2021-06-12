@@ -26,7 +26,7 @@ namespace backend_api.User.Controllers.Controllers
 
         // GET: api/User
         [HttpGet]
-        [Route("RetrieveUsers")]
+        [Route("GetUser")]
         public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
         {
             // return await _context.users.ToListAsync();
