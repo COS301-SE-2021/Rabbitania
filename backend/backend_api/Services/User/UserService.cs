@@ -38,7 +38,12 @@ namespace backend_api.Services.User
 
         public EditProfileResponse EditProfile(EditProfileRequest request)
         {
-            return null;
+            if (request.UserId == null)
+            {
+                throw new Exception("Error missing UserID");
+            }
+            
+            return _userRepository.EditProfile(request);
         }
     }
 }

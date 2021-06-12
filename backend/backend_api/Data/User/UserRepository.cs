@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +59,19 @@ namespace backend_api.Data.User
 
         public EditProfileResponse EditProfile(EditProfileRequest request)
         {
-            return null;
+            var selectUserId = request.UserId;
+            var user = _users.users.Where(u => u.UserID == selectUserId).FirstOrDefault();
+
+            user.firstname = request.FirstName;
+            user.lastname = request.LastName;
+            user.phoneNumber = request.PhoneNumber;
+            user.userDescription = request.UserDescription;
+            user.userImage = request.UserImage;
+            _users.SaveChanges();
+            
+            EditProfileResponse response = new EditProfileResponse("Successfully Edited User");
+            
+            return response;
         }
     }
 }

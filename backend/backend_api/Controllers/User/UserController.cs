@@ -54,7 +54,7 @@ namespace backend_api.Controllers.User
         [Route("EditProfile")]
         public EditProfileResponse EditProfile([FromBody] EditProfileRequest request)
         {
-            return null;
+            return service.EditProfile(request);
         }
 
         // POST: api/User
