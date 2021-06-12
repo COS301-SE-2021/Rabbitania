@@ -4,7 +4,7 @@ namespace backend_api.Models.User.Responses
 {
     public class ViewProfileResponse
     {
-        public ViewProfileResponse(string message, string firstName, string lastname, string userImage, string description, string phoneNumber, int empLevel, UserRoles userRole, OfficeLocation officeLocation)
+        public ViewProfileResponse(string message, string firstName, string lastname, string userImage, string description, int phoneNumber, int empLevel, int userRole, int officeLocation)
         {
             this.message = message;
             this.firstName = firstName;
@@ -14,7 +14,7 @@ namespace backend_api.Models.User.Responses
             this.phoneNumber = phoneNumber;
             this.empLevel = empLevel;
             this.officeLocation = officeLocation;
-            this.userRole = userRole;
+            this.userRoles = userRole;
         }
 
         private string message { get; set; }
@@ -22,10 +22,10 @@ namespace backend_api.Models.User.Responses
         private string lastname { get; set; }
         private string userImage { get; set; }
         private string description { get; set; }
-        private string phoneNumber { get; set; }
+        private int phoneNumber { get; set; }
         private int empLevel { get; set; }
-        private OfficeLocation officeLocation { get; set; }
-        private UserRoles userRole { get; set; }
+        private int officeLocation { get; set; }
+        private int userRoles { get; set; }
 
         public ViewProfileResponse(string response)
         {

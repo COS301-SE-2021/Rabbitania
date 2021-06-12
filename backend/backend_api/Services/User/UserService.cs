@@ -36,6 +36,7 @@ namespace backend_api.Services.User
             return response;
         }
 
+
         public EditProfileResponse EditProfile(EditProfileRequest request)
         {
             if (request.UserId == null)
@@ -44,6 +45,20 @@ namespace backend_api.Services.User
             }
             
             return _userRepository.EditProfile(request);
+        }
+        
+        public ViewProfileResponse viewProfile(ViewProfileRequest request)
+        {
+
+            if (request.GetUserId() == null)
+            {
+                throw new Exception("UserID not present in the Database");
+            }
+            else
+            {
+                return _userRepository.viewProfile(request);
+            }
+
         }
     }
 }
