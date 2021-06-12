@@ -6,11 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Migrations" />
-      <Folder Include="User\Data\Migrations" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
       <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.6" />

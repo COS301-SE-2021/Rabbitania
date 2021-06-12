@@ -1,8 +1,8 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
+using backend_api.Data.User;
 using backend_api.Models;
-using backend_api.User.Data;
-using backend_api.User.Models.User;
+using backend_api.Models.User;
 using Moq; 
 using Xunit;
 
@@ -10,12 +10,12 @@ namespace backend_api.Tests
 {
     public class UserUnitTests
     {
-        private readonly User.Models.User.User _sutUser;
+        private readonly Models.User.User _sutUser;
         private readonly UserEmails _sutUserEmails;
         private IUserRepository userRepository;
         public UserUnitTests()
         {
-            this._sutUser = new User.Models.User.User();
+            this._sutUser = new Models.User.User();
             this._sutUserEmails = new UserEmails();
         }
         
@@ -52,14 +52,14 @@ namespace backend_api.Tests
             
             userRepository = UserMoq.Object;
         }
-        */
+        
         
         [Fact]
         public void CreateNewUserInstanceIsNotNull()
         {
             // given
-            User.Models.User.User newTestUser;
-            newTestUser = new User.Models.User.User();
+            Models.User.User newTestUser;
+            newTestUser = new Models.User.User();
             // expected 
             Assert.NotNull(newTestUser);
         }
@@ -78,7 +78,7 @@ namespace backend_api.Tests
         public void CreateNewUserInstanceIsNull()
         {
             //given
-            User.Models.User.User newTestUser;
+            Models.User.User newTestUser;
             newTestUser = null;
             //excepted
             Assert.Null(newTestUser);
@@ -393,4 +393,4 @@ namespace backend_api.Tests
             Assert.NotEqual(userEmailTest, this._sutUserEmails.userEmail);
         }
     }
-}
+}*/
