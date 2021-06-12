@@ -17,8 +17,8 @@ namespace backend_api.Models.User.Responses
         // public bool isOnline { get; set; }
         private bool isAdmin { get; set; }
         private int empLevel { get; set; }
-        private int UserRole { get; set; }
-        private int OfficeLocation { get; set; }
+        private UserRoles UserRole { get; set; }
+        private OfficeLocation OfficeLocation { get; set; }
         
         private Models.User.User user;
         public GetUserResponse(String resp)
@@ -26,7 +26,7 @@ namespace backend_api.Models.User.Responses
             this.response = resp;
         }
 
-        public GetUserResponse(Models.User.User user, String firstname, String lastname, int emplvl, bool isadmin, String desc, int userid, int number, int role, String image, int office, List<int> pinnedids)
+        public GetUserResponse(Models.User.User user, String firstname, String lastname, int emplvl, bool isadmin, String desc, int userid, int number, UserRoles role, String image, OfficeLocation office, List<int> pinnedids)
         {
             this.description = desc;
             this.UserRole = role;

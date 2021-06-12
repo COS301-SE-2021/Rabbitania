@@ -28,9 +28,9 @@ namespace backend_api.Models.User
 
         public int employeeLevel { get; set; }
         
-        public int userRole { get; set; }//corresponds to UserRoles enum
+        public UserRoles userRole { get; set; }//corresponds to UserRoles enum
 
-        public int officeLocationID { get; set; }
+        public OfficeLocation officeLocation { get; set; }
 
         public override string ToString()
         {

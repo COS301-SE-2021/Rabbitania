@@ -32,7 +32,7 @@ namespace backend_api.Services.User
             //search for user
             Models.User.User user = _userRepository.GetUser(firstname, lastname).Result[0];
             
-            GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocationID, user.pinnedUserIDs);
+            GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocation, user.pinnedUserIDs);
             return response;
         }
 
