@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models;
 using backend_api.Notifications.Data;
+using backend_api.User.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,7 +40,7 @@ namespace backend_api
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
             
-                
+            //----------------------------------------------------------------------------------------------------------------------   
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
                 options.UseNpgsql(
@@ -47,7 +48,15 @@ namespace backend_api
                     b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
             services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
-            /////
+            //----------------------------------------------------------------------------------------------------------------------
+            //User DB Context
+            services.AddDbContext<UserContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("UserConnection"),
+                    b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
+
+            services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
+            //----------------------------------------------------------------------------------------------------------------------
             
             services.AddControllers();
             #region Swagger
