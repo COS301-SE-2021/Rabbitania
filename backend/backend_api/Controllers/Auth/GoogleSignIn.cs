@@ -48,5 +48,11 @@ namespace backend_api.Controllers.Auth
             var json = JsonSerializer.Serialize(claims);
             return json;
         }
+        [HttpGet]
+        [Route("UserSignIn")]
+        public GoogleResponse SignIn([FromQuery] GoogleSignInRequest request)
+        {
+            //TODO: Complete sign in endpoint
+        }
     }
 }
