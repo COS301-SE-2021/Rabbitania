@@ -35,5 +35,10 @@ namespace backend_api.Services.User
             GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocationID, user.pinnedUserIDs);
             return response;
         }
+
+        public EditProfileResponse EditProfile(EditProfileRequest request)
+        {
+            return null;
+        }
     }
 }

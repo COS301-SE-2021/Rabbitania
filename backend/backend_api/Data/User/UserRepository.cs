@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models.User.Requests;
+using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.User
@@ -52,5 +54,10 @@ namespace backend_api.Data.User
         //     
         // }
         // public DbSet<Models.User.User> users { get; set; }
+
+        public EditProfileResponse EditProfile(EditProfileRequest request)
+        {
+            return null;
+        }
     }
 }

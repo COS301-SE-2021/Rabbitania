@@ -16,5 +16,6 @@ namespace backend_api.Services.User
         */
         GetUserResponse getUser(GetUserRequest request);
 
+        EditProfileResponse EditProfile(EditProfileRequest request);
     }
 }
