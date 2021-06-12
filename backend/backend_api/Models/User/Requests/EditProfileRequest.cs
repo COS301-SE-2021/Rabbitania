@@ -10,8 +10,10 @@
         private string _userImage;
         private bool _isAdmin;
         private int _empLevel;
+        private UserRoles _userRoles;
+        private OfficeLocation _officeLocation;
         
-        public EditProfileRequest(int userId, string firstName, string lastName, string phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel)
+        public EditProfileRequest(int userId, string firstName, string lastName, string phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel, UserRoles userRoles, OfficeLocation officeLocation)
         {
             this._userId = userId;
             this._firstName = firstName;
@@ -21,6 +23,8 @@
             this._userImage = userImage;
             this._isAdmin = isAdmin;
             this._empLevel = empLevel;
+            this._userRoles = userRoles;
+            this._officeLocation = officeLocation;
         }
 
         public int UserId
@@ -69,6 +73,18 @@
         {
             get => _empLevel;
             set => _empLevel = value;
+        }
+
+        public UserRoles UserRoles
+        {
+            get => _userRoles;
+            set => _userRoles = value;
+        }
+
+        public OfficeLocation OfficeLocation
+        {
+            get => _officeLocation;
+            set => _officeLocation = value;
         }
     }
 }
