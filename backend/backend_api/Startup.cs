@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
 using backend_api.Services.Notification;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
@@ -39,6 +41,19 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
+            
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.LoginPath = "/api/googleSignIn";
+            }).AddGoogle(options =>
+            {
+                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
+                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
+            });
+            
             
             // Notification DB Context
             // Notification Configuration
@@ -89,9 +104,9 @@ namespace backend_api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
