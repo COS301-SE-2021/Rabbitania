@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Models.User;
 using backend_api.Services.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -42,7 +43,7 @@ namespace backend_api
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
             
-            services.AddAuthentication(option =>
+            /*services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options =>
@@ -52,6 +53,14 @@ namespace backend_api
             {
                 options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
+            });*/
+            //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+            
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
+                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
+                options.SignInScheme = IdentityConstants.ExternalScheme;
             });
             
             
