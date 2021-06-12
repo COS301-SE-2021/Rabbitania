@@ -35,5 +35,18 @@ namespace backend_api.Services.User
             GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocationID, user.pinnedUserIDs);
             return response;
         }
+        
+        public ViewProfileResponse viewProfile(ViewProfileRequest request)
+        {
+
+            if (request.GetUserId() == null)
+            {
+                throw new Exception("UserID not present in the Database");
+            }
+            else
+            {
+                return _userRepository.viewProfile(request);
+            }
+        }
     }
 }
