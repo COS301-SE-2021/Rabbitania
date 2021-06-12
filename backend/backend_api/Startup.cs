@@ -43,9 +43,9 @@ namespace backend_api
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
             
-            /*services.AddAuthentication(option =>
+            services.AddAuthentication(option =>
             {
-                option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                option.DefaultScheme  = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options =>
             {
                 options.LoginPath = "/api/googleSignIn";
@@ -53,17 +53,8 @@ namespace backend_api
             {
                 options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
-            });*/
-            //services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
-            
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
-                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
-                options.SignInScheme = IdentityConstants.ExternalScheme;
             });
-            
-            
+
             // Notification DB Context
             // Notification Configuration
             services.AddDbContext<NotificationContext>(options =>
