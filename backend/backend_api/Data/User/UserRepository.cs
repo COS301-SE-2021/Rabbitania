@@ -53,8 +53,8 @@ namespace backend_api.Data.User
             var description = "";
             var phoneNumber = 111;
             var empLevel = 111;
-            var officeLocation = 111;
-            var userRole = 111;
+            OfficeLocation officeLocation = 0;
+            UserRoles userRole = 0;
 
             foreach (var x in selectedUser)
             {
@@ -64,7 +64,7 @@ namespace backend_api.Data.User
                 description = x.userDescription;
                 phoneNumber = x.phoneNumber;
                 empLevel = x.employeeLevel;
-                officeLocation = x.officeLocationID;
+                officeLocation = x.officeLocation;
                 userRole = x.userRole;
             }
 
