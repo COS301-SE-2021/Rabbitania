@@ -78,6 +78,7 @@ namespace backend_api
             //----------------------------------------------------------------------------------------------------------------------
             
             services.AddControllers();
+            
             #region Swagger
             services.AddSwaggerGen(c =>
             {

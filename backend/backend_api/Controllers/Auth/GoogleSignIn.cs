@@ -17,16 +17,19 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace backend_api.Controllers.Auth
 {
-    [AllowAnonymous, Route("signin-google")]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    [AllowAnonymous, Route("api/[controller]")]
+    [ApiController]
     public class GoogleSignIn : ControllerBase
     {
+        [HttpGet]
         [Route("signin-google")]
         public IActionResult signIn()
         {
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
-
+        [HttpGet]
         [Route("google-response")]
         public async Task<String> GoogleResponse()
         {
