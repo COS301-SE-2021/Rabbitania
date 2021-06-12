@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using backend_api.Models.Notifications;
-using backend_api.Notifications.Models;
+﻿using System.Threading.Tasks;
+using backend_api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend_api.Notifications.Data
+namespace backend_api.Data
 {
     public class NotificationContext : DbContext, INotificationContext
     {

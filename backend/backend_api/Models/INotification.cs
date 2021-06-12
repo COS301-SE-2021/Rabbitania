@@ -1,7 +1,6 @@
 ﻿using System;
-using backend_api.Models.Notifications;
 
-namespace backend_api.Notifications.Models
+namespace backend_api.Models
 {
     public interface INotification
     {

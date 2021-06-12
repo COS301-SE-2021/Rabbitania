@@ -1,19 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using backend_api.Models.Requests;
+using backend_api.Models.Responses;
+using backend_api.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using backend_api.Models.Notifications;
-using backend_api.Notifications.Data;
-using backend_api.Notifications.Models;
-using backend_api.Notifications.Models.Requests;
-using backend_api.Notifications.Models.Responses;
-using backend_api.Notifications.Services;
-using Newtonsoft.Json;
 
-namespace backend_api.Notifications.Controller
+namespace backend_api.Controller
 {
     [Route("api/[controller]")]
     [ApiController]

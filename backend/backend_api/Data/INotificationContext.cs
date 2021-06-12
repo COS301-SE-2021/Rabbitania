@@ -1,8 +1,7 @@
-﻿using backend_api.Models.Notifications;
-using backend_api.Notifications.Models;
+﻿using backend_api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend_api.Notifications.Data
+namespace backend_api.Data
 {
     public interface INotificationContext
     {

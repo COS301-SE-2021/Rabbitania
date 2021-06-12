@@ -1,9 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-
-namespace backend_api.Notifications.Models.Requests
+﻿namespace backend_api.Models.Requests
 {
     public class RetrieveNotificationRequest
     {

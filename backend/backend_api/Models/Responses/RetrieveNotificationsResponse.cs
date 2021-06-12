@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
-namespace backend_api.Notifications.Models.Responses
+namespace backend_api.Models.Responses
 {
     public class RetrieveNotificationsResponse
     {

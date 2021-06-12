@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using backend_api.Models.Notifications;
-using backend_api.Notifications.Models;
-using backend_api.Notifications.Models.Requests;
-using backend_api.Notifications.Models.Responses;
+﻿using backend_api.Models.Requests;
+using backend_api.Models.Responses;
 
-namespace backend_api.Notifications.Data
+namespace backend_api.Data
 {
     public interface INotificationRepository
     {

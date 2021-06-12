@@ -1,4 +1,4 @@
-﻿namespace backend_api.Models.Notifications
+﻿namespace backend_api.Models
 {
     public enum NotificationTypeEnum
     {
