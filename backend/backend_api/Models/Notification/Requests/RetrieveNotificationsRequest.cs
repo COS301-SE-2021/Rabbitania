@@ -1,4 +1,4 @@
-﻿namespace backend_api.Models.Requests
+﻿namespace backend_api.Models.Notification.Requests
 {
     public class RetrieveNotificationRequest
     {

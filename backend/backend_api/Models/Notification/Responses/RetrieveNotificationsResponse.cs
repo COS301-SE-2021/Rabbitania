@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace backend_api.Models.Responses
+namespace backend_api.Models.Notification.Responses
 {
     public class RetrieveNotificationsResponse
     {

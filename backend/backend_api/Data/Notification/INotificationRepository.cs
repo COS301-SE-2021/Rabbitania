@@ -1,7 +1,7 @@
-﻿using backend_api.Models.Requests;
-using backend_api.Models.Responses;
+﻿using backend_api.Models.Notification.Requests;
+using backend_api.Models.Notification.Responses;
 
-namespace backend_api.Data
+namespace backend_api.Data.Notification
 {
     public interface INotificationRepository
     {

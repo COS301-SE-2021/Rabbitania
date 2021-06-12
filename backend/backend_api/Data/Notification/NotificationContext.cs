@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using backend_api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend_api.Data
+namespace backend_api.Data.Notification
 {
     public class NotificationContext : DbContext, INotificationContext
     {
@@ -17,7 +16,7 @@ namespace backend_api.Data
             
         }
         
-        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Models.Notification.Notification> Notifications { get; set; }
 
         public async Task<int> SaveChanges()
         {

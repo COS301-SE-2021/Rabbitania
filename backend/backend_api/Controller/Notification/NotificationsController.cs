@@ -1,9 +1,9 @@
-using backend_api.Models.Requests;
-using backend_api.Models.Responses;
-using backend_api.Services;
+using backend_api.Models.Notification.Requests;
+using backend_api.Models.Notification.Responses;
+using backend_api.Services.Notification;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backend_api.Controller
+namespace backend_api.Controller.Notification
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using backend_api.Models;
-using backend_api.Models.Requests;
-using backend_api.Models.Responses;
+using backend_api.Models.Notification.Requests;
+using backend_api.Models.Notification.Responses;
 
-namespace backend_api.Data
+namespace backend_api.Data.Notification
 {
     public class NotificationRepository : INotificationRepository
     {
@@ -18,7 +17,7 @@ namespace backend_api.Data
         /// <inheritdoc />
         public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            IQueryable<Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == request.UserId);
+            IQueryable<Models.Notification.Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == request.UserId);
 
             RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
                 "Notification successfully retrieved", retrieveUserNotifications

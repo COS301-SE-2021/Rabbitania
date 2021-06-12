@@ -1,8 +1,9 @@
 ﻿using backend_api.Data;
-using backend_api.Models.Requests;
-using backend_api.Models.Responses;
+using backend_api.Data.Notification;
+using backend_api.Models.Notification.Requests;
+using backend_api.Models.Notification.Responses;
 
-namespace backend_api.Services
+namespace backend_api.Services.Notification
 {
     public class NotificationService : INotificationService
     {
