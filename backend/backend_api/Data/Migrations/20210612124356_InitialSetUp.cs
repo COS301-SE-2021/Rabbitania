@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitialNotificationCreate : Migration
+    public partial class InitialSetUp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

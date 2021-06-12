@@ -6,7 +6,7 @@ namespace backend_api.Data.Notification
     public class NotificationContext : DbContext, INotificationContext
     {
         
-        public NotificationContext(DbContextOptions options) : base(options)
+        public NotificationContext(DbContextOptions<NotificationContext> options) : base(options)
         {
 
         }

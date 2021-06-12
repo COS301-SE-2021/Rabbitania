@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Data.Notification;
 using backend_api.Data.User;
-using backend_api.Models;
+using backend_api.Services.Notification;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,10 +40,23 @@ namespace backend_api
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
             
+            // Notification DB Context
+            // Notification Configuration
+            services.AddDbContext<NotificationContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
+
+            services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
+
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<INotificationService, NotificationService>();
+            //
+            
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("UserConnection"),
+                    Configuration.GetConnectionString("RabbitaniaDatabase"),
                     b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());

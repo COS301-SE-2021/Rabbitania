@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models;
@@ -79,4 +79,4 @@ namespace backend_api.Controllers.User
             return _context.userEmails.Any(e => e.userEmailID == id);
         }
     }
-}
+}*/
