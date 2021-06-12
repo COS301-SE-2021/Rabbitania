@@ -32,8 +32,19 @@ namespace backend_api.Services.User
             //search for user
             Models.User.User user = _userRepository.GetUser(firstname, lastname).Result[0];
             
-            GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocationID, user.pinnedUserIDs);
+            GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocation, user.pinnedUserIDs);
             return response;
+        }
+
+
+        public EditProfileResponse EditProfile(EditProfileRequest request)
+        {
+            if (request.UserId == null)
+            {
+                throw new Exception("Error missing UserID");
+            }
+            
+            return _userRepository.EditProfile(request);
         }
         
         public ViewProfileResponse viewProfile(ViewProfileRequest request)
@@ -47,6 +58,7 @@ namespace backend_api.Services.User
             {
                 return _userRepository.viewProfile(request);
             }
+
         }
     }
 }

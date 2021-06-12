@@ -5,7 +5,7 @@
         private int _userId;
         private string _firstName;
         private string _lastName;
-        private string _phoneNumber;
+        private int _phoneNumber;
         private string _userDescription;
         private string _userImage;
         private bool _isAdmin;
@@ -13,7 +13,12 @@
         private UserRoles _userRoles;
         private OfficeLocation _officeLocation;
         
-        public EditProfileRequest(int userId, string firstName, string lastName, string phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel, UserRoles userRoles, OfficeLocation officeLocation)
+        public EditProfileRequest()
+        {
+            
+        }
+        
+        public EditProfileRequest(int userId, string firstName, string lastName, int phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel, UserRoles userRoles, OfficeLocation officeLocation)
         {
             this._userId = userId;
             this._firstName = firstName;
@@ -45,7 +50,7 @@
             set => _lastName = value;
         }
 
-        public string PhoneNumber
+        public int PhoneNumber
         {
             get => _phoneNumber;
             set => _phoneNumber = value;
