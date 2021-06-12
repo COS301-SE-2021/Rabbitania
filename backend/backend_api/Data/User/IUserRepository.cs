@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using backend_api.Models.User.Requests;
+using backend_api.Models.User.Responses;
 
 namespace backend_api.Data.User
 {
@@ -11,6 +13,8 @@ namespace backend_api.Data.User
         Task<List<Models.User.User>> GetUser(String firstname, String lastname);
         
         Task<IEnumerable<Models.User.User>> GetAllUsers();
+        
+        ViewProfileResponse viewProfile(ViewProfileRequest request);
 
         // Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
         //

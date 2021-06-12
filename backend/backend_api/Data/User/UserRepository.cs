@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models.User.Requests;
+using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.User
@@ -36,6 +38,42 @@ namespace backend_api.Data.User
             
             return allUsers.ToList();
         }
+        
+        public ViewProfileResponse viewProfile(ViewProfileRequest request)
+        {
+
+            
+            var selectedUser = _users.users.Where(x => x.UserID == request.GetUserId());
+
+            var firstname = "";
+            var lastname = "";
+            var userImage = "";
+            var description = "";
+            var phoneNumber = 111;
+            var empLevel = 111;
+            var officeLocation = 111;
+            var userRole = 111;
+
+            foreach (var x in selectedUser)
+            {
+                firstname = x.firstname;
+                lastname = x.lastname;
+                userImage = x.userImage;
+                description = x.userDescription;
+                phoneNumber = x.phoneNumber;
+                empLevel = x.employeeLevel;
+                officeLocation = x.officeLocationID;
+                userRole = x.userRole;
+            }
+
+            ViewProfileResponse response = new ViewProfileResponse("Succesfully Viewed Profile", firstname, lastname, userImage, description, phoneNumber,empLevel,userRole, officeLocation);
+
+            
+            return response;
+            
+            
+        }
+
         //TODO: implement the rest of the functions needed in the repository class
         // public async Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID)
         // {
