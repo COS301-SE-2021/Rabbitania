@@ -13,6 +13,11 @@
         private UserRoles _userRoles;
         private OfficeLocation _officeLocation;
         
+        public EditProfileRequest()
+        {
+            
+        }
+        
         public EditProfileRequest(int userId, string firstName, string lastName, int phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel, UserRoles userRoles, OfficeLocation officeLocation)
         {
             this._userId = userId;
