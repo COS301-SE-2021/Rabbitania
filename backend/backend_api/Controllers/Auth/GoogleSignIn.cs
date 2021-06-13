@@ -59,7 +59,7 @@ namespace backend_api.Controllers.Auth
             //var json = JsonSerializer.Serialize(claims);
             
             //return json;
-            return response.json(email.ToString(), token.ToString(), givenName.ToString(), name.ToString(), surname.ToString()).ToString();
+            return response.json(email, token, givenName, name, surname).ToString();
         }
     }
 }
