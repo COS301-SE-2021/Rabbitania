@@ -47,17 +47,15 @@ namespace backend_api.Services.User
             return _userRepository.EditProfile(request);
         }
         
-        public ViewProfileResponse viewProfile(ViewProfileRequest request)
+        public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
 
-            if (request.GetUserId() == null)
+            if (request.UserId == null)
             {
-                throw new Exception("UserID not present in the Database");
+                throw new Exception("UserID Missing");
             }
-            else
-            {
-                return _userRepository.viewProfile(request);
-            }
+            return _userRepository.ViewProfile(request);
+            
 
         }
     }
