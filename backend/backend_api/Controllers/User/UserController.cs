@@ -56,6 +56,13 @@ namespace backend_api.Controllers.User
         {
             return service.EditProfile(request);
         }
+        
+        [HttpGet]
+        [Route("ViewProfile")]
+        public ViewProfileResponse ViewProfile([FromBody] ViewProfileRequest request)
+        {
+            return service.ViewProfile(request);
+        }
 
         // POST: api/User
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
