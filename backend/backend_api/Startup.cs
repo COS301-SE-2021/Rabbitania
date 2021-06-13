@@ -9,6 +9,7 @@ using backend_api.Services.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,19 +28,21 @@ namespace backend_api
     public class Startup
     {
         private string _connection = null;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             var builder = new NpgsqlConnectionStringBuilder(
-                Configuration.GetConnectionString("ConnectionString"));
+                Configuration.GetConnectionString("RabbitaniaDatabase"));
+            builder.Password = Configuration["DbPassword"];
             _connection = builder.ConnectionString;
             /*
             Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.
@@ -47,14 +50,11 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-            
+
             services.AddAuthentication(option =>
             {
-                option.DefaultScheme  = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options =>
-            {
-                options.LoginPath = "/api/googleSignIn";
-            }).AddGoogle(options =>
+                option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
             {
                 options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
@@ -72,7 +72,7 @@ namespace backend_api
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationService, NotificationService>();
             //
-            
+
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
@@ -81,25 +81,35 @@ namespace backend_api
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
             //----------------------------------------------------------------------------------------------------------------------
-            
+
             services.AddControllers();
-            
+
             #region Swagger
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v1"});
             });
+
             #endregion
+
             services.AddAuthorization();
-            
+
             //Npgsql connection for Postresql
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            /*
+             app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync($"DB Connection: {_connection}");
+            });*/
+    
+
+    if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 #region Swagger
