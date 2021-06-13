@@ -35,7 +35,7 @@ namespace backend_api.Controllers.User
         [HttpGet("{id}")]
         public async Task<ActionResult<Models.User.User>> GetUser(int id)
         {
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
             if (user == null)
             {
@@ -62,7 +62,7 @@ namespace backend_api.Controllers.User
         [HttpPost]
         public async Task<ActionResult<Models.User.User>> PostUser(Models.User.User user)
         {
-            _context.users.Add(user);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
@@ -72,13 +72,13 @@ namespace backend_api.Controllers.User
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _context.users.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.users.Remove(user);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -86,7 +86,7 @@ namespace backend_api.Controllers.User
 
         private bool UserExists(int id)
         {
-            return _context.users.Any(e => e.UserID == id);
+            return _context.Users.Any(e => e.UserID == id);
         }
     }
 }

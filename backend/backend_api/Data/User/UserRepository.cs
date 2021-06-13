@@ -21,16 +21,16 @@ namespace backend_api.Data.User
 
         public async Task<List<Models.User.User>> GetUser(int userID)
         {
-            return await _users.users.Where(x => x.UserID == userID).ToListAsync();
+            return await _users.Users.Where(x => x.UserID == userID).ToListAsync();
         }
         public async Task<List<Models.User.User>> GetUser(String firstname, String lastname)
         {
-            return await _users.users.Where(x => x.firstname == firstname && x.lastname==lastname).ToListAsync();
+            return await _users.Users.Where(x => x.firstname == firstname && x.lastname==lastname).ToListAsync();
         }
         
         public async Task<IEnumerable<Models.User.User>> GetAllUsers()
         {
-            var users = _users.users;
+            var users = _users.Users;
             IEnumerable<Models.User.User> allUsers = users.Select(user => user);
             
             // foreach (var user in users)
@@ -45,7 +45,7 @@ namespace backend_api.Data.User
         {
 
             
-            var selectedUser = _users.users.Where(x => x.UserID == request.GetUserId());
+            var selectedUser = _users.Users.Where(x => x.UserID == request.GetUserId());
 
             var firstname = "";
             var lastname = "";
@@ -96,7 +96,7 @@ namespace backend_api.Data.User
         public EditProfileResponse EditProfile(EditProfileRequest request)
         {
             var selectUserId = request.UserId;
-            var user = _users.users.Where(u => u.UserID == selectUserId).FirstOrDefault();
+            var user = _users.Users.Where(u => u.UserID == selectUserId).FirstOrDefault();
 
             user.firstname = request.FirstName;
             user.lastname = request.LastName;
