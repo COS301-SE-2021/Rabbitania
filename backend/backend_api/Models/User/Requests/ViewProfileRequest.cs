@@ -5,24 +5,18 @@ namespace backend_api.Models.User.Requests
 {
     public class ViewProfileRequest
     {
-
+   
         private int UserID;
-      
-        
         
         public ViewProfileRequest(int UserID)
         {
             this.UserID = UserID;
         }
 
-        public int GetUserId()
+        public int UserId
         {
-            return UserID;
-        }
-
-        public void SetUserID(int UserID)
-        {
-            this.UserID = UserID;
+            get => UserID;
+            set => UserID = value;
         }
 
     }

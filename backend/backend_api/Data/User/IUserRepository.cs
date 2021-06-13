@@ -14,7 +14,7 @@ namespace backend_api.Data.User
         
         Task<IEnumerable<Models.User.User>> GetAllUsers();
         
-        ViewProfileResponse viewProfile(ViewProfileRequest request);
+        ViewProfileResponse ViewProfile(ViewProfileRequest request);
 
         // Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
         //
