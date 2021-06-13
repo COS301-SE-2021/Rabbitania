@@ -8,23 +8,31 @@ namespace backend_api.Models.NoticeBoard
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int threadID { get; set; }
+        public int ThreadId { get; set; }
 
-        public string threadTitle { get; set; }
+        public string ThreadTitle { get; set; }
 
-        public string threadContent { get; set; }
+        public string ThreadContent { get; set; }
 
-        public int minLevel { get; set; }
+        public int MinLevel { get; set; }
         
-        public string imageUrl { get; set; }
+        public string ImageUrl { get; set; }
         
-        public UserRoles permittedUserRoles { get; set; }
+        public UserRoles PermittedUserRoles { get; set; }
         
         [ForeignKey("User")] 
-        public int UserID { get; set; }
-        public User.User User { get; set; }
-        
-       
+        public int UserId { get; set; }
+
+        public NoticeBoard(int threadId, string threadTitle, string threadContent, int minLevel, string imageUrl, UserRoles permittedUserRoles, int userId)
+        {
+            ThreadId = threadId;
+            ThreadTitle = threadTitle;
+            ThreadContent = threadContent;
+            MinLevel = minLevel;
+            ImageUrl = imageUrl;
+            PermittedUserRoles = permittedUserRoles;
+            UserId = userId;
+        }
 
     }
 }

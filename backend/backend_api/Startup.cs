@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
 using backend_api.Models.User;
+using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +29,6 @@ namespace backend_api
 {
     public class Startup
     {
-        private string _connection = null;
 
         public Startup(IConfiguration configuration)
         {
@@ -39,11 +40,6 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            var builder = new NpgsqlConnectionStringBuilder(
-                Configuration.GetConnectionString("RabbitaniaDatabase"));
-            builder.Password = Configuration["DbPassword"];
-            _connection = builder.ConnectionString;
             /*
             Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.
             Line #4 states that we are using Npgsql as ourPostgres Database Provider.
@@ -72,6 +68,17 @@ namespace backend_api
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationService, NotificationService>();
             //
+            
+            //NoticeBoard DB Context
+            services.AddDbContext<NoticeBoardContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    b => b.MigrationsAssembly(typeof(NoticeBoardContext).Assembly.FullName)));
+
+            services.AddScoped<INoticeBoardContext>(provider => provider.GetService<NoticeBoardContext>());
+
+            services.AddScoped<INoticeBoardRepository, NoticeBoardRepository>();
+            services.AddScoped<INoticeBoardService, NoticeBoardService>();
 
             //User DB Context
             services.AddDbContext<UserContext>(options =>
@@ -102,28 +109,23 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            /*
-             app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync($"DB Connection: {_connection}");
-            });*/
-    
+            
 
     if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                #region Swagger
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "backend_api v1"));
-            }
-            #endregion
-            app.UseHttpsRedirection();
+        {
+            app.UseDeveloperExceptionPage();
+            #region Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "backend_api v1"));
+        }
+        #endregion
+        app.UseHttpsRedirection();
 
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
-            
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
