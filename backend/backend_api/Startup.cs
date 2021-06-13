@@ -26,6 +26,7 @@ namespace backend_api
 {
     public class Startup
     {
+        private string _connection = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,6 +37,10 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var builder = new NpgsqlConnectionStringBuilder(
+                Configuration.GetConnectionString("ConnectionString"));
+            _connection = builder.ConnectionString;
             /*
             Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.
             Line #4 states that we are using Npgsql as ourPostgres Database Provider.
