@@ -41,11 +41,11 @@ namespace backend_api.Data.User
             return allUsers.ToList();
         }
         
-        public ViewProfileResponse viewProfile(ViewProfileRequest request)
+        public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
 
             
-            var selectedUser = _users.users.Where(x => x.UserID == request.GetUserId());
+            var selectedUser = _users.users.Where(x => x.UserID == request.UserId);
 
             var firstname = "";
             var lastname = "";

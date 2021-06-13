@@ -19,7 +19,7 @@ namespace backend_api.Services.User
 
         EditProfileResponse EditProfile(EditProfileRequest request);
 
-        ViewProfileResponse viewProfile(ViewProfileRequest request);
+        ViewProfileResponse ViewProfile(ViewProfileRequest request);
 
     }
 }
