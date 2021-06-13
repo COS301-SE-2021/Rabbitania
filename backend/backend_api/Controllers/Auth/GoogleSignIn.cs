@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace backend_api.Controllers.Auth
@@ -31,7 +33,7 @@ namespace backend_api.Controllers.Auth
         }
         [HttpGet]
         [Route("google-response")]
-        public async Task<String> GoogleResponse()
+        public async Task<JObject> GoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
@@ -41,18 +43,23 @@ namespace backend_api.Controllers.Auth
                 claim.Type,
                 claim.Value
             }).ToList();
-            // var options = new JsonSerializerOptions
-            // {
-            //     AllowTrailingCommas = true
-            // };
-            var json = JsonSerializer.Serialize(claims);
-            return json;
-        }
-        [HttpGet]
-        [Route("UserSignIn")]
-        public GoogleResponse SignIn([FromQuery] GoogleSignInRequest request)
-        {
-            //TODO: Complete sign in endpoint
+            
+            //Creating Google response object
+            var token = claims[0].Value;
+            var email = claims[(claims.Count)-1].Value;
+            var givenName = claims[1].Value;
+            var name = claims[2].Value;
+            var surname = "";
+            if (claims.Capacity > 4)
+            {
+                surname = claims[3].Value;
+            }
+            GoogleResponse response = new GoogleResponse(email, token, givenName, name, surname);
+            
+            //var json = JsonSerializer.Serialize(claims);
+            
+            //return json;
+            return response.json();
         }
     }
 }
