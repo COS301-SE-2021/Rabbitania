@@ -34,11 +34,18 @@ namespace backend_api.Models.Auth.Responses
             return this._email + ", " + this._token;
         }
 
-        public JObject json()
+        public JObject json(String email, String token, String givenName, String name, String surname)
         {
-            GoogleResponse temp = new GoogleResponse(_email, _token, _givenName, _name, _surname);
-            String jsonObj = JsonConvert.SerializeObject(temp);
-            JObject jsonObject = JObject.Parse(jsonObj);
+            var temp = new
+            {
+                Email = email,
+                Token = token,
+                GiveName = givenName,
+                Name = name,
+                Surname = surname
+            };
+            var jsonData = JsonConvert.SerializeObject(temp);
+            JObject jsonObject = JObject.Parse(jsonData);
             Console.WriteLine(jsonObject);
             return jsonObject;
         }

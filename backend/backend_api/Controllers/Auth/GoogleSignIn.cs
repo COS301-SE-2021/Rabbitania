@@ -33,7 +33,7 @@ namespace backend_api.Controllers.Auth
         }
         [HttpGet]
         [Route("google-response")]
-        public async Task<JObject> GoogleResponse()
+        public async Task<String> GoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
@@ -54,12 +54,12 @@ namespace backend_api.Controllers.Auth
             {
                 surname = claims[3].Value;
             }
-            GoogleResponse response = new GoogleResponse(email, token, givenName, name, surname);
+            GoogleResponse response = new GoogleResponse();
             
             //var json = JsonSerializer.Serialize(claims);
             
             //return json;
-            return response.json();
+            return response.json(email.ToString(), token.ToString(), givenName.ToString(), name.ToString(), surname.ToString()).ToString();
         }
     }
 }
