@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using backend_api.Models.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.User
@@ -14,8 +15,9 @@ namespace backend_api.Data.User
         {
             
         }
-        public DbSet<Models.User.User> users { get; set; }
-
+        public DbSet<Models.User.User> Users { get; set; }
+        
+        public DbSet<UserEmails> UserEmail { get; set; }
         public async Task<int> SaveChanges()
         {
             return await base.SaveChangesAsync();
