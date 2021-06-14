@@ -6,6 +6,7 @@ using backend_api.Data.Notification;
 using backend_api.Data.User;
 using backend_api.Models.User;
 using backend_api.Services.Notification;
+using backend_api.Services.User;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,6 +75,9 @@ namespace backend_api
                     b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             //----------------------------------------------------------------------------------------------------------------------
 
             services.AddControllers();
