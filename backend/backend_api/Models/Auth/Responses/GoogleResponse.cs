@@ -7,11 +7,11 @@ namespace backend_api.Models.Auth.Responses
 {
     public class GoogleResponse
     {
-        private String _email { get; set; }
-        private String _token { get; set; }
-        private String _name { get; set; }
-        private String _givenName { get; set; }
-        private String _surname { get; set; }
+        private String _email;
+        private String _token;
+        private String _name;
+        private String _givenName;
+        private String _surname;
 
         public GoogleResponse() {}
 
@@ -47,6 +47,31 @@ namespace backend_api.Models.Auth.Responses
             var jsonData = JsonConvert.SerializeObject(temp);
             JObject jsonObject = JObject.Parse(jsonData);
             return jsonObject;
+        }
+        public String Email
+        {
+            get => _email;
+            set => _email = value;
+        }
+        public String Token
+        {
+            get => _token;
+            set => _token = value;
+        }
+        public String Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+        public String Surname
+        {
+            get => _surname;
+            set => _surname = value;
+        }
+        public String GivenName
+        {
+            get => _givenName;
+            set => _givenName = value;
         }
     }
 }

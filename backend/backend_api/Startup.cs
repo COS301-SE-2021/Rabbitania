@@ -6,6 +6,7 @@ using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
 using backend_api.Models.User;
+using backend_api.Services.Auth;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
@@ -89,6 +90,7 @@ namespace backend_api
             
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
             //----------------------------------------------------------------------------------------------------------------------
 
             services.AddControllers();

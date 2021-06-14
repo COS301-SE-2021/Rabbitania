@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 
@@ -27,5 +28,6 @@ namespace backend_api.Data.User
         // Task<int> SaveChanges();
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
+        bool checkEmailExists(GoogleSignInRequest request);
     }
 }

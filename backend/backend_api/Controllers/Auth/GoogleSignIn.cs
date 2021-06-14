@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using backend_api.Services.Auth;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,6 +25,13 @@ namespace backend_api.Controllers.Auth
     [ApiController]
     public class GoogleSignIn : ControllerBase
     {
+        private readonly IAuthService _service;
+
+        public GoogleSignIn(IAuthService service)
+        {
+            this._service = service;
+        }
+
         [HttpGet]
         [Route("signin-google")]
         public IActionResult signIn()
@@ -31,6 +39,7 @@ namespace backend_api.Controllers.Auth
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
+
         [HttpGet]
         [Route("google-response")]
         public async Task<String> GoogleResponse()
@@ -43,20 +52,40 @@ namespace backend_api.Controllers.Auth
                 claim.Type,
                 claim.Value
             }).ToList();
-            
+
             //Creating Google response object
             var token = claims[0].Value;
-            var email = claims[(claims.Count)-1].Value;
+            var email = claims[(claims.Count) - 1].Value;
             var givenName = claims[1].Value;
             var name = claims[2].Value;
             var surname = "";
+            //not every account has provided a surname
             if (claims.Capacity > 4)
             {
                 surname = claims[3].Value;
             }
-            //TODO: populate result instead of the json method
-            GoogleResponse response = new GoogleResponse(email, token, givenName, name, surname);
 
+            GoogleSignInRequest request = new GoogleSignInRequest(email);
+            
+            GoogleResponse response = new GoogleResponse();
+            try
+            {
+                if (_service.checkEmailExists(request).EmailExists)
+                {
+                    response.Surname = surname;
+                    response.Email = email;
+                    response.Name = name;
+                    response.Token = token;
+                    response.GivenName = givenName;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+            //TODO: populate result instead of the json method
+            
             return response.json().ToString();
         }
     }
