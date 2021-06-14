@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 using backend_api.Services.Notification;
@@ -26,6 +27,18 @@ namespace backend_api.Controller.Notification
         public RetrieveNotificationsResponse RetriveNotifiations([FromQuery] RetrieveNotificationRequest request)
         {
             return _service.RetrieveNotifications(request);
+        }
+        
+        /// <summary>
+        ///     API endpoint for retrieveNotifications
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("CreateNotification")]
+        public async Task<CreateNotificationResponse> CreateNotification([FromBody] CreateNotificationRequest request)
+        {
+            return await _service.CreateNotification(request);
         }
         
     }

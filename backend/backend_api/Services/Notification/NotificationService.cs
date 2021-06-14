@@ -1,4 +1,6 @@
-﻿using backend_api.Data;
+﻿using System;
+using System.Threading.Tasks;
+using backend_api.Data;
 using backend_api.Data.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
@@ -17,8 +19,31 @@ namespace backend_api.Services.Notification
         public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
         {
             // No validation for now to test services
-
+            if (request.UserId is not (0 and >= 0))
+            {
+                throw new Exception("UserID is invalid");
+            }
+            if (request.UserId.Equals(null))
+            {
+                throw new Exception("UserID is null or empty");
+            }
+            
             return _repository.RetrieveNotifications(request);
+        }
+
+        public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
+        {
+            Console.WriteLine(request.UserId);
+            if (request.UserId.Equals(null) || request.UserId < 0)
+            {
+                throw new Exception("UserID is invalid");
+            }
+            if (request.NotificationType.Equals(null))
+            {
+                throw new Exception("Invalid Notification Type (Null or empty)");
+            }
+
+            return await _repository.CreateNotification(request);
         }
     }
 }
