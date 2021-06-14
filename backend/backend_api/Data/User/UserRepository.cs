@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.User
 {
-    public class UserRepository : DbContext, IUserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly IUserContext _users;
+        private readonly UserContext _users;
         
-        public UserRepository(IUserContext users)
+        public UserRepository(UserContext users)
         {
             this._users = users;
         }
@@ -94,20 +94,26 @@ namespace backend_api.Data.User
         // }
         // public DbSet<Models.User.User> users { get; set; }
 
-        public EditProfileResponse EditProfile(EditProfileRequest request)
+        public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
-            var selectUserId = request.UserId;
-            var user = _users.Users.Where(u => u.UserID == selectUserId).FirstOrDefault();
+            var toUpdate = _users.Users.FirstOrDefault(uu => uu.UserID == request.UserId);
 
-            user.firstname = request.FirstName;
-            user.lastname = request.LastName;
-            user.phoneNumber = request.PhoneNumber;
-            user.userDescription = request.UserDescription;
-            user.userImage = request.UserImage;
-            _users.SaveChanges();
+            toUpdate.firstname = request.FirstName;
+            toUpdate.lastname = request.LastName;
+            toUpdate.phoneNumber = request.PhoneNumber;
+            toUpdate.userImage = request.UserImage;
+            toUpdate.userDescription = request.UserDescription;
+            _users.Entry(toUpdate).State = EntityState.Modified;
             
-            EditProfileResponse response = new EditProfileResponse("Successfully Edited User");
+            try
+            {
+                await _users.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
             
+            EditProfileResponse response = new EditProfileResponse("Successfully updated user");
             return response;
         }
     }

@@ -1,4 +1,5 @@
-﻿using backend_api.Models.User.Requests;
+﻿using System.Threading.Tasks;
+using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 
 namespace backend_api.Services.User
@@ -17,7 +18,7 @@ namespace backend_api.Services.User
         GetUserResponse getUser(GetUserRequest request);
 
 
-        EditProfileResponse EditProfile(EditProfileRequest request);
+        Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
         ViewProfileResponse ViewProfile(ViewProfileRequest request);
 
