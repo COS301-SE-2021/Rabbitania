@@ -20,6 +20,11 @@ namespace backend_api.Models.User.Requests
         private string firstname;
         private string surname;
 
+        public GetUserRequest()
+        {
+            
+        }
+        
         public GetUserRequest(string firstname, string lastname)
         {
             this.firstname = firstname;

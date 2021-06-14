@@ -7,6 +7,11 @@ namespace backend_api.Models.User.Requests
     {
    
         private int UserID;
+
+        public ViewProfileRequest()
+        {
+            
+        }
         
         public ViewProfileRequest(int UserID)
         {

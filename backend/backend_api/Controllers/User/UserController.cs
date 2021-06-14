@@ -59,7 +59,7 @@ namespace backend_api.Controllers.User
         
         [HttpGet]
         [Route("ViewProfile")]
-        public ViewProfileResponse ViewProfile([FromBody] ViewProfileRequest request)
+        public ViewProfileResponse ViewProfile([FromQuery] ViewProfileRequest request)
         {
             return service.ViewProfile(request);
         }

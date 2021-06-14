@@ -17,15 +17,15 @@ namespace backend_api.Models.User.Responses
             this.userRoles = userRole;
         }
 
-        private string message { get; set; }
-        private string firstName { get; set; }
-        private string lastname { get; set; }
-        private string userImage { get; set; }
-        private string description { get; set; }
-        private int phoneNumber { get; set; }
-        private int empLevel { get; set; }
-        private OfficeLocation officeLocation { get; set; }
-        private UserRoles userRoles { get; set; }
+        public string message { get; set; }
+        public string firstName { get; set; }
+        public string lastname { get; set; }
+        public string userImage { get; set; }
+        public string description { get; set; }
+        public int phoneNumber { get; set; }
+        public int empLevel { get; set; }
+        public OfficeLocation officeLocation { get; set; }
+        public UserRoles userRoles { get; set; }
 
         public ViewProfileResponse(string response)
         {
