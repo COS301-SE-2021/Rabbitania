@@ -47,15 +47,17 @@ namespace backend_api.Data.User
             
             var selectedUser = _users.Users.Where(x => x.UserID == request.UserId);
 
-
+            
+            
+            
             var firstname = "";
             var lastname = "";
             var userImage = "";
             var description = "";
             var phoneNumber = 111;
             var empLevel = 111;
-            OfficeLocation officeLocation = 0;
-            UserRoles userRole = 0;
+            OfficeLocation officeLocation = OfficeLocation.Braamfontein;
+            UserRoles userRole = UserRoles.Administrator;
 
             foreach (var x in selectedUser)
             {
