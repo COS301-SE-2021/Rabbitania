@@ -24,6 +24,6 @@ namespace backend_api.Data.User
         
         // Task<int> SaveChanges();
 
-        EditProfileResponse EditProfile(EditProfileRequest request);
+        Task<EditProfileResponse> EditProfile(EditProfileRequest request);
     }
 }

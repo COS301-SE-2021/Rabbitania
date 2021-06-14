@@ -52,7 +52,7 @@ namespace backend_api.Controllers.User
         /// <returns></returns>
         [HttpPut]
         [Route("EditProfile")]
-        public EditProfileResponse EditProfile([FromBody] EditProfileRequest request)
+        public Task<EditProfileResponse> EditProfile([FromBody] EditProfileRequest request)
         {
             return service.EditProfile(request);
         }
