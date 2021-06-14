@@ -54,12 +54,10 @@ namespace backend_api.Controllers.Auth
             {
                 surname = claims[3].Value;
             }
-            GoogleResponse response = new GoogleResponse();
-            
-            //var json = JsonSerializer.Serialize(claims);
-            
-            //return json;
-            return response.json(email, token, givenName, name, surname).ToString();
+            //TODO: populate result instead of the json method
+            GoogleResponse response = new GoogleResponse(email, token, givenName, name, surname);
+
+            return response.json().ToString();
         }
     }
 }

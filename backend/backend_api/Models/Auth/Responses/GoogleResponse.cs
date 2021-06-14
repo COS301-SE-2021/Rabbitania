@@ -34,19 +34,18 @@ namespace backend_api.Models.Auth.Responses
             return this._email + ", " + this._token;
         }
 
-        public JObject json(String email, String token, String givenName, String name, String surname)
+        public JObject json()
         {
             var temp = new
             {
-                Email = email,
-                Token = token,
-                GiveName = givenName,
-                Name = name,
-                Surname = surname
+                Email = this._email,
+                Token = this._token,
+                GiveName = this._givenName,
+                Name = this._name,
+                Surname = this._surname
             };
             var jsonData = JsonConvert.SerializeObject(temp);
             JObject jsonObject = JObject.Parse(jsonData);
-            Console.WriteLine(jsonObject);
             return jsonObject;
         }
     }
