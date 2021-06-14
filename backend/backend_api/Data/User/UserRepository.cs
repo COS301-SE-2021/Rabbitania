@@ -27,6 +27,20 @@ namespace backend_api.Data.User
         {
             return await _users.Users.Where(x => x.firstname == firstname && x.lastname==lastname).ToListAsync();
         }
+
+
+        public CreateUserResponse CreateUser(CreateUserRequest request)
+        {
+            Models.User.User newUser = new Models.User.User(request.UserId, request.FirstName, request.LastName,
+                request.PhoneNumber, request.PinnedUserIds, request.UserImage, request.UserDescription,
+                request.IsOnline, request.IsAdmin, request.EmployeeLevel, request.UserRole, request.OfficeLocation);
+
+            _users.Users.Add(newUser);
+            _users.SaveChanges();
+
+            return new CreateUserResponse("User Successfully Created");
+        }
+        
         
         public async Task<IEnumerable<Models.User.User>> GetAllUsers()
         {

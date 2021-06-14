@@ -11,6 +11,8 @@ namespace backend_api.Data.User
         Task<List<Models.User.User>> GetUser(int userID);
 
         Task<List<Models.User.User>> GetUser(String firstname, String lastname);
+
+        public CreateUserResponse CreateUser(CreateUserRequest request);
         
         Task<IEnumerable<Models.User.User>> GetAllUsers();
         
