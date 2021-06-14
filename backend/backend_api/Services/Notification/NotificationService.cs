@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using backend_api.Data;
 using backend_api.Data.Notification;
 using backend_api.Models.Notification.Requests;
@@ -30,9 +31,10 @@ namespace backend_api.Services.Notification
             return _repository.RetrieveNotifications(request);
         }
 
-        public CreateNotificationResponse CreateNotification(CreateNotificationRequest request)
+        public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
-            if (request.UserId is not (0 and >= 0))
+            Console.WriteLine(request.UserId);
+            if (request.UserId.Equals(null) || request.UserId < 0)
             {
                 throw new Exception("UserID is invalid");
             }
@@ -41,7 +43,7 @@ namespace backend_api.Services.Notification
                 throw new Exception("Invalid Notification Type (Null or empty)");
             }
 
-            return _repository.CreateNotification(request);
+            return await _repository.CreateNotification(request);
         }
     }
 }

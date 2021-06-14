@@ -1,4 +1,5 @@
-﻿using backend_api.Models.Notification.Requests;
+﻿using System.Threading.Tasks;
+using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 
 namespace backend_api.Services.Notification
@@ -13,13 +14,13 @@ namespace backend_api.Services.Notification
         /// <param name="request"></param>
         /// <returns>List of Notifications for user.</returns>
         RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request);
-        
+
         /// <summary>
         ///     Validates whether or not the request is valid
         ///     if valid creates a new notification for the user.
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Response success message</returns>
-        CreateNotificationResponse CreateNotification(CreateNotificationRequest request);
+        Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request);
     }
 }

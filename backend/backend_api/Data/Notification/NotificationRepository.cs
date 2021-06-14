@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 
@@ -16,8 +17,8 @@ namespace backend_api.Data.Notification
         /// <inheritdoc />
         public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            IQueryable<Models.Notification.Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == request.UserId);
-
+            IQueryable<Models.Notification.Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserID == request.UserId);
+            
             RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
                 "Notification successfully retrieved", retrieveUserNotifications
             );
@@ -26,9 +27,20 @@ namespace backend_api.Data.Notification
         }
 
         /// <inheritdoc />
-        public CreateNotificationResponse CreateNotification(CreateNotificationRequest request)
+        public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
-            return null;
+            var newNot = new Models.Notification.Notification();
+            newNot.NotificationContent = request.NotificationContext;
+            newNot.NotificationType = request.NotificationType;
+            newNot.DateCreated = request.DateCreated;
+            newNot.UserID = request.UserId;
+            
+            _context.Notifications.Add(newNot);
+            await _context.SaveChanges();
+
+            CreateNotificationResponse response = new CreateNotificationResponse("Successfully created user");
+
+            return response;
         }
     }
 }
