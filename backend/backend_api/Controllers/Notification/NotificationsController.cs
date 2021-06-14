@@ -28,5 +28,17 @@ namespace backend_api.Controller.Notification
             return _service.RetrieveNotifications(request);
         }
         
+        /// <summary>
+        ///     API endpoint for retrieveNotifications
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("CreateNotification")]
+        public CreateNotificationResponse CreateNotification([FromBody] CreateNotificationRequest request)
+        {
+            return _service.CreateNotification(request);
+        }
+        
     }
 }

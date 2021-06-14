@@ -11,6 +11,13 @@ namespace backend_api.Data.Notification
         /// <param name="request"></param>
         /// <returns> A list of notifications </returns>
         RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request);
+        
+        /// <summary>
+        ///     Creates a new notification for a user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> Created Notification Response </returns>
+        CreateNotificationResponse CreateNotification(CreateNotificationRequest request);
     }
 
 }

@@ -12,8 +12,7 @@ namespace backend_api.Data.Notification
         {
             this._context = context;
         }
-        
-     
+
         /// <inheritdoc />
         public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
         {
@@ -24,6 +23,12 @@ namespace backend_api.Data.Notification
             );
             
             return response;
+        }
+
+        /// <inheritdoc />
+        public CreateNotificationResponse CreateNotification(CreateNotificationRequest request)
+        {
+            return null;
         }
     }
 }
