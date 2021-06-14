@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
 using backend_api.Models.User;
+using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -67,7 +69,16 @@ namespace backend_api
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationService, NotificationService>();
             //
+        //NoticeBoard DB Context
+            services.AddDbContext<NoticeBoardContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    b => b.MigrationsAssembly(typeof(NoticeBoardContext).Assembly.FullName)));
 
+            services.AddScoped<INoticeBoardContext>(provider => provider.GetService<NoticeBoardContext>());
+
+            services.AddScoped<INoticeBoardRepository, NoticeBoardRepository>();
+            services.AddScoped<INoticeBoardService, NoticeBoardService>();
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
