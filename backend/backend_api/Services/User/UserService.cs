@@ -22,6 +22,11 @@ namespace backend_api.Services.User
             
         }
 
+        public CreateUserResponse CreateUser(CreateUserRequest request)
+        {
+            return _userRepository.CreateUser(request);
+        }
+
         public GetUserResponse getUser(GetUserRequest request)
         {
             //TODO: implement GetUSerResponse to use the jwt token from google login API

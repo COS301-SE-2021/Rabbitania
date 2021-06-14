@@ -6,6 +6,26 @@ namespace backend_api.Models.User
 {
     public class User
     {
+        public User(int userId, string firstname, string lastname, int phoneNumber, List<int> pinnedUserIDs, string userImage, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        {
+            UserID = userId;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.phoneNumber = phoneNumber;
+            this.pinnedUserIDs = pinnedUserIDs;
+            this.userImage = userImage;
+            this.userDescription = userDescription;
+            this.isOnline = isOnline;
+            this.isAdmin = isAdmin;
+            this.employeeLevel = employeeLevel;
+            this.userRole = userRole;
+            this.officeLocation = officeLocation;
+        }
+
+        public User()
+        {
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }

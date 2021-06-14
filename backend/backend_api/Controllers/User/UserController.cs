@@ -22,6 +22,13 @@ namespace backend_api.Controllers.User
             this._context = context;//not needed once other endpoints are configured
         }
 
+        [HttpPost]
+        [Route("CreateUser")]
+        public CreateUserResponse CreateUser([FromBody] CreateUserRequest request)
+        {
+            return service.CreateUser(request);
+        }
+
         // GET: api/User
         [HttpGet]
         [Route("GetUser")]
