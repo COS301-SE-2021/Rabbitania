@@ -5,6 +5,6 @@ namespace backend_api.Services.Auth
 {
     public interface IAuthService
     {
-        GoogleResponse GoogleAuthResponse(GoogleSignInRequest request);
+        LoginResponse checkEmailExists(GoogleSignInRequest request);
     }
 }

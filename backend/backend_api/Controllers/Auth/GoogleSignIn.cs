@@ -59,14 +59,33 @@ namespace backend_api.Controllers.Auth
             var givenName = claims[1].Value;
             var name = claims[2].Value;
             var surname = "";
+            //not every account has provided a surname
             if (claims.Capacity > 4)
             {
                 surname = claims[3].Value;
             }
 
+            GoogleSignInRequest request = new GoogleSignInRequest(email);
+            
+            GoogleResponse response = new GoogleResponse();
+            try
+            {
+                if (_service.checkEmailExists(request).EmailExists)
+                {
+                    response.Surname = surname;
+                    response.Email = email;
+                    response.Name = name;
+                    response.Token = token;
+                    response.GivenName = givenName;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
             //TODO: populate result instead of the json method
-            GoogleResponse response = new GoogleResponse(email, token, givenName, name, surname);
-
+            
             return response.json().ToString();
         }
     }

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models.Auth.Requests;
+using backend_api.Models.Auth.Responses;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
@@ -13,12 +16,12 @@ namespace backend_api.Data.User
     public class UserRepository : IUserRepository
     {
         private readonly UserContext _users;
-        
+
         public UserRepository(UserContext users)
         {
             this._users = users;
         }
-
+        
         public async Task<List<Models.User.User>> GetUser(int userID)
         {
             return await _users.Users.Where(x => x.UserID == userID).ToListAsync();
@@ -70,11 +73,8 @@ namespace backend_api.Data.User
             }
 
             ViewProfileResponse response = new ViewProfileResponse("Succesfully Viewed Profile", firstname, lastname, userImage, description, phoneNumber,empLevel,userRole, officeLocation);
-
             
             return response;
-            
-            
         }
 
         //TODO: implement the rest of the functions needed in the repository class
@@ -115,6 +115,20 @@ namespace backend_api.Data.User
             
             EditProfileResponse response = new EditProfileResponse("Successfully updated user");
             return response;
+        }
+
+        public bool checkEmailExists(GoogleSignInRequest request)
+        {
+            var userEmail = _users.UserEmail.Where(x => x.userEmail == request.Email);
+            //Check if IQueryable returns something
+            if (userEmail.Any())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
