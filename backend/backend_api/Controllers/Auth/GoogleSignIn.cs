@@ -84,8 +84,6 @@ namespace backend_api.Controllers.Auth
                 throw e;
             }
             
-            //TODO: populate result instead of the json method
-            
             return response.json().ToString();
         }
     }
