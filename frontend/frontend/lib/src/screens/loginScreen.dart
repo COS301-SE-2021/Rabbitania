@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/models/util_model.dart';
-
+import '../models/util_model.dart';
 import 'userProfileScreen.dart';
 
 class Login extends StatefulWidget {
@@ -12,6 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _loginState extends State<Login> {
+  final util = new UtilModel();
   void login() {
     UtilModel.route(() => ProfileScreen(), context);
   }
@@ -48,6 +49,7 @@ class _loginState extends State<Login> {
           width: 300,
           child: FittedBox(
             child: FloatingActionButton(
+              tooltip: 'LogIn',
               elevation: 0,
               backgroundColor: Colors.transparent,
               foregroundColor: Colors.transparent,
@@ -55,6 +57,8 @@ class _loginState extends State<Login> {
               splashColor: Colors.transparent,
               onPressed: login,
               child: Container(
+                height: 60,
+                width: 50,
                 padding: EdgeInsets.all(16),
                 child: SvgPicture.string(
                   _svg_rabbit,
@@ -71,6 +75,7 @@ class _loginState extends State<Login> {
         _svg_background,
         alignment: Alignment(1, 2),
         fit: BoxFit.fitWidth,
+        semanticsLabel: 'Log In',
       ),
     );
   }

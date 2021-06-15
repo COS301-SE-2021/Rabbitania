@@ -10,6 +10,8 @@ class ProfileDisplay extends StatefulWidget {
 
 class _profileState extends State<ProfileDisplay> {
   Widget build(context) {
-    return Scaffold(body: SvgPicture.string(''));
+    return Scaffold(
+      body: SvgPicture.string(''),
+    );
   }
 }
