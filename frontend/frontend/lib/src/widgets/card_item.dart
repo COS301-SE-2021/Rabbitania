@@ -7,7 +7,7 @@ class NoticeboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child:Column(
+      child:ListView(
         children: <Widget>[
 
           for(var item in list)
@@ -29,7 +29,7 @@ class NoticeboardCard extends StatelessWidget {
                     ),
                     subtitle: Text(item['Body'].toString()),
                   ),
-                  Image.asset("../assets/images/TestImage1.png"),
+                  Image.asset("images/TestImage1.png"),
                 ],
 
               ),
