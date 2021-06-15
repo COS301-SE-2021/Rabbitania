@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Card extends StatelessWidget {
+class noticeboardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Card(),
+      child: Card(
+        child: Text("Hello Rabbitania")
+
+      ),
     );
   }
 }
