@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class NoticeBoard extends StatefulWidget {
@@ -8,7 +7,6 @@ class NoticeBoard extends StatefulWidget {
 }
 
 class _NoticeBoard extends State<NoticeBoard> {
-
   @override
   Widget build(BuildContext context) {
     return Center(
