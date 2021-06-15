@@ -1,25 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using backend_api.Models;
+using backend_api.Models.User;
 
-namespace backend_api.Models
+namespace backend_api.Models.NoticeBoard
 {
     public class NoticeBoard
     {
-        [Key] 
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int NoticeBoardID { get; set; }
-        
-        [ForeignKey("NoticeBoardThread")]
-        public List<int> noticeBoardThreadIDs { get; set; }
-        public string title { get; set; }
+        public int ThreadId { get; set; }
 
-        //Return number of threads on the notice board
-        public int getNumberOfThreads()
+        public string ThreadTitle { get; set; }
+
+        public string ThreadContent { get; set; }
+
+        public int MinLevel { get; set; }
+        
+        public string ImageUrl { get; set; }
+        
+        public UserRoles PermittedUserRoles { get; set; }
+        
+        [ForeignKey("User")] 
+        public int UserId { get; set; }
+
+        public NoticeBoard(int threadId, string threadTitle, string threadContent, int minLevel, string imageUrl, UserRoles permittedUserRoles, int userId)
         {
-            return noticeBoardThreadIDs.Count;
+            ThreadId = threadId;
+            ThreadTitle = threadTitle;
+            ThreadContent = threadContent;
+            MinLevel = minLevel;
+            ImageUrl = imageUrl;
+            PermittedUserRoles = permittedUserRoles;
+            UserId = userId;
         }
+
     }
 }

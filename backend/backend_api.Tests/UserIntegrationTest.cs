@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.TestHost;
 using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
 
-namespace backend_api.Tests
+/*namespace backend_api.Tests
 {
     public class UserIntegrationTest : IClassFixture<TestFixture<Startup>>
     {
@@ -99,7 +99,7 @@ namespace backend_api.Tests
                     "officeLocation": 0,
                     "userEmails": [
                     0
-                    ] */
+                    ] 
                 }
             };
 
@@ -235,7 +235,7 @@ namespace backend_api.Tests
             // Act
             var postResponse = await Client.PostAsync(postRequest.Url, ContentHelper.GetStringContent(postRequest.Body));
             var jsonFromPost = await postResponse.Content.ReadAsStringAsync();
-            User temp = await postResponse.Content.ReadAsAsync<User>();
+            User.Models.User.User temp = await postResponse.Content.ReadAsAsync<User.Models.User.User>();
             
 
             var deleteResponse = await Client.DeleteAsync(string.Format("/api/User/{0}", temp.UserID));
@@ -250,7 +250,7 @@ namespace backend_api.Tests
         {
             // Arrange
             /*
-            */
+            
             // Act
           
             
@@ -260,4 +260,4 @@ namespace backend_api.Tests
             Assert.Equal(HttpStatusCode.NotFound, deleteResponse.StatusCode);
         }
     }
-}
+} */

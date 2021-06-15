@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace backend_api.Models
+namespace backend_api.Models.User
 {
     public class UserEmails
     {

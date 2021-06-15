@@ -2,10 +2,30 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace backend_api.Models
+namespace backend_api.Models.User
 {
     public class User
     {
+        public User(int userId, string firstname, string lastname, int phoneNumber, List<int> pinnedUserIDs, string userImage, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        {
+            UserID = userId;
+            this.firstname = firstname;
+            this.lastname = lastname;
+            this.phoneNumber = phoneNumber;
+            this.pinnedUserIDs = pinnedUserIDs;
+            this.userImage = userImage;
+            this.userDescription = userDescription;
+            this.isOnline = isOnline;
+            this.isAdmin = isAdmin;
+            this.employeeLevel = employeeLevel;
+            this.userRole = userRole;
+            this.officeLocation = officeLocation;
+        }
+
+        public User()
+        {
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
@@ -14,7 +34,7 @@ namespace backend_api.Models
         public string firstname { get; set; }
         public string lastname { get; set; }
         
-        public string phoneNumber { get; set; }
+        public int phoneNumber { get; set; }
         
         public List<int> pinnedUserIDs { get; set; }
         
@@ -28,7 +48,7 @@ namespace backend_api.Models
 
         public int employeeLevel { get; set; }
         
-        public UserRoles userRoles { get; set; }
+        public UserRoles userRole { get; set; }//corresponds to UserRoles enum
 
         public OfficeLocation officeLocation { get; set; }
 

@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="52a0fbc9-4b57-437e-9d28-e6de4cb929dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Rabbitania.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Rabbitania.dir/.idea/workspace.xml" afterDir="false" />
+frontend/FrontendMaster
       <change beforePath="$PROJECT_DIR$/frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.idea/workspace.xml" afterDir="false" />
+ development
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,6 +13,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1tE8T5YX9UXA1seoaULvpXRYNr0" />
@@ -19,9 +26,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -36,6 +46,7 @@
       <workItem from="1622358965959" duration="5000" />
       <workItem from="1622363885314" duration="5000" />
       <workItem from="1622364152213" duration="801000" />
+ frontend/FrontendMaster
       <workItem from="1623224600126" duration="144000" />
       <workItem from="1623226241485" duration="43000" />
       <workItem from="1623226351754" duration="29000" />
@@ -47,6 +58,17 @@
       <option name="project" value="LOCAL" />
       <updated>1623224675876</updated>
     </task>
+
+      <workItem from="1623060145140" duration="164000" />
+    </task>
+    <task id="LOCAL-00001" summary="Merged development_backend successfully into development">
+      <created>1622794433283</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622794433283</updated>
+    </task>
+ development
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
@@ -69,7 +91,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+frontend/FrontendMaster
     <MESSAGE value="Flutter framework" />
     <option name="LAST_COMMIT_MESSAGE" value="Flutter framework" />
+
+    <MESSAGE value="Merged development_backend successfully into development" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged development_backend successfully into development" />
+development
   </component>
 </project>
