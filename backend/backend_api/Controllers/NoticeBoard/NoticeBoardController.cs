@@ -19,9 +19,9 @@ namespace backend_api.Controllers.NoticeBoard
 
         [HttpPost]
         [Route("AddNoticeBoardThread")]
-        public AddNoticeBoardThreadResponse AddNoticeBoardThread([FromBody] AddNoticeBoardThreadRequest request)
+        public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread([FromBody] AddNoticeBoardThreadRequest request)
         {
-            return _service.AddNoticeBoardThread(request);
+            return await _service.AddNoticeBoardThread(request);
         }
 
     }

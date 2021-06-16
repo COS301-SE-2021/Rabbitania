@@ -19,11 +19,13 @@ namespace backend_api.Models.NoticeBoard.Requests
             set => _userId = value;
         }
 
+        /*
         public int ThreadId
         {
             get => _threadId;
             set => _threadId = value;
         }
+        */
 
         public string ThreadTitle
         {
@@ -63,10 +65,10 @@ namespace backend_api.Models.NoticeBoard.Requests
         }
         
         //TODO: Sort out minLevel. Possibly need to separate tables again
-        public AddNoticeBoardThreadRequest(int threadId, string threadTitle, string threadContent, int minLevel,
+        public AddNoticeBoardThreadRequest(string threadTitle, string threadContent, int minLevel,
             string imageUrl, UserRoles permittedUserRoles, int userId)
         {
-            _threadId = threadId;
+            /*_threadId = threadId;*/
             _threadTitle = threadTitle;
             _threadContent = threadContent;
             _minLevel = minLevel;

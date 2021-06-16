@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using backend_api.Data.NoticeBoard;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
@@ -13,14 +13,9 @@ namespace backend_api.Services.NoticeBoard
         {
             _noticeBoardRepository = noticeBoardRepo;
         }
-        public AddNoticeBoardThreadResponse AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
+        public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
-            if (request.ThreadId == null)
-            {
-                throw new Exception("ThreadID Missing");
-            }
-
-            return _noticeBoardRepository.AddNoticeBoardThread(request);
+            return await _noticeBoardRepository.AddNoticeBoardThread(request);
         }
     }
 }

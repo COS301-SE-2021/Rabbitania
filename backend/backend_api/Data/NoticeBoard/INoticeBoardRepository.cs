@@ -6,6 +6,6 @@ namespace backend_api.Data.NoticeBoard
 {
     public interface INoticeBoardRepository
     {
-        public AddNoticeBoardThreadResponse AddNoticeBoardThread(AddNoticeBoardThreadRequest request);
+        public Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request);
     }
 }

@@ -1,18 +1,20 @@
-﻿using backend_api.Models.NoticeBoard.Requests;
+﻿using System;
+using System.Net;
+using backend_api.Models.NoticeBoard.Requests;
 
 namespace backend_api.Models.NoticeBoard.Responses
 {
     public class AddNoticeBoardThreadResponse
     {
-        private string _response;
+        private HttpStatusCode _response;
 
-        public string Response
+        public HttpStatusCode Response
         {
             get => _response;
             set => _response = value;
         }
 
-        public AddNoticeBoardThreadResponse(string response)
+        public AddNoticeBoardThreadResponse(HttpStatusCode response)
         {
             _response = response;
         }

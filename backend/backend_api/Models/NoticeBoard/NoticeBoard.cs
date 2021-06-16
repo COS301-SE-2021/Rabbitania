@@ -23,9 +23,9 @@ namespace backend_api.Models.NoticeBoard
         [ForeignKey("User")] 
         public int UserId { get; set; }
 
-        public NoticeBoard(int threadId, string threadTitle, string threadContent, int minLevel, string imageUrl, UserRoles permittedUserRoles, int userId)
+        public NoticeBoard(string threadTitle, string threadContent, int minLevel, string imageUrl,
+            UserRoles permittedUserRoles, int userId)
         {
-            ThreadId = threadId;
             ThreadTitle = threadTitle;
             ThreadContent = threadContent;
             MinLevel = minLevel;
@@ -33,6 +33,5 @@ namespace backend_api.Models.NoticeBoard
             PermittedUserRoles = permittedUserRoles;
             UserId = userId;
         }
-
     }
 }
