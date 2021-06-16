@@ -12,6 +12,9 @@ var list = [
 
 ];
 
+int like = 0;
+int dislike = 0;
+
 
 class NoticeboardCard extends StatelessWidget {
   @override
@@ -71,6 +74,7 @@ class NoticeboardCard extends StatelessWidget {
 
                         },
                       ),
+                      Text(like.toString()),
                       IconButton(
                         icon: const Icon(
                           Icons.thumb_down_sharp,
@@ -82,6 +86,7 @@ class NoticeboardCard extends StatelessWidget {
 
                         },
                       ),
+                      Text(dislike.toString()),
 
 
 
