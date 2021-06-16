@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using backend_api.Data;
 using backend_api.Data.Notification;
+using backend_api.Exceptions.Notifications;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 
@@ -21,15 +22,15 @@ namespace backend_api.Services.Notification
             // No validation for now to test services
             if (request.UserId.Equals(null))
             {
-                throw new Exception("UserID is invalid");
+                throw new InvalidNotificationRequestException("UserID is null or empty");
             }
-            if (request.UserId.Equals(null))
+            if (request.UserId <= 0)
             {
-                throw new Exception("UserID is null or empty");
+                throw new InvalidNotificationRequestException("UserID is invalid");
             }
             
             RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
-                "Notification successfully retrieved", await _repository.RetrieveNotifications(request)
+                await _repository.RetrieveNotifications(request)
             );
 
 
@@ -41,11 +42,11 @@ namespace backend_api.Services.Notification
             Console.WriteLine(request.UserId);
             if (request.UserId.Equals(null) || request.UserId < 0)
             {
-                throw new Exception("UserID is invalid");
+                throw new InvalidNotificationRequestException("UserID is invalid");
             }
             if (request.Type.Equals(null))
             {
-                throw new Exception("Invalid Notification Type (Null or empty)");
+                throw new InvalidNotificationRequestException("Invalid Notification Type (Null or empty)");
             }
 
             return await _repository.CreateNotification(request);
