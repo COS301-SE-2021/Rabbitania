@@ -55,14 +55,10 @@ class NoticeboardCard extends StatelessWidget {
                       //         Icons.add_comment_outlined,
                       //         color: Color.fromRGBO(0, 0, 0, 1),
                       //         size: 24.0,
-                      //
-                      //
                       //     ),
                       //     label: Text("Comment",
                       //     style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1)))
                       // ),
-
-
                       IconButton(
                         icon: const Icon(
                           Icons.thumb_up_sharp,
@@ -87,19 +83,13 @@ class NoticeboardCard extends StatelessWidget {
                         },
                       ),
                       Text(dislike.toString()),
-
-
-
                     ],
                   ),
                 ],
-
               ),
           ),
-
         ]
       ),
-
     );
   }
 }
