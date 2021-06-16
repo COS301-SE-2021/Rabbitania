@@ -20,7 +20,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace backend_api.Controllers.Auth
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     [AllowAnonymous, Route("api/[controller]")]
     [ApiController]
     public class GoogleSignIn : ControllerBase
@@ -33,7 +33,7 @@ namespace backend_api.Controllers.Auth
         }
 
         [HttpGet]
-        [Route("signin-google")]
+        [Route("GoogleLogin")]
         public IActionResult signIn()
         {
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
@@ -41,7 +41,7 @@ namespace backend_api.Controllers.Auth
         }
 
         [HttpGet]
-        [Route("google-response")]
+        [Route("GoogleLoginResponse")]
         public async Task<String> GoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -83,7 +83,7 @@ namespace backend_api.Controllers.Auth
             {
                 throw e;
             }
-            
+          
             return response.json().ToString();
         }
     }
