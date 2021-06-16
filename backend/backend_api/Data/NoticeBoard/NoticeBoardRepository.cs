@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
@@ -16,9 +17,9 @@ namespace backend_api.Data.NoticeBoard
             _noticeBoard = noticeBoard;
         }
 
-        public AddNoticeBoardThreadResponse AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
+        public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
-            var threadId = request.ThreadId;
+            /*var threadId = request.ThreadId;*/
             var threadTitle = request.ThreadTitle;
             var threadContent = request.ThreadContent;
             var minLevel = request.MinLevel;
@@ -26,14 +27,14 @@ namespace backend_api.Data.NoticeBoard
             var permittedUserRoles = request.PermittedUserRoles;
             var userId = request.UserId;
 
-            Models.NoticeBoard.NoticeBoard noticeBoardThread = new Models.NoticeBoard.NoticeBoard(threadId, threadTitle,
+            Models.NoticeBoard.NoticeBoard noticeBoardThread = new Models.NoticeBoard.NoticeBoard(threadTitle,
                 threadContent, minLevel, imageUrl, permittedUserRoles, userId);
 
             _noticeBoard.NoticeBoard.Add(noticeBoardThread);
-            _noticeBoard.SaveChanges();
+            await _noticeBoard.SaveChanges();
             
             
-            return new AddNoticeBoardThreadResponse("NoticeBoard Thread Successfully added");
+            return new AddNoticeBoardThreadResponse(HttpStatusCode.Created);
         }
     }
 }
