@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using backend_api.Exceptions.Auth;
 using backend_api.Services.Auth;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
@@ -33,7 +34,7 @@ namespace backend_api.Controllers.Auth
         }
 
         [HttpGet]
-        [Route("GoogleLogin")]
+        [Route("GoogleLoginv1")]
         public IActionResult signIn()
         {
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
@@ -85,12 +86,12 @@ namespace backend_api.Controllers.Auth
                     }
                     else
                     {
-                        throw new Exception("Email does not exist in database");
+                        throw new InvalidEmailException("Email does not exist in database");
                     }
                 }
                 else
                 {
-                    throw new Exception("Domain in not part of the retro rabbit workspace");
+                    throw new InvalidDomainException("Domain in not part of the retro rabbit workspace");
                 }
             }
             catch (Exception e)
