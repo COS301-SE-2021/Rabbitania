@@ -4,7 +4,7 @@ using backend_api.Models.Notification.Responses;
 using backend_api.Services.Notification;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backend_api.Controller.Notification
+namespace backend_api.Controllers.Notification
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,7 +24,7 @@ namespace backend_api.Controller.Notification
         /// <returns></returns>
         [HttpGet]
         [Route("RetrieveNotifications")]
-        public RetrieveNotificationsResponse RetriveNotifiations([FromQuery] RetrieveNotificationRequest request)
+        public RetrieveNotificationsResponse RetrieveNotifications([FromQuery] RetrieveNotificationRequest request)
         {
             return _service.RetrieveNotifications(request);
         }
