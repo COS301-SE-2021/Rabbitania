@@ -29,13 +29,13 @@ namespace backend_api.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("NotificationContent")
+                    b.Property<string>("NotificationPayload")
                         .HasColumnType("text");
 
                     b.Property<int>("NotificationType")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserID")
                         .HasColumnType("integer");
 
                     b.HasKey("NotificationId");

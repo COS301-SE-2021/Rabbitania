@@ -4,37 +4,29 @@ namespace backend_api.Models.Notification.Requests
 {
     public class CreateNotificationRequest
     {
-        private int _notificationId;
-        private string _notificationContext;
-        private int _notificationType;
+        private string _payload;
+        private NotificationTypeEnum _type;
         private DateTime _dateCreated;
         private int _userId;
 
-        public CreateNotificationRequest(int notificationId, string notificationContext, int notificationType, DateTime dateCreated, int userId)
+        public CreateNotificationRequest(string payload, NotificationTypeEnum type, DateTime dateCreated, int userId)
         {
-            this._notificationId = notificationId;
-            this._notificationContext = notificationContext;
-            this._notificationType = notificationType;
+            this._payload = payload;
+            this._type = type;
             this._dateCreated = dateCreated;
             this._userId = userId;
         }
 
-        public int NotificationId
+        public string Payload
         {
-            get => _notificationId;
-            set => _notificationId = value;
+            get => _payload;
+            set => _payload = value;
         }
 
-        public string NotificationContext
+        public NotificationTypeEnum Type
         {
-            get => _notificationContext;
-            set => _notificationContext = value;
-        }
-
-        public int NotificationType
-        {
-            get => _notificationType;
-            set => _notificationType = value;
+            get => _type;
+            set => _type = value;
         }
 
         public DateTime DateCreated
