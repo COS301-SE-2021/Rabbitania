@@ -8,9 +8,6 @@
         private int _phoneNumber;
         private string _userDescription;
         private string _userImage;
-        private bool _isAdmin;
-        private int _empLevel;
-        private UserRoles _userRoles;
         private OfficeLocation _officeLocation;
         
         public EditProfileRequest()
@@ -26,9 +23,6 @@
             this._phoneNumber = phoneNumber;
             this._userDescription = userDescription;
             this._userImage = userImage;
-            this._isAdmin = isAdmin;
-            this._empLevel = empLevel;
-            this._userRoles = userRoles;
             this._officeLocation = officeLocation;
         }
 
@@ -66,24 +60,6 @@
         {
             get => _userImage;
             set => _userImage = value;
-        }
-
-        public bool IsAdmin
-        {
-            get => _isAdmin;
-            set => _isAdmin = value;
-        }
-
-        public int EmpLevel
-        {
-            get => _empLevel;
-            set => _empLevel = value;
-        }
-
-        public UserRoles UserRoles
-        {
-            get => _userRoles;
-            set => _userRoles = value;
         }
 
         public OfficeLocation OfficeLocation

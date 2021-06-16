@@ -93,23 +93,6 @@ namespace backend_api.Data.User
             return response;
         }
 
-        //TODO: implement the rest of the functions needed in the repository class
-        // public async Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID)
-        // {
-        //     
-        // }
-        //
-        // public async Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User User)
-        // {
-        //                 
-        // }
-        //
-        // public async Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User User)
-        // {
-        //     
-        // }
-        // public DbSet<Models.User.User> users { get; set; }
-
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             var toUpdate = _users.Users.FirstOrDefault(uu => uu.UserID == request.UserId);
@@ -119,6 +102,7 @@ namespace backend_api.Data.User
             toUpdate.phoneNumber = request.PhoneNumber;
             toUpdate.userImage = request.UserImage;
             toUpdate.userDescription = request.UserDescription;
+            toUpdate.officeLocation = request.OfficeLocation;
             _users.Entry(toUpdate).State = EntityState.Modified;
             
             try
@@ -127,9 +111,11 @@ namespace backend_api.Data.User
             }
             catch (DbUpdateConcurrencyException)
             {
+                throw new DbUpdateException("Error when updating user" + request.FirstName);
             }
             
-            EditProfileResponse response = new EditProfileResponse("Successfully updated user");
+            var response = new EditProfileResponse("Successfully updated user");
+            
             return response;
         }
 
