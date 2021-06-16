@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/screens/noticeboardScreen.dart';
 import './widgets/expandable_button_widget.dart';
 import './screens/loginScreen.dart';
 
@@ -14,7 +15,7 @@ class AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Login(),
+        body: NoticeBoard(),
       ),
     );
   }
