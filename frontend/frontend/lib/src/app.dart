@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/provider/google_sign_in.dart';
+import 'package:frontend/src/screens/googleAuthTest.dart';
 import 'package:frontend/src/screens/noticeboardScreen.dart';
+import 'package:provider/provider.dart';
 import './widgets/expandable_button_widget.dart';
 import './screens/loginScreen.dart';
 
@@ -11,12 +14,14 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  var profileName = '';
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: NoticeBoard(),
+    return ChangeNotifierProvider(
+      create: (context) => GoogleSignInProvider(),
+      child: MaterialApp(
+        home: Scaffold(
+          body: Login(),
+        ),
       ),
     );
   }
