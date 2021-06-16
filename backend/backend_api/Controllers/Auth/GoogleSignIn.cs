@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using backend_api.Exceptions.Auth;
 using backend_api.Services.Auth;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
@@ -33,7 +34,7 @@ namespace backend_api.Controllers.Auth
         }
 
         [HttpGet]
-        [Route("GoogleLogin")]
+        [Route("GoogleLoginv1")]
         public IActionResult signIn()
         {
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
@@ -68,22 +69,36 @@ namespace backend_api.Controllers.Auth
             GoogleSignInRequest request = new GoogleSignInRequest(email);
             
             GoogleResponse response = new GoogleResponse();
+            
             try
             {
-                if (_service.checkEmailExists(request).EmailExists)
+                //check if correct domain
+                if (_service.CheckEmailDomain(request).CorrectDomain)
                 {
-                    response.Surname = surname;
-                    response.Email = email;
-                    response.Name = name;
-                    response.Token = token;
-                    response.GivenName = givenName;
+                    //check if email exists in databse, otherwise user must register
+                    if (_service.checkEmailExists(request).EmailExists)
+                    {
+                        response.Surname = surname;
+                        response.Email = email;
+                        response.Name = name;
+                        response.Token = token;
+                        response.GivenName = givenName;
+                    }
+                    else
+                    {
+                        throw new InvalidEmailException("Email does not exist in database");
+                    }
+                }
+                else
+                {
+                    throw new InvalidDomainException("Domain in not part of the retro rabbit workspace");
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-          
+
             return response.json().ToString();
         }
     }
