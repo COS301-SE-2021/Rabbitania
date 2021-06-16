@@ -15,6 +15,7 @@ namespace backend_api.Models.Auth.Responses
         {
             this._emailExists = emailExists;
         }
+        
 
         public bool EmailExists
         {

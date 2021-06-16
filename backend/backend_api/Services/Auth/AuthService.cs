@@ -32,5 +32,24 @@ namespace backend_api.Services.Auth
         {
             this._repository = repository;
         }
+
+        public DomainResponse CheckEmailDomain(GoogleSignInRequest request)
+        {
+            var email = request.Email;
+            var arr = email.Split('@');
+            //TODO: Change to retrorabbit.co.za once we have a test email to work with
+            if (arr[1].Equals("tuks.co.za"))
+            {
+                return new DomainResponse(true);
+            }
+            else
+            {
+                return new DomainResponse(false);
+            }
+            
+        }
+
+        
     }
+    
 }
