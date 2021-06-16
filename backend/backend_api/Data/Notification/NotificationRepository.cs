@@ -28,8 +28,8 @@ namespace backend_api.Data.Notification
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
             var newNot = new Models.Notification.Notification();
-            newNot.NotificationContent = request.NotificationContext;
-            newNot.NotificationType = request.NotificationType;
+            newNot.NotificationPayload = request.Payload;
+            newNot.NotificationType = request.Type;
             newNot.DateCreated = request.DateCreated;
             newNot.UserID = request.UserId;
             

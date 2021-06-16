@@ -43,7 +43,7 @@ namespace backend_api.Services.Notification
             {
                 throw new Exception("UserID is invalid");
             }
-            if (request.NotificationType.Equals(null))
+            if (request.Type.Equals(null))
             {
                 throw new Exception("Invalid Notification Type (Null or empty)");
             }

@@ -10,15 +10,12 @@ namespace backend_api.Models.Notification
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NotificationId { get; set; }
         
-        public string NotificationContent { get; set; }
-        
-        public int NotificationType { get; set; }
-        
+        public string NotificationPayload { get; set; }
+        public NotificationTypeEnum NotificationType { get; set; }
         public DateTime DateCreated { get; set; }
         
         // User ID foreign key
-        [ForeignKey("UserID")] 
+        [ForeignKey("User")] 
         public int UserID { get; set; }
-        
     }
 }
