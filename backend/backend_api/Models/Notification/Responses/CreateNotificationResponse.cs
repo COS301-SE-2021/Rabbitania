@@ -1,18 +1,20 @@
-﻿namespace backend_api.Models.Notification.Responses
+﻿using System.Net;
+
+namespace backend_api.Models.Notification.Responses
 {
     public class CreateNotificationResponse
     {
-        private string _message;
-
-        public CreateNotificationResponse(string message)
+        private HttpStatusCode _httpStatusCode; 
+        
+        public CreateNotificationResponse(HttpStatusCode httpStatusCode)
         {
-            this._message = message;
+            this._httpStatusCode = httpStatusCode;
         }
 
-        public string Message
+        public HttpStatusCode HttpStatusCode
         {
-            get => _message;
-            set => _message = value;
+            get => _httpStatusCode;
+            set => _httpStatusCode = value;
         }
     }
 }
