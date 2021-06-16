@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Notification
 {
@@ -15,15 +17,11 @@ namespace backend_api.Data.Notification
         }
 
         /// <inheritdoc />
-        public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
+        public async Task<List<Models.Notification.Notification>> RetrieveNotifications(RetrieveNotificationRequest request)
         {
             IQueryable<Models.Notification.Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserID == request.UserId);
-            
-            RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
-                "Notification successfully retrieved", retrieveUserNotifications
-            );
-            
-            return response;
+
+            return await retrieveUserNotifications.ToListAsync();
         }
 
         /// <inheritdoc />

@@ -16,10 +16,10 @@ namespace backend_api.Services.Notification
             this._repository = repository;
         }
 
-        public RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request)
+        public async Task<RetrieveNotificationsResponse> RetrieveNotifications(RetrieveNotificationRequest request)
         {
             // No validation for now to test services
-            if (request.UserId is not (0 and >= 0))
+            if (request.UserId.Equals(null))
             {
                 throw new Exception("UserID is invalid");
             }
@@ -28,7 +28,12 @@ namespace backend_api.Services.Notification
                 throw new Exception("UserID is null or empty");
             }
             
-            return _repository.RetrieveNotifications(request);
+            RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
+                "Notification successfully retrieved", await _repository.RetrieveNotifications(request)
+            );
+
+
+            return response;
         }
 
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
