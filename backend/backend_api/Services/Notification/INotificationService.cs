@@ -13,7 +13,7 @@ namespace backend_api.Services.Notification
         /// </summary>
         /// <param name="request"></param>
         /// <returns>List of Notifications for user.</returns>
-        RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request);
+        Task<RetrieveNotificationsResponse> RetrieveNotifications(RetrieveNotificationRequest request);
 
         /// <summary>
         ///     Validates whether or not the request is valid

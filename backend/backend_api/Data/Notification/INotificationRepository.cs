@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 
@@ -11,7 +12,7 @@ namespace backend_api.Data.Notification
         /// </summary>
         /// <param name="request"></param>
         /// <returns> A list of notifications </returns>
-        RetrieveNotificationsResponse RetrieveNotifications(RetrieveNotificationRequest request);
+        Task<List<Models.Notification.Notification>> RetrieveNotifications(RetrieveNotificationRequest request);
 
         /// <summary>
         ///     Creates a new notification for a user
