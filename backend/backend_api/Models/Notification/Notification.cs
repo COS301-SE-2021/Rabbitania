@@ -12,7 +12,8 @@ namespace backend_api.Models.Notification
         
         public string NotificationPayload { get; set; }
         public NotificationTypeEnum NotificationType { get; set; }
-        public DateTime DateCreated { get; set; }
+        
+        public DateTime CreatedDate { get; set; }
         
         // User ID foreign key
         [ForeignKey("User")] 

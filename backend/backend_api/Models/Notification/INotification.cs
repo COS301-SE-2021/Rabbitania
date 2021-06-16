@@ -7,7 +7,7 @@ namespace backend_api.Models.Notification
         int NotificationId { get; set; }
         string NotificationPayload { get; set; }
         NotificationTypeEnum NotificationType { get; set; }
-        DateTime DateCreated { get; set; }
+        DateTime CreatedDate { get; set; }
         int UserID { get; set; }
     }
 }

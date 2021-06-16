@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
@@ -30,13 +31,13 @@ namespace backend_api.Data.Notification
             var newNot = new Models.Notification.Notification();
             newNot.NotificationPayload = request.Payload;
             newNot.NotificationType = request.Type;
-            newNot.DateCreated = request.DateCreated;
+            newNot.CreatedDate = request.DateCreated;
             newNot.UserID = request.UserId;
             
             _context.Notifications.Add(newNot);
             await _context.SaveChanges();
 
-            CreateNotificationResponse response = new CreateNotificationResponse("Successfully created user");
+            CreateNotificationResponse response = new CreateNotificationResponse(HttpStatusCode.Created);
 
             return response;
         }
