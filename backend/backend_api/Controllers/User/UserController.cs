@@ -13,94 +13,66 @@ namespace backend_api.Controllers.User
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService service;
+        private readonly IUserService _service;
         private readonly UserContext _context;
 
-        public UserController(IUserService _service, UserContext context)
+        public UserController(IUserService service, UserContext context)
         {
-            this.service = _service;
+            this._service = service;
             this._context = context;//not needed once other endpoints are configured
         }
-
+        
+        
+        /// <summary>
+        ///     ** FOR ADMINS ONLY
+        ///     API Endpoint to create a new user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Returns either an error or a success response</returns>
         [HttpPost]
-        [Route("CreateUser")]
+        [Route("Admin/CreateUser")]
         public CreateUserResponse CreateUser([FromBody] CreateUserRequest request)
         {
-            return service.CreateUser(request);
+            return _service.CreateUser(request);
         }
 
-        // GET: api/User
+        /// <summary>
+        ///     ** FOR ADMINS ONLY
+        ///     API endpoint to Get all Users in the system
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A list of users in the system</returns>
         [HttpGet]
-        [Route("GetUser")]
+        [Route("Admin/GetUser")]
         public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
         {
             // return await _context.users.ToListAsync();
-            return service.getUser(request);
+            return _service.getUser(request);
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Models.User.User>> GetUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
-        }
-        
         /// <summary>
         ///     API endpoint to edit a users profile.
         /// </summary>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <returns> A response </returns>
         [HttpPut]
         [Route("EditProfile")]
-        public Task<EditProfileResponse> EditProfile([FromBody] EditProfileRequest request)
+        public async Task<EditProfileResponse> EditProfile([FromBody] EditProfileRequest request)
         {
-            return service.EditProfile(request);
+            return await _service.EditProfile(request);
         }
         
+        /// <summary>
+        ///     API endpoint to view a users profile.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> A response </returns>
         [HttpGet]
         [Route("ViewProfile")]
         public ViewProfileResponse ViewProfile([FromQuery] ViewProfileRequest request)
         {
-            return service.ViewProfile(request);
+            return _service.ViewProfile(request);
         }
-
-        // POST: api/User
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Models.User.User>> PostUser(Models.User.User user)
-        {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.UserID }, user);
-        }
-
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.UserID == id);
-        }
+        
     }
 }
