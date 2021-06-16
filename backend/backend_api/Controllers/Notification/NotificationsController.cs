@@ -24,9 +24,9 @@ namespace backend_api.Controllers.Notification
         /// <returns></returns>
         [HttpGet]
         [Route("RetrieveNotifications")]
-        public RetrieveNotificationsResponse RetrieveNotifications([FromQuery] RetrieveNotificationRequest request)
+        public async Task<RetrieveNotificationsResponse> RetrieveNotifications([FromQuery] RetrieveNotificationRequest request)
         {
-            return _service.RetrieveNotifications(request);
+            return await _service.RetrieveNotifications(request);
         }
         
         /// <summary>
