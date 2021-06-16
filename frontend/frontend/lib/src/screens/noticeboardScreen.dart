@@ -4,7 +4,6 @@ import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import '../widgets/card_item.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/models/util_model.dart';
 
 class NoticeBoard extends StatefulWidget {
   createState() {
@@ -26,6 +25,7 @@ class _NoticeBoard extends State<NoticeBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+       leading: const BackButton() ,
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
@@ -37,9 +37,14 @@ class _NoticeBoard extends State<NoticeBoard> {
             ),
           ),
         ),
+        actions: [
+          Icon(Icons.search),
+        ],
       ),
       floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+
+
 
       body:
       Center(
