@@ -11,6 +11,7 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
+  var profileName = '';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
