@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
@@ -11,11 +14,71 @@ class NoticeBoard extends StatefulWidget {
   }
 }
 
+class Notice {
+  final int threadId;
+  final String threadTitle;
+  final String threadContent;
+  final int minLevel;
+  final String imageUrl;
+  final int permittedUserRoles;
+  final int userId;
+
+  Notice({
+    required this.threadId,
+    required this.threadTitle,
+    required this.threadContent,
+    required this.minLevel,
+    required this.imageUrl,
+    required this.permittedUserRoles,
+    required this.userId,
+  });
+
+  factory Notice.fromJson(Map<String, dynamic> json) {
+    return Notice(
+      threadId: json['threadId'],
+      threadTitle: json['threadTitle'],
+      threadContent: json['threadContent'],
+      minLevel: json['minLevel'],
+      imageUrl: json['imageUrl'],
+      permittedUserRoles: json['permittedUserRoles'],
+      userId: json['userId'],
+    );
+  }
+}
+
+Future<Notice> fetchNotice() async {
+  final response = await http.get(Uri.parse("https://localhost:5001/api/NoticeBoard/RetrieveNoticeBoardThreads"));
+
+    if(jsonDecode(response.body) == null)
+    {
+      throw Exception("Failed to receive API JSON object");
+    }
+  log("TEST");
+  print("DOES IT REALLY");
+  print(response);
+  debugPrint(response.toString());
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Notice.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+
 
 
 class _NoticeBoard extends State<NoticeBoard> {
   final util = new UtilModel();
+  late Future<Notice> futureNotice;
 
+  @override
+  void initState() {
+    super.initState();
+    futureNotice = fetchNotice();
+  }
   void next() {
     UtilModel.route(() => ProfileScreen(), context);
   }
@@ -57,7 +120,18 @@ class _NoticeBoard extends State<NoticeBoard> {
              Container(
                 child: NoticeboardCard(),
               ),
-
+            FutureBuilder<Notice>(
+              future: futureNotice,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!.threadTitle);
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // By default, show a loading spinner.
+                return Text(snapshot.data.toString());
+              },
+            )
           ],
         ),
       ),

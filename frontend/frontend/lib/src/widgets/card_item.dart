@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 var list = [
   {"userId": 420,"threadId": 7,"threadTitle": "Stage 4 Wave 3 Level 3","threadContent": "https://news24/lockdownnews","minLevel": 0,"imageUrl": "images/TestImage1.png","permittedUserRoles": 0 },
@@ -14,6 +17,61 @@ var list = [
 
 int like = 0;
 int dislike = 0;
+//
+// Future<http.Response> retrieveNoticeboardThreads() {
+//   return http.get(Uri.parse('https://localhost:5001/api/NoticeBoard/RetrieveNoticeBoardThreads'));
+// }
+//
+// class Notice {
+//   final int threadId;
+//   final String threadTitle;
+//   final String threadContent;
+//   final int minLevel;
+//   final String imageUrl;
+//   final int permittedUserRoles;
+//   final int userId;
+//
+//   Notice({
+//     required this.threadId,
+//     required this.threadTitle,
+//     required this.threadContent,
+//     required this.minLevel,
+//     required this.imageUrl,
+//     required this.permittedUserRoles,
+//     required this.userId,
+//   });
+//
+//   factory Notice.fromJson(Map<String, dynamic> json) {
+//     return Notice(
+//       threadId: json['threadId'],
+//       threadTitle: json['threadTitle'],
+//       threadContent: json['threadContent'],
+//       minLevel: json['minLevel'],
+//       imageUrl: json['imageUrl'],
+//       permittedUserRoles: json['permittedUserRoles'],
+//       userId: json['userId'],
+//     );
+//   }
+// }
+//
+// Future<Notice> fetchAlbum() async {
+//   final response =
+//   await http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+//
+//   if (response.statusCode == 200) {
+//     // If the server did return a 200 OK response,
+//     // then parse the JSON.
+//     return Notice.fromJson(jsonDecode(response.body));
+//   } else {
+//     // If the server did not return a 200 OK response,
+//     // then throw an exception.
+//     throw Exception('Failed to load album');
+//   }
+// }
+
+
+
+
 
 
 class NoticeboardCard extends StatelessWidget {
