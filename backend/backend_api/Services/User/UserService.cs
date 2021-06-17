@@ -45,8 +45,7 @@ namespace backend_api.Services.User
         {
             return _userRepository.CreateUserEmail(userRequest, emailRequest);
         }
-
-
+        
         public Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             if (request.UserId == null)

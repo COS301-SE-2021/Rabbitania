@@ -43,7 +43,7 @@ namespace backend_api.Data.User
             
             _users.Users.Add(newUser);
             _users.SaveChanges();
-
+            
             return new CreateUserResponse("User Successfully Created");
         }
         public CreateEmailResponse CreateUserEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest)
