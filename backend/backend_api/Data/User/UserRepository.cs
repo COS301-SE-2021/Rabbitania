@@ -49,15 +49,6 @@ namespace backend_api.Data.User
             return new CreateUserResponse("User Successfully Created");
         }
 
-        public CreateEmailResponse CreateUserEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest)
-        {
-            UserEmails userEmail = new UserEmails(emailRequest.EmailId, emailRequest.Email, userRequest.UserId);
-            _users.SaveChanges();
-
-            return new CreateEmailResponse("User Email Successfully Created");
-        }
-
-
         public async Task<IEnumerable<Models.User.User>> GetAllUsers()
         {
             var users = _users.Users;

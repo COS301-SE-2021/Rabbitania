@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using backend_api.Models.User.Requests;
 
 namespace backend_api.Models.User
 {
@@ -20,6 +21,12 @@ namespace backend_api.Models.User
              userEmailID = userEmailId;
              this.userEmail = userEmail;
              UserID = userId;
+         }
+
+         public UserEmails(CreateEmailRequest request)
+         {
+             this.userEmail = request.Email;
+             this.UserID = request.UserId;
          }
     }
 }

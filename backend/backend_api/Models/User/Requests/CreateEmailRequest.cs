@@ -2,26 +2,19 @@
 {
     public class CreateEmailRequest
     {
-        //private int _userID;
         private string _email;
-        private int _emailID;
-
-        public CreateEmailRequest(string email, int emailId)
+        private int _userId;
+        
+        public CreateEmailRequest(string email, int userId)
         {
             //_userID = userId;
             _email = email;
-            _emailID = emailId;
+            _userId = userId;
         }
 
         public CreateEmailRequest()
         {
         }
-
-        // public int UserId
-        // {
-        //     get => _userID;
-        //     set => _userID = value;
-        // }
 
         public string Email
         {
@@ -29,10 +22,10 @@
             set => _email = value;
         }
 
-        public int EmailId
+        public int UserId
         {
-            get => _emailID;
-            set => _emailID = value;
+            get => _userId;
+            set => _userId = value;
         }
     }
 }
