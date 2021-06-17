@@ -56,7 +56,7 @@ namespace backend_api.Tests
             var newUserRequest = new CreateUserRequest(userID, name, surname, phone, pinnedIds, userImage,desc, online, admin, empLevel, role, location);
             String email = "hi@castellodev.co.za";
             var emailID = 10;
-            var newEmailRequest = new CreateEmailRequest(newUserRequest.UserId, email, emailID);
+            var newEmailRequest = new CreateEmailRequest(email, emailID);
             
             //Act
             var response1 = _userRepositoryMock.Setup(x => x.CreateUser(newUserRequest));

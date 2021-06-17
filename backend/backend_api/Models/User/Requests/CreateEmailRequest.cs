@@ -2,13 +2,13 @@
 {
     public class CreateEmailRequest
     {
-        private int _userID;
+        //private int _userID;
         private string _email;
         private int _emailID;
 
-        public CreateEmailRequest(int userId, string email, int emailId)
+        public CreateEmailRequest(string email, int emailId)
         {
-            _userID = userId;
+            //_userID = userId;
             _email = email;
             _emailID = emailId;
         }
@@ -17,11 +17,11 @@
         {
         }
 
-        public int UserId
-        {
-            get => _userID;
-            set => _userID = value;
-        }
+        // public int UserId
+        // {
+        //     get => _userID;
+        //     set => _userID = value;
+        // }
 
         public string Email
         {
