@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
@@ -22,6 +23,7 @@ class Notice {
   final String imageUrl;
   final int permittedUserRoles;
   final int userId;
+
 
   Notice({
     required this.threadId,
@@ -47,25 +49,24 @@ class Notice {
 }
 
 Future<Notice> fetchNotice() async {
-  final response = await http.get(Uri.parse("https://localhost:5001/api/NoticeBoard/RetrieveNoticeBoardThreads"));
 
-    if(jsonDecode(response.body) == null)
-    {
-      throw Exception("Failed to receive API JSON object");
-    }
-  log("TEST");
-  print("DOES IT REALLY");
-  print(response);
-  debugPrint(response.toString());
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Notice.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
-  }
+    HttpClient client = new HttpClient();
+    client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+
+    String url ='http://10.0.2.2:5000/api/NoticeBoard/RetrieveNoticeBoardThreads';
+    //Map map = { "email" : "email" , "password" : "password" };
+    HttpClientRequest request = await client.getUrl(Uri.parse(url));
+
+    request.headers.set('content-type', 'application/json');
+    //request.add(utf8.encode(json.encode(map)));
+
+    HttpClientResponse response1 = await request.close();
+    String reply = await response1.transform(utf8.decoder).join();
+    print(reply);
+    print(jsonDecode(reply));
+
+    return Notice.fromJson(jsonDecode(reply));
+
 }
 
 
