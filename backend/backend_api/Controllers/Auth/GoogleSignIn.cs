@@ -37,16 +37,16 @@ namespace backend_api.Controllers.Auth
         }
         
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("GoogleLoginv1")]
         public IActionResult signIn()
         {
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }
+        }*/
 
         [HttpGet]
-        [Route("GoogleLoginResponse")]
+        [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
         {
             //Task<String>
