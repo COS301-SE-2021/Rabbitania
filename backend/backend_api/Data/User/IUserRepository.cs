@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
+using Newtonsoft.Json.Linq;
 
 namespace backend_api.Data.User
 {
@@ -29,6 +30,8 @@ namespace backend_api.Data.User
         CreateEmailResponse CreateUserEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest);
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
+
+        Task<Models.User.User> GetExistingUserDetails(GoogleSignInRequest request);
         bool checkEmailExists(GoogleSignInRequest request);
     }
 }
