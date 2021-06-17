@@ -4,6 +4,7 @@
     {
         Pretoria,
         Braamfontein,
-        Kampala
+        Kampala,
+        Unassigned
     }
 }

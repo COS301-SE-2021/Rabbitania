@@ -15,6 +15,11 @@ namespace backend_api.Models.User
          [ForeignKey("User")] 
          public int UserId { get; set; }
          public User User { get; set; }
-         
+
+         public UserEmails(string email, int userId)
+         {
+             UserEmail = email;
+             UserId = userId;
+         }
     }
 }
