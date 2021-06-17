@@ -14,5 +14,12 @@ namespace backend_api.Models.User
          [ForeignKey("User")] 
          public int UserID { get; set; }
          public User User { get; set; }
+
+         public UserEmails(int userEmailId, string userEmail, int userId)
+         {
+             userEmailID = userEmailId;
+             this.userEmail = userEmail;
+             UserID = userId;
+         }
     }
 }

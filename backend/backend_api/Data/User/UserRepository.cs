@@ -10,6 +10,7 @@ using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
+using CreateEmailRequest = backend_api.Models.User.Requests.CreateEmailRequest;
 
 namespace backend_api.Data.User
 {
@@ -37,11 +38,20 @@ namespace backend_api.Data.User
             Models.User.User newUser = new Models.User.User(request.UserId, request.FirstName, request.LastName,
                 request.PhoneNumber, request.PinnedUserIds, request.UserImage, request.UserDescription,
                 request.IsOnline, request.IsAdmin, request.EmployeeLevel, request.UserRole, request.OfficeLocation);
-
+            
+            //TODO: User's email should also be added to the repo
+            
             _users.Users.Add(newUser);
             _users.SaveChanges();
-
+            
             return new CreateUserResponse("User Successfully Created");
+        }
+        public CreateEmailResponse CreateUserEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest)
+        {
+            UserEmails userEmail = new UserEmails(emailRequest.EmailId, emailRequest.Email, userRequest.UserId);
+            _users.SaveChanges();
+
+            return new CreateEmailResponse("User Email Successfully Created");
         }
         
         

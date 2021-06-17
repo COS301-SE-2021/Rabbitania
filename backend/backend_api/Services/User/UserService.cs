@@ -9,7 +9,6 @@ namespace backend_api.Services.User
     public class UserService: IUserService
     {
         private readonly IUserRepository _userRepository;
-        
 
         public UserService(IUserRepository userRepo)
         {
@@ -42,7 +41,11 @@ namespace backend_api.Services.User
             return response;
         }
 
-
+        public CreateEmailResponse CreateEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest)
+        {
+            return _userRepository.CreateUserEmail(userRequest, emailRequest);
+        }
+        
         public Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             if (request.UserId == null)
