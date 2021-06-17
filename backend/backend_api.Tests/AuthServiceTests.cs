@@ -15,11 +15,15 @@ namespace backend_api.Tests
 {
     public class AuthUniTests
     {
-        private AuthService _authService;
+        private readonly AuthService _authService;
         private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
-
+        public AuthUniTests()
+        {
+            _authService = new AuthService(_userRepositoryMock.Object);
+        }
+        
         [Fact]
-        public void invalidDomainLogin()
+        public void InvalidDomainLogin()
         {
             //Arrange
             String email = "test@gmail.com";
@@ -35,14 +39,12 @@ namespace backend_api.Tests
         [Fact]
         public void invalidEmailLogin()
         {
+            
             String email = "hi@castellodev.co.za";
             
         }
         //TODO: Check why I get a TestClassException error
-        public AuthUniTests(AuthService authService)
-        {
-            _authService = new AuthService(_userRepositoryMock.Object);
-        }
+        
     }
     
 }

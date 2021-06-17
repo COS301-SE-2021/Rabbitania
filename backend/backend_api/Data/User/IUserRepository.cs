@@ -13,7 +13,7 @@ namespace backend_api.Data.User
 
         Task<List<Models.User.User>> GetUser(String firstname, String lastname);
 
-        public CreateUserResponse CreateUser(CreateUserRequest request);
+        CreateUserResponse CreateUser(CreateUserRequest request);
         
         Task<IEnumerable<Models.User.User>> GetAllUsers();
         
@@ -26,6 +26,7 @@ namespace backend_api.Data.User
         // Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID);
         
         // Task<int> SaveChanges();
+        CreateEmailResponse CreateUserEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest);
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
         bool checkEmailExists(GoogleSignInRequest request);
