@@ -70,7 +70,7 @@ class NoticeboardCard extends StatelessWidget {
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
-                          //Image.asset(item.imageUrl),
+                          Image.asset(iter.current.imageUrl),
                           ButtonBar(
                             alignment: MainAxisAlignment.start,
                             children: [
