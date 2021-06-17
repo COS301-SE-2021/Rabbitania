@@ -19,7 +19,6 @@ namespace backend_api.Services.User
         */
         CreateUserResponse CreateUser(CreateUserRequest request);
         GetUserResponse getUser(GetUserRequest request);
-        CreateEmailResponse CreateEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest);
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 

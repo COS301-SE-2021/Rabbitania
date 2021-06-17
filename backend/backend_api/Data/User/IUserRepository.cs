@@ -20,15 +20,6 @@ namespace backend_api.Data.User
         
         ViewProfileResponse ViewProfile(ViewProfileRequest request);
 
-        // Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
-        //
-        // Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User user);
-        //
-        // Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID);
-        
-        // Task<int> SaveChanges();
-        CreateEmailResponse CreateUserEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest);
-
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
         Task<Models.User.User> GetExistingUserDetails(GoogleSignInRequest request);

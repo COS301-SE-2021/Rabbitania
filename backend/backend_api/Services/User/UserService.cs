@@ -43,14 +43,9 @@ namespace backend_api.Services.User
             return response;
         }
 
-        public CreateEmailResponse CreateEmail(CreateUserRequest userRequest, CreateEmailRequest emailRequest)
-        {
-            return _userRepository.CreateUserEmail(userRequest, emailRequest);
-        }
-        
         public Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
-            if (request.UserId == null)
+            if (request.UserId.Equals(null))
             {
                 throw new Exception("Error missing UserID");
             }
@@ -61,7 +56,7 @@ namespace backend_api.Services.User
         public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
 
-            if (request.UserId == null)
+            if (request.UserId.Equals(null))
             {
                 throw new Exception("UserID Missing");
             }
