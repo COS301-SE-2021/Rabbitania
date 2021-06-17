@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/login_fab.dart';
 import '../models/util_model.dart';
+import 'googleAuthTest.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -42,7 +44,20 @@ class _loginState extends State<Login> {
             ),
             height: 300,
             width: 300,
-            child: LoginFab(),
+            child: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    //where http is done
+                    return Test();
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Something went wrong'));
+                  } else {
+                    return LoginFab();
+                  }
+                }),
           ),
         ),
       );

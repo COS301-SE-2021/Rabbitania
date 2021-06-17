@@ -26,6 +26,7 @@ class _loginState extends State<LoginFab> {
         provider.googleLogin();
       },
       child: Container(
+        alignment: Alignment.center,
         height: 200,
         width: 180,
         padding: EdgeInsets.all(16),
