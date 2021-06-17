@@ -12,9 +12,9 @@ namespace backend_api.Data.User
     {
         Task<List<Models.User.User>> GetUser(int userID);
 
-        Task<List<Models.User.User>> GetUser(String firstname, String lastname);
+        Task<List<Models.User.User>> GetUser(String name);
 
-        CreateUserResponse CreateUser(CreateUserRequest request);
+        Task<CreateUserResponse> CreateUser(GoogleSignInRequest request);
         
         Task<IEnumerable<Models.User.User>> GetAllUsers();
         

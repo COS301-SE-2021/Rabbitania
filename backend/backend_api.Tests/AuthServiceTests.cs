@@ -12,7 +12,7 @@ using Moq;
 using Xunit;
 using Xunit.Sdk;
 
-namespace backend_api.Tests
+/*namespace backend_api.Tests
 {
     public class AuthUniTests
     {
@@ -70,4 +70,4 @@ namespace backend_api.Tests
         
     }
     
-}
+}*/

@@ -8,25 +8,13 @@ namespace backend_api.Models.User
     {
          [Key]
          [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-         public int userEmailID { get; set; }
+         public int UserEmailId { get; set; }
 
-         public string userEmail { get; set; }
+         public string UserEmail { get; set; }
          
          [ForeignKey("User")] 
-         public int UserID { get; set; }
+         public int UserId { get; set; }
          public User User { get; set; }
-
-         public UserEmails(int userEmailId, string userEmail, int userId)
-         {
-             userEmailID = userEmailId;
-             this.userEmail = userEmail;
-             UserID = userId;
-         }
-
-         public UserEmails(CreateEmailRequest request)
-         {
-             this.userEmail = request.Email;
-             this.UserID = request.UserId;
-         }
+         
     }
 }

@@ -17,7 +17,7 @@ namespace backend_api.Services.User
         * @param req GetUserRequest object which reads a token and adds the data to its variables.
         * @return Returns a response containing a GetUserResponse object which contains getters for each attribute of the user (details obtained from GetUserRequest object).
         */
-        CreateUserResponse CreateUser(CreateUserRequest request);
+        Task<CreateUserResponse> CreateUser(GoogleSignInRequest request);
         GetUserResponse getUser(GetUserRequest request);
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);

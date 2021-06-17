@@ -29,10 +29,11 @@ namespace backend_api.Controllers.Auth
     public class GoogleSignIn : ControllerBase
     {
         private readonly IAuthService _service;
-
-        public GoogleSignIn(IAuthService service)
+        private readonly IUserService _userService;
+        public GoogleSignIn(IAuthService service, IUserService userService)
         {
             this._service = service;
+            this._userService = userService;
         }
         
 
@@ -87,9 +88,12 @@ namespace backend_api.Controllers.Auth
                         //user exists, return missing info as json object
                         return Ok(json);
                     }
-                    else//user doesn't exist and needs to be thrown
+                    else //user doesn't exist and needs to be thrown
                     {
-                        //user email needs to be added
+                        // user needs to be added as they are a valid retro rabbit employee
+                        // but are not in the system yet.
+                        _userService.CreateUser(request);
+                        
                         throw new InvalidEmailException("Email does not exist in database");
                     }
                 }

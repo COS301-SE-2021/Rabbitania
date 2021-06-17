@@ -53,12 +53,12 @@ namespace backend_api.Services.Auth
         {
             var user = _repository.GetExistingUserDetails(request).Result;
             JObject json = new JObject(
-                new JProperty("description", user.userDescription),
-                new JProperty("pinnedIDs", user.pinnedUserIDs.ToArray()),
-                new JProperty("admin", user.isAdmin),
-                new JProperty("role", user.userRole.ToString()),
-                new JProperty("empLevel", user.employeeLevel),
-                new JProperty("office", user.officeLocation.ToString()));
+                new JProperty("description", user.UserDescription),
+                new JProperty("pinnedIDs", user.PinnedUserIds.ToArray()),
+                new JProperty("admin", user.IsAdmin),
+                new JProperty("role", user.UserRole.ToString()),
+                new JProperty("empLevel", user.EmployeeLevel),
+                new JProperty("office", user.OfficeLocation.ToString()));
 
             return json;
         }

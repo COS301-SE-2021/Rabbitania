@@ -23,9 +23,9 @@ namespace backend_api.Services.User
             
         }
 
-        public CreateUserResponse CreateUser(CreateUserRequest request)
+        public async Task<CreateUserResponse> CreateUser(GoogleSignInRequest request)
         {
-            return _userRepository.CreateUser(request);
+            return await _userRepository.CreateUser(request);
         }
 
         public GetUserResponse getUser(GetUserRequest request)
@@ -34,12 +34,12 @@ namespace backend_api.Services.User
             //JsonWebToken token = request.getToken();
             //String email = token.getEmail();
 
-            String firstname = request.getName();
-            String lastname = request.getSurname();
+            String name = request.getName();
+           
             //search for user
-            Models.User.User user = _userRepository.GetUser(firstname, lastname).Result[0];
+            Models.User.User user = _userRepository.GetUser(name).Result[0];
             
-            GetUserResponse response = new GetUserResponse(user, firstname, lastname, user.employeeLevel, user.isAdmin, user.userDescription, user.UserID, user.phoneNumber, user.userRole, user.userImage, user.officeLocation, user.pinnedUserIDs);
+            GetUserResponse response = new GetUserResponse(user, name, user.EmployeeLevel, user.IsAdmin, user.UserDescription, user.UserId, user.PhoneNumber, user.UserRole, user.UserImgUrl, user.OfficeLocation, user.PinnedUserIds);
             return response;
         }
 
