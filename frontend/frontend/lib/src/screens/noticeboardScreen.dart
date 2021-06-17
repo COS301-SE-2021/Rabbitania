@@ -75,9 +75,19 @@ Future<NoticeBoardThreads> fetchNotice() async {
 
     print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList);
     print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
-    print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
+
+
+    var test = (NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
+    print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    print(test);
+    print(jsonEncode(test));
+
+    print(Thread.fromJson(test).threadId);
+
+
 
     return NoticeBoardThreads.fromJson(jsonDecode(reply));
+
 }
 
 class _NoticeBoard extends State<NoticeBoard> {
