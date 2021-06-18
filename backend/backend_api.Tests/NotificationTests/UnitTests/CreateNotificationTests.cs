@@ -27,7 +27,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             _mockedDate = new DateTime();
         }
         
-        [Fact(DisplayName = "When a new notification is created, it should return HttpStatus 201")]
+        [Fact(DisplayName = "When a new notification is created, it should return HttpStatusCode 201")]
         public async Task CreateNotification_ShouldReturnCreatedStatusCodeAsync()
         {
             // Arrange
