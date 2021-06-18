@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Data.User;
+using backend_api.Exceptions.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using backend_api.Models.User;
@@ -37,56 +38,74 @@ namespace backend_api.Tests.Auth
             Assert.NotNull(response);
             Assert.IsType<DomainResponse>(response);
         }
-        //TODO: finish test
+        
         [Fact(DisplayName = "Should throw an exception for an invalid email in the database")]
-        public async Task invalidEmailLogin()
+        public void InvalidEmailLogin()
         {
-            /*
-                // Arrange
-                var requestDto = new CreateNotificationRequest(
-                    "Notification Test",
-                    NotificationTypeEnum.Email,
-                    this._mockedDate,
-                    1
-                );
-                var responseDto = new CreateNotificationResponse(HttpStatusCode.Created);
-
-                _notificationRepoMock.Setup(n => n.CreateNotification(requestDto)).ReturnsAsync(responseDto);
-
-                // Act
-                var createdNotification = await _sut.CreateNotification(requestDto);
-
-                // Assert
-                Assert.Equal(responseDto, createdNotification);
-            }*/
             //Arrange
-            int userID = 50;
-            var name = "unit";
-            var surname = "test";
-            var phone = 1234567890;
-            var pinnedIds = new List<int>(){1,2};
-            var userImage = "test.png";
-            var desc = "test description";
-            var online = true;
-            var admin = false;
-            var empLevel = 4;
-            UserRoles role = UserRoles.Developer;
-            OfficeLocation location = OfficeLocation.Pretoria;
-            var newUserRequest = new CreateUserRequest(userID, name, surname, phone, pinnedIds, userImage,desc, online, admin, empLevel, role, location);
-            String email = "hi@castellodev.co.za";
+            // int userID = 50;
+            // var name = "unit";
+            // var surname = "test";
+            // var phone = 1234567890;
+            // var pinnedIds = new List<int>(){1,2};
+            // var userImage = "test.png";
+            // var desc = "test description";
+            // var online = true;
+            // var admin = false;
+            // var empLevel = 4;
+            // UserRoles role = UserRoles.Developer;
+            // OfficeLocation location = OfficeLocation.Pretoria;
+            // var newUserRequest = new CreateUserRequest(userID, name, surname, phone, pinnedIds, userImage,desc, online, admin, empLevel, role, location);
+            var email = "hi@castellodev.co.za";
             var emailID = 10;
-            var newEmailRequest = new CreateEmailRequest(email, emailID);
-            
+            var displayName = "unit test";
+            var image = "unitTest.png";
+            var phone = "1234567890";
+           
+            var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
+            var request2 = new GoogleSignInRequest("check", "check@castellodev.co.za", "1234567899", "test.png");
+           
+            _userRepositoryMock.Setup(x => x.CreateUser(signInRequest));
+
             //Act
-            var response1 = _userRepositoryMock.Setup(x => x.CreateUser(newUserRequest));
-            var response2 = _userRepositoryMock.Setup(x => x.CreateUserEmail(newUserRequest, newEmailRequest));
-            
+            var response = _authService.checkEmailExists(request2);
             //Assert
-            Assert.IsType<LoginResponse>(response2);
+            Assert.IsType<LoginResponse>(response);
+            Assert.Equal(false,response.EmailExists);
 
         }
-        //TODO: Check why I get a TestClassException error
-        
+
+        [Fact(DisplayName = "If the email is null, a null email exception is thrown")]
+        public void CheckNullEmail()
+        {
+            //Arrange
+            var request = new GoogleSignInRequest("check", null, "1234567899", "test.png");
+            //Act
+            
+            //Assert
+            Assert.Throws<NullEmailException>(() => _authService.checkEmailExists(request));
+        }
+
+        [Fact(DisplayName = "Should be true if the user already exists in the system")]
+        public void CheckCorrectEmail()
+        {
+            //Arrange
+            var email = "hi@castellodev.co.za";
+            var emailID = 10;
+            var displayName = "unit test";
+            var image = "unitTest.png";
+            var phone = "1234567890";
+           
+            var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
+            var request2 = new GoogleSignInRequest("check", "hi@castellodev.co.za", "1234567899", "test.png");
+            _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).Verifiable();
+            
+            //Act
+            var response = _authService.checkEmailExists(request2);
+            //Assert
+            Assert.IsType<LoginResponse>(response);
+            Assert.True(response.EmailExists);
+        }
     }
 }
 }

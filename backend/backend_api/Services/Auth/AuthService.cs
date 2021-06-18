@@ -1,5 +1,6 @@
 ﻿using System;
 using backend_api.Data.User;
+using backend_api.Exceptions.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using Newtonsoft.Json.Linq;
@@ -16,7 +17,7 @@ namespace backend_api.Services.Auth
             String email = request.Email;
             if (email == null)
             {
-                throw new Exception("User Email Missing");
+                throw new NullEmailException("User Email Missing");
             }
             //Checks if email received by request is in the UserEmails repo
             if (_repository.checkEmailExists(request))
