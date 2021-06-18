@@ -27,7 +27,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             _mockedDate = new DateTime();
         }
         
-        [Fact]
+        [Fact(DisplayName = "When a new notification is created, it should return HttpStatus 201")]
         public async Task CreateNotification_ShouldReturnCreatedStatusCodeAsync()
         {
             // Arrange
@@ -49,7 +49,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
         }
         
         
-        [Fact]
+        [Fact(DisplayName = "When payload is empty, CreateNotification should throw an InvalidPayloadException")]
         public async Task CreateNotification_ShouldThrowExceptionWhenPayloadIsEmptyAsync()
         {
             // Arrange
@@ -61,13 +61,13 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             );
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            var exception = await Assert.ThrowsAsync<InvalidPayloadException>(() => _sut.CreateNotification(requestDto));
             
             // Assert
             Assert.Equal("Payload cannot be null or empty", exception.Message);
         } 
         
-        [Fact]
+        [Fact(DisplayName = "When payload is null, CreateNotification should throw an InvalidPayloadException")]
         public async Task CreateNotification_ShouldThrowExceptionWhenPayloadIsNullAsync()
         {
             // Arrange
@@ -79,13 +79,13 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             );
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            var exception = await Assert.ThrowsAsync<InvalidPayloadException>(() => _sut.CreateNotification(requestDto));
             
             // Assert
             Assert.Equal("Payload cannot be null or empty", exception.Message);
         }
         
-        [Fact]
+        [Fact(DisplayName = "When a UserId is zero, CreateNotification should throw an InvalidUserIdException")]
         public async Task CreateNotification_ShouldThrowExceptionWhenUserIdIsZeroAsync()
         {
             // Arrange
@@ -97,13 +97,13 @@ namespace backend_api.Tests.NotificationTests.UnitTests
                 );
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            var exception = await Assert.ThrowsAsync<InvalidUserIdException>(() => _sut.CreateNotification(requestDto));
             
             // Assert
             Assert.Equal("UserID is invalid", exception.Message);
         }
         
-        [Fact]
+        [Fact(DisplayName = "When UserId is negative, CreateNotification should throw an InvalidUserIdException")]
         public async Task CreateNotification_ShouldThrowExceptionWhenUserIdIsLessThanZeroAsync()
         {
             // Arrange
@@ -115,7 +115,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             );
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            var exception = await Assert.ThrowsAsync<InvalidUserIdException>(() => _sut.CreateNotification(requestDto));
             
             // Assert
             Assert.Equal("UserID is invalid", exception.Message);

@@ -19,7 +19,10 @@ namespace backend_api.Services.Notification
 
         public async Task<RetrieveNotificationsResponse> RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            // No validation for now to test services
+            if (request == null)
+            {
+                return null;
+            }
             if (request.UserId.Equals(null))
             {
                 throw new InvalidNotificationRequestException("UserID is null or empty");
@@ -39,14 +42,17 @@ namespace backend_api.Services.Notification
 
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
-            Console.WriteLine(request.UserId);
+            if (request == null)
+            {
+                throw new InvalidNotificationRequestException("Invalid CreateNotificationRequest object");
+            }
             if (request.UserId is 0 or < 0)
             {
-                throw new InvalidNotificationRequestException("UserID is invalid");
+                throw new InvalidUserIdException("UserID is invalid");
             }
             if (string.IsNullOrEmpty(request.Payload))
             {
-                throw new InvalidNotificationRequestException("Payload cannot be null or empty");
+                throw new InvalidPayloadException("Payload cannot be null or empty");
             }
 
             return await _repository.CreateNotification(request);
