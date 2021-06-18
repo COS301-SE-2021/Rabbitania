@@ -21,5 +21,10 @@ namespace backend_api.Models.User
              UserEmail = email;
              UserId = userId;
          }
+
+         public UserEmails()
+         {
+             
+         }
     }
 }
