@@ -10,6 +10,8 @@ using backend_api.Models.User.Requests;
 using backend_api.Services.Auth;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace backend_api.Tests.Auth
 {
@@ -19,9 +21,11 @@ namespace backend_api.Tests.Auth
     {
         private readonly AuthService _authService;
         private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
-        public AuthUniTests()
+        private readonly ITestOutputHelper outHelper;
+        public AuthUniTests(ITestOutputHelper outHelp)
         {
             _authService = new AuthService(_userRepositoryMock.Object);
+            this.outHelper = outHelp;
         }
         
         [Fact]
@@ -117,7 +121,6 @@ namespace backend_api.Tests.Auth
         {
             //Arrange
             var email = "hi@castellodev.co.za";
-            var emailID = 10;
             var displayName = "unit test";
             var image = "unitTest.png";
             var phone = "1234567890";
@@ -129,6 +132,8 @@ namespace backend_api.Tests.Auth
                 "1234567899", 
                 "test.png");
             _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).Verifiable();
+            var user = _authService.GetUser(signInRequest).ToString();
+            outHelper.WriteLine("This is output from {0}",user); 
             
             //Act
             var response = _authService.checkEmailExists(request2);

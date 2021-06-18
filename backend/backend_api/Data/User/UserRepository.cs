@@ -36,7 +36,6 @@ namespace backend_api.Data.User
 
         public async Task<CreateUserResponse> CreateUser(GoogleSignInRequest request)
         {
-            
             var newUser = new Models.User.User();
             newUser.Name = request.DisplayName;
             newUser.PhoneNumber = request.PhoneNumber;
@@ -47,7 +46,7 @@ namespace backend_api.Data.User
             newUser.EmployeeLevel = 0;
             newUser.UserRole = UserRoles.Unassigned;
             newUser.OfficeLocation = OfficeLocation.Unassigned;
-            
+
             var newEmail = new UserEmails(request.Email, newUser.UserId);
             _users.UserEmail.Add(newEmail);
 
@@ -68,7 +67,7 @@ namespace backend_api.Data.User
         public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
             var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
-            
+
             var name = "";
             var userImage = "";
             var description = "";
