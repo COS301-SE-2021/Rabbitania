@@ -32,7 +32,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
         {
             // Arrange
             var requestDto = new CreateNotificationRequest(
-                    "Notification Test",
+                "Notification Test",
                     NotificationTypeEnum.Email,
                     this._mockedDate,
                     1
