@@ -5,40 +5,46 @@ namespace backend_api.Models.Auth.Requests
 {
     public class GoogleSignInRequest
     {
-        private String _jwt;
-        private String _name;
-        private String _email;
-
+        private string _displayName;
+        private string _email;
+        private string _phoneNumber;
+        private string _googleImgUrl;
+        
         public GoogleSignInRequest()
         {
             
         }
 
-        public GoogleSignInRequest(String email)
+        public GoogleSignInRequest(string displayName, string email, string phoneNumber, string googleImgUrl)
         {
+            this._displayName = displayName;
             this._email = email;
-        }
-        public GoogleSignInRequest(String jwt, String email, String name)
-        {
-            this._jwt = jwt;
-            this._name = name;
-            this._email = email;
+            this._phoneNumber = phoneNumber;
+            this._googleImgUrl = googleImgUrl;
         }
 
-        public String Jwt
+        public string DisplayName
         {
-            get => _jwt;
-            set => _jwt = value;
+            get => _displayName;
+            set => _displayName = value;
         }
-        public String Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-        public String Email
+
+        public string Email
         {
             get => _email;
             set => _email = value;
+        }
+
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set => _phoneNumber = value;
+        }
+
+        public string GoogleImgUrl
+        {
+            get => _googleImgUrl;
+            set => _googleImgUrl = value;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
+using Newtonsoft.Json.Linq;
 
 namespace backend_api.Data.User
 {
@@ -11,23 +12,17 @@ namespace backend_api.Data.User
     {
         Task<List<Models.User.User>> GetUser(int userID);
 
-        Task<List<Models.User.User>> GetUser(String firstname, String lastname);
+        Task<List<Models.User.User>> GetUser(String name);
 
-        public CreateUserResponse CreateUser(CreateUserRequest request);
+        Task<CreateUserResponse> CreateUser(GoogleSignInRequest request);
         
         Task<IEnumerable<Models.User.User>> GetAllUsers();
         
         ViewProfileResponse ViewProfile(ViewProfileRequest request);
 
-        // Task<IAsyncEnumerable<Models.User.User>> AddUser(Models.User.User user);
-        //
-        // Task<IAsyncEnumerable<Models.User.User>> UpdateUser(Models.User.User user);
-        //
-        // Task<IAsyncEnumerable<Models.User.User>> DeleteUser(int userID);
-        
-        // Task<int> SaveChanges();
-
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
+
+        Task<Models.User.User> GetExistingUserDetails(GoogleSignInRequest request);
         bool checkEmailExists(GoogleSignInRequest request);
     }
 }

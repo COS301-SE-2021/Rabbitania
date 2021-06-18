@@ -21,20 +21,6 @@ namespace backend_api.Controllers.User
             this._service = service;
             this._context = context;//not needed once other endpoints are configured
         }
-        
-        
-        /// <summary>
-        ///     ** FOR ADMINS ONLY
-        ///     API Endpoint to create a new user
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns>Returns either an error or a success response</returns>
-        [HttpPost]
-        [Route("Admin/CreateUser")]
-        public CreateUserResponse CreateUser([FromBody] CreateUserRequest request)
-        {
-            return _service.CreateUser(request);
-        }
 
         /// <summary>
         ///     ** FOR ADMINS ONLY

@@ -10,6 +10,7 @@
         CAM,
         Director,
         Graduate,
-        Intern
+        Intern,
+        Unassigned
     }
 }

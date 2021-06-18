@@ -6,20 +6,18 @@ namespace backend_api.Models.User
 {
     public class User
     {
-        public User(int userId, string firstname, string lastname, int phoneNumber, List<int> pinnedUserIDs, string userImage, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        public User(int userId, string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
         {
-            UserID = userId;
-            this.firstname = firstname;
-            this.lastname = lastname;
-            this.phoneNumber = phoneNumber;
-            this.pinnedUserIDs = pinnedUserIDs;
-            this.userImage = userImage;
-            this.userDescription = userDescription;
-            this.isOnline = isOnline;
-            this.isAdmin = isAdmin;
-            this.employeeLevel = employeeLevel;
-            this.userRole = userRole;
-            this.officeLocation = officeLocation;
+            UserId = userId;
+            this.Name = name;
+            this.PhoneNumber = phoneNumber;
+            this.PinnedUserIds = pinnedUserIds;
+            this.UserImgUrl = userImgUrl;
+            this.UserDescription = userDescription;
+            this.IsAdmin = isAdmin;
+            this.EmployeeLevel = employeeLevel;
+            this.UserRole = userRole;
+            this.OfficeLocation = officeLocation;
         }
 
         public User()
@@ -28,33 +26,30 @@ namespace backend_api.Models.User
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         
         //public string email { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        
-        public int phoneNumber { get; set; }
-        
-        public List<int> pinnedUserIDs { get; set; }
-        
-        public string userImage { get; set; }
-        
-        public string userDescription { get; set; }
-        
-        public bool isOnline { get; set; }
+        public string Name { get; set; }
 
-        public bool isAdmin { get; set; }
-
-        public int employeeLevel { get; set; }
+        public string PhoneNumber { get; set; }
         
-        public UserRoles userRole { get; set; }//corresponds to UserRoles enum
+        public List<int> PinnedUserIds { get; set; }
+        
+        public string UserImgUrl { get; set; }
+        
+        public string UserDescription { get; set; }
 
-        public OfficeLocation officeLocation { get; set; }
+        public bool IsAdmin { get; set; }
+
+        public int EmployeeLevel { get; set; }
+        
+        public UserRoles UserRole { get; set; }//corresponds to UserRoles enum
+
+        public OfficeLocation OfficeLocation { get; set; }
 
         public override string ToString()
         {
-            return UserID.ToString() + " " + firstname + " " + lastname;
+            return UserId.ToString() + " " + Name;
         }
     }
 }
