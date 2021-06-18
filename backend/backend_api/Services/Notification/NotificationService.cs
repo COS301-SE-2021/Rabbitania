@@ -19,17 +19,16 @@ namespace backend_api.Services.Notification
 
         public async Task<RetrieveNotificationsResponse> RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            // No validation for now to test services
-            if (request.UserId.Equals(null))
+            if (request == null)
             {
-                throw new InvalidNotificationRequestException("UserID is null or empty");
+                throw new InvalidNotificationRequestException("Invalid RetrieveNotificationRequest object");
             }
-            if (request.UserId <= 0)
+            if (request.UserId is 0 or < 0)
             {
-                throw new InvalidNotificationRequestException("UserID is invalid");
+                throw new InvalidUserIdException("UserID is invalid");
             }
             
-            RetrieveNotificationsResponse response = new RetrieveNotificationsResponse(
+            var response = new RetrieveNotificationsResponse(
                 await _repository.RetrieveNotifications(request)
             );
 
@@ -39,14 +38,17 @@ namespace backend_api.Services.Notification
 
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
-            Console.WriteLine(request.UserId);
-            if (request.UserId.Equals(null) || request.UserId < 0)
+            if (request == null)
             {
-                throw new InvalidNotificationRequestException("UserID is invalid");
+                throw new InvalidNotificationRequestException("Invalid CreateNotificationRequest object");
             }
-            if (request.Type.Equals(null))
+            if (request.UserId is 0 or < 0)
             {
-                throw new InvalidNotificationRequestException("Invalid Notification Type (Null or empty)");
+                throw new InvalidUserIdException("UserID is invalid");
+            }
+            if (string.IsNullOrEmpty(request.Payload))
+            {
+                throw new InvalidPayloadException("Payload cannot be null or empty");
             }
 
             return await _repository.CreateNotification(request);
