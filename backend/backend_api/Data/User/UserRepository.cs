@@ -120,9 +120,9 @@ namespace backend_api.Data.User
             return response;
         }
 
-        public bool checkEmailExists(GoogleSignInRequest request)
+        public async Task<bool> checkEmailExists(GoogleSignInRequest request)
         {
-            var userEmail = _users.UserEmail.Where(x => x.UserEmail == request.Email);
+            var userEmail = await _users.UserEmail.Where(x => x.UserEmail == request.Email).ToListAsync();
             //Check if IQueryable returns something
             if (userEmail.Any())
             {

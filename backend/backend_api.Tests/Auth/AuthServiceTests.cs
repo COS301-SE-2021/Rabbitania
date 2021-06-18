@@ -23,10 +23,30 @@ namespace backend_api.Tests.Auth
         private readonly AuthService _authService;
         private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
         private readonly ITestOutputHelper outHelper;
+        private readonly User _mockedUser;
+        private readonly UserEmails _mockedEmail;
         public AuthUniTests(ITestOutputHelper outHelp)
         {
             _authService = new AuthService(_userRepositoryMock.Object);
             this.outHelper = outHelp;
+            
+            this._mockedUser = new User(
+                50,
+                "Unit Tests",
+                "0834758854",
+                new List<int>(){1},
+                "www.google/test.png",
+                "This is a Unit Test",
+                true,
+                1,
+                UserRoles.Unassigned,
+                OfficeLocation.Unassigned
+            );
+
+            this._mockedEmail = new UserEmails("test@castellodev.co.za", 50);
+            
+            
+
         }
         
         [Fact]
@@ -62,29 +82,13 @@ namespace backend_api.Tests.Auth
         }
         
         [Fact(DisplayName = "Should throw an exception for an invalid email in the database")]
-        public void InvalidEmailLogin()
+        public async Task InvalidEmailLogin()
         {
             //Arrange
-            // int userID = 50;
-            // var name = "unit";
-            // var surname = "test";
-            // var phone = 1234567890;
-            // var pinnedIds = new List<int>(){1,2};
-            // var userImage = "test.png";
-            // var desc = "test description";
-            // var online = true;
-            // var admin = false;
-            // var empLevel = 4;
-            // UserRoles role = UserRoles.Developer;
-            // OfficeLocation location = OfficeLocation.Pretoria;
-            // var newUserRequest = new CreateUserRequest(userID, name, surname, phone, pinnedIds, userImage,desc, online, admin, empLevel, role, location);
-            var email = "hi@castellodev.co.za";
-            var emailID = 10;
-            var displayName = "unit test";
-            var image = "unitTest.png";
-            var phone = "1234567890";
-           
-            var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
+            var signInRequest = new GoogleSignInRequest(
+                _mockedUser.Name, _mockedEmail.UserEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl
+                );
+            
             var request2 = new GoogleSignInRequest(
                 "check",
                 "check@castellodev.co.za",
@@ -94,7 +98,7 @@ namespace backend_api.Tests.Auth
             _userRepositoryMock.Setup(x => x.CreateUser(signInRequest));
 
             //Act
-            var response = _authService.checkEmailExists(request2);
+            var response = await _authService.checkEmailExists(request2);
             
             //Assert
             Assert.IsType<LoginResponse>(response);
@@ -114,27 +118,24 @@ namespace backend_api.Tests.Auth
             //Act
             
             //Assert
-            Assert.Throws<NullEmailException>(() => _authService.checkEmailExists(request));
+            Assert.ThrowsAsync<NullEmailException>(() => _authService.checkEmailExists(request));
         }
 
         [Fact(DisplayName = "Should be true if the user already exists in the system")]
-        public void CheckCorrectEmail()
+        public async Task CheckCorrectEmail()
         {
             //Arrange
-            var email = "hi@castellodev.co.za";
-            var displayName = "unit test";
-            var image = "unitTest.png";
-            var phone = "1234567890";
-           
-            var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
-           
-            _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).ReturnsAsync(new CreateUserResponse());
+            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, _mockedEmail.UserEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
+            var responseDoa = new CreateUserResponse("User created.");
+
+            _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(responseDoa);
             
             //Act
-            var response = _authService.checkEmailExists(signInRequest);
+            var response = await _authService.checkEmailExists(requestDoa);
             
             //Assert
-             Assert.IsType<LoginResponse>(response);
+             /*Assert.IsType<LoginResponse>(response);
+             Assert.True(response.EmailExists);*/
              Assert.True(response.EmailExists);
         }
 

@@ -81,7 +81,7 @@ namespace backend_api.Controllers.Auth
                 if (_service.CheckEmailDomain(request).CorrectDomain)
                 {
                     //check if email exists in databse, otherwise user must register
-                    if (_service.checkEmailExists(request).EmailExists)
+                    if (_service.checkEmailExists(request).Result.EmailExists)
                     {
                         var json = _service.GetUser(request);
 

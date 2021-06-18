@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
 using backend_api.Models.Auth.Requests;
@@ -11,7 +12,7 @@ namespace backend_api.Services.Auth
     {
         private readonly IUserRepository _repository;
 
-        public LoginResponse checkEmailExists(GoogleSignInRequest request)
+        public async Task<LoginResponse> checkEmailExists(GoogleSignInRequest request)
         {
             // throw new System.NotImplementedException();
             String email = request.Email;
@@ -20,7 +21,7 @@ namespace backend_api.Services.Auth
                 throw new NullEmailException("User Email Missing");
             }
             //Checks if email received by request is in the UserEmails repo
-            if (_repository.checkEmailExists(request))
+            if(_repository.checkEmailExists(request).Result)
             {
                 return new LoginResponse(true);
             }

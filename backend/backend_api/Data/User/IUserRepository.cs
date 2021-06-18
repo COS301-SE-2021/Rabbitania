@@ -23,6 +23,7 @@ namespace backend_api.Data.User
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
         Task<Models.User.User> GetExistingUserDetails(GoogleSignInRequest request);
-        bool checkEmailExists(GoogleSignInRequest request);
+        
+        Task<bool> checkEmailExists(GoogleSignInRequest request);
     }
 }
