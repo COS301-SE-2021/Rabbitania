@@ -46,7 +46,6 @@ namespace backend_api.Data.User
             newUser.EmployeeLevel = 0;
             newUser.UserRole = UserRoles.Unassigned;
             newUser.OfficeLocation = OfficeLocation.Unassigned;
-
             
             _users.Users.Add(newUser);
             await _users.SaveChanges();

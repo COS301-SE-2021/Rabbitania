@@ -7,6 +7,7 @@ using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
+using backend_api.Models.User.Responses;
 using backend_api.Services.Auth;
 using Moq;
 using Xunit;
@@ -126,28 +127,22 @@ namespace backend_api.Tests.Auth
             var phone = "1234567890";
            
             var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
-            var request2 = new GoogleSignInRequest(
-                "check", 
-                "hi@castellodev.co.za", 
-                "1234567899", 
-                "test.png");
-            _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).Verifiable();
-            var user = _authService.GetUser(signInRequest).ToString();
-            outHelper.WriteLine("This is output from {0}",user); 
+           
+            _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).ReturnsAsync(new CreateUserResponse());
             
             //Act
-            var response = _authService.checkEmailExists(request2);
+            var response = _authService.checkEmailExists(signInRequest);
+            
             //Assert
              Assert.IsType<LoginResponse>(response);
              Assert.True(response.EmailExists);
         }
 
-        [Fact(DisplayName = "Gets a user json object that exists on the system")]
+        /*[Fact(DisplayName = "Gets a user json object that exists on the system")]
         public void getUser()
         {
             //Arrange
             var email = "hi@castellodev.co.za";
-            var emailID = 10;
             var displayName = "unit test";
             var image = "unitTest.png";
             var phone = "1234567890";
@@ -159,7 +154,7 @@ namespace backend_api.Tests.Auth
             var resp = _authService.GetUser(signInRequest);
             //Assert
             Assert.NotNull(resp);
-        }
+        }*/
     }
 }
 }
