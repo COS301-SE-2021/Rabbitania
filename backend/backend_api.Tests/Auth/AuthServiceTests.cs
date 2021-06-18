@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Data.User;
-using backend_api.Exceptions.Auth;
-using backend_api.Models;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Services.Auth;
-using Moq; 
+using Moq;
 using Xunit;
-using Xunit.Sdk;
 
-/*namespace backend_api.Tests
+namespace backend_api.Tests.Auth
+{
+    namespace backend_api.Tests
 {
     public class AuthUniTests
     {
@@ -27,7 +27,8 @@ using Xunit.Sdk;
         public void InvalidDomainLogin()
         {
             //Arrange
-            String email = "test@gmail.com";
+            string email = "test@gmail.com";
+            
             GoogleSignInRequest request1 = new GoogleSignInRequest(email);
             
             //Act
@@ -37,9 +38,27 @@ using Xunit.Sdk;
             Assert.IsType<DomainResponse>(response);
         }
         //TODO: finish test
-        [Fact]
-        public void invalidEmailLogin()
+        [Fact(DisplayName = "Should throw an exception for an invalid email in the database")]
+        public async Task invalidEmailLogin()
         {
+            /*
+                // Arrange
+                var requestDto = new CreateNotificationRequest(
+                    "Notification Test",
+                    NotificationTypeEnum.Email,
+                    this._mockedDate,
+                    1
+                );
+                var responseDto = new CreateNotificationResponse(HttpStatusCode.Created);
+
+                _notificationRepoMock.Setup(n => n.CreateNotification(requestDto)).ReturnsAsync(responseDto);
+
+                // Act
+                var createdNotification = await _sut.CreateNotification(requestDto);
+
+                // Assert
+                Assert.Equal(responseDto, createdNotification);
+            }*/
             //Arrange
             int userID = 50;
             var name = "unit";
@@ -69,5 +88,5 @@ using Xunit.Sdk;
         //TODO: Check why I get a TestClassException error
         
     }
-    
-}*/
+}
+}
