@@ -13,13 +13,13 @@ using Xunit;
 
 namespace backend_api.Tests.NotificationTests.UnitTests
 {
-    public class NotificationServiceTests
+    public class CreateNotificationTests
     {
         private readonly NotificationService _sut;
         private readonly Mock<INotificationRepository> _notificationRepoMock = new Mock<INotificationRepository>();
         private readonly DateTime _mockedDate;
         
-        public NotificationServiceTests()
+        public CreateNotificationTests()
         {
             // Mocks the implementation of Notification repository
             _sut = new NotificationService(_notificationRepoMock.Object);
