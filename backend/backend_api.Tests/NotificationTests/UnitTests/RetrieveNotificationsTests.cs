@@ -1,21 +1,55 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using backend_api.Data.Notification;
 using backend_api.Exceptions.Notifications;
+using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
+using backend_api.Models.Notification.Responses;
 using backend_api.Services.Notification;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace backend_api.Tests.NotificationTests.UnitTests
 {
     public class RetrieveNotificationsTests
     {
+        private readonly ITestOutputHelper _testOutputHelper;
         private readonly NotificationService _sut;
         private readonly Mock<INotificationRepository> _notificationRepoMock = new Mock<INotificationRepository>();
-
-        public RetrieveNotificationsTests()
+        private readonly DateTime _mockedDate;
+        private readonly List<Notification> _mockedListDto;
+        
+        public RetrieveNotificationsTests(ITestOutputHelper testOutputHelper)
         {
+            _testOutputHelper = testOutputHelper;
             _sut = new NotificationService(_notificationRepoMock.Object);
+            
+            _mockedDate = new DateTime();
+            
+            _mockedListDto = new List<Notification>(){
+                new Notification {
+                    NotificationPayload = "Well done to the Rabbitanaia Team!", 
+                    NotificationType = NotificationTypeEnum.Email,
+                    CreatedDate = _mockedDate,
+                    UserID = 1
+                },
+                new Notification {
+                    NotificationPayload = "Meeting at 12:30 with Design Team", 
+                    NotificationType = NotificationTypeEnum.Push,
+                    CreatedDate = _mockedDate,
+                    UserID = 1
+                },
+                new Notification {
+                    NotificationPayload = "Don't forget to do you tests!", 
+                    NotificationType = NotificationTypeEnum.Email,
+                    CreatedDate = _mockedDate,
+                    UserID = 1
+                }
+            };
         }
         
         [Fact(DisplayName = "When the RetrieveNotificationRequest is null it should throw an exception")]
@@ -28,7 +62,25 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             Assert.Equal("Invalid RetrieveNotificationRequest object", exception.Message);
         }
         
-        // Should return a list of objects...
+        
+        [Fact(DisplayName = "When a request with a UserId is passed in this should return a list of notifications")]
+        public async Task RetrieveNotifications_ShouldReturnAListOfNotificationsAsync()
+        {
+            // Arrange
+            var requestDto = new RetrieveNotificationRequest(
+                1
+            );
+            var responseDto = new RetrieveNotificationsResponse(_mockedListDto);
+            
+            _notificationRepoMock.Setup(n =>
+                n.RetrieveNotifications(requestDto)).ReturnsAsync(_mockedListDto);
+           
+            // Act
+            var notificationList = await _sut.RetrieveNotifications(requestDto);
+            
+            // Assert
+            Assert.Equal(responseDto.Notifications, notificationList.Notifications);
+        }
         
         [Fact(DisplayName = "When a userId is zero the system should throw an InvalidUserIdException")]
         public async Task RetrieveNotifications_ShouldThrowAnInvalidUserIdExceptionWhenUserIdIsZeroAsync()
@@ -58,7 +110,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             
             // Assert
             Assert.Equal("UserID is invalid", exception.Message);
-        } 
+        }
         
         
     }
