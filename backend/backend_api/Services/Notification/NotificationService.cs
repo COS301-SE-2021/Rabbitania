@@ -23,13 +23,9 @@ namespace backend_api.Services.Notification
             {
                 throw new InvalidNotificationRequestException("Invalid RetrieveNotificationRequest object");
             }
-            if (request.UserId.Equals(null))
+            if (request.UserId is 0 or < 0)
             {
-                throw new InvalidNotificationRequestException("UserID is null or empty");
-            }
-            if (request.UserId <= 0)
-            {
-                throw new InvalidNotificationRequestException("UserID is invalid");
+                throw new InvalidUserIdException("UserID is invalid");
             }
             
             var response = new RetrieveNotificationsResponse(
