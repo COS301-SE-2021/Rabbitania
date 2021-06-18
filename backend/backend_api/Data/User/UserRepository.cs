@@ -48,10 +48,12 @@ namespace backend_api.Data.User
             newUser.UserRole = UserRoles.Unassigned;
             newUser.OfficeLocation = OfficeLocation.Unassigned;
             
+            _users.Users.Add(newUser);
+            await _users.SaveChanges();
+            
             var newEmail = new UserEmails(request.Email, newUser.UserId);
             _users.UserEmail.Add(newEmail);
-
-            _users.Users.Add(newUser);
+            
             await _users.SaveChanges();
 
             return new CreateUserResponse("User Successfully Created");
