@@ -52,8 +52,7 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             };
         }
         
-        
-        [Fact(DisplayName = "When the RetrieveNotificationRequest is null is should throw an exception")]
+        [Fact(DisplayName = "When the RetrieveNotificationRequest is null it should throw an exception")]
         public async Task RetrieveNotifications_ShouldThrowAnInvalidNotificationRequestExceptionWhenRequestIsNullAsync()
         {
             // Arrange & Act
