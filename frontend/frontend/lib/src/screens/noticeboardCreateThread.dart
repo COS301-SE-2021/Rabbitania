@@ -6,6 +6,8 @@ import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
 import '../widgets/card_item.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'noticeboardScreen.dart';
+
 class NoticeBoardThread extends StatefulWidget {
   createState() {
     return _NoticeThreadBoard();
@@ -35,7 +37,10 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton() ,
+        leading: BackButton( onPressed: (){
+          UtilModel.route(() => NoticeBoard(), context);
+        },
+        ) ,
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
@@ -76,5 +81,3 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
 
 }
 
-class NoticeboardCreateCard {
-}
