@@ -24,14 +24,14 @@ class _infoForm extends State<InfoForm> {
           backgroundColor: Color.fromRGBO(33, 33, 33, 1),
           appBar: AppBar(
             bottom: PreferredSize(
-              child: Container(
-                color: Color.fromRGBO(171, 255, 79, 1),
-                height: 2,
+              child: Wrap(
+                children: <Widget>[
+                  ProfilePicture(),
+                ],
               ),
-              preferredSize: Size.fromHeight(35),
+              preferredSize: Size.fromHeight(55),
             ),
             centerTitle: true,
-            title: ProfilePicture(),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
@@ -46,7 +46,7 @@ class _infoForm extends State<InfoForm> {
                     padding: EdgeInsets.all(30),
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 10),
+                        padding: EdgeInsets.only(top: 5),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -55,8 +55,7 @@ class _infoForm extends State<InfoForm> {
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
-                                  dropdownColor:
-                                      Color.fromRGBO(171, 255, 79, 1),
+                                  dropdownColor: Color.fromRGBO(33, 33, 33, 1),
                                   value: _dropDownRoleValue,
                                   underline: Container(
                                     height: 2,
@@ -76,7 +75,8 @@ class _infoForm extends State<InfoForm> {
                                       value: value,
                                       child: Text(value,
                                           style: TextStyle(
-                                            color: Colors.white,
+                                            color:
+                                                Color.fromRGBO(171, 255, 79, 1),
                                           )),
                                     );
                                   }).toList(),
@@ -84,13 +84,12 @@ class _infoForm extends State<InfoForm> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 30),
+                              padding: EdgeInsets.only(top: 20),
                               width: MediaQuery.of(context).size.width,
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
-                                  dropdownColor:
-                                      Color.fromRGBO(171, 255, 79, 1),
+                                  dropdownColor: Color.fromRGBO(33, 33, 33, 1),
                                   value: _dropDownIsAdminValue,
                                   underline: Container(
                                     height: 2,
@@ -107,7 +106,8 @@ class _infoForm extends State<InfoForm> {
                                       value: value,
                                       child: Text(value,
                                           style: TextStyle(
-                                            color: Colors.white,
+                                            color:
+                                                Color.fromRGBO(171, 255, 79, 1),
                                           )),
                                     );
                                   }).toList(),
@@ -115,13 +115,12 @@ class _infoForm extends State<InfoForm> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 30),
+                              padding: EdgeInsets.only(top: 20),
                               width: MediaQuery.of(context).size.width,
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: DropdownButton<String>(
-                                  dropdownColor:
-                                      Color.fromRGBO(171, 255, 79, 1),
+                                  dropdownColor: Color.fromRGBO(33, 33, 33, 1),
                                   value: _dropDownOfficeValue,
                                   underline: Container(
                                     height: 2,
@@ -141,7 +140,8 @@ class _infoForm extends State<InfoForm> {
                                       value: value,
                                       child: Text(value,
                                           style: TextStyle(
-                                            color: Colors.white,
+                                            color:
+                                                Color.fromRGBO(171, 255, 79, 1),
                                           )),
                                     );
                                   }).toList(),
@@ -149,10 +149,14 @@ class _infoForm extends State<InfoForm> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(top: 30),
+                              padding: EdgeInsets.only(top: 20),
                               child: TextFormField(
+                                style: TextStyle(
+                                    color: Color.fromRGBO(171, 255, 79, 1)),
                                 autocorrect: true,
                                 decoration: InputDecoration(
+                                  hintStyle: TextStyle(
+                                      color: Color.fromRGBO(171, 255, 79, 0.3)),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                     color: Color.fromRGBO(171, 255, 79, 1),
