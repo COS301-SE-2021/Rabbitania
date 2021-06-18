@@ -40,13 +40,13 @@ namespace backend_api.Services.Notification
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
             Console.WriteLine(request.UserId);
-            if (request.UserId.Equals(null) || request.UserId < 0)
+            if (request.UserId is 0 or < 0)
             {
                 throw new InvalidNotificationRequestException("UserID is invalid");
             }
-            if (request.Type.Equals(null))
+            if (string.IsNullOrEmpty(request.Payload))
             {
-                throw new InvalidNotificationRequestException("Invalid Notification Type (Null or empty)");
+                throw new InvalidNotificationRequestException("Payload cannot be null or empty");
             }
 
             return await _repository.CreateNotification(request);

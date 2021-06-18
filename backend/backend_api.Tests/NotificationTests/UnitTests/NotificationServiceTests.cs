@@ -2,6 +2,8 @@
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
+using backend_api.Exceptions.Auth;
+using backend_api.Exceptions.Notifications;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
@@ -29,42 +31,94 @@ namespace backend_api.Tests.NotificationTests.UnitTests
         public async Task CreateNotification_ShouldReturnCreatedStatusCodeAsync()
         {
             // Arrange
-            var mockReq = new CreateNotificationRequest(
+            var requestDto = new CreateNotificationRequest(
                     "Notification Test",
                     NotificationTypeEnum.Email,
                     this._mockedDate,
                     1
                 );
-            var mockRes = new CreateNotificationResponse(HttpStatusCode.Created);
+            var responseDto = new CreateNotificationResponse(HttpStatusCode.Created);
             
-            _notificationRepoMock.Setup(n => n.CreateNotification(mockReq)).ReturnsAsync(mockRes);
+            _notificationRepoMock.Setup(n => n.CreateNotification(requestDto)).ReturnsAsync(responseDto);
             
             // Act
-            var createdNotification = await _sut.CreateNotification(mockReq);
+            var createdNotification = await _sut.CreateNotification(requestDto);
             
             // Assert
-            Assert.Equal(mockRes, createdNotification);
-        } 
+            Assert.Equal(responseDto, createdNotification);
+        }
+        
         
         [Fact]
-        public async Task CreateNotification_ShouldReturnFailAsync()
+        public async Task CreateNotification_ShouldThrowExceptionWhenPayloadIsEmptyAsync()
         {
             // Arrange
-            var mockReq = new CreateNotificationRequest(
-                "Notification Test",
+            var requestDto = new CreateNotificationRequest(
+                "",
                 NotificationTypeEnum.Email,
                 this._mockedDate,
                 1
             );
-            var mockRes = new CreateNotificationResponse(HttpStatusCode.Created);
-            
-            _notificationRepoMock.Setup(n => n.CreateNotification(mockReq)).ReturnsAsync(mockRes);
-            
+
             // Act
-            var createdNotification = await _sut.CreateNotification(mockReq);
+            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
             
             // Assert
-            Assert.Equal(mockRes, createdNotification);
+            Assert.Equal("Payload cannot be null or empty", exception.Message);
+        } 
+        
+        [Fact]
+        public async Task CreateNotification_ShouldThrowExceptionWhenPayloadIsNullAsync()
+        {
+            // Arrange
+            var requestDto = new CreateNotificationRequest(
+                null,
+                NotificationTypeEnum.Email,
+                this._mockedDate,
+                1
+            );
+
+            // Act
+            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            
+            // Assert
+            Assert.Equal("Payload cannot be null or empty", exception.Message);
+        }
+        
+        [Fact]
+        public async Task CreateNotification_ShouldThrowExceptionWhenUserIdIsZeroAsync()
+        {
+            // Arrange
+            var requestDto = new CreateNotificationRequest(
+                "Notification Test",
+                NotificationTypeEnum.Email,
+                this._mockedDate,
+                0
+                );
+
+            // Act
+            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            
+            // Assert
+            Assert.Equal("UserID is invalid", exception.Message);
+        }
+        
+        [Fact]
+        public async Task CreateNotification_ShouldThrowExceptionWhenUserIdIsLessThanZeroAsync()
+        {
+            // Arrange
+            var requestDto = new CreateNotificationRequest(
+                "Notification Test",
+                NotificationTypeEnum.Email,
+                this._mockedDate,
+                -1
+            );
+
+            // Act
+            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(requestDto));
+            
+            // Assert
+            Assert.Equal("UserID is invalid", exception.Message);
         } 
     }
 }

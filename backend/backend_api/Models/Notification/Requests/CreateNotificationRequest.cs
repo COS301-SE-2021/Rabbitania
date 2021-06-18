@@ -9,6 +9,10 @@ namespace backend_api.Models.Notification.Requests
         private DateTime _dateCreated;
         private int _userId;
 
+        public CreateNotificationRequest()
+        {
+            
+        }
         public CreateNotificationRequest(string payload, NotificationTypeEnum type, DateTime dateCreated, int userId)
         {
             this._payload = payload;
