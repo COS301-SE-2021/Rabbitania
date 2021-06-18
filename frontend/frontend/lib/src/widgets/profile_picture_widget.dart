@@ -6,7 +6,7 @@ class ProfilePicture extends StatelessWidget {
   Widget build(context) => Container(
         margin: const EdgeInsets.all(15.0),
         padding: const EdgeInsets.all(3.0),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CircleAvatar(
@@ -14,7 +14,6 @@ class ProfilePicture extends StatelessWidget {
               radius: 30,
               backgroundImage: NetworkImage(user.photoURL!),
             ),
-            VerticalDivider(),
             Text(user.email!,
                 style: TextStyle(
                   color: Color.fromRGBO(171, 255, 79, 1),

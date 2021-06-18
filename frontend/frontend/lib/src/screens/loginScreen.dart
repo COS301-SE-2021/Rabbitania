@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/login_fab.dart';
 import '../models/util_model.dart';
@@ -33,38 +34,50 @@ class _loginState extends State<Login> {
             ),
           ),
         ),
-        body: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(300)),
-              color: Colors.transparent,
-              border: Border.all(
-                color: Color.fromRGBO(171, 255, 79, 1),
-                width: 3,
+        body: Stack(
+          children: <Widget>[
+            SvgPicture.string(_svg_background),
+            Container(
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(300)),
+                    color: Colors.transparent,
+                    border: Border.all(
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      width: 3,
+                    ),
+                  ),
+                  height: 300,
+                  width: 300,
+                  child: Container(
+                    child: StreamBuilder(
+                        stream: FirebaseAuth.instance.authStateChanges(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasData) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InfoForm()));
+                            return Container(
+                              width: 0,
+                              height: 0,
+                              color: Colors.transparent,
+                            );
+                          } else if (snapshot.hasError) {
+                            return Center(child: Text('Something went wrong'));
+                          } else {
+                            return LoginFab();
+                          }
+                        }),
+                  ),
+                ),
               ),
             ),
-            height: 300,
-            width: 300,
-            child: Column(
-              children: [
-                StreamBuilder(
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasData) {
-                        return Expanded(
-                          child: InfoForm(),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Something went wrong'));
-                      } else {
-                        return LoginFab();
-                      }
-                    }),
-              ],
-            ),
-          ),
+          ],
         ),
       );
 }

@@ -18,125 +18,227 @@ class _infoForm extends State<InfoForm> {
   final myController = TextEditingController();
   String _dropDownRoleValue = 'Employee';
   String _dropDownIsAdminValue = 'No';
+  String _dropDownOfficeValue = 'Pretoria';
   Widget build(context) => MaterialApp(
         home: Scaffold(
           backgroundColor: Color.fromRGBO(33, 33, 33, 1),
           appBar: AppBar(
+            bottom: PreferredSize(
+              child: Container(
+                color: Color.fromRGBO(171, 255, 79, 1),
+                height: 2,
+              ),
+              preferredSize: Size.fromHeight(35),
+            ),
             centerTitle: true,
             title: ProfilePicture(),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
-          body: Container(
-            alignment: Alignment.center,
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                padding: EdgeInsets.all(10),
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          child: DropdownButton<String>(
-                            dropdownColor: Color.fromRGBO(171, 255, 79, 1),
-                            value: _dropDownRoleValue,
-                            underline: Container(
-                              height: 2,
-                              color: Color.fromRGBO(171, 255, 79, 1),
+          body: Stack(
+            children: <Widget>[
+              SvgPicture.string(_svg_background),
+              Container(
+                alignment: Alignment.center,
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    padding: EdgeInsets.all(30),
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButton<String>(
+                                  dropdownColor:
+                                      Color.fromRGBO(171, 255, 79, 1),
+                                  value: _dropDownRoleValue,
+                                  underline: Container(
+                                    height: 2,
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(
+                                        () => {_dropDownRoleValue = newValue!});
+                                  },
+                                  items: <String>[
+                                    'Employee',
+                                    'Wizard',
+                                    'Ward of the allmighty'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          )),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                             ),
-                            onChanged: (String? newValue) {
-                              setState(() => {_dropDownRoleValue = newValue!});
-                            },
-                            items: <String>[
-                              'Employee',
-                              'Wizard',
-                              'Ward of the allmighty'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    )),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        DropdownButton<String>(
-                          dropdownColor: Color.fromRGBO(171, 255, 79, 1),
-                          value: _dropDownIsAdminValue,
-                          underline: Container(
-                            height: 2,
-                            color: Color.fromRGBO(171, 255, 79, 1),
-                          ),
-                          onChanged: (String? newValue) {
-                            setState(() => {_dropDownIsAdminValue = newValue!});
-                          },
-                          items: <String>['Yes', 'No']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: TextStyle(
-                                    color: Colors.white,
+                            Container(
+                              padding: EdgeInsets.only(top: 30),
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButton<String>(
+                                  dropdownColor:
+                                      Color.fromRGBO(171, 255, 79, 1),
+                                  value: _dropDownIsAdminValue,
+                                  underline: Container(
+                                    height: 2,
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() =>
+                                        {_dropDownIsAdminValue = newValue!});
+                                  },
+                                  items: <String>['Yes', 'No']
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          )),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 30),
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: DropdownButton<String>(
+                                  dropdownColor:
+                                      Color.fromRGBO(171, 255, 79, 1),
+                                  value: _dropDownOfficeValue,
+                                  underline: Container(
+                                    height: 2,
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() =>
+                                        {_dropDownOfficeValue = newValue!});
+                                  },
+                                  items: <String>[
+                                    'Pretoria',
+                                    'Braamfontein',
+                                    'Kampala'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          )),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 30),
+                              child: TextFormField(
+                                autocorrect: true,
+                                decoration: InputDecoration(
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                    color: Color.fromRGBO(171, 255, 79, 1),
                                   )),
-                            );
-                          }).toList(),
-                        ),
-                        Text('User Description',
-                            style: TextStyle(
-                                color: Color.fromRGBO(171, 255, 79, 1))),
-                        TextFormField(
-                          autocorrect: true,
-                          decoration: InputDecoration(
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                            )),
-                            hintText: 'Enter user description',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(171, 255, 79, 1)),
+                                  hintText: 'Enter user description',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color.fromRGBO(171, 255, 79, 1)),
+                                  ),
+                                ),
+                                controller: myController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter text';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
-                          ),
-                          controller: myController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter text';
-                            }
-                            return null;
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            onSurface: Colors.transparent,
-                            primary: Colors.transparent,
-                            side: BorderSide(
-                              width: 0.5,
-                              color: Color.fromRGBO(171, 255, 79, 1),
+                            Container(
+                              height: 110,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.only(top: 50),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  onSurface: Colors.transparent,
+                                  primary: Colors.transparent,
+                                  side: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                ),
+                                child: Text(
+                                  'continue',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    print(myController.text);
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            'continue',
-                            style: TextStyle(
-                              color: Color.fromRGBO(171, 255, 79, 1),
+                            Container(
+                              height: 110,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.only(top: 50),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  onSurface: Colors.transparent,
+                                  primary: Colors.transparent,
+                                  side: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                ),
+                                child: Text(
+                                  'Sign out',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  final provider =
+                                      Provider.of<GoogleSignInProvider>(context,
+                                          listen: false);
+                                  provider.googleLogout();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Login(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              print(myController.text);
-                            }
-                          },
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       );
