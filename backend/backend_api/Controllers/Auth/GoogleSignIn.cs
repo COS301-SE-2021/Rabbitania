@@ -37,16 +37,16 @@ namespace backend_api.Controllers.Auth
         }
         
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("GoogleLoginv1")]
         public IActionResult signIn()
         {
             var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }
+        }*/
 
         [HttpGet]
-        [Route("GoogleLoginResponse")]
+        [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
         {
             //Task<String>
@@ -92,7 +92,7 @@ namespace backend_api.Controllers.Auth
                     {
                         // user needs to be added as they are a valid retro rabbit employee
                         // but are not in the system yet.
-                        _userService.CreateUser(request);
+                        await _userService.CreateUser(request);
                         
                         throw new InvalidEmailException("Email does not exist in database");
                     }

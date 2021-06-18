@@ -36,13 +36,20 @@ namespace backend_api.Data.User
 
         public async Task<CreateUserResponse> CreateUser(GoogleSignInRequest request)
         {
-            /*Models.User.User newUser = new Models.User.User(request.UserId, request.FirstName, request.LastName,
-                request.PhoneNumber, request.PinnedUserIds, request.UserImage, request.UserDescription,
-                request.IsOnline, request.IsAdmin, request.EmployeeLevel, request.UserRole, request.OfficeLocation);*/
-
+            
             var newUser = new Models.User.User();
-
-            //TODO: User's email should also be added to the repo
+            newUser.Name = request.DisplayName;
+            newUser.PhoneNumber = request.PhoneNumber;
+            newUser.PinnedUserIds = new List<int>();
+            newUser.UserImgUrl = request.GoogleImgUrl;
+            newUser.UserDescription = "No Description...";
+            newUser.IsAdmin = false;
+            newUser.EmployeeLevel = 0;
+            newUser.UserRole = UserRoles.Unassigned;
+            newUser.OfficeLocation = OfficeLocation.Unassigned;
+            
+            var newEmail = new UserEmails(request.Email, newUser.UserId);
+            _users.UserEmail.Add(newEmail);
 
             _users.Users.Add(newUser);
             await _users.SaveChanges();
@@ -55,11 +62,6 @@ namespace backend_api.Data.User
             var users = _users.Users;
             IEnumerable<Models.User.User> allUsers = users.Select(user => user);
 
-            // foreach (var user in users)
-            // {
-            //     allUsers.Add(user);
-            // }
-
             return allUsers.ToList();
         }
 
@@ -67,8 +69,7 @@ namespace backend_api.Data.User
         {
             var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
             
-            var firstname = "";
-            var lastname = "";
+            var name = "";
             var userImage = "";
             var description = "";
             var phoneNumber = "";
@@ -78,7 +79,7 @@ namespace backend_api.Data.User
 
             foreach (var x in selectedUser)
             {
-                firstname = x.Name;
+                name = x.Name;
                 userImage = x.UserImgUrl;
                 description = x.UserDescription;
                 phoneNumber = x.PhoneNumber;
@@ -87,7 +88,7 @@ namespace backend_api.Data.User
                 userRole = x.UserRole;
             }
 
-            ViewProfileResponse response = new ViewProfileResponse("Successfully Viewed Profile", firstname,
+            ViewProfileResponse response = new ViewProfileResponse("Successfully Viewed Profile", name,
                 userImage, description, phoneNumber, empLevel, userRole, officeLocation);
 
             return response;
