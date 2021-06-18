@@ -39,29 +39,31 @@ class _infoForm extends State<InfoForm> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(child:DropdownButton<String>(
-                          dropdownColor: Color.fromRGBO(171, 255, 79, 1),
-                          value: _dropDownRoleValue,
-                          underline: Container(
-                            height: 2,
-                            color: Color.fromRGBO(171, 255, 79, 1),
+                        Container(
+                          child: DropdownButton<String>(
+                            dropdownColor: Color.fromRGBO(171, 255, 79, 1),
+                            value: _dropDownRoleValue,
+                            underline: Container(
+                              height: 2,
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() => {_dropDownRoleValue = newValue!});
+                            },
+                            items: <String>[
+                              'Employee',
+                              'Wizard',
+                              'Ward of the allmighty'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    )),
+                              );
+                            }).toList(),
                           ),
-                          onChanged: (String? newValue) {
-                            setState(() => {_dropDownRoleValue = newValue!});
-                          },
-                          items: <String>[
-                            'Employee',
-                            'Wizard',
-                            'Ward of the allmighty'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  )),
-                            );
-                          }).toList(),
                         ),
                         DropdownButton<String>(
                           dropdownColor: Color.fromRGBO(171, 255, 79, 1),
