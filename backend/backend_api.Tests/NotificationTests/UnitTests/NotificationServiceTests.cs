@@ -48,6 +48,16 @@ namespace backend_api.Tests.NotificationTests.UnitTests
             Assert.Equal(responseDto, createdNotification);
         }
         
+        [Fact(DisplayName = "When a request object is null, the notification shouldn't be created and throw a InvalidNotificationRequestException")]
+        public async Task CreateNotification_ShouldNotReturnCreatedAndIsNullAsync()
+        {
+            // Arrange & Act
+            var exception = await Assert.ThrowsAsync<InvalidNotificationRequestException>(() => _sut.CreateNotification(null));
+            
+            // Assert
+            Assert.Equal("Invalid CreateNotificationRequest object", exception.Message);
+        }
+        
         
         [Fact(DisplayName = "When payload is empty, CreateNotification should throw an InvalidPayloadException")]
         public async Task CreateNotification_ShouldThrowExceptionWhenPayloadIsEmptyAsync()
