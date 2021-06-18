@@ -29,14 +29,31 @@ namespace backend_api.Tests.Auth
         {
             //Arrange
             string email = "test@gmail.com";
-            
             GoogleSignInRequest request1 = new GoogleSignInRequest(email);
             
             //Act
             var response = _authService.CheckEmailDomain(request1);
+            
             //Assert
             Assert.NotNull(response);
             Assert.IsType<DomainResponse>(response);
+            Assert.Equal(false, response.CorrectDomain);
+        }
+
+        [Fact(DisplayName = "Should be true if a 'castellodev.co.za' is used to login")]
+        public void CorrectDomainLogin()
+        {
+            //Arrange
+            string email = "test@castellodev.co.za";
+            GoogleSignInRequest request1 = new GoogleSignInRequest(email);
+            
+            //Act
+            var response = _authService.CheckEmailDomain(request1);
+            
+            //Assert
+            Assert.NotNull(response);
+            Assert.IsType<DomainResponse>(response);
+            Assert.Equal(true, response.CorrectDomain);
         }
         
         [Fact(DisplayName = "Should throw an exception for an invalid email in the database")]
@@ -63,12 +80,17 @@ namespace backend_api.Tests.Auth
             var phone = "1234567890";
            
             var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
-            var request2 = new GoogleSignInRequest("check", "check@castellodev.co.za", "1234567899", "test.png");
+            var request2 = new GoogleSignInRequest(
+                "check",
+                "check@castellodev.co.za",
+                "1234567899",
+                "test.png");
            
             _userRepositoryMock.Setup(x => x.CreateUser(signInRequest));
 
             //Act
             var response = _authService.checkEmailExists(request2);
+            
             //Assert
             Assert.IsType<LoginResponse>(response);
             Assert.Equal(false,response.EmailExists);
@@ -79,7 +101,11 @@ namespace backend_api.Tests.Auth
         public void CheckNullEmail()
         {
             //Arrange
-            var request = new GoogleSignInRequest("check", null, "1234567899", "test.png");
+            var request = new GoogleSignInRequest(
+                "check",
+                null, 
+                "1234567899",
+                "test.png");
             //Act
             
             //Assert
@@ -97,14 +123,37 @@ namespace backend_api.Tests.Auth
             var phone = "1234567890";
            
             var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
-            var request2 = new GoogleSignInRequest("check", "hi@castellodev.co.za", "1234567899", "test.png");
+            var request2 = new GoogleSignInRequest(
+                "check", 
+                "hi@castellodev.co.za", 
+                "1234567899", 
+                "test.png");
             _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).Verifiable();
             
             //Act
             var response = _authService.checkEmailExists(request2);
             //Assert
-            Assert.IsType<LoginResponse>(response);
-            Assert.True(response.EmailExists);
+             Assert.IsType<LoginResponse>(response);
+             Assert.True(response.EmailExists);
+        }
+
+        [Fact(DisplayName = "Gets a user json object that exists on the system")]
+        public void getUser()
+        {
+            //Arrange
+            var email = "hi@castellodev.co.za";
+            var emailID = 10;
+            var displayName = "unit test";
+            var image = "unitTest.png";
+            var phone = "1234567890";
+           
+            var signInRequest = new GoogleSignInRequest(displayName, email, phone, image);
+            var request2 = new GoogleSignInRequest("check", "hi@castellodev.co.za", "1234567899", "test.png");
+            _userRepositoryMock.Setup(x => x.CreateUser(signInRequest)).Verifiable();
+            //Act
+            var resp = _authService.GetUser(signInRequest);
+            //Assert
+            Assert.NotNull(resp);
         }
     }
 }
