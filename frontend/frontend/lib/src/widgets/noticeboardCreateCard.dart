@@ -1,4 +1,7 @@
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/noticeboardCreateThread.dart';
@@ -58,19 +61,55 @@ class NoticeboardThreadCard extends StatelessWidget {
 Widget addNewThread(String title, String content)
 {
   try{
+    if(title==""||content=="")
+      {
+        throw("Cannot Submit Empty fields");
+      }
+    else{
 
+      Future<bool> flag = connectAndGet();
 
-    return AlertDialog(
-      content: Text("Successfully Uploaded New Thread"),
-    );
+      // ignore: unrelated_type_equality_checks
+      if(flag == true)
+        {
+          return AlertDialog(
+            content: Text("Successfully Uploaded New Thread"),
+          );
+        }
+      else
+        {
+          throw("When submitting the request an error occurred");
+        }
+    }
   }
   catch(Exception)
   {
     return AlertDialog(
-      content: Text("Failed due to unknown error, try again or contact an admin"),
+      content: Text(Exception.toString()),
     );
   }
 
+
+}
+
+Future<bool> connectAndGet() async {
+  try {
+    HttpClient client = new HttpClient();
+    client.badCertificateCallback =
+    ((X509Certificate cert, String host, int port) => true);
+    String url = 'http://10.0.2.2:5000/api/';
+    //Map map = { "email" : "email" , "password" : "password" };
+    HttpClientRequest request = await client.getUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json');
+    //request.add(utf8.encode(json.encode(map)));
+    HttpClientResponse response1 = await request.close();
+    String reply = await response1.transform(utf8.decoder).join();
+    return true;
+  }
+  catch(Exception)
+  {
+    return false;
+  }
 
 }
 
