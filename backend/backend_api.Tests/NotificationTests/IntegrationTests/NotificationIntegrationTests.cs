@@ -1,47 +1,39 @@
-﻿using System.Net.Http;
+﻿using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Xunit;
 
 namespace backend_api.Tests.NotificationTests.IntegrationTests
 {
     public class NotificationIntegrationTests
     {
-        private readonly HttpClient _notificationClient;
-        
-        public NotificationIntegrationTests()
+        protected readonly HttpClient Http;
+
+        protected NotificationIntegrationTests()
         {
-            // App factory
-            // Using memory virtual Database
-            var notificationFactory = new WebApplicationFactory<Startup>()
-                .WithWebHostBuilder(builder =>
+            var notFactory = new WebApplicationFactory<Startup>()
+                .WithWebHostBuilder(build =>
                 {
-                    builder.ConfigureServices(services =>
+                    build.ConfigureServices(services =>
                     {
                         services.RemoveAll(typeof(NotificationContext));
-                        services.AddDbContext<NotificationContext>(options =>
+                        services.AddDbContext<NotificationContext>(opts =>
                         {
-                            options.UseInMemoryDatabase("RabbitaniaDB");
+                            opts.UseInMemoryDatabase("RabbitaniaDB");
                         });
                     });
                 });
-            _notificationClient = notificationFactory.CreateClient();
+            
+            this.Http = notFactory.CreateClient();
         }
         
-        protected async Task Random()
-        {
-            return;
-        }
-
-        protected async Task<string> GetJwtAsync()
-        {
-            return "null";
-        }
+        
     }
 }
