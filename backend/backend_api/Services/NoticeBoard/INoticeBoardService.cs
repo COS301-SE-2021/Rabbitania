@@ -23,5 +23,7 @@ namespace backend_api.Services.NoticeBoard
         /// <param name="request"></param>
         /// <returns></returns>
         Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(RetrieveNoticeBoardThreadsRequest request);
+
+        Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(DeleteNoticeBoardThreadRequest request);
     }
 }

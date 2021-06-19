@@ -45,8 +45,7 @@ namespace backend_api.Services.NoticeBoard
             RetrieveNoticeBoardThreadsRequest request)
         {
             RetrieveNoticeBoardThreadsResponse response = new RetrieveNoticeBoardThreadsResponse(
-                await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request)
-            );
+                await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request));
 
             if (request == null)
             {
@@ -54,6 +53,19 @@ namespace backend_api.Services.NoticeBoard
             }
 
             return response;
+        }
+
+        public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
+            DeleteNoticeBoardThreadRequest request)
+        {
+            
+            
+            if (request == null)
+            {
+                throw new InvalidNotificationRequestException("Invalid DeleteNoticeBoardThreadRequest operation");
+            }
+
+            return await _noticeBoardRepository.DeleteNoticeBoardThread(request);
         }
     }
 }
