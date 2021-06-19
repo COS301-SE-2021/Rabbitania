@@ -121,9 +121,3 @@ class NoticeboardCard extends StatelessWidget {
     );
   }
 }
-
-
-
-// {'Title':"Covid 21","Body":"No more work for 2021"},
-// {'Title':"Returning","Body":"Work is Not stopping"},
-// {'Title':"Party Time","Body":"This is a message to all employees"}
