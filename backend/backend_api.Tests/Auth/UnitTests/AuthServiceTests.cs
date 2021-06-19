@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using backend_api.Models.User;
-using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using backend_api.Services.Auth;
 using backend_api.Services.User;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
-namespace backend_api.Tests.Auth
+namespace backend_api.Tests.Auth.UnitTests
 {
     namespace backend_api.Tests
 {
