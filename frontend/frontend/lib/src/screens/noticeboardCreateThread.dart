@@ -45,7 +45,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Create New Thread',
+            'Create Notice         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
@@ -53,7 +53,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
           ),
         ),
         actions: [
-          Icon(Icons.search),
+
         ],
       ),
       floatingActionButton: ExampleExpandableFab(),
