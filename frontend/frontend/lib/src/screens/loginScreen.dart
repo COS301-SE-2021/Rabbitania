@@ -8,7 +8,9 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/login_fab.dart';
 import '../models/util_model.dart';
 import 'googleAuthTest.dart';
+import 'noticeboardScreen.dart';
 import 'supplyInfoScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,24 +20,30 @@ class Login extends StatefulWidget {
 }
 
 class _loginState extends State<Login> {
+  final user = FirebaseAuth.instance.currentUser!;
   final util = new UtilModel();
 
   httpCall() async {
     final response = await http.post(
-      Uri.parse(
-          'https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread%27'),
+      Uri.parse('https://10.0.2.2:5001/api/GoogleSignIn/GoogleLogin'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'userId': 1,
-        'threadTitle': "title",
-        'threadContent': "content",
-        'minLevel': 0,
-        'imageUrl': "string",
-        'permittedUserRoles': 0
+        'displayName': user.displayName,
+        'email': user.email,
+        'phoneNumber': user.phoneNumber,
+        'googleImgUrl': user.photoURL,
       }),
     );
+
+    if (response.statusCode == 200) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => NoticeBoard()));
+    } else if (response.statusCode == 201) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => InfoForm()));
+    }
   }
 
   Widget build(context) => Scaffold(
@@ -95,10 +103,11 @@ class _loginState extends State<Login> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => InfoForm()));
+                                  //make api call
+                                  //api endpoint - displayName, email, number, uri
+                                  //if 200 user goes to noticeboard, else 201 user goes to infoForm
+                                  //receive statuscode 200 || thrownException || emailDomain does not match
+                                  httpCall();
                                 },
                                 child: Text(
                                   'Continue',

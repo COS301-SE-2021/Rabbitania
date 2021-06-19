@@ -5,6 +5,7 @@ import 'package:frontend/src/widgets/profile_picture_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'loginScreen.dart';
+import 'noticeboardScreen.dart';
 
 class InfoForm extends StatefulWidget {
   @override
@@ -196,9 +197,10 @@ class _infoForm extends State<InfoForm> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    print(myController.text);
-                                  }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => NoticeBoard()));
                                 },
                               ),
                             ),
