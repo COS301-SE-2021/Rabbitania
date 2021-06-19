@@ -50,7 +50,6 @@ namespace backend_api.Services.Auth
             {
                 return new DomainResponse(false);
             }
-            
         }
         public JObject GetUser(GoogleSignInRequest request)
         {

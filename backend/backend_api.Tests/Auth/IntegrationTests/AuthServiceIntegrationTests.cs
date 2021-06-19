@@ -30,6 +30,5 @@ namespace backend_api.Tests.Auth.IntegrationTests
                 });
             _client = authFactory.CreateClient();
         }
-        
     }
 }
