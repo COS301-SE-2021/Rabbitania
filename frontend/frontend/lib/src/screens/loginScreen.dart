@@ -58,14 +58,38 @@ class _loginState extends State<Login> {
                               ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasData) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => InfoForm()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => InfoForm()));
                             return Container(
-                              width: 0,
-                              height: 0,
                               color: Colors.transparent,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.transparent),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(300)),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => InfoForm()));
+                                },
+                                child: Text(
+                                  'Continue',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: Color.fromRGBO(171, 255, 79, 1),
+                                  ),
+                                ),
+                              ),
                             );
                           } else if (snapshot.hasError) {
                             return Center(child: Text('Something went wrong'));
