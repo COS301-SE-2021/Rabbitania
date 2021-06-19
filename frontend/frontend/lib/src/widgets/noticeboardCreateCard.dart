@@ -1,10 +1,7 @@
-
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import '../screens/noticeboardCreateThread.dart';
 
 var titleInput = "";
@@ -12,7 +9,6 @@ var contextInput = "";
 
 class NoticeboardThreadCard extends StatelessWidget {
   Future<String>? futureStringReceived;
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -38,7 +34,6 @@ class NoticeboardThreadCard extends StatelessWidget {
                       ),
                       labelText: 'Enter the title of your notice thread',
                       labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
-
                     ),
                   ),
                   TextFormField(
@@ -51,12 +46,9 @@ class NoticeboardThreadCard extends StatelessWidget {
                       ),
                       labelText: 'Enter the content',
                       labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
-
                     ),
                   ),
                   TextButton(
-                    // When the user presses the button, show an alert dialog containing
-                    // the text that the user has entered into the text field.
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -95,7 +87,6 @@ Future<String> addNewThread(String title,String content) async {
     if (title == "" || content == "") {
       throw("Cannot Submit Empty fields");
     }
-
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
       headers: <String, String>{
@@ -106,11 +97,10 @@ Future<String> addNewThread(String title,String content) async {
         'threadTitle': title,
         'threadContent': content,
         'minLevel': 0,
-        'imageUrl': "string",
+        'imageUrl': "images/RR.png",
         'permittedUserRoles': 0
       }),
     );
-
     if (response.statusCode == 201||response.statusCode == 200) {
       return ("Successfully uploaded new thread");
     } else {

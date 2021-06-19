@@ -60,7 +60,7 @@ class NoticeboardCard extends StatelessWidget {
                           ListTile(
                             contentPadding: EdgeInsets.all(10.0),
                             leading: Icon(
-                              Icons.account_circle_outlined, size: 70,
+                              Icons.announcement_outlined, size: 45,
                               color: Color.fromRGBO(171, 255, 79, 1),),
                             title: Text(iter.current.threadTitle,
                               style: TextStyle(letterSpacing: 3.0, color: Colors
