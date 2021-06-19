@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
 using backend_api.Services.NoticeBoard;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend_api.Controllers.NoticeBoard
@@ -22,6 +24,15 @@ namespace backend_api.Controllers.NoticeBoard
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread([FromBody] AddNoticeBoardThreadRequest request)
         {
             return await _service.AddNoticeBoardThread(request);
+        }
+        
+        
+        [HttpGet]
+        [Route("RetrieveNoticeBoardThreads")]
+        public async Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(
+            [FromQuery] RetrieveNoticeBoardThreadsRequest request)
+        {
+            return await _service.RetrieveNoticeBoardThreads(request);
         }
 
     }

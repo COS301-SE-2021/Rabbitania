@@ -3,9 +3,8 @@
     public class EditProfileRequest
     {
         private int _userId;
-        private string _firstName;
-        private string _lastName;
-        private int _phoneNumber;
+        private string _name;
+        private string _phoneNumber;
         private string _userDescription;
         private string _userImage;
         private OfficeLocation _officeLocation;
@@ -15,11 +14,10 @@
             
         }
         
-        public EditProfileRequest(int userId, string firstName, string lastName, int phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel, UserRoles userRoles, OfficeLocation officeLocation)
+        public EditProfileRequest(int userId, string name, string phoneNumber, string userDescription, string userImage, bool isAdmin, int empLevel, UserRoles userRoles, OfficeLocation officeLocation)
         {
             this._userId = userId;
-            this._firstName = firstName;
-            this._lastName = lastName;
+            this._name = name;
             this._phoneNumber = phoneNumber;
             this._userDescription = userDescription;
             this._userImage = userImage;
@@ -32,19 +30,13 @@
             set => _userId = value;
         }
 
-        public string FirstName
+        public string Name
         {
-            get => _firstName;
-            set => _firstName = value;
+            get => _name;
+            set => _name = value;
         }
 
-        public string LastName
-        {
-            get => _lastName;
-            set => _lastName = value;
-        }
-
-        public int PhoneNumber
+        public string PhoneNumber
         {
             get => _phoneNumber;
             set => _phoneNumber = value;

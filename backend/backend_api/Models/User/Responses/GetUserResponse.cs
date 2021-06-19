@@ -6,12 +6,10 @@ namespace backend_api.Models.User.Responses
     public class GetUserResponse
     {
         private String response { get; set; }
-        private String firstname { get; set; }
-        private String lastname { get; set; }
-        
+        private String name { get; set; }
         private List<int> pinnedIDs { get; set; }
         private int userID { get; set; }
-        private int phoneNumber { get; set; }
+        private string phoneNumber { get; set; }
         private String userImage { get; set; }
         private String description { get; set; }
         // public bool isOnline { get; set; }
@@ -26,12 +24,11 @@ namespace backend_api.Models.User.Responses
             this.response = resp;
         }
 
-        public GetUserResponse(Models.User.User user, String firstname, String lastname, int emplvl, bool isadmin, String desc, int userid, int number, UserRoles role, String image, OfficeLocation office, List<int> pinnedids)
+        public GetUserResponse(Models.User.User user, String name, int emplvl, bool isadmin, String desc, int userid, string number, UserRoles role, String image, OfficeLocation office, List<int> pinnedids)
         {
             this.description = desc;
             this.UserRole = role;
-            this.firstname = firstname;
-            this.lastname = lastname;
+            this.name = name;
             this.empLevel = emplvl;
             this.isAdmin = isadmin;
             this.userID = userid;

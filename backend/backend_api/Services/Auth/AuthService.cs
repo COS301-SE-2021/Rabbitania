@@ -2,6 +2,7 @@
 using backend_api.Data.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.Auth
 {
@@ -47,6 +48,19 @@ namespace backend_api.Services.Auth
                 return new DomainResponse(false);
             }
             
+        }
+        public JObject GetUser(GoogleSignInRequest request)
+        {
+            var user = _repository.GetExistingUserDetails(request).Result;
+            JObject json = new JObject(
+                new JProperty("description", user.UserDescription),
+                new JProperty("pinnedIDs", user.PinnedUserIds.ToArray()),
+                new JProperty("admin", user.IsAdmin),
+                new JProperty("role", user.UserRole.ToString()),
+                new JProperty("empLevel", user.EmployeeLevel),
+                new JProperty("office", user.OfficeLocation.ToString()));
+
+            return json;
         }
 
         

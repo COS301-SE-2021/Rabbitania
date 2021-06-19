@@ -10,6 +10,7 @@ using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace backend_api.Data.User
 {
@@ -21,107 +22,108 @@ namespace backend_api.Data.User
         {
             this._users = users;
         }
-        
+
         public async Task<List<Models.User.User>> GetUser(int userID)
         {
-            return await _users.Users.Where(x => x.UserID == userID).ToListAsync();
-        }
-        public async Task<List<Models.User.User>> GetUser(String firstname, String lastname)
-        {
-            return await _users.Users.Where(x => x.firstname == firstname && x.lastname==lastname).ToListAsync();
+            return await _users.Users.Where(x => x.UserId == userID).ToListAsync();
         }
 
-
-        public CreateUserResponse CreateUser(CreateUserRequest request)
+        public async Task<List<Models.User.User>> GetUser(String name)
         {
-            Models.User.User newUser = new Models.User.User(request.UserId, request.FirstName, request.LastName,
-                request.PhoneNumber, request.PinnedUserIds, request.UserImage, request.UserDescription,
-                request.IsOnline, request.IsAdmin, request.EmployeeLevel, request.UserRole, request.OfficeLocation);
+            return await _users.Users.Where(x => x.Name == name).ToListAsync();
+        }
 
+
+        public async Task<CreateUserResponse> CreateUser(GoogleSignInRequest request)
+        {
+            
+            var newUser = new Models.User.User();
+            newUser.Name = request.DisplayName;
+            newUser.PhoneNumber = request.PhoneNumber;
+            newUser.PinnedUserIds = new List<int>();
+            newUser.UserImgUrl = request.GoogleImgUrl;
+            newUser.UserDescription = "No Description...";
+            newUser.IsAdmin = false;
+            newUser.EmployeeLevel = 0;
+            newUser.UserRole = UserRoles.Unassigned;
+            newUser.OfficeLocation = OfficeLocation.Unassigned;
+            
             _users.Users.Add(newUser);
-            _users.SaveChanges();
+            await _users.SaveChanges();
+            
+            var newEmail = new UserEmails(request.Email, newUser.UserId);
+            _users.UserEmail.Add(newEmail);
+            
+            await _users.SaveChanges();
 
             return new CreateUserResponse("User Successfully Created");
         }
-        
-        
+
         public async Task<IEnumerable<Models.User.User>> GetAllUsers()
         {
             var users = _users.Users;
             IEnumerable<Models.User.User> allUsers = users.Select(user => user);
-            
-            // foreach (var user in users)
-            // {
-            //     allUsers.Add(user);
-            // }
-            
+
             return allUsers.ToList();
         }
-        
+
         public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
-
+            var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
             
-            var selectedUser = _users.Users.Where(x => x.UserID == request.UserId);
-
-            
-            
-            
-            var firstname = "";
-            var lastname = "";
+            var name = "";
             var userImage = "";
             var description = "";
-            var phoneNumber = 111;
+            var phoneNumber = "";
             var empLevel = 111;
             OfficeLocation officeLocation = OfficeLocation.Braamfontein;
             UserRoles userRole = UserRoles.Administrator;
 
             foreach (var x in selectedUser)
             {
-                firstname = x.firstname;
-                lastname = x.lastname;
-                userImage = x.userImage;
-                description = x.userDescription;
-                phoneNumber = x.phoneNumber;
-                empLevel = x.employeeLevel;
-                officeLocation = x.officeLocation;
-                userRole = x.userRole;
+                name = x.Name;
+                userImage = x.UserImgUrl;
+                description = x.UserDescription;
+                phoneNumber = x.PhoneNumber;
+                empLevel = x.EmployeeLevel;
+                officeLocation = x.OfficeLocation;
+                userRole = x.UserRole;
             }
 
-            ViewProfileResponse response = new ViewProfileResponse("Succesfully Viewed Profile", firstname, lastname, userImage, description, phoneNumber,empLevel,userRole, officeLocation);
-            
+            ViewProfileResponse response = new ViewProfileResponse("Successfully Viewed Profile", name,
+                userImage, description, phoneNumber, empLevel, userRole, officeLocation);
+
             return response;
         }
 
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
-            var toUpdate = _users.Users.FirstOrDefault(uu => uu.UserID == request.UserId);
+            var toUpdate = _users.Users.FirstOrDefault(uu => uu.UserId == request.UserId);
 
-            toUpdate.firstname = request.FirstName;
-            toUpdate.lastname = request.LastName;
-            toUpdate.phoneNumber = request.PhoneNumber;
-            toUpdate.userImage = request.UserImage;
-            toUpdate.userDescription = request.UserDescription;
-            toUpdate.officeLocation = request.OfficeLocation;
+            toUpdate.Name = request.Name;
+            toUpdate.PhoneNumber = request.PhoneNumber;
+            toUpdate.UserImgUrl = request.UserImage;
+            toUpdate.UserDescription = request.UserDescription;
+            toUpdate.OfficeLocation = request.OfficeLocation;
             _users.Entry(toUpdate).State = EntityState.Modified;
-            
+
             try
             {
                 await _users.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw new DbUpdateException("Error when updating user" + request.FirstName);
+                throw new DbUpdateException("Error when updating user" + request.Name);
             }
-            
+
             var response = new EditProfileResponse("Successfully updated user");
-            
+
             return response;
         }
 
         public bool checkEmailExists(GoogleSignInRequest request)
         {
-            var userEmail = _users.UserEmail.Where(x => x.userEmail == request.Email);
+            var userEmail = _users.UserEmail.Where(x => x.UserEmail == request.Email);
             //Check if IQueryable returns something
             if (userEmail.Any())
             {
@@ -131,6 +133,15 @@ namespace backend_api.Data.User
             {
                 return false;
             }
+        }
+
+        public async Task<Models.User.User> GetExistingUserDetails(GoogleSignInRequest request)
+        {
+            var email = request.Email;
+            //get email object for the given email
+            var userEmail = await _users.UserEmail.FirstOrDefaultAsync(x => x.UserEmail == email);
+            var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == userEmail.UserId);
+            return user;
         }
     }
 }

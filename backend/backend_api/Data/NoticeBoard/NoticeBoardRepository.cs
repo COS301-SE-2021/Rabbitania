@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.NoticeBoard.Requests;
@@ -35,6 +36,14 @@ namespace backend_api.Data.NoticeBoard
             
             
             return new AddNoticeBoardThreadResponse(HttpStatusCode.Created);
+        }
+
+        public async Task<List<Models.NoticeBoard.NoticeBoard>> RetrieveAllNoticeBoardThreads(
+            RetrieveNoticeBoardThreadsRequest request)
+        {
+            List<Models.NoticeBoard.NoticeBoard> threads = _noticeBoard.NoticeBoard.ToList();
+
+            return threads;
         }
     }
 }

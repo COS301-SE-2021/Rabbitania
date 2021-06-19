@@ -4,6 +4,41 @@ namespace backend_api.Models.User.Requests
 {
     public class CreateUserRequest
     {
+        private int _userId;
+        private string _firstName;
+        private string _lastName;
+        private int _phoneNumber;
+        private List<int> _pinnedUserIds;
+        private string _userImage;
+        private string _userDescription;
+        private bool _isOnline;
+        private bool _isAdmin;
+        private int _employeeLevel;
+        private UserRoles _userRole;
+        private OfficeLocation _officeLocation;
+
+        
+        public CreateUserRequest(int userId, string firstName, string lastName, int phoneNumber, List<int> pinnedUserIds, string userImage, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        {
+            _userId = userId;
+            _firstName = firstName;
+            _lastName = lastName;
+            _phoneNumber = phoneNumber;
+            _pinnedUserIds = pinnedUserIds;
+            _userImage = userImage;
+            _userDescription = userDescription;
+            _isOnline = isOnline;
+            _isAdmin = isAdmin;
+            _employeeLevel = employeeLevel;
+            _userRole = userRole;
+            _officeLocation = officeLocation;
+        }
+        
+        public CreateUserRequest()
+        {
+            
+        }
+        
         public int UserId
         {
             get => _userId;
@@ -76,43 +111,6 @@ namespace backend_api.Models.User.Requests
             set => _officeLocation = value;
         }
 
-        private int _userId;
-        private string _firstName;
-        private string _lastName;
-        private int _phoneNumber;
-        private List<int> _pinnedUserIds;
-
-        
-
-        private string _userImage;
-        private string _userDescription;
-        private bool _isOnline;
-        private bool _isAdmin;
-        private int _employeeLevel;
-        private UserRoles _userRole;
-        private OfficeLocation _officeLocation;
-
-        public CreateUserRequest(int userId, string firstName, string lastName, int phoneNumber, List<int> pinnedUserIds, string userImage, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
-        {
-            _userId = userId;
-            _firstName = firstName;
-            _lastName = lastName;
-            _phoneNumber = phoneNumber;
-            _pinnedUserIds = pinnedUserIds;
-            _userImage = userImage;
-            _userDescription = userDescription;
-            _isOnline = isOnline;
-            _isAdmin = isAdmin;
-            _employeeLevel = employeeLevel;
-            _userRole = userRole;
-            _officeLocation = officeLocation;
-        }
-
-
-        public CreateUserRequest()
-        {
-            
-        }
 
     }
 }
