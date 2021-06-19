@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'loginScreen.dart';
 import 'noticeboardScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class InfoForm extends StatefulWidget {
   @override
@@ -15,27 +16,15 @@ class InfoForm extends StatefulWidget {
 }
 
 class _infoForm extends State<InfoForm> {
+  final user = FirebaseAuth.instance.currentUser!;
   final _formKey = GlobalKey<FormState>();
   final myController = TextEditingController();
-  String _dropDownRoleValue = 'Employee';
-  String _dropDownIsAdminValue = 'No';
+  String _dropDownRoleValue = 'Developer';
+  String _dropDownLevelValue = '0';
   String _dropDownOfficeValue = 'Pretoria';
   Widget build(context) => MaterialApp(
         home: Scaffold(
           backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-          appBar: AppBar(
-            bottom: PreferredSize(
-              child: Wrap(
-                children: <Widget>[
-                  ProfilePicture(),
-                ],
-              ),
-              preferredSize: Size.fromHeight(55),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
           body: Stack(
             children: <Widget>[
               SvgPicture.string(_svg_background),
@@ -47,194 +36,324 @@ class _infoForm extends State<InfoForm> {
                     padding: EdgeInsets.all(30),
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top: 5),
+                        padding: EdgeInsets.only(top: 1),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  dropdownColor: Color.fromRGBO(33, 33, 33, 1),
-                                  value: _dropDownRoleValue,
-                                  underline: Container(
-                                    height: 2,
-                                    color: Color.fromRGBO(171, 255, 79, 1),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Color.fromRGBO(171, 255, 79, 0.8),
+                              ),
+                              child: Column(
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(12),
+                                    child: ProfilePicture(),
                                   ),
-                                  onChanged: (String? newValue) {
-                                    setState(
-                                        () => {_dropDownRoleValue = newValue!});
-                                  },
-                                  items: <String>[
-                                    'Employee',
-                                    'Wizard',
-                                    'Ward of the allmighty'
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value,
+                                  Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 300,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          user.displayName!,
                                           style: TextStyle(
+                                            fontSize: 18,
                                             color:
-                                                Color.fromRGBO(171, 255, 79, 1),
-                                          )),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 20),
-                              width: MediaQuery.of(context).size.width,
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  dropdownColor: Color.fromRGBO(33, 33, 33, 1),
-                                  value: _dropDownIsAdminValue,
-                                  underline: Container(
-                                    height: 2,
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() =>
-                                        {_dropDownIsAdminValue = newValue!});
-                                  },
-                                  items: <String>['Yes', 'No']
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value,
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(171, 255, 79, 1),
-                                          )),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 20),
-                              width: MediaQuery.of(context).size.width,
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: DropdownButton<String>(
-                                  dropdownColor: Color.fromRGBO(33, 33, 33, 1),
-                                  value: _dropDownOfficeValue,
-                                  underline: Container(
-                                    height: 2,
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() =>
-                                        {_dropDownOfficeValue = newValue!});
-                                  },
-                                  items: <String>[
-                                    'Pretoria',
-                                    'Braamfontein',
-                                    'Kampala'
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value,
-                                          style: TextStyle(
-                                            color:
-                                                Color.fromRGBO(171, 255, 79, 1),
-                                          )),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 20),
-                              child: TextFormField(
-                                style: TextStyle(
-                                    color: Color.fromRGBO(171, 255, 79, 1)),
-                                autocorrect: true,
-                                decoration: InputDecoration(
-                                  hintStyle: TextStyle(
-                                      color: Color.fromRGBO(171, 255, 79, 0.3)),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  )),
-                                  hintText: 'Enter user description',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color.fromRGBO(171, 255, 79, 1)),
-                                  ),
-                                ),
-                                controller: myController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter text';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Container(
-                              height: 110,
-                              width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.only(top: 50),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  onSurface: Colors.transparent,
-                                  primary: Colors.transparent,
-                                  side: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                ),
-                                child: Text(
-                                  'continue',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => NoticeBoard()));
-                                },
-                              ),
-                            ),
-                            Container(
-                              height: 110,
-                              width: MediaQuery.of(context).size.width,
-                              padding: EdgeInsets.only(top: 50),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  onSurface: Colors.transparent,
-                                  primary: Colors.transparent,
-                                  side: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                ),
-                                child: Text(
-                                  'Sign out',
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  final provider =
-                                      Provider.of<GoogleSignInProvider>(context,
-                                          listen: false);
-                                  provider.googleLogout();
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Login(),
+                                                Color.fromRGBO(33, 33, 33, 1),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 300,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: Colors.transparent,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          user.email!,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color:
+                                                Color.fromRGBO(33, 33, 33, 1),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(15),
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: Text(
+                                  'please enter missing information to proceed',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromRGBO(171, 255, 79, 1)),
+                                ),
+                              ),
+                            ),
+                            Divider(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                            ),
+                            Container(
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: Center(
+                                  child: DropdownButton<String>(
+                                    dropdownColor:
+                                        Color.fromRGBO(33, 33, 33, 1),
+                                    value: _dropDownRoleValue,
+                                    underline: Container(
+                                      height: 2,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() =>
+                                          {_dropDownRoleValue = newValue!});
+                                    },
+                                    items: <String>[
+                                      'Developer',
+                                      'Designer',
+                                      'Care Taker',
+                                      'Scrum Master',
+                                      'CAM',
+                                      'Director',
+                                      'Graduate',
+                                      'Intern'
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          width: 250,
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  171, 255, 79, 1),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 20),
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: Center(
+                                  child: DropdownButton<String>(
+                                    dropdownColor:
+                                        Color.fromRGBO(33, 33, 33, 1),
+                                    value: _dropDownLevelValue,
+                                    underline: Container(
+                                      height: 2,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() =>
+                                          {_dropDownLevelValue = newValue!});
+                                    },
+                                    items: <String>[
+                                      '0',
+                                      '1',
+                                      '2',
+                                      '3',
+                                      '4',
+                                      '5',
+                                      '6',
+                                      '7',
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          width: 250,
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  171, 255, 79, 1),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(top: 20),
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: Center(
+                                  child: DropdownButton<String>(
+                                    dropdownColor:
+                                        Color.fromRGBO(33, 33, 33, 1),
+                                    value: _dropDownOfficeValue,
+                                    underline: Container(
+                                      height: 2,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() =>
+                                          {_dropDownOfficeValue = newValue!});
+                                    },
+                                    items: <String>['Pretoria', 'Braamfontein']
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Container(
+                                          width: 250,
+                                          child: Text(
+                                            value,
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  171, 255, 79, 1),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                padding: EdgeInsets.only(top: 20),
+                                width: 290,
+                                child: TextFormField(
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(171, 255, 79, 1)),
+                                  autocorrect: true,
+                                  decoration: InputDecoration(
+                                    hintStyle: TextStyle(
+                                        color:
+                                            Color.fromRGBO(171, 255, 79, 0.6)),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                    )),
+                                    hintText: 'User bio',
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1)),
+                                    ),
+                                  ),
+                                  controller: myController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter text';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 40),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    width: 150,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: 15),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          onSurface: Colors.transparent,
+                                          primary:
+                                              Color.fromRGBO(33, 33, 33, 1),
+                                          side: BorderSide(
+                                            width: 0.5,
+                                            color:
+                                                Color.fromRGBO(171, 255, 79, 1),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color:
+                                                Color.fromRGBO(171, 255, 79, 1),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          final provider =
+                                              Provider.of<GoogleSignInProvider>(
+                                                  context,
+                                                  listen: false);
+                                          provider.googleLogout();
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => Login(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: 15),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          onSurface: Colors.transparent,
+                                          primary:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          side: BorderSide(
+                                            width: 0.5,
+                                            color:
+                                                Color.fromRGBO(171, 255, 79, 1),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Proceed',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NoticeBoard(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
