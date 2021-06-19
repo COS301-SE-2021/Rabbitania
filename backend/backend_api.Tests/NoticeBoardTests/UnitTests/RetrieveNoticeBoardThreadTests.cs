@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using backend_api.Data.NoticeBoard;
 using backend_api.Exceptions.NoticeBoard;
 using backend_api.Models.NoticeBoard;
+using backend_api.Models.NoticeBoard.Requests;
+using backend_api.Models.NoticeBoard.Responses;
 using backend_api.Models.User;
 using backend_api.Services.NoticeBoard;
 using Moq;
@@ -54,7 +56,23 @@ namespace backend_api.Tests.NoticeBoardTests.UnitTests
         [Fact(DisplayName = "When the RetrieveNoticeBoardThreadsRequest is null, an exception should be thrown")]
         public async Task RetrieveNoticeBoardThreads_ThrowInvalidNoticeBoardThreadRequestOnInvalidRequest()
         {
-            
+            var exception =
+                await Assert.ThrowsAsync<InvalidNoticeBoardRequestException>(
+                    () => _sut.RetrieveNoticeBoardThreads(null));
+            Assert.Equal("Invalid RetrieveNoticeBoardThreadsRequest object", exception.Message);
         }
+
+        [Fact(DisplayName =
+            "When a request to retrieve all Notice Board threads is passed in a list of Noticeboard Threads should be returned")]
+        public async Task RetrieveNoticeBoardThreads_ReturnListOfNoticeBoardThreads()
+        {
+            var requestDto = new RetrieveNoticeBoardThreadsRequest();
+            var responseDto = new RetrieveNoticeBoardThreadsResponse(_mockedListDto);
+            _noticeBoardRepoMock.Setup(n => n.RetrieveAllNoticeBoardThreads(requestDto)).ReturnsAsync(_mockedListDto);
+            var noticeBoardThreadList = await _sut.RetrieveNoticeBoardThreads(requestDto);
+            Assert.Equal(responseDto.NoticeBoard, noticeBoardThreadList.NoticeBoard);
+        }
+        
+        
     }
 }
