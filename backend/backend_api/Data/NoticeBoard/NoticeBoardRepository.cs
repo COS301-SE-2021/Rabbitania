@@ -45,5 +45,19 @@ namespace backend_api.Data.NoticeBoard
 
             return threads;
         }
+
+        public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
+            DeleteNoticeBoardThreadRequest request)
+        {
+            var threadToDelete = _noticeBoard.NoticeBoard.Find(request.ThreadId);
+            if (threadToDelete != null)
+            {
+                _noticeBoard.NoticeBoard.Remove(threadToDelete);
+            }
+            
+            await _noticeBoard.SaveChanges();
+
+            return new DeleteNoticeBoardThreadResponse(HttpStatusCode.Accepted);
+        }
     }
 }

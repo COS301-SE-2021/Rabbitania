@@ -35,5 +35,18 @@ namespace backend_api.Controllers.NoticeBoard
             return await _service.RetrieveNoticeBoardThreads(request);
         }
 
+        [HttpDelete]
+        [Route("DeleteNoticeBoardThread")]
+        public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
+            [FromBody] DeleteNoticeBoardThreadRequest request)
+        {
+            return await _service.DeleteNoticeBoardThread(request);
+        }
+        
+        /*[HttpDelete]
+        [Route("DeleteNoticeBoardThread")]
+        public async Task<DeleteNoticeBoardThreadResponse
+        */
+
     }
 }

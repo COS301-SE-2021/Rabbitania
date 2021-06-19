@@ -81,7 +81,7 @@ namespace backend_api.Controllers.Auth
                 if (_service.CheckEmailDomain(request).CorrectDomain)
                 {
                     //check if email exists in databse, otherwise user must register
-                    if (_service.checkEmailExists(request).EmailExists)
+                    if (_service.checkEmailExists(request).Result.EmailExists)
                     {
                         var json = _service.GetUser(request);
 
@@ -93,7 +93,7 @@ namespace backend_api.Controllers.Auth
                         // user needs to be added as they are a valid retro rabbit employee
                         // but are not in the system yet.
                         await _userService.CreateUser(request);
-                        return Ok("all good in the hood");
+                        return Created("", "User has been created.");
                         //throw new InvalidEmailException("Email does not exist in database");
                     }
                 }

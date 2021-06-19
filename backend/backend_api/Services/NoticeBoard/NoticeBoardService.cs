@@ -45,15 +45,27 @@ namespace backend_api.Services.NoticeBoard
             RetrieveNoticeBoardThreadsRequest request)
         {
             RetrieveNoticeBoardThreadsResponse response = new RetrieveNoticeBoardThreadsResponse(
-                await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request)
-            );
+                await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request));
 
-            if (response == null)
+            if (request == null)
             {
-                throw new InvalidNoticeBoardRequestException("There are no Noticeboard Threads to retrieve");
+                throw new InvalidNoticeBoardRequestException("Invalid RetrieveNoticeBoardThreadsRequest object");
             }
 
             return response;
+        }
+
+        public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
+            DeleteNoticeBoardThreadRequest request)
+        {
+            
+            
+            if (request == null)
+            {
+                throw new InvalidNotificationRequestException("Invalid DeleteNoticeBoardThreadRequest operation");
+            }
+
+            return await _noticeBoardRepository.DeleteNoticeBoardThread(request);
         }
     }
 }
