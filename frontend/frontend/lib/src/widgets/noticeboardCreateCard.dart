@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/noticeboardCreateThread.dart';
 
+
 var titleInput = "";
 var contextInput = "";
 
@@ -85,7 +86,7 @@ class NoticeboardThreadCard extends StatelessWidget {
 Future<String> addNewThread(String title,String content) async {
   try {
     if (title == "" || content == "") {
-      throw("Cannot Submit Empty fields");
+      throw("Cannot Submit Empty Fields");
     }
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
