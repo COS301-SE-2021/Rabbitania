@@ -13,5 +13,7 @@ namespace backend_api.Services.Auth
 
         JObject GetUser(GoogleSignInRequest request);
 
+        Task<Models.User.User> GetUserName(string name);
+
     }
 }

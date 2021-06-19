@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
@@ -63,6 +64,15 @@ namespace backend_api.Services.Auth
                 new JProperty("office", user.OfficeLocation.ToString()));
 
             return json;
+        }
+
+        public async Task<Models.User.User> GetUserName(string name)
+        {
+            var UserName = name;
+
+            var resp = await _repository.GetUser(name);
+            var user = resp.FirstOrDefault();
+            return user;
         }
 
         

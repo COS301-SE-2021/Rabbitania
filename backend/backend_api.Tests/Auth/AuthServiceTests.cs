@@ -9,6 +9,7 @@ using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using backend_api.Services.Auth;
+using backend_api.Services.User;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
@@ -25,9 +26,13 @@ namespace backend_api.Tests.Auth
         private readonly ITestOutputHelper outHelper;
         private readonly User _mockedUser;
         private readonly UserEmails _mockedEmail;
+        private readonly UserService _userService;
+
         public AuthUniTests(ITestOutputHelper outHelp)
         {
             _authService = new AuthService(_userRepositoryMock.Object);
+            _userService = new UserService(_userRepositoryMock.Object);
+            
             this.outHelper = outHelp;
             
             this._mockedUser = new User(
@@ -44,9 +49,6 @@ namespace backend_api.Tests.Auth
             );
 
             this._mockedEmail = new UserEmails("test@castellodev.co.za", 50);
-            
-            
-
         }
         
         [Fact]
@@ -132,11 +134,12 @@ namespace backend_api.Tests.Auth
             
             //Act
             var response = await _authService.checkEmailExists(requestDoa);
+            var resp = await _authService.GetUserName(_mockedUser.Name);
             
             //Assert
-             /*Assert.IsType<LoginResponse>(response);
-             Assert.True(response.EmailExists);*/
-             Assert.True(response.EmailExists);
+            Assert.NotNull(resp);
+             //Assert.IsType<LoginResponse>(response);
+             //Assert.True(response.EmailExists);
         }
 
         /*[Fact(DisplayName = "Gets a user json object that exists on the system")]
