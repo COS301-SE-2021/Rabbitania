@@ -33,6 +33,25 @@ int dislike = 0;
 
 class NoticeboardCard extends StatelessWidget {
 
+  Widget cancelButton = IconButton(
+    icon: const Icon(
+      Icons.close,
+      color: Color.fromRGBO(255, 79, 79, 1),
+      size: 24.0,
+    ),
+    tooltip: 'Cancel',
+    onPressed:  () {},
+  );
+  Widget continueButton = IconButton(
+    icon: const Icon(
+      Icons.check,
+      color: Color.fromRGBO(171, 255, 79, 1),
+      size: 24.0,
+    ),
+    tooltip: 'Delete',
+    onPressed:  () {},
+  );
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -69,37 +88,38 @@ class NoticeboardCard extends StatelessWidget {
                             subtitle: Text(iter.current.threadContent,
                               style: TextStyle(color: Colors.white),
                             ),
-                          ),
+                            trailing:
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.delete_forever_sharp,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                      size: 24.0,
+                                    ),
+                                    tooltip: 'Delete',
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            elevation: 5,
+                                            backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                                            titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
+                                            title: Text("Delete Thread"),
+                                            contentTextStyle: TextStyle(color: Colors.white, fontSize: 16) ,
+                                            content: Text("Are you sure you want to delete this thread?"),
+                                            actions: [
+                                              continueButton,
+                                              cancelButton,
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+
+                            ),
+
                           Image.asset(iter.current.imageUrl),
-                          // ButtonBar(
-                          //   alignment: MainAxisAlignment.start,
-                          //   children: [
-                          //     IconButton(
-                          //       icon: const Icon(
-                          //         Icons.thumb_up_sharp,
-                          //         color: Color.fromRGBO(171, 255, 79, 1),
-                          //         size: 24.0,
-                          //       ),
-                          //       tooltip: 'Up',
-                          //       onPressed: () {
-                          //         fetchNotice();
-                          //       },
-                          //     ),
-                          //     Text(like.toString()),
-                          //     IconButton(
-                          //       icon: const Icon(
-                          //         Icons.thumb_down_sharp,
-                          //         color: Color.fromRGBO(171, 255, 79, 1),
-                          //         size: 24.0,
-                          //       ),
-                          //       tooltip: 'Down',
-                          //       onPressed: () {
-                          //
-                          //       },
-                          //     ),
-                          //     Text(dislike.toString()),
-                          //   ],
-                          // ),
                         ],
                       ),
                     ),
