@@ -60,7 +60,7 @@ class NoticeboardCard extends StatelessWidget {
                           ListTile(
                             contentPadding: EdgeInsets.all(10.0),
                             leading: Icon(
-                              Icons.account_circle_outlined, size: 70,
+                              Icons.announcement_outlined, size: 45,
                               color: Color.fromRGBO(171, 255, 79, 1),),
                             title: Text(iter.current.threadTitle,
                               style: TextStyle(letterSpacing: 3.0, color: Colors
@@ -121,9 +121,3 @@ class NoticeboardCard extends StatelessWidget {
     );
   }
 }
-
-
-
-// {'Title':"Covid 21","Body":"No more work for 2021"},
-// {'Title':"Returning","Body":"Work is Not stopping"},
-// {'Title':"Party Time","Body":"This is a message to all employees"}

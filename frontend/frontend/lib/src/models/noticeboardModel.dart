@@ -87,6 +87,6 @@ Future<List<Thread>> fetchNotice() async {
     }
   print("ENTIRE LIST");
   print(threadObj);
-
+  client.close();
   return threadObj;
 }
