@@ -23,6 +23,11 @@ namespace backend_api.Models.Auth.Requests
             this._googleImgUrl = googleImgUrl;
         }
 
+        public GoogleSignInRequest(string email)
+        {
+            _email = email;
+        }
+
         public string DisplayName
         {
             get => _displayName;

@@ -6,7 +6,7 @@ namespace backend_api.Models.User
 {
     public class User
     {
-        public User(int userId, string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isOnline, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        public User(int userId, string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
         {
             UserId = userId;
             this.Name = name;
