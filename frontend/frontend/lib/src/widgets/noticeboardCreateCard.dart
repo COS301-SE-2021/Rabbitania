@@ -29,10 +29,30 @@ class NoticeboardThreadCard extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
+                    style: TextStyle(color: Colors.white),
                     controller: titleController,
+                    cursorColor: Color.fromRGBO(171, 255, 79, 1),
+                    decoration: InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
+                      ),
+                      labelText: 'Enter the title of your notice thread',
+                      labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+
+                    ),
                   ),
                   TextFormField(
+                    style: TextStyle(color: Colors.white),
                     controller: contentController,
+                    cursorColor: Color.fromRGBO(171, 255, 79, 1),
+                    decoration: InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
+                      ),
+                      labelText: 'Enter the content',
+                      labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+
+                    ),
                   ),
                   TextButton(
                     // When the user presses the button, show an alert dialog containing
@@ -47,7 +67,7 @@ class NoticeboardThreadCard extends StatelessWidget {
                         },
                       );
                     },
-                    child: Icon(Icons.control_point),
+                    child: Icon(Icons.control_point, color:Color.fromRGBO(171, 255, 79, 1) ,),
                   ),
                 ],
               ),
@@ -101,8 +121,8 @@ Widget addNewThread(String title, String content)
         throw("Cannot Submit Empty fields");
       }
     else{
-      //createAlbum(title);
-      connectAndGet(title,content);
+      createAlbum(title);
+      //connectAndGet(title,content);
 
       // ignore: unrelated_type_equality_checks
       if(true)
@@ -141,21 +161,43 @@ Widget addNewThread(String title, String content)
 
 Future<bool> connectAndGet(String title, String content) async {
   try {
-    HttpClient client = new HttpClient();
+    final client = HttpClient();
     client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
-    String url = 'http://10.0.2.2:5000/api/NoticeBoard/AddNoticeBoardThread';
-    Map<String, dynamic> jsonObj = {'userId': 1,'threadTitle': "title",'threadContent': "content",'minLevel': 0,'imageUrl': "string",'permittedUserRoles': 0};//tested this is a json object when json.encode is run on it
+    final request = await client.postUrl(Uri.parse("http://10.0.2.2:5000/api/NoticeBoard/AddNoticeBoardThread"));
+        request.headers.set(HttpHeaders.contentTypeHeader, "application/json");
+        request.write('{"userId": 1,"threadTitle": "title","threadContent": "content","minLevel": 0,"imageUrl": "string","permittedUserRoles": 0}');
+        final response = await request.close();
+        print(response.statusCode);
+        String reply = await response.transform(utf8.decoder).join();
+        print(reply);
+        response.transform(utf8.decoder).listen((contents)
+        {
+          print(contents);
+        });
 
 
-    HttpClientRequest request = await client.postUrl(Uri.parse(url));
-    request.headers.set('content-type', 'application/json');
-    //request.headers.add("body", json.encode(jsonObj));
-    request.add(utf8.encode(json.encode(jsonObj)));
 
 
-    HttpClientResponse response1 = await request.close();
-    print(response1.statusCode);
-    print(response1.first);
+    // HttpClient client = new HttpClient();
+    // client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+    // String url = 'http://10.0.2.2:5000/api/NoticeBoard/AddNoticeBoardThread';
+    // Map<String, dynamic> jsonObj = {"userId": 1,"threadTitle": "title","threadContent": "content","minLevel": 0,"imageUrl": "string","permittedUserRoles": 0};//tested this is a json object when json.encode is run on it
+    //
+    // print(jsonObj);
+    // print(json.encode(jsonObj));
+    // print(utf8.encode(json.encode(jsonObj)));
+    //
+    // HttpClientRequest request = await client.postUrl(Uri.parse(url));
+    // request.headers.set('content-type', 'application/json');
+    // //request.headers.add("body", json.encode(jsonObj));
+    // //request.add(utf8.encode(json.encode(jsonObj)));
+    // request.write(json.encode(jsonObj));
+    //
+    // HttpClientResponse response1 = await request.close();
+    //
+    // String reply = await response1.transform(utf8.decoder).join();
+    // print(reply);
+
 
     return true;
   }
@@ -168,11 +210,9 @@ Future<bool> connectAndGet(String title, String content) async {
 }
 
 Future<Thread> createAlbum(String title) async {
-  HttpClient client = new HttpClient();
-  client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
 
   final response = await http.post(
-    Uri.parse('http://10.0.2.2:5000/api/NoticeBoard/AddNoticeBoardThread'),
+    Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -186,7 +226,7 @@ Future<Thread> createAlbum(String title) async {
     }),
   );
 
-
+  print(response);
   print(response.body);
   //print(jsonDecode(response.body));
   print(response.statusCode);
