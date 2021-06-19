@@ -48,9 +48,9 @@ namespace backend_api.Services.NoticeBoard
                 await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request)
             );
 
-            if (response == null)
+            if (request == null)
             {
-                throw new InvalidNoticeBoardRequestException("There are no Noticeboard Threads to retrieve");
+                throw new InvalidNoticeBoardRequestException("Invalid RetrieveNoticeBoardThreadsRequest object");
             }
 
             return response;

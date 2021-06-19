@@ -33,5 +33,10 @@ namespace backend_api.Models.NoticeBoard
             PermittedUserRoles = permittedUserRoles;
             UserId = userId;
         }
+
+        public NoticeBoard()
+        {
+            
+        }
     }
 }
