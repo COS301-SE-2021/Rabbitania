@@ -15,14 +15,16 @@ class NoticeboardThreadCard extends StatelessWidget {
     return Center(
       child:ListView(
           children: <Widget>[
-            Card(
-              color: Color.fromRGBO(57, 57, 57, 25),
-              shadowColor: Colors.black,
+            Container(
+            padding: EdgeInsets.all(16),
+            child: Card(
+              color: Colors.transparent,
+              //shadowColor: Colors.black,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5.0)
               ),
               clipBehavior: Clip.antiAlias,
-              elevation: 10,
+              elevation: 0,
               child: Column(
                 children: [
                   TextFormField(
@@ -33,7 +35,7 @@ class NoticeboardThreadCard extends StatelessWidget {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
                       ),
-                      labelText: 'Enter the title of your notice thread',
+                      labelText: 'Title',
                       labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                     ),
                   ),
@@ -45,11 +47,14 @@ class NoticeboardThreadCard extends StatelessWidget {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
                       ),
-                      labelText: 'Enter the content',
+                      labelText: 'Content',
                       labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                     ),
                   ),
-                  TextButton(
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color.fromRGBO(171, 255, 79, 1)),
+                    ),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -71,10 +76,12 @@ class NoticeboardThreadCard extends StatelessWidget {
                         },
                       );
                     },
-                    child: Icon(Icons.control_point, color:Color.fromRGBO(171, 255, 79, 1) ,),
+                    child: Text("Create", style: TextStyle(color: Colors.black)),
+                    //child: Icon(Icons.control_point, color:Color.fromRGBO(171, 255, 79, 1) , size: 50,),
                   ),
                 ],
               ),
+            ),
             ),
           ]
       ),
@@ -94,7 +101,7 @@ Future<String> addNewThread(String title,String content) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'userId': 1,
+        'userId': 2,
         'threadTitle': title,
         'threadContent': content,
         'minLevel': 0,

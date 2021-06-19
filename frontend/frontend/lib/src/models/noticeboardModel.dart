@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class NoticeBoardThreads {
   final List<dynamic> threadList;
@@ -89,4 +90,33 @@ Future<List<Thread>> fetchNotice() async {
   print(threadObj);
   client.close();
   return threadObj;
+}
+
+Future<bool> deleteThread(int threadID) async{
+  try {
+    if (threadID < 0 ) {
+      throw("Error Thread ID is Incorrect");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/DeleteNoticeBoardThread'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'threadId': threadID,
+      }),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201||response.statusCode == 200) {
+      return true;
+    } else {
+      throw("Failed to delete, error code" +
+          response.statusCode.toString());
+    }
+  } catch(Exception)
+  {
+    return false;
+  }
+
+
 }

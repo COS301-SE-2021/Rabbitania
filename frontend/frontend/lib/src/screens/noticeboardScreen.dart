@@ -12,7 +12,9 @@ class NoticeBoard extends StatefulWidget {
   }
 }
 
+
 late Future<List<Thread>> futureThread;
+late Future<bool> deleteResponse;
 
 class _NoticeBoard extends State<NoticeBoard> {
   final util = new UtilModel();
@@ -20,6 +22,14 @@ class _NoticeBoard extends State<NoticeBoard> {
   void initState() {
     super.initState();
     futureThread = fetchNotice();
+    deleteResponse = deleteThread(-1);
+  }
+
+  void refresh()
+  {
+    setState(() {
+
+    });
   }
 
   void next() {
@@ -35,7 +45,7 @@ class _NoticeBoard extends State<NoticeBoard> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Noticeboard',
+            'Noticeboard      ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 35,
@@ -43,7 +53,7 @@ class _NoticeBoard extends State<NoticeBoard> {
           ),
         ),
         actions: [
-          Icon(Icons.search),
+
         ],
       ),
       floatingActionButton: ExampleExpandableFab(),
