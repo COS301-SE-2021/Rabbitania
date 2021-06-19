@@ -3,14 +3,13 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:http/http.dart' as http;
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/widgets/continue_button.dart';
 import 'package:frontend/src/widgets/login_fab.dart';
 import '../models/util_model.dart';
 import 'googleAuthTest.dart';
 import 'noticeboardScreen.dart';
 import 'supplyInfoScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -20,31 +19,8 @@ class Login extends StatefulWidget {
 }
 
 class _loginState extends State<Login> {
-  final user = FirebaseAuth.instance.currentUser!;
   final util = new UtilModel();
-
-  httpCall() async {
-    final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/GoogleSignIn/GoogleLogin'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        'displayName': user.displayName,
-        'email': user.email,
-        'phoneNumber': user.phoneNumber,
-        'googleImgUrl': user.photoURL,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => NoticeBoard()));
-    } else if (response.statusCode == 201) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => InfoForm()));
-    }
-  }
+  var user;
 
   Widget build(context) => Scaffold(
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
@@ -54,7 +30,7 @@ class _loginState extends State<Login> {
           title: Center(
             child: Container(
               child: Text(
-                'Welcome to rabbitania',
+                'Welcome to Rabbitania',
                 maxLines: 2,
                 style: TextStyle(
                   color: Color.fromRGBO(171, 255, 79, 1),
@@ -88,36 +64,8 @@ class _loginState extends State<Login> {
                               ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasData) {
-                            return Container(
-                              color: Colors.transparent,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.transparent),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(300)),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  //make api call
-                                  //api endpoint - displayName, email, number, uri
-                                  //if 200 user goes to noticeboard, else 201 user goes to infoForm
-                                  //receive statuscode 200 || thrownException || emailDomain does not match
-                                  httpCall();
-                                },
-                                child: Text(
-                                  'Continue',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    color: Color.fromRGBO(171, 255, 79, 1),
-                                  ),
-                                ),
-                              ),
-                            );
+                            return ContinueButton(
+                                FirebaseAuth.instance.currentUser);
                           } else if (snapshot.hasError) {
                             return Center(child: Text('Something went wrong'));
                           } else {
