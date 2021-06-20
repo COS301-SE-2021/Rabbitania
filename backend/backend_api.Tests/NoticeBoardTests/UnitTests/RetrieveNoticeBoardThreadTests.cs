@@ -54,7 +54,7 @@ namespace backend_api.Tests.NoticeBoardTests.UnitTests
         }
 
         [Fact(DisplayName = "When the RetrieveNoticeBoardThreadsRequest is null, an exception should be thrown")]
-        public async Task RetrieveNoticeBoardThreads_ThrowInvalidNoticeBoardThreadRequestOnInvalidRequest()
+        public async Task RetrieveNoticeBoardThreads_ThrowInvalidNoticeBoardThreadRequestOnNullObject()
         {
             var exception =
                 await Assert.ThrowsAsync<InvalidNoticeBoardRequestException>(
@@ -72,6 +72,8 @@ namespace backend_api.Tests.NoticeBoardTests.UnitTests
             var noticeBoardThreadList = await _sut.RetrieveNoticeBoardThreads(requestDto);
             Assert.Equal(responseDto.NoticeBoard, noticeBoardThreadList.NoticeBoard);
         }
+        
+        
         
         
     }

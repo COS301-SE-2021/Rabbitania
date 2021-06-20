@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class NoticeBoardThreads {
   final List<dynamic> threadList;
@@ -59,14 +60,14 @@ Future<List<Thread>> fetchNotice() async {
   HttpClientResponse response1 = await request.close();
   String reply = await response1.transform(utf8.decoder).join();
 
-  print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList);//[{everything}]
-  print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);//{singleThread}
+  //print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList);//[{everything}]
+  //print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);//{singleThread}
 
 
   var test = (NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
   print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-  print(test);
-  print(jsonEncode(test));
+  //print(test);
+  //print(jsonEncode(test));
 
   print(Thread.fromJson(test).threadId);
 
@@ -77,7 +78,7 @@ Future<List<Thread>> fetchNotice() async {
   //list of thread objects
   List<dynamic> tList = NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList;
 
-  print(tList[0]);
+  //print(tList[0]);
 
   List<Thread> threadObj = [];
 
@@ -85,8 +86,37 @@ Future<List<Thread>> fetchNotice() async {
     {
       threadObj.add(Thread.fromJson(t));
     }
-  print("ENTIRE LIST");
-  print(threadObj);
+  //print("ENTIRE LIST");
+  //print(threadObj);
   client.close();
   return threadObj;
+}
+
+Future<bool> deleteThread(int threadID) async{
+  try {
+    if (threadID < 0 ) {
+      throw("Error Thread ID is Incorrect");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/DeleteNoticeBoardThread'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'threadId': threadID,
+      }),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201||response.statusCode == 200) {
+      return true;
+    } else {
+      throw("Failed to delete, error code" +
+          response.statusCode.toString());
+    }
+  } catch(Exception)
+  {
+    return false;
+  }
+
+
 }

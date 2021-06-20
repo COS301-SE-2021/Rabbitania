@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using backend_api.Exceptions.Auth;
+using backend_api.Models.User.Requests;
 using backend_api.Services.Auth;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Routing;
@@ -93,7 +94,7 @@ namespace backend_api.Controllers.Auth
                         // user needs to be added as they are a valid retro rabbit employee
                         // but are not in the system yet.
                         await _userService.CreateUser(request);
-                        return Ok("all good in the hood");
+                        return Created("", "User has been created.");
                         //throw new InvalidEmailException("Email does not exist in database");
                     }
                 }
@@ -108,6 +109,16 @@ namespace backend_api.Controllers.Auth
             }
 
             // return response.json().ToString();
+        }
+
+        [HttpGet]
+        [Route("GetID")]
+        public async Task<int> GetUserID(String email)
+        {
+            var request = new GoogleSignInRequest(email);
+            var resp = await _service.GetUserID(request);
+            var UserID = resp.UserId;
+            return UserID;
         }
     }
 }

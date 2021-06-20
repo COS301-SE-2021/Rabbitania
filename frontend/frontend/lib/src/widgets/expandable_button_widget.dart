@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/screens/googleAuthTest.dart';
 
 @immutable
 class ExampleExpandableFab extends StatelessWidget {
@@ -31,16 +33,22 @@ class ExampleExpandableFab extends StatelessWidget {
       distance: 112.0,
       children: [
         ActionButton(
-          onPressed: () => _showAction(context, 0),
-          icon: const Icon(Icons.format_size),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Test()));
+          },
+          icon: const FaIcon(FontAwesomeIcons.home,
+              color: Color.fromRGBO(171, 255, 79, 1)),
         ),
         ActionButton(
           onPressed: () => _showAction(context, 1),
-          icon: const Icon(Icons.insert_photo),
+          icon: const FaIcon(FontAwesomeIcons.bell,
+              color: Color.fromRGBO(171, 255, 79, 1)),
         ),
         ActionButton(
           onPressed: () => _showAction(context, 2),
-          icon: const Icon(Icons.videocam),
+          icon: const FaIcon(FontAwesomeIcons.userCircle,
+              color: Color.fromRGBO(171, 255, 79, 1)),
         ),
       ],
     );
@@ -129,12 +137,11 @@ class _ExpandableFabState extends State<ExpandableFab>
           elevation: 4.0,
           child: InkWell(
             onTap: _toggle,
-            child: Padding(
+            child: Container(
+              color: Color.fromRGBO(33, 33, 33, 1),
               padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.close,
-                color: Color.fromRGBO(171, 255, 79, 1),
-              ),
+              child: FaIcon(FontAwesomeIcons.timesCircle,
+                  color: Color.fromRGBO(171, 255, 79, 1)),
             ),
           ),
         ),
@@ -178,12 +185,18 @@ class _ExpandableFabState extends State<ExpandableFab>
           curve: const Interval(0.25, 1.0, curve: Curves.easeInOut),
           duration: const Duration(milliseconds: 250),
           child: Container(
-            child: FloatingActionButton(
-              backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-              foregroundColor: Colors.transparent,
-              elevation: 0,
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(33, 33, 33, 1),
+              borderRadius: BorderRadius.circular(300),
+            ),
+            child: IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.bars,
+                color: Color.fromRGBO(171, 255, 79, 1),
+              ),
               onPressed: _toggle,
-              child: SvgPicture.string(_svg_rabbit),
             ),
           ),
         ),
@@ -253,7 +266,7 @@ class ActionButton extends StatelessWidget {
     return Material(
       shape: const CircleBorder(),
       clipBehavior: Clip.antiAlias,
-      color: Color.fromRGBO(171, 255, 79, 1),
+      color: Color.fromRGBO(33, 33, 33, 1),
       elevation: 4.0,
       child: IconTheme.merge(
         data: theme.accentIconTheme,

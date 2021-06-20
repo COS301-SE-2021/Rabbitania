@@ -14,12 +14,11 @@ class _loginState extends State<LoginFab> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      tooltip: 'LogIn',
       elevation: 0,
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.transparent,
       focusColor: Colors.transparent,
-      splashColor: Colors.transparent,
+      splashColor: Color.fromRGBO(171, 255, 79, 1),
       onPressed: () {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
@@ -27,9 +26,6 @@ class _loginState extends State<LoginFab> {
       },
       child: Container(
         alignment: Alignment.center,
-        height: 200,
-        width: 180,
-        padding: EdgeInsets.all(16),
         child: SvgPicture.string(
           _svg_rabbit,
           fit: BoxFit.fill,

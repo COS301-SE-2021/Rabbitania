@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class UtilModel {
   final greyColor = Color.fromRGBO(33, 33, 33, 1);
   final greenColor = Color.fromRGBO(171, 255, 79, 1);
+  final whiteColor = Color.fromRGBO(238, 238, 238, 1);
 
   UtilModel();
 

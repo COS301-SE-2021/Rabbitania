@@ -6,13 +6,17 @@ import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import '../widgets/card_item.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'noticeboardCreateThread.dart';
+
 class NoticeBoard extends StatefulWidget {
   createState() {
     return _NoticeBoard();
   }
 }
 
+
 late Future<List<Thread>> futureThread;
+late Future<bool> deleteResponse;
 
 class _NoticeBoard extends State<NoticeBoard> {
   final util = new UtilModel();
@@ -20,6 +24,14 @@ class _NoticeBoard extends State<NoticeBoard> {
   void initState() {
     super.initState();
     futureThread = fetchNotice();
+    deleteResponse = deleteThread(-1);
+  }
+
+  void refresh()
+  {
+    setState(() {
+
+    });
   }
 
   void next() {
@@ -35,7 +47,7 @@ class _NoticeBoard extends State<NoticeBoard> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Noticeboard',
+            'Noticeboard      ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 35,
@@ -43,7 +55,7 @@ class _NoticeBoard extends State<NoticeBoard> {
           ),
         ),
         actions: [
-          Icon(Icons.search),
+
         ],
       ),
       floatingActionButton: ExampleExpandableFab(),
@@ -57,8 +69,30 @@ class _NoticeBoard extends State<NoticeBoard> {
               fit: BoxFit.contain,
             ),
              Container(
+               padding: EdgeInsets.only(bottom: 75),
                 child: NoticeboardCard(),
               ),
+            Positioned.fill(
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: Colors.transparent,
+                    height: 75,
+                    width: double.infinity,
+                    //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
+                    padding: EdgeInsets.only(left:15, right: 80,top:5, bottom: 16),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Color.fromRGBO(171, 255, 79, 1)),
+                      ), onPressed: () {
+                      UtilModel.route(() => NoticeBoardThread(), context);
+                    },
+                      child: Text("Create Notice", style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ),
+                  ),
+              ),
+            ),
+
           ],
         ),
       ),

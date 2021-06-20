@@ -21,7 +21,7 @@ class ProfileDisplay extends StatelessWidget {
           ),
           SizedBox(height: 8),
           CircleAvatar(
-            maxRadius: 25,
+            maxRadius: 40,
           ),
           SizedBox(height: 8),
           Text('Name: ' + user.displayName!,
