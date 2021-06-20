@@ -22,6 +22,7 @@ class _infoForm extends State<InfoForm> {
   String _dropDownRoleValue = 'Developer';
   String _dropDownLevelValue = '0';
   String _dropDownOfficeValue = 'Pretoria';
+
   Widget build(context) => MaterialApp(
         home: Scaffold(
           backgroundColor: Color.fromRGBO(33, 33, 33, 1),
@@ -43,7 +44,7 @@ class _infoForm extends State<InfoForm> {
                             Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                color: Color.fromRGBO(171, 255, 79, 0.8),
+                                color: Color.fromRGBO(171, 255, 79, 0.6),
                               ),
                               child: Column(
                                 children: <Widget>[
@@ -65,8 +66,8 @@ class _infoForm extends State<InfoForm> {
                                           user.displayName!,
                                           style: TextStyle(
                                             fontSize: 18,
-                                            color:
-                                                Color.fromRGBO(33, 33, 33, 1),
+                                            color: Color.fromRGBO(
+                                                238, 238, 238, 1),
                                           ),
                                         ),
                                       ),
@@ -86,8 +87,8 @@ class _infoForm extends State<InfoForm> {
                                           user.email!,
                                           style: TextStyle(
                                             fontSize: 18,
-                                            color:
-                                                Color.fromRGBO(33, 33, 33, 1),
+                                            color: Color.fromRGBO(
+                                                238, 238, 238, 1),
                                           ),
                                         ),
                                       ),
@@ -342,13 +343,14 @@ class _infoForm extends State<InfoForm> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NoticeBoard(),
-                                            ),
-                                          );
+                                          print(user.uid);
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         NoticeBoard(),
+                                          //   ),
+                                          // );
                                         },
                                       ),
                                     ),

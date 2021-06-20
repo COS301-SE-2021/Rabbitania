@@ -20,7 +20,6 @@ class Login extends StatefulWidget {
 
 class _loginState extends State<Login> {
   final util = new UtilModel();
-  var user;
 
   Widget build(context) => Scaffold(
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
@@ -64,8 +63,7 @@ class _loginState extends State<Login> {
                               ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasData) {
-                            return ContinueButton(
-                                FirebaseAuth.instance.currentUser);
+                            return ContinueButton(snapshot.data);
                           } else if (snapshot.hasError) {
                             return Center(child: Text('Something went wrong'));
                           } else {

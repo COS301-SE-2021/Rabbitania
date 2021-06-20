@@ -16,18 +16,21 @@ class ContinueButton extends StatefulWidget {
 
 class _continueButton extends State<ContinueButton> {
   Future httpCall() async {
-    print('httpCall made');
-    print(widget.user);
+    var user;
+    setState(() {
+      user = widget.user;
+    });
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/GoogleSignIn/GoogleLogin'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'displayName': widget.user.displayName!,
-        'email': widget.user.email!,
-        'phoneNumber': widget.user.phoneNumber!,
-        'googleImgUrl': widget.user.photoURL!,
+        'displayName': widget.user.displayName,
+        'email': widget.user.email,
+        'phoneNumber': widget.user.phoneNumber,
+        'googleImgUrl': widget.user.phoneNumber,
+        'uid': widget.user.uid,
       }),
     );
     if (response.statusCode == 200) {
@@ -37,7 +40,21 @@ class _continueButton extends State<ContinueButton> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => InfoForm()));
     } else {
-      print(response.statusCode);
+      showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          title: new Text("Login Error"),
+          content: new Text("Threre was an error"),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text('Close me!'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ),
+      );
     }
   }
 
