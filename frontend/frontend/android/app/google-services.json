@@ -20,10 +20,6 @@
             "package_name": "com.example.frontend",
             "certificate_hash": "cfb128a92e6dca02634af3b82dbd01b5b435745c"
           }
-        },
-        {
-          "client_id": "956015917059-8ika0sebnt059r5n5vrtfle1aopnogb2.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
