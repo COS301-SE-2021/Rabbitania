@@ -30,7 +30,7 @@ class _continueButton extends State<ContinueButton> {
         'displayName': widget.user.displayName,
         'email': widget.user.email,
         'phoneNumber': widget.user.phoneNumber,
-        'googleImgUrl': widget.user.phoneNumber,
+        'googleImgUrl': widget.user.photoURL,
       }),
     );
     if (response.statusCode == 200) {
