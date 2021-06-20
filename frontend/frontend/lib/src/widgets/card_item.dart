@@ -101,7 +101,7 @@ class CardObj extends StatelessWidget {
                       elevation: 5,
                       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
                       titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
-                      title: Text("Delete Thread"),
+                      title: Text("Delete Notice"),
                       contentTextStyle: TextStyle(color: Colors.white, fontSize: 16) ,
                       content: Text("Are you sure you want to delete this notice?"),
                       actions: [
