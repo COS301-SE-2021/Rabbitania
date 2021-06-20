@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using backend_api.Exceptions.NoticeBoard;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -49,15 +51,26 @@ namespace backend_api.Data.NoticeBoard
         public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
             DeleteNoticeBoardThreadRequest request)
         {
-            var threadToDelete = _noticeBoard.NoticeBoard.Find(request.ThreadId);
-            if (threadToDelete != null)
+            try
             {
-                _noticeBoard.NoticeBoard.Remove(threadToDelete);
-            }
-            
-            await _noticeBoard.SaveChanges();
+                var threadToDelete = _noticeBoard.NoticeBoard.Find(request.ThreadId);
+                if (threadToDelete != null)
+                {
+                    _noticeBoard.NoticeBoard.Remove(threadToDelete);
+                }
+                else
+                {
+                    throw new InvalidNoticeBoardRequestException("Thread Id not found in database");
+                }
 
-            return new DeleteNoticeBoardThreadResponse(HttpStatusCode.Accepted);
+                await _noticeBoard.SaveChanges();
+
+                return new DeleteNoticeBoardThreadResponse(HttpStatusCode.Accepted);
+            }
+            catch(InvalidNoticeBoardRequestException e)
+            {
+                return new DeleteNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
+            }
         }
     }
 }
