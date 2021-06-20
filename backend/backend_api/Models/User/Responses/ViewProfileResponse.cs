@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Net;
+using Microsoft.AspNetCore.Http;
 
 namespace backend_api.Models.User.Responses
 {
     public class ViewProfileResponse
     {
-        public ViewProfileResponse(string message, string name, string userImage, string description, string phoneNumber, int empLevel, UserRoles userRole, OfficeLocation officeLocation)
+        public ViewProfileResponse(HttpStatusCode message, string name, string userImage, string description, string phoneNumber, int empLevel, UserRoles userRole, OfficeLocation officeLocation)
         {
-            this.message = message;
+            this.response = message;
             this.name = name;
             this.userImage = userImage;
             this.description = description;
@@ -16,7 +18,7 @@ namespace backend_api.Models.User.Responses
             this.userRoles = userRole;
         }
 
-        public string message { get; set; }
+        public HttpStatusCode response { get; set; }
         public string name { get; set; }
         public string userImage { get; set; }
         public string description { get; set; }
@@ -25,9 +27,9 @@ namespace backend_api.Models.User.Responses
         public OfficeLocation officeLocation { get; set; }
         public UserRoles userRoles { get; set; }
 
-        public ViewProfileResponse(string response)
+        public ViewProfileResponse(HttpStatusCode response)
         {
-            this.message = response;
+            this.response = response;
         }
         
 
