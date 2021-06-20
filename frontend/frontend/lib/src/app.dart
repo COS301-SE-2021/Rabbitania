@@ -20,7 +20,7 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: InfoForm(),
+        home: Login(),
       ),
     );
   }
