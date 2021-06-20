@@ -1,10 +1,14 @@
 ﻿using System.Net.Http;
+using System.Reflection;
+using backend_api.Controllers.Auth;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Services.Auth;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Xunit;
 
 namespace backend_api.Tests.Auth.IntegrationTests
 {
@@ -29,6 +33,15 @@ namespace backend_api.Tests.Auth.IntegrationTests
                     });
                 });
             _client = authFactory.CreateClient();
+        }
+
+        [Fact]
+        public void GetUserID_ValidEmail()
+        {
+            DbContextOptionsBuilder<UserContext> optionsBuilder = new();
+            optionsBuilder.UseInMemoryDatabase(MethodBase.GetCurrentMethod().Name);
+            UserContext ctx = new(optionsBuilder.Options);
+            
         }
     }
 }

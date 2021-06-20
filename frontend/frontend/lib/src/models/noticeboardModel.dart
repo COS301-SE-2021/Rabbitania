@@ -60,14 +60,14 @@ Future<List<Thread>> fetchNotice() async {
   HttpClientResponse response1 = await request.close();
   String reply = await response1.transform(utf8.decoder).join();
 
-  print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList);//[{everything}]
-  print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);//{singleThread}
+  //print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList);//[{everything}]
+  //print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);//{singleThread}
 
 
   var test = (NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
   print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-  print(test);
-  print(jsonEncode(test));
+  //print(test);
+  //print(jsonEncode(test));
 
   print(Thread.fromJson(test).threadId);
 
@@ -78,7 +78,7 @@ Future<List<Thread>> fetchNotice() async {
   //list of thread objects
   List<dynamic> tList = NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList;
 
-  print(tList[0]);
+  //print(tList[0]);
 
   List<Thread> threadObj = [];
 
@@ -86,8 +86,8 @@ Future<List<Thread>> fetchNotice() async {
     {
       threadObj.add(Thread.fromJson(t));
     }
-  print("ENTIRE LIST");
-  print(threadObj);
+  //print("ENTIRE LIST");
+  //print(threadObj);
   client.close();
   return threadObj;
 }

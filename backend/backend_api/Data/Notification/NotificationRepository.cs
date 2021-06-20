@@ -4,6 +4,8 @@ using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
+using Castle.Core.Internal;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Notification
@@ -22,6 +24,11 @@ namespace backend_api.Data.Notification
         {
             IQueryable<Models.Notification.Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserID == request.UserId);
 
+            if (retrieveUserNotifications.ToList().IsNullOrEmpty())
+            {
+                return null;
+            }
+            
             return await retrieveUserNotifications.ToListAsync();
         }
 

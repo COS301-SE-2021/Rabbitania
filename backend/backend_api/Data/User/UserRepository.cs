@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
@@ -89,7 +90,7 @@ namespace backend_api.Data.User
                 userRole = x.UserRole;
             }
 
-            ViewProfileResponse response = new ViewProfileResponse("Successfully Viewed Profile", name,
+            ViewProfileResponse response = new ViewProfileResponse(HttpStatusCode.OK, name,
                 userImage, description, phoneNumber, empLevel, userRole, officeLocation);
 
             return response;

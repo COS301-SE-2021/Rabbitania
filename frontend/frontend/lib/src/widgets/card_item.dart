@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/noticeboardCreateThread.dart';
 import '../models/noticeboardModel.dart';
 import '../screens/noticeboardScreen.dart';
 
@@ -14,6 +17,7 @@ class NoticeboardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child:ListView(
+        padding: EdgeInsets.only(bottom: 70),
         children: <Widget>[
             FutureBuilder<List<Thread>>(
               future: futureThread,
@@ -32,7 +36,7 @@ class NoticeboardCard extends StatelessWidget {
                 }
                 return CircularProgressIndicator(color:Color.fromRGBO(171, 255, 79, 1),);
               },
-            )
+            ),
         ]
       ),
     );

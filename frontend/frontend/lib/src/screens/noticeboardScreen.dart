@@ -6,6 +6,8 @@ import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import '../widgets/card_item.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'noticeboardCreateThread.dart';
+
 class NoticeBoard extends StatefulWidget {
   createState() {
     return _NoticeBoard();
@@ -67,8 +69,30 @@ class _NoticeBoard extends State<NoticeBoard> {
               fit: BoxFit.contain,
             ),
              Container(
+               padding: EdgeInsets.only(bottom: 75),
                 child: NoticeboardCard(),
               ),
+            Positioned.fill(
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    color: Colors.transparent,
+                    height: 75,
+                    width: double.infinity,
+                    //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
+                    padding: EdgeInsets.only(left:15, right: 80,top:5, bottom: 16),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Color.fromRGBO(171, 255, 79, 1)),
+                      ), onPressed: () {
+                      UtilModel.route(() => NoticeBoardThread(), context);
+                    },
+                      child: Text("Create Notice", style: TextStyle(color: Colors.black, fontSize: 20)),
+                    ),
+                  ),
+              ),
+            ),
+
           ],
         ),
       ),
