@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'loginScreen.dart';
 import 'noticeboardScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
 class InfoForm extends StatefulWidget {
   @override
@@ -22,6 +25,62 @@ class _infoForm extends State<InfoForm> {
   String _dropDownRoleValue = 'Developer';
   String _dropDownLevelValue = '0';
   String _dropDownOfficeValue = 'Pretoria';
+
+  httpCallGetUser() async {
+    String userEmail = user.email!;
+    final response = await http.get(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/GoogleSignIn/GetID?email=$userEmail'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    return response.body;
+  }
+
+  httpCallUpdateUserInfo() async {
+    int officeLocationInt = 0;
+    if (_dropDownOfficeValue == 'Braamfontein') {
+      officeLocationInt = 1;
+    }
+    final String userID = await httpCallGetUser();
+    final response = await http.put(
+      Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'userId': int.parse(userID),
+        'name': user.displayName,
+        'phoneNumber': user.phoneNumber,
+        'userDescription': myController.text,
+        'userImage': user.photoURL,
+        'officeLocation': officeLocationInt
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => NoticeBoard()));
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+            title: Text('Something went wrong'),
+            content:
+                Text('something went wrong while updating your information'),
+            actions: [
+              ElevatedButton(
+                child: Text('return'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ]),
+      );
+    }
+  }
 
   Widget build(context) => MaterialApp(
         home: Scaffold(
@@ -314,12 +373,13 @@ class _infoForm extends State<InfoForm> {
                                                   context,
                                                   listen: false);
                                           provider.googleLogout();
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => Login(),
-                                            ),
-                                          );
+                                          Navigator.pop(context);
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => Login(),
+                                          //   ),
+                                          // );
                                         },
                                       ),
                                     ),
@@ -348,7 +408,8 @@ class _infoForm extends State<InfoForm> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          print(user.uid);
+                                          httpCallUpdateUserInfo();
+
                                           // Navigator.push(
                                           //   context,
                                           //   MaterialPageRoute(
