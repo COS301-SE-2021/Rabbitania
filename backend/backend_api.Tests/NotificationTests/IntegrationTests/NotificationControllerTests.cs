@@ -8,32 +8,64 @@ using backend_api.Data.Notification;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore.TestModels.Inheritance;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace backend_api.Tests.NotificationTests.IntegrationTests
 {
-    public class NotificationControllerTests: NotificationIntegrationTests
+    public class NotificationControllerTests: IClassFixture<NotificationIntegrationTests<Startup>>
     {
         private readonly DateTime _mockDate;
+        private readonly HttpClient _client;
         
-        public NotificationControllerTests()
+        public NotificationControllerTests(NotificationIntegrationTests<Startup> factory)
         {
             _mockDate = DateTime.Now;
+            _client = factory.CreateClient();
+        }
+
+
+        [Fact(DisplayName = "Retrieve Notifications should be an internal server error when user doesn't exist")]
+        public async Task NotificationController_RetrieveNotificationsEndpoint_ShouldNotReturnNotificationsOfTheUserIfUserDoesNotExists()
+        {
+            // Arrange
+            var response = await _client.GetAsync("/api/Notifications/RetrieveNotifications?UserId=0");
+
+            // Act
+            var resString = await response.Content.ReadAsStringAsync();
+            
+            //Assert
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
         
-        [Fact(DisplayName = "Retrieve Notifications should return a list of notification when user exists")]
+        [Fact(DisplayName = "Retrieve Notifications should return OK when user exists")]
         public async Task NotificationController_RetrieveNotificationsEndpoint_ShouldReturnNotificationsOfTheUserIfUserExists()
         {
             // Arrange
+            var response = await _client.GetAsync("/api/Notifications/RetrieveNotifications?UserId=3");
             
             // Act
-            var response = await Http.GetAsync("api/Notifications/RetrieveNotifications?UserId=1");
+            response.EnsureSuccessStatusCode();
             
-            // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await response.Content.ReadAsAsync<List<Notification>>()).Should().BeEmpty();
+            //Assert
+            Assert.NotNull(response.Content);
         }
         
+        [Fact(DisplayName = "Create Notifications should return OK notification created")]
+        public async Task NotificationController_CreateNotification()
+        {
+            // Arrange
+            var response = await _client.GetAsync("/api/Notifications/CreateNotification");
+
+            // Act
+            response.EnsureSuccessStatusCode();
+            var resString = await response.Content.ReadAsStringAsync();
+            
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
     }
 }
