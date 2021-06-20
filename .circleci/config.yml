@@ -176,10 +176,6 @@ workflows:
           requires:
             - Notification
 
-      - IntegrationTest_NotificationIntegration:
-          requires:
-            - Notification
-
       - UnitTest_CreateNoticeBoardThread:
           requires:
             - Noticeboard
