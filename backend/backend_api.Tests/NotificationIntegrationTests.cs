@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 using backend_api.Data.Notification;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace backend_api.Tests.NotificationTests.IntegrationTests
+namespace backend_api.Tests
 {
     public class NotificationIntegrationTests<TStartup> : WebApplicationFactory<Startup>
     {

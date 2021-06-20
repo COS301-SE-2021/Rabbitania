@@ -12,7 +12,7 @@ using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace backend_api.Tests.Auth.UnitTests
+namespace backend_api.Tests
 {
     namespace backend_api.Tests
 {

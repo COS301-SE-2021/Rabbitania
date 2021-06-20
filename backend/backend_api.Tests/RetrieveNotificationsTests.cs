@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
 using backend_api.Exceptions.Notifications;
@@ -8,12 +7,11 @@ using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 using backend_api.Services.Notification;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace backend_api.Tests.NotificationTests.UnitTests
+namespace backend_api.Tests
 {
     public class RetrieveNotificationsTests
     {

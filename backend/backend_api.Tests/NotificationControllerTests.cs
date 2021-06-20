@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using backend_api.Controllers.Notification;
-using backend_api.Data.Notification;
-using backend_api.Models.Notification;
-using backend_api.Models.Notification.Requests;
-using FluentAssertions;
-using Microsoft.EntityFrameworkCore.TestModels.Inheritance;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using Xunit;
 
-namespace backend_api.Tests.NotificationTests.IntegrationTests
+namespace backend_api.Tests
 {
     public class NotificationControllerTests: IClassFixture<NotificationIntegrationTests<Startup>>
     {

@@ -10,7 +10,7 @@ using backend_api.Services.NoticeBoard;
 using Moq;
 using Xunit;
 
-namespace backend_api.Tests.NoticeBoardTests.UnitTests
+namespace backend_api.Tests
 {
     public class RetrieveNoticeBoardThreadTests
     {

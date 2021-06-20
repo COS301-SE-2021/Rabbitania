@@ -2,7 +2,7 @@
 using backend_api.Data.Notification;
 using backend_api.Models.Notification;
 
-namespace backend_api.Tests.NotificationTests.IntegrationTests
+namespace backend_api.Tests
 {
     public class IntegrationSeedData
     {
