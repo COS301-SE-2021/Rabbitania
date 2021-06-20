@@ -93,19 +93,6 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter NotificationControllerTests
-
-  IntegrationTest_NotificationIntegration:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
-            dotnet test --filter NotificationIntegrationTests
-
-
   ################################################### NOTIFICATION TESTS ########################################
 
   ################################################### NOTICEBOARD TESTS ######################################### 
