@@ -75,6 +75,12 @@ namespace backend_api.Services.Auth
             return user;
         }
 
+        public async Task<Models.User.User> GetUserID(GoogleSignInRequest request)
+        {
+            var user = await _repository.GetExistingUserDetails(request);
+            return user;
+        }
+
         
     }
     
