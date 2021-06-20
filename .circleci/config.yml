@@ -4,159 +4,227 @@
 version: 2.1
 
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+
+  build:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+  ################################################### USER TESTS ############################################### 
+  User:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
             dotnet build
 
-
-
-
-  UnitTest_UserUnitTest:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+  UnitTest_AuthServiceTest:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
             dotnet test --filter UserUnitTests
 
-  UnitTest_Notification:  
-  # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-  # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-  # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+  UnitTest_UserUnitTest:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter NotificationUnitTests
-            
-  UnitTest_NoticeBoard:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+            dotnet test --filter UserUnitTests
+  ################################################### USER TESTS ################################################ 
+
+  ################################################### NOTIFICATION TESTS ######################################## 
+  Notification:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter NoticeBoardUnitTests
-
-
-  IntegrationTest_NoticeBoardThreadTests:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+            dotnet build
+  UnitTest_CreateNotification:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
-          working_directory: ~/project/backend/backend_api
+          working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter NoticeBoardThreadTests  
+            dotnet test --filter CreateNotificationTests
 
-  IntegrationTest_NotificationsIntegrationTests:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+  UnitTest_RetrieveNotifications:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
-          working_directory: ~/project/backend/backend_api
+          working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter NotificationsIntegrationTests
+            dotnet test --filter RetrieveNotificationsTests
 
-  IntegrationTest_UserIntegrationTest:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+  IntegrationTest_NotificationController:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Then simply use the dotnet container as you'd expect and run your tests
       - run:
-          # Update this line with the directory that contains your tests project file
-          working_directory: ~/project/backend/backend_api
+          working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter UserIntegrationTest
+            dotnet test --filter NotificationControllerTests
 
+  IntegrationTest_NotificationIntegration:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter NotificationIntegrationTests
+
+
+  ################################################### NOTIFICATION TESTS ########################################
+
+  ################################################### NOTICEBOARD TESTS ######################################### 
+  Noticeboard:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+
+  UnitTest_CreateNoticeBoardThread:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter CreateNoticeBoardThreadTests
+
+  UnitTest_DeleteNoticeBoardThread:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter DeleteNoticeBoardThreadTests
+
+  UnitTest_RetrieveNoticeBoardThread:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter RetrieveNoticeBoardThreadTests
+    ################################################### NOTICEBOARD TESTS #########################################
+
+    ################################################### WORKFLOW ################################################## 
 
 workflows:
-  # Below is the definition of your workflow.
-  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
-  # CircleCI will run this workflow on every commit.
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  Rabbitania Testing: 
+  Rabbitania Testing:
     jobs:
       - build
+      - User:
+          requires:
+            - build
+      - Notification:
+          requires:
+            - build
+      - Noticeboard:
+          requires:
+            - build
+
+      - UnitTest_AuthServiceTest:
+          requires:
+            - User
       - UnitTest_UserUnitTest:
           requires:
-            - build
-      - UnitTest_Notification:
+            - User
+
+      - UnitTest_CreateNotification:
           requires:
-            - build
-      - UnitTest_NoticeBoard:
+            - Notification
+
+      - UnitTest_RetrieveNotifications:
           requires:
-            - build
-      - IntegrationTest_NoticeBoardThreadTests:
+            - Notification
+
+      - IntegrationTest_NotificationController:
           requires:
-            - UnitTest_UserUnitTest
-            - UnitTest_Notification
-            - UnitTest_NoticeBoard
-      - IntegrationTest_NotificationsIntegrationTests:
+            - Notification
+
+      - IntegrationTest_NotificationIntegration:
           requires:
-            - IntegrationTest_NoticeBoardThreadTests
-      - IntegrationTest_UserIntegrationTest:
+            - Notification
+
+      - UnitTest_CreateNoticeBoardThread:
           requires:
-            - IntegrationTest_NotificationsIntegrationTests
+            - Noticeboard
+
+      - UnitTest_DeleteNoticeBoardThread:
+          requires:
+            - Noticeboard
+
+      - UnitTest_RetrieveNoticeBoardThread:
+          requires:
+            - Noticeboard
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
