@@ -203,7 +203,7 @@
 # Documentation
 
 - [Software Requirements Specification 1 - Rabbitania](https://drive.google.com/file/d/1yUXTbRDdgXev8SWuDdDbjWwT-Ym6qxjd/view?usp=sharing)
-- [Software Requirements Specification 2 - Rabbitania](https://drive.google.com/file/d/1yUXTbRDdgXev8SWuDdDbjWwT-Ym6qxjd/view?usp=sharing)
+- [Software Requirements Specification 2 - Rabbitania](https://drive.google.com/file/d/18Ur5ZkbwtMKRKKpHimQh-MPtLOeDkaUL/view?usp=sharing)
 
 
 # Demo-Video-Links
