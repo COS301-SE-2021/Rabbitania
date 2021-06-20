@@ -98,7 +98,8 @@ class _infoForm extends State<InfoForm> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(15),
+                              padding:
+                                  EdgeInsets.only(top: 15, left: 15, right: 15),
                               width: MediaQuery.of(context).size.width,
                               child: Center(
                                 child: Text(
@@ -110,9 +111,11 @@ class _infoForm extends State<InfoForm> {
                               ),
                             ),
                             Divider(
+                              thickness: 3,
                               color: Color.fromRGBO(171, 255, 79, 1),
                             ),
                             Container(
+                              padding: EdgeInsets.only(top: 20),
                               child: ButtonTheme(
                                 alignedDropdown: true,
                                 child: Center(
@@ -142,7 +145,7 @@ class _infoForm extends State<InfoForm> {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Container(
-                                          width: 250,
+                                          width: 305,
                                           child: Text(
                                             value,
                                             style: TextStyle(
@@ -189,7 +192,7 @@ class _infoForm extends State<InfoForm> {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Container(
-                                          width: 250,
+                                          width: 305,
                                           child: Text(
                                             value,
                                             style: TextStyle(
@@ -228,7 +231,7 @@ class _infoForm extends State<InfoForm> {
                                       return DropdownMenuItem<String>(
                                         value: value,
                                         child: Container(
-                                          width: 250,
+                                          width: 305,
                                           child: Text(
                                             value,
                                             style: TextStyle(
@@ -246,7 +249,7 @@ class _infoForm extends State<InfoForm> {
                             Center(
                               child: Container(
                                 padding: EdgeInsets.only(top: 20),
-                                width: 290,
+                                width: 340,
                                 child: TextFormField(
                                   style: TextStyle(
                                       color: Color.fromRGBO(171, 255, 79, 1)),
@@ -282,7 +285,8 @@ class _infoForm extends State<InfoForm> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
-                                    width: 150,
+                                    width: 170,
+                                    height: 55,
                                     child: Padding(
                                       padding: EdgeInsets.only(right: 15),
                                       child: ElevatedButton(
@@ -321,7 +325,8 @@ class _infoForm extends State<InfoForm> {
                                     ),
                                   ),
                                   Container(
-                                    width: 150,
+                                    width: 170,
+                                    height: 55,
                                     child: Padding(
                                       padding: EdgeInsets.only(left: 15),
                                       child: ElevatedButton(

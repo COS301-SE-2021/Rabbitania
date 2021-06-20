@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,6 @@ class _continueButton extends State<ContinueButton> {
         'email': widget.user.email,
         'phoneNumber': widget.user.phoneNumber,
         'googleImgUrl': widget.user.phoneNumber,
-        'uid': widget.user.uid,
       }),
     );
     if (response.statusCode == 200) {
@@ -60,13 +60,11 @@ class _continueButton extends State<ContinueButton> {
 
   Widget build(context) => Container(
         color: Colors.transparent,
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.transparent),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(300)),
-            ),
+        child: IconButton(
+          icon: FaIcon(
+            FontAwesomeIcons.arrowRight,
+            color: Color.fromRGBO(171, 255, 79, 1),
+            size: 200,
           ),
           onPressed: () {
             //make api call
@@ -76,13 +74,6 @@ class _continueButton extends State<ContinueButton> {
 
             httpCall();
           },
-          child: Text(
-            'Continue',
-            style: TextStyle(
-              fontSize: 24,
-              color: Color.fromRGBO(171, 255, 79, 1),
-            ),
-          ),
         ),
       );
 }

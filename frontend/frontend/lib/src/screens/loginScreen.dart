@@ -63,7 +63,9 @@ class _loginState extends State<Login> {
                               ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasData) {
-                            return ContinueButton(snapshot.data);
+                            return Container(
+                              child: ContinueButton(snapshot.data),
+                            );
                           } else if (snapshot.hasError) {
                             return Center(child: Text('Something went wrong'));
                           } else {
