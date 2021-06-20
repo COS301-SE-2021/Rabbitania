@@ -58,11 +58,14 @@ namespace backend_api.Services.NoticeBoard
         public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
             DeleteNoticeBoardThreadRequest request)
         {
-            
-            
             if (request == null)
             {
-                throw new InvalidNotificationRequestException("Invalid DeleteNoticeBoardThreadRequest operation");
+                throw new InvalidNoticeBoardRequestException("Invalid DeleteNoticeBoardThreadRequest Object");
+            }
+
+            if (request.ThreadId == 0)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
             }
 
             return await _noticeBoardRepository.DeleteNoticeBoardThread(request);
