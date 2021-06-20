@@ -103,7 +103,7 @@ class CardObj extends StatelessWidget {
                       titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
                       title: Text("Delete Thread"),
                       contentTextStyle: TextStyle(color: Colors.white, fontSize: 16) ,
-                      content: Text("Are you sure you want to delete this thread?"),
+                      content: Text("Are you sure you want to delete this notice?"),
                       actions: [
                         IconButton(
                           icon: const Icon(

@@ -65,7 +65,7 @@ Future<List<Thread>> fetchNotice() async {
 
 
   var test = (NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
-  print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+  //print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
   //print(test);
   //print(jsonEncode(test));
 

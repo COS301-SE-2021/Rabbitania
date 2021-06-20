@@ -110,7 +110,7 @@ Future<String> addNewThread(String title,String content) async {
       }),
     );
     if (response.statusCode == 201||response.statusCode == 200) {
-      return ("Successfully uploaded new thread");
+      return ("Successfully uploaded new notice");
     } else {
       throw("Failed to create new thread error" +
           response.statusCode.toString());
