@@ -44,7 +44,20 @@ namespace backend_api.Tests.NotificationTests.IntegrationTests
         public async Task NotificationController_RetrieveNotificationsEndpoint_ShouldReturnNotificationsOfTheUserIfUserExists()
         {
             // Arrange
-            var response = await _client.GetAsync("/api/Notifications/RetrieveNotifications?UserId=1");
+            var response = await _client.GetAsync("/api/Notifications/RetrieveNotifications?UserId=3");
+            
+            // Act
+            response.EnsureSuccessStatusCode();
+            
+            //Assert
+            Assert.NotNull(response.Content);
+        }
+        
+        [Fact(DisplayName = "Create Notifications should return OK notification created")]
+        public async Task NotificationController_CreateNotification()
+        {
+            // Arrange
+            var response = await _client.GetAsync("/api/Notifications/CreateNotification");
 
             // Act
             response.EnsureSuccessStatusCode();
