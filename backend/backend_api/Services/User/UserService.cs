@@ -61,10 +61,6 @@ namespace backend_api.Services.User
                 throw new Exception("UserID Missing");
             }
             return _userRepository.ViewProfile(request);
-            
-
         }
-
-        
     }
 }
