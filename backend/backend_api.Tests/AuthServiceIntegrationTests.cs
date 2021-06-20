@@ -1,16 +1,13 @@
 ﻿using System.Net.Http;
 using System.Reflection;
-using backend_api.Controllers.Auth;
-using backend_api.Data.Notification;
 using backend_api.Data.User;
-using backend_api.Services.Auth;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Xunit;
 
-namespace backend_api.Tests.Auth.IntegrationTests
+namespace backend_api.Tests
 {
     public class AuthServiceIntegrationTests
     {
@@ -28,7 +25,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
                         services.RemoveAll(typeof(UserContext));
                         services.AddDbContext<UserContext>(options =>
                         {
-                            options.UseInMemoryDatabase("RabbitaniaDB");
+                            InMemoryDbContextOptionsExtensions.UseInMemoryDatabase(options, "RabbitaniaDB");
                         });
                     });
                 });
