@@ -36,7 +36,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter AuthServiceIntegrationTests
+            dotnet test --filter AuthIntegrationTests
 
   UnitTest_AuthServiceTests:
     docker:
@@ -70,6 +70,17 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter EditProfileUnitTests
+
+  IntegrationTest_GoogleSignInControllerTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter GoogleSignInControllerTests
   ################################################### USER TESTS ################################################ 
 
   ################################################### NOTIFICATION TESTS ######################################## 
@@ -186,6 +197,10 @@ workflows:
       - UnitTest_AuthServiceTests:
           requires:
             - User
+
+      -  IntegrationTest_GoogleSignInControllerTests:
+          requires:
+              - User
 
       - UnitTest_ViewProfileUnitTests:
           requires:
