@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/models/userProfile_model.dart';
+import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
+import 'package:frontend/src/widgets/profile_picture_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileScreen extends StatefulWidget {
   createState() {
@@ -9,24 +14,202 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _profileState extends State<ProfileScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
+  String? name;
+  String? description;
+  int? employeeLevel;
+  int? officeLocation;
+  int? userRole;
+  String? phoneNumber;
+  httpCall() async {
+    var userHttp = new UserProvider();
+    final user = await userHttp.getUserID();
+
+    final response = await http.get(
+      Uri.parse('https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    print(response.statusCode);
+  }
+
+  determineOffice() {
+    if (officeLocation == 1) {
+      return 'Braamfontein';
+    }
+    return 'Pretoria';
+  }
+
+  determineRole() {
+    print(employeeLevel);
+    switch (employeeLevel!) {
+      case 0:
+        return 'Developer';
+      case 1:
+        return 'Designer';
+      case 2:
+        return 'Care Taker';
+      case 3:
+        return 'Scrum Master';
+      case 4:
+        return 'CAM';
+      case 5:
+        return 'Director';
+      case 6:
+        return 'Graduate';
+      case 7:
+        return 'Intern';
+    }
+  }
+
+  initFunction() async {
+    var userProfile = new UserProvider();
+    final UserProfileModel userDetails = await userProfile.getUserProfile();
+    setState(() {
+      name = userDetails.name;
+      description = userDetails.description;
+      employeeLevel = userDetails.empLevel;
+      officeLocation = userDetails.officeLocation;
+      userRole = userDetails.userRoles;
+      phoneNumber = userDetails.phoneNumber;
+    });
+  }
+
+  initState() {
+    initFunction();
+  }
+
   Widget build(context) {
     return Scaffold(
       floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      body: SvgPicture.string(
-        _svg_background,
-        fit: BoxFit.contain,
-      ),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Center(
-          child: Text(
-            'profile screen',
-            style: TextStyle(
-              color: Color.fromRGBO(171, 255, 79, 1),
-              fontSize: 35,
-            ),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.only(top: 80),
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ProfilePicture(),
+                  Text(
+                    user.displayName!,
+                    style: TextStyle(
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      fontSize: 25,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(description!,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                        ))
+                  ]),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Divider(
+                  color: Color.fromRGBO(171, 255, 79, 1),
+                  thickness: 3,
+                ),
+              ),
+              Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(top: 25, bottom: 25),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              width: 2,
+                            ),
+                          ),
+                          child: Text(
+                            'User Role: ' + determineRole(),
+                            style: TextStyle(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 25, bottom: 25),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              width: 2,
+                            ),
+                          ),
+                          child: Text(
+                            'Office Location : ' + determineOffice(),
+                            style: TextStyle(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 25, bottom: 25),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              width: 2,
+                            ),
+                          ),
+                          child: Text(
+                            'Employee Level: ' + employeeLevel.toString(),
+                            style: TextStyle(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 25, bottom: 25),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              width: 2,
+                            ),
+                          ),
+                          child: Text(
+                            'Phone Number: ' + phoneNumber!,
+                            style: TextStyle(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
           ),
         ),
       ),

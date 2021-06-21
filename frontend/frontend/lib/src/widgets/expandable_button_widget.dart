@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/screens/googleAuthTest.dart';
+import 'package:frontend/src/screens/noticeboardScreen.dart';
+import 'package:frontend/src/screens/userProfileScreen.dart';
 
 @immutable
 class ExampleExpandableFab extends StatelessWidget {
@@ -34,8 +36,8 @@ class ExampleExpandableFab extends StatelessWidget {
       children: [
         ActionButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Test()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NoticeBoard()));
           },
           icon: const FaIcon(FontAwesomeIcons.home,
               color: Color.fromRGBO(171, 255, 79, 1)),
@@ -46,7 +48,10 @@ class ExampleExpandableFab extends StatelessWidget {
               color: Color.fromRGBO(171, 255, 79, 1)),
         ),
         ActionButton(
-          onPressed: () => _showAction(context, 2),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()));
+          },
           icon: const FaIcon(FontAwesomeIcons.userCircle,
               color: Color.fromRGBO(171, 255, 79, 1)),
         ),
