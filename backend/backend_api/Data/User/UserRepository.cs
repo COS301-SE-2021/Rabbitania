@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using backend_api.Models.User;
@@ -69,6 +70,10 @@ namespace backend_api.Data.User
 
         public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
             var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
             
             var name = "";
@@ -99,7 +104,9 @@ namespace backend_api.Data.User
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             var toUpdate = _users.Users.FirstOrDefault(uu => uu.UserId == request.UserId);
-
+            
+            /*if(request.Name != )*/
+            
             toUpdate.Name = request.Name;
             toUpdate.PhoneNumber = request.PhoneNumber;
             toUpdate.UserImgUrl = request.UserImage;
@@ -116,7 +123,7 @@ namespace backend_api.Data.User
                 throw new DbUpdateException("Error when updating user" + request.Name);
             }
 
-            var response = new EditProfileResponse("Successfully updated user");
+            var response = new EditProfileResponse(HttpStatusCode.Accepted);
 
             return response;
         }
