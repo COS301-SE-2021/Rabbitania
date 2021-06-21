@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using backend_api.Exceptions.Auth;
+using backend_api.Models.User.Responses;
+using Microsoft.AspNetCore.Http;
 using Xunit;
 
 namespace backend_api.Tests
@@ -11,8 +16,10 @@ namespace backend_api.Tests
             //Arrange
             
             //Act
-            
+            var response = await _client.GetAsync("/api/GoogleSignIn/GetID?UserId=0");
             //Assert
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+            Assert.NotNull(response);
         }
     }
 }
