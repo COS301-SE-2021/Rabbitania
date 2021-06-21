@@ -21,5 +21,17 @@ namespace backend_api.Tests
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             Assert.NotNull(response);
         }
+        [Fact(DisplayName = "Attempt to get ID with a valid email")]
+        public async Task GetIDEndpoint_ValidEmail()
+        {
+            //Arrange
+            
+            //Act
+            var response = await _client.GetAsync("/api/GoogleSignIn/GetID?UserId=1");
+            response.EnsureSuccessStatusCode();
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.NotNull(response);
+        }
     }
 }
