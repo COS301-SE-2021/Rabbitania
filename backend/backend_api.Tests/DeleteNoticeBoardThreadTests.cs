@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.NoticeBoard;
@@ -14,7 +12,7 @@ using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace backend_api.Tests.NoticeBoardTests.UnitTests
+namespace backend_api.Tests
 {
     public class DeleteNoticeBoardThreadTests
     {

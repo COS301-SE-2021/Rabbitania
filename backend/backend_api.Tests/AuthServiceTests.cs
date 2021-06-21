@@ -12,11 +12,11 @@ using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace backend_api.Tests.Auth.UnitTests
+namespace backend_api.Tests
 {
     namespace backend_api.Tests
 {
-    public class AuthUniTests
+    public class AuthServiceTests
     {
         private readonly AuthService _authService;
         private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
@@ -25,7 +25,7 @@ namespace backend_api.Tests.Auth.UnitTests
         private readonly UserEmails _mockedEmail;
         private readonly UserService _userService;
 
-        public AuthUniTests(ITestOutputHelper outHelp)
+        public AuthServiceTests(ITestOutputHelper outHelp)
         {
             _authService = new AuthService(_userRepositoryMock.Object);
             _userService = new UserService(_userRepositoryMock.Object);

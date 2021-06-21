@@ -27,7 +27,7 @@ jobs:
           command: |
             dotnet build
 
-  UnitTest_AuthServiceTest:
+  UnitTest_AuthServiceIntegrationTest:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -36,9 +36,9 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter UserUnitTests
+            dotnet test --filter AuthServiceIntegrationTests
 
-  UnitTest_UserUnitTest:
+  UnitTest_AuthServiceTests:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -47,7 +47,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter UserUnitTests
+            dotnet test --filter AuthServiceTests
   ################################################### USER TESTS ################################################ 
 
   ################################################### NOTIFICATION TESTS ######################################## 
@@ -93,19 +93,6 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter NotificationControllerTests
-
-  IntegrationTest_NotificationIntegration:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
-            dotnet test --filter NotificationIntegrationTests
-
-
   ################################################### NOTIFICATION TESTS ########################################
 
   ################################################### NOTICEBOARD TESTS ######################################### 
@@ -170,10 +157,10 @@ workflows:
           requires:
             - build
 
-      - UnitTest_AuthServiceTest:
+      - UnitTest_AuthServiceIntegrationTest:
           requires:
             - User
-      - UnitTest_UserUnitTest:
+      - UnitTest_AuthServiceTests:
           requires:
             - User
 
@@ -186,10 +173,6 @@ workflows:
             - Notification
 
       - IntegrationTest_NotificationController:
-          requires:
-            - Notification
-
-      - IntegrationTest_NotificationIntegration:
           requires:
             - Notification
 

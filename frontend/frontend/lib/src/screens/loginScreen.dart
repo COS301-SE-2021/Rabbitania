@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,9 +5,6 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/continue_button.dart';
 import 'package:frontend/src/widgets/login_fab.dart';
 import '../models/util_model.dart';
-import 'googleAuthTest.dart';
-import 'noticeboardScreen.dart';
-import 'supplyInfoScreen.dart';
 
 class Login extends StatefulWidget {
   @override

@@ -40,4 +40,12 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Auth\IntegrationTests" />
+      <Folder Include="Auth\UnitTests" />
+      <Folder Include="NoticeBoardTests\UnitTests" />
+      <Folder Include="NotificationTests\IntegrationTests" />
+      <Folder Include="NotificationTests\UnitTests" />
+    </ItemGroup>
+
 </Project>

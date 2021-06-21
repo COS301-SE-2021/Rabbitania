@@ -2,7 +2,6 @@
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
-using backend_api.Exceptions.Auth;
 using backend_api.Exceptions.Notifications;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
@@ -11,7 +10,7 @@ using backend_api.Services.Notification;
 using Moq;
 using Xunit;
 
-namespace backend_api.Tests.NotificationTests.UnitTests
+namespace backend_api.Tests
 {
     public class CreateNotificationTests
     {
