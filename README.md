@@ -196,8 +196,8 @@
 
 - master
     - development (build)
-        - backend-subsystem-feature
-        - frontend-subsystem-feature
+        - backend/subsystem/feature
+        - frontend/subsystem/feature
 
 
 # Documentation
