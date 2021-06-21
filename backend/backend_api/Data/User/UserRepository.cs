@@ -40,7 +40,7 @@ namespace backend_api.Data.User
         {
             var newUser = new Models.User.User();
             newUser.Name = request.DisplayName;
-            newUser.PhoneNumber = request.PhoneNumber;
+            newUser.PhoneNumber = "0833611023";
             newUser.PinnedUserIds = new List<int>();
             newUser.UserImgUrl = request.GoogleImgUrl;
             newUser.UserDescription = "No Description...";
