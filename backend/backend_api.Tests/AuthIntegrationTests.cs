@@ -9,11 +9,11 @@ using Xunit;
 
 namespace backend_api.Tests
 {
-    public class AuthServiceIntegrationTests
+    public class AuthIntegrationTests
     {
-        private HttpClient _client;
+        protected readonly HttpClient _client;
 
-        public AuthServiceIntegrationTests()
+        public AuthIntegrationTests()
         {
             // App factory
             // Using memory virtual Database
