@@ -1,0 +1,267 @@
+
+# Use the latest 2.1 version of CircleCI pipeline process engine. 
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+jobs:
+
+  build:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+  ################################################### USER TESTS ############################################### 
+  User:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+
+  UnitTest_AuthServiceIntegrationTest:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter AuthIntegrationTests
+
+  UnitTest_AuthServiceTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter AuthServiceTests
+
+  UnitTest_ViewProfileUnitTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter ViewProfileUnitTests
+
+  UnitTest_EditProfileUnitTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter EditProfileUnitTests
+
+  IntegrationTest_GoogleSignInControllerTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter GoogleSignInControllerTests
+  ################################################### USER TESTS ################################################ 
+
+  ################################################### NOTIFICATION TESTS ######################################## 
+  Notification:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+  UnitTest_CreateNotification:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter CreateNotificationTests
+
+  UnitTest_RetrieveNotifications:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter RetrieveNotificationsTests
+
+  IntegrationTest_NotificationController:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter NotificationControllerTests
+  ################################################### NOTIFICATION TESTS ########################################
+
+  ################################################### NOTICEBOARD TESTS ######################################### 
+  Noticeboard:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+
+  UnitTest_CreateNoticeBoardThread:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter CreateNoticeBoardThreadTests
+
+  UnitTest_DeleteNoticeBoardThread:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter DeleteNoticeBoardThreadTests
+
+  UnitTest_RetrieveNoticeBoardThread:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter RetrieveNoticeBoardThreadTests
+    ################################################### NOTICEBOARD TESTS #########################################
+
+    ################################################### WORKFLOW ################################################## 
+
+workflows:
+  Rabbitania Testing:
+    jobs:
+      - build
+      - User:
+          requires:
+            - build
+      - Notification:
+          requires:
+            - build
+      - Noticeboard:
+          requires:
+            - build
+
+      - UnitTest_AuthServiceIntegrationTest:
+          requires:
+            - User
+
+      - UnitTest_AuthServiceTests:
+          requires:
+            - User
+
+      -  IntegrationTest_GoogleSignInControllerTests:
+          requires:
+              - User
+
+      - UnitTest_ViewProfileUnitTests:
+          requires:
+            - Noticeboard
+
+      - UnitTest_EditProfileUnitTests:
+          requires:
+            - Noticeboard
+
+      - UnitTest_CreateNotification:
+          requires:
+            - Notification
+
+      - UnitTest_RetrieveNotifications:
+          requires:
+            - Notification
+
+      - IntegrationTest_NotificationController:
+          requires:
+            - Notification
+
+      - UnitTest_CreateNoticeBoardThread:
+          requires:
+            - Noticeboard
+
+      - UnitTest_DeleteNoticeBoardThread:
+          requires:
+            - Noticeboard
+
+      - UnitTest_RetrieveNoticeBoardThread:
+          requires:
+            - Noticeboard
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
