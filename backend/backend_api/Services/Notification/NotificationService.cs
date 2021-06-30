@@ -21,7 +21,12 @@ namespace backend_api.Services.Notification
     {
         private readonly INotificationRepository _repository;
         private readonly EmailSettings _settings;
-
+        
+        public NotificationService(INotificationRepository repository)
+        {
+            this._repository = repository;
+        }
+        
         public NotificationService(INotificationRepository repository, IOptions<EmailSettings> settings)
         {
             this._repository = repository;
@@ -91,8 +96,8 @@ namespace backend_api.Services.Notification
             var client = new SmtpClient();
             try
             {
-                client.Connect(_settings.Host, _settings.Port, true);
-                client.Authenticate(_settings.Mail, _settings.Password);
+                await client.ConnectAsync(_settings.Host, _settings.Port, true);
+                await client.AuthenticateAsync(_settings.Mail, _settings.Password);
                 await client.SendAsync(email);
 
                 var response = new SendEmailNotificationResponse(HttpStatusCode.OK);
@@ -105,7 +110,7 @@ namespace backend_api.Services.Notification
             }
             finally
             {
-                client.Disconnect(true);
+                await client.DisconnectAsync(true);
                 client.Dispose();
             }
         }
