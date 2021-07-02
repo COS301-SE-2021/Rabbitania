@@ -20,6 +20,7 @@ namespace backend_api.Data.NoticeBoard
             _noticeBoard = noticeBoard;
         }
 
+        /// <inheritdoc />
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
             /*var threadId = request.ThreadId;*/
@@ -40,6 +41,7 @@ namespace backend_api.Data.NoticeBoard
             return new AddNoticeBoardThreadResponse(HttpStatusCode.Created);
         }
 
+        /// <inheritdoc />
         public async Task<List<Models.NoticeBoard.NoticeBoard>> RetrieveAllNoticeBoardThreads(
             RetrieveNoticeBoardThreadsRequest request)
         {
@@ -48,6 +50,7 @@ namespace backend_api.Data.NoticeBoard
             return threads;
         }
 
+        /// <inheritdoc />
         public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
             DeleteNoticeBoardThreadRequest request)
         {

@@ -17,6 +17,8 @@ namespace backend_api.Services.NoticeBoard
         {
             _noticeBoardRepository = noticeBoardRepo;
         }
+        
+        /// <inheritdoc />
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
             if (request == null)
@@ -41,6 +43,7 @@ namespace backend_api.Services.NoticeBoard
             return await _noticeBoardRepository.AddNoticeBoardThread(request);
         }
 
+        /// <inheritdoc />
         public async Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(
             RetrieveNoticeBoardThreadsRequest request)
         {
@@ -55,6 +58,7 @@ namespace backend_api.Services.NoticeBoard
             return response;
         }
 
+        /// <inheritdoc />
         public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
             DeleteNoticeBoardThreadRequest request)
         {

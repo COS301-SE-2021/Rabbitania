@@ -64,7 +64,6 @@ namespace backend_api.Models.NoticeBoard.Requests
            
         }
         
-        //TODO: Sort out minLevel. Possibly need to separate tables again
         public AddNoticeBoardThreadRequest(string threadTitle, string threadContent, int minLevel,
             string imageUrl, UserRoles permittedUserRoles, int userId)
         {

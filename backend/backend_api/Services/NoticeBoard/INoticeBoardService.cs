@@ -24,6 +24,12 @@ namespace backend_api.Services.NoticeBoard
         /// <returns></returns>
         Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(RetrieveNoticeBoardThreadsRequest request);
 
+        /// <summary>
+        /// Validates whether or not the request is valid (i.e. the notice board thread exists in the database)
+        /// after which it will delete the thread from the database and return a success response.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(DeleteNoticeBoardThreadRequest request);
     }
 }
