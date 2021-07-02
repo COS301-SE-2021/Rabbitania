@@ -36,16 +36,16 @@ namespace backend_api.Controllers.Auth
             this._service = service;
             this._userService = userService;
         }
-        
 
-        /*[HttpGet]
-        [Route("GoogleLoginv1")]
-        public IActionResult signIn()
-        {
-            var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }*/
-
+        /// <summary>
+        ///     API endpoint for logging in with Google credentials
+        ///     Checks if the email is of the correct domain and if it exists in the system
+        ///     If the domain is incorrect, an InvalidDomainException is thrown
+        ///     If the domain is correct but the email does not exist, a user is created and the 201
+        ///     response code is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Http response code</returns>
         [HttpPost]
         [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
@@ -89,7 +89,13 @@ namespace backend_api.Controllers.Auth
 
             // return response.json().ToString();
         }
-
+        
+        /// <summary>
+        ///     API endpoint for GetUserID
+        ///     Returns the corresponding user ID from the user's email address
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>integer</returns>
         [HttpGet]
         [Route("GetID")]
         public async Task<int> GetUserID(String email)
