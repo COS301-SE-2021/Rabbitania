@@ -79,8 +79,6 @@ class singleCardObj extends StatelessWidget {
               subtitle: Text(
                 theThreadContent,
                 style: TextStyle(color: Colors.white),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
               trailing: IconButton(
                 icon: const Icon(

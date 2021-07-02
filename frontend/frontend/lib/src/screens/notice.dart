@@ -1,7 +1,9 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
+import 'package:frontend/src/widgets/navigationbar.dart';
 import 'package:frontend/src/widgets/noticeCard.dart';
 import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,8 +46,9 @@ class _Notice extends State<Notice> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
+      //floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+      bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[

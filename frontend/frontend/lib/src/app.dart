@@ -21,7 +21,8 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: Login(),
+        //home: Login(), TODO change to this
+        home: NoticeBoard(),
       ),
     );
   }
