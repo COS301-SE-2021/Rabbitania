@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using backend_api.Data.User;
+using backend_api.Exceptions.Notifications;
+using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
@@ -45,20 +47,27 @@ namespace backend_api.Services.User
 
         public Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
-            if (request.UserId.Equals(null))
+            if (request == null)
             {
-                throw new Exception("Error missing UserID");
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+            if (request.UserId <= 0)
+            {
+                throw new InvalidUserIdException("UserID is invalid");
             }
             
             return _userRepository.EditProfile(request);
         }
         
-        public ViewProfileResponse ViewProfile(ViewProfileRequest request)
+        public async Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request)
         {
-
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
             if (request.UserId.Equals(null))
             {
-                throw new Exception("UserID Missing");
+                throw new Exception("Error Missing UserID");
             }
             return _userRepository.ViewProfile(request);
         }

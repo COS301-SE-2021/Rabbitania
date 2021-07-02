@@ -41,5 +41,17 @@ namespace backend_api.Controllers.Notification
             return await _service.CreateNotification(request);
         }
         
+        /// <summary>
+        ///     API endpoint to send an email to a user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> HTTP Status response </returns>
+        [HttpPost]
+        [Route("SendEmailNotification")]
+        public async Task<SendEmailNotificationResponse> SendEmailNotification([FromBody] SendEmailNotificationRequest request)
+        {
+            return await _service.SendEmailNotification(request);
+        }
+        
     }
 }

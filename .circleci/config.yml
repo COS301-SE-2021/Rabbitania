@@ -36,7 +36,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter AuthServiceIntegrationTests
+            dotnet test --filter AuthIntegrationTests
 
   UnitTest_AuthServiceTests:
     docker:
@@ -48,6 +48,39 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter AuthServiceTests
+
+  UnitTest_ViewProfileUnitTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter ViewProfileUnitTests
+
+  UnitTest_EditProfileUnitTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter EditProfileUnitTests
+
+  IntegrationTest_GoogleSignInControllerTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter GoogleSignInControllerTests
   ################################################### USER TESTS ################################################ 
 
   ################################################### NOTIFICATION TESTS ######################################## 
@@ -160,9 +193,22 @@ workflows:
       - UnitTest_AuthServiceIntegrationTest:
           requires:
             - User
+
       - UnitTest_AuthServiceTests:
           requires:
             - User
+
+      -  IntegrationTest_GoogleSignInControllerTests:
+          requires:
+              - User
+
+      - UnitTest_ViewProfileUnitTests:
+          requires:
+            - Noticeboard
+
+      - UnitTest_EditProfileUnitTests:
+          requires:
+            - Noticeboard
 
       - UnitTest_CreateNotification:
           requires:
@@ -187,6 +233,7 @@ workflows:
       - UnitTest_RetrieveNoticeBoardThread:
           requires:
             - Noticeboard
+      
 
 
 
