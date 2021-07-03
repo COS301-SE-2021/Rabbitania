@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Net;
-using System.Net.Mail;
 using System.Threading.Tasks;
-using backend_api.Data;
 using backend_api.Data.Notification;
 using backend_api.Exceptions.Notifications;
 using backend_api.Models.Notification;
@@ -10,9 +8,6 @@ using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using MailKit;
-using MailKit.Net.Smtp;
-using Microsoft.EntityFrameworkCore.Metadata;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace backend_api.Services.Notification
@@ -68,7 +63,7 @@ namespace backend_api.Services.Notification
 
             return await _repository.CreateNotification(request);
         }
-
+        
         public async Task<SendEmailNotificationResponse> SendEmailNotification(SendEmailNotificationRequest request)
         {
             if (request.Email.Equals("") || request.Email == null)
@@ -103,7 +98,7 @@ namespace backend_api.Services.Notification
                 var response = new SendEmailNotificationResponse(HttpStatusCode.OK);
                 return response;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 var error = new SendEmailNotificationResponse(HttpStatusCode.BadRequest);
                 return error;
