@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Data.Booking;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -74,18 +75,19 @@ namespace backend_api
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
             
-            /*//----------------------------------------------------------------------------------------------------------------------
+            //----------------------------------------------------------------------------------------------------------------------
             // Booking DB Context
-            services.AddDbContext<NotificationContext>(options =>
+            services.AddDbContext<BookingContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("HerokuDatabase"),
-                    b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(BookingContext).Assembly.FullName)));
 
-            services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
-
-            services.AddScoped<INotificationRepository, NotificationRepository>();
-            services.AddScoped<INotificationService, NotificationService>();
-            //----------------------------------------------------------------------------------------------------------------------*/
+            services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
+            
+            //TODO: Add services and repos
+            //services.AddScoped<IBookingRepository, BookingRepository>();
+            //services.AddScoped<IBookingService, BookingService>();
+            //----------------------------------------------------------------------------------------------------------------------
             
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
