@@ -28,6 +28,7 @@ namespace backend_api.Services.Notification
             this._settings = settings.Value;
         }
 
+        /// <inheritdoc />
         public async Task<RetrieveNotificationsResponse> RetrieveNotifications(RetrieveNotificationRequest request)
         {
             if (request == null)
@@ -46,6 +47,7 @@ namespace backend_api.Services.Notification
             return response;
         }
 
+        /// <inheritdoc />
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
             if (request == null)
@@ -64,6 +66,7 @@ namespace backend_api.Services.Notification
             return await _repository.CreateNotification(request);
         }
         
+        /// <inheritdoc />
         public async Task<SendEmailNotificationResponse> SendEmailNotification(SendEmailNotificationRequest request)
         {
             if (request.Email.Equals("") || request.Email == null)
