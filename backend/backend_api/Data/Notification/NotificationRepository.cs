@@ -21,7 +21,7 @@ namespace backend_api.Data.Notification
         /// <inheritdoc />
         public async Task<List<Models.Notification.Notification>> RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            IQueryable<Models.Notification.Notification> retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserID == request.UserId);
+            var retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserID == request.UserId);
 
             if (retrieveUserNotifications.ToList().IsNullOrEmpty())
             {
