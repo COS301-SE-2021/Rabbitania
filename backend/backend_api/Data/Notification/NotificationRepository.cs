@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 using Castle.Core.Internal;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Notification
@@ -35,16 +34,18 @@ namespace backend_api.Data.Notification
         /// <inheritdoc />
         public async Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request)
         {
-            var newNot = new Models.Notification.Notification();
-            newNot.Payload = request.Payload;
-            newNot.Type = request.Type;
-            newNot.CreatedDate = request.DateCreated;
-            newNot.UserID = request.UserId;
-            
+            var newNot = new Models.Notification.Notification
+            {
+                Payload = request.Payload,
+                Type = request.Type,
+                CreatedDate = request.DateCreated,
+                UserID = request.UserId
+            };
+
             _context.Notifications.Add(newNot);
             await _context.SaveChanges();
 
-            CreateNotificationResponse response = new CreateNotificationResponse(HttpStatusCode.Created);
+            var response = new CreateNotificationResponse(HttpStatusCode.Created);
 
             return response;
         }
