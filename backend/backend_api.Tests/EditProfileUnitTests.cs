@@ -18,7 +18,6 @@ namespace backend_api.Tests
         private readonly UserService _sut;
         private readonly Mock<IUserRepository> _userRepoMock = new Mock<IUserRepository>();
 
-
         public EditProfileUnitTests()
         {
             _sut = new UserService(_userRepoMock.Object);

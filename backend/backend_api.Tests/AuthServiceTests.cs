@@ -19,7 +19,7 @@ namespace backend_api.Tests
     public class AuthServiceTests
     {
         private readonly AuthService _authService;
-        private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
+        public Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
         private readonly ITestOutputHelper outHelper;
         private readonly User _mockedUser;
         private readonly UserEmails _mockedEmail;
@@ -44,7 +44,6 @@ namespace backend_api.Tests
                 UserRoles.Unassigned,
                 OfficeLocation.Unassigned
             );
-
             this._mockedEmail = new UserEmails("test@tuks.co.za", 50);
         }
         
@@ -73,7 +72,6 @@ namespace backend_api.Tests
             
             //Act
             var response = _authService.CheckEmailDomain(request1);
-            
             //Assert
             Assert.NotNull(response);
             Assert.IsType<DomainResponse>(response);
@@ -124,20 +122,13 @@ namespace backend_api.Tests
         public async Task CheckCorrectEmail()
         {
             //Arrange
-            var email = "test@tuks.co.za";
-            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, "test@tuks.co.za", _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
-            var responseDoa = new CreateUserResponse("User created.");
-
-            _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(responseDoa);
-            var req = new GoogleSignInRequest(email);
+            var requestDoa = new GoogleSignInRequest("_mockedUser.Name", "test@tuks.co.za", "_mockedUser.PhoneNumber", "_mockedUser.UserImgUrl");
+            _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(new CreateUserResponse());
+            var service = new AuthService(_userRepositoryMock.Object);
             //Act
-            var response = await _authService.checkEmailExists(req);
-           // var resp = await _authService.GetUserName(_mockedUser.Name);
-            
+            var response = await service.checkEmailExists(requestDoa);
             //Assert
-            //Assert.NotNull(resp);
-             Assert.IsType<LoginResponse>(response);
-             Assert.True(response.EmailExists);
+            Assert.Equal(true, response.EmailExists);
         }
 
         /*[Fact(DisplayName = "Gets a user json object that exists on the system")]
