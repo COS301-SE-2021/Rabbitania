@@ -35,7 +35,6 @@
     <ItemGroup>
       <Folder Include="Controllers\Booking" />
       <Folder Include="Data\Migrations" />
-      <Folder Include="Models\Booking\Requests" />
       <Folder Include="Models\Booking\Responses" />
     </ItemGroup>
 
