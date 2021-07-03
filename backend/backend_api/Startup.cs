@@ -74,32 +74,37 @@ namespace backend_api
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
 
+            //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
-            // Notification Configuration
             services.AddDbContext<NotificationContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
             services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
 
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationService, NotificationService>();
-            //
-        //NoticeBoard DB Context
+            //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            //NoticeBoard DB Context
             services.AddDbContext<NoticeBoardContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(NoticeBoardContext).Assembly.FullName)));
 
             services.AddScoped<INoticeBoardContext>(provider => provider.GetService<NoticeBoardContext>());
 
             services.AddScoped<INoticeBoardRepository, NoticeBoardRepository>();
             services.AddScoped<INoticeBoardService, NoticeBoardService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
@@ -129,10 +134,8 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-          
-
-    if (env.IsDevelopment())
-            {
+            
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 #region Swagger
                 app.UseSwagger();
