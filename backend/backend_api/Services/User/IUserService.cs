@@ -22,7 +22,7 @@ namespace backend_api.Services.User
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
-        ViewProfileResponse ViewProfile(ViewProfileRequest request);
+        Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
 
     }
 }

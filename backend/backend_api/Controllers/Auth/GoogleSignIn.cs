@@ -36,42 +36,21 @@ namespace backend_api.Controllers.Auth
             this._service = service;
             this._userService = userService;
         }
-        
 
-        /*[HttpGet]
-        [Route("GoogleLoginv1")]
-        public IActionResult signIn()
-        {
-            var properties = new AuthenticationProperties {RedirectUri = Url.Action("GoogleResponse")};
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        }*/
-
+        /// <summary>
+        ///     API endpoint for logging in with Google credentials
+        ///     Checks if the email is of the correct domain and if it exists in the system
+        ///     If the domain is incorrect, an InvalidDomainException is thrown
+        ///     If the domain is correct but the email does not exist, a user is created and the 201
+        ///     response code is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Http response code</returns>
         [HttpPost]
         [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
         {
-            //Task<String>
-            // var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            // var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
-            // {
-            //     claim.Issuer,
-            //     claim.OriginalIssuer,
-            //     claim.Type,
-            //     claim.Value
-            // }).ToList();
-            //
-            // //Creating Google response object
-            // var token = claims[0].Value;
-            // var email = claims[(claims.Count) - 1].Value;
-            // var givenName = claims[1].Value;
-            // var name = claims[2].Value;
-            // var surname = "";
-            // //not every account has provided a surname
-            // if (claims.Capacity > 4)
-            // {
-            //     surname = claims[3].Value;
-            // }
-            
+
             var email = request.Email;
 
             GoogleResponse response = new GoogleResponse();
@@ -110,7 +89,13 @@ namespace backend_api.Controllers.Auth
 
             // return response.json().ToString();
         }
-
+        
+        /// <summary>
+        ///     API endpoint for GetUserID
+        ///     Returns the corresponding user ID from the user's email address
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>integer</returns>
         [HttpGet]
         [Route("GetID")]
         public async Task<int> GetUserID(String email)

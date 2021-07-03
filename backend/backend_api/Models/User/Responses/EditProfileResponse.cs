@@ -1,18 +1,22 @@
-﻿namespace backend_api.Models.User.Responses
+﻿using System.Net;
+
+namespace backend_api.Models.User.Responses
 {
     public class EditProfileResponse
     {
-        private string _message;
-        
-        public EditProfileResponse(string message)
+        private HttpStatusCode _response;
+
+        public HttpStatusCode Response
         {
-            this._message = message;
+            get => _response;
+            set => _response = value;
         }
 
-        public string Message
+        public EditProfileResponse(HttpStatusCode message)
         {
-            get => _message;
-            set => _message = value;
+            _response = message;
         }
+
+      
     }
 }

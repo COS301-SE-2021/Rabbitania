@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Models.Notification;
+using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
 using backend_api.Services.NoticeBoard;
@@ -59,7 +61,10 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-
+            
+            // For sending an email
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            
             services.AddAuthentication(option =>
             {
                 option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;

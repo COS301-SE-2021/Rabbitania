@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
+import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/profile_picture_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,15 +29,9 @@ class _infoForm extends State<InfoForm> {
 
   httpCallGetUser() async {
     String userEmail = user.email!;
-    final response = await http.get(
-      Uri.parse(
-          'https://10.0.2.2:5001/api/GoogleSignIn/GetID?email=$userEmail'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
-
-    return response.body;
+    final userHttp = new UserProvider();
+    final userID = await userHttp.getUserID();
+    return userID;
   }
 
   httpCallUpdateUserInfo() async {
@@ -44,14 +39,14 @@ class _infoForm extends State<InfoForm> {
     if (_dropDownOfficeValue == 'Braamfontein') {
       officeLocationInt = 1;
     }
-    final String userID = await httpCallGetUser();
+    final int userID = await httpCallGetUser();
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'userId': int.parse(userID),
+        'userId': userID,
         'name': user.displayName,
         'phoneNumber': user.phoneNumber,
         'userDescription': myController.text,
