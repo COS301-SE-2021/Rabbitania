@@ -73,7 +73,20 @@ namespace backend_api
                 options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
+            
+            /*//----------------------------------------------------------------------------------------------------------------------
+            // Booking DB Context
+            services.AddDbContext<NotificationContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
+            services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
+
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<INotificationService, NotificationService>();
+            //----------------------------------------------------------------------------------------------------------------------*/
+            
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
@@ -113,7 +126,7 @@ namespace backend_api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             //----------------------------------------------------------------------------------------------------------------------
-
+            
             services.AddControllers();
 
             #region Swagger
