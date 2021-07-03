@@ -9,8 +9,8 @@ namespace backend_api.Models.Notification
     {
         public Notification(string payload, NotificationTypeEnum nType, DateTime date, int userid)
         {
-            this.NotificationPayload = payload;
-            this.NotificationType = nType;
+            this.Payload = payload;
+            this.Type = nType;
             this.CreatedDate = date;
             this.UserID = userid;
         }
@@ -24,8 +24,8 @@ namespace backend_api.Models.Notification
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NotificationId { get; set; }
         
-        public string NotificationPayload { get; set; }
-        public NotificationTypeEnum NotificationType { get; set; }
+        public string Payload { get; set; }
+        public NotificationTypeEnum Type { get; set; }
         
         public DateTime CreatedDate { get; set; }
         
