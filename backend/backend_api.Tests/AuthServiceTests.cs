@@ -126,6 +126,7 @@ namespace backend_api.Tests
             _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(new CreateUserResponse());
             var service = new AuthService(_userRepositoryMock.Object);
             //Act
+            var user = service.GetUser(requestDoa);
             var response = await service.checkEmailExists(requestDoa);
             //Assert
             Assert.Equal(true, response.EmailExists);
