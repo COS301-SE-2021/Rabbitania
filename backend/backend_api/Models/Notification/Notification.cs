@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using backend_api.Data.Notification;
 
 namespace backend_api.Models.Notification
 {
