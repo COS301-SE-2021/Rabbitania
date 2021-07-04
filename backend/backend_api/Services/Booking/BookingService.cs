@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
+using backend_api.Exceptions.Booking;
 using backend_api.Models.Booking.Requests;
 using backend_api.Models.Booking.Responses;
 
@@ -39,7 +41,15 @@ namespace backend_api.Services.Booking
 
         public async Task<GetBookingResponse> ViewBooking(GetBookingRequest request)
         {
-            
+            var resp = await _bookingRepository.GetBooking(request);
+            if (resp!=null)
+            {
+                return new GetBookingResponse(resp);
+            }
+            else
+            {
+                throw new InvalidBookingException("Booking not found");
+            }
         }
 
         public async Task<GetAllBookingsResponse> ViewAllBookings(GetAllBookingsRequest request)
