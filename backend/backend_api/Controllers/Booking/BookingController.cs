@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Models.Booking.Requests;
+using backend_api.Models.Booking.Responses;
+using backend_api.Services.Booking;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace backend_api.Controllers.Booking
 {
@@ -15,28 +18,33 @@ namespace backend_api.Controllers.Booking
     public class BookingController : ControllerBase
     {
         private readonly IUserService _userService;
-        //private readonly IBookingService _bookingService;
+        private readonly IBookingService _bookingService;
 
-        public BookingController(IUserService userService)
+        public BookingController(IUserService userService, IBookingService bookingService)
         {
             _userService = userService;
-            //_bookingService = _bookingService;
+            _bookingService = bookingService;
         }
         
-        // GET: api/Booking
+        // GET: api/GetBookings
         [HttpGet]
         [Route("GetBookings")]
-        // public GetAllBookingsResponse GetAllBookings([FromQuery] GetAllBookingsRequest request)
-        // {
-        //     return _bookingService.getAllBookings(request);
-        // }
-
-        // GET: api/Booking/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public async Task<ActionResult> GetAllBookings([FromQuery] GetAllBookingsRequest request)
         {
-            return "value";
+            if (request != null)
+            {
+                var bookings = await _bookingService.ViewAllBookings(request);
+                var list = bookings.Bookings.ToList();
+                return Ok(list);
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+            
         }
+
+       
 
         // POST: api/Booking
         [HttpPost]
