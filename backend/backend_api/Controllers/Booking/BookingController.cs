@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,14 @@ namespace backend_api.Controllers.Booking
     [ApiController]
     public class BookingController : ControllerBase
     {
+        private readonly IUserService _userService;
+        //private readonly IBookingService _bookingService;
+
+        public BookingController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         // GET: api/Booking
         [HttpGet]
         [Route("GetBookings")]
