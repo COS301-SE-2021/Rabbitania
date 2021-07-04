@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,86 +8,63 @@ import '../screens/noticeboardCreateThread.dart';
 
 var titleInput = "";
 var contextInput = "";
+File imageFile = File("images/RR.png");
 
 class NoticeboardThreadCard extends StatelessWidget {
   Future<String>? futureStringReceived;
   @override
   Widget build(BuildContext context) {
     return Center(
-      child:ListView(
-          children: <Widget>[
-            Container(
-            padding: EdgeInsets.all(16),
-            child: Card(
-              color: Colors.transparent,
-              //shadowColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)
-              ),
-              clipBehavior: Clip.antiAlias,
-              elevation: 0,
-              child: Column(
-                children: [
-                  TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    controller: titleController,
-                    cursorColor: Color.fromRGBO(171, 255, 79, 1),
-                    decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
-                      ),
-                      labelText: 'Title',
-                      labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+      child: ListView(children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(16),
+          child: Card(
+            color: Colors.transparent,
+            //shadowColor: Colors.black,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+            clipBehavior: Clip.antiAlias,
+            elevation: 0,
+            child: Column(
+              children: [
+                TextFormField(
+                  style: TextStyle(color: Colors.white),
+                  controller: titleController,
+                  cursorColor: Color.fromRGBO(171, 255, 79, 1),
+                  decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
                     ),
+                    labelText: 'Title',
+                    labelStyle:
+                        TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                   ),
-                  TextFormField(
-                    minLines: 1,
-                    maxLines: 20,
-                    style: TextStyle(color: Colors.white),
-                    controller: contentController,
-                    cursorColor: Color.fromRGBO(171, 255, 79, 1),
-                    decoration: InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
-                      ),
-                      labelText: 'Content',
-                      labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+                ),
+                TextFormField(
+                  minLines: 1,
+                  maxLines: 20,
+                  style: TextStyle(color: Colors.white),
+                  controller: contentController,
+                  cursorColor: Color.fromRGBO(171, 255, 79, 1),
+                  decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
                     ),
+                    labelText: 'Content',
+                    labelStyle:
+                        TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                   ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          titleInput = titleController.text;
-                          contextInput = contentController.text;
-                          futureStringReceived = addNewThread(titleController.text,contentController.text);
-                          return FutureBuilder<String>(
-                            future: futureStringReceived,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return AlertDialog(content: Text(snapshot.data!));
-                              } else if (snapshot.hasError) {
-                                return AlertDialog(content: Text('${snapshot.error}'));
-                              }
-                              return AlertDialog(content: CircularProgressIndicator());
-                            },
-                          );
-                        },
-                      );
-                    },
-                    child: Text("Create", style: TextStyle(color: Colors.black)),
-                    //child: Icon(Icons.control_point, color:Color.fromRGBO(171, 255, 79, 1) , size: 50,),
+                ),
+                Container(
+                  child: Image.file(
+                    imageFile,
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
-            ),
-            ),
-            Container(
-                child: Container(
+                ),
+                Container(
+                    child: Container(
                   alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -98,21 +76,54 @@ class NoticeboardThreadCard extends StatelessWidget {
                         },
                         child: Text("PICK FROM GALLERY"),
                       ),
-
                     ],
                   ),
-                ))
-          ]
-      ),
+                )),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromRGBO(171, 255, 79, 1)),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        titleInput = titleController.text;
+                        contextInput = contentController.text;
+                        futureStringReceived = addNewThread(
+                            titleController.text, contentController.text);
+                        return FutureBuilder<String>(
+                          future: futureStringReceived,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return AlertDialog(content: Text(snapshot.data!));
+                            } else if (snapshot.hasError) {
+                              return AlertDialog(
+                                  content: Text('${snapshot.error}'));
+                            }
+                            return AlertDialog(
+                                content: CircularProgressIndicator());
+                          },
+                        );
+                      },
+                    );
+                  },
+                  child: Text("Create", style: TextStyle(color: Colors.black)),
+                  //child: Icon(Icons.control_point, color:Color.fromRGBO(171, 255, 79, 1) , size: 50,),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }
 
-
-Future<String> addNewThread(String title,String content) async {
+Future<String> addNewThread(String title, String content) async {
   try {
     if (title == "" || content == "") {
-      throw("Cannot Submit Empty Fields");
+      throw ("Cannot Submit Empty Fields");
     }
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
@@ -128,14 +139,13 @@ Future<String> addNewThread(String title,String content) async {
         'permittedUserRoles': 0
       }),
     );
-    if (response.statusCode == 201||response.statusCode == 200) {
+    if (response.statusCode == 201 || response.statusCode == 200) {
       return ("Successfully uploaded new notice");
     } else {
-      throw("Failed to create new thread error" +
+      throw ("Failed to create new thread error" +
           response.statusCode.toString());
     }
-  } catch(Exception)
-  {
+  } catch (Exception) {
     return Exception.toString();
   }
 }
@@ -147,6 +157,8 @@ _getFromGallery() async {
     maxHeight: 1800,
   );
   if (pickedFile != null) {
-
+    imageFile = File(pickedFile.path);
+    print("IMAGE _________________________");
+    print(imageFile);
   }
 }
