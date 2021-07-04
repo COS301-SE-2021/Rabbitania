@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/screens/googleAuthTest.dart';
@@ -21,7 +22,7 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: Login(),
+        home: InfoForm(FirebaseAuth.instance.currentUser),
       ),
     );
   }

@@ -13,14 +13,27 @@ class ProfileScreen extends StatefulWidget {
   }
 }
 
+late Future<UserProfileModel>? userDetails;
+
 class _profileState extends State<ProfileScreen> {
-  final user = FirebaseAuth.instance.currentUser!;
+  var user;
   String? name;
   String? description;
   int? employeeLevel;
   int? officeLocation;
   int? userRole;
   String? phoneNumber;
+
+  initState() {
+    var userProfile = new UserProvider();
+    setState(() {
+      userDetails = userProfile.getUserProfile();
+      user = FirebaseAuth.instance.currentUser;
+    });
+    initFunction(userDetails);
+    print(user);
+  }
+
   httpCall() async {
     var userHttp = new UserProvider();
     final user = await userHttp.getUserID();
@@ -43,7 +56,7 @@ class _profileState extends State<ProfileScreen> {
 
   determineRole() {
     print(employeeLevel);
-    switch (employeeLevel!) {
+    switch (employeeLevel) {
       case 0:
         return 'Developer';
       case 1:
@@ -63,9 +76,7 @@ class _profileState extends State<ProfileScreen> {
     }
   }
 
-  initFunction() async {
-    var userProfile = new UserProvider();
-    final UserProfileModel userDetails = await userProfile.getUserProfile();
+  initFunction(userDetails) async {
     setState(() {
       name = userDetails.name;
       description = userDetails.description;
@@ -76,143 +87,203 @@ class _profileState extends State<ProfileScreen> {
     });
   }
 
-  initState() {
-    initFunction();
-  }
-
   Widget build(context) {
-    return Scaffold(
-      floatingActionButton: ExampleExpandableFab(),
-      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.only(top: 80),
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ProfilePicture(),
-                  Text(
-                    user.displayName!,
-                    style: TextStyle(
-                      color: Color.fromRGBO(171, 255, 79, 1),
-                      fontSize: 25,
+    return FutureBuilder<UserProfileModel>(
+      future: userDetails,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        List<Widget> children;
+        if (snapshot.hasData) {
+          print(snapshot.data);
+          name = snapshot.data.name;
+          description = snapshot.data.description;
+          employeeLevel = snapshot.data.empLevel;
+          officeLocation = snapshot.data.officeLocation;
+          userRole = snapshot.data.userRoles;
+          phoneNumber = snapshot.data.phoneNumber;
+          children = <Widget>[
+            Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Scaffold(
+                  floatingActionButton: ExampleExpandableFab(),
+                  backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                  body: Center(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 80),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              ProfilePicture(),
+                              Text(
+                                user.displayName,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(171, 255, 79, 1),
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(user.displayName,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                    ))
+                              ]),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Divider(
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              thickness: 3,
+                            ),
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(top: 20),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 25, bottom: 25),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'User Role: ' + determineRole(),
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 25, bottom: 25),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Office Location : ' +
+                                            determineOffice(),
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 25, bottom: 25),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Employee Level: ' +
+                                            employeeLevel.toString(),
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(top: 25, bottom: 25),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Phone Number: ' + phoneNumber!,
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          fontSize: 24,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
                     ),
                   ),
-                ],
-              ),
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(description!,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Color.fromRGBO(171, 255, 79, 1),
-                        ))
-                  ]),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Divider(
-                  color: Color.fromRGBO(171, 255, 79, 1),
-                  thickness: 3,
-                ),
-              ),
-              Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 25, bottom: 25),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              width: 2,
-                            ),
-                          ),
-                          child: Text(
-                            'User Role: ' + determineRole(),
-                            style: TextStyle(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 25, bottom: 25),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              width: 2,
-                            ),
-                          ),
-                          child: Text(
-                            'Office Location : ' + determineOffice(),
-                            style: TextStyle(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 25, bottom: 25),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              width: 2,
-                            ),
-                          ),
-                          child: Text(
-                            'Employee Level: ' + employeeLevel.toString(),
-                            style: TextStyle(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 25, bottom: 25),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              width: 2,
-                            ),
-                          ),
-                          child: Text(
-                            'Phone Number: ' + phoneNumber!,
-                            style: TextStyle(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
-            ],
+                )),
+          ];
+        } else if (snapshot.hasError) {
+          children = <Widget>[
+            const Icon(
+              Icons.error_outline,
+              color: Colors.red,
+              size: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text('Error: ${snapshot.error}'),
+            )
+          ];
+        } else {
+          children = const <Widget>[
+            CircularProgressIndicator(
+              color: Color.fromRGBO(171, 255, 79, 1),
+            ),
+          ];
+        }
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: children,
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
