@@ -7,7 +7,6 @@ namespace backend_api.Models.Booking
 {
     public class Booking : IBooking
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookingId { get; set; }
