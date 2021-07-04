@@ -49,13 +49,13 @@ namespace backend_api.Data.User
             newUser.UserRole = UserRoles.Unassigned;
             newUser.OfficeLocation = OfficeLocation.Unassigned;
             
-            _users.Users.Add(newUser);
-            await _users.SaveChanges();
+            await _users.Users.AddAsync(newUser);
+            await _users.SaveChangesAsync();
             
             var newEmail = new UserEmails(request.Email, newUser.UserId);
-            _users.UserEmail.Add(newEmail);
+            await _users.UserEmail.AddAsync(newEmail);
             
-            await _users.SaveChanges();
+            await _users.SaveChangesAsync();
 
             return new CreateUserResponse("User Successfully Created");
         }
@@ -103,7 +103,7 @@ namespace backend_api.Data.User
 
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
-            var toUpdate = _users.Users.FirstOrDefault(uu => uu.UserId == request.UserId);
+            var toUpdate = await _users.Users.FirstOrDefaultAsync(uu => uu.UserId == request.UserId);
             
             /*if(request.Name != )*/
             
