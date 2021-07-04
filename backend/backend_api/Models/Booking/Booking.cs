@@ -7,6 +7,13 @@ namespace backend_api.Models.Booking
 {
     public class Booking : IBooking
     {
+        public Booking(DateTime bookingDate, float duration, OfficeLocation officeLocation, int userId)
+        {
+            BookingDate = bookingDate;
+            Duration = duration;
+            OfficeLocation = officeLocation;
+            UserId = userId;
+        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -8,18 +8,16 @@ namespace backend_api.Models.Booking.Requests
         private int BookingID;
         private DateTime date;
         private float duration;
-        private OfficeLocation office;
 
         public UpdateBookingRequest()
         {
         }
 
-        public UpdateBookingRequest(int bookingId, DateTime _date, float duration, OfficeLocation office)
+        public UpdateBookingRequest(int bookingId, DateTime _date, float duration)
         {
             BookingID = bookingId;
             date = date;
             duration = duration;
-            this.office = office;
         }
 
         public int BookingId
@@ -34,16 +32,10 @@ namespace backend_api.Models.Booking.Requests
             set => date = value;
         }
 
-        public float Duration1
+        public float Duration
         {
             get => duration;
             set => duration = value;
-        }
-
-        public OfficeLocation Office
-        {
-            get => office;
-            set => office = value;
         }
     }
 }
