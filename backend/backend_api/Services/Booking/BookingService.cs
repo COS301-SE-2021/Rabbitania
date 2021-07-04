@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
 using backend_api.Exceptions.Booking;
+using backend_api.Exceptions.Notifications;
 using backend_api.Models.Booking.Requests;
 using backend_api.Models.Booking.Responses;
+using Castle.Core.Internal;
 
 namespace backend_api.Services.Booking
 {
@@ -54,7 +57,15 @@ namespace backend_api.Services.Booking
 
         public async Task<GetAllBookingsResponse> ViewAllBookings(GetAllBookingsRequest request)
         {
-            
+            var resp = await _bookingRepository.GetAllBookings(request);
+            if (!resp.IsNullOrEmpty())
+            {
+                return new GetAllBookingsResponse(resp);
+            }
+            else
+            {
+                throw new InvalidBookingException("The specified user: "+request.UserId+" has no bookings");
+            }
         }
 
 
