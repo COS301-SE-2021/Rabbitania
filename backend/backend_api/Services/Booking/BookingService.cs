@@ -11,7 +11,7 @@ using Castle.Core.Internal;
 
 namespace backend_api.Services.Booking
 {
-    public class BookingService: IBookingService
+    public class BookingService : IBookingService
     {
         private readonly IBookingRepository _bookingRepository;
 
@@ -26,36 +26,46 @@ namespace backend_api.Services.Booking
             {
                 throw new InvalidBookingException("Request is null or empty");
             }
+
             if (request.UserId is 0 or < 0)
             {
                 throw new InvalidBookingException("Invalid UserId");
             }
+
             if (request.Date.Hour.Equals(0) || request.Date.Day.Equals(0))
             {
                 throw new InvalidDateException("Date is not in correct format");
             }
+
             if (request.Duration.Equals(0) || request.Duration < 0)
             {
                 throw new InvalidDurationException("The duration of the booking is invalid");
             }
-            
+
             var response = new CreateBookingResponse(
                 await _bookingRepository.CreateBooking(request)
             );
-            
+
             return response;
         }
-        
+
         public async Task<UpdateBookingResponse> UpdateBooking(UpdateBookingRequest request)
         {
-            var resp = await _bookingRepository.UpdateBooking(request);
-            if (resp == HttpStatusCode.Accepted)
+            if (request != null)
             {
-                return new UpdateBookingResponse(HttpStatusCode.OK);
+                var resp = await _bookingRepository.UpdateBooking(request);
+                if (resp == HttpStatusCode.Accepted)
+                {
+                    return new UpdateBookingResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return new UpdateBookingResponse(HttpStatusCode.NotFound);
+                }
             }
             else
             {
-                return new UpdateBookingResponse(HttpStatusCode.NotFound);
+                throw new InvalidBookingException("request is null or empty");
             }
         }
 
@@ -66,31 +76,42 @@ namespace backend_api.Services.Booking
 
         public async Task<GetBookingResponse> ViewBooking(GetBookingRequest request)
         {
-            var resp = await _bookingRepository.GetBooking(request);
-            if (resp!=null)
+            if (request != null)
             {
-                return new GetBookingResponse(resp);
+                var resp = await _bookingRepository.GetBooking(request);
+                if (resp != null)
+                {
+                    return new GetBookingResponse(resp);
+                }
+                else
+                {
+                    throw new InvalidBookingException("Booking not found");
+                }
             }
             else
             {
-                throw new InvalidBookingException("Booking not found");
+                throw new InvalidBookingException("request is null or empty");
             }
         }
 
         public async Task<GetAllBookingsResponse> ViewAllBookings(GetAllBookingsRequest request)
         {
-            var resp = await _bookingRepository.GetAllBookings(request);
-            if (!resp.IsNullOrEmpty())
+            if (request != null)
             {
-                return new GetAllBookingsResponse(resp);
+                var resp = await _bookingRepository.GetAllBookings(request);
+                if (!resp.IsNullOrEmpty())
+                {
+                    return new GetAllBookingsResponse(resp);
+                }
+                else
+                {
+                    throw new InvalidBookingException("The specified user: " + request.UserId + " has no bookings");
+                }
             }
             else
             {
-                throw new InvalidBookingException("The specified user: "+request.UserId+" has no bookings");
+                throw new InvalidBookingException("Request is null or empty");
             }
         }
-
-
-
     }
 }
