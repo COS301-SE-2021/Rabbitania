@@ -22,8 +22,30 @@ namespace backend_api.Services.Booking
 
         public async Task<CreateBookingResponse> CreateBooking(CreateBookingRequest request)
         {
+            if (request == null)
+            {
+                throw new InvalidBookingException("Request is null or empty");
+            }
+            if (request.UserId is 0 or < 0)
+            {
+                throw new InvalidBookingException("Invalid UserId");
+            }
+            if (request.Date.Hour.Equals(0) || request.Date.Day.Equals(0))
+            {
+                throw new InvalidDateException("Date is not in correct format");
+            }
+            if (request.Duration.Equals(0) || request.Duration < 0)
+            {
+                throw new InvalidDurationException("The duration of the booking is invalid");
+            }
             
+            var response = new CreateBookingResponse(
+                await _bookingRepository.CreateBooking(request)
+            );
+            
+            return response;
         }
+        
         public async Task<UpdateBookingResponse> UpdateBooking(UpdateBookingRequest request)
         {
             var resp = await _bookingRepository.UpdateBooking(request);
