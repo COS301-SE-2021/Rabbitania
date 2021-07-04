@@ -8,6 +8,9 @@ import 'package:flutter_svg/svg.dart';
 
 import 'noticeboardScreen.dart';
 
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
 class NoticeBoardThread extends StatefulWidget {
   createState() {
     return _NoticeThreadBoard();
@@ -20,17 +23,8 @@ final contentController = TextEditingController();
 
 class _NoticeThreadBoard extends State<NoticeBoardThread> {
   final util = new UtilModel();
-
   void next() {
     UtilModel.route(() => ProfileScreen(), context);
-  }
-
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    titleController.dispose();
-    super.dispose();
   }
 
   @override
@@ -74,6 +68,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
           ],
         ),
       ),
+
     );
   }
   static const String _svg_background =

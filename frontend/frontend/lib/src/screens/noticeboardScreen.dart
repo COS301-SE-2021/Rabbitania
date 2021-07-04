@@ -85,6 +85,9 @@ class _NoticeBoard extends State<NoticeBoard> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Color.fromRGBO(171, 255, 79, 1)),
                       ), onPressed: () {
+                        //dispose();
+                        titleController.clear();
+                        contentController.clear();
                       UtilModel.route(() => NoticeBoardThread(), context);
                     },
                       child: Text("Create Notice", style: TextStyle(color: Colors.black, fontSize: 20)),

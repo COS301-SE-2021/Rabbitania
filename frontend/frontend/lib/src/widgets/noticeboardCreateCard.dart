@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../screens/noticeboardCreateThread.dart';
-
 
 var titleInput = "";
 var contextInput = "";
@@ -40,6 +40,8 @@ class NoticeboardThreadCard extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    minLines: 1,
+                    maxLines: 20,
                     style: TextStyle(color: Colors.white),
                     controller: contentController,
                     cursorColor: Color.fromRGBO(171, 255, 79, 1),
@@ -83,6 +85,23 @@ class NoticeboardThreadCard extends StatelessWidget {
               ),
             ),
             ),
+            Container(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        color: Colors.greenAccent,
+                        onPressed: () {
+                          _getFromGallery();
+                        },
+                        child: Text("PICK FROM GALLERY"),
+                      ),
+
+                    ],
+                  ),
+                ))
           ]
       ),
     );
@@ -121,3 +140,13 @@ Future<String> addNewThread(String title,String content) async {
   }
 }
 
+_getFromGallery() async {
+  PickedFile? pickedFile = await ImagePicker().getImage(
+    source: ImageSource.gallery,
+    maxWidth: 1800,
+    maxHeight: 1800,
+  );
+  if (pickedFile != null) {
+
+  }
+}
