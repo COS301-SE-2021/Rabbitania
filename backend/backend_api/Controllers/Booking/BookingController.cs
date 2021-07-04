@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Models.Booking.Requests;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -19,15 +20,16 @@ namespace backend_api.Controllers.Booking
         public BookingController(IUserService userService)
         {
             _userService = userService;
+            //_bookingService = _bookingService;
         }
-
+        
         // GET: api/Booking
         [HttpGet]
         [Route("GetBookings")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        // public GetAllBookingsResponse GetAllBookings([FromQuery] GetAllBookingsRequest request)
+        // {
+        //     return _bookingService.getAllBookings(request);
+        // }
 
         // GET: api/Booking/5
         [HttpGet("{id}", Name = "Get")]
