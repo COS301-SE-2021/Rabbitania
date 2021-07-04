@@ -61,7 +61,7 @@ namespace backend_api.Services.Booking
 
         public async Task<CancelBookingResponse> CancelBooking(CancelBookingRequest request)
         {
-            
+            return null;
         }
 
         public async Task<GetBookingResponse> ViewBooking(GetBookingRequest request)
