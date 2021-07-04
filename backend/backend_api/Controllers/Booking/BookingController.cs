@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Booking;
 using backend_api.Models.Booking.Requests;
@@ -26,11 +27,11 @@ namespace backend_api.Controllers.Booking
             _userService = userService;
             _bookingService = bookingService;
         }
-        
+
         /// <summary>
         ///     API endpoint for retrieving bookings belonging to a user
         ///     Checks if the given request is valid and then queries the service
-        ///     If the user cannot be found an InvalidBookingException is thrown
+        ///     If the User cannot be found an InvalidBookingException is thrown
         ///     An Http response code is returned.
         /// </summary>
         /// <param name="request"></param>
@@ -51,14 +52,13 @@ namespace backend_api.Controllers.Booking
                 {
                     throw e;
                 }
-                
             }
             else
             {
                 return BadRequest("Request is null or empty");
             }
-            
         }
+
         /// <summary>
         ///     API endpoint for retrieving a booking with a bookingID
         ///     Checks if the given request is valid and then queries the service
@@ -83,13 +83,123 @@ namespace backend_api.Controllers.Booking
                 {
                     throw e;
                 }
-                
             }
             else
             {
                 return BadRequest("Request is null or empty");
             }
-            
         }
+
+        /// <summary>
+        ///     API endpoint for updating a Booking with a BookingID
+        ///     Checks if the given request is valid and then queries the service
+        ///     If the Booking to update cannot be found, an InvalidBookingException is thrown
+        ///     An Http response code is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Http response code</returns>
+        [HttpPut]
+        [Route("EditBooking")]
+        public async Task<ActionResult> UpdateBooking([FromQuery] UpdateBookingRequest request)
+        {
+            if (request != null)
+            {
+                try
+                {
+                    var resp = await _bookingService.UpdateBooking(request);
+                    if (resp.Response == HttpStatusCode.Accepted)
+                    {
+                        return Ok("Successfully updated booking "+request.BookingId);
+                    }
+                    else
+                    {
+                        return BadRequest("Error when trying to update booking with ID: "+request.BookingId);
+                    }
+                }
+                catch (InvalidBookingException e)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
+        
+        /// <summary>
+        ///     API endpoint for deleting a Booking with a BookingID
+        ///     Checks if the given request is valid and then queries the service
+        ///     If the Booking to delete cannot be found, an InvalidBookingException is thrown
+        ///     An Http response code is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Http response code</returns>
+        [HttpDelete]
+        [Route("DeleteBooking")]
+        public async Task<ActionResult> DeleteBooking([FromQuery] CancelBookingRequest request)
+        {
+            if (request != null)
+            {
+                try
+                {
+                    var resp = await _bookingService.CancelBooking(request);
+                    if (resp.Response == HttpStatusCode.Accepted)
+                    {
+                        return Ok("Booking with ID: "+request.BookingId+" successfully deleted.");
+                    }
+                    else
+                    {
+                        return BadRequest("Error trying to delete booking with ID: "+request.BookingId+" from the database.");
+                    }
+                }
+                catch (InvalidBookingException)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
+        
+        /// <summary>
+        ///     API endpoint for creating a Booking
+        ///     Checks if the given request is valid and then queries the service
+        ///     If the new Booking cannot be created in the database, an InvalidBookingException is thrown
+        ///     An Http response code is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Http response code</returns>
+        [HttpPost]
+        [Route("CreateBooking")]
+        public async Task<ActionResult> CreateBooking([FromQuery] CreateBookingRequest request)
+        {
+            if (request != null)
+            {
+                try
+                {
+                    var resp = await _bookingService.CreateBooking(request);
+                    if (resp.Response == HttpStatusCode.Created)
+                    {
+                        return Ok("Booking created successfully");
+                    }
+                    else
+                    {
+                        return BadRequest("Error trying to create booking in system");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
+        
     }
 }
