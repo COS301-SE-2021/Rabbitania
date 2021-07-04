@@ -219,4 +219,4 @@
 
 # Project Management Tools
 
-- :open_book: [Runtime Terrors - Rabbitania Project Board](https://github.com/COS301-SE-2021/Rabbitania/projects/1)
+- :open_book: [Runtime Terrors - Rabbitania Project Board](https://sharing.clickup.com/b/h/6-13854616-2/4a11359d740b761)
