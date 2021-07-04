@@ -2,7 +2,7 @@
 {
     public class CancelBookingRequest
     {
-        public int BookingID;
+        private int _bookingId;
         
         public CancelBookingRequest()
         {
@@ -10,7 +10,13 @@
 
         public CancelBookingRequest(int bookingId)
         {
-            BookingID = bookingId;
+            _bookingId = bookingId;
+        }
+
+        public int BookingId
+        {
+            get => _bookingId;
+            set => _bookingId = value;
         }
     }
 }
