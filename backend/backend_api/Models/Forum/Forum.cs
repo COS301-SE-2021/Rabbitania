@@ -24,8 +24,11 @@ namespace backend_api.Models.Forum
         
         public string ForumTitle { get; set; }
         
-        public int UserID { get; set; }
-
         public DateTime CreatedDate { get; set; }
+        
+        [ForeignKey("UserId")]
+        public int UserID { get; set; }
+        public User.User User { get; set; }
+        
     }
 }

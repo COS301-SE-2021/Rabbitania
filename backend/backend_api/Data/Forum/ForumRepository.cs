@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
@@ -22,8 +23,10 @@ namespace backend_api.Data.Forum
 
             Models.Forum.Forum forum = new Models.Forum.Forum(forumTitle, userId, createdDate);
 
-            _forum.Forum.Add(forum);
+            _forum.Forums.Add(forum);
             await _forum.SaveChanges();
+            
+            return new CreateForumResponse(HttpStatusCode.Created);
         }
     }
 }
