@@ -9,8 +9,8 @@ using backend_api.Data.NoticeBoard;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(NoticeBoardContext))]
-    [Migration("20210703100938_NewDatabaseNoticeBoard")]
-    partial class NewDatabaseNoticeBoard
+    [Migration("20210705085733_InitialNoticeBoardCreate")]
+    partial class InitialNoticeBoardCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

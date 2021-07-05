@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
+using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -10,6 +11,7 @@ using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
+using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
@@ -127,6 +129,20 @@ namespace backend_api
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            //Forum DB Context
+            
+            services.AddDbContext<ForumContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+
+            services.AddScoped<IForumContext>(provider => provider.GetService<ForumContext>());
+            
+            services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<IForumService, ForumService>();
             //----------------------------------------------------------------------------------------------------------------------
             
             services.AddControllers();

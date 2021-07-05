@@ -18,13 +18,13 @@ namespace backend_api.Models.User.Responses
         private UserRoles UserRole { get; set; }
         private OfficeLocation OfficeLocation { get; set; }
         
-        private Models.User.User user;
+        private Models.User.Users user;
         public GetUserResponse(String resp)
         {
             this.response = resp;
         }
 
-        public GetUserResponse(Models.User.User user, String name, int emplvl, bool isadmin, String desc, int userid, string number, UserRoles role, String image, OfficeLocation office, List<int> pinnedids)
+        public GetUserResponse(Models.User.Users user, String name, int emplvl, bool isadmin, String desc, int userid, string number, UserRoles role, String image, OfficeLocation office, List<int> pinnedids)
         {
             this.description = desc;
             this.UserRole = role;

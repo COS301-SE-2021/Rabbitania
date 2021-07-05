@@ -8,6 +8,7 @@
   </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="DotNetTools" Version="0.0.2" />
       <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
       <PackageReference Include="MailKit" Version="2.13.0" />
       <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />

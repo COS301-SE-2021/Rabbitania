@@ -21,7 +21,7 @@ namespace backend_api.Tests
         private readonly AuthService _authService;
         private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
         private readonly ITestOutputHelper outHelper;
-        private readonly User _mockedUser;
+        private readonly Users _mockedUser;
         private readonly UserEmails _mockedEmail;
         private readonly UserService _userService;
 
@@ -32,7 +32,7 @@ namespace backend_api.Tests
             
             this.outHelper = outHelp;
             
-            this._mockedUser = new User(
+            this._mockedUser = new Users(
                 50,
                 "Unit Tests",
                 "0834758854",
@@ -85,7 +85,7 @@ namespace backend_api.Tests
         {
             //Arrange
             var signInRequest = new GoogleSignInRequest(
-                _mockedUser.Name, _mockedEmail.UserEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl
+                _mockedUser.Name, _mockedEmail.UsersEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl
                 );
             
             var request2 = new GoogleSignInRequest(
@@ -124,7 +124,7 @@ namespace backend_api.Tests
         public async Task CheckCorrectEmail()
         {
             //Arrange
-            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, _mockedEmail.UserEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
+            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, _mockedEmail.UsersEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
             var responseDoa = new CreateUserResponse("User created.");
 
             _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(responseDoa);

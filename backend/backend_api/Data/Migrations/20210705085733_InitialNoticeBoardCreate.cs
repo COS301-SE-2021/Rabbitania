@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class NewDatabaseNoticeBoard : Migration
+    public partial class InitialNoticeBoardCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
