@@ -39,7 +39,7 @@ namespace backend_api.Services.Auth
         /// </summary>
         /// <param name="name"></param>
         /// <returns>User object</returns>
-        Task<Models.User.User> GetUserName(string name);
+        Task<Models.User.Users> GetUserName(string name);
         
         /// <summary>
         ///     Checks if a user exists in the system with the given request
@@ -48,7 +48,7 @@ namespace backend_api.Services.Auth
         /// </summary>
         /// <param name="request"></param>
         /// <returns>User object</returns>
-        Task<Models.User.User> GetUserID(GoogleSignInRequest request);
+        Task<Models.User.Users> GetUserID(GoogleSignInRequest request);
 
     }
 }

@@ -4,16 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend_api.Models.Forum
 {
-    public class Forum : IForum
+    public class Forums : IForum
     {
-        public Forum(string forumTitle, int userId, DateTime CreatedDate)
+        public Forums(string forumTitle, int userId, DateTime CreatedDate)
         {
             this.ForumTitle = forumTitle;
             this.UserId = userId;
             this.CreatedDate = CreatedDate;
         }
 
-        public Forum()
+        public Forums()
         {
             
         }
@@ -28,7 +28,7 @@ namespace backend_api.Models.Forum
         
         [ForeignKey("UserId")] 
         public int UserId { get; set; }
-        public User.User Users { get; set; }
+        public User.Users Users { get; set; }
 
         
     }

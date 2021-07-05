@@ -6,7 +6,7 @@ namespace backend_api.Models.Forum
     {
         int ForumThreadId { get; set; }
         string ForumThreadTitle { get; set; }
-        int UserId { get; set; }
+        /*int UserId { get; set; }*/
         DateTime CreatedDate { get; set; }
         string imageURL { get; set; }
         

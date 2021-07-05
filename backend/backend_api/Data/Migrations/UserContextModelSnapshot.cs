@@ -19,7 +19,27 @@ namespace backend_api.Data.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0-preview.4.21253.1")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("backend_api.Models.User.User", b =>
+            modelBuilder.Entity("backend_api.Models.User.UserEmails", b =>
+                {
+                    b.Property<int>("UserEmailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UsersEmail")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserEmailId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserEmail");
+                });
+
+            modelBuilder.Entity("backend_api.Models.User.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -60,27 +80,7 @@ namespace backend_api.Data.Migrations
 
             modelBuilder.Entity("backend_api.Models.User.UserEmails", b =>
                 {
-                    b.Property<int>("UserEmailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("UserEmail")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserEmailId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserEmails");
-                });
-
-            modelBuilder.Entity("backend_api.Models.User.UserEmails", b =>
-                {
-                    b.HasOne("backend_api.Models.User.User", "User")
+                    b.HasOne("backend_api.Models.User.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

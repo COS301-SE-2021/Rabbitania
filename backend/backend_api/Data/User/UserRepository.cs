@@ -25,12 +25,12 @@ namespace backend_api.Data.User
             this._users = users;
         }
 
-        public async Task<List<Models.User.User>> GetUser(int userID)
+        public async Task<List<Models.User.Users>> GetUser(int userID)
         {
             return await _users.Users.Where(x => x.UserId == userID).ToListAsync();
         }
 
-        public async Task<List<Models.User.User>> GetUser(String name)
+        public async Task<List<Models.User.Users>> GetUser(String name)
         {
             return await _users.Users.Where(x => x.Name == name).ToListAsync();
         }
@@ -38,7 +38,7 @@ namespace backend_api.Data.User
 
         public async Task<CreateUserResponse> CreateUser(GoogleSignInRequest request)
         {
-            var newUser = new Models.User.User();
+            var newUser = new Models.User.Users();
             newUser.Name = request.DisplayName;
             newUser.PhoneNumber = "0833611023";
             newUser.PinnedUserIds = new List<int>();
@@ -60,10 +60,10 @@ namespace backend_api.Data.User
             return new CreateUserResponse("User Successfully Created");
         }
 
-        public async Task<IEnumerable<Models.User.User>> GetAllUsers()
+        public async Task<IEnumerable<Models.User.Users>> GetAllUsers()
         {
             var users = _users.Users;
-            IEnumerable<Models.User.User> allUsers = users.Select(user => user);
+            IEnumerable<Models.User.Users> allUsers = users.Select(user => user);
 
             return allUsers.ToList();
         }
@@ -130,7 +130,7 @@ namespace backend_api.Data.User
 
         public async Task<bool> checkEmailExists(GoogleSignInRequest request)
         {
-            var userEmail = await _users.UserEmail.Where(x => x.UserEmail == request.Email).ToListAsync();
+            var userEmail = await _users.UserEmail.Where(x => x.UsersEmail == request.Email).ToListAsync();
             //Check if IQueryable returns something
             if (userEmail.Any())
             {
@@ -142,11 +142,11 @@ namespace backend_api.Data.User
             }
         }
 
-        public async Task<Models.User.User> GetExistingUserDetails(GoogleSignInRequest request)
+        public async Task<Models.User.Users> GetExistingUserDetails(GoogleSignInRequest request)
         {
             var email = request.Email;
             //get email object for the given email
-            var userEmail = await _users.UserEmail.FirstOrDefaultAsync(x => x.UserEmail == email);
+            var userEmail = await _users.UserEmail.FirstOrDefaultAsync(x => x.UsersEmail == email);
             var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == userEmail.UserId);
             return user;
         }

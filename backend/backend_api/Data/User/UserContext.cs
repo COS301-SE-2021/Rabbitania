@@ -15,7 +15,7 @@ namespace backend_api.Data.User
         {
             
         }
-        public DbSet<Models.User.User> Users { get; set; }
+        public DbSet<Models.User.Users> Users { get; set; }
         
         public DbSet<UserEmails> UserEmail { get; set; }
         public async Task<int> SaveChanges()

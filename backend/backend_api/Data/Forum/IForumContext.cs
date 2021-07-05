@@ -6,8 +6,8 @@ namespace backend_api.Data.Forum
 {
     public interface IForumContext
     {
-        DbSet<Models.Forum.Forum> Forums { get; set; }
-        DbSet<ForumThread> ForumThreads { get; set; }
+        DbSet<Models.Forum.Forums> Forums { get; set; }
+        DbSet<ForumThreads> ForumThreads { get; set; }
         Task<int> SaveChanges();
     }
 }

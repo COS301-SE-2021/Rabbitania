@@ -21,7 +21,7 @@ namespace backend_api.Data.Forum
             var createdDate = request.CreatedDate;
             var userId = request.UserId;
 
-            Models.Forum.Forum forum = new Models.Forum.Forum(forumTitle, userId, createdDate);
+            var forum = new Models.Forum.Forums(forumTitle, userId, createdDate);
 
             _forum.Forums.Add(forum);
             await _forum.SaveChanges();

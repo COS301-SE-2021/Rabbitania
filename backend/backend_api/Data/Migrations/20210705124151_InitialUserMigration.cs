@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitialUserCreation : Migration
+    public partial class InitialUserMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,19 +30,19 @@ namespace backend_api.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserEmails",
+                name: "UserEmail",
                 columns: table => new
                 {
                     UserEmailId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserEmail = table.Column<string>(type: "text", nullable: true),
+                    UsersEmail = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserEmails", x => x.UserEmailId);
+                    table.PrimaryKey("PK_UserEmail", x => x.UserEmailId);
                     table.ForeignKey(
-                        name: "FK_UserEmails_Users_UserId",
+                        name: "FK_UserEmail_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -50,15 +50,15 @@ namespace backend_api.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserEmails_UserId",
-                table: "UserEmails",
+                name: "IX_UserEmail_UserId",
+                table: "UserEmail",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserEmails");
+                name: "UserEmail");
 
             migrationBuilder.DropTable(
                 name: "Users");

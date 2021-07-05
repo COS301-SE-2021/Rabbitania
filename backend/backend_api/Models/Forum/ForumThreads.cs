@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend_api.Models.Forum
 {
-    public class ForumThread : IForumThread
+    public class ForumThreads : IForumThread
     {
-        public ForumThread(string ForumThreadTitle, int userId, DateTime CreatedDate, string imageURL, int ForumId)
+        public ForumThreads(string ForumThreadTitle, int userId, DateTime CreatedDate, string imageURL, int ForumId)
         {
             this.ForumThreadTitle = ForumThreadTitle;
             this.UserId = userId;
@@ -15,7 +15,7 @@ namespace backend_api.Models.Forum
             this.ForumId = ForumId;
         }
 
-        public ForumThread()
+        public ForumThreads()
         {
             
         }
@@ -32,11 +32,11 @@ namespace backend_api.Models.Forum
         
         [ForeignKey("Forums")]
         public int ForumId { get; set; }
-        public Forum Forums { get; set; }
+        public Forums Forums { get; set; }
         
         [ForeignKey("UserId")] 
         public int UserId { get; set; }
-        public User.User Users { get; set; }
+        public User.Users Users { get; set; }
 
     }
 }
