@@ -1,15 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../screens/noticeboardCreateThread.dart';
+import 'dart:io' as Io;
 
 var titleInput = "";
 var contextInput = "";
 File? imageFile;
+Uint8List? base64String;
 Future<String>? futureStringReceived;
 
 class NoticeboardThreadCard extends StatelessWidget {
@@ -95,11 +98,15 @@ class NoticeboardThreadCard extends StatelessWidget {
 
 Widget isImageWidget() {
   try {
-    return Image.file(
-      imageFile!,
-      height: 350,
-      fit: BoxFit.cover,
+    return Image.memory(
+      base64String!,
+      fit: BoxFit.fill,
     );
+    // return Image.file(
+    //   imageFile!,
+    //   height: 350,
+    //   fit: BoxFit.cover,
+    // );
   } catch (Exception) {
     return SizedBox.shrink();
   }
@@ -143,7 +150,11 @@ _getFromGallery() async {
   );
   if (pickedFile != null) {
     imageFile = File(pickedFile.path);
-    print("IMAGE _________________________");
-    print(imageFile);
+
+    final bytes = Io.File(pickedFile.path).readAsBytesSync();
+
+    String img64 = base64Encode(bytes);
+    print(img64.substring(0, 100));
+    base64String = Base64Decoder().convert(img64);
   }
 }
