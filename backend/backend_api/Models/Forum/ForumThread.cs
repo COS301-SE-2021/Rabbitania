@@ -9,7 +9,7 @@ namespace backend_api.Models.Forum
         public ForumThread(string ForumThreadTitle, int userId, DateTime CreatedDate, string imageURL, int ForumId)
         {
             this.ForumThreadTitle = ForumThreadTitle;
-            this.UserID = userId;
+            this.UserId = userId;
             this.CreatedDate = CreatedDate;
             this.imageURL = imageURL;
             this.ForumId = ForumId;
@@ -30,12 +30,13 @@ namespace backend_api.Models.Forum
 
         public string imageURL { get; set; }
         
-        [ForeignKey("Forum")]
+        [ForeignKey("Forums")]
         public int ForumId { get; set; }
-        public Forum Forum { get; set; }
+        public Forum Forums { get; set; }
         
-        [ForeignKey("UserId")]
-        public int UserID { get; set; }
-        public User.User User { get; set; }
+        [ForeignKey("UserId")] 
+        public int UserId { get; set; }
+        public User.User Users { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ namespace backend_api.Models.Forum
         public Forum(string forumTitle, int userId, DateTime CreatedDate)
         {
             this.ForumTitle = forumTitle;
-            this.UserID = userId;
+            this.UserId = userId;
             this.CreatedDate = CreatedDate;
         }
 
@@ -26,9 +26,10 @@ namespace backend_api.Models.Forum
         
         public DateTime CreatedDate { get; set; }
         
-        [ForeignKey("UserId")]
-        public int UserID { get; set; }
-        public User.User User { get; set; }
+        [ForeignKey("UserId")] 
+        public int UserId { get; set; }
+        public User.User Users { get; set; }
+
         
     }
 }

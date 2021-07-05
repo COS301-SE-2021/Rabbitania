@@ -8,7 +8,7 @@ namespace backend_api.Models.Forum
 
         string ForumTitle { get; set; }
 
-        int UserID { get; set; }
+        int UserId { get; set; }
 
         DateTime CreatedDate { get; set; }
     }
