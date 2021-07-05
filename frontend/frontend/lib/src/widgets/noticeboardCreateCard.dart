@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,10 @@ import '../screens/noticeboardCreateThread.dart';
 
 var titleInput = "";
 var contextInput = "";
-File imageFile = File("images/RR.png");
+File? imageFile;
+Future<String>? futureStringReceived;
 
 class NoticeboardThreadCard extends StatelessWidget {
-  Future<String>? futureStringReceived;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,7 +21,6 @@ class NoticeboardThreadCard extends StatelessWidget {
           padding: EdgeInsets.all(16),
           child: Card(
             color: Colors.transparent,
-            //shadowColor: Colors.black,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
             clipBehavior: Clip.antiAlias,
@@ -58,58 +58,31 @@ class NoticeboardThreadCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  child: Image.file(
-                    imageFile,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Container(
                     child: Container(
-                  alignment: Alignment.center,
+                  alignment: Alignment.bottomCenter,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      RaisedButton(
-                        color: Colors.greenAccent,
-                        onPressed: () {
-                          _getFromGallery();
-                        },
-                        child: Text("PICK FROM GALLERY"),
+                      IconButton(
+                          icon: const Icon(Icons.add_photo_alternate_outlined),
+                          iconSize: 50,
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          tooltip: "Add Image",
+                          onPressed: () async {
+                            await _getFromGallery();
+                            UtilModel.route(() => NoticeBoardThread(), context);
+                          }),
+                      Text(
+                        "Add Image",
+                        style:
+                            TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                       ),
+                      //Text("PICK FROM GALLERY"),
                     ],
                   ),
                 )),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(171, 255, 79, 1)),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        titleInput = titleController.text;
-                        contextInput = contentController.text;
-                        futureStringReceived = addNewThread(
-                            titleController.text, contentController.text);
-                        return FutureBuilder<String>(
-                          future: futureStringReceived,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return AlertDialog(content: Text(snapshot.data!));
-                            } else if (snapshot.hasError) {
-                              return AlertDialog(
-                                  content: Text('${snapshot.error}'));
-                            }
-                            return AlertDialog(
-                                content: CircularProgressIndicator());
-                          },
-                        );
-                      },
-                    );
-                  },
-                  child: Text("Create", style: TextStyle(color: Colors.black)),
-                  //child: Icon(Icons.control_point, color:Color.fromRGBO(171, 255, 79, 1) , size: 50,),
+                Container(
+                  child: isImageWidget(),
                 ),
               ],
             ),
@@ -117,6 +90,18 @@ class NoticeboardThreadCard extends StatelessWidget {
         ),
       ]),
     );
+  }
+}
+
+Widget isImageWidget() {
+  try {
+    return Image.file(
+      imageFile!,
+      height: 350,
+      fit: BoxFit.cover,
+    );
+  } catch (Exception) {
+    return SizedBox.shrink();
   }
 }
 
