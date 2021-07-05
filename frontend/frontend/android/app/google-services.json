@@ -1,37 +1,41 @@
 {
   "project_info": {
-    "project_number": "956015917059",
-    "project_id": "rabbitania-c0174",
-    "storage_bucket": "rabbitania-c0174.appspot.com"
+    "project_number": "248471898739",
+    "project_id": "rabbitania-f761f",
+    "storage_bucket": "rabbitania-f761f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:956015917059:android:e8aad4c94f0db1db763636",
+        "mobilesdk_app_id": "1:248471898739:android:a7f4406ebf2570caac3806",
         "android_client_info": {
           "package_name": "com.example.frontend"
         }
       },
       "oauth_client": [
         {
-          "client_id": "956015917059-bvv7ec73bmd9g8iapsci44p660c6olln.apps.googleusercontent.com",
+          "client_id": "248471898739-ulck4k19o6mbtqaj2jsemvagio0mc6mc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.frontend",
-            "certificate_hash": "cfb128a92e6dca02634af3b82dbd01b5b435745c"
+            "certificate_hash": "fbc68c799dce031ff51b817dadc88a2b597bb70f"
           }
+        },
+        {
+          "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBq_0q3weiYd284lBQROxhl0kNelJRSqGk"
+          "current_key": "AIzaSyCLCWqzHuJ-SRRdLMNvhJL-2tnWeFtGz0A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "956015917059-8ika0sebnt059r5n5vrtfle1aopnogb2.apps.googleusercontent.com",
+              "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

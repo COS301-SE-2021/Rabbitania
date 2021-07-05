@@ -35,17 +35,19 @@ class _continueButton extends State<ContinueButton> {
       },
       body: jsonEncode(<String, dynamic>{
         'displayName': widget.user.displayName,
-        'email': widget.user.email,
+        'email': widget.user.providerData[0].email,
         'phoneNumber': widget.user.phoneNumber,
         'googleImgUrl': widget.user.photoURL,
       }),
     );
     if (response.statusCode == 200) {
+      setState(() {});
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => InfoForm()));
+      setState(() {});
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => InfoForm(widget.user)));
     } else {
       showDialog(
         context: context,
