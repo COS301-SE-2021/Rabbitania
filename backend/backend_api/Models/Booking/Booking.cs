@@ -25,8 +25,8 @@ namespace backend_api.Models.Booking
         
         public OfficeLocation OfficeLocation { get; set; }
         
-        [ForeignKey("Users")] 
         public int UserId { get; set; }
+        public Users User { get; set; }
         
     }
 }
