@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
@@ -8,6 +7,9 @@ import '../widgets/card_item.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'noticeboardScreen.dart';
+
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class NoticeBoardThread extends StatefulWidget {
   createState() {
@@ -20,16 +22,8 @@ final contentController = TextEditingController();
 
 class _NoticeThreadBoard extends State<NoticeBoardThread> {
   final util = new UtilModel();
-
   void next() {
     UtilModel.route(() => ProfileScreen(), context);
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    titleController.dispose();
-    super.dispose();
   }
 
   @override
@@ -65,6 +59,52 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
             ),
             Container(
               child: NoticeboardThreadCard(),
+            ),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: Colors.transparent,
+                  height: 75,
+                  width: double.infinity,
+                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
+                  padding:
+                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(171, 255, 79, 1)),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          titleInput = titleController.text;
+                          contextInput = contentController.text;
+                          futureStringReceived = addNewThread(
+                              titleController.text, contentController.text);
+                          return FutureBuilder<String>(
+                            future: futureStringReceived,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return AlertDialog(
+                                    content: Text(snapshot.data!));
+                              } else if (snapshot.hasError) {
+                                return AlertDialog(
+                                    content: Text('${snapshot.error}'));
+                              }
+                              return AlertDialog(
+                                  content: CircularProgressIndicator());
+                            },
+                          );
+                        },
+                      );
+                    },
+                    child: Text("Create",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

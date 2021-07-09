@@ -20,7 +20,7 @@ class Thread {
   final int threadId;
   final String threadTitle;
   final String threadContent;
-  final int minLevel;
+  final int minEmployeeLevel;
   final String imageUrl;
   final int permittedUserRoles;
   final int userId;
@@ -29,7 +29,7 @@ class Thread {
     required this.threadId,
     required this.threadTitle,
     required this.threadContent,
-    required this.minLevel,
+    required this.minEmployeeLevel,
     required this.imageUrl,
     required this.permittedUserRoles,
     required this.userId,
@@ -40,7 +40,7 @@ class Thread {
       threadId: json['threadId'],
       threadTitle: json['threadTitle'],
       threadContent: json['threadContent'],
-      minLevel: json['minLevel'],
+      minEmployeeLevel: json['minEmployeeLevel'],
       imageUrl: json['imageUrl'],
       permittedUserRoles: json['permittedUserRoles'],
       userId: json['userId'],
@@ -49,10 +49,11 @@ class Thread {
 }
 
 Future<List<Thread>> fetchNotice() async {
-
   HttpClient client = new HttpClient();
-  client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
-  String url ='http://10.0.2.2:5000/api/NoticeBoard/RetrieveNoticeBoardThreads';
+  client.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+  String url =
+      'http://10.0.2.2:5000/api/NoticeBoard/RetrieveNoticeBoardThreads';
   //Map map = { "email" : "email" , "password" : "password" };
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
   request.headers.set('content-type', 'application/json');
@@ -63,42 +64,42 @@ Future<List<Thread>> fetchNotice() async {
   //print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList);//[{everything}]
   //print(NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);//{singleThread}
 
-
-  var test = (NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
+  //var test = (NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList[0]);
   //print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
   //print(test);
   //print(jsonEncode(test));
 
-  print(Thread.fromJson(test).threadId);
+  //print(Thread.fromJson(test).threadId);
 
   //"{threadId:}"
   //list of strings that i can jsonEncode
 
   //object with threadID
   //list of thread objects
-  List<dynamic> tList = NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList;
+  List<dynamic> tList =
+      NoticeBoardThreads.fromJson(jsonDecode(reply)).threadList;
 
   //print(tList[0]);
 
   List<Thread> threadObj = [];
 
-  for(var t in tList)
-    {
-      threadObj.add(Thread.fromJson(t));
-    }
+  for (var t in tList) {
+    threadObj.add(Thread.fromJson(t));
+  }
   //print("ENTIRE LIST");
   //print(threadObj);
   client.close();
   return threadObj;
 }
 
-Future<bool> deleteThread(int threadID) async{
+Future<bool> deleteThread(int threadID) async {
   try {
-    if (threadID < 0 ) {
-      throw("Error Thread ID is Incorrect");
+    if (threadID < 0) {
+      throw ("Error Thread ID is Incorrect");
     }
     final response = await http.delete(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/DeleteNoticeBoardThread'),
+      Uri.parse(
+          'https://10.0.2.2:5001/api/NoticeBoard/DeleteNoticeBoardThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -107,16 +108,12 @@ Future<bool> deleteThread(int threadID) async{
       }),
     );
     //print("CODE ============" + response.statusCode.toString());
-    if (response.statusCode == 201||response.statusCode == 200) {
+    if (response.statusCode == 201 || response.statusCode == 200) {
       return true;
     } else {
-      throw("Failed to delete, error code" +
-          response.statusCode.toString());
+      throw ("Failed to delete, error code" + response.statusCode.toString());
     }
-  } catch(Exception)
-  {
+  } catch (Exception) {
     return false;
   }
-
-
 }

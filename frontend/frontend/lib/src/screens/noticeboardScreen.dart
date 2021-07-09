@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
+import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
 import '../widgets/card_item.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -82,6 +82,10 @@ class _NoticeBoard extends State<NoticeBoard> {
                           Color.fromRGBO(171, 255, 79, 1)),
                     ),
                     onPressed: () {
+                      //dispose();
+                      titleController.clear();
+                      contentController.clear();
+                      imageFile = null;
                       UtilModel.route(() => NoticeBoardThread(), context);
                     },
                     child: Text("Create Notice",
