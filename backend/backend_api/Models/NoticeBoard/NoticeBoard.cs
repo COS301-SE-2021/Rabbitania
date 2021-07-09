@@ -19,9 +19,8 @@ namespace backend_api.Models.NoticeBoard
         public string ImageUrl { get; set; }
         
         public UserRoles PermittedUserRoles { get; set; }
-        
-        [ForeignKey("User")] 
         public int UserId { get; set; }
+        public Users User { get; set; }
 
         public NoticeBoard(string threadTitle, string threadContent, int minLevel, string imageUrl,
             UserRoles permittedUserRoles, int userId)
