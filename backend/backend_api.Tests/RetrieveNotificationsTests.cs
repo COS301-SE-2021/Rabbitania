@@ -33,19 +33,19 @@ namespace backend_api.Tests
                     Payload = "Well done to the Rabbitanaia Team!", 
                     Type = NotificationTypeEnum.Email,
                     CreatedDate = _mockedDate,
-                    UserID = 1
+                    UserId = 1
                 },
                 new Notification {
                     Payload = "Meeting at 12:30 with Design Team", 
                     Type = NotificationTypeEnum.Push,
                     CreatedDate = _mockedDate,
-                    UserID = 1
+                    UserId = 1
                 },
                 new Notification {
                     Payload = "Don't forget to do you tests!", 
                     Type = NotificationTypeEnum.Email,
                     CreatedDate = _mockedDate,
-                    UserID = 1
+                    UserId = 1
                 }
             };
         }

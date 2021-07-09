@@ -21,7 +21,7 @@ namespace backend_api.Data.Notification
         /// <inheritdoc />
         public async Task<List<Models.Notification.Notification>> RetrieveNotifications(RetrieveNotificationRequest request)
         {
-            var retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserID == request.UserId);
+            var retrieveUserNotifications = _context.Notifications.Where(notification => notification.UserId == request.UserId);
 
             if (retrieveUserNotifications.ToList().IsNullOrEmpty())
             {
@@ -39,7 +39,7 @@ namespace backend_api.Data.Notification
                 Payload = request.Payload,
                 Type = request.Type,
                 CreatedDate = request.DateCreated,
-                UserID = request.UserId
+                UserId = request.UserId
             };
 
             _context.Notifications.Add(newNot);
