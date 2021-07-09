@@ -14,7 +14,7 @@ namespace backend_api.Models.NoticeBoard
 
         public string ThreadContent { get; set; }
 
-        public int MinLevel { get; set; }
+        public int MinEmployeeLevel { get; set; }
         
         public string ImageUrl { get; set; }
         
@@ -27,7 +27,7 @@ namespace backend_api.Models.NoticeBoard
         {
             ThreadTitle = threadTitle;
             ThreadContent = threadContent;
-            MinLevel = minLevel;
+            MinEmployeeLevel = minLevel;
             ImageUrl = imageUrl;
             PermittedUserRoles = permittedUserRoles;
             UserId = userId;

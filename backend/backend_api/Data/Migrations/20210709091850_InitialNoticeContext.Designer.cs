@@ -10,8 +10,8 @@ using backend_api.Data.NoticeBoard;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(NoticeBoardContext))]
-    [Migration("20210709083904_InitialNoticeBoardMigration")]
-    partial class InitialNoticeBoardMigration
+    [Migration("20210709091850_InitialNoticeContext")]
+    partial class InitialNoticeContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace backend_api.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
-                    b.Property<int>("MinLevel")
+                    b.Property<int>("MinEmployeeLevel")
                         .HasColumnType("integer");
 
                     b.Property<int>("PermittedUserRoles")
