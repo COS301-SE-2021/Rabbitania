@@ -29,7 +29,7 @@ namespace backend_api.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
-                    b.Property<int>("MinLevel")
+                    b.Property<int>("MinEmployeeLevel")
                         .HasColumnType("integer");
 
                     b.Property<int>("PermittedUserRoles")
@@ -51,7 +51,7 @@ namespace backend_api.Data.Migrations
                     b.ToTable("NoticeBoard");
                 });
 
-            modelBuilder.Entity("backend_api.Models.User.Users", b =>
+            /*modelBuilder.Entity("backend_api.Models.User.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -88,7 +88,7 @@ namespace backend_api.Data.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
+                });*/
 
             modelBuilder.Entity("backend_api.Models.NoticeBoard.NoticeBoard", b =>
                 {

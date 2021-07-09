@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitialNoticeBoardMigration : Migration
+    public partial class InitialNoticeContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,7 +37,7 @@ namespace backend_api.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ThreadTitle = table.Column<string>(type: "text", nullable: true),
                     ThreadContent = table.Column<string>(type: "text", nullable: true),
-                    MinLevel = table.Column<int>(type: "integer", nullable: false),
+                    MinEmployeeLevel = table.Column<int>(type: "integer", nullable: false),
                     ImageUrl = table.Column<string>(type: "text", nullable: true),
                     PermittedUserRoles = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false)
