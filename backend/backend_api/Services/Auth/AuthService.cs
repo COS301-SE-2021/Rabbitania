@@ -42,7 +42,7 @@ namespace backend_api.Services.Auth
             var email = request.Email;
             var arr = email.Split('@');
             //TODO: Change to retrorabbit.co.za once we have a test email to work with
-            if (arr[1].Equals("tuks.co.za"))
+            if (arr[1].Equals("gmail.com"))
             {
                 return new DomainResponse(true);
             }
@@ -65,7 +65,7 @@ namespace backend_api.Services.Auth
             return json;
         }
 
-        public async Task<Models.User.User> GetUserName(string name)
+        public async Task<Models.User.Users> GetUserName(string name)
         {
             var UserName = name;
 
@@ -74,7 +74,7 @@ namespace backend_api.Services.Auth
             return user;
         }
 
-        public async Task<Models.User.User> GetUserID(GoogleSignInRequest request)
+        public async Task<Models.User.Users> GetUserID(GoogleSignInRequest request)
         {
             var user = await _repository.GetExistingUserDetails(request);
             return user;

@@ -27,7 +27,7 @@ namespace backend_api.Tests
                 {
                     ThreadTitle = "Welcome back Rabbits!",
                     ThreadContent = "This is going to be a great year",
-                    MinLevel = 1,
+                    MinEmployeeLevel = 1,
                     ImageUrl = "image.png",
                     PermittedUserRoles = UserRoles.Administrator,
                     UserId = 1
@@ -36,7 +36,7 @@ namespace backend_api.Tests
                 {
                     ThreadTitle = "Unfortunately Our offices are going to have to close temporarily due to Covid",
                     ThreadContent = "We will make it through this year",
-                    MinLevel = 1,
+                    MinEmployeeLevel = 1,
                     ImageUrl = "image.png",
                     PermittedUserRoles = UserRoles.Administrator,
                     UserId = 1
@@ -45,7 +45,7 @@ namespace backend_api.Tests
                 {
                     ThreadTitle = "There is a company event happening next week Monday",
                     ThreadContent = "Hope to see you all there!",
-                    MinLevel = 1,
+                    MinEmployeeLevel = 1,
                     ImageUrl = "image.png",
                     PermittedUserRoles = UserRoles.Administrator,
                     UserId = 1

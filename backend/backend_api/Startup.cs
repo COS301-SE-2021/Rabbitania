@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Data.Booking;
+using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -9,6 +11,7 @@ using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
+using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
@@ -73,7 +76,21 @@ namespace backend_api
                 options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            // Booking DB Context
+            services.AddDbContext<BookingContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(BookingContext).Assembly.FullName)));
 
+            services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
+            
+            //TODO: Add services and repos
+            //services.AddScoped<IBookingRepository, BookingRepository>();
+            //services.AddScoped<IBookingService, BookingService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
@@ -113,7 +130,21 @@ namespace backend_api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            //Forum DB Context
+            
+            services.AddDbContext<ForumContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
 
+            services.AddScoped<IForumContext>(provider => provider.GetService<ForumContext>());
+            
+            services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<IForumService, ForumService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            
             services.AddControllers();
 
             #region Swagger

@@ -14,21 +14,20 @@ namespace backend_api.Models.NoticeBoard
 
         public string ThreadContent { get; set; }
 
-        public int MinLevel { get; set; }
+        public int MinEmployeeLevel { get; set; }
         
         public string ImageUrl { get; set; }
         
         public UserRoles PermittedUserRoles { get; set; }
-        
-        [ForeignKey("User")] 
         public int UserId { get; set; }
+        public Users User { get; set; }
 
         public NoticeBoard(string threadTitle, string threadContent, int minLevel, string imageUrl,
             UserRoles permittedUserRoles, int userId)
         {
             ThreadTitle = threadTitle;
             ThreadContent = threadContent;
-            MinLevel = minLevel;
+            MinEmployeeLevel = minLevel;
             ImageUrl = imageUrl;
             PermittedUserRoles = permittedUserRoles;
             UserId = userId;

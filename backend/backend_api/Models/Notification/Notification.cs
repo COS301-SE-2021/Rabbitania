@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using backend_api.Models.User;
 
 namespace backend_api.Models.Notification
 {
@@ -11,7 +12,7 @@ namespace backend_api.Models.Notification
             this.Payload = payload;
             this.Type = nType;
             this.CreatedDate = date;
-            this.UserID = userid;
+            this.UserId = userid;
         }
         
         public Notification()
@@ -28,8 +29,7 @@ namespace backend_api.Models.Notification
         
         public DateTime CreatedDate { get; set; }
         
-        // User ID foreign key
-        [ForeignKey("User")] 
-        public int UserID { get; set; }
+        public int UserId { get; set; }
+        public Users User { get; set; }
     }
 }

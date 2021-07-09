@@ -39,7 +39,7 @@ namespace backend_api.Services.User
             String name = request.getName();
            
             //search for user
-            Models.User.User user = _userRepository.GetUser(name).Result[0];
+            Models.User.Users user = _userRepository.GetUser(name).Result[0];
             
             GetUserResponse response = new GetUserResponse(user, name, user.EmployeeLevel, user.IsAdmin, user.UserDescription, user.UserId, user.PhoneNumber, user.UserRole, user.UserImgUrl, user.OfficeLocation, user.PinnedUserIds);
             return response;

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend_api.Models.User
 {
-    public class User
+    public class Users
     {
-        public User(int userId, string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        public Users(int userId, string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
         {
             UserId = userId;
             this.Name = name;
@@ -20,7 +20,7 @@ namespace backend_api.Models.User
             this.OfficeLocation = officeLocation;
         }
 
-        public User()
+        public Users()
         {
         }
 
@@ -28,7 +28,6 @@ namespace backend_api.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         
-        //public string email { get; set; }
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }
