@@ -11,8 +11,8 @@ using backend_api.Data.Forum;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(ForumContext))]
-    [Migration("20210705124955_UserForeignKeyInForum")]
-    partial class UserForeignKeyInForum
+    [Migration("20210709082539_InitialForumMigration")]
+    partial class InitialForumMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,9 +41,6 @@ namespace backend_api.Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UsersUserId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("imageURL")
                         .HasColumnType("text");
 
@@ -51,7 +48,7 @@ namespace backend_api.Data.Migrations
 
                     b.HasIndex("ForumId");
 
-                    b.HasIndex("UsersUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ForumThreads");
                 });
@@ -72,12 +69,9 @@ namespace backend_api.Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UsersUserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("ForumId");
 
-                    b.HasIndex("UsersUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Forums");
                 });
@@ -129,22 +123,26 @@ namespace backend_api.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backend_api.Models.User.Users", "Users")
+                    b.HasOne("backend_api.Models.User.Users", "User")
                         .WithMany()
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Forums");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend_api.Models.Forum.Forums", b =>
                 {
-                    b.HasOne("backend_api.Models.User.Users", "Users")
+                    b.HasOne("backend_api.Models.User.Users", "User")
                         .WithMany()
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

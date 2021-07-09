@@ -10,7 +10,7 @@ using backend_api.Data.User;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20210705124151_InitialUserMigration")]
+    [Migration("20210709081758_InitialUserMigration")]
     partial class InitialUserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

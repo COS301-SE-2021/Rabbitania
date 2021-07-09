@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using backend_api.Models.User;
 
 namespace backend_api.Models.Forum
 {
@@ -26,9 +27,8 @@ namespace backend_api.Models.Forum
         
         public DateTime CreatedDate { get; set; }
         
-        [ForeignKey("UserId")] 
         public int UserId { get; set; }
-        public User.Users Users { get; set; }
+        public Users User { get; set; }
 
         
     }

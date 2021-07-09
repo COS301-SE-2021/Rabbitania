@@ -20,30 +20,7 @@ namespace backend_api.Data.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0-preview.4.21253.1")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("backend_api.Models.Forum.Forum", b =>
-                {
-                    b.Property<int>("ForumId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ForumTitle")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ForumId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Forums");
-                });
-
-            modelBuilder.Entity("backend_api.Models.Forum.ForumThread", b =>
+            modelBuilder.Entity("backend_api.Models.Forum.ForumThreads", b =>
                 {
                     b.Property<int>("ForumThreadId")
                         .ValueGeneratedOnAdd()
@@ -74,7 +51,30 @@ namespace backend_api.Data.Migrations
                     b.ToTable("ForumThreads");
                 });
 
-            modelBuilder.Entity("backend_api.Models.User.User", b =>
+            modelBuilder.Entity("backend_api.Models.Forum.Forums", b =>
+                {
+                    b.Property<int>("ForumId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ForumTitle")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ForumId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Forums");
+                });
+
+            modelBuilder.Entity("backend_api.Models.User.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -110,29 +110,18 @@ namespace backend_api.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("backend_api.Models.Forum.Forum", b =>
+            modelBuilder.Entity("backend_api.Models.Forum.ForumThreads", b =>
                 {
-                    b.HasOne("backend_api.Models.User.User", "Users")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("backend_api.Models.Forum.ForumThread", b =>
-                {
-                    b.HasOne("backend_api.Models.Forum.Forum", "Forums")
+                    b.HasOne("backend_api.Models.Forum.Forums", "Forums")
                         .WithMany()
                         .HasForeignKey("ForumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backend_api.Models.User.User", "Users")
+                    b.HasOne("backend_api.Models.User.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -140,7 +129,18 @@ namespace backend_api.Data.Migrations
 
                     b.Navigation("Forums");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("backend_api.Models.Forum.Forums", b =>
+                {
+                    b.HasOne("backend_api.Models.User.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
