@@ -135,7 +135,7 @@ Future<String> addNewThread(String title, String content) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'userId': 2,
+        'userId': 1,
         'threadTitle': title,
         'threadContent': content,
         'minLevel': 0,
