@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
 using backend_api.Exceptions.Booking;
-using backend_api.Exceptions.Notifications;
 using backend_api.Models.Booking.Requests;
 using backend_api.Models.Booking.Responses;
 using Castle.Core.Internal;
