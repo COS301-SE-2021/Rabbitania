@@ -46,9 +46,9 @@ class _Notice extends State<Notice> {
         ),
         actions: [],
       ),
-      //floatingActionButton: ExampleExpandableFab(),
+      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      bottomNavigationBar: navigationBar(),
+      //bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[

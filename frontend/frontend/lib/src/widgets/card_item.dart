@@ -121,7 +121,6 @@ class CardObj extends StatelessWidget {
               ListTile(
                 contentPadding:
                     EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
-
                 // leading: Icon(
                 //   Icons.announcement_outlined, size: 45,
                 //   color: Color.fromRGBO(171, 255, 79, 1),),
@@ -138,59 +137,6 @@ class CardObj extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                ),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.delete_forever_sharp,
-                    color: Color.fromRGBO(171, 255, 79, 1),
-                    size: 24.0,
-                  ),
-                  tooltip: 'Delete',
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          elevation: 5,
-                          backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                          titleTextStyle:
-                              TextStyle(color: Colors.white, fontSize: 32),
-                          title: Text("Delete Notice"),
-                          contentTextStyle:
-                              TextStyle(color: Colors.white, fontSize: 16),
-                          content: Text(
-                              "Are you sure you want to delete this notice?"),
-                          actions: [
-                            IconButton(
-                              icon: const Icon(
-                                Icons.check,
-                                color: Color.fromRGBO(171, 255, 79, 1),
-                                size: 24.0,
-                              ),
-                              tooltip: 'Delete',
-                              onPressed: () async {
-                                final deleteResponse =
-                                    await deleteThread(this.id);
-                                UtilModel.route(() => NoticeBoard(), context);
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.close,
-                                color: Color.fromRGBO(255, 79, 79, 1),
-                                size: 24.0,
-                              ),
-                              tooltip: 'Cancel',
-                              onPressed: () {
-                                //final deleteResponse = await deleteThread(this.id);
-                                UtilModel.route(() => NoticeBoard(), context);
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
                 ),
               ),
               Container(
