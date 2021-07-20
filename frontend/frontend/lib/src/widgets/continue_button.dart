@@ -71,17 +71,13 @@ class _continueButton extends State<ContinueButton> {
         alignment: Alignment.center,
         child: ElevatedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(300),
-            )),
             elevation: MaterialStateProperty.all<double>(0),
             backgroundColor:
                 MaterialStateProperty.all<Color>(Colors.transparent),
           ),
           child: Container(
-            height: 250,
-            width: 250,
+            height: 50,
+            width: 50,
             child: CircularProgressIndicator(
               color: Color.fromRGBO(171, 255, 79, 1),
             ),

@@ -376,7 +376,11 @@ class _infoForm extends State<InfoForm> {
                                                   context,
                                                   listen: false);
                                           provider.googleLogout();
-                                          Navigator.pop(context);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Login()));
                                           // Navigator.push(
                                           //   context,
                                           //   MaterialPageRoute(

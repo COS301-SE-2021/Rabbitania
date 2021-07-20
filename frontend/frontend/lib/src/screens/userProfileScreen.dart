@@ -127,13 +127,7 @@ class _profileState extends State<ProfileScreen> {
                           ),
                           Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(user.displayName,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color.fromRGBO(171, 255, 79, 1),
-                                    ))
-                              ]),
+                              children: <Widget>[]),
                           Padding(
                             padding: EdgeInsets.only(top: 10),
                             child: Divider(
@@ -270,9 +264,23 @@ class _profileState extends State<ProfileScreen> {
             )
           ];
         } else {
-          children = const <Widget>[
-            CircularProgressIndicator(
-              color: Color.fromRGBO(171, 255, 79, 1),
+          children = <Widget>[
+            Center(
+              child: Stack(children: <Widget>[
+                Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: new BoxDecoration(
+                      color: Color.fromRGBO(33, 33, 33, 1),
+                    ),
+                    child: Center(
+                      widthFactor: 0.5,
+                      heightFactor: 0.5,
+                      child: CircularProgressIndicator(
+                        color: Color.fromRGBO(171, 255, 79, 1),
+                      ),
+                    )),
+              ]),
             ),
           ];
         }

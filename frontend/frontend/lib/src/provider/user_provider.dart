@@ -24,8 +24,7 @@ class UserProvider {
     final user = await getUserID();
     final oldURI = "https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user";
     final response = await http.get(
-      Uri.parse(
-          'https://rabbitania-runtimeterrors.herokuapp.com/api/User/ViewProfile?UserId=$user'),
+      Uri.parse(oldURI),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
