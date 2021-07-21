@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 
-class BookingButton extends StatefulWidget {
+class BookingHomeText extends StatefulWidget {
   final displayText;
-  BookingButton(this.displayText);
-  _bookingState createState() => _bookingState();
+  BookingHomeText(this.displayText);
+  _BookingState createState() => _BookingState();
 }
 
-class _bookingState extends State<BookingButton> {
+class _BookingState extends State<BookingHomeText> {
   Widget build(BuildContext context) => Center(
         child: Container(
             child: Column(
           children: <Widget>[
             Center(
-              child: Text(widget.displayText),
+              child: Text(widget.displayText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 25,
+                      color: Color.fromRGBO(171, 255, 79, 1))),
             ),
           ],
         )),

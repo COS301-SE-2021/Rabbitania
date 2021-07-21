@@ -6,10 +6,10 @@ import 'package:frontend/src/widgets/bookingDayButton.dart';
 
 class BookingScreen extends StatefulWidget {
   @override
-  _bookingState createState() => _bookingState();
+  _BookingState createState() => _BookingState();
 }
 
-class _bookingState extends State<BookingScreen> {
+class _BookingState extends State<BookingScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -32,9 +32,11 @@ class _bookingState extends State<BookingScreen> {
         body: Center(
           child: Container(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                BookingButton('Afternoon'),
+                BookingHomeText(
+                    'Welcome to Rabbitanias online office space booking!'),
               ],
             ),
           ),
