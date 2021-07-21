@@ -41,9 +41,12 @@ class _BookingState extends State<BookingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  BookingHomeText(
-                      "Welcome to Rabbitania's online office space booking!"),
-                  Image(image: AssetImage('images/rabbitaniabunny.png'))
+                  BookingHomeText("Welcome to Rabbitania's online office space booking!"),
+                  Image(
+                    image: AssetImage('images/logo.png'),
+                    height: 100,
+                    width: 150,
+                  )
                 ],
               ),
             ],
