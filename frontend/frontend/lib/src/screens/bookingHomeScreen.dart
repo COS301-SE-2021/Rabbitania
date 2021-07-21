@@ -39,14 +39,29 @@ class _BookingState extends State<BookingScreen> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  BookingHomeText("** Text Goes here ** "),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  BookingHomeText("Welcome to Rabbitania's online office space booking!"),
+                  BookingHomeText(
+                      "Welcome to Rabbitania's online office space booking system!"),
                   Image(
                     image: AssetImage('images/logo.png'),
-                    height: 100,
+                    height: 150,
                     width: 150,
                   )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  BookingHomeText("** Text Goes here ** "),
                 ],
               ),
             ],
