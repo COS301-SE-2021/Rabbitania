@@ -44,7 +44,7 @@ class _BookingState extends State<BookingScreen> {
                   BookingHomeText(
                       "Welcome to Rabbitania's online office space booking system!"),
                   Padding(
-                    padding: new EdgeInsets.all(40.0),
+                    padding: new EdgeInsets.all(50.0),
                     child: BookingHomeText(
                         "Please select a day of the week above to start your booking process \n"),
                   )
@@ -57,7 +57,7 @@ class _BookingState extends State<BookingScreen> {
                   Image(
                     image: AssetImage('images/logo.png'),
                     height: 100,
-                    width: 250,
+                    width: 400,
                   )
                 ],
               )
