@@ -41,8 +41,11 @@ class _BookingState extends State<BookingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  BookingHomeText(
-                      "Welcome to Rabbitania's online office space booking system!"),
+                  Container(
+                    margin: const EdgeInsets.only(top: 25.0),
+                    child: BookingHomeText(
+                        "Welcome to Rabbitania's online office space booking system!"),
+                  ),
                   Padding(
                     padding: new EdgeInsets.all(50.0),
                     child: BookingHomeText(
@@ -56,7 +59,7 @@ class _BookingState extends State<BookingScreen> {
                 children: <Widget>[
                   Image(
                     image: AssetImage('images/logo.png'),
-                    height: 100,
+                    height: 150,
                     width: 400,
                   )
                 ],
