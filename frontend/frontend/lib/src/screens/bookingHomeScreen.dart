@@ -4,6 +4,7 @@ import 'package:frontend/src/widgets/bookingAppBar.dart';
 import 'package:frontend/src/widgets/bookingButton.dart';
 import 'package:frontend/src/widgets/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/bookingViewButton.dart';
 
 class BookingScreen extends StatefulWidget {
   @override
@@ -62,6 +63,17 @@ class _BookingState extends State<BookingScreen> {
                     height: 150,
                     width: 400,
                   )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(
+                        left: 75.0, top: 25.0, bottom: 20.0),
+                    child: BookingViewButton(),
+                  ),
                 ],
               )
             ],

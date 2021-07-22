@@ -17,6 +17,7 @@ class _BookingDayState extends State<BookingDayScreen> {
           centerTitle: true,
           toolbarHeight: 100,
           elevation: 1,
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

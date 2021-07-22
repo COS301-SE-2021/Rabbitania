@@ -8,7 +8,7 @@ class BookingDayButton extends StatefulWidget {
 }
 
 class _BookingDayState extends State<BookingDayButton> {
-  bool _colorChange = false;
+  bool _colorChange = true;
 
   @override
   Widget build(context) => TextButton(
