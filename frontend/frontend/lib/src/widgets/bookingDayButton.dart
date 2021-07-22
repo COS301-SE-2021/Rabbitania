@@ -19,7 +19,7 @@ class _bookingDayState extends State<BookingDayButton> {
         child: Text(
           widget.displayText,
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 40,
             color: Color.fromRGBO(171, 255, 79, 1),
           ),
         ),
