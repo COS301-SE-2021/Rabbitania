@@ -80,6 +80,8 @@ class EditCard extends StatelessWidget {
               controller: titleController,
               cursorColor: Color.fromRGBO(171, 255, 79, 1),
               decoration: InputDecoration(
+                prefixText: theThreadTitle,
+                prefixStyle: TextStyle(color: Colors.white),
                 focusedBorder: UnderlineInputBorder(
                   borderSide:
                       BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
@@ -95,6 +97,8 @@ class EditCard extends StatelessWidget {
               controller: contentController,
               cursorColor: Color.fromRGBO(171, 255, 79, 1),
               decoration: InputDecoration(
+                prefixText: theThreadContent,
+                prefixStyle: TextStyle(color: Colors.white),
                 focusedBorder: UnderlineInputBorder(
                   borderSide:
                       BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
@@ -131,7 +135,7 @@ class EditCard extends StatelessWidget {
                 )),
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: isImageWidget(),
+              child: isImageWidget(imageFile),
             ),
           ],
         ),
@@ -140,18 +144,21 @@ class EditCard extends StatelessWidget {
   }
 }
 
-Widget isImageWidget() {
+Widget isImageWidget(String IF) {
   try {
-    // return Image.memory(
-    //   base64String!,
-    //   fit: BoxFit.fill,
-    // );
-    return Image.file(
-      imageFile!,
-      height: 250,
-      width: 350,
-      fit: BoxFit.cover,
-    );
+    if (IF.isNotEmpty && imageFile == null) {
+      return Image.memory(
+        Base64Decoder().convert(IF),
+        fit: BoxFit.fill,
+      );
+    } else {
+      return Image.file(
+        imageFile!,
+        height: 250,
+        width: 350,
+        fit: BoxFit.cover,
+      );
+    }
   } catch (Exception) {
     return SizedBox.shrink();
   }
