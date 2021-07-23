@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/widgets/bookingAppBar.dart';
-import 'package:frontend/src/widgets/bookingButton.dart';
-import 'package:frontend/src/widgets/bookingDayButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
+import 'package:frontend/src/widgets/Booking/bookingButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/widgets/bookingViewButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
 
 class BookingScreen extends StatefulWidget {
   @override
@@ -58,24 +58,19 @@ class _BookingState extends State<BookingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image(
-                    image: AssetImage('images/logo.png'),
-                    height: 150,
-                    width: 400,
-                  )
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
                   Container(
-                    margin: const EdgeInsets.only(
-                        left: 75.0, top: 25.0, bottom: 20.0),
+                    margin: const EdgeInsets.only(top: 55.0, bottom: 25.0),
+                    child: Image(
+                      image: AssetImage('images/logo.png'),
+                      height: 150,
+                      width: 400,
+                    ),
+                  ),
+                  Container(
                     child: BookingViewButton(),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

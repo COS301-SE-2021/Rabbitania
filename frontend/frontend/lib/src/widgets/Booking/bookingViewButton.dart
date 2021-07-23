@@ -5,16 +5,20 @@ class BookingViewButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {},
-      child: const Text('VIEW YOUR BOOKINGS'),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          side: BorderSide(width: 20.0, color: Colors.blue),
-        )),
-        foregroundColor:
-            MaterialStateProperty.all(Color.fromRGBO(171, 255, 79, 1)),
-        backgroundColor: MaterialStateProperty.all(Colors.transparent),
+    return ButtonTheme(
+      minWidth: 400.0,
+      height: 200.0,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          textStyle: const TextStyle(fontSize: 20),
+          primary: Colors.transparent,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+              side: BorderSide(color: Color.fromRGBO(171, 255, 79, 1))),
+        ),
+        onPressed: () {},
+        child: const Text('VIEW YOUR CURRENT BOOKINGS',
+            style: TextStyle(color: Color.fromRGBO(171, 255, 79, 1))),
       ),
     );
   }

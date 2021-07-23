@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/widgets/bookingAppBar.dart';
-import 'package:frontend/src/widgets/bookingButton.dart';
-import 'package:frontend/src/widgets/bookingDayButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
+import 'package:frontend/src/widgets/Booking/bookingButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BookingDayScreen extends StatefulWidget {
