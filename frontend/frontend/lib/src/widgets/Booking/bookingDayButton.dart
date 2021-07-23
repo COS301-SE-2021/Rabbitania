@@ -20,12 +20,6 @@ class _BookingDayState extends State<BookingDayButton> {
             side: BorderSide(width: 2, color: Color.fromRGBO(171, 255, 79, 1)),
           )),
         ),
-        // style: ButtonStyle(
-        //   backgroundColor: MaterialStateProperty.all(Colors.transparent),
-        //   shape: MaterialStateProperty.all(CircleBorder(
-        //     side: BorderSide(width: 2, color: Color.fromRGBO(171, 255, 79, 1)),
-        //   )),
-        // ),
         onPressed: () => {
           setState(() => _colorChange = !_colorChange),
           Navigator.push(
