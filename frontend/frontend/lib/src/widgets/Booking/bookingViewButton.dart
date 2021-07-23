@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/screens/Booking/bookingViewBookings.dart';
 
 class BookingViewButton extends StatelessWidget {
   const BookingViewButton({Key? key}) : super(key: key);
@@ -16,7 +17,12 @@ class BookingViewButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(18.0),
               side: BorderSide(color: Color.fromRGBO(171, 255, 79, 1))),
         ),
-        onPressed: () {},
+        onPressed: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ViewBookingScreen()),
+          )
+        },
         child: const Text('VIEW YOUR CURRENT BOOKINGS',
             style: TextStyle(color: Color.fromRGBO(171, 255, 79, 1))),
       ),
