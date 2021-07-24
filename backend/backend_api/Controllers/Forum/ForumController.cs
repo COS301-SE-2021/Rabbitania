@@ -24,5 +24,13 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.CreateForum(request);
         }
+
+        [HttpGet]
+        [Route("RetrieveForums")]
+        public async Task<RetrieveForumsResponse> RetrieveForums(
+            [FromQuery] RetrieveForumsRequest request)
+        {
+            return await _service.RetrieveForums(request);
+        }
     }
 }

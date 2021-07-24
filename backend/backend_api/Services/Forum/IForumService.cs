@@ -13,7 +13,7 @@ namespace backend_api.Services.Forum
         /// <param name="request"></param>
         /// <returns>An HTTPS status code stating whether the operation was successful or not</returns>
         Task<CreateForumResponse> CreateForum(CreateForumRequest request);
-        
-        
+
+        Task<RetrieveForumsResponse> RetrieveForums(RetrieveForumsRequest request);
     }
 }

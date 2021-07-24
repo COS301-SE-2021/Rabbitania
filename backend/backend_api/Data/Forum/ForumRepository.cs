@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using backend_api.Models.Forum.Requests;
@@ -27,6 +29,12 @@ namespace backend_api.Data.Forum
             await _forum.SaveChanges();
             
             return new CreateForumResponse(HttpStatusCode.Created);
+        }
+
+        public async Task<List<Models.Forum.Forums>> RetrieveForums(RetrieveForumsRequest request)
+        {
+            List<Models.Forum.Forums> forums = _forum.Forums.ToList();
+            return forums;
         }
     }
 }
