@@ -47,7 +47,7 @@ namespace backend_api.Data.NoticeBoard
             var toUpdate = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == threadID);
             toUpdate.ImageUrl = request.ImageUrl;
             toUpdate.ThreadContent = request.ThreadContent;
-            toUpdate.ThreadTitle = request.ThreadContent;
+            toUpdate.ThreadTitle = request.ThreadTitle;
             try
             {
                 _noticeBoard.NoticeBoard.Update(toUpdate).State = EntityState.Modified;
