@@ -7,13 +7,13 @@ namespace backend_api.Models.Forum
 {
     public class ForumThreads : IForumThread
     {
-        public ForumThreads(string ForumThreadTitle, int userId, DateTime CreatedDate, string imageURL, int ForumId)
+        public ForumThreads(string forumThreadTitle, int userId, DateTime createdDate, string imageUrl, int forumId)
         {
-            this.ForumThreadTitle = ForumThreadTitle;
+            this.ForumThreadTitle = forumThreadTitle;
             this.UserId = userId;
-            this.CreatedDate = CreatedDate;
-            this.imageURL = imageURL;
-            this.ForumId = ForumId;
+            this.CreatedDate = createdDate;
+            this.imageURL = imageUrl;
+            this.ForumId = forumId;
         }
 
         public ForumThreads()
