@@ -7,6 +7,7 @@ using backend_api.Exceptions.NoticeBoard;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.NoticeBoard
@@ -38,6 +39,25 @@ namespace backend_api.Data.NoticeBoard
             
             
             return new AddNoticeBoardThreadResponse(HttpStatusCode.Created);
+        }
+
+        public async Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(EditNoticeBoardThreadRequest request)
+        {
+            var threadID = request.ThreadId;
+            var toUpdate = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == threadID);
+            toUpdate.ImageUrl = request.ImageUrl;
+            toUpdate.ThreadContent = request.ThreadContent;
+            toUpdate.ThreadTitle = request.ThreadContent;
+            try
+            {
+                _noticeBoard.NoticeBoard.Update(toUpdate).State = EntityState.Modified;
+                await _noticeBoard.SaveChanges();
+                return new EditNoticeBoardThreadResponse(HttpStatusCode.Accepted);
+            }
+            catch (Exception)
+            {
+                return new EditNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
+            }
         }
 
         public async Task<List<Models.NoticeBoard.NoticeBoard>> RetrieveAllNoticeBoardThreads(

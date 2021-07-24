@@ -42,11 +42,15 @@ namespace backend_api.Controllers.NoticeBoard
         {
             return await _service.DeleteNoticeBoardThread(request);
         }
-        
-        /*[HttpDelete]
-        [Route("DeleteNoticeBoardThread")]
-        public async Task<DeleteNoticeBoardThreadResponse
-        */
+
+        [HttpPut]
+        [Route("EditNoticeBoardThread")]
+        public async Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(
+            [FromBody] EditNoticeBoardThreadRequest request)
+        {
+            return await _service.EditNoticeBoardThread(request);
+        }
+
 
     }
 }
