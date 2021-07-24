@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using backend_api.Exceptions.Forum;
+
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 

@@ -1,0 +1,28 @@
+﻿
+using System.Threading.Tasks;
+using backend_api.Models.Forum.Requests;
+using backend_api.Models.Forum.Responses;
+using backend_api.Services.Forum;
+using Microsoft.AspNetCore.Mvc;
+
+namespace backend_api.Controllers.Forum
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ForumController : ControllerBase
+    {
+        private readonly IForumService _service;
+
+        public ForumController(IForumService service)
+        {
+            this._service = service;
+        }
+
+        [HttpPost]
+        [Route("CreateForum")]
+        public async Task<CreateForumResponse> CreateForum([FromBody] CreateForumRequest request)
+        {
+            return await _service.CreateForum(request);
+        }
+    }
+}
