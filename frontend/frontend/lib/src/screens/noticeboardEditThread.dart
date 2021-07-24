@@ -1,28 +1,25 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/noticeboardEditThread.dart';
-import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/screens/notice.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
-import 'package:frontend/src/widgets/navigationbar.dart';
-import 'package:frontend/src/widgets/noticeCard.dart';
-import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/noticeboardEditCard.dart';
+
 import 'noticeboardScreen.dart';
 
-class Notice extends StatefulWidget {
+class NoticeBoardEditThread extends StatefulWidget {
   createState() {
-    return _Notice();
+    return _NoticeBoardEditThread();
   }
 }
 
-var noticeID = -1;
+final titleController = TextEditingController();
+final contentController = TextEditingController();
 
-class _Notice extends State<Notice> {
+class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   final util = new UtilModel();
-
   void next() {
-    UtilModel.route(() => ProfileScreen(), context);
+    UtilModel.route(() => Notice(), context);
   }
 
   @override
@@ -38,7 +35,7 @@ class _Notice extends State<Notice> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Notice         ',
+            'Edit Notice         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
@@ -49,7 +46,6 @@ class _Notice extends State<Notice> {
       ),
       floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      //bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[
@@ -58,7 +54,7 @@ class _Notice extends State<Notice> {
               fit: BoxFit.contain,
             ),
             Container(
-              child: NoticeCard(),
+              child: NoticeboardEditThreadCard(),
             ),
             Positioned.fill(
               child: Align(
@@ -76,12 +72,31 @@ class _Notice extends State<Notice> {
                           Color.fromRGBO(171, 255, 79, 1)),
                     ),
                     onPressed: () {
-                      //dispose();
-
-                      //imageFile = null;
-                      UtilModel.route(() => NoticeBoardEditThread(), context);
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          titleInput = titleController.text;
+                          contextInput = contentController.text;
+                          futureStringReceived = addNewThread(
+                              titleController.text, contentController.text);
+                          return FutureBuilder<String>(
+                            future: futureStringReceived,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return AlertDialog(
+                                    content: Text(snapshot.data!));
+                              } else if (snapshot.hasError) {
+                                return AlertDialog(
+                                    content: Text('${snapshot.error}'));
+                              }
+                              return AlertDialog(
+                                  content: CircularProgressIndicator());
+                            },
+                          );
+                        },
+                      );
                     },
-                    child: Text("Edit Notice",
+                    child: Text("Edit",
                         style: TextStyle(color: Colors.black, fontSize: 20)),
                   ),
                 ),

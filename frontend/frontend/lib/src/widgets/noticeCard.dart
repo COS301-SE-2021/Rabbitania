@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/notice.dart';
 import '../models/noticeboardModel.dart';
 import '../screens/noticeboardScreen.dart';
+import 'card_item.dart';
 
 class NoticeCard extends StatelessWidget {
   @override
@@ -22,7 +25,7 @@ class NoticeCard extends StatelessWidget {
                       id: iterate.current.threadId,
                       theThreadTitle: iterate.current.threadTitle,
                       theThreadContent: iterate.current.threadContent,
-                      theImageURL: iterate.current.imageUrl));
+                      imageFile: iterate.current.imageUrl));
                 }
               }
               return new Column(children: cards);
@@ -43,13 +46,13 @@ class singleCardObj extends StatelessWidget {
   final int id;
   final String theThreadTitle;
   final String theThreadContent;
-  final String theImageURL;
+  final String imageFile;
 
   const singleCardObj(
       {required this.id,
       required this.theThreadTitle,
       required this.theThreadContent,
-      required this.theImageURL});
+      required this.imageFile});
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +66,10 @@ class singleCardObj extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              child: Image.asset(theImageURL),
-            ),
+                child: Image.memory(
+              Base64Decoder().convert(imageFile),
+              fit: BoxFit.fill,
+            )),
             ListTile(
               contentPadding:
                   EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
