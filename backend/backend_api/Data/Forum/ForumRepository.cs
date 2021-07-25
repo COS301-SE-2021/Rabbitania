@@ -33,7 +33,7 @@ namespace backend_api.Data.Forum
 
         public async Task<List<Models.Forum.Forums>> RetrieveForums(RetrieveForumsRequest request)
         {
-            List<Models.Forum.Forums> forums = _forum.Forums.ToList();
+            var forums = _forum.Forums.ToList();
             return forums;
         }
 
@@ -41,7 +41,7 @@ namespace backend_api.Data.Forum
         {
             try
             {
-                var forumToDelete = _forum.Forums.Find(request.ForumId);
+                var forumToDelete = await _forum.Forums.FindAsync(request.ForumId);
                 if (forumToDelete != null)
                 {
                     _forum.Forums.Remove(forumToDelete);
