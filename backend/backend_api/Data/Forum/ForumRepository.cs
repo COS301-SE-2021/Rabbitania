@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
 using backend_api.Models.Forum.Requests;
@@ -27,6 +29,35 @@ namespace backend_api.Data.Forum
             await _forum.SaveChanges();
             
             return new CreateForumResponse(HttpStatusCode.Created);
+        }
+
+        public async Task<List<Models.Forum.Forums>> RetrieveForums(RetrieveForumsRequest request)
+        {
+            var forums = _forum.Forums.ToList();
+            return forums;
+        }
+
+        public async Task<DeleteForumResponse> DeleteForum(DeleteForumRequest request)
+        {
+            try
+            {
+                var forumToDelete = await _forum.Forums.FindAsync(request.ForumId);
+                if (forumToDelete != null)
+                {
+                    _forum.Forums.Remove(forumToDelete);
+                }
+                else
+                {
+                    throw new InvalidForumRequestException("Forum ID not found in the database");
+                }
+
+                await _forum.SaveChanges();
+                return new DeleteForumResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new DeleteForumResponse(HttpStatusCode.BadRequest);
+            }
         }
     }
 }
