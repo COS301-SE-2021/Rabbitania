@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace backend_api.Data.Forum
             _forum = forum;
         }
 
+        //Forum Repository
         public async Task<CreateForumResponse> CreateForum(CreateForumRequest request)
         {
             var forumTitle = request.ForumTitle;
@@ -58,6 +60,32 @@ namespace backend_api.Data.Forum
             {
                 return new DeleteForumResponse(HttpStatusCode.BadRequest);
             }
+        }
+        
+        //ForumThread Repository
+        public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
+        {
+            var forumThreadTitle = request.ForumThreadTitle;
+            var createdDate = request.CreatedDate;
+            var imageUrl = request.ImageUrl;
+            var userId = request.UserId;
+            var forumId = request.ForumId;
+
+            var forumThread = new Models.Forum.ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
+
+            try
+            {
+                _forum.ForumThreads.Add(forumThread);
+                await _forum.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
+            }
+
+            return new CreateForumThreadResponse(HttpStatusCode.Created);
+
+
         }
     }
 }

@@ -17,5 +17,7 @@ namespace backend_api.Services.Forum
         Task<RetrieveForumsResponse> RetrieveForums(RetrieveForumsRequest request);
 
         Task<DeleteForumResponse> DeleteForum(DeleteForumRequest request);
+
+        Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request);
     }
 }
