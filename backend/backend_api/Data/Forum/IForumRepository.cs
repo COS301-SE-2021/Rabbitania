@@ -10,5 +10,7 @@ namespace backend_api.Data.Forum
         Task<CreateForumResponse> CreateForum(CreateForumRequest request);
 
         Task<List<Models.Forum.Forums>> RetrieveForums(RetrieveForumsRequest request);
+
+        Task<DeleteForumResponse> DeleteForum(DeleteForumRequest request);
     }
 }
