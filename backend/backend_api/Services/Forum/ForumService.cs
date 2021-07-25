@@ -49,6 +49,21 @@ namespace backend_api.Services.Forum
 
             return response;
         }
+
+        public async Task<DeleteForumResponse> DeleteForum(DeleteForumRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidForumRequestException("Invalid DeleteForumRequest Object");
+            }
+
+            if (request.ForumId == 0)
+            {
+                throw new InvalidForumRequestException("Invalid ForumId");
+            }
+
+            return await _forumRepository.DeleteForum(request);
+        }
         
     }
 }
