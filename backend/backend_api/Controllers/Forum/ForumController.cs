@@ -32,5 +32,13 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.RetrieveForums(request);
         }
+
+        [HttpDelete]
+        [Route("DeleteForum")]
+        public async Task<DeleteForumResponse> DeleteForum(
+            [FromBody] DeleteForumRequest request)
+        {
+            return await _service.DeleteForum(request);
+        }
     }
 }
