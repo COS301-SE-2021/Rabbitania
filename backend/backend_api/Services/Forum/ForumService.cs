@@ -64,6 +64,41 @@ namespace backend_api.Services.Forum
 
             return await _forumRepository.DeleteForum(request);
         }
+
+        public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
+            }
+
+            if (request.ForumThreadId == 0)
+            {
+                throw new InvalidForumRequestException("Invalid ForumThreadId");
+            }
+
+            if (request.UserId == 0)
+            {
+                throw new InvalidUserIdException("Invalid UserId");
+            }
+
+            return await _forumRepository.CreateForumThread(request);
+        }
+
+        public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(RetrieveForumThreadsRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidForumRequestException("Invalid RetrieveForumThreadsRequest Object");
+            }
+
+            if (request.ForumId == 0)
+            {
+                throw new InvalidForumRequestException("Invalid ForumId");
+            }
+
+            return await _forumRepository.RetrieveForumThreads(request);
+        }
         
     }
 }

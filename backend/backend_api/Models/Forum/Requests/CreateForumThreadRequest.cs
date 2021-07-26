@@ -4,6 +4,29 @@ namespace backend_api.Models.Forum.Requests
 {
     public class CreateForumThreadRequest
     {
+        
+        private int _forumThreadId;
+        private string _forumThreadTitle;
+        private DateTime _createdDate;
+        private string _imageUrl;
+        private int _userId;
+        private int _forumId;
+
+        public CreateForumThreadRequest(int forumThreadId, string forumThreadTitle, DateTime createdDate, string imageUrl,
+            int userId, int forumId)
+        {
+            _forumThreadId = forumThreadId;
+            _forumThreadTitle = forumThreadTitle;
+            _createdDate = createdDate;
+            _imageUrl = imageUrl;
+            _userId = userId;
+            _forumId = forumId;
+        }
+
+        public CreateForumThreadRequest()
+        {
+            
+        }
         public int ForumThreadId
         {
             get => _forumThreadId;
@@ -40,28 +63,7 @@ namespace backend_api.Models.Forum.Requests
             set => _forumId = value;
         }
 
-        private int _forumThreadId;
-        private string _forumThreadTitle;
-        private DateTime _createdDate;
-        private string _imageUrl;
-        private int _userId;
-        private int _forumId;
 
-        public CreateForumThreadRequest(int forumThreadId, string forumThreadTitle, DateTime createdDate, string imageUrl,
-            int userId, int forumId)
-        {
-            _forumThreadId = forumThreadId;
-            _forumThreadTitle = forumThreadTitle;
-            _createdDate = createdDate;
-            _imageUrl = imageUrl;
-            _userId = userId;
-            _forumId = forumId;
-        }
-
-        public CreateForumThreadRequest()
-        {
-            
-        }
         
         
     }

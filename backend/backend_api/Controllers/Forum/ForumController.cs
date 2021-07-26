@@ -40,5 +40,21 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.DeleteForum(request);
         }
+
+        [HttpPost]
+        [Route("CreateForumThread")]
+        public async Task<CreateForumThreadResponse> CreateForumThread(
+            [FromBody] CreateForumThreadRequest request)
+        {
+            return await _service.CreateForumThread(request);
+        }
+
+        [HttpGet]
+        [Route("RetrieveForumThreads")]
+        public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(
+            [FromQuery] RetrieveForumThreadsRequest request)
+        {
+            return await _service.RetrieveForumThreads(request);
+        }
     }
 }
