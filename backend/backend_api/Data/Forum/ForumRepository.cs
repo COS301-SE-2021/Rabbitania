@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
+using Castle.Core.Internal;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Forum
 {
@@ -50,7 +52,7 @@ namespace backend_api.Data.Forum
                 }
                 else
                 {
-                    throw new InvalidForumRequestException("Forum ID not found in the database");
+                    throw new InvalidForumRequestException("Forum does not exist in the database");
                 }
 
                 await _forum.SaveChanges();
@@ -73,19 +75,45 @@ namespace backend_api.Data.Forum
 
             var forumThread = new Models.Forum.ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
 
+           
             try
             {
+                var foreignForumId = await _forum.Forums.FindAsync(forumId);
+                if (foreignForumId == null)
+                {
+                    throw new InvalidForumRequestException("Forum does not exist in the database");
+                }
                 _forum.ForumThreads.Add(forumThread);
                 await _forum.SaveChanges();
             }
-            catch (Exception)
+            catch (InvalidForumRequestException e)
             {
-                return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
+                return new CreateForumThreadResponse(HttpStatusCode.BadRequest, e);
             }
 
             return new CreateForumThreadResponse(HttpStatusCode.Created);
 
 
+        }
+
+        public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(RetrieveForumThreadsRequest request)
+        {
+            var forumThreads = _forum.ForumThreads.Where(id => id.ForumId == request.ForumId);
+
+            try
+            {
+                if (forumThreads.ToList().IsNullOrEmpty())
+                {
+                    throw new InvalidForumRequestException(
+                        "Cannot retrieve forum threads for a forum that does not exist");
+                }
+
+                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync());
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest, e);
+            }
         }
     }
 }

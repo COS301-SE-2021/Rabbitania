@@ -84,6 +84,21 @@ namespace backend_api.Services.Forum
 
             return await _forumRepository.CreateForumThread(request);
         }
+
+        public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(RetrieveForumThreadsRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidForumRequestException("Invalid RetrieveForumThreadsRequest Object");
+            }
+
+            if (request.ForumId == 0)
+            {
+                throw new InvalidForumRequestException("Invalid ForumId");
+            }
+
+            return await _forumRepository.RetrieveForumThreads(request);
+        }
         
     }
 }
