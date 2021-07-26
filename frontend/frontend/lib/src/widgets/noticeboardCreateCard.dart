@@ -13,7 +13,7 @@ var titleInput = "";
 var contextInput = "";
 File? imageFile;
 //Uint8List? base64String;
-String? img64;
+String img64 = "";
 Future<String>? futureStringReceived;
 
 class NoticeboardThreadCard extends StatelessWidget {
@@ -124,8 +124,8 @@ Future<String> addNewThread(String title, String content) async {
       throw ("Cannot Submit Empty Fields");
     }
 
-    if (img64!.isNotEmpty) {
-      inputImage = img64!;
+    if (img64 != "") {
+      inputImage = img64;
       print(img64);
     }
 
@@ -150,7 +150,7 @@ Future<String> addNewThread(String title, String content) async {
           response.statusCode.toString());
     }
   } catch (Exception) {
-    return Exception.toString();
+    return ("Error: " + Exception.toString());
   }
 }
 
