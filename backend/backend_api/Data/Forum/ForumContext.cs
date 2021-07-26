@@ -16,9 +16,11 @@ namespace backend_api.Data.Forum
         {
             
         }
-        
+
         public DbSet<Models.Forum.Forums> Forums { get; set; }
         public DbSet<ForumThreads> ForumThreads { get; set; }
+        
+        public DbSet<ThreadComments> ThreadComments { get; set; }
 
         public new async Task<int> SaveChanges()
         {

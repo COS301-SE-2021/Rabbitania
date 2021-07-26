@@ -5,7 +5,7 @@ using backend_api.Models.User;
 
 namespace backend_api.Models.Forum
 {
-    public class ForumThreads : IForumThread
+    public class  ForumThreads : IForumThread
     {
         public ForumThreads(string forumThreadTitle, int userId, DateTime createdDate, string imageUrl, int forumId)
         {
