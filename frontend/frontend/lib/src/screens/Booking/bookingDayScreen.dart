@@ -37,7 +37,45 @@ class _BookingDayState extends State<BookingDayScreen> {
               SvgPicture.string(
                 _svg_background,
                 fit: BoxFit.contain,
-              )
+              ),
+              Row(
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    // margin: const EdgeInsets.only(top: 75.0, bottom: 25.0),
+                    child: Text('Mornings'),
+                  ),
+                  Container(
+                    child: Text('DropDownGoesHere'),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    child: Text('Afternoons'),
+                  ),
+                  Container(
+                    child: Text('DropDownGoesHere'),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    child: Text('Full Day'),
+                  ),
+                  Container(
+                    child: Text('DropDownGoesHere'),
+                  ),
+                ],
+              ),
+              Column(),
             ],
           ),
         ),
