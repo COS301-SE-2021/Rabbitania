@@ -7,7 +7,7 @@ class BookingDayText extends StatefulWidget {
 }
 
 class _BookingDayTextState extends State<BookingDayText> {
-  String dropdownValue = 'None';
+  String dropdownValue = 'No Booking';
   Widget build(BuildContext context) => Center(
         child: Container(
             child: Column(
@@ -30,7 +30,8 @@ class _BookingDayTextState extends State<BookingDayText> {
               child: Container(
                 width: 300,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromRGBO(172, 255, 79, 1)),
+                  border: Border.all(
+                      color: Color.fromRGBO(172, 255, 79, 1), width: 2),
                   borderRadius: BorderRadius.circular(12),
                   color: Color.fromRGBO(33, 33, 33, 1),
                 ),
@@ -39,8 +40,10 @@ class _BookingDayTextState extends State<BookingDayText> {
                     dropdownColor: Color.fromRGBO(33, 33, 33, 1),
                     value: dropdownValue,
                     icon: const Padding(
-                        padding: EdgeInsets.only(right: 20),
-                        child: Icon(Icons.arrow_downward)),
+                      padding: EdgeInsets.only(right: 20),
+                      child: Icon(Icons.arrow_downward,
+                          color: Color.fromRGBO(171, 255, 79, 1)),
+                    ),
                     iconSize: 30,
                     elevation: 8,
                     style: const TextStyle(
@@ -57,7 +60,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                       });
                     },
                     items: <String>[
-                      'None',
+                      'No Booking',
                       'Pretoria',
                       'Braamfontein',
                       'Amsterdam'

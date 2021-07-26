@@ -47,15 +47,37 @@ class _BookingDayState extends State<BookingDayScreen> {
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Morning'),
                   ),
-                  Padding(padding: const EdgeInsets.only(top: 20)),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                  ),
+                  Divider(
+                    height: 2,
+                    thickness: 2,
+                    color: Color.fromRGBO(70, 70, 70, 1),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Afternoon'),
                   ),
-                  Padding(padding: const EdgeInsets.only(top: 20)),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                  ),
+                  Divider(
+                    height: 2,
+                    thickness: 2,
+                    color: Color.fromRGBO(70, 70, 70, 1),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Full Day'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Divider(
+                      height: 2,
+                      thickness: 2,
+                      color: Color.fromRGBO(70, 70, 70, 1),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40),

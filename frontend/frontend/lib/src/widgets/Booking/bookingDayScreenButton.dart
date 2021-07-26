@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class BookingDayScreenButton extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _bookingDayScreenButton();
+  State<StatefulWidget> createState() => _BookingDayScreenButton();
 }
 
-class _bookingDayScreenButton extends State<BookingDayScreenButton> {
+class _BookingDayScreenButton extends State<BookingDayScreenButton> {
   @override
   Widget build(BuildContext context) => Center(
         child: SizedBox(
