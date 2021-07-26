@@ -4,6 +4,7 @@ import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 
 class BookingDayScreen extends StatefulWidget {
@@ -41,45 +42,27 @@ class _BookingDayState extends State<BookingDayScreen> {
               ),
               Column(
                 //crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Morning'),
                   ),
-                  Container(
-                    child: Text('DROP DOWN EXAMPLE',
-                        style: TextStyle(color: Colors.blue)),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
+                  Padding(padding: const EdgeInsets.only(top: 20)),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Afternoon'),
                   ),
-                  Container(
-                    child: Text('DROP DOWN EXAMPLE',
-                        style: TextStyle(color: Colors.blue)),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                  Padding(padding: const EdgeInsets.only(top: 20)),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Full Day'),
                   ),
-                  Container(
-                    child: Text('DROP DOWN EXAMPLE',
-                        style: TextStyle(color: Colors.blue)),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: BookingDayScreenButton(),
                   ),
                 ],
               ),
-              Column(),
             ],
           ),
         ),
