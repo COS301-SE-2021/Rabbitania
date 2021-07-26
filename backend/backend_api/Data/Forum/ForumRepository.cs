@@ -115,5 +115,28 @@ namespace backend_api.Data.Forum
                 return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest, e);
             }
         }
+
+        public async Task<DeleteForumThreadResponse> DeleteForumThread(DeleteForumThreadRequest request)
+        {
+            try
+            {
+                var forumThreadToDelete = await _forum.ForumThreads.FindAsync(request.ForumThreadId);
+                if (forumThreadToDelete != null)
+                {
+                    _forum.ForumThreads.Remove(forumThreadToDelete);
+                }
+                else
+                {
+                    throw new InvalidForumRequestException("Forum Thread does not exist");
+                }
+
+                await _forum.SaveChanges();
+                return new DeleteForumThreadResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new DeleteForumThreadResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

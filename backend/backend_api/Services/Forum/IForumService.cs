@@ -21,5 +21,7 @@ namespace backend_api.Services.Forum
         Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request);
 
         Task<RetrieveForumThreadsResponse> RetrieveForumThreads(RetrieveForumThreadsRequest request);
+
+        Task<DeleteForumThreadResponse> DeleteForumThread(DeleteForumThreadRequest request);
     }
 }
