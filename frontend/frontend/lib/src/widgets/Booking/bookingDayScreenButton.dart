@@ -13,7 +13,9 @@ class _bookingDayScreenButton extends State<BookingDayScreenButton> {
           height: 70,
           child: ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              backgroundColor: MaterialStateProperty.all(
+                Color.fromRGBO(172, 255, 79, 1),
+              ),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
@@ -28,7 +30,7 @@ class _bookingDayScreenButton extends State<BookingDayScreenButton> {
               'Book',
               style: TextStyle(
                 fontSize: 30,
-                color: Color.fromRGBO(172, 255, 79, 1),
+                color: Color.fromRGBO(33, 33, 33, 1),
               ),
             ),
             onPressed: () {},

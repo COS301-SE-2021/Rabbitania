@@ -19,7 +19,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 40,
-                  color: Color.fromRGBO(171, 255, 79, 1),
+                  color: Color.fromRGBO(172, 255, 79, 1),
                 ),
               ),
             ),
@@ -30,12 +30,13 @@ class _BookingDayTextState extends State<BookingDayText> {
               child: Container(
                 width: 300,
                 decoration: BoxDecoration(
+                  border: Border.all(color: Color.fromRGBO(172, 255, 79, 1)),
                   borderRadius: BorderRadius.circular(12),
-                  color: Color.fromRGBO(172, 255, 79, 1),
+                  color: Color.fromRGBO(33, 33, 33, 1),
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
-                    dropdownColor: Color.fromRGBO(171, 255, 79, 1),
+                    dropdownColor: Color.fromRGBO(33, 33, 33, 1),
                     value: dropdownValue,
                     icon: const Padding(
                         padding: EdgeInsets.only(right: 20),
@@ -44,7 +45,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                     elevation: 8,
                     style: const TextStyle(
                       fontSize: 30,
-                      color: Color.fromRGBO(33, 33, 33, 1),
+                      color: Color.fromRGBO(172, 255, 79, 1),
                     ),
                     underline: Container(
                       height: 0,
