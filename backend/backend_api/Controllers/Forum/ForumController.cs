@@ -56,5 +56,13 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.RetrieveForumThreads(request);
         }
+
+        [HttpDelete]
+        [Route("DeleteForumThread")]
+        public async Task<DeleteForumThreadResponse> DeleteForumThread(
+            [FromBody] DeleteForumThreadRequest request)
+        {
+            return await _service.DeleteForumThread(request);
+        }
     }
 }

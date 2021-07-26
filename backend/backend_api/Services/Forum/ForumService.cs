@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using backend_api.Data.Forum;
 using backend_api.Exceptions.Forum;
 using backend_api.Exceptions.Notifications;
@@ -98,6 +99,28 @@ namespace backend_api.Services.Forum
             }
 
             return await _forumRepository.RetrieveForumThreads(request);
+        }
+
+        public async Task<DeleteForumThreadResponse> DeleteForumThread(DeleteForumThreadRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid DeleteForumThreadRequest Object");
+                }
+
+                if (request.ForumThreadId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumId");
+                }
+
+                return await _forumRepository.DeleteForumThread(request);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new DeleteForumThreadResponse(HttpStatusCode.BadRequest, e);
+            }
         }
         
     }
