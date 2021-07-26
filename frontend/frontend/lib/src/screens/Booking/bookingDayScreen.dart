@@ -4,6 +4,7 @@ import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 
 class BookingDayScreen extends StatefulWidget {
   @override
@@ -38,40 +39,43 @@ class _BookingDayState extends State<BookingDayScreen> {
                 _svg_background,
                 fit: BoxFit.contain,
               ),
-              Row(
+              Column(
                 //crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    child: BookingDayText('Morning'),
+                  ),
+                  Container(
+                    child: Text('DROP DOWN EXAMPLE',
+                        style: TextStyle(color: Colors.blue)),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    child: BookingDayText('Afternoon'),
+                  ),
+                  Container(
+                    child: Text('DROP DOWN EXAMPLE',
+                        style: TextStyle(color: Colors.blue)),
+                  ),
+                ],
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    // margin: const EdgeInsets.only(top: 75.0, bottom: 25.0),
-                    child: Text('Mornings'),
+                    margin: const EdgeInsets.only(top: 25),
+                    child: BookingDayText('Full Day'),
                   ),
                   Container(
-                    child: Text('DropDownGoesHere'),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    child: Text('Afternoons'),
-                  ),
-                  Container(
-                    child: Text('DropDownGoesHere'),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    child: Text('Full Day'),
-                  ),
-                  Container(
-                    child: Text('DropDownGoesHere'),
+                    child: Text('DROP DOWN EXAMPLE',
+                        style: TextStyle(color: Colors.blue)),
                   ),
                 ],
               ),
