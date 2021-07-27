@@ -138,5 +138,38 @@ namespace backend_api.Data.Forum
                 return new DeleteForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<CreateThreadCommentResponse> CreateThreadComment(CreateThreadCommentRequest request)
+        {
+            var commentBody = request.CommentBody;
+            var createDate = request.CreatedDate;
+            var imageUrl = request.ImageUrl;
+            var likes = request.Likes;
+            var dislikes = request.Dislikes;
+            var userId = request.UserId;
+            var forumThreadId = request.ForumThreadId;
+
+            var threadComment =
+                new Models.Forum.ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
+
+            try
+            {
+                var foreignForumThreadId = await _forum.ForumThreads.FindAsync(forumThreadId);
+                if (foreignForumThreadId == null)
+                {
+                    throw new InvalidForumRequestException("Forum Thread does not exist in the database");
+                }
+
+                _forum.ThreadComments.Add(threadComment);
+                return new CreateThreadCommentResponse(HttpStatusCode.Accepted);
+                await _forum.SaveChanges();
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest, e);
+            }
+
+            
+        }
     }
 }
