@@ -24,7 +24,7 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 10),
             ),
             Center(
               child: Container(

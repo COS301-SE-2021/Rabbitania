@@ -24,7 +24,8 @@ class _BookingDayState extends State<BookingDayButton> {
           setState(() => _colorChange = !_colorChange),
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => BookingDayScreen()),
+            MaterialPageRoute(
+                builder: (context) => BookingDayScreen(widget.displayText)),
           )
         },
         child: Text(

@@ -8,11 +8,38 @@ import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 
 class BookingDayScreen extends StatefulWidget {
+  final displayText;
+  BookingDayScreen(this.displayText);
   @override
   _BookingDayState createState() => _BookingDayState();
 }
 
 class _BookingDayState extends State<BookingDayScreen> {
+  var displayText;
+  determineDisplayText() {
+    switch (widget.displayText) {
+      case 'M':
+        this.displayText = 'Monday';
+        break;
+      case 'Tu':
+        this.displayText = 'Tuesday';
+        break;
+      case 'W':
+        this.displayText = 'Wednessday';
+        break;
+      case 'Th':
+        this.displayText = 'Thursday';
+        break;
+      case 'F':
+        this.displayText = 'Friday';
+        break;
+    }
+  }
+
+  initState() {
+    determineDisplayText();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -25,9 +52,9 @@ class _BookingDayState extends State<BookingDayScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               BookingDayButton('M'),
-              BookingDayButton('T'),
+              BookingDayButton('Tu'),
               BookingDayButton('W'),
-              BookingDayButton('T'),
+              BookingDayButton('Th'),
               BookingDayButton('F'),
             ],
           ),
@@ -43,6 +70,20 @@ class _BookingDayState extends State<BookingDayScreen> {
               Column(
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      this.displayText,
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Color.fromRGBO(172, 255, 79, 1),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    color: Color.fromRGBO(171, 255, 79, 1),
+                    thickness: 2,
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: BookingDayText('Morning'),
