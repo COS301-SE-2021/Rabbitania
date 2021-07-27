@@ -4,6 +4,8 @@ import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 
 class BookingDayScreen extends StatefulWidget {
   @override
@@ -37,7 +39,52 @@ class _BookingDayState extends State<BookingDayScreen> {
               SvgPicture.string(
                 _svg_background,
                 fit: BoxFit.contain,
-              )
+              ),
+              Column(
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    child: BookingDayText('Morning'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                  ),
+                  Divider(
+                    height: 2,
+                    thickness: 2,
+                    color: Color.fromRGBO(70, 70, 70, 1),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    child: BookingDayText('Afternoon'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                  ),
+                  Divider(
+                    height: 2,
+                    thickness: 2,
+                    color: Color.fromRGBO(70, 70, 70, 1),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    child: BookingDayText('Full Day'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Divider(
+                      height: 2,
+                      thickness: 2,
+                      color: Color.fromRGBO(70, 70, 70, 1),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: BookingDayScreenButton(),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

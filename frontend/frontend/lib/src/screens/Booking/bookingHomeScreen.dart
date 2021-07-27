@@ -31,6 +31,7 @@ class _BookingState extends State<BookingScreen> {
           ),
         ),
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+        // 63 63 63
         body: Center(
           child: Stack(
             children: <Widget>[
@@ -48,9 +49,9 @@ class _BookingState extends State<BookingScreen> {
                         "Welcome to Rabbitania's online office space booking system!"),
                   ),
                   Padding(
-                    padding: new EdgeInsets.all(50.0),
+                    padding: new EdgeInsets.all(25.0),
                     child: BookingHomeText(
-                        "Please select a day of the week above to start your booking process \n"),
+                        "Please select a day of the week at the top to start your booking process! If a time slot is unavailable it will be grey. \n"),
                   )
                 ],
               ),
@@ -59,7 +60,7 @@ class _BookingState extends State<BookingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: const EdgeInsets.only(top: 55.0, bottom: 25.0),
+                    margin: const EdgeInsets.only(top: 75.0, bottom: 25.0),
                     child: Image(
                       image: AssetImage('images/logo.png'),
                       height: 150,
