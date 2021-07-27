@@ -5,14 +5,13 @@ namespace backend_api.Models.Forum.Responses
 {
     public class CreateForumThreadResponse
     {
+        private HttpStatusCode _response;
+        private InvalidForumRequestException _exception;
         public InvalidForumRequestException Exception
         {
             get => _exception;
             set => _exception = value;
         }
-
-        private HttpStatusCode _response;
-        private InvalidForumRequestException _exception;
 
         public HttpStatusCode Response
         {
