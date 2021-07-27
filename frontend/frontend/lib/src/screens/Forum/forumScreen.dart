@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/widgets/Forum/forumHome.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,11 +12,12 @@ class Forum extends StatefulWidget {
   }
 }
 
-class _Forum extends State<Forum> {
-  final util = new UtilModel();
+late Future<List<ForumThread>> futureForumThread;
 
+class _Forum extends State<Forum> {
   void initState() {
     super.initState();
+    futureForumThread = fetchForumThread();
   }
 
   void refresh() {
@@ -47,14 +50,14 @@ class _Forum extends State<Forum> {
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
+          //HERE is the stack for the forum page, the stack fills back to front (last child will be on the top of the stack)
           children: <Widget>[
+            // Children of type widget
             SvgPicture.string(
               _svg_background,
               fit: BoxFit.contain,
             ),
-            Container(
-              padding: EdgeInsets.only(bottom: 75),
-            ),
+            Container(padding: EdgeInsets.only(bottom: 75), child: ForumHome()),
           ],
         ),
       ),
