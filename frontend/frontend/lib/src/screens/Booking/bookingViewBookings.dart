@@ -49,7 +49,7 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                   child: ListView(
                     children: <Widget>[
                       ViewBookingCard(
-                          1, 'Monday', '24 Jul', 'Morning', 'Braam'),
+                          1, 'Monday', '24 Jul', 'Full Day', 'Amsterdam'),
                     ],
                   ),
                 ),

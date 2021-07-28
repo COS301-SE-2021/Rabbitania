@@ -18,7 +18,7 @@ class ViewBookingCard extends StatefulWidget {
 class _viewBookingCard extends State<ViewBookingCard> {
   @override
   Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
         child: Container(
           key: widget.key,
           decoration: BoxDecoration(
@@ -26,11 +26,11 @@ class _viewBookingCard extends State<ViewBookingCard> {
               color: Color.fromRGBO(172, 255, 79, 1),
               width: 4,
             ),
-            color: Color.fromRGBO(33, 33, 33, 1),
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(25),
           ),
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -47,7 +47,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 5, right: 5),
+                          padding: EdgeInsets.only(left: 5, right: 10),
                         ),
                         Text(
                           widget.dateText,
@@ -67,7 +67,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                         Row(
                           children: <Widget>[
                             Text(
-                              'Time Slot:',
+                              'Time Slot: ',
                               style: TextStyle(
                                 color: Color.fromRGBO(172, 255, 79, 1),
                                 fontSize: 25,
@@ -88,7 +88,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                         Row(
                           children: <Widget>[
                             Text(
-                              'Office:',
+                              'Office:  ',
                               style: TextStyle(
                                 color: Color.fromRGBO(172, 255, 79, 1),
                                 fontSize: 25,
