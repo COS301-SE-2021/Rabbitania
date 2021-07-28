@@ -8,6 +8,7 @@ using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace backend_api.Data.Forum
 {
@@ -146,22 +147,20 @@ namespace backend_api.Data.Forum
             var imageUrl = request.ImageUrl;
             var likes = request.Likes;
             var dislikes = request.Dislikes;
-            var userId = request.UserId;
             var forumThreadId = request.ForumThreadId;
-
+            var userId = request.UserId;
+            
             var threadComment =
                 new Models.Forum.ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
 
             try
             {
-                var foreignForumThreadId = await _forum.ForumThreads.FindAsync(forumThreadId);
-                if (foreignForumThreadId == null)
+                var foreignForumId = await _forum.Forums.FindAsync(forumThreadId);
+                if (foreignForumId == null)
                 {
-                    throw new InvalidForumRequestException("Forum Thread does not exist in the database");
+                    throw new InvalidForumRequestException("Forum does not exist in the database");
                 }
-
                 _forum.ThreadComments.Add(threadComment);
-                return new CreateThreadCommentResponse(HttpStatusCode.Accepted);
                 await _forum.SaveChanges();
             }
             catch (InvalidForumRequestException e)
@@ -169,7 +168,8 @@ namespace backend_api.Data.Forum
                 return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
 
-            
+            return new CreateThreadCommentResponse(HttpStatusCode.Created);
+           
         }
     }
-}
+} 
