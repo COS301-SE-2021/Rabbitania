@@ -81,5 +81,13 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.RetrieveThreadComments(request);
         }
+
+        [HttpDelete]
+        [Route("DeleteThreadComment")]
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(
+            [FromBody] DeleteThreadCommentRequest request)
+        {
+            return await _service.DeleteThreadComment(request);
+        }
     }
 }
