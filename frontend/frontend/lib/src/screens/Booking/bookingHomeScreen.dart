@@ -32,11 +32,11 @@ class _BookingState extends State<BookingScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              BookingDayButton('M'),
-              BookingDayButton('Tu'),
-              BookingDayButton('W'),
-              BookingDayButton('Th'),
-              BookingDayButton('F'),
+              BookingDayButton('M', Colors.transparent),
+              BookingDayButton('Tu', Colors.transparent),
+              BookingDayButton('W', Colors.transparent),
+              BookingDayButton('Th', Colors.transparent),
+              BookingDayButton('F', Colors.transparent),
             ],
           ),
         ),

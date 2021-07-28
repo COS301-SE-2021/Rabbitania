@@ -3,21 +3,16 @@ import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 
 class BookingDayButton extends StatefulWidget {
   final displayText;
-  BookingDayButton(this.displayText);
+  final selectedColour;
+  BookingDayButton(this.displayText, this.selectedColour);
   _BookingDayState createState() => _BookingDayState();
 }
 
 class _BookingDayState extends State<BookingDayButton> {
-  bool _colorChange = true;
-
   @override
   Widget build(context) => TextButton(
         style: ButtonStyle(
-          backgroundColor: _colorChange
-              ? MaterialStateProperty.all(Colors.transparent)
-              : MaterialStateProperty.all(
-                  Color.fromRGBO(33, 33, 33, 1),
-                ),
+          backgroundColor: MaterialStateProperty.all(widget.selectedColour),
           shape: MaterialStateProperty.all(CircleBorder(
             side: BorderSide(
               width: 2,
@@ -26,7 +21,6 @@ class _BookingDayState extends State<BookingDayButton> {
           )),
         ),
         onPressed: () => {
-          setState(() => _colorChange = !_colorChange),
           Navigator.push(
             context,
             MaterialPageRoute(
