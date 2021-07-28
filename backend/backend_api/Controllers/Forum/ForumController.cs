@@ -20,7 +20,8 @@ namespace backend_api.Controllers.Forum
 
         [HttpPost]
         [Route("CreateForum")]
-        public async Task<CreateForumResponse> CreateForum([FromBody] CreateForumRequest request)
+        public async Task<CreateForumResponse> CreateForum(
+            [FromBody] CreateForumRequest request)
         {
             return await _service.CreateForum(request);
         }
@@ -63,6 +64,14 @@ namespace backend_api.Controllers.Forum
             [FromBody] DeleteForumThreadRequest request)
         {
             return await _service.DeleteForumThread(request);
+        }
+
+        [HttpPost]
+        [Route("CreateThreadComment")]
+        public async Task<CreateThreadCommentResponse> CreateThreadComment(
+            [FromBody] CreateThreadCommentRequest request)
+        {
+            return await _service.CreateThreadComment(request);
         }
     }
 }
