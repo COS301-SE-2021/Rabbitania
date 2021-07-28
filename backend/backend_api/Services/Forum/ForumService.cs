@@ -132,7 +132,7 @@ namespace backend_api.Services.Forum
                     throw new InvalidForumRequestException("Invalid CreateThreadCommentRequest Object");
                 }
 
-                if (request.ThreadCommentId == 0)
+                if (request.ForumThreadId == 0)
                 {
                     throw new InvalidForumRequestException("Invalid ThreadCommentId");
                 }
