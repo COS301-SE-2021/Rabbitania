@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
+using backend_api.Exceptions.NoticeBoard;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
@@ -188,6 +189,29 @@ namespace backend_api.Data.Forum
             catch(InvalidForumRequestException e)
             {
                 return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request)
+        {
+            try
+            {
+                var threadCommentToDelete = await _forum.ThreadComments.FindAsync(request.ThreadCommentId);
+                if (threadCommentToDelete != null)
+                {
+                    _forum.ThreadComments.Remove(threadCommentToDelete);
+                }
+                else
+                {
+                    throw new InvalidForumRequestException("Thread Comment does not exist");
+                }
+
+                await _forum.SaveChanges();
+                return new DeleteThreadCommentResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidThreadContentException e)
+            {
+                return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
     }
