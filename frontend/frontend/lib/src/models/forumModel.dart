@@ -43,8 +43,7 @@ Future<List<ForumThread>> fetchForumThread() async {
   HttpClient client = new HttpClient();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
-  String url =
-      'http://10.0.2.2:5000/api/NoticeBoard/RetrieveNoticeBoardThreads';
+  String url = 'http://10.0.2.2:5000/api/Forum/RetrieveForums';
 
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
   request.headers.set('content-type', 'application/json');

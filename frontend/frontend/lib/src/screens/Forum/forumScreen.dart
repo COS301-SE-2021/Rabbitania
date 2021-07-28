@@ -21,11 +21,9 @@ class _Forum extends State<Forum> {
   }
 
   void refresh() {
+    UtilModel.route(() => Forum(), context);
     setState(() {});
-  }
-
-  void next() {
-    UtilModel.route(() => ProfileScreen(), context);
+    print("refresh");
   }
 
   @override
@@ -35,16 +33,26 @@ class _Forum extends State<Forum> {
         leading: const BackButton(),
         elevation: 0,
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: Center(
           child: Text(
-            'Forum      ',
+            'Forum   ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 35,
             ),
           ),
         ),
-        actions: [],
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  refresh();
+                },
+                child: Icon(Icons.refresh),
+              )),
+        ],
       ),
       floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
