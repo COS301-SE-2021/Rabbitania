@@ -73,5 +73,13 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.CreateThreadComment(request);
         }
+
+        [HttpGet]
+        [Route("RetrieveThreadComments")]
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(
+            [FromQuery] RetrieveThreadCommentsRequest request)
+        {
+            return await _service.RetrieveThreadComments(request);
+        }
     }
 }
