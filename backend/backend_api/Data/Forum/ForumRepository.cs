@@ -88,7 +88,7 @@ namespace backend_api.Data.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new CreateForumThreadResponse(HttpStatusCode.BadRequest, e);
+                return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
             }
 
             return new CreateForumThreadResponse(HttpStatusCode.Created);
@@ -166,7 +166,7 @@ namespace backend_api.Data.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest, e);
+                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
 
             

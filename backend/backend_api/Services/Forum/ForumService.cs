@@ -119,7 +119,7 @@ namespace backend_api.Services.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new DeleteForumThreadResponse(HttpStatusCode.BadRequest, e);
+                return new DeleteForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
 
@@ -141,7 +141,7 @@ namespace backend_api.Services.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest, e);
+                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
         
