@@ -2,7 +2,7 @@
 {
     public class RetrieveForumThreadsRequest
     {
-        private int forumId;
+        private int _forumId;
         public RetrieveForumThreadsRequest()
         {
             
@@ -10,13 +10,13 @@
 
         public RetrieveForumThreadsRequest(int forumId)
         {
-            this.forumId = forumId;
+            _forumId = forumId;
         }
 
         public int ForumId
         {
-            get => forumId;
-            set => forumId = value;
+            get => _forumId;
+            set => _forumId = value;
         }
     }
 }

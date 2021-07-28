@@ -113,7 +113,7 @@ namespace backend_api.Data.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest, e);
+                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest);
             }
         }
 
