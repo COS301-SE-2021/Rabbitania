@@ -171,5 +171,24 @@ namespace backend_api.Data.Forum
             return new CreateThreadCommentResponse(HttpStatusCode.Created);
            
         }
+
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request)
+        {
+            var threadComments = _forum.ThreadComments.Where(id => id.ForumThreadId == request.ForumThreadId);
+            try
+            {
+                if (threadComments.ToList().IsNullOrEmpty())
+                {
+                    throw new InvalidForumRequestException(
+                        "Cannot retrieve Thread Comments for a thread that does not exist");
+                }
+
+                return new RetrieveThreadCommentsResponse(await threadComments.ToListAsync());
+            }
+            catch(InvalidForumRequestException e)
+            {
+                return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 } 

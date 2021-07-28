@@ -25,5 +25,7 @@ namespace backend_api.Services.Forum
         Task<DeleteForumThreadResponse> DeleteForumThread(DeleteForumThreadRequest request);
 
         Task<CreateThreadCommentResponse> CreateThreadComment(CreateThreadCommentRequest request);
+
+        Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request);
     }
 }

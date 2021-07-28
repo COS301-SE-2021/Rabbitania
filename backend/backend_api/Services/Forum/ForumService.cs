@@ -144,6 +144,28 @@ namespace backend_api.Services.Forum
                 return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
-        
+
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid RetrieveThreadCommentsRequest");
+                }
+
+                if (request.ForumThreadId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumThread Id");
+                }
+
+                return await _forumRepository.RetrieveThreadComments(request);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
     }
 }
