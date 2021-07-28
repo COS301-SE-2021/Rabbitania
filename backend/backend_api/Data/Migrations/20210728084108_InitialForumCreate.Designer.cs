@@ -11,8 +11,8 @@ using backend_api.Data.Forum;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(ForumContext))]
-    [Migration("20210709082539_InitialForumMigration")]
-    partial class InitialForumMigration
+    [Migration("20210728084108_InitialForumCreate")]
+    partial class InitialForumCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,9 @@ namespace backend_api.Data.Migrations
                     b.Property<string>("ForumThreadTitle")
                         .HasColumnType("text");
 
+                    b.Property<int?>("ForumsForumId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
@@ -46,7 +49,7 @@ namespace backend_api.Data.Migrations
 
                     b.HasKey("ForumThreadId");
 
-                    b.HasIndex("ForumId");
+                    b.HasIndex("ForumsForumId");
 
                     b.HasIndex("UserId");
 
@@ -76,52 +79,51 @@ namespace backend_api.Data.Migrations
                     b.ToTable("Forums");
                 });
 
-            modelBuilder.Entity("backend_api.Models.User.Users", b =>
+            modelBuilder.Entity("backend_api.Models.Forum.ThreadComments", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("ThreadCommentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("EmployeeLevel")
+                    b.Property<string>("CommentBody")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Dislikes")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("OfficeLocation")
+                    b.Property<int>("ForumThreadId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<List<int>>("PinnedUserIds")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("UserDescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserImgUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserRole")
+                    b.Property<int?>("ForumThreadsForumThreadId")
                         .HasColumnType("integer");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("text");
 
-                    b.ToTable("Users");
+                    b.Property<int>("Likes")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ThreadCommentId");
+
+                    b.HasIndex("ForumThreadsForumThreadId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ThreadComments");
                 });
-
+            
             modelBuilder.Entity("backend_api.Models.Forum.ForumThreads", b =>
                 {
                     b.HasOne("backend_api.Models.Forum.Forums", "Forums")
                         .WithMany()
-                        .HasForeignKey("ForumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ForumsForumId");
 
                     b.HasOne("backend_api.Models.User.Users", "User")
                         .WithMany()
@@ -141,6 +143,23 @@ namespace backend_api.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("backend_api.Models.Forum.ThreadComments", b =>
+                {
+                    b.HasOne("backend_api.Models.Forum.ForumThreads", "ForumThreads")
+                        .WithMany()
+                        .HasForeignKey("ForumThreadsForumThreadId");
+
+                    b.HasOne("backend_api.Models.User.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ForumThreads");
 
                     b.Navigation("User");
                 });

@@ -73,9 +73,9 @@ namespace backend_api.Services.Forum
                 throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
             }
 
-            if (request.ForumThreadId == 0)
+            if (request.ForumId == 0)
             {
-                throw new InvalidForumRequestException("Invalid ForumThreadId");
+                throw new InvalidForumRequestException("Invalid ForumId");
             }
 
             if (request.UserId == 0)
@@ -114,7 +114,7 @@ namespace backend_api.Services.Forum
                 {
                     throw new InvalidForumRequestException("Invalid ForumId");
                 }
-
+                
                 return await _forumRepository.DeleteForumThread(request);
             }
             catch (InvalidForumRequestException e)
