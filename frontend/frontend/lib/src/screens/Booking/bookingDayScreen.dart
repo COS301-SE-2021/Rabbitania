@@ -25,7 +25,7 @@ class _BookingDayState extends State<BookingDayScreen> {
         this.displayText = 'Tuesday';
         break;
       case 'W':
-        this.displayText = 'Wednessday';
+        this.displayText = 'Wednesday';
         break;
       case 'Th':
         this.displayText = 'Thursday';

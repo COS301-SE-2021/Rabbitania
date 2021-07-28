@@ -15,9 +15,14 @@ class _BookingDayState extends State<BookingDayButton> {
         style: ButtonStyle(
           backgroundColor: _colorChange
               ? MaterialStateProperty.all(Colors.transparent)
-              : MaterialStateProperty.all(Color.fromRGBO(33, 33, 33, 1)),
+              : MaterialStateProperty.all(
+                  Color.fromRGBO(33, 33, 33, 1),
+                ),
           shape: MaterialStateProperty.all(CircleBorder(
-            side: BorderSide(width: 2, color: Color.fromRGBO(171, 255, 79, 1)),
+            side: BorderSide(
+              width: 2,
+              color: Color.fromRGBO(171, 255, 79, 1),
+            ),
           )),
         ),
         onPressed: () => {
@@ -25,8 +30,9 @@ class _BookingDayState extends State<BookingDayButton> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BookingDayScreen(widget.displayText)),
-          )
+              builder: (context) => BookingDayScreen(widget.displayText),
+            ),
+          ),
         },
         child: Text(
           widget.displayText,

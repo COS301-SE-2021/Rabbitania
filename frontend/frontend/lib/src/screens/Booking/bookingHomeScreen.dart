@@ -33,9 +33,9 @@ class _BookingState extends State<BookingScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               BookingDayButton('M'),
-              BookingDayButton('T'),
+              BookingDayButton('Tu'),
               BookingDayButton('W'),
-              BookingDayButton('T'),
+              BookingDayButton('Th'),
               BookingDayButton('F'),
             ],
           ),
