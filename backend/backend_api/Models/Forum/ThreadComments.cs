@@ -35,7 +35,7 @@ namespace backend_api.Models.Forum
         public int Dislikes { get; set; }
         
         public int ForumThreadId { get; set; }
-        public ForumThreads ForumThreads { get; set; }
+        public ForumThreads ForumThread { get; set; }
 
         
         //UserId will be used to find the user that both created the original comment, and the user to 

@@ -40,18 +40,17 @@ namespace backend_api.Data.Migrations
                     CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     imageURL = table.Column<string>(type: "text", nullable: true),
                     ForumId = table.Column<int>(type: "integer", nullable: false),
-                    ForumsForumId = table.Column<int>(type: "integer", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ForumThreads", x => x.ForumThreadId);
                     table.ForeignKey(
-                        name: "FK_ForumThreads_Forums_ForumsForumId",
-                        column: x => x.ForumsForumId,
+                        name: "FK_ForumThreads_Forums_ForumId",
+                        column: x => x.ForumId,
                         principalTable: "Forums",
                         principalColumn: "ForumId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ForumThreads_Users_UserId",
                         column: x => x.UserId,
@@ -72,18 +71,17 @@ namespace backend_api.Data.Migrations
                     Likes = table.Column<int>(type: "integer", nullable: false),
                     Dislikes = table.Column<int>(type: "integer", nullable: false),
                     ForumThreadId = table.Column<int>(type: "integer", nullable: false),
-                    ForumThreadsForumThreadId = table.Column<int>(type: "integer", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ThreadComments", x => x.ThreadCommentId);
                     table.ForeignKey(
-                        name: "FK_ThreadComments_ForumThreads_ForumThreadsForumThreadId",
-                        column: x => x.ForumThreadsForumThreadId,
+                        name: "FK_ThreadComments_ForumThreads_ForumThreadId",
+                        column: x => x.ForumThreadId,
                         principalTable: "ForumThreads",
                         principalColumn: "ForumThreadId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ThreadComments_Users_UserId",
                         column: x => x.UserId,
@@ -98,9 +96,9 @@ namespace backend_api.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumThreads_ForumsForumId",
+                name: "IX_ForumThreads_ForumId",
                 table: "ForumThreads",
-                column: "ForumsForumId");
+                column: "ForumId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ForumThreads_UserId",
@@ -108,9 +106,9 @@ namespace backend_api.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ThreadComments_ForumThreadsForumThreadId",
+                name: "IX_ThreadComments_ForumThreadId",
                 table: "ThreadComments",
-                column: "ForumThreadsForumThreadId");
+                column: "ForumThreadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ThreadComments_UserId",
