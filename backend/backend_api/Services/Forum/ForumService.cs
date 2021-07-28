@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
 using backend_api.Exceptions.Forum;
+using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.Notifications;
 using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
@@ -112,7 +113,7 @@ namespace backend_api.Services.Forum
 
                 if (request.ForumThreadId == 0)
                 {
-                    throw new InvalidForumRequestException("Invalid ForumId");
+                    throw new InvalidForumRequestException("Invalid ForumThreadId");
                 }
                 
                 return await _forumRepository.DeleteForumThread(request);
@@ -167,5 +168,26 @@ namespace backend_api.Services.Forum
             }
         }
 
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid DeleteThreadCommentRequest object");
+                }
+
+                if (request.ThreadCommentId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ThreadCommentId");
+                }
+
+                return await _forumRepository.DeleteThreadComment(request);
+            }
+            catch (InvalidThreadContentException e)
+            {
+                return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 }
