@@ -15,7 +15,7 @@ namespace backend_api.Controllers.Forum
 
         public ForumController(IForumService service)
         {
-            this._service = service;
+            _service = service;
         }
 
         [HttpPost]
