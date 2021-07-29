@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/models/Booking/view_booking_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
@@ -77,19 +78,10 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                       } else if (snapshot.hasError) {
                         children = <Widget>[
                           AlertDialog(
-                            title: const Text('An error has occurred'),
+                            title: const Text('No Bookings Found'),
                             content: const Text(
-                                'An error has occured while retreiving your bookings'),
+                                "There doesn't seem to be any bookings"),
                             actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BookingScreen(),
-                                  ),
-                                ),
-                                child: Text('Retry'),
-                              ),
                               TextButton(
                                 onPressed: () => Navigator.push(
                                   context,
