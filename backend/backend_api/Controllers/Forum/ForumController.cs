@@ -15,7 +15,7 @@ namespace backend_api.Controllers.Forum
 
         public ForumController(IForumService service)
         {
-            this._service = service;
+            _service = service;
         }
 
         [HttpPost]
@@ -72,6 +72,22 @@ namespace backend_api.Controllers.Forum
             [FromBody] CreateThreadCommentRequest request)
         {
             return await _service.CreateThreadComment(request);
+        }
+
+        [HttpGet]
+        [Route("RetrieveThreadComments")]
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(
+            [FromQuery] RetrieveThreadCommentsRequest request)
+        {
+            return await _service.RetrieveThreadComments(request);
+        }
+
+        [HttpDelete]
+        [Route("DeleteThreadComment")]
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(
+            [FromBody] DeleteThreadCommentRequest request)
+        {
+            return await _service.DeleteThreadComment(request);
         }
     }
 }
