@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/models/Booking/view_booking_model.dart';
+import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
@@ -13,6 +16,14 @@ class ViewBookingScreen extends StatefulWidget {
 }
 
 class _ViewBookingState extends State<ViewBookingScreen> {
+  Future<ViewBookingModel>? bookingFuture;
+  initState() {
+    BookingProvider bookingProvider = new BookingProvider();
+    setState(() {
+      bookingFuture = bookingProvider.fetchBooking();
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -46,11 +57,68 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                     //       color: const Color.fromRGBO(172, 255, 79, 1)),
                     //   borderRadius: BorderRadius.circular(12),
                   ),
-                  child: ListView(
-                    children: <Widget>[
-                      ViewBookingCard(
-                          1, 'Monday', '24 Jul', 'Full Day', 'Amsterdam'),
-                    ],
+                  child: FutureBuilder(
+                    future: bookingFuture,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      List<Widget> children;
+                      if (snapshot.hasData) {
+                        children = <Widget>[
+                          ListView.builder(
+                              itemBuilder: (BuildContext context, int index) {
+                            return new ViewBookingCard(
+                                index,
+                                snapshot.data.day,
+                                snapshot.data.date,
+                                snapshot.data.timeSlot,
+                                snapshot.data.office);
+                          }),
+                        ];
+                      } else if (snapshot.hasError) {
+                        children = <Widget>[
+                          AlertDialog(
+                            title: const Text('An error has occurred'),
+                            content: const Text(
+                                'An error has occured while retreiving your bookings'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BookingScreen(),
+                                  ),
+                                ),
+                                child: Text('Retry'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BookingScreen(),
+                                  ),
+                                ),
+                                child: Text('Retry'),
+                              ),
+                            ],
+                          ),
+                        ];
+                      } else {
+                        children = const <Widget>[
+                          SizedBox(
+                            child: CircularProgressIndicator(
+                                color: Color.fromRGBO(171, 255, 79, 1)),
+                            width: 60,
+                            height: 60,
+                          ),
+                        ];
+                      }
+                      return Center(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: children),
+                      );
+                    },
                   ),
                 ),
               ),
