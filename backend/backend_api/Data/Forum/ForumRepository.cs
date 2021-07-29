@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
+using backend_api.Exceptions.NoticeBoard;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
@@ -113,7 +114,7 @@ namespace backend_api.Data.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest, e);
+                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest);
             }
         }
 
@@ -170,6 +171,48 @@ namespace backend_api.Data.Forum
 
             return new CreateThreadCommentResponse(HttpStatusCode.Created);
            
+        }
+
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request)
+        {
+            var threadComments = _forum.ThreadComments.Where(id => id.ForumThreadId == request.ForumThreadId);
+            try
+            {
+                if (threadComments.ToList().IsNullOrEmpty())
+                {
+                    throw new InvalidForumRequestException(
+                        "Cannot retrieve Thread Comments for a thread that does not exist");
+                }
+
+                return new RetrieveThreadCommentsResponse(await threadComments.ToListAsync());
+            }
+            catch(InvalidForumRequestException e)
+            {
+                return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request)
+        {
+            try
+            {
+                var threadCommentToDelete = await _forum.ThreadComments.FindAsync(request.ThreadCommentId);
+                if (threadCommentToDelete != null)
+                {
+                    _forum.ThreadComments.Remove(threadCommentToDelete);
+                }
+                else
+                {
+                    throw new InvalidForumRequestException("Thread Comment does not exist");
+                }
+
+                await _forum.SaveChanges();
+                return new DeleteThreadCommentResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidThreadContentException e)
+            {
+                return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
         }
     }
 } 
