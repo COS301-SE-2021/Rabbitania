@@ -8,7 +8,7 @@ namespace backend_api.Models.Forum
 {
     public class ThreadComments : IThreadComments
     {
-        public ThreadComments(string commentBody, DateTime createdDate, string imageUrl, int likes, int dislikes, int forumThreadId)
+        public ThreadComments(string commentBody, DateTime createdDate, string imageUrl, int likes, int dislikes, int forumThreadId, int userId)
         {
             this.CommentBody = commentBody;
             this.CreatedDate = createdDate;
@@ -16,6 +16,7 @@ namespace backend_api.Models.Forum
             this.Likes = likes;
             this.Dislikes = dislikes;
             this.ForumThreadId = forumThreadId;
+            this.UserId = userId;
 
         }
 
@@ -33,14 +34,12 @@ namespace backend_api.Models.Forum
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         
-        [ForeignKey("ForumThreads")]
         public int ForumThreadId { get; set; }
-        public ForumThreads ForumThreads { get; set; }
+        public ForumThreads ForumThread { get; set; }
 
         
         //UserId will be used to find the user that both created the original comment, and the user to 
         //which the comment is directed at.
-        [ForeignKey("UserId")]
         public int UserId { get; set; }
         public Users User { get; set; }
         

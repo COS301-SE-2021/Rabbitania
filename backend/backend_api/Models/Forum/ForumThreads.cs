@@ -31,9 +31,8 @@ namespace backend_api.Models.Forum
 
         public string imageURL { get; set; }
         
-        [ForeignKey("Forums")]
         public int ForumId { get; set; }
-        public Forums Forums { get; set; }
+        public Forums Forum { get; set; }
         public int UserId { get; set; }
         public Users User { get; set; }
 

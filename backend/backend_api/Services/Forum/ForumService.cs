@@ -73,9 +73,9 @@ namespace backend_api.Services.Forum
                 throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
             }
 
-            if (request.ForumThreadId == 0)
+            if (request.ForumId == 0)
             {
-                throw new InvalidForumRequestException("Invalid ForumThreadId");
+                throw new InvalidForumRequestException("Invalid ForumId");
             }
 
             if (request.UserId == 0)
@@ -114,12 +114,34 @@ namespace backend_api.Services.Forum
                 {
                     throw new InvalidForumRequestException("Invalid ForumId");
                 }
-
+                
                 return await _forumRepository.DeleteForumThread(request);
             }
             catch (InvalidForumRequestException e)
             {
-                return new DeleteForumThreadResponse(HttpStatusCode.BadRequest, e);
+                return new DeleteForumThreadResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<CreateThreadCommentResponse> CreateThreadComment(CreateThreadCommentRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid CreateThreadCommentRequest Object");
+                }
+
+                if (request.ForumThreadId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ThreadCommentId");
+                }
+
+                return await _forumRepository.CreateThreadComment(request);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
         

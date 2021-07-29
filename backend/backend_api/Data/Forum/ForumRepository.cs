@@ -8,6 +8,7 @@ using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace backend_api.Data.Forum
 {
@@ -88,7 +89,7 @@ namespace backend_api.Data.Forum
             }
             catch (InvalidForumRequestException e)
             {
-                return new CreateForumThreadResponse(HttpStatusCode.BadRequest, e);
+                return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
             }
 
             return new CreateForumThreadResponse(HttpStatusCode.Created);
@@ -138,5 +139,37 @@ namespace backend_api.Data.Forum
                 return new DeleteForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<CreateThreadCommentResponse> CreateThreadComment(CreateThreadCommentRequest request)
+        {
+            var commentBody = request.CommentBody;
+            var createDate = request.CreatedDate;
+            var imageUrl = request.ImageUrl;
+            var likes = request.Likes;
+            var dislikes = request.Dislikes;
+            var forumThreadId = request.ForumThreadId;
+            var userId = request.UserId;
+            
+            var threadComment =
+                new Models.Forum.ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
+
+            try
+            {
+                var foreignForumId = await _forum.Forums.FindAsync(forumThreadId);
+                if (foreignForumId == null)
+                {
+                    throw new InvalidForumRequestException("Forum does not exist in the database");
+                }
+                _forum.ThreadComments.Add(threadComment);
+                await _forum.SaveChanges();
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+
+            return new CreateThreadCommentResponse(HttpStatusCode.Created);
+           
+        }
     }
-}
+} 

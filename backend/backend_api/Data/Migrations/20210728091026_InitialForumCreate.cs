@@ -5,31 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitialForumMigration : Migration
+    public partial class InitialForumCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    PinnedUserIds = table.Column<List<int>>(type: "integer[]", nullable: true),
-                    UserImgUrl = table.Column<string>(type: "text", nullable: true),
-                    UserDescription = table.Column<string>(type: "text", nullable: true),
-                    IsAdmin = table.Column<bool>(type: "boolean", nullable: false),
-                    EmployeeLevel = table.Column<int>(type: "integer", nullable: false),
-                    UserRole = table.Column<int>(type: "integer", nullable: false),
-                    OfficeLocation = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
-                });*/
-
             migrationBuilder.CreateTable(
                 name: "Forums",
                 columns: table => new
@@ -80,6 +59,37 @@ namespace backend_api.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ThreadComments",
+                columns: table => new
+                {
+                    ThreadCommentId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CommentBody = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ImageURL = table.Column<string>(type: "text", nullable: true),
+                    Likes = table.Column<int>(type: "integer", nullable: false),
+                    Dislikes = table.Column<int>(type: "integer", nullable: false),
+                    ForumThreadId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ThreadComments", x => x.ThreadCommentId);
+                    table.ForeignKey(
+                        name: "FK_ThreadComments_ForumThreads_ForumThreadId",
+                        column: x => x.ForumThreadId,
+                        principalTable: "ForumThreads",
+                        principalColumn: "ForumThreadId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ThreadComments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Forums_UserId",
                 table: "Forums",
@@ -94,10 +104,23 @@ namespace backend_api.Data.Migrations
                 name: "IX_ForumThreads_UserId",
                 table: "ForumThreads",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThreadComments_ForumThreadId",
+                table: "ThreadComments",
+                column: "ForumThreadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThreadComments_UserId",
+                table: "ThreadComments",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ThreadComments");
+
             migrationBuilder.DropTable(
                 name: "ForumThreads");
 
