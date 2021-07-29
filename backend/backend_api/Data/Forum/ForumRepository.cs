@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
 using backend_api.Exceptions.NoticeBoard;
+using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
@@ -212,6 +213,27 @@ namespace backend_api.Data.Forum
             catch (InvalidThreadContentException e)
             {
                 return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request)
+        {
+            try
+            {
+                var forumThreads = _forum.ForumThreads.Where(id => id.ForumId == request.ForumId);
+                if (forumThreads.ToList().IsNullOrEmpty())
+                {
+                    throw new InvalidForumRequestException("There are currently no threads stored in this Forum");
+                }
+                else
+                {
+                    var threadsList = forumThreads.ToList();
+                    return new RetrieveNumThreadsResponse(threadsList.Count);
+                }
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
             }
         }
     }
