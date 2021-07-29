@@ -211,5 +211,29 @@ namespace backend_api.Services.Forum
                 return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
             }
         }
+
+
+        public async Task<EditForumResponse> EditForum(EditForumRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid EditForumRequest Object");
+                }
+
+                if (request.ForumId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumId");
+                }
+
+                return await _forumRepository.EditForum(request);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
+    
 }
