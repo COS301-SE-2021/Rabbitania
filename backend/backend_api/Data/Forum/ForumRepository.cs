@@ -280,5 +280,31 @@ namespace backend_api.Data.Forum
                 return new EditForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request)
+        {
+            try
+            {
+                var threadCommentToEdit = await _forum.ThreadComments.FindAsync(request.ThreadCommentId);
+                if (threadCommentToEdit == null)
+                {
+                    throw new InvalidForumRequestException("Threac Comment is present in the database");
+                }
+
+                threadCommentToEdit.CommentBody = request.CommentBody;
+                threadCommentToEdit.Likes = request.Likes;
+                threadCommentToEdit.Dislikes = request.Dislikes;
+                threadCommentToEdit.ImageURL = request.ImageUrl;
+
+                _forum.ThreadComments.Update(threadCommentToEdit).State = EntityState.Modified;
+                await _forum.SaveChanges();
+                return new EditThreadCommentResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+            
+        }
     }
 } 

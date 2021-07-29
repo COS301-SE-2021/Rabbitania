@@ -257,6 +257,28 @@ namespace backend_api.Services.Forum
                 return new EditForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid EditThreadCommentRequest Object");
+                }
+
+                if (request.ThreadCommentId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ThreadCommentId");
+                }
+
+                return await _forumRepository.EditThreadComment(request);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
     
 }
