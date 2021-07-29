@@ -189,5 +189,27 @@ namespace backend_api.Services.Forum
                 return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid RetrieveNumThreadsRequest Object");
+                }
+
+                if (request.ForumId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumId");
+                }
+
+                return await _forumRepository.RetrieveNumThreads(request);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

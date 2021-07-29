@@ -29,5 +29,7 @@ namespace backend_api.Services.Forum
         Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request);
 
         Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request);
+
+        Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request);
     }
 }
