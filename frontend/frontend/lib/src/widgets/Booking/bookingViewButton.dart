@@ -7,8 +7,8 @@ class BookingViewButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
-      minWidth: 400.0,
-      height: 200.0,
+      minWidth: 200.0,
+      height: 100.0,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           textStyle: const TextStyle(fontSize: 20),
@@ -23,8 +23,21 @@ class BookingViewButton extends StatelessWidget {
             MaterialPageRoute(builder: (context) => ViewBookingScreen()),
           )
         },
-        child: const Text('VIEW YOUR CURRENT BOOKINGS',
-            style: TextStyle(color: Color.fromRGBO(171, 255, 79, 1))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'VIEW YOUR',
+              style: TextStyle(
+                  color: Color.fromRGBO(171, 255, 79, 1), fontSize: 25),
+            ),
+            const Text(
+              'CURRENT BOOKINGS',
+              style: TextStyle(
+                  color: Color.fromRGBO(171, 255, 79, 1), fontSize: 25),
+            ),
+          ],
+        ),
       ),
     );
   }
