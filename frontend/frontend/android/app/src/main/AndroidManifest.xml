@@ -2,6 +2,7 @@
     package="com.example.frontend">
    <application
         android:label="frontend"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

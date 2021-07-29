@@ -13,6 +13,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 class InfoForm extends StatefulWidget {
+  final user;
+  InfoForm(this.user);
   @override
   State<StatefulWidget> createState() {
     return _infoForm();
@@ -20,15 +22,21 @@ class InfoForm extends StatefulWidget {
 }
 
 class _infoForm extends State<InfoForm> {
-  final user = FirebaseAuth.instance.currentUser!;
+  var user;
   final _formKey = GlobalKey<FormState>();
   final myController = TextEditingController();
   String _dropDownRoleValue = 'Developer';
   String _dropDownLevelValue = '0';
   String _dropDownOfficeValue = 'Pretoria';
 
+  initState() {
+    setState(() {
+      user = widget.user;
+    });
+    print(user);
+  }
+
   httpCallGetUser() async {
-    String userEmail = user.email!;
     final userHttp = new UserProvider();
     final userID = await userHttp.getUserID();
     return userID;
@@ -138,7 +146,7 @@ class _infoForm extends State<InfoForm> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          user.email!,
+                                          user.providerData[0].email!,
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color.fromRGBO(
@@ -368,7 +376,11 @@ class _infoForm extends State<InfoForm> {
                                                   context,
                                                   listen: false);
                                           provider.googleLogout();
-                                          Navigator.pop(context);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Login()));
                                           // Navigator.push(
                                           //   context,
                                           //   MaterialPageRoute(

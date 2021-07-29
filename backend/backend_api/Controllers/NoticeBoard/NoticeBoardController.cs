@@ -21,7 +21,8 @@ namespace backend_api.Controllers.NoticeBoard
 
         [HttpPost]
         [Route("AddNoticeBoardThread")]
-        public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread([FromBody] AddNoticeBoardThreadRequest request)
+        public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(
+            [FromBody] AddNoticeBoardThreadRequest request)
         {
             return await _service.AddNoticeBoardThread(request);
         }
@@ -42,11 +43,15 @@ namespace backend_api.Controllers.NoticeBoard
         {
             return await _service.DeleteNoticeBoardThread(request);
         }
-        
-        /*[HttpDelete]
-        [Route("DeleteNoticeBoardThread")]
-        public async Task<DeleteNoticeBoardThreadResponse
-        */
+
+        [HttpPut]
+        [Route("EditNoticeBoardThread")]
+        public async Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(
+            [FromBody] EditNoticeBoardThreadRequest request)
+        {
+            return await _service.EditNoticeBoardThread(request);
+        }
+
 
     }
 }

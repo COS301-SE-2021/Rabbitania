@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/noticeboardEditThread.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:frontend/src/widgets/navigationbar.dart';
@@ -46,9 +47,9 @@ class _Notice extends State<Notice> {
         ),
         actions: [],
       ),
-      //floatingActionButton: ExampleExpandableFab(),
+      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      bottomNavigationBar: navigationBar(),
+      //bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[
@@ -58,6 +59,33 @@ class _Notice extends State<Notice> {
             ),
             Container(
               child: NoticeCard(),
+            ),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: Colors.transparent,
+                  height: 75,
+                  width: double.infinity,
+                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
+                  padding:
+                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(171, 255, 79, 1)),
+                    ),
+                    onPressed: () {
+                      //dispose();
+
+                      //imageFile = null;
+                      UtilModel.route(() => NoticeBoardEditThread(), context);
+                    },
+                    child: Text("Edit Notice",
+                        style: TextStyle(color: Colors.black, fontSize: 20)),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

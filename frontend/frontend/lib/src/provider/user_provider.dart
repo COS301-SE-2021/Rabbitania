@@ -9,7 +9,7 @@ class UserProvider {
   final user = FirebaseAuth.instance.currentUser!;
 
   getUserID() async {
-    String userEmail = user.email!;
+    String userEmail = user.providerData[0].email!;
     final response = await http.get(
       Uri.parse(
           'https://10.0.2.2:5001/api/GoogleSignIn/GetID?email=$userEmail'),
@@ -22,9 +22,9 @@ class UserProvider {
 
   Future<UserProfileModel> getUserProfile() async {
     final user = await getUserID();
-
+    final oldURI = "https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user";
     final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user'),
+      Uri.parse(oldURI),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

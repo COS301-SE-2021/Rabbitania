@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
+import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/googleAuthTest.dart';
 import 'package:frontend/src/screens/noticeboardScreen.dart';
 import 'package:frontend/src/screens/supplyInfoScreen.dart';
@@ -21,8 +23,8 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: Login(),
-        //home: NoticeBoard(),
+        //home: Login(),
+        home: BookingScreen(),
       ),
     );
   }

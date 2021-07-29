@@ -19,7 +19,7 @@ namespace backend_api.Tests
     public class AuthServiceTests
     {
         private readonly AuthService _authService;
-        public Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
+        private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
         private readonly ITestOutputHelper outHelper;
         private readonly User _mockedUser;
         private readonly UserEmails _mockedEmail;
@@ -72,6 +72,7 @@ namespace backend_api.Tests
             
             //Act
             var response = _authService.CheckEmailDomain(request1);
+            
             //Assert
             Assert.NotNull(response);
             Assert.IsType<DomainResponse>(response);
@@ -122,14 +123,19 @@ namespace backend_api.Tests
         public async Task CheckCorrectEmail()
         {
             //Arrange
-            var requestDoa = new GoogleSignInRequest("_mockedUser.Name", "test@tuks.co.za", "_mockedUser.PhoneNumber", "_mockedUser.UserImgUrl");
-            _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(new CreateUserResponse());
-            var service = new AuthService(_userRepositoryMock.Object);
+            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, _mockedEmail.UsersEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
+            var responseDoa = new CreateUserResponse("User created.");
+
+            _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(responseDoa);
+            
             //Act
-            var user = service.GetUser(requestDoa);
-            var response = await service.checkEmailExists(requestDoa);
+            var response = await _authService.checkEmailExists(requestDoa);
+            var resp = await _authService.GetUserName(_mockedUser.Name);
+            
             //Assert
-            Assert.Equal(true, response.EmailExists);
+            Assert.NotNull(resp);
+             //Assert.IsType<LoginResponse>(response);
+             //Assert.True(response.EmailExists);
         }
 
         /*[Fact(DisplayName = "Gets a user json object that exists on the system")]

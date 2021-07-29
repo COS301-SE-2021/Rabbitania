@@ -31,7 +31,7 @@ namespace backend_api.Tests
                     ThreadId = 1,
                     ThreadTitle = "List Item Title 1",
                     ThreadContent = "List Item Content 1",
-                    MinLevel = 1,
+                    MinEmployeeLevel = 1,
                     ImageUrl = "image.png",
                     PermittedUserRoles = UserRoles.Administrator,
                     UserId = 1
@@ -41,7 +41,7 @@ namespace backend_api.Tests
                     ThreadId = 2,
                     ThreadTitle = "List Item Title 2",
                     ThreadContent = "List Item Content 2",
-                    MinLevel = 1,
+                    MinEmployeeLevel = 1,
                     ImageUrl = "image.png",
                     PermittedUserRoles = UserRoles.Administrator,
                     UserId = 1
@@ -51,7 +51,7 @@ namespace backend_api.Tests
                     ThreadId = 3,
                     ThreadTitle = "List Item Title 3",
                     ThreadContent = "List Item Content 3",
-                    MinLevel = 1,
+                    MinEmployeeLevel = 1,
                     ImageUrl = "image.png",
                     PermittedUserRoles = UserRoles.Administrator,
                     UserId = 1

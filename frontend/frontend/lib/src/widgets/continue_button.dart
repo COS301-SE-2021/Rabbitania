@@ -35,17 +35,19 @@ class _continueButton extends State<ContinueButton> {
       },
       body: jsonEncode(<String, dynamic>{
         'displayName': widget.user.displayName,
-        'email': widget.user.email,
+        'email': widget.user.providerData[0].email,
         'phoneNumber': widget.user.phoneNumber,
         'googleImgUrl': widget.user.photoURL,
       }),
     );
     if (response.statusCode == 200) {
+      setState(() {});
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => InfoForm()));
+      setState(() {});
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => InfoForm(widget.user)));
     } else {
       showDialog(
         context: context,
@@ -69,17 +71,13 @@ class _continueButton extends State<ContinueButton> {
         alignment: Alignment.center,
         child: ElevatedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(300),
-            )),
             elevation: MaterialStateProperty.all<double>(0),
             backgroundColor:
                 MaterialStateProperty.all<Color>(Colors.transparent),
           ),
           child: Container(
-            height: 250,
-            width: 250,
+            height: 50,
+            width: 50,
             child: CircularProgressIndicator(
               color: Color.fromRGBO(171, 255, 79, 1),
             ),

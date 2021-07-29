@@ -8,6 +8,6 @@ namespace backend_api.Models.Notification
         string Payload { get; set; }
         NotificationTypeEnum Type { get; set; }
         DateTime CreatedDate { get; set; }
-        int UserID { get; set; }
+        int UserId { get; set; }
     }
 }
