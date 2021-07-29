@@ -66,6 +66,14 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveForumThreads(request);
         }
 
+        [HttpPut]
+        [Route("EditForumThread")]
+        public async Task<EditForumThreadResponse> EditForumThread(
+            [FromBody] EditForumThreadRequest request)
+        {
+            return await _service.EditForumThread(request);
+        }
+
         [HttpDelete]
         [Route("DeleteForumThread")]
         public async Task<DeleteForumThreadResponse> DeleteForumThread(

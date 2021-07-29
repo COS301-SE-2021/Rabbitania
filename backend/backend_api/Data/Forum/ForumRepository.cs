@@ -110,7 +110,7 @@ namespace backend_api.Data.Forum
                         "Cannot retrieve forum threads for a forum that does not exist");
                 }
 
-                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync());
+                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync(), HttpStatusCode.Accepted);
             }
             catch (InvalidForumRequestException)
             {
@@ -255,6 +255,29 @@ namespace backend_api.Data.Forum
             catch (InvalidForumRequestException)
             {
                 return new EditForumResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request)
+        {
+            try
+            {
+                var forumThreadToEdit = await _forum.ForumThreads.FindAsync(request.ForumThreadId);
+                if (forumThreadToEdit == null)
+                {
+                    throw new InvalidForumRequestException("Forum Thread is not present in the database");
+                }
+
+                forumThreadToEdit.ForumThreadTitle = request.ForumThreadTitle;
+                forumThreadToEdit.imageURL = request.ImageUrl;
+
+                _forum.ForumThreads.Update(forumThreadToEdit).State = EntityState.Modified;
+                await _forum.SaveChanges();
+                return new EditForumThreadResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
     }

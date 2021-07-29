@@ -33,5 +33,7 @@ namespace backend_api.Services.Forum
         Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request);
 
         Task<EditForumResponse> EditForum(EditForumRequest request);
+
+        Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request);
     }
 }

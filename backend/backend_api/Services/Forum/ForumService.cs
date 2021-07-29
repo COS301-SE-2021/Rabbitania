@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
+using backend_api.Exceptions.Booking;
 using backend_api.Exceptions.Forum;
 using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.Notifications;
@@ -232,6 +233,28 @@ namespace backend_api.Services.Forum
             catch (InvalidForumRequestException)
             {
                 return new EditForumResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid EditForumThreadRequest Object");
+                }
+
+                if (request.ForumThreadId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumThreadId");
+                }
+
+                return await _forumRepository.EditForumThread(request);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
     }
