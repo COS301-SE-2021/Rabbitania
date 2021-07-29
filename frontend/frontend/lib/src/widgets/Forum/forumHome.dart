@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
 
 class ForumHome extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class ForumHome extends StatelessWidget {
                         children: [
                           ListTile(
                             contentPadding: EdgeInsets.only(
-                                bottom: 10.0, top: 10, left: 20, right: 10),
+                                bottom: 5.0, top: 10, left: 20, right: 10),
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
@@ -123,6 +124,19 @@ class forumCard extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
+                padding: const EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(171, 255, 79, 230),
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      width: 0.4,
+                      style: BorderStyle.solid),
+                ),
+                child: ForumLatestThread(),
               ),
             ],
           ),
