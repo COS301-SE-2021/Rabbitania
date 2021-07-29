@@ -89,5 +89,13 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.DeleteThreadComment(request);
         }
+
+        [HttpGet]
+        [Route("RetrieveNumThreads")]
+        public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(
+            [FromQuery] RetrieveNumThreadsRequest request)
+        {
+            return await _service.RetrieveNumThreads(request);
+        }
     }
 }
