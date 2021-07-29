@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,7 +10,6 @@ using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace backend_api.Data.Forum
 {
@@ -30,7 +29,7 @@ namespace backend_api.Data.Forum
             var createdDate = request.CreatedDate;
             var userId = request.UserId;
 
-            var forum = new Models.Forum.Forums(forumTitle, userId, createdDate);
+            var forum = new Forums(forumTitle, userId, createdDate);
 
             _forum.Forums.Add(forum);
             await _forum.SaveChanges();
@@ -38,7 +37,7 @@ namespace backend_api.Data.Forum
             return new CreateForumResponse(HttpStatusCode.Created);
         }
 
-        public async Task<List<Models.Forum.Forums>> RetrieveForums(RetrieveForumsRequest request)
+        public async Task<List<Forums>> RetrieveForums(RetrieveForumsRequest request)
         {
             var forums = _forum.Forums.ToList();
             return forums;
@@ -61,7 +60,7 @@ namespace backend_api.Data.Forum
                 await _forum.SaveChanges();
                 return new DeleteForumResponse(HttpStatusCode.Accepted);
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new DeleteForumResponse(HttpStatusCode.BadRequest);
             }
@@ -76,7 +75,7 @@ namespace backend_api.Data.Forum
             var userId = request.UserId;
             var forumId = request.ForumId;
 
-            var forumThread = new Models.Forum.ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
+            var forumThread = new ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
 
            
             try
@@ -89,7 +88,7 @@ namespace backend_api.Data.Forum
                 _forum.ForumThreads.Add(forumThread);
                 await _forum.SaveChanges();
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
             }
@@ -113,7 +112,7 @@ namespace backend_api.Data.Forum
 
                 return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync());
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest);
             }
@@ -153,7 +152,7 @@ namespace backend_api.Data.Forum
             var userId = request.UserId;
             
             var threadComment =
-                new Models.Forum.ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
+                new ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
 
             try
             {
@@ -165,7 +164,7 @@ namespace backend_api.Data.Forum
                 _forum.ThreadComments.Add(threadComment);
                 await _forum.SaveChanges();
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
@@ -187,7 +186,7 @@ namespace backend_api.Data.Forum
 
                 return new RetrieveThreadCommentsResponse(await threadComments.ToListAsync());
             }
-            catch(InvalidForumRequestException e)
+            catch(InvalidForumRequestException)
             {
                 return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
             }
@@ -210,7 +209,7 @@ namespace backend_api.Data.Forum
                 await _forum.SaveChanges();
                 return new DeleteThreadCommentResponse(HttpStatusCode.Accepted);
             }
-            catch (InvalidThreadContentException e)
+            catch (InvalidThreadContentException)
             {
                 return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
             }
@@ -228,10 +227,11 @@ namespace backend_api.Data.Forum
                 else
                 {
                     var threadsList = forumThreads.ToList();
-                    return new RetrieveNumThreadsResponse(threadsList.Count);
+                    return new RetrieveNumThreadsResponse(threadsList.Count, HttpStatusCode.Accepted);
                 }
+
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
             }
