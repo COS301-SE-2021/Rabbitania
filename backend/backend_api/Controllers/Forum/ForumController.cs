@@ -34,6 +34,14 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveForums(request);
         }
 
+        [HttpPut]
+        [Route("EditForum")]
+        public async Task<EditForumResponse> EditForum(
+            [FromQuery] EditForumRequest request)
+        {
+            return await _service.EditForum(request);
+        }
+
         [HttpDelete]
         [Route("DeleteForum")]
         public async Task<DeleteForumResponse> DeleteForum(
@@ -97,5 +105,7 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.RetrieveNumThreads(request);
         }
+        
+        
     }
 }
