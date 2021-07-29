@@ -8,9 +8,10 @@ namespace backend_api.Models.Forum.Responses
         private int _numThreads;
         private HttpStatusCode _code;
 
-        public RetrieveNumThreadsResponse(int numThreads)
+        public RetrieveNumThreadsResponse(int numThreads, HttpStatusCode code)
         {
             _numThreads = numThreads;
+            _code = code;
         }
 
         public RetrieveNumThreadsResponse(HttpStatusCode code)

@@ -31,5 +31,11 @@ namespace backend_api.Services.Forum
         Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request);
 
         Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request);
+
+        Task<EditForumResponse> EditForum(EditForumRequest request);
+
+        Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request);
+
+        Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request);
     }
 }

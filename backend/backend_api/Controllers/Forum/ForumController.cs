@@ -34,6 +34,14 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveForums(request);
         }
 
+        [HttpPut]
+        [Route("EditForum")]
+        public async Task<EditForumResponse> EditForum(
+            [FromQuery] EditForumRequest request)
+        {
+            return await _service.EditForum(request);
+        }
+
         [HttpDelete]
         [Route("DeleteForum")]
         public async Task<DeleteForumResponse> DeleteForum(
@@ -56,6 +64,14 @@ namespace backend_api.Controllers.Forum
             [FromQuery] RetrieveForumThreadsRequest request)
         {
             return await _service.RetrieveForumThreads(request);
+        }
+
+        [HttpPut]
+        [Route("EditForumThread")]
+        public async Task<EditForumThreadResponse> EditForumThread(
+            [FromBody] EditForumThreadRequest request)
+        {
+            return await _service.EditForumThread(request);
         }
 
         [HttpDelete]
@@ -82,6 +98,14 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveThreadComments(request);
         }
 
+        [HttpPut]
+        [Route("EditThreadComment")]
+        public async Task<EditThreadCommentResponse> EditThreadComment(
+            [FromBody] EditThreadCommentRequest request)
+        {
+            return await _service.EditThreadComment(request);
+        }
+
         [HttpDelete]
         [Route("DeleteThreadComment")]
         public async Task<DeleteThreadCommentResponse> DeleteThreadComment(
@@ -97,5 +121,7 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.RetrieveNumThreads(request);
         }
+        
+        
     }
 }

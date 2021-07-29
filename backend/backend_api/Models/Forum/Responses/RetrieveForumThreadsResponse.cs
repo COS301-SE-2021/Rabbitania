@@ -11,9 +11,10 @@ namespace backend_api.Models.Forum.Responses
         private IEnumerable<ForumThreads> _forumThreads;
         private HttpStatusCode _code;
         
-        public RetrieveForumThreadsResponse(IEnumerable<ForumThreads> threads)
+        public RetrieveForumThreadsResponse(IEnumerable<ForumThreads> threads, HttpStatusCode code)
         {
             this._forumThreads = threads;
+            _code = code;
         }
 
         public RetrieveForumThreadsResponse(HttpStatusCode code)
