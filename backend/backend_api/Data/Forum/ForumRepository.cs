@@ -236,5 +236,26 @@ namespace backend_api.Data.Forum
                 return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<EditForumResponse> EditForum(EditForumRequest request)
+        {
+            try
+            {
+                var forumToEdit = await _forum.Forums.FindAsync(request.ForumId);
+                if (forumToEdit == null)
+                {
+                    throw new InvalidForumRequestException("Forum is not present in the database");
+                }
+
+                forumToEdit.ForumTitle = request.ForumTitle;
+                _forum.Forums.Update(forumToEdit).State = EntityState.Modified;
+                await _forum.SaveChanges();
+                return new EditForumResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 } 

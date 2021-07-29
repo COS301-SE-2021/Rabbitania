@@ -4,13 +4,13 @@
     {
         
         private int _forumId;
-        private int _forumTitle;
+        private string _forumTitle;
         
         public EditForumRequest()
         {
         }
 
-        public EditForumRequest(int forumId, int forumTitle)
+        public EditForumRequest(int forumId, string forumTitle)
         {
             _forumId = forumId;
             _forumTitle = forumTitle;
@@ -22,7 +22,7 @@
             set => _forumId = value;
         }
 
-        public int ForumTitle
+        public string ForumTitle
         {
             get => _forumTitle;
             set => _forumTitle = value;
