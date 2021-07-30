@@ -9,7 +9,7 @@ namespace backend_api.Data.Booking
         {
             
         }
-        public BookingScheduleContext(DbContextOptions<BookingContext> options): base(options)
+        public BookingScheduleContext(DbContextOptions<BookingScheduleContext> options) : base(options)
         {
             
         }

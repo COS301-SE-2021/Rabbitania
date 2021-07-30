@@ -90,7 +90,18 @@ namespace backend_api
             //services.AddScoped<IBookingRepository, BookingRepository>();
             //services.AddScoped<IBookingService, BookingService>();
             //----------------------------------------------------------------------------------------------------------------------
+            //BookingSchedule DB Context
             
+            services.AddDbContext<BookingScheduleContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+
+            services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
+            
+            //services.AddScoped<IForumRepository, ForumRepository>();
+            //services.AddScoped<IForumService, ForumService>();
+            //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
