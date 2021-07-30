@@ -128,7 +128,7 @@
 
 <div align="center">
    
-<img src="images_banners_logos/ReadME image.jpeg" width="250" height="250">
+<img src="images_banners_logos/ReadME image.jpeg" width="190" height="250">
 
 #### James Hulett | u16003251
 
