@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using backend_api.Models.Booking;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Booking
@@ -17,6 +18,14 @@ namespace backend_api.Data.Booking
         public new async Task<int> SaveChanges()
         {
             return await base.SaveChangesAsync();
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<BookingSchedule>().HasKey(schedule => new
+            {
+                schedule.Office, schedule.TimeSlot
+            });
         }
     }
 }
