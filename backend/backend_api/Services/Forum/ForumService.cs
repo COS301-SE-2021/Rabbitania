@@ -1,7 +1,9 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
+using backend_api.Exceptions.Booking;
 using backend_api.Exceptions.Forum;
+using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.Notifications;
 using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
@@ -73,9 +75,9 @@ namespace backend_api.Services.Forum
                 throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
             }
 
-            if (request.ForumThreadId == 0)
+            if (request.ForumId == 0)
             {
-                throw new InvalidForumRequestException("Invalid ForumThreadId");
+                throw new InvalidForumRequestException("Invalid ForumId");
             }
 
             if (request.UserId == 0)
@@ -112,9 +114,9 @@ namespace backend_api.Services.Forum
 
                 if (request.ForumThreadId == 0)
                 {
-                    throw new InvalidForumRequestException("Invalid ForumId");
+                    throw new InvalidForumRequestException("Invalid ForumThreadId");
                 }
-
+                
                 return await _forumRepository.DeleteForumThread(request);
             }
             catch (InvalidForumRequestException e)
@@ -132,7 +134,7 @@ namespace backend_api.Services.Forum
                     throw new InvalidForumRequestException("Invalid CreateThreadCommentRequest Object");
                 }
 
-                if (request.ThreadCommentId == 0)
+                if (request.ForumThreadId == 0)
                 {
                     throw new InvalidForumRequestException("Invalid ThreadCommentId");
                 }
@@ -144,6 +146,139 @@ namespace backend_api.Services.Forum
                 return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
-        
+
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid RetrieveThreadCommentsRequest");
+                }
+
+                if (request.ForumThreadId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumThread Id");
+                }
+
+                return await _forumRepository.RetrieveThreadComments(request);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid DeleteThreadCommentRequest object");
+                }
+
+                if (request.ThreadCommentId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ThreadCommentId");
+                }
+
+                return await _forumRepository.DeleteThreadComment(request);
+            }
+            catch (InvalidThreadContentException e)
+            {
+                return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid RetrieveNumThreadsRequest Object");
+                }
+
+                if (request.ForumId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumId");
+                }
+
+                return await _forumRepository.RetrieveNumThreads(request);
+            }
+            catch (InvalidForumRequestException e)
+            {
+                return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+
+        public async Task<EditForumResponse> EditForum(EditForumRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid EditForumRequest Object");
+                }
+
+                if (request.ForumId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumId");
+                }
+
+                return await _forumRepository.EditForum(request);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid EditForumThreadRequest Object");
+                }
+
+                if (request.ForumThreadId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumThreadId");
+                }
+
+                return await _forumRepository.EditForumThread(request);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumThreadResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request)
+        {
+            try
+            {
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid EditThreadCommentRequest Object");
+                }
+
+                if (request.ThreadCommentId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ThreadCommentId");
+                }
+
+                return await _forumRepository.EditThreadComment(request);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
+    
 }

@@ -8,11 +8,38 @@ import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 
 class BookingDayScreen extends StatefulWidget {
+  final displayText;
+  BookingDayScreen(this.displayText);
   @override
   _BookingDayState createState() => _BookingDayState();
 }
 
 class _BookingDayState extends State<BookingDayScreen> {
+  var displayText;
+  determineDisplayText() {
+    switch (widget.displayText) {
+      case 'M':
+        this.displayText = 'Monday';
+        break;
+      case 'Tu':
+        this.displayText = 'Tuesday';
+        break;
+      case 'W':
+        this.displayText = 'Wednesday';
+        break;
+      case 'Th':
+        this.displayText = 'Thursday';
+        break;
+      case 'F':
+        this.displayText = 'Friday';
+        break;
+    }
+  }
+
+  initState() {
+    determineDisplayText();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -21,14 +48,45 @@ class _BookingDayState extends State<BookingDayScreen> {
           elevation: 1,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          title: Column(
             children: <Widget>[
-              BookingDayButton('M'),
-              BookingDayButton('T'),
-              BookingDayButton('W'),
-              BookingDayButton('T'),
-              BookingDayButton('F'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  this.displayText == 'Monday'
+                      ? new BookingDayButton(
+                          'M', Color.fromRGBO(63, 63, 63, 1)) //if true
+                      : new BookingDayButton('M', Colors.transparent), //else
+                  this.displayText == 'Tuesday'
+                      ? new BookingDayButton(
+                          'Tu', Color.fromRGBO(63, 63, 63, 1)) //if true
+                      : new BookingDayButton('Tu', Colors.transparent), //
+                  this.displayText == 'Wednesday'
+                      ? new BookingDayButton(
+                          'W', Color.fromRGBO(63, 63, 63, 1)) //if true
+                      : new BookingDayButton('W', Colors.transparent),
+                  this.displayText == 'Thursday'
+                      ? new BookingDayButton(
+                          'Th', Color.fromRGBO(63, 63, 63, 1)) //if true
+                      : new BookingDayButton('Th', Colors.transparent),
+                  this.displayText == 'Friday'
+                      ? new BookingDayButton(
+                          'F', Color.fromRGBO(63, 63, 63, 1)) //if true
+                      : new BookingDayButton('F', Colors.transparent),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    this.displayText,
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Color.fromRGBO(172, 255, 79, 1),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

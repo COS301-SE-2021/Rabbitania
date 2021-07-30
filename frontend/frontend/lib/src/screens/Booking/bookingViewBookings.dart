@@ -5,6 +5,7 @@ import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
+import 'package:frontend/src/widgets/Booking/viewBookingCard.dart';
 
 class ViewBookingScreen extends StatefulWidget {
   @override
@@ -19,8 +20,13 @@ class _ViewBookingState extends State<ViewBookingScreen> {
           toolbarHeight: 100,
           elevation: 1,
           backgroundColor: Colors.transparent,
-          title: Text('Your Bookings',
-              style: TextStyle(color: Color.fromRGBO(171, 255, 79, 1))),
+          title: Text(
+            'Your Bookings',
+            style: TextStyle(
+              fontSize: 30,
+              color: Color.fromRGBO(171, 255, 79, 1),
+            ),
+          ),
         ),
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
         body: Center(
@@ -29,7 +35,25 @@ class _ViewBookingState extends State<ViewBookingScreen> {
               SvgPicture.string(
                 _svg_background,
                 fit: BoxFit.contain,
-              )
+              ),
+              Padding(
+                padding: EdgeInsets.all(15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    //   border: Border.all(
+                    //       width: 2.0,
+                    //       color: const Color.fromRGBO(172, 255, 79, 1)),
+                    //   borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListView(
+                    children: <Widget>[
+                      ViewBookingCard(
+                          1, 'Monday', '24 Jul', 'Full Day', 'Amsterdam'),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

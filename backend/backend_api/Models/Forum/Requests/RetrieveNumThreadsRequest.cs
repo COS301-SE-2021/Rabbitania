@@ -1,14 +1,15 @@
 ﻿namespace backend_api.Models.Forum.Requests
 {
-    public class RetrieveForumThreadsRequest
+    public class RetrieveNumThreadsRequest
     {
         private int _forumId;
-        public RetrieveForumThreadsRequest()
+
+        public RetrieveNumThreadsRequest()
         {
             
         }
 
-        public RetrieveForumThreadsRequest(int forumId)
+        public RetrieveNumThreadsRequest(int forumId)
         {
             _forumId = forumId;
         }

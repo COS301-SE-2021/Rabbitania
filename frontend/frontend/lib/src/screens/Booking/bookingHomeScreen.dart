@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/models/Booking/booking_model.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
@@ -12,6 +13,15 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingState extends State<BookingScreen> {
+  List<bool> colorArray = [true, false, false, false, false];
+  BookingModel bookingModel = new BookingModel();
+  @override
+  initState() {
+    setState(() {
+      this.colorArray = bookingModel.getColorArray();
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -22,11 +32,11 @@ class _BookingState extends State<BookingScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              BookingDayButton('M'),
-              BookingDayButton('T'),
-              BookingDayButton('W'),
-              BookingDayButton('T'),
-              BookingDayButton('F'),
+              BookingDayButton('M', Colors.transparent),
+              BookingDayButton('Tu', Colors.transparent),
+              BookingDayButton('W', Colors.transparent),
+              BookingDayButton('Th', Colors.transparent),
+              BookingDayButton('F', Colors.transparent),
             ],
           ),
         ),

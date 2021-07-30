@@ -6,26 +6,27 @@ using backend_api.Models.Forum.Requests;
 
 namespace backend_api.Models.Forum.Responses
 {
-    public class RetrieveForumThreadsResponse
+    public class RetrieveThreadCommentsResponse
     {
-        private IEnumerable<ForumThreads> _forumThreads;
+        private IEnumerable<ThreadComments> _threadComments;
         private HttpStatusCode _code;
+
         
-        public RetrieveForumThreadsResponse(IEnumerable<ForumThreads> threads, HttpStatusCode code)
+
+        public RetrieveThreadCommentsResponse(IEnumerable<ThreadComments> comments)
         {
-            this._forumThreads = threads;
+            _threadComments = comments;
+        }
+
+        public RetrieveThreadCommentsResponse(HttpStatusCode code)
+        {
             _code = code;
         }
 
-        public RetrieveForumThreadsResponse(HttpStatusCode code)
+        public IEnumerable<ThreadComments> ThreadComments
         {
-            _code = code;
-        }
-
-        public IEnumerable<ForumThreads> ForumThreads
-        {
-            get => _forumThreads;
-            set => _forumThreads = value;
+            get => _threadComments;
+            set => _threadComments = value;
         }
         
         public HttpStatusCode Code

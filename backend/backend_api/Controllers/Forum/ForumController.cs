@@ -15,7 +15,7 @@ namespace backend_api.Controllers.Forum
 
         public ForumController(IForumService service)
         {
-            this._service = service;
+            _service = service;
         }
 
         [HttpPost]
@@ -32,6 +32,14 @@ namespace backend_api.Controllers.Forum
             [FromQuery] RetrieveForumsRequest request)
         {
             return await _service.RetrieveForums(request);
+        }
+
+        [HttpPut]
+        [Route("EditForum")]
+        public async Task<EditForumResponse> EditForum(
+            [FromQuery] EditForumRequest request)
+        {
+            return await _service.EditForum(request);
         }
 
         [HttpDelete]
@@ -58,6 +66,14 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveForumThreads(request);
         }
 
+        [HttpPut]
+        [Route("EditForumThread")]
+        public async Task<EditForumThreadResponse> EditForumThread(
+            [FromBody] EditForumThreadRequest request)
+        {
+            return await _service.EditForumThread(request);
+        }
+
         [HttpDelete]
         [Route("DeleteForumThread")]
         public async Task<DeleteForumThreadResponse> DeleteForumThread(
@@ -73,5 +89,39 @@ namespace backend_api.Controllers.Forum
         {
             return await _service.CreateThreadComment(request);
         }
+
+        [HttpGet]
+        [Route("RetrieveThreadComments")]
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(
+            [FromQuery] RetrieveThreadCommentsRequest request)
+        {
+            return await _service.RetrieveThreadComments(request);
+        }
+
+        [HttpPut]
+        [Route("EditThreadComment")]
+        public async Task<EditThreadCommentResponse> EditThreadComment(
+            [FromBody] EditThreadCommentRequest request)
+        {
+            return await _service.EditThreadComment(request);
+        }
+
+        [HttpDelete]
+        [Route("DeleteThreadComment")]
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(
+            [FromBody] DeleteThreadCommentRequest request)
+        {
+            return await _service.DeleteThreadComment(request);
+        }
+
+        [HttpGet]
+        [Route("RetrieveNumThreads")]
+        public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(
+            [FromQuery] RetrieveNumThreadsRequest request)
+        {
+            return await _service.RetrieveNumThreads(request);
+        }
+        
+        
     }
 }

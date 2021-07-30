@@ -1,9 +1,11 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Forum;
+using backend_api.Exceptions.NoticeBoard;
+using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using Castle.Core.Internal;
@@ -27,7 +29,7 @@ namespace backend_api.Data.Forum
             var createdDate = request.CreatedDate;
             var userId = request.UserId;
 
-            var forum = new Models.Forum.Forums(forumTitle, userId, createdDate);
+            var forum = new Forums(forumTitle, userId, createdDate);
 
             _forum.Forums.Add(forum);
             await _forum.SaveChanges();
@@ -35,7 +37,7 @@ namespace backend_api.Data.Forum
             return new CreateForumResponse(HttpStatusCode.Created);
         }
 
-        public async Task<List<Models.Forum.Forums>> RetrieveForums(RetrieveForumsRequest request)
+        public async Task<List<Forums>> RetrieveForums(RetrieveForumsRequest request)
         {
             var forums = _forum.Forums.ToList();
             return forums;
@@ -58,7 +60,7 @@ namespace backend_api.Data.Forum
                 await _forum.SaveChanges();
                 return new DeleteForumResponse(HttpStatusCode.Accepted);
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new DeleteForumResponse(HttpStatusCode.BadRequest);
             }
@@ -73,7 +75,7 @@ namespace backend_api.Data.Forum
             var userId = request.UserId;
             var forumId = request.ForumId;
 
-            var forumThread = new Models.Forum.ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
+            var forumThread = new ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
 
            
             try
@@ -86,7 +88,7 @@ namespace backend_api.Data.Forum
                 _forum.ForumThreads.Add(forumThread);
                 await _forum.SaveChanges();
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
             }
@@ -108,11 +110,11 @@ namespace backend_api.Data.Forum
                         "Cannot retrieve forum threads for a forum that does not exist");
                 }
 
-                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync());
+                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync(), HttpStatusCode.Accepted);
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
-                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest, e);
+                return new RetrieveForumThreadsResponse(HttpStatusCode.BadRequest);
             }
         }
 
@@ -146,30 +148,163 @@ namespace backend_api.Data.Forum
             var imageUrl = request.ImageUrl;
             var likes = request.Likes;
             var dislikes = request.Dislikes;
-            var userId = request.UserId;
             var forumThreadId = request.ForumThreadId;
-
+            var userId = request.UserId;
+            
             var threadComment =
-                new Models.Forum.ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
+                new ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
 
             try
             {
-                var foreignForumThreadId = await _forum.ForumThreads.FindAsync(forumThreadId);
-                if (foreignForumThreadId == null)
+                var foreignForumId = await _forum.Forums.FindAsync(forumThreadId);
+                if (foreignForumId == null)
                 {
-                    throw new InvalidForumRequestException("Forum Thread does not exist in the database");
+                    throw new InvalidForumRequestException("Forum does not exist in the database");
                 }
-
                 _forum.ThreadComments.Add(threadComment);
-                return new CreateThreadCommentResponse(HttpStatusCode.Accepted);
                 await _forum.SaveChanges();
             }
-            catch (InvalidForumRequestException e)
+            catch (InvalidForumRequestException)
             {
                 return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
 
+            return new CreateThreadCommentResponse(HttpStatusCode.Created);
+           
+        }
+
+        public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request)
+        {
+            var threadComments = _forum.ThreadComments.Where(id => id.ForumThreadId == request.ForumThreadId);
+            try
+            {
+                if (threadComments.ToList().IsNullOrEmpty())
+                {
+                    throw new InvalidForumRequestException(
+                        "Cannot retrieve Thread Comments for a thread that does not exist");
+                }
+
+                return new RetrieveThreadCommentsResponse(await threadComments.ToListAsync());
+            }
+            catch(InvalidForumRequestException)
+            {
+                return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request)
+        {
+            try
+            {
+                var threadCommentToDelete = await _forum.ThreadComments.FindAsync(request.ThreadCommentId);
+                if (threadCommentToDelete != null)
+                {
+                    _forum.ThreadComments.Remove(threadCommentToDelete);
+                }
+                else
+                {
+                    throw new InvalidForumRequestException("Thread Comment does not exist");
+                }
+
+                await _forum.SaveChanges();
+                return new DeleteThreadCommentResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidThreadContentException)
+            {
+                return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request)
+        {
+            try
+            {
+                var forumThreads = _forum.ForumThreads.Where(id => id.ForumId == request.ForumId);
+                if (forumThreads.ToList().IsNullOrEmpty())
+                {
+                    throw new InvalidForumRequestException("There are currently no threads stored in this Forum");
+                }
+                else
+                {
+                    var threadsList = forumThreads.ToList();
+                    return new RetrieveNumThreadsResponse(threadsList.Count, HttpStatusCode.Accepted);
+                }
+
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new RetrieveNumThreadsResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditForumResponse> EditForum(EditForumRequest request)
+        {
+            try
+            {
+                var forumToEdit = await _forum.Forums.FindAsync(request.ForumId);
+                if (forumToEdit == null)
+                {
+                    throw new InvalidForumRequestException("Forum is not present in the database");
+                }
+
+                forumToEdit.ForumTitle = request.ForumTitle;
+                _forum.Forums.Update(forumToEdit).State = EntityState.Modified;
+                await _forum.SaveChanges();
+                return new EditForumResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request)
+        {
+            try
+            {
+                var forumThreadToEdit = await _forum.ForumThreads.FindAsync(request.ForumThreadId);
+                if (forumThreadToEdit == null)
+                {
+                    throw new InvalidForumRequestException("Forum Thread is not present in the database");
+                }
+
+                forumThreadToEdit.ForumThreadTitle = request.ForumThreadTitle;
+                forumThreadToEdit.imageURL = request.ImageUrl;
+
+                _forum.ForumThreads.Update(forumThreadToEdit).State = EntityState.Modified;
+                await _forum.SaveChanges();
+                return new EditForumThreadResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditForumThreadResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request)
+        {
+            try
+            {
+                var threadCommentToEdit = await _forum.ThreadComments.FindAsync(request.ThreadCommentId);
+                if (threadCommentToEdit == null)
+                {
+                    throw new InvalidForumRequestException("Threac Comment is present in the database");
+                }
+
+                threadCommentToEdit.CommentBody = request.CommentBody;
+                threadCommentToEdit.Likes = request.Likes;
+                threadCommentToEdit.Dislikes = request.Dislikes;
+                threadCommentToEdit.ImageURL = request.ImageUrl;
+
+                _forum.ThreadComments.Update(threadCommentToEdit).State = EntityState.Modified;
+                await _forum.SaveChanges();
+                return new EditThreadCommentResponse(HttpStatusCode.Accepted);
+            }
+            catch (InvalidForumRequestException)
+            {
+                return new EditThreadCommentResponse(HttpStatusCode.BadRequest);
+            }
             
         }
     }
-}
+} 

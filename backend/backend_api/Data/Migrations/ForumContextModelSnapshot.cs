@@ -110,49 +110,10 @@ namespace backend_api.Data.Migrations
 
                     b.ToTable("ThreadComments");
                 });
-
-            modelBuilder.Entity("backend_api.Models.User.Users", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EmployeeLevel")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("OfficeLocation")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<List<int>>("PinnedUserIds")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("UserDescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserImgUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserRole")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
+            
             modelBuilder.Entity("backend_api.Models.Forum.ForumThreads", b =>
                 {
-                    b.HasOne("backend_api.Models.Forum.Forums", "Forums")
+                    b.HasOne("backend_api.Models.Forum.Forums", "Forum")
                         .WithMany()
                         .HasForeignKey("ForumId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -164,7 +125,7 @@ namespace backend_api.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Forums");
+                    b.Navigation("Forum");
 
                     b.Navigation("User");
                 });
@@ -182,7 +143,7 @@ namespace backend_api.Data.Migrations
 
             modelBuilder.Entity("backend_api.Models.Forum.ThreadComments", b =>
                 {
-                    b.HasOne("backend_api.Models.Forum.ForumThreads", "ForumThreads")
+                    b.HasOne("backend_api.Models.Forum.ForumThreads", "ForumThread")
                         .WithMany()
                         .HasForeignKey("ForumThreadId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -194,7 +155,7 @@ namespace backend_api.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ForumThreads");
+                    b.Navigation("ForumThread");
 
                     b.Navigation("User");
                 });
