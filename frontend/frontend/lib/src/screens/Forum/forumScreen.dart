@@ -12,12 +12,13 @@ class Forum extends StatefulWidget {
   }
 }
 
+late Future<List<ForumObj>> futureForum;
 late Future<List<ForumThread>> futureForumThread;
 
 class _Forum extends State<Forum> {
   void initState() {
     super.initState();
-    futureForumThread = fetchForumThread();
+    futureForum = fetchForum();
   }
 
   void refresh() {
