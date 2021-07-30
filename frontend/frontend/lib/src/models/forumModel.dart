@@ -71,7 +71,7 @@ Future<List<ForumObj>> fetchForum() async {
 ///////////////////////////////////////////////////////////////
 
 class ForumThreads {
-  final List<dynamic> forumThreadList;
+  final List<dynamic>? forumThreadList;
 
   ForumThreads({
     required this.forumThreadList,
@@ -132,15 +132,19 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   HttpClientResponse response1 = await request.close();
   String reply = await response1.transform(utf8.decoder).join();
   print(jsonDecode(reply));
-  List<dynamic> tList =
-      ForumThreads.fromJson(jsonDecode(reply)).forumThreadList;
+
+  List? tList = ForumThreads.fromJson(jsonDecode(reply)).forumThreadList;
 
   List<ForumThread> threadObj = [];
 
-  for (var t in tList) {
-    threadObj.add(ForumThread.fromJson(t));
-  }
+  if (tList != null) {
+    for (var t in tList) {
+      threadObj.add(ForumThread.fromJson(t));
+    }
 
-  client.close();
-  return threadObj;
+    client.close();
+    return threadObj;
+  } else {
+    return threadObj;
+  }
 }
