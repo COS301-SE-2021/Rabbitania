@@ -14,8 +14,8 @@ class ForumHome extends StatelessWidget {
           children: <Widget>[
             //Children in the list
 
-            FutureBuilder<List<ForumThread>>(
-              future: futureForumThread,
+            FutureBuilder<List<ForumObj>>(
+              future: futureForum,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var iterate = snapshot.data!.iterator;
@@ -136,7 +136,7 @@ class forumCard extends StatelessWidget {
                       width: 0.4,
                       style: BorderStyle.solid),
                 ),
-                child: ForumLatestThread(),
+                child: ForumLatestThread(forumId),
               ),
             ],
           ),
