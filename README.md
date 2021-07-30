@@ -128,7 +128,7 @@
 
 <div align="center">
    
-<img src="https://media-exp1.licdn.com/dms/image/C4D03AQGcLJTVqfu0yQ/profile-displayphoto-shrink_200_200/0/1619101131263?e=1627516800&v=beta&t=3Zd7eXUkQwAUBKb5PSjuSzDtydWomCrX9MmOreQcfNo" width="250" height="250">
+<img src="images_banners_logos/ReadME image.jpeg" width="250" height="250">
 
 #### James Hulett | u16003251
 
