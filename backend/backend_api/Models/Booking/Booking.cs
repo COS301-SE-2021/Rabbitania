@@ -18,11 +18,12 @@ namespace backend_api.Models.Booking
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookingId { get; set; }
-        
         public DateTime BookingDate { get; set; }
         
+        [ForeignKey("BookingSchedules")]
         public string TimeSlot { get; set; }
         
+        [ForeignKey("BookingSchedules")]
         public OfficeLocation Office { get; set; }
         
         public int UserId { get; set; }

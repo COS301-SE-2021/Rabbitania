@@ -11,8 +11,8 @@ using backend_api.Data.Booking;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    [Migration("20210709083117_InitialBookingContext")]
-    partial class InitialBookingContext
+    [Migration("20210731104318_BookingModelUpdate")]
+    partial class BookingModelUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,11 +32,11 @@ namespace backend_api.Data.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<float>("Duration")
-                        .HasColumnType("real");
-
-                    b.Property<int>("OfficeLocation")
+                    b.Property<int>("Office")
                         .HasColumnType("integer");
+
+                    b.Property<string>("TimeSlot")
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
