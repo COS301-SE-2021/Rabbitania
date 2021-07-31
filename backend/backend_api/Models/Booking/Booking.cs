@@ -7,11 +7,11 @@ namespace backend_api.Models.Booking
 {
     public class Booking : IBooking
     {
-        public Booking(DateTime bookingDate, float duration, OfficeLocation officeLocation, int userId)
+        public Booking(DateTime bookingDate, string timeSlot, OfficeLocation office, int userId)
         {
             BookingDate = bookingDate;
-            Duration = duration;
-            OfficeLocation = officeLocation;
+            TimeSlot = timeSlot;
+            Office = office;
             UserId = userId;
         }
 
@@ -21,9 +21,9 @@ namespace backend_api.Models.Booking
         
         public DateTime BookingDate { get; set; }
         
-        public float Duration { get; set; }
+        public string TimeSlot { get; set; }
         
-        public OfficeLocation OfficeLocation { get; set; }
+        public OfficeLocation Office { get; set; }
         
         public int UserId { get; set; }
         public Users User { get; set; }

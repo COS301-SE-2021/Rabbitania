@@ -10,8 +10,10 @@ namespace backend_api.Models.Booking
         
          DateTime BookingDate { get; set; }
          
-         OfficeLocation OfficeLocation { get; set; }
+         OfficeLocation Office { get; set; }
          
+         public string TimeSlot { get; set; }
+
          int UserId { get; set; }
          
     }
