@@ -11,8 +11,8 @@ using backend_api.Data.Booking;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(BookingContext))]
-    [Migration("20210731104318_BookingModelUpdate")]
-    partial class BookingModelUpdate
+    [Migration("20210731105449_InitialBookings")]
+    partial class InitialBookings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,46 +47,7 @@ namespace backend_api.Data.Migrations
 
                     b.ToTable("Bookings");
                 });
-
-            modelBuilder.Entity("backend_api.Models.User.Users", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EmployeeLevel")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("OfficeLocation")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<List<int>>("PinnedUserIds")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("UserDescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserImgUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserRole")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });
-
+            
             modelBuilder.Entity("backend_api.Models.Booking.Booking", b =>
                 {
                     b.HasOne("backend_api.Models.User.Users", "User")
