@@ -46,7 +46,7 @@ namespace backend_api.Data.Migrations
                     b.ToTable("Bookings");
                 });
 
-            /*modelBuilder.Entity("backend_api.Models.User.Users", b =>
+            modelBuilder.Entity("backend_api.Models.User.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,7 @@ namespace backend_api.Data.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });*/
+                });
 
             modelBuilder.Entity("backend_api.Models.Booking.Booking", b =>
                 {
