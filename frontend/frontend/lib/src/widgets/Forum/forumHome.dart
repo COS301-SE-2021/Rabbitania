@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
 
 class ForumHome extends StatelessWidget {
@@ -95,8 +97,9 @@ class forumCard extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 0, top: 0),
       child: InkWell(
         onTap: () {
-          //noticeID = this.id;
-          //UtilModel.route(() => Notice(), context);
+          currentForumID = this.forumId;
+          currentForumName = this.forumTitle;
+          UtilModel.route(() => ForumThreadScreen(), context);
         },
         child: Card(
           color: Color.fromRGBO(57, 57, 57, 100),
