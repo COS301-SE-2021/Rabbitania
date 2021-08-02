@@ -4,13 +4,13 @@ import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
-  futureForumThread = fetchForumThreads(forumIdentifier);
+  futureForumLatestThread = fetchForumThreads(forumIdentifier);
 
   return Center(
     child: Column(
       children: [
         FutureBuilder<List<ForumThread>>(
-          future: futureForumThread,
+          future: futureForumLatestThread,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.length == 0) {
