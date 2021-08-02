@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/models/Booking/viewBookingListModel.dart';
 import 'package:frontend/src/models/Booking/view_booking_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/provider/user_provider.dart';
@@ -17,7 +18,7 @@ class ViewBookingScreen extends StatefulWidget {
 }
 
 class _ViewBookingState extends State<ViewBookingScreen> {
-  Future<ViewBookingModel>? bookingFuture;
+  Future<ViewBookingListModel>? bookingFuture;
   initState() {
     BookingProvider bookingProvider = new BookingProvider();
     setState(() {
@@ -67,6 +68,7 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                         children = <Widget>[
                           ListView.builder(
                               itemBuilder: (BuildContext context, int index) {
+                            print(snapshot.data);
                             return new ViewBookingCard(
                                 index,
                                 snapshot.data.day,

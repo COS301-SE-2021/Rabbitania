@@ -4,7 +4,7 @@ class ViewBookingModel {
   final DateTime date;
   final String day;
   final String timeSlot;
-  final String office;
+  final int office;
 
   ViewBookingModel({
     required this.date,
