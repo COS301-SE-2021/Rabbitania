@@ -13,7 +13,7 @@ class Forum extends StatefulWidget {
 }
 
 late Future<List<ForumObj>> futureForum;
-late Future<List<ForumThread>> futureForumThread;
+late Future<List<ForumThread>> futureForumLatestThread;
 
 class _Forum extends State<Forum> {
   void initState() {
