@@ -60,8 +60,8 @@ namespace backend_api.Services.Auth
                 new JProperty("admin", user.IsAdmin),
                 new JProperty("role", user.UserRole.ToString()),
                 new JProperty("empLevel", user.EmployeeLevel),
-                new JProperty("office", user.OfficeLocation.ToString()));
-
+                new JProperty("office", user.OfficeLocation.ToString()),
+                new JProperty("email", request.Email));
             return json;
         }
 

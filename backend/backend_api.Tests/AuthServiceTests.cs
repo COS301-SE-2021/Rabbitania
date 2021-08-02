@@ -44,11 +44,10 @@ namespace backend_api.Tests
                 UserRoles.Unassigned,
                 OfficeLocation.Unassigned
             );
-
-            this._mockedEmail = new UserEmails("test@castellodev.co.za", 50);
+            this._mockedEmail = new UserEmails("test@tuks.co.za", 50);
         }
         
-        [Fact]
+        [Fact(DisplayName = "Should be False if a non 'tuks.co.za' is used to login")]
         public void InvalidDomainLogin()
         {
             //Arrange
@@ -64,11 +63,11 @@ namespace backend_api.Tests
             Assert.Equal(false, response.CorrectDomain);
         }
 
-        [Fact(DisplayName = "Should be true if a 'castellodev.co.za' is used to login")]
+        [Fact(DisplayName = "Should be true if a 'tuks.co.za' is used to login")]
         public void CorrectDomainLogin()
         {
             //Arrange
-            string email = "test@castellodev.co.za";
+            string email = "test@tuks.co.za";
             GoogleSignInRequest request1 = new GoogleSignInRequest(email);
             
             //Act
@@ -79,7 +78,7 @@ namespace backend_api.Tests
             Assert.IsType<DomainResponse>(response);
             Assert.Equal(true, response.CorrectDomain);
         }
-        
+
         [Fact(DisplayName = "Should throw an exception for an invalid email in the database")]
         public async Task InvalidEmailLogin()
         {
@@ -90,7 +89,7 @@ namespace backend_api.Tests
             
             var request2 = new GoogleSignInRequest(
                 "check",
-                "check@castellodev.co.za",
+                "check@tuks.co.za",
                 "1234567899",
                 "test.png");
            

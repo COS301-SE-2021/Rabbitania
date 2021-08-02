@@ -10,8 +10,6 @@ namespace backend_api.Models.Booking
         
          DateTime BookingDate { get; set; }
          
-         float Duration { get; set; }
-        
          OfficeLocation OfficeLocation { get; set; }
          
          int UserId { get; set; }

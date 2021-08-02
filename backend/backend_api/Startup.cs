@@ -11,6 +11,7 @@ using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
+using backend_api.Services.Booking;
 using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
@@ -87,10 +88,21 @@ namespace backend_api
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
             
             //TODO: Add services and repos
-            //services.AddScoped<IBookingRepository, BookingRepository>();
-            //services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IBookingService, BookingService>();
             //----------------------------------------------------------------------------------------------------------------------
+            //BookingSchedule DB Context
             
+            services.AddDbContext<BookingScheduleContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+
+            services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
+            
+            //services.AddScoped<IForumRepository, ForumRepository>();
+            //services.AddScoped<IForumService, ForumService>();
+            //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
