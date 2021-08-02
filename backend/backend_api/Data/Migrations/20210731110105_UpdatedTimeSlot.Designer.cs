@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Data.Booking;
 
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(BookingScheduleContext))]
-    partial class BookingScheduleContextModelSnapshot : ModelSnapshot
+    [Migration("20210731110105_UpdatedTimeSlot")]
+    partial class UpdatedTimeSlot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

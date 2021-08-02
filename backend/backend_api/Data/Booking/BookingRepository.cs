@@ -66,7 +66,6 @@ namespace backend_api.Data.Booking
         {
             var bookingID = request.BookingId;
             var toUpdate = await _bookings.Bookings.FirstOrDefaultAsync(x => x.BookingId == bookingID);
-            toUpdate.Duration = request.Duration;
             toUpdate.BookingDate = request.Date;
             try
             {
@@ -86,6 +85,7 @@ namespace backend_api.Data.Booking
             var bookingDate = request.Date;
             var bookingDuration = request.Duration;
             var bookingOffice = OfficeLocation.Unassigned;
+            var timeSlot = request.TimeSlot;
             var user = _users.Users.Where(x => x.UserId == request.UserId);
             foreach(var y in user)
             {
@@ -93,7 +93,7 @@ namespace backend_api.Data.Booking
             }
             
             var bookingUserID = request.UserId;
-            var booking = new Models.Booking.Booking(bookingDate, bookingDuration, bookingOffice, bookingUserID);
+            var booking = new Models.Booking.Booking(bookingDate, timeSlot, bookingOffice, bookingUserID);
             try
             {
                 await _bookings.Bookings.AddAsync(booking);

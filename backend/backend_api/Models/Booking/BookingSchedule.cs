@@ -12,7 +12,7 @@ namespace backend_api.Models.Booking
             
         }
 
-        public BookingSchedule(DateTime timeSlot, OfficeLocation office, int availability)
+        public BookingSchedule(string timeSlot, OfficeLocation office, int availability)
         {
             TimeSlot = timeSlot;
             Office = office;
@@ -21,7 +21,7 @@ namespace backend_api.Models.Booking
         
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime TimeSlot { get; set; }
+        public string TimeSlot { get; set; }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public OfficeLocation Office { get; set; }
