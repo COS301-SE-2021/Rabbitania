@@ -9,6 +9,7 @@ import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:provider/provider.dart';
 import './widgets/expandable_button_widget.dart';
 import './screens/loginScreen.dart';
+import 'screens/Forum/forumScreen.dart';
 
 class App extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class AppState extends State<App> {
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         //home: Login(),
-        home: BookingScreen(),
+        home: Forum(),
       ),
     );
   }
