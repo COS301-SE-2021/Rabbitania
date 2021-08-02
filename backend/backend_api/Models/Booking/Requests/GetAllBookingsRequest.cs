@@ -4,39 +4,21 @@ namespace backend_api.Models.Booking.Requests
 {
     public class GetAllBookingsRequest
     {
-        private int userID;
-        private DateTime date;
-
-        public GetAllBookingsRequest(DateTime date)
+        private int _userId;
+        
+        public GetAllBookingsRequest(int userId)
         {
-            this.date = date;
-        }
-
-        public GetAllBookingsRequest(int userId, DateTime date)
-        {
-            userID = userId;
-            this.date = date;
-        }
-
-        public DateTime Date
-        {
-            get => date;
-            set => date = value;
+            _userId = userId;
         }
 
         public GetAllBookingsRequest()
         {
         }
 
-        public GetAllBookingsRequest(int userId)
-        {
-            userID = userId;
-        }
-
         public int UserId
         {
-            get => userID;
-            set => userID = value;
+            get => _userId;
+            set => _userId = value;
         }
     }
 }
