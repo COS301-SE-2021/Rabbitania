@@ -5,7 +5,7 @@ namespace backend_api.Models.Booking
 {
     public interface IBookingSchedule
     {
-        DateTime TimeSlot { get; set; }
+        string TimeSlot { get; set; }
         OfficeLocation Office { get; set; }
         int Availability { get; set; }
     }

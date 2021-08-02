@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitializeBookingScheduleAndChangesToBooking : Migration
+    public partial class UpdatedTimeSlot : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +10,7 @@ namespace backend_api.Data.Migrations
                 name: "BookingSchedules",
                 columns: table => new
                 {
-                    TimeSlot = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    TimeSlot = table.Column<string>(type: "text", nullable: false),
                     Office = table.Column<int>(type: "integer", nullable: false),
                     Availability = table.Column<int>(type: "integer", nullable: false)
                 },
