@@ -176,7 +176,7 @@ Future<String> addNewThread(String title, String content) async {
     }
 
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
+      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/EditNoticeBoardThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

@@ -85,52 +85,6 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             Container(
               child: NoticeboardEditThreadCard(),
             ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.transparent,
-                  height: 75,
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          titleInput = titleController.text;
-                          contextInput = contentController.text;
-                          futureStringReceived = addNewThread(
-                              titleController.text, contentController.text);
-                          return FutureBuilder<String>(
-                            future: futureStringReceived,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return AlertDialog(
-                                    content: Text(snapshot.data!));
-                              } else if (snapshot.hasError) {
-                                return AlertDialog(
-                                    content: Text('${snapshot.error}'));
-                              }
-                              return AlertDialog(
-                                  content: CircularProgressIndicator());
-                            },
-                          );
-                        },
-                      );
-                    },
-                    child: Text("Edit",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),

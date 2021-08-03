@@ -48,7 +48,9 @@ class _NoticeBoard extends State<NoticeBoard> {
           imageFile = null;
           UtilModel.route(() => NoticeBoardThread(), context);
         },
-        child: Icon(Icons.add), //icon inside button
+        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
+        child: Icon(Icons.add,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
       ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),

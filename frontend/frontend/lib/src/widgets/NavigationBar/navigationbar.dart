@@ -25,7 +25,7 @@ Widget bnb(BuildContext context) {
     //bottom navigation bar on scaffold
     color: Color.fromRGBO(171, 255, 79, 1),
     shape: CircularNotchedRectangle(), //shape of notch
-    notchMargin: 5, //notche margin between floating button and bottom appbar
+    notchMargin: 10, //notche margin between floating button and bottom appbar
     child: Row(
       //children inside bottom appbar
       mainAxisSize: MainAxisSize.max,
