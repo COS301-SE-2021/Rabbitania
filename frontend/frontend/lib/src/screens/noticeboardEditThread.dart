@@ -26,7 +26,33 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: fab(context),
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          showDialog(
+            context: context,
+            builder: (context) {
+              titleInput = titleController.text;
+              contextInput = contentController.text;
+              futureStringReceived =
+                  addNewThread(titleController.text, contentController.text);
+              return FutureBuilder<String>(
+                future: futureStringReceived,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(content: Text(snapshot.data!));
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
+        },
+        child: Icon(Icons.edit), //icon inside button
+      ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(

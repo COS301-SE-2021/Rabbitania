@@ -28,7 +28,18 @@ class _Notice extends State<Notice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: fab(context),
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          titleController.clear();
+          contentController.clear();
+          imageFile = null;
+          UtilModel.route(() => NoticeBoardEditThread(), context);
+          ;
+        },
+        child: Icon(Icons.edit), //icon inside button
+      ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -62,33 +73,6 @@ class _Notice extends State<Notice> {
             ),
             Container(
               child: NoticeCard(),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.transparent,
-                  height: 75,
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      //dispose();
-
-                      //imageFile = null;
-                      UtilModel.route(() => NoticeBoardEditThread(), context);
-                    },
-                    child: Text("Edit Notice",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ),
-                ),
-              ),
             ),
           ],
         ),
