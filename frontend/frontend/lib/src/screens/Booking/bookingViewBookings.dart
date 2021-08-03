@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/models/Booking/viewBookingListModel.dart';
 import 'package:frontend/src/models/Booking/view_booking_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/provider/user_provider.dart';
@@ -18,15 +17,6 @@ class ViewBookingScreen extends StatefulWidget {
 }
 
 class _ViewBookingState extends State<ViewBookingScreen> {
-  Future<List<ViewBookingModel>>? bookingFuture;
-  initState() {
-    BookingProvider bookingProvider = new BookingProvider();
-
-    setState(() {
-      bookingFuture = bookingProvider.fetchBookingsAsync();
-    });
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -50,72 +40,8 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                 _svg_background,
                 fit: BoxFit.contain,
               ),
-              Padding(
-                padding: EdgeInsets.all(15),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    //   border: Border.all(
-                    //       width: 2.0,
-                    //       color: const Color.fromRGBO(172, 255, 79, 1)),
-                    //   borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: FutureBuilder(
-                    future: bookingFuture,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<dynamic> snapshot) {
-                      List<Widget> children;
-                      if (snapshot.hasData) {
-                        children = <Widget>[
-                          ListView.builder(
-                              itemBuilder: (BuildContext context, int index) {
-                            //print(snapshot.data);
-                            return new ViewBookingCard(
-                                index,
-                                snapshot.data.bookingDate,
-                                snapshot.data.timeSlot,
-                                snapshot.data.office);
-                          }),
-                        ];
-                      } else if (snapshot.hasError) {
-                        //print(snapshot.hasData);
-                        children = <Widget>[
-                          AlertDialog(
-                            title: const Text('No Bookings Found'),
-                            content: const Text(
-                                "There doesn't seem to be any bookings"),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BookingScreen(),
-                                  ),
-                                ),
-                                child: Text('Retry'),
-                              ),
-                            ],
-                          ),
-                        ];
-                      } else {
-                        children = const <Widget>[
-                          SizedBox(
-                            child: CircularProgressIndicator(
-                                color: Color.fromRGBO(171, 255, 79, 1)),
-                            width: 60,
-                            height: 60,
-                          ),
-                        ];
-                      }
-                      return Center(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: children),
-                      );
-                    },
-                  ),
-                ),
+              Center(
+                child: BookingListVew(),
               ),
             ],
           ),

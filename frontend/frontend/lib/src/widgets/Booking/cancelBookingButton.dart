@@ -14,15 +14,15 @@ class CancelBookingButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   FaIcon(
-                    FontAwesomeIcons.times,
-                    color: Color.fromRGBO(171, 255, 79, 1),
-                    size: 35,
+                    Icons.delete,
+                    color: Colors.red,
+                    size: 30,
                   ),
                   Text(
-                    'Cancel',
+                    'Delete',
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Color.fromRGBO(172, 255, 79, 1),
+                      fontSize: 12,
+                      color: Colors.red,
                     ),
                   ),
                 ],
