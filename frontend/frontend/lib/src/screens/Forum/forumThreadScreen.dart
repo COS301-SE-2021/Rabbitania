@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/userProfileScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumHome.dart';
+import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Forum extends StatefulWidget {
+class ForumThreadScreen extends StatefulWidget {
   createState() {
-    return _Forum();
+    return _ForumThreadScreen();
   }
 }
 
-late Future<List<ForumObj>> futureForum;
-late Future<List<ForumThread>> futureForumLatestThread;
+late Future<List<ForumThread>> futureForumThreads;
 
-class _Forum extends State<Forum> {
+class _ForumThreadScreen extends State<ForumThreadScreen> {
   void initState() {
     super.initState();
-    futureForum = fetchForum();
+    futureForumThreads = fetchForumThreads(currentForumID);
   }
 
   void refresh() {
-    UtilModel.route(() => Forum(), context);
+    UtilModel.route(() => ForumThreadScreen(), context);
     setState(() {});
     print("refresh");
   }
@@ -37,10 +35,10 @@ class _Forum extends State<Forum> {
         centerTitle: true,
         title: Center(
           child: Text(
-            'Forum   ',
+            currentForumName.toString(),
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
-              fontSize: 35,
+              fontSize: 25,
             ),
           ),
         ),
@@ -66,7 +64,9 @@ class _Forum extends State<Forum> {
               _svg_background,
               fit: BoxFit.contain,
             ),
-            Container(padding: EdgeInsets.only(bottom: 75), child: ForumHome()),
+            Container(
+                padding: EdgeInsets.only(bottom: 75),
+                child: ForumThreadsCards()),
           ],
         ),
       ),
