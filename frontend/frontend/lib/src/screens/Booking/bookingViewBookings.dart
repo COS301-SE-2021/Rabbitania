@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/models/Booking/view_booking_model.dart';
+import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
@@ -36,23 +40,8 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                 _svg_background,
                 fit: BoxFit.contain,
               ),
-              Padding(
-                padding: EdgeInsets.all(15),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    //   border: Border.all(
-                    //       width: 2.0,
-                    //       color: const Color.fromRGBO(172, 255, 79, 1)),
-                    //   borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: ListView(
-                    children: <Widget>[
-                      ViewBookingCard(
-                          1, 'Monday', '24 Jul', 'Full Day', 'Amsterdam'),
-                    ],
-                  ),
-                ),
+              Center(
+                child: BookingListVew(),
               ),
             ],
           ),

@@ -102,45 +102,27 @@ class _BookingDayState extends State<BookingDayScreen> {
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: const EdgeInsets.only(top: 25),
-                    child: BookingDayText('Morning'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 2,
-                    color: Color.fromRGBO(70, 70, 70, 1),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 25),
-                    child: BookingDayText('Afternoon'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                  ),
-                  Divider(
-                    height: 2,
-                    thickness: 2,
-                    color: Color.fromRGBO(70, 70, 70, 1),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 25),
-                    child: BookingDayText('Full Day'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Divider(
-                      height: 2,
-                      thickness: 2,
-                      color: Color.fromRGBO(70, 70, 70, 1),
+                    margin: const EdgeInsets.only(top: 50),
+                    child: BookingDayText(
+                      'Morning',
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: BookingDayScreenButton(),
+                    padding: const EdgeInsets.only(top: 50),
                   ),
+
+                  Container(
+                    margin: const EdgeInsets.only(top: 50),
+                    child: BookingDayText('Afternoon'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50),
+                  ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 40),
+                  //   child: BookingDayScreenButton(),
+                  // ),
                 ],
               ),
             ],

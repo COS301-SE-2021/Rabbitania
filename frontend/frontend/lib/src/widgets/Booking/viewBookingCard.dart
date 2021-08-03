@@ -1,119 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/models/Booking/view_booking_model.dart';
+import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/widgets/Booking/cancelBookingButton.dart';
 
-class ViewBookingCard extends StatefulWidget {
-  final dayText;
-  final dateText;
-  final timeText;
-  final locationText;
-  final _key;
+class BookingListVew extends StatelessWidget {
+  final _bookingProvider = new BookingProvider();
 
-  ViewBookingCard(
-      this._key, this.dayText, this.dateText, this.timeText, this.locationText);
   @override
-  State<StatefulWidget> createState() => _viewBookingCard();
-}
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<ViewBookingModel>>(
+      future: _bookingProvider.fetchBookingsAsync(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<ViewBookingModel>? data = snapshot.data;
+          return _bookingCardListView(data);
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+        return CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(
+            Color.fromRGBO(171, 255, 79, 1),
+          ),
+        );
+      },
+    );
+  }
 
-class _viewBookingCard extends State<ViewBookingCard> {
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.all(10),
-        child: Container(
-          key: widget.key,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Color.fromRGBO(172, 255, 79, 1),
-              width: 4,
-            ),
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(25),
+  /*
+  final int id;
+  final String bookingDate;
+  final String timeSlot;
+  final int office;
+  final int userId;
+  */
+  ListView _bookingCardListView(data) {
+    return ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return _bookingCardTile(data[index].timeSlot, data[index].bookingDate,
+              data[index].office, Icons.bookmark_added_outlined);
+        });
+  }
+
+  ListTile _bookingCardTile(
+          String title, String subtitle, int subsubtitle, IconData icon) =>
+      ListTile(
+        isThreeLine: true,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Color.fromRGBO(171, 255, 79, 1),
+            fontSize: 25,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          widget.dayText + ',',
-                          style: TextStyle(
-                            color: Color.fromRGBO(172, 255, 79, 1),
-                            fontSize: 30,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 5, right: 10),
-                        ),
-                        Text(
-                          widget.dateText,
-                          style: TextStyle(
-                            color: Color.fromRGBO(172, 255, 79, 1),
-                            fontSize: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Time Slot: ',
-                              style: TextStyle(
-                                color: Color.fromRGBO(172, 255, 79, 1),
-                                fontSize: 25,
-                              ),
-                            ),
-                            Text(
-                              widget.timeText,
-                              style: TextStyle(
-                                color: Color.fromRGBO(172, 255, 79, 1),
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 5, right: 5, top: 5),
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              'Office:  ',
-                              style: TextStyle(
-                                color: Color.fromRGBO(172, 255, 79, 1),
-                                fontSize: 25,
-                              ),
-                            ),
-                            Text(
-                              widget.locationText,
-                              style: TextStyle(
-                                color: Color.fromRGBO(172, 255, 79, 1),
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                ),
-                CancelBookingButton(),
-              ],
-            ),
+        ),
+        subtitle: Text(
+          'Time Slot: ' + subtitle.toString(),
+          style: TextStyle(
+            color: Color.fromRGBO(171, 255, 79, 1),
+            fontSize: 20,
           ),
+        ),
+        trailing: CancelBookingButton(),
+        leading: Icon(
+          icon,
+          size: 35,
+          color: Color.fromRGBO(171, 255, 79, 1),
         ),
       );
 }
