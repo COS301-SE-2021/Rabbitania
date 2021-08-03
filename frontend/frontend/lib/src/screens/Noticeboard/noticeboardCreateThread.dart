@@ -1,37 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
-import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
-import '../widgets/card_item.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
+import '../../widgets/Noticeboard/card_item.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'noticeboardCreateThread.dart';
+import 'noticeboardScreen.dart';
 
-class NoticeBoard extends StatefulWidget {
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+class NoticeBoardThread extends StatefulWidget {
   createState() {
-    return _NoticeBoard();
+    return _NoticeThreadBoard();
   }
 }
 
-late Future<List<Thread>> futureThread;
-late Future<bool> deleteResponse;
+final titleController = TextEditingController();
+final contentController = TextEditingController();
 
-class _NoticeBoard extends State<NoticeBoard> {
+class _NoticeThreadBoard extends State<NoticeBoardThread> {
   final util = new UtilModel();
-
-  void initState() {
-    super.initState();
-    futureThread = fetchNotice();
-    deleteResponse = deleteThread(-1);
-  }
-
-  void refresh() {
-    setState(() {});
-  }
-
   void next() {
     UtilModel.route(() => ProfileScreen(), context);
   }
@@ -43,25 +34,45 @@ class _NoticeBoard extends State<NoticeBoard> {
         //Floating action button on Scaffold
         onPressed: () {
           //code to execute on button press
-          titleController.clear();
-          contentController.clear();
-          imageFile = null;
-          UtilModel.route(() => NoticeBoardThread(), context);
+          showDialog(
+            context: context,
+            builder: (context) {
+              titleInput = titleController.text;
+              contextInput = contentController.text;
+              futureStringReceived =
+                  addNewThread(titleController.text, contentController.text);
+              return FutureBuilder<String>(
+                future: futureStringReceived,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(content: Text(snapshot.data!));
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
         },
         child: Icon(Icons.add), //icon inside button
       ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            UtilModel.route(() => NoticeBoard(), context);
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Noticeboard      ',
+            'Create Notice         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
-              fontSize: 35,
+              fontSize: 25,
             ),
           ),
         ),
@@ -76,8 +87,7 @@ class _NoticeBoard extends State<NoticeBoard> {
               fit: BoxFit.contain,
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 0),
-              child: NoticeboardCard(),
+              child: NoticeboardThreadCard(),
             ),
           ],
         ),

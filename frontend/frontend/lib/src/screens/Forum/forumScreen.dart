@@ -8,7 +8,7 @@ import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../noticeboardScreen.dart';
+import '../Noticeboard/noticeboardScreen.dart';
 
 class Forum extends StatefulWidget {
   createState() {

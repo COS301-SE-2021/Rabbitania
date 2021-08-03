@@ -5,10 +5,10 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/notice.dart';
+import 'package:frontend/src/screens/Noticeboard/notice.dart';
 //import 'package:frontend/src/screens/notice.dart';
-import '../models/noticeboardModel.dart';
-import '../screens/noticeboardScreen.dart';
+import '../../models/noticeboardModel.dart';
+import '../../screens/Noticeboard/noticeboardScreen.dart';
 
 int like = 0;
 int dislike = 0;

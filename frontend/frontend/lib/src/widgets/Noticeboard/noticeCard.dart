@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/notice.dart';
-import '../models/noticeboardModel.dart';
-import '../screens/noticeboardScreen.dart';
+import 'package:frontend/src/screens/Noticeboard/notice.dart';
+import '../../models/noticeboardModel.dart';
+import '../../screens/Noticeboard/noticeboardScreen.dart';
 import 'card_item.dart';
 
 class NoticeCard extends StatelessWidget {

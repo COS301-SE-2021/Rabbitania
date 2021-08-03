@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
-import 'package:frontend/src/screens/noticeboardScreen.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 
 fab(BuildContext context) {

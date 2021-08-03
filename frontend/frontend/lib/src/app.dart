@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/googleAuthTest.dart';
-import 'package:frontend/src/screens/noticeboardScreen.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/supplyInfoScreen.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:provider/provider.dart';

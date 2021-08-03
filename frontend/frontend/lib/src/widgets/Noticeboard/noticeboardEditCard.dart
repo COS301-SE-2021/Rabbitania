@@ -1,118 +1,164 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
+import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Noticeboard/notice.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardEditThread.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../screens/noticeboardCreateThread.dart';
 import 'dart:io' as Io;
 
 var titleInput = "";
 var contextInput = "";
 File? imageFile;
 //Uint8List? base64String;
-String img64 = "";
+String? img64;
 Future<String>? futureStringReceived;
 
-class NoticeboardThreadCard extends StatelessWidget {
+class NoticeboardEditThreadCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(16),
-          child: Card(
-            color: Colors.transparent,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-            clipBehavior: Clip.antiAlias,
-            elevation: 0,
-            child: Column(
-              children: [
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  controller: titleController,
-                  cursorColor: Color.fromRGBO(171, 255, 79, 1),
-                  decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    labelText: 'Title',
-                    labelStyle:
-                        TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
-                  ),
-                ),
-                TextFormField(
-                  minLines: 1,
-                  maxLines: 20,
-                  style: TextStyle(color: Colors.white),
-                  controller: contentController,
-                  cursorColor: Color.fromRGBO(171, 255, 79, 1),
-                  decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    labelText: 'Content',
-                    labelStyle:
-                        TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Container(
-                      alignment: Alignment.bottomCenter,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          IconButton(
-                              icon: const Icon(
-                                  Icons.add_photo_alternate_outlined),
-                              iconSize: 50,
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              tooltip: "Add Image",
-                              onPressed: () async {
-                                await _getFromGallery();
-                                UtilModel.route(
-                                    () => NoticeBoardThread(), context);
-                              }),
-                          Text(
-                            "Add Image",
-                            style: TextStyle(
-                                color: Color.fromRGBO(171, 255, 79, 1)),
-                          ),
-                          //Text("PICK FROM GALLERY"),
-                        ],
-                      ),
-                    )),
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: isImageWidget(),
-                ),
-              ],
-            ),
-          ),
+        FutureBuilder<List<Thread>>(
+          future: futureThread,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var iterate = snapshot.data!.iterator;
+              List<Widget> cards = [];
+              while (iterate.moveNext()) {
+                if (iterate.current.threadId == noticeID) {
+                  return EditCard(
+                      id: iterate.current.threadId,
+                      theThreadTitle: iterate.current.threadTitle,
+                      theThreadContent: iterate.current.threadContent,
+                      imageFile: iterate.current.imageUrl);
+                }
+              }
+              return new Column(children: cards);
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+            return CircularProgressIndicator(
+              color: Color.fromRGBO(171, 255, 79, 1),
+            );
+          },
         ),
       ]),
     );
   }
 }
 
-Widget isImageWidget() {
-  try {
-    // return Image.memory(
-    //   base64String!,
-    //   fit: BoxFit.fill,
-    // );
-    return Image.file(
-      imageFile!,
-      height: 250,
-      width: 350,
-      fit: BoxFit.cover,
+class EditCard extends StatelessWidget {
+  final int id;
+  final String theThreadTitle;
+  final String theThreadContent;
+  final String imageFile;
+
+  const EditCard(
+      {required this.id,
+      required this.theThreadTitle,
+      required this.theThreadContent,
+      required this.imageFile});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Card(
+        color: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        clipBehavior: Clip.antiAlias,
+        elevation: 0,
+        child: Column(
+          children: [
+            TextFormField(
+              style: TextStyle(color: Colors.white),
+              controller: titleController,
+              cursorColor: Color.fromRGBO(171, 255, 79, 1),
+              decoration: InputDecoration(
+                prefixText: theThreadTitle,
+                prefixStyle: TextStyle(color: Colors.white),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
+                ),
+                labelText: 'Title',
+                labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+              ),
+            ),
+            TextFormField(
+              minLines: 1,
+              maxLines: 20,
+              style: TextStyle(color: Colors.white),
+              controller: contentController,
+              cursorColor: Color.fromRGBO(171, 255, 79, 1),
+              decoration: InputDecoration(
+                prefixText: theThreadContent,
+                prefixStyle: TextStyle(color: Colors.white),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
+                ),
+                labelText: 'Content',
+                labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+              ),
+            ),
+            Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                          icon: const Icon(Icons.add_photo_alternate_outlined),
+                          iconSize: 50,
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          tooltip: "Add Image",
+                          onPressed: () async {
+                            await _getFromGallery();
+                            UtilModel.route(
+                                () => NoticeBoardEditThread(), context);
+                          }),
+                      Text(
+                        "Add Image",
+                        style:
+                            TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+                      ),
+                      //Text("PICK FROM GALLERY"),
+                    ],
+                  ),
+                )),
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              child: isImageWidget(imageFile),
+            ),
+          ],
+        ),
+      ),
     );
+  }
+}
+
+Widget isImageWidget(String IF) {
+  try {
+    if (IF.isNotEmpty && imageFile == null) {
+      return Image.memory(
+        Base64Decoder().convert(IF),
+        fit: BoxFit.fill,
+      );
+    } else {
+      return Image.file(
+        imageFile!,
+        height: 250,
+        width: 350,
+        fit: BoxFit.cover,
+      );
+    }
   } catch (Exception) {
     return SizedBox.shrink();
   }
@@ -124,8 +170,8 @@ Future<String> addNewThread(String title, String content) async {
       throw ("Cannot Submit Empty Fields");
     }
 
-    if (img64 != "") {
-      inputImage = img64;
+    if (img64!.isNotEmpty) {
+      inputImage = img64!;
       print(img64);
     }
 
@@ -150,7 +196,7 @@ Future<String> addNewThread(String title, String content) async {
           response.statusCode.toString());
     }
   } catch (Exception) {
-    return ("Error: " + Exception.toString());
+    return Exception.toString();
   }
 }
 
