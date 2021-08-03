@@ -5,7 +5,7 @@ import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
-import '../../widgets/Noticeboard/card_item.dart';
+import '../../widgets/Noticeboard/noticeboardHome.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'noticeboardCreateThread.dart';

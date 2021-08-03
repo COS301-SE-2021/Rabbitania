@@ -16,7 +16,7 @@ class Notice extends StatefulWidget {
   }
 }
 
-var noticeID = -1;
+var noticeID = -1; //get changed eveytime a new notice is tapped
 
 class _Notice extends State<Notice> {
   final util = new UtilModel();

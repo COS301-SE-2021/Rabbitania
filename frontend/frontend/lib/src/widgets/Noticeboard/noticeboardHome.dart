@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Noticeboard/notice.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 //import 'package:frontend/src/screens/notice.dart';
 import '../../models/noticeboardModel.dart';
 import '../../screens/Noticeboard/noticeboardScreen.dart';
@@ -25,62 +26,65 @@ class NoticeboardCard extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var iterate = snapshot.data!.iterator;
-              List<Widget> cards = [];
-              while (iterate.moveNext()) {
-                cards.add(CardObj(
-                    id: iterate.current.threadId,
-                    theThreadTitle: iterate.current.threadTitle,
-                    theThreadContent: iterate.current.threadContent,
-                    theImageURL: iterate.current.imageUrl));
-              }
-              return new Column(children: cards);
-            } else if (!snapshot.hasData) {
-              return Card(
-                color: Color.fromRGBO(57, 57, 57, 25),
-                shadowColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0)),
-                clipBehavior: Clip.antiAlias,
-                elevation: 2,
-                child: Column(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.only(
-                          bottom: 10.0, top: 10, left: 20, right: 10),
+              if (snapshot.data!.length == 0) {
+                return Card(
+                  color: Color.fromRGBO(57, 57, 57, 25),
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)),
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 2,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.only(
+                            bottom: 10.0, top: 10, left: 20, right: 10),
 
-                      // leading: Icon(
-                      //   Icons.announcement_outlined, size: 45,
-                      //   color: Color.fromRGBO(171, 255, 79, 1),),
-                      title: Container(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "No Notifications Yet",
-                          style: TextStyle(
-                              letterSpacing: 2.0,
-                              color: Colors.white,
-                              fontSize: 22),
+                        // leading: Icon(
+                        //   Icons.announcement_outlined, size: 45,
+                        //   color: Color.fromRGBO(171, 255, 79, 1),),
+                        title: Container(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            "No Notifications Yet",
+                            style: TextStyle(
+                                letterSpacing: 2.0,
+                                color: Colors.white,
+                                fontSize: 22),
+                          ),
+                        ),
+                        subtitle: Text(
+                          "New Notifications will be posted here",
+                          style: TextStyle(color: Colors.white),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      subtitle: Text(
-                        "New Notifications will be posted here",
-                        style: TextStyle(color: Colors.white),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      Container(
+                        padding: EdgeInsets.only(top: 5),
+                        child: Image.asset("images/RR2.png"),
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 5),
-                      child: Image.asset("images/RR2.png"),
-                    ),
-                  ],
-                ),
-              );
+                    ],
+                  ),
+                );
+              } else {
+                List<Widget> cards = [];
+                while (iterate.moveNext()) {
+                  cards.add(CardObj(
+                      id: iterate.current.threadId,
+                      theThreadTitle: iterate.current.threadTitle,
+                      theThreadContent: iterate.current.threadContent,
+                      theImageURL: iterate.current.imageUrl));
+                }
+                return new Column(children: cards);
+              }
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
+            } else {
+              return CircularProgressIndicator(
+                color: Color.fromRGBO(171, 255, 79, 1),
+              );
             }
-            return CircularProgressIndicator(
-              color: Color.fromRGBO(171, 255, 79, 1),
-            );
           },
         ),
       ]),
@@ -140,11 +144,14 @@ class CardObj extends StatelessWidget {
                 ),
               ),
               Container(
+                constraints: const BoxConstraints(
+                    minWidth: 500,
+                    maxWidth: double.infinity,
+                    minHeight: 0.0,
+                    maxHeight: 300),
                 padding: EdgeInsets.only(top: 5),
-                child: Image.memory(
-                  Base64Decoder().convert(theImageURL),
-                  fit: BoxFit.fill,
-                ),
+                child: Image.memory(Base64Decoder().convert(theImageURL),
+                    fit: BoxFit.cover, width: 10000),
               ),
             ],
           ),

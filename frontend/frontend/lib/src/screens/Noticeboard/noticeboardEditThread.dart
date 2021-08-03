@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Noticeboard/notice.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,8 +14,8 @@ class NoticeBoardEditThread extends StatefulWidget {
   }
 }
 
-final titleController = TextEditingController();
-final contentController = TextEditingController();
+TextEditingController titleController = new TextEditingController();
+TextEditingController contentController = new TextEditingController();
 
 class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   final util = new UtilModel();
@@ -33,10 +33,10 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
           showDialog(
             context: context,
             builder: (context) {
-              titleInput = titleController.text;
-              contextInput = contentController.text;
-              futureStringReceived =
-                  addNewThread(titleController.text, contentController.text);
+              if (titleController.text != "" && contentController.text != "") {
+                futureStringReceived =
+                    addNewThread(titleController.text, contentController.text);
+              }
               return FutureBuilder<String>(
                 future: futureStringReceived,
                 builder: (context, snapshot) {
