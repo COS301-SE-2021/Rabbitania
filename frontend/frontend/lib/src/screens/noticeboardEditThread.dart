@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/notice.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/noticeboardEditCard.dart';
@@ -25,6 +26,9 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: fab(context),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -44,7 +48,6 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
