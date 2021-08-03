@@ -4,7 +4,7 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/noticeboardEditThread.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
-import 'package:frontend/src/widgets/navigationbar.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/noticeCard.dart';
 import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,6 +28,9 @@ class _Notice extends State<Notice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: fab(context),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -47,7 +50,7 @@ class _Notice extends State<Notice> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
+
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       //bottomNavigationBar: navigationBar(),
       body: Center(
