@@ -3,16 +3,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/widgets/Booking/cancelBookingButton.dart';
 
 class ViewBookingCard extends StatefulWidget {
-  final dayText;
-  final dateText;
-  final timeText;
-  final locationText;
+  final bookingDate;
+  final timeSlot;
+  final officeAPI;
   final _key;
 
-  ViewBookingCard(
-      this._key, this.dayText, this.dateText, this.timeText, this.locationText);
+  ViewBookingCard(this._key, this.bookingDate, this.timeSlot, this.officeAPI);
   @override
   State<StatefulWidget> createState() => _viewBookingCard();
+
+  checkOfficeLocation(int officeAPI) {
+    if (officeAPI == 0) {}
+    if (officeAPI == 1) {}
+  }
 }
 
 class _viewBookingCard extends State<ViewBookingCard> {
@@ -40,7 +43,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                     Row(
                       children: <Widget>[
                         Text(
-                          widget.dayText + ',',
+                          'Fake Date',
                           style: TextStyle(
                             color: Color.fromRGBO(172, 255, 79, 1),
                             fontSize: 30,
@@ -50,7 +53,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                           padding: EdgeInsets.only(left: 5, right: 10),
                         ),
                         Text(
-                          widget.dateText,
+                          "Hello",
                           style: TextStyle(
                             color: Color.fromRGBO(172, 255, 79, 1),
                             fontSize: 30,
@@ -74,7 +77,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                               ),
                             ),
                             Text(
-                              widget.timeText,
+                              "Hello",
                               style: TextStyle(
                                 color: Color.fromRGBO(172, 255, 79, 1),
                                 fontSize: 25,
@@ -95,7 +98,7 @@ class _viewBookingCard extends State<ViewBookingCard> {
                               ),
                             ),
                             Text(
-                              widget.locationText,
+                              widget.officeAPI.toString(),
                               style: TextStyle(
                                 color: Color.fromRGBO(172, 255, 79, 1),
                                 fontSize: 25,

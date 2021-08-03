@@ -18,11 +18,12 @@ class ViewBookingScreen extends StatefulWidget {
 }
 
 class _ViewBookingState extends State<ViewBookingScreen> {
-  Future<ViewBookingListModel>? bookingFuture;
+  Future<List<ViewBookingModel>>? bookingFuture;
   initState() {
     BookingProvider bookingProvider = new BookingProvider();
+
     setState(() {
-      bookingFuture = bookingProvider.fetchBooking();
+      bookingFuture = bookingProvider.fetchBookingsAsync();
     });
   }
 
@@ -68,16 +69,16 @@ class _ViewBookingState extends State<ViewBookingScreen> {
                         children = <Widget>[
                           ListView.builder(
                               itemBuilder: (BuildContext context, int index) {
-                            print(snapshot.data);
+                            //print(snapshot.data);
                             return new ViewBookingCard(
                                 index,
-                                snapshot.data.day,
-                                snapshot.data.date,
+                                snapshot.data.bookingDate,
                                 snapshot.data.timeSlot,
                                 snapshot.data.office);
                           }),
                         ];
                       } else if (snapshot.hasError) {
+                        //print(snapshot.hasData);
                         children = <Widget>[
                           AlertDialog(
                             title: const Text('No Bookings Found'),
