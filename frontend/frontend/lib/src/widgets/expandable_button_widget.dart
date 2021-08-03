@@ -4,7 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/screens/googleAuthTest.dart';
-import 'package:frontend/src/screens/noticeboardScreen.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 
 @immutable

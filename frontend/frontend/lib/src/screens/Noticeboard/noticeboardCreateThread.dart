@@ -1,26 +1,28 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/noticeboardEditThread.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
-import 'package:frontend/src/widgets/navigationbar.dart';
-import 'package:frontend/src/widgets/noticeCard.dart';
-import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
+import '../../widgets/Noticeboard/noticeboardHome.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'noticeboardScreen.dart';
 
-class Notice extends StatefulWidget {
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
+class NoticeBoardThread extends StatefulWidget {
   createState() {
-    return _Notice();
+    return _NoticeThreadBoard();
   }
 }
 
-var noticeID = -1;
+final titleController = TextEditingController();
+final contentController = TextEditingController();
 
-class _Notice extends State<Notice> {
+class _NoticeThreadBoard extends State<NoticeBoardThread> {
   final util = new UtilModel();
-
   void next() {
     UtilModel.route(() => ProfileScreen(), context);
   }
@@ -28,6 +30,35 @@ class _Notice extends State<Notice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          showDialog(
+            context: context,
+            builder: (context) {
+              titleInput = titleController.text;
+              contextInput = contentController.text;
+              futureStringReceived =
+                  addNewThread(titleController.text, contentController.text);
+              return FutureBuilder<String>(
+                future: futureStringReceived,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(content: Text(snapshot.data!));
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
+        },
+        child: Icon(Icons.add), //icon inside button
+      ),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -38,7 +69,7 @@ class _Notice extends State<Notice> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Notice         ',
+            'Create Notice         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
@@ -47,9 +78,7 @@ class _Notice extends State<Notice> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      //bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[
@@ -58,34 +87,7 @@ class _Notice extends State<Notice> {
               fit: BoxFit.contain,
             ),
             Container(
-              child: NoticeCard(),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.transparent,
-                  height: 75,
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      //dispose();
-
-                      //imageFile = null;
-                      UtilModel.route(() => NoticeBoardEditThread(), context);
-                    },
-                    child: Text("Edit Notice",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ),
-                ),
-              ),
+              child: NoticeboardThreadCard(),
             ),
           ],
         ),

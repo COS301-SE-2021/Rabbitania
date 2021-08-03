@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/notice.dart';
-import '../models/noticeboardModel.dart';
-import '../screens/noticeboardScreen.dart';
-import 'card_item.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
+import '../../models/noticeboardModel.dart';
+import '../../screens/Noticeboard/noticeboardScreen.dart';
 
 class NoticeCard extends StatelessWidget {
   @override
@@ -115,6 +114,7 @@ class singleCardObj extends StatelessWidget {
                             ),
                             tooltip: 'Delete',
                             onPressed: () async {
+                              // ignore: unused_local_variable
                               final deleteResponse =
                                   await deleteThread(this.id);
                               UtilModel.route(() => NoticeBoard(), context);

@@ -8,7 +8,7 @@ import 'package:frontend/src/widgets/profile_picture_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'loginScreen.dart';
-import 'noticeboardScreen.dart';
+import 'Noticeboard/noticeboardScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 

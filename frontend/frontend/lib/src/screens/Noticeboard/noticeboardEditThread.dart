@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/notice.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/widgets/noticeboardEditCard.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
 
 import 'noticeboardScreen.dart';
 
@@ -13,8 +14,8 @@ class NoticeBoardEditThread extends StatefulWidget {
   }
 }
 
-final titleController = TextEditingController();
-final contentController = TextEditingController();
+TextEditingController titleController = new TextEditingController();
+TextEditingController contentController = new TextEditingController();
 
 class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   final util = new UtilModel();
@@ -25,6 +26,35 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          showDialog(
+            context: context,
+            builder: (context) {
+              if (titleController.text != "" && contentController.text != "") {
+                futureStringReceived =
+                    addNewThread(titleController.text, contentController.text);
+              }
+              return FutureBuilder<String>(
+                future: futureStringReceived,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(content: Text(snapshot.data!));
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
+        },
+        child: Icon(Icons.edit), //icon inside button
+      ),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -44,7 +74,6 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
@@ -55,52 +84,6 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             ),
             Container(
               child: NoticeboardEditThreadCard(),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.transparent,
-                  height: 75,
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          titleInput = titleController.text;
-                          contextInput = contentController.text;
-                          futureStringReceived = addNewThread(
-                              titleController.text, contentController.text);
-                          return FutureBuilder<String>(
-                            future: futureStringReceived,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return AlertDialog(
-                                    content: Text(snapshot.data!));
-                              } else if (snapshot.hasError) {
-                                return AlertDialog(
-                                    content: Text('${snapshot.error}'));
-                              }
-                              return AlertDialog(
-                                  content: CircularProgressIndicator());
-                            },
-                          );
-                        },
-                      );
-                    },
-                    child: Text("Edit",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ),
-                ),
-              ),
             ),
           ],
         ),

@@ -1,27 +1,26 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardEditThread.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
-import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
-import '../widgets/card_item.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeCard.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'noticeboardScreen.dart';
 
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-
-class NoticeBoardThread extends StatefulWidget {
+class Notice extends StatefulWidget {
   createState() {
-    return _NoticeThreadBoard();
+    return _Notice();
   }
 }
 
-final titleController = TextEditingController();
-final contentController = TextEditingController();
+var noticeID = -1; //get changed eveytime a new notice is tapped
 
-class _NoticeThreadBoard extends State<NoticeBoardThread> {
+class _Notice extends State<Notice> {
   final util = new UtilModel();
+
   void next() {
     UtilModel.route(() => ProfileScreen(), context);
   }
@@ -29,6 +28,20 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          titleController.clear();
+          contentController.clear();
+          imageFile = null;
+          UtilModel.route(() => NoticeBoardEditThread(), context);
+          ;
+        },
+        child: Icon(Icons.edit), //icon inside button
+      ),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
@@ -39,7 +52,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Create Notice         ',
+            'Notice         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
@@ -48,8 +61,9 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
+
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+      //bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[
@@ -58,53 +72,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
               fit: BoxFit.contain,
             ),
             Container(
-              child: NoticeboardThreadCard(),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.transparent,
-                  height: 75,
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          titleInput = titleController.text;
-                          contextInput = contentController.text;
-                          futureStringReceived = addNewThread(
-                              titleController.text, contentController.text);
-                          return FutureBuilder<String>(
-                            future: futureStringReceived,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return AlertDialog(
-                                    content: Text(snapshot.data!));
-                              } else if (snapshot.hasError) {
-                                return AlertDialog(
-                                    content: Text('${snapshot.error}'));
-                              }
-                              return AlertDialog(
-                                  content: CircularProgressIndicator());
-                            },
-                          );
-                        },
-                      );
-                    },
-                    child: Text("Create",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ),
-                ),
-              ),
+              child: NoticeCard(),
             ),
           ],
         ),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
-import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
-import '../widgets/card_item.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
+import '../../widgets/Noticeboard/noticeboardHome.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'noticeboardCreateThread.dart';
@@ -38,6 +39,21 @@ class _NoticeBoard extends State<NoticeBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          titleController.clear();
+          contentController.clear();
+          imageFile = null;
+          UtilModel.route(() => NoticeBoardThread(), context);
+        },
+        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
+        child: Icon(Icons.add,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+      ),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: const BackButton(),
         elevation: 0,
@@ -53,7 +69,6 @@ class _NoticeBoard extends State<NoticeBoard> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
@@ -63,36 +78,8 @@ class _NoticeBoard extends State<NoticeBoard> {
               fit: BoxFit.contain,
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 75),
+              padding: EdgeInsets.only(bottom: 0),
               child: NoticeboardCard(),
-            ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  color: Colors.transparent,
-                  height: 75,
-                  width: double.infinity,
-                  //decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 80, top: 5, bottom: 16),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    onPressed: () {
-                      //dispose();
-                      titleController.clear();
-                      contentController.clear();
-                      imageFile = null;
-                      UtilModel.route(() => NoticeBoardThread(), context);
-                    },
-                    child: Text("Create Notice",
-                        style: TextStyle(color: Colors.black, fontSize: 20)),
-                  ),
-                ),
-              ),
             ),
           ],
         ),
