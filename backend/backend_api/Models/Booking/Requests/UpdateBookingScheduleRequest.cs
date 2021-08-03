@@ -15,6 +15,12 @@ namespace backend_api.Models.Booking.Requests
             _availability = availability;
         }
 
+        public UpdateBookingScheduleRequest(string timeSlot, OfficeLocation office)
+        {
+            _timeSlot = timeSlot;
+            _office = office;
+        }
+
         public string TimeSlot
         {
             get => _timeSlot;
