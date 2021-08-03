@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:frontend/src/widgets/noticeboardCreateCard.dart';
 import '../widgets/card_item.dart';
@@ -38,6 +39,9 @@ class _NoticeBoard extends State<NoticeBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: fab(context),
+      floatingActionButtonLocation: fabl(context),
+      bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: const BackButton(),
         elevation: 0,
@@ -53,7 +57,6 @@ class _NoticeBoard extends State<NoticeBoard> {
         ),
         actions: [],
       ),
-      floatingActionButton: ExampleExpandableFab(),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
