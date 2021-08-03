@@ -2,6 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
+//GLOBAL VARIABLES
+var currentForumID = -1;
+var currentForumName = "ForumName";
+//
+
 ////////////////////////////////////////////////////////////////
 /// Forum Getting Forums
 ///////////////////////////////////////////////////////////////
