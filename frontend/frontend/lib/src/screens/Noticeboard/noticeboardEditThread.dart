@@ -27,6 +27,7 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
         //Floating action button on Scaffold
         onPressed: () {
           //code to execute on button press
@@ -51,7 +52,10 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             },
           );
         },
-        child: Icon(Icons.edit), //icon inside button
+        child: Icon(
+          Icons.edit,
+          color: Color.fromRGBO(33, 33, 33, 1)
+        ), //icon inside button
       ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),

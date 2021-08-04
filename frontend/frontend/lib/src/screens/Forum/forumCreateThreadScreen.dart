@@ -26,6 +26,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
         onPressed: () {
           showDialog(
             context: context,
@@ -46,7 +47,10 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
             },
           );
         },
-        child: Icon(Icons.add), //icon inside button
+        child: Icon(
+          Icons.add,
+          color: Color.fromRGBO(33, 33, 33, 1)
+          ), //icon inside ),
       ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
