@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:frontend/src/screens/Forum/forumCreateScreen.dart';
+import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ Future<String> addNewForum(String title) async {
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
-      return ("Successfully uploaded new notice");
+      return ("Successfully uploaded new Form");
     } else {
       throw ("Failed to create new thread error" +
           response.statusCode.toString());

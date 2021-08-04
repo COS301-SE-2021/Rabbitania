@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
-import 'package:frontend/src/screens/Forum/forumCreateScreen.dart';
+import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumHome.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
