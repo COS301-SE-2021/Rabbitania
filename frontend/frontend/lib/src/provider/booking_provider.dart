@@ -9,7 +9,7 @@ class BookingProvider {
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
     //UserProvider userProvider = new UserProvider();
     final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/Booking/GetBookings?UserId=1'),
+      Uri.parse('https://10.0.2.2:5001/api/Booking/GetBookings?UserId=8'),
     );
 
     if (response.statusCode == 200) {
