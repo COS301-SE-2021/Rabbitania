@@ -6,6 +6,7 @@ import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class BookingScreen extends StatefulWidget {
   @override
@@ -20,6 +21,9 @@ class _BookingState extends State<BookingScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        floatingActionButton: fab(context),
+        floatingActionButtonLocation: fabl(context),
+        bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
           toolbarHeight: 150,
