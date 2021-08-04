@@ -2,15 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 
 class BookingDayText extends StatefulWidget {
-  final displayText;
-  BookingDayText(
-    this.displayText,
-  );
+  final String displayText;
+  final String dayOfTheWeek;
+  BookingDayText(this.displayText, this.dayOfTheWeek);
+  @override
   _BookingDayTextState createState() => _BookingDayTextState();
 }
 
 class _BookingDayTextState extends State<BookingDayText> {
   String dropdownValue = 'No Booking';
+  String selectedOffice = '';
+
+  List<String> officeLocations = [
+    'No Booking',
+    'Pretoria',
+    'Braamfontein',
+    'Amsterdam',
+  ];
+
+  void getDropDownItem() {
+    setState(() {
+      selectedOffice = dropdownValue;
+    });
+  }
+
   Widget build(BuildContext context) => Center(
         child: Container(
           child: Column(
@@ -57,22 +72,19 @@ class _BookingDayTextState extends State<BookingDayText> {
                         height: 0,
                         color: Color.fromRGBO(33, 33, 33, 1),
                       ),
-                      onChanged: (String? newValue) {
+                      onChanged: (String? office) {
                         setState(() {
-                          dropdownValue = newValue!;
+                          dropdownValue = office!;
                         });
                       },
-                      items: <String>[
-                        'No Booking',
-                        'Pretoria',
-                        'Braamfontein',
-                        'Amsterdam'
-                      ].map<DropdownMenuItem<String>>((String value) {
+                      items: officeLocations
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Padding(
-                              padding: EdgeInsets.only(left: 30),
-                              child: Text(value)),
+                            padding: EdgeInsets.only(left: 30),
+                            child: Text(value),
+                          ),
                         );
                       }).toList(),
                     ),
@@ -80,8 +92,10 @@ class _BookingDayTextState extends State<BookingDayText> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: BookingDayScreenButton()),
+                padding: EdgeInsets.only(top: 10),
+                child: BookingDayScreenButton(this.dropdownValue,
+                    widget.displayText, widget.dayOfTheWeek),
+              ),
             ],
           ),
         ),

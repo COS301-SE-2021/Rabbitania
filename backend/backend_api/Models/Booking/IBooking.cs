@@ -8,7 +8,7 @@ namespace backend_api.Models.Booking
     {
          int BookingId { get; set; }
         
-         DateTime BookingDate { get; set; }
+         string BookingDate { get; set; }
          
          OfficeLocation Office { get; set; }
          
