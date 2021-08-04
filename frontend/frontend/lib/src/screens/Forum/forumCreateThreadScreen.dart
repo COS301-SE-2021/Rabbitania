@@ -1,87 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
+import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
+import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'forumCreateThreadScreen.dart';
-
-class ForumThreadScreen extends StatefulWidget {
+class ForumCreateThreadScreen extends StatefulWidget {
   createState() {
-    return _ForumThreadScreen();
+    return _ForumCreateThreadScreen();
   }
 }
 
-late Future<List<ForumThread>> futureForumThreads;
+final threadTitleController = TextEditingController();
 
-class _ForumThreadScreen extends State<ForumThreadScreen> {
-  void initState() {
-    super.initState();
-    futureForumThreads = fetchForumThreads(currentForumID);
-  }
 
-  void refresh() {
-    UtilModel.route(() => ForumThreadScreen(), context);
-    setState(() {});
-    print("refresh");
-  }
+class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
+  final util = new UtilModel();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
-
-          UtilModel.route(() => ForumCreateThreadScreen(), context);
+          showDialog(
+            context: context,
+            builder: (context) {
+              futureStringReceivedThread =
+                  addNewForumThread(threadTitleController.text);
+              return FutureBuilder<String>(
+                future: futureStringReceivedForum,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(content: Text(snapshot.data!));
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
         },
-        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.add), //icon inside button
       ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            UtilModel.route(() => Forum(), context);
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
         title: Center(
           child: Text(
-            currentForumName.toString(),
+            'Create Forum Thread         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
             ),
           ),
         ),
-        actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  refresh();
-                },
-                child: Icon(Icons.refresh),
-              )),
-        ],
+        actions: [],
       ),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
-          //HERE is the stack for the forum page, the stack fills back to front (last child will be on the top of the stack)
           children: <Widget>[
-            // Children of type widget
             SvgPicture.string(
               _svg_background,
               fit: BoxFit.contain,
             ),
             Container(
-                padding: EdgeInsets.only(bottom: 75),
-                child: ForumThreadsCards()),
+              child: ForumCreateThreadCard(),
+            ),
           ],
         ),
       ),

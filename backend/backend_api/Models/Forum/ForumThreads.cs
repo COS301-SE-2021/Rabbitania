@@ -26,7 +26,8 @@ namespace backend_api.Models.Forum
         public int ForumThreadId { get; set; }
 
         public string ForumThreadTitle { get; set; }
-
+        
+        public string ForumThreadBody { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public string imageURL { get; set; }
