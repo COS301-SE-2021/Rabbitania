@@ -6,6 +6,12 @@ namespace backend_api.Services.Booking
 {
     public interface IBookingScheduleService
     {
+        /// <summary>
+        ///     Create bookingSchedule service that checks the request object
+        ///     and makes sure all checks pass
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> CreateBookingScheduleResponse </returns>
         Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request);
         
         Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request);
