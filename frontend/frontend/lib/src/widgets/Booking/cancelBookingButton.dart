@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CancelBookingButton extends StatelessWidget {
   Widget build(context) => SizedBox.fromSize(
-        size: Size(70, 70),
+        size: Size(50, 50),
         child: ClipOval(
           child: Material(
             color: Colors.transparent,

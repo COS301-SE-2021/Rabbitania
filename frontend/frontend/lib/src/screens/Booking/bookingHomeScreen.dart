@@ -6,6 +6,7 @@ import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class BookingScreen extends StatefulWidget {
   @override
@@ -20,19 +21,42 @@ class _BookingState extends State<BookingScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        floatingActionButton: fab(context),
+        floatingActionButtonLocation: fabl(context),
+        bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 100,
+          toolbarHeight: 150,
+          automaticallyImplyLeading: false,
           elevation: 1,
           backgroundColor: Colors.transparent,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          title: Column(
             children: <Widget>[
-              BookingDayButton('M', Colors.transparent),
-              BookingDayButton('Tu', Colors.transparent),
-              BookingDayButton('W', Colors.transparent),
-              BookingDayButton('Th', Colors.transparent),
-              BookingDayButton('F', Colors.transparent),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      'Booking',
+                      style: TextStyle(
+                        fontSize: 35,
+                        color: Color.fromRGBO(172, 255, 79, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  BookingDayButton('M', Colors.transparent),
+                  BookingDayButton('Tu', Colors.transparent),
+                  BookingDayButton('W', Colors.transparent),
+                  BookingDayButton('Th', Colors.transparent),
+                  BookingDayButton('F', Colors.transparent),
+                ],
+              ),
             ],
           ),
         ),

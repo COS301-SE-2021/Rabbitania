@@ -6,6 +6,7 @@ import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class BookingDayScreen extends StatefulWidget {
   final displayText;
@@ -42,6 +43,9 @@ class _BookingDayState extends State<BookingDayScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        floatingActionButton: fab(context),
+        floatingActionButtonLocation: fabl(context),
+        bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
           toolbarHeight: 100,
