@@ -10,6 +10,7 @@ import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class BookingDayScreen extends StatefulWidget {
   final displayText;
+
   BookingDayScreen(this.displayText);
   @override
   _BookingDayState createState() => _BookingDayState();
@@ -124,26 +125,15 @@ class _BookingDayState extends State<BookingDayScreen> {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.only(top: 50),
-                    child: BookingDayText(
-                      'Morning',
-                    ),
+                    child: BookingDayText('Morning', this.displayText),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                  ),
-
                   Container(
                     margin: const EdgeInsets.only(top: 50),
-                    child: BookingDayText('Afternoon'),
+                    child: BookingDayText('Afternoon', this.displayText),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 50),
                   ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 40),
-                  //   child: BookingDayScreenButton(),
-                  // ),
                 ],
               ),
             ],

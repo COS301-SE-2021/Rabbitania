@@ -22,4 +22,26 @@ class BookingProvider {
       throw Exception('Failed to retreive bookings');
     }
   }
+
+  Future<String> createBookingAsync(
+      String bookingDate, String timeSlot, int office, int userId) async {
+    final response = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Booking/CreateBooking'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'bookingDate': bookingDate,
+        'timeSlot': timeSlot,
+        'office': office,
+        'userId': 8
+      }),
+    );
+    if (response.statusCode == 200) {
+      return ("Created new Booking");
+    } else {
+      throw ("Failed to create new booking - Error Status: " +
+          response.statusCode.toString());
+    }
+  }
 }

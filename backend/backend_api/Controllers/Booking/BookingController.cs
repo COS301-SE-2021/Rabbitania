@@ -174,7 +174,7 @@ namespace backend_api.Controllers.Booking
         /// <returns>Http response code</returns>
         [HttpPost]
         [Route("CreateBooking")]
-        public async Task<ActionResult> CreateBooking([FromQuery] CreateBookingRequest request)
+        public async Task<ActionResult> CreateBooking([FromBody] CreateBookingRequest request)
         {
             if (request != null)
             {
