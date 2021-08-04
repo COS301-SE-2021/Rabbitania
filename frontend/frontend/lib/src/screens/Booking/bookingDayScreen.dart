@@ -48,12 +48,19 @@ class _BookingDayState extends State<BookingDayScreen> {
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 100,
+          toolbarHeight: 150,
           elevation: 1,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Column(
             children: <Widget>[
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05,
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[

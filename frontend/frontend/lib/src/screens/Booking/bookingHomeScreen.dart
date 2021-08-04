@@ -32,6 +32,13 @@ class _BookingState extends State<BookingScreen> {
           backgroundColor: Colors.transparent,
           title: Column(
             children: <Widget>[
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
