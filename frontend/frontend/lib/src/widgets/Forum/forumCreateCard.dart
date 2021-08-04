@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureStringReceived;
+Future<String>? futureStringReceivedForum;
 
 class ForumCreateCard extends StatelessWidget {
   @override
@@ -36,22 +36,6 @@ class ForumCreateCard extends StatelessWidget {
                         TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                   ),
                 ),
-                TextFormField(
-                  minLines: 1,
-                  maxLines: 20,
-                  style: TextStyle(color: Colors.white),
-                  controller: forumContentController,
-                  cursorColor: Color.fromRGBO(171, 255, 79, 1),
-                  decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
-                    ),
-                    labelText: 'Forum Content',
-                    labelStyle:
-                        TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
-                  ),
-                ),
               ],
             ),
           ),
@@ -61,23 +45,22 @@ class ForumCreateCard extends StatelessWidget {
   }
 }
 
-Future<String> addNewThread(String title, String content) async {
+Future<String> addNewForum(String title) async {
   try {
-    if (title == "" || content == "") {
+    if (title == "") {
       throw ("Cannot Submit Empty Fields");
     }
 
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
+      Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForum'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'userId': 1,
-        'threadTitle': title,
-        'threadContent': content,
-        'minLevel': 0,
-        'permittedUserRoles': 0
+        "forumId": 0,
+        "forumTitle": title,
+        "createdDate": "2021-08-04T11:50:49.398Z",
+        "userId": 1
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {

@@ -13,7 +13,6 @@ class ForumCreateScreen extends StatefulWidget {
 }
 
 final forumTitleController = TextEditingController();
-final forumContentController = TextEditingController();
 
 class _ForumCreateScreen extends State<ForumCreateScreen> {
   final util = new UtilModel();
@@ -22,26 +21,25 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
-          // showDialog(
-          //   context: context,
-          //   builder: (context) {
-          //     futureStringReceived = addNewForum(forumTitleController.text, forumContentController.text);
-          //     return FutureBuilder<String>(
-          //       future: futureStringReceived,
-          //       builder: (context, snapshot) {
-          //         if (snapshot.hasData) {
-          //           return AlertDialog(content: Text(snapshot.data!));
-          //         } else if (snapshot.hasError) {
-          //           return AlertDialog(content: Text('${snapshot.error}'));
-          //         }
-          //         return AlertDialog(content: CircularProgressIndicator());
-          //       },
-          //     );
-          //   },
-          // );
+          showDialog(
+            context: context,
+            builder: (context) {
+              futureStringReceivedForum =
+                  addNewForum(forumTitleController.text);
+              return FutureBuilder<String>(
+                future: futureStringReceivedForum,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(content: Text(snapshot.data!));
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
         },
         child: Icon(Icons.add), //icon inside button
       ),
@@ -57,7 +55,7 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Create Notice         ',
+            'Create Forum         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
