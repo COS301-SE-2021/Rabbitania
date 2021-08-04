@@ -1,36 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
-import 'package:frontend/src/screens/Forum/forumCreateScreen.dart';
-import 'package:frontend/src/screens/userProfileScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumHome.dart';
+import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/widgets/Forum/forumCreateCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../Noticeboard/noticeboardScreen.dart';
-
-class Forum extends StatefulWidget {
+class ForumCreateScreen extends StatefulWidget {
   createState() {
-    return _Forum();
+    return _ForumCreateScreen();
   }
 }
 
-late Future<List<ForumObj>> futureForum;
-late Future<List<ForumThread>> futureForumLatestThread;
+final forumTitleController = TextEditingController();
+final forumContentController = TextEditingController();
 
-class _Forum extends State<Forum> {
-  void initState() {
-    super.initState();
-    futureForum = fetchForum();
-  }
-
-  void refresh() {
-    UtilModel.route(() => Forum(), context);
-    setState(() {});
-    print("refresh");
-  }
+class _ForumCreateScreen extends State<ForumCreateScreen> {
+  final util = new UtilModel();
 
   @override
   Widget build(BuildContext context) {
@@ -39,51 +25,58 @@ class _Forum extends State<Forum> {
         //Floating action button on Scaffold
         onPressed: () {
           //code to execute on button press
-
-          UtilModel.route(() => ForumCreateScreen(), context);
+          // showDialog(
+          //   context: context,
+          //   builder: (context) {
+          //     futureStringReceived = addNewForum(forumTitleController.text, forumContentController.text);
+          //     return FutureBuilder<String>(
+          //       future: futureStringReceived,
+          //       builder: (context, snapshot) {
+          //         if (snapshot.hasData) {
+          //           return AlertDialog(content: Text(snapshot.data!));
+          //         } else if (snapshot.hasError) {
+          //           return AlertDialog(content: Text('${snapshot.error}'));
+          //         }
+          //         return AlertDialog(content: CircularProgressIndicator());
+          //       },
+          //     );
+          //   },
+          // );
         },
-        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.add), //icon inside button
       ),
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            UtilModel.route(() => Forum(), context);
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
         title: Center(
           child: Text(
-            'Forum   ',
+            'Create Notice         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
-              fontSize: 35,
+              fontSize: 25,
             ),
           ),
         ),
-        actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  refresh();
-                },
-                child: Icon(Icons.refresh),
-              )),
-        ],
+        actions: [],
       ),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
-          //HERE is the stack for the forum page, the stack fills back to front (last child will be on the top of the stack)
           children: <Widget>[
-            // Children of type widget
             SvgPicture.string(
               _svg_background,
               fit: BoxFit.contain,
             ),
-            Container(padding: EdgeInsets.only(bottom: 75), child: ForumHome()),
+            Container(
+              child: ForumCreateCard(),
+            ),
           ],
         ),
       ),
