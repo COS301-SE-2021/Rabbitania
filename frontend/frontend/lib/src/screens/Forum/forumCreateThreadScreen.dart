@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
@@ -14,6 +15,7 @@ class ForumCreateThreadScreen extends StatefulWidget {
 }
 
 final threadTitleController = TextEditingController();
+final threadBodyController = TextEditingController();
 
 
 class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
@@ -28,9 +30,9 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
             context: context,
             builder: (context) {
               futureStringReceivedThread =
-                  addNewForumThread(threadTitleController.text);
+                  addNewForumThread(currentForumID, threadTitleController.text, threadBodyController.text);
               return FutureBuilder<String>(
-                future: futureStringReceivedForum,
+                future: futureStringReceivedThread,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return AlertDialog(content: Text(snapshot.data!));

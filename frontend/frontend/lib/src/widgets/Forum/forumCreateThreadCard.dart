@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
+import 'package:frontend/src/screens/Forum/forumCreateThreadScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,14 +26,30 @@ class ForumCreateThreadCard extends StatelessWidget {
               children: [
                 TextFormField(
                   style: TextStyle(color: Colors.white),
-                  controller: forumTitleController,
+                  controller: threadTitleController,
                   cursorColor: Color.fromRGBO(171, 255, 79, 1),
                   decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
                     ),
-                    labelText: 'Forum Title',
+                    labelText: 'Thread Title',
+                    labelStyle:
+                        TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
+                  ),
+                ),
+                TextFormField(
+                  minLines: 1,
+                  maxLines: 20,
+                  style: TextStyle(color: Colors.white),
+                  controller: threadBodyController,
+                  cursorColor: Color.fromRGBO(171, 255, 79, 1),
+                  decoration: InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
+                    ),
+                    labelText: 'Thread Description',
                     labelStyle:
                         TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
                   ),
@@ -45,11 +63,12 @@ class ForumCreateThreadCard extends StatelessWidget {
   }
 }
 
-Future<String> addNewForumThread(String title) async {
+Future<String> addNewForumThread(int currentId, String title, String body) async {
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Fields");
     }
+    
 
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForumThread'),
@@ -57,10 +76,13 @@ Future<String> addNewForumThread(String title) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "forumId": 0,
-        "forumTitle": title,
-        "createdDate": "2021-08-04T11:50:49.398Z",
-        "userId": 1
+      "forumThreadId": 0,
+      "forumThreadTitle": title,
+      "forumThreadBody": body,
+      "createdDate": "2021-08-04T13:45:13.091Z",
+      "imageUrl": "string",
+      "userId": 1,
+      "forumId": currentForumID
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
