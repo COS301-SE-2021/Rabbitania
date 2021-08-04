@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -52,7 +53,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            UtilModel.route(() => Forum(), context);
+            UtilModel.route(() => ForumThreadScreen(), context);
           },
         ),
         elevation: 0,

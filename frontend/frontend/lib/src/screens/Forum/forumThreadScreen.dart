@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
@@ -45,7 +46,11 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
       floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            UtilModel.route(() => Forum(), context);
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
