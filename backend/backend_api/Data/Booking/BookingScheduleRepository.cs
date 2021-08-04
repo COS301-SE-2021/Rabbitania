@@ -18,24 +18,13 @@ namespace backend_api.Data.Booking
             _schedules = schedules;
         }
 
-        public BookingScheduleRepository(BookingScheduleContext schedules, BookingContext bookings)
-        {
-            _schedules = schedules;
-            _bookings = bookings;
-        }
-        
         //return a booking schedule for a specific office
         //Not quite sure about how this will be used
         public async Task<GetBookingScheduleResponse> GetBookingSchedule(GetBookingScheduleRequest request)
         {
-            //var timeSlot = request.TimeSlot;
-            var bookingSchedule = _schedules.BookingSchedules.Select(
-                s => new {
-                    s.Office,
-                    s.TimeSlot,
-                    s.Availability
-                }).FirstOrDefaultAsync();
-            var resp = new GetBookingScheduleResponse(new BookingSchedule(bookingSchedule.Result.TimeSlot, bookingSchedule.Result.Office, bookingSchedule.Result.Availability));
+            var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
+                request.Office, request.TimeSlot).AsTask();
+            var resp = new GetBookingScheduleResponse(new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office, bookingSchedule.Availability));
             return resp;
         }
 
@@ -47,24 +36,85 @@ namespace backend_api.Data.Booking
 
         public async Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request)
         {
-            var bookingSchedule = _schedules.BookingSchedules.Select(
-                s => new {
-                    s.Office,
-                    s.TimeSlot,
-                    s.Availability
-                }).FirstOrDefaultAsync();
-            var scheduleToRemove = new BookingSchedule(bookingSchedule.Result.TimeSlot, bookingSchedule.Result.Office,
-                bookingSchedule.Result.Availability);
+            var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
+                request.Office, request.TimeSlot).AsTask();
+            var scheduleToRemove = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
+                bookingSchedule.Availability);
             try
             {
                 _schedules.BookingSchedules.Remove(scheduleToRemove);
                 await _schedules.SaveChangesAsync();
+                if (_schedules.Entry(scheduleToRemove).State == EntityState.Deleted)
+                    return new CancelBookingScheduleResponse(true);
+                else
+                {
+                    return new CancelBookingScheduleResponse(false);
+                }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new CancelBookingScheduleResponse(false);
             }
         }
+        public async Task<UpdateBookingScheduleResponse> UpdateBookingSchedule(UpdateBookingScheduleRequest request)
+        {
+            var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
+                request.Office, request.TimeSlot).AsTask();
+            var scheduleToUpdate = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
+                bookingSchedule.Availability);
+            //setting new values
+            scheduleToUpdate.Availability = request.Availability;
+            scheduleToUpdate.Office = request.Office;
+            scheduleToUpdate.TimeSlot = request.TimeSlot;
+            try
+            {
+                _schedules.Entry(scheduleToUpdate).State = EntityState.Modified;
+                await _schedules.SaveChangesAsync();
+                return new UpdateBookingScheduleResponse(true);
+            }
+            catch (Exception)
+            {
+                return new UpdateBookingScheduleResponse(false);
+            }
+            
+        }
+        public async Task<UpdateBookingScheduleResponse> UpdateBookingScheduleAvailability(UpdateBookingScheduleRequest request)
+        {
+            var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
+                request.Office, request.TimeSlot).AsTask();
+            var scheduleToUpdate = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
+                bookingSchedule.Availability);
+            //setting new values
+            scheduleToUpdate.Availability = request.Availability;
+            try
+            {
+                _schedules.Entry(scheduleToUpdate).State = EntityState.Modified;
+                await _schedules.SaveChangesAsync();
+                return new UpdateBookingScheduleResponse(true);
+            }
+            catch (Exception)
+            {
+                return new UpdateBookingScheduleResponse(false);
+            }
+            
+        }
+
+        public async Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request)
+        {
+            var newSchedule = new BookingSchedule(request.TimeSlot, request.Office, request.Availability);
+            try
+            {
+                await _schedules.BookingSchedules.AddAsync(newSchedule);
+                await _schedules.SaveChangesAsync();
+                return new CreateBookingScheduleResponse(true);
+            }
+            catch (Exception)
+            {
+                return new CreateBookingScheduleResponse(false);
+            }
+        }
+
+
 
         
     }
