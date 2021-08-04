@@ -70,12 +70,13 @@ namespace backend_api.Data.Forum
         public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
         {
             var forumThreadTitle = request.ForumThreadTitle;
+            var forumThreadBody = request.ForumThreadBody;
             var createdDate = request.CreatedDate;
             var imageUrl = request.ImageUrl;
             var userId = request.UserId;
             var forumId = request.ForumId;
 
-            var forumThread = new ForumThreads(forumThreadTitle, userId, createdDate, imageUrl, forumId);
+            var forumThread = new ForumThreads(forumThreadTitle, userId, forumThreadBody, createdDate, imageUrl, forumId);
 
            
             try
@@ -269,6 +270,7 @@ namespace backend_api.Data.Forum
                 }
 
                 forumThreadToEdit.ForumThreadTitle = request.ForumThreadTitle;
+                forumThreadToEdit.ForumThreadBody = request.ForumThreadBody;
                 forumThreadToEdit.imageURL = request.ImageUrl;
 
                 _forum.ForumThreads.Update(forumThreadToEdit).State = EntityState.Modified;

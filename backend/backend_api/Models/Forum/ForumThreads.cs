@@ -7,10 +7,11 @@ namespace backend_api.Models.Forum
 {
     public class  ForumThreads : IForumThread
     {
-        public ForumThreads(string forumThreadTitle, int userId, DateTime createdDate, string imageUrl, int forumId)
+        public ForumThreads(string forumThreadTitle, int userId, string forumThreadBody, DateTime createdDate, string imageUrl, int forumId)
         {
             this.ForumThreadTitle = forumThreadTitle;
             this.UserId = userId;
+            this.ForumThreadBody = forumThreadBody;
             this.CreatedDate = createdDate;
             this.imageURL = imageUrl;
             this.ForumId = forumId;
@@ -26,7 +27,6 @@ namespace backend_api.Models.Forum
         public int ForumThreadId { get; set; }
 
         public string ForumThreadTitle { get; set; }
-        
         public string ForumThreadBody { get; set; }
         public DateTime CreatedDate { get; set; }
 
