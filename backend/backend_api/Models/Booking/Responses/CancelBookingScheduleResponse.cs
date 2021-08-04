@@ -5,19 +5,19 @@ namespace backend_api.Models.Booking.Responses
     public class CancelBookingScheduleResponse
     {
         /// <summary>
-        ///     Will return status code response to confirm if a booking
+        ///     Will return bool response to confirm if a booking
         ///     schedule was indeed cancelled or not
-        ///     + Status code return 200 (Ok) or
-        ///     + Status code return 400 (Bad request) 
+        ///     + boole return true (success) or
+        ///     + bool return false (failed) 
         /// </summary>
-        private HttpStatusCode _response;
+        private bool _response;
 
-        public CancelBookingScheduleResponse(HttpStatusCode response)
+        public CancelBookingScheduleResponse(bool response)
         {
             _response = response;
         }
 
-        public HttpStatusCode Response
+        public bool Response
         {
             get => _response;
             set => _response = value;
