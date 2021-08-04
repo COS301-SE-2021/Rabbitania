@@ -49,7 +49,7 @@ namespace backend_api.Data.Booking
             try
             {
                 _bookings.Bookings.Remove(booking);
-                await _bookings.SaveChanges();
+                await _bookings.SaveChangesAsync();
                 if (_bookings.Entry(booking).State == EntityState.Deleted)
                     return HttpStatusCode.Accepted;
                 else

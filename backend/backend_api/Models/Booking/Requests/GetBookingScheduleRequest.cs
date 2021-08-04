@@ -6,7 +6,7 @@ namespace backend_api.Models.Booking.Requests
     {
         private string timeSlot;
         private OfficeLocation office;
-
+        
         public GetBookingScheduleRequest(string timeSlot, OfficeLocation office)
         {
             TimeSlot = timeSlot;
@@ -16,7 +16,7 @@ namespace backend_api.Models.Booking.Requests
         public GetBookingScheduleRequest()
         {
         }
-
+        
         public string TimeSlot
         {
             get => timeSlot;
