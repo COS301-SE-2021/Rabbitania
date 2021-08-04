@@ -36,7 +36,7 @@ class ForumThreadsCards extends StatelessWidget {
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
-                                "No Threads on " + currentForumName,
+                                "No Threads Currently In " + currentForumName,
                                 style: TextStyle(
                                     letterSpacing: 2.0,
                                     color: Colors.white,
@@ -59,6 +59,7 @@ class ForumThreadsCards extends StatelessWidget {
                       cards.add(forumThreadCard(
                           forumThreadId: iterate.current.forumThreadId,
                           forumThreadTitle: iterate.current.forumThreadTitle,
+                          forumThreadBody: iterate.current.forumThreadBody,
                           createdDate: iterate.current.createdDate,
                           imageURL: iterate.current.imageURL,
                           userId: iterate.current.userId));
@@ -82,6 +83,7 @@ class ForumThreadsCards extends StatelessWidget {
 class forumThreadCard extends StatelessWidget {
   final int forumThreadId;
   final String forumThreadTitle;
+  final String forumThreadBody;
   final String createdDate;
   final String imageURL;
   final int userId;
@@ -89,6 +91,7 @@ class forumThreadCard extends StatelessWidget {
   const forumThreadCard(
       {required this.forumThreadId,
       required this.forumThreadTitle,
+      required this.forumThreadBody,
       required this.createdDate,
       required this.imageURL,
       required this.userId});
@@ -115,6 +118,7 @@ class forumThreadCard extends StatelessWidget {
               ListTile(
                 contentPadding:
                     EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
+                leading: FlutterLogo(size: 50),
                 title: Container(
                   padding: EdgeInsets.only(bottom: 8),
                   child: Text(
@@ -124,7 +128,7 @@ class forumThreadCard extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  createdDate.substring(0, 10),
+                  forumThreadBody,
                   style: TextStyle(color: Colors.white),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

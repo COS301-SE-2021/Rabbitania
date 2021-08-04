@@ -38,18 +38,21 @@ Widget ForumLatestThread(int forumIdentifier) {
                             // leading: Icon(
                             //   Icons.announcement_outlined, size: 45,
                             //   color: Color.fromRGBO(171, 255, 79, 1),),
+                            
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
                                 snapshot.data!.last.forumThreadTitle,
+                                maxLines: 2,
                                 style: TextStyle(
                                     letterSpacing: 2.0,
                                     color: Colors.white,
                                     fontSize: 22),
                               ),
                             ),
+
                             subtitle: Text(
-                              snapshot.data!.last.createdDate.substring(0, 10),
+                              snapshot.data!.last.forumThreadBody,
                               style: TextStyle(color: Colors.white),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
