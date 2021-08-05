@@ -13,26 +13,21 @@ class BookingDayText extends StatefulWidget {
 }
 
 class _BookingDayTextState extends State<BookingDayText> {
-  String dropdownValue = 'No Booking';
-  String dropdownValue2 = 'No Bookings';
+  String dropdownValue = 'No Selection';
+  String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
 
   final _bookingProvider = new BookingProvider();
 
   List<String> officeLocations = [
-    'No Booking',
+    'No Selection',
     'Pretoria',
     'Braamfontein',
     'Amsterdam',
   ];
 
-  List<String> timeSlots = [
-    'No Bookings',
-    'Morning',
-    'Afternoon',
-    'Full Day',
-  ];
+  List<String> timeSlots = ['No Selection', 'Morning', 'Afternoon'];
 
   int getOfficeIndex(String office) {
     int officeIndex = -1;
