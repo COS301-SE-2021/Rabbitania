@@ -18,7 +18,6 @@ class ForumCreateThreadScreen extends StatefulWidget {
 final threadTitleController = TextEditingController();
 final threadBodyController = TextEditingController();
 
-
 class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
   final util = new UtilModel();
 
@@ -31,8 +30,8 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedThread =
-                  addNewForumThread(currentForumID, threadTitleController.text, threadBodyController.text);
+              futureStringReceivedThread = addNewForumThread(currentForumID,
+                  threadTitleController.text, threadBodyController.text);
               return FutureBuilder<String>(
                 future: futureStringReceivedThread,
                 builder: (context, snapshot) {
@@ -47,12 +46,9 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
             },
           );
         },
-        child: Icon(
-          Icons.add,
-          color: Color.fromRGBO(33, 33, 33, 1)
-          ), //icon inside ),
+        child: Icon(Icons.add,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside ),
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(

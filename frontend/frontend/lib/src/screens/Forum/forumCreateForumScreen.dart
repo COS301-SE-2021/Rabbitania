@@ -42,12 +42,9 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
             },
           );
         },
-         child: Icon(
-          Icons.add,
-          color: Color.fromRGBO(33, 33, 33, 1)
-          ),  //icon inside button
+        child: Icon(Icons.add,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(

@@ -3,6 +3,7 @@ import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,18 +33,17 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
-        onPressed: () {
-          //code to execute on button press
-
+      floatingActionButton: FancyFab(
+        numberOfItems: 2,
+        icon1: Icons.add,
+        onPressed1: () {
           UtilModel.route(() => ForumCreateThreadScreen(), context);
         },
-        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        icon2: Icons.delete,
+        onPressed2: () {},
+        icon3: Icons.airplane_ticket,
+        onPressed3: () {},
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
