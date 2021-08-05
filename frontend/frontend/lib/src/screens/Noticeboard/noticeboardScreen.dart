@@ -44,17 +44,12 @@ class _NoticeBoard extends State<NoticeBoard> {
         numberOfItems: 1,
         icon1: Icons.add,
         onPressed1: () {
-          //print("Fab 1");
           UtilModel.route(() => NoticeBoardThread(), context);
         },
         icon2: Icons.delete,
-        onPressed2: () {
-          print("Fab 2");
-        },
+        onPressed2: () {},
         icon3: Icons.airplane_ticket,
-        onPressed3: () {
-          print("Fab 3");
-        },
+        onPressed3: () {},
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
