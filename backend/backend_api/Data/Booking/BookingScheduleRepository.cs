@@ -98,7 +98,6 @@ namespace backend_api.Data.Booking
             }
             
         }
-
         public async Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request)
         {
             var newSchedule = new BookingSchedule(request.TimeSlot, request.Office, request.Availability);

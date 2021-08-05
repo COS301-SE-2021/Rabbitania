@@ -11,6 +11,10 @@ namespace backend_api.Models.Booking.Responses
             this.successful = successful;
         }
 
+        public CreateBookingScheduleResponse()
+        {
+        }
+
         public bool Successful
         {
             get => successful;
