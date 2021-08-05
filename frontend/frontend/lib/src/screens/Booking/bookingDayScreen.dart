@@ -129,11 +129,6 @@ class _BookingDayState extends State<BookingDayScreen> {
                     child: BookingDayText(
                         'Morning', this.displayText, widget.bookText),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 50),
-                    child: BookingDayText(
-                        'Afternoon', this.displayText, widget.bookText),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 50),
                   ),

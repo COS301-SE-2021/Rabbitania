@@ -36,8 +36,8 @@ class _BookingDayScreenButton extends State<BookingDayScreenButton> {
   @override
   Widget build(BuildContext context) => Center(
         child: SizedBox(
-          width: 300,
-          height: 50,
+          width: 400,
+          height: 100,
           child: ElevatedButton(
             style: ButtonStyle(
               elevation: MaterialStateProperty.all(11),
