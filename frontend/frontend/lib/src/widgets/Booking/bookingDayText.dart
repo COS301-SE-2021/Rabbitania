@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 
 class BookingDayText extends StatefulWidget {
   final String displayText;
   final String dayOfTheWeek;
-  BookingDayText(this.displayText, this.dayOfTheWeek);
+  late String bookText;
+
+  BookingDayText(this.displayText, this.dayOfTheWeek, this.bookText);
   @override
   _BookingDayTextState createState() => _BookingDayTextState();
 }
@@ -12,6 +15,7 @@ class BookingDayText extends StatefulWidget {
 class _BookingDayTextState extends State<BookingDayText> {
   String dropdownValue = 'No Booking';
   String selectedOffice = '';
+  final _bookingProvider = new BookingProvider();
 
   List<String> officeLocations = [
     'No Booking',
@@ -19,6 +23,18 @@ class _BookingDayTextState extends State<BookingDayText> {
     'Braamfontein',
     'Amsterdam',
   ];
+
+  int getOfficeIndex(String office) {
+    int officeIndex = -1;
+    if (office == 'Pretoria') {
+      officeIndex = 0;
+    } else if (office == 'Braamfontein') {
+      officeIndex = 1;
+    } else if (office == 'Amsterdam') {
+      officeIndex = 2;
+    }
+    return officeIndex;
+  }
 
   void getDropDownItem() {
     setState(() {
@@ -93,8 +109,44 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: BookingDayScreenButton(this.dropdownValue,
-                    widget.displayText, widget.dayOfTheWeek),
+                //child: BookingDayScreenButton(this.dropdownValue,
+                //  widget.displayText, widget.dayOfTheWeek),
+                child: SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(11),
+                      backgroundColor: MaterialStateProperty.all(
+                        Color.fromRGBO(172, 255, 79, 1),
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          side: BorderSide(
+                            style: BorderStyle.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      widget.bookText,
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Color.fromRGBO(33, 33, 33, 1),
+                      ),
+                    ),
+                    onPressed: () {
+                      int office = this.getOfficeIndex(this.dropdownValue);
+                      DateTime date = DateTime.now();
+                      String timeSlot =
+                          widget.displayText + "," + widget.dayOfTheWeek;
+                      widget.bookText = 'Booked';
+                      _bookingProvider.createBookingAsync(
+                          date.toString(), timeSlot, office, 1);
+                    },
+                  ),
+                ),
               ),
             ],
           ),
