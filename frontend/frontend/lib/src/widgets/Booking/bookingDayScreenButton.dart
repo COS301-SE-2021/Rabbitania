@@ -7,6 +7,7 @@ class BookingDayScreenButton extends StatefulWidget {
   final String timeOfDay;
   final String dayOfTheWeek;
   late String timeSlot = dayOfTheWeek + "," + timeOfDay;
+  late bool isDisabled;
 
   BookingDayScreenButton(
       this.officeLocation, this.timeOfDay, this.dayOfTheWeek);
@@ -35,8 +36,8 @@ class _BookingDayScreenButton extends State<BookingDayScreenButton> {
   @override
   Widget build(BuildContext context) => Center(
         child: SizedBox(
-          width: 300,
-          height: 50,
+          width: 400,
+          height: 100,
           child: ElevatedButton(
             style: ButtonStyle(
               elevation: MaterialStateProperty.all(11),
@@ -61,10 +62,8 @@ class _BookingDayScreenButton extends State<BookingDayScreenButton> {
             ),
             onPressed: () {
               int office = getOfficeIndex(widget.officeLocation);
-              print(widget.timeSlot);
-              print(office);
               DateTime date = DateTime.now();
-              print(date.toString());
+
               _bookingProvider.createBookingAsync(
                   date.toString(), widget.timeSlot, office, 1);
             },
