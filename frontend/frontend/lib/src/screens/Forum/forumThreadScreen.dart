@@ -85,7 +85,7 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
               fit: BoxFit.contain,
             ),
             Container(
-                padding: EdgeInsets.only(bottom: 75),
+                padding: EdgeInsets.only(bottom: 30),
                 child: ForumThreadsCards()),
           ],
         ),
