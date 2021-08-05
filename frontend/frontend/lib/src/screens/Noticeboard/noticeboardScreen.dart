@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
@@ -39,20 +40,17 @@ class _NoticeBoard extends State<NoticeBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
-        onPressed: () {
-          //code to execute on button press
-          titleController.clear();
-          contentController.clear();
-          imageFile = null;
+      floatingActionButton: FancyFab(
+        numberOfItems: 1,
+        icon1: Icons.add,
+        onPressed1: () {
           UtilModel.route(() => NoticeBoardThread(), context);
         },
-        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        icon2: Icons.delete,
+        onPressed2: () {},
+        icon3: Icons.airplane_ticket,
+        onPressed3: () {},
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: const BackButton(),
