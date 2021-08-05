@@ -46,7 +46,6 @@ class _Forum extends State<Forum> {
         child: Icon(Icons.add,
             color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: const BackButton(),
@@ -83,7 +82,7 @@ class _Forum extends State<Forum> {
               _svg_background,
               fit: BoxFit.contain,
             ),
-            Container(padding: EdgeInsets.only(bottom: 75), child: ForumHome()),
+            Container(padding: EdgeInsets.only(bottom: 0), child: ForumHome()),
           ],
         ),
       ),
