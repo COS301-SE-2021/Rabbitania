@@ -212,11 +212,10 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     onPressed: () async {
-                      // int office = this.getOfficeIndex(this.dropdownValue);
-                      // DateTime date = DateTime.now();
+                      int office = this.getOfficeIndex(this.dropdownValue);
+                      DateTime date = DateTime.now();
                       String timeSlot =
                           widget.dayOfTheWeek + "," + this.dropdownValue2;
-                      // widget.bookText = 'Booked';
                       // await _bookingProvider.createBookingAsync(
                       //     date.toString(), timeSlot, office, 1);
                       print(this.getOfficeIndex(this.dropdownValue));
