@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Exceptions.Booking;
 using backend_api.Models.Booking.Requests;
@@ -58,9 +60,9 @@ namespace backend_api.Controllers.Booking
             }
         }
         // <summary>
-                ///     API endpoint for retrieving a booking with a bookingID
+                ///     API endpoint for retrieving a booking schedule with a office and timeslot
                 ///     Checks if the given request is valid and then queries the service
-                ///     If the Booking cannot be found an InvalidBookingException is thrown
+                ///     If the Booking schedule cannot be found an InvalidBookingException is thrown
                 ///     response code is returned.
                 /// </summary>
                 /// <param name="request"></param>
@@ -80,6 +82,114 @@ namespace backend_api.Controllers.Booking
                         catch (InvalidBookingException e)
                         {
                             throw e;
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("Request is null or empty");
+                    }
+                }
+                /// <summary>
+                        ///     API endpoint for updating a Booking schedule
+                        ///     Checks if the given request is valid and then queries the service
+                        ///     If the Booking schedule to update cannot be found, an InvalidBookingException is thrown
+                        ///     An Http response code is returned.
+                        /// </summary>
+                        /// <param name="request"></param>
+                        /// <returns>Http response code</returns>
+                        [HttpPut]
+                        [Route("EditBookingSchedule")]
+                        public async Task<ActionResult> UpdateBookingSchedule([FromQuery] UpdateBookingScheduleRequest request)
+                        {
+                            if (request != null)
+                            {
+                                try
+                                {
+                                    var resp = await _scheduleService.UpdateBookingSchedule(request);
+                                    if (resp.Success == true)
+                                    {
+                                        return Ok("Successfully updated booking schedule");
+                                    }
+                                    else
+                                    {
+                                        return BadRequest("Error when trying to update booking schedule");
+                                    }
+                                }
+                                catch (InvalidBookingException e)
+                                {
+                                    throw;
+                                }
+                            }
+                            else
+                            {
+                                return BadRequest("Request is null or empty");
+                            }
+                        }
+                /// <summary>
+                ///     API endpoint for deleting a Booking Schedule
+                ///     Checks if the given request is valid and then queries the service
+                ///     If the Booking schedule to delete cannot be found, an InvalidBookingException is thrown
+                ///     An Http response code is returned.
+                /// </summary>
+                /// <param name="request"></param>
+                /// <returns>Http response code</returns>
+                [HttpDelete]
+                [Route("DeleteBookingSchedule")]
+                public async Task<ActionResult> DeleteBookingSchedule([FromQuery] CancelBookingScheduleRequest request)
+                {
+                    if (request != null)
+                    {
+                        try
+                        {
+                            var resp = await _scheduleService.CancelBookingSchedule(request);
+                            if (resp.Response == true)
+                            {
+                                return Ok("Booking Schedule for: "+request.Office+", "+request.TimeSlot+" successfully deleted.");
+                            }
+                            else
+                            {
+                                return BadRequest("Error trying to delete booking schedule for: "+request.Office+", "+request.TimeSlot+" from the database.");
+                            }
+                        }
+                        catch (InvalidBookingException)
+                        {
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("Request is null or empty");
+                    }
+                }
+                /// <summary>
+                ///     API endpoint for creating a Booking Schedule
+                ///     Checks if the given request is valid and then queries the service
+                ///     If the new Booking Schedule cannot be created in the database, an InvalidBookingException is thrown
+                ///     An Http response code is returned.
+                /// </summary>
+                /// <param name="request"></param>
+                /// <returns>Http response code</returns>
+                [HttpPost]
+                [Route("CreateBooking")]
+                public async Task<ActionResult> CreateBookingSchedule([FromBody] CreateBookingScheduleRequest request)
+                {
+                    if (request != null)
+                    {
+                        try
+                        {
+                            var resp = await _scheduleService.CreateBookingSchedule(request);
+                            if (resp.Successful == true)
+                            {
+                                return Ok("Booking Schedule created successfully");
+                            }
+                            else
+                            {
+                                return BadRequest("Error trying to create booking Schedule in system");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            throw;
                         }
                     }
                     else
