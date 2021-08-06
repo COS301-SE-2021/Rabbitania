@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 //GLOBAL VARIABLES
 var currentForumID = -1;
 var currentForumName = "ForumName";
+var currentThreadID = -1;
+var currentThreadName = "ThreadName";
 //
 
 ////////////////////////////////////////////////////////////////
@@ -154,5 +156,96 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
     return threadObj;
   } else {
     return threadObj;
+  }
+}
+
+//////////////////////////
+///ForumThreadComments:
+/////////////////////////
+
+class ForumThreadComments {
+  final List<dynamic>? forumCommentsList;
+
+  ForumThreadComments({
+    required this.forumCommentsList,
+  });
+
+  factory ForumThreadComments.fromJson(Map<String, dynamic> json) {
+    return ForumThreadComments(
+      forumCommentsList: json["ThreadComments"],
+    );
+  }
+}
+
+class ThreadComments {
+  final int threadCommentId;
+  final String commentBody;
+  final String createdDate;
+  final String imageURL;
+  final int likes;
+  final int dislikes;
+  final int forumThreadId;
+  final String? forumThread;
+  final int userId;
+  final String? user;
+
+  ThreadComments({
+    
+    required this.threadCommentId,
+    required this.commentBody,
+    required this.createdDate,
+    required this.imageURL,
+    required this.likes,
+    required this.dislikes,
+    required this.forumThreadId,
+    required this.forumThread,
+    required this.userId,
+    required this.user
+
+  });
+
+  factory ThreadComments.fromJson(Map<String, dynamic> json) {
+    return ThreadComments(
+      threadCommentId: json['threadCommentId'],
+      commentBody: json['commentBody'],
+      createdDate: json['createdDate'],
+      imageURL: json['imageUrl'],
+      likes: json['likes'],
+      dislikes: json['dislikes'],
+      userId: json['userId'],
+      user: json['user'],
+      forumThreadId: json['forumThreadId'],
+      forumThread: json['forumThread']
+    );
+  }
+}
+
+Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
+  HttpClient client = new HttpClient();
+  client.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+  String url = 'http://10.0.2.2:5000/api/Forum/RetrieveThreadComments?ForumThreadID=' +
+      ThreadIdentifier.toString();
+
+  HttpClientRequest request = await client.getUrl(Uri.parse(url));
+  request.headers.set('content-type', 'application/json');
+
+  HttpClientResponse response1 = await request.close();
+  String reply = await response1.transform(utf8.decoder).join();
+  print(jsonDecode(reply));
+
+  List? cList = ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
+
+  List<ThreadComments> CommentObj = [];
+
+  if (cList != null) {
+    for (var t in cList) {
+      CommentObj.add(ThreadComments.fromJson(t));
+    }
+
+    client.close();
+    return CommentObj;
+  } else {
+    return CommentObj;
   }
 }
