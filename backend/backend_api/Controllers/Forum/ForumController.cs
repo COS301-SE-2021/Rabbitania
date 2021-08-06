@@ -37,7 +37,7 @@ namespace backend_api.Controllers.Forum
         [HttpPut]
         [Route("EditForum")]
         public async Task<EditForumResponse> EditForum(
-            [FromQuery] EditForumRequest request)
+            [FromBody] EditForumRequest request)
         {
             return await _service.EditForum(request);
         }
