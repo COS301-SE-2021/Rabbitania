@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Forum/forumEditForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
@@ -34,15 +35,58 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FancyFab(
-        numberOfItems: 2,
+        numberOfItems: 3,
         icon1: Icons.add,
         onPressed1: () {
           UtilModel.route(() => ForumCreateThreadScreen(), context);
         },
         icon2: Icons.delete,
-        onPressed2: () {},
-        icon3: Icons.airplane_ticket,
-        onPressed3: () {},
+        onPressed2: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
+                title: Text("Delete Forum"),
+                contentTextStyle: TextStyle(color: Colors.white, fontSize: 16),
+                content: Text("Are you sure you want to delete this Forum?"),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.check,
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      size: 24.0,
+                    ),
+                    tooltip: 'Delete',
+                    onPressed: () async {
+                      // ignore: unused_local_variable
+                      final deleteResponse = await deleteForum(currentForumID);
+                      UtilModel.route(() => Forum(), context);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.close,
+                      color: Color.fromRGBO(255, 79, 79, 1),
+                      size: 24.0,
+                    ),
+                    tooltip: 'Cancel',
+                    onPressed: () {
+                      //final deleteResponse = await deleteThread(this.id);
+                      UtilModel.route(() => Forum(), context);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        icon3: Icons.edit,
+        onPressed3: () {
+          UtilModel.route(() => ForumEditForumScreen(), context);
+        },
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(

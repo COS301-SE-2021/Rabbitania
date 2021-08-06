@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
-import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
+import 'package:frontend/src/widgets/Forum/forumEditForumCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
 
-class ForumCreateThreadScreen extends StatefulWidget {
+class ForumEditForumScreen extends StatefulWidget {
   createState() {
-    return _ForumCreateThreadScreen();
+    return _ForumEditForumScreen();
   }
 }
 
-final threadTitleController = TextEditingController();
-final threadBodyController = TextEditingController();
+TextEditingController forumTitleController = new TextEditingController();
 
-class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
+class _ForumEditForumScreen extends State<ForumEditForumScreen> {
   final util = new UtilModel();
 
   @override
@@ -26,20 +23,22 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
+        //Floating action button on Scaffold
         onPressed: () {
+          //code to execute on button press
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedThread = addNewForumThread(currentForumID,
-                  threadTitleController.text, threadBodyController.text);
+              if (forumTitleController.text != "") {
+                futureEditString = editNewForum(forumTitleController.text);
+              }
               return FutureBuilder<String>(
-                future: futureStringReceivedThread,
+                future: futureEditString,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return AlertDialog(
                       elevation: 5,
                       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                      content: Text(snapshot.data!),
                       titleTextStyle:
                           TextStyle(color: Colors.white, fontSize: 32),
                       title: Text(snapshot.data!),
@@ -74,21 +73,21 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
             },
           );
         },
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside ),
+        child: Icon(Icons.edit,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            UtilModel.route(() => ForumThreadScreen(), context);
+            UtilModel.route(() => Forum(), context);
           },
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Create Forum Thread         ',
+            'Edit Forum         ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
@@ -106,7 +105,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
               fit: BoxFit.contain,
             ),
             Container(
-              child: ForumCreateThreadCard(),
+              child: ForumEditForumCard(),
             ),
           ],
         ),

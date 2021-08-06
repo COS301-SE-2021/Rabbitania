@@ -161,7 +161,7 @@ Widget isImageWidget(String ImageF) {
   }
 }
 
-Future<String> addNewThread(String title, String content) async {
+Future<String> editNoticeboardThread(String title, String content) async {
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
@@ -178,7 +178,7 @@ Future<String> addNewThread(String title, String content) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'threadId': 5,
+        'threadId': noticeID,
         'threadTitle': title,
         'threadContent': content,
         'minLevel': 0,
