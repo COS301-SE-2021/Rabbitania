@@ -10,6 +10,8 @@ import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class BookingDayScreen extends StatefulWidget {
   final displayText;
+  final bookText = 'Book';
+
   BookingDayScreen(this.displayText);
   @override
   _BookingDayState createState() => _BookingDayState();
@@ -43,17 +45,34 @@ class _BookingDayState extends State<BookingDayScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        floatingActionButton: fab(context),
+        floatingActionButton: FloatingActionButton(
+          //Floating action button on Scaffold
+          onPressed: () {
+            //code to execute on button press
+          },
+          backgroundColor: Color.fromRGBO(172, 255, 79, 1),
+          child: Icon(
+            Icons.apps_sharp,
+            color: Color.fromRGBO(33, 33, 33, 1),
+          ), //icon inside button
+        ),
         floatingActionButtonLocation: fabl(context),
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 100,
+          toolbarHeight: 150,
           elevation: 1,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Column(
             children: <Widget>[
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05,
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -108,25 +127,11 @@ class _BookingDayState extends State<BookingDayScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 50),
                     child: BookingDayText(
-                      'Morning',
-                    ),
+                        'Morning', this.displayText, widget.bookText),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 50),
                   ),
-
-                  Container(
-                    margin: const EdgeInsets.only(top: 50),
-                    child: BookingDayText('Afternoon'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                  ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 40),
-                  //   child: BookingDayScreenButton(),
-                  // ),
                 ],
               ),
             ],

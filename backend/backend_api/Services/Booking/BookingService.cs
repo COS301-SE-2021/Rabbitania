@@ -31,14 +31,9 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Invalid UserId");
             }
 
-            if (request.Date.Hour.Equals(0) || request.Date.Day.Equals(0))
+            if (request.BookingDate == "")
             {
                 throw new InvalidDateException("Date is not in correct format");
-            }
-
-            if (request.Duration.Equals(0) || request.Duration < 0)
-            {
-                throw new InvalidDurationException("The duration of the booking is invalid");
             }
 
             var response = new CreateBookingResponse(
