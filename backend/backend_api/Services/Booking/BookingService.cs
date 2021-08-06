@@ -65,7 +65,15 @@ namespace backend_api.Services.Booking
 
         public async Task<CancelBookingResponse> CancelBooking(CancelBookingRequest request)
         {
-            return null;
+            if (request != null)
+            {
+                var resp = await _bookingRepository.CancelBooking(request);
+                return new CancelBookingResponse(resp);
+            }
+            else
+            {
+                throw new InvalidBookingException("Request is null or empty");
+            }
         }
 
         public async Task<GetBookingResponse> ViewBooking(GetBookingRequest request)
