@@ -24,7 +24,8 @@ class InfoForm extends StatefulWidget {
 class _infoForm extends State<InfoForm> {
   var user;
   final _formKey = GlobalKey<FormState>();
-  final myController = TextEditingController();
+  final userBioController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   String _dropDownRoleValue = 'Developer';
   String _dropDownLevelValue = '0';
   String _dropDownOfficeValue = 'Pretoria';
@@ -57,8 +58,8 @@ class _infoForm extends State<InfoForm> {
       body: jsonEncode(<String, dynamic>{
         'userId': userID,
         'name': user.displayName,
-        'phoneNumber': user.phoneNumber,
-        'userDescription': myController.text,
+        'phoneNumber': phoneNumberController.text,
+        'userDescription': userBioController.text,
         'userImage': user.photoURL,
         'officeLocation': officeLocationInt
       }),
@@ -233,53 +234,6 @@ class _infoForm extends State<InfoForm> {
                                   child: DropdownButton<String>(
                                     dropdownColor:
                                         Color.fromRGBO(33, 33, 33, 1),
-                                    value: _dropDownLevelValue,
-                                    underline: Container(
-                                      height: 2,
-                                      color: Color.fromRGBO(171, 255, 79, 1),
-                                    ),
-                                    onChanged: (String? newValue) {
-                                      setState(() =>
-                                          {_dropDownLevelValue = newValue!});
-                                    },
-                                    items: <String>[
-                                      '0',
-                                      '1',
-                                      '2',
-                                      '3',
-                                      '4',
-                                      '5',
-                                      '6',
-                                      '7',
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Container(
-                                          width: 305,
-                                          child: Text(
-                                            value,
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  171, 255, 79, 1),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 20),
-                              width: MediaQuery.of(context).size.width,
-                              child: ButtonTheme(
-                                alignedDropdown: true,
-                                child: Center(
-                                  child: DropdownButton<String>(
-                                    dropdownColor:
-                                        Color.fromRGBO(33, 33, 33, 1),
                                     value: _dropDownOfficeValue,
                                     underline: Container(
                                       height: 2,
@@ -310,6 +264,42 @@ class _infoForm extends State<InfoForm> {
                                 ),
                               ),
                             ),
+                            Container(
+                              padding: EdgeInsets.only(top: 20),
+                              width: MediaQuery.of(context).size.width,
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                child: Center(
+                                  child: TextFormField(
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(171, 255, 79, 1)),
+                                    autocorrect: true,
+                                    decoration: InputDecoration(
+                                      hintStyle: TextStyle(
+                                          color: Color.fromRGBO(
+                                              171, 255, 79, 0.6)),
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: Color.fromRGBO(171, 255, 79, 1),
+                                      )),
+                                      hintText: 'Phone Number',
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color.fromRGBO(
+                                                171, 255, 79, 1)),
+                                      ),
+                                    ),
+                                    controller: phoneNumberController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter text';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
                             Center(
                               child: Container(
                                 padding: EdgeInsets.only(top: 20),
@@ -333,7 +323,7 @@ class _infoForm extends State<InfoForm> {
                                               Color.fromRGBO(171, 255, 79, 1)),
                                     ),
                                   ),
-                                  controller: myController,
+                                  controller: userBioController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter text';
