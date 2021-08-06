@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
