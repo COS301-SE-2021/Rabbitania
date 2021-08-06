@@ -73,7 +73,6 @@ Future<List<ForumObj>> fetchForum() async {
   return threadObj;
 }
 
-
 Future<bool> deleteForum(int currentForumID) async {
   try {
     if (currentForumID < 0) {
@@ -96,7 +95,6 @@ Future<bool> deleteForum(int currentForumID) async {
     }
   } catch (Exception) {
     return false;
-
   }
 }
 
@@ -186,7 +184,6 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   }
 }
 
-
 //////////////////////////
 ///ForumThreadComments:
 /////////////////////////
@@ -217,34 +214,30 @@ class ThreadComments {
   final int userId;
   final String? user;
 
-  ThreadComments({
-    
-    required this.threadCommentId,
-    required this.commentBody,
-    required this.createdDate,
-    required this.imageURL,
-    required this.likes,
-    required this.dislikes,
-    required this.forumThreadId,
-    required this.forumThread,
-    required this.userId,
-    required this.user
-
-  });
+  ThreadComments(
+      {required this.threadCommentId,
+      required this.commentBody,
+      required this.createdDate,
+      required this.imageURL,
+      required this.likes,
+      required this.dislikes,
+      required this.forumThreadId,
+      required this.forumThread,
+      required this.userId,
+      required this.user});
 
   factory ThreadComments.fromJson(Map<String, dynamic> json) {
     return ThreadComments(
-      threadCommentId: json['threadCommentId'],
-      commentBody: json['commentBody'],
-      createdDate: json['createdDate'],
-      imageURL: json['imageUrl'],
-      likes: json['likes'],
-      dislikes: json['dislikes'],
-      userId: json['userId'],
-      user: json['user'],
-      forumThreadId: json['forumThreadId'],
-      forumThread: json['forumThread']
-    );
+        threadCommentId: json['threadCommentId'],
+        commentBody: json['commentBody'],
+        createdDate: json['createdDate'],
+        imageURL: json['imageUrl'],
+        likes: json['likes'],
+        dislikes: json['dislikes'],
+        userId: json['userId'],
+        user: json['user'],
+        forumThreadId: json['forumThreadId'],
+        forumThread: json['forumThread']);
   }
 }
 
@@ -252,8 +245,9 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
   HttpClient client = new HttpClient();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
-  String url = 'http://10.0.2.2:5000/api/Forum/RetrieveThreadComments?ForumThreadID=' +
-      ThreadIdentifier.toString();
+  String url =
+      'http://10.0.2.2:5000/api/Forum/RetrieveThreadComments?ForumThreadID=' +
+          ThreadIdentifier.toString();
 
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
   request.headers.set('content-type', 'application/json');
@@ -262,7 +256,8 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
   String reply = await response1.transform(utf8.decoder).join();
   print(jsonDecode(reply));
 
-  List? cList = ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
+  List? cList =
+      ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
 
   List<ThreadComments> CommentObj = [];
 
@@ -275,3 +270,5 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
     return CommentObj;
   } else {
     return CommentObj;
+  }
+}
