@@ -32,11 +32,20 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
                 future: futureStringReceivedForum,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return AlertDialog(content: Text(snapshot.data!));
+                    return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        content: Text(snapshot.data!));
                   } else if (snapshot.hasError) {
-                    return AlertDialog(content: Text('${snapshot.error}'));
+                    return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        content: Text('${snapshot.error}'));
                   }
-                  return AlertDialog(content: CircularProgressIndicator());
+                  return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: CircularProgressIndicator());
                 },
               );
             },

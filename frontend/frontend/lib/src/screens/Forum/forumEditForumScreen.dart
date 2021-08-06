@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -35,11 +36,38 @@ class _ForumEditForumScreen extends State<ForumEditForumScreen> {
                 future: futureEditString,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return AlertDialog(content: Text(snapshot.data!));
+                    return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      title: Text(snapshot.data!),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Color.fromRGBO(171, 255, 79, 1),
+                            size: 24.0,
+                          ),
+                          tooltip: 'Continue',
+                          onPressed: () async {
+                            UtilModel.route(() => Forum(), context);
+                          },
+                        ),
+                      ],
+                    );
                   } else if (snapshot.hasError) {
-                    return AlertDialog(content: Text('${snapshot.error}'));
+                    return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        content: Text('${snapshot.error}'));
                   }
-                  return AlertDialog(content: CircularProgressIndicator());
+                  return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: CircularProgressIndicator());
                 },
               );
             },
