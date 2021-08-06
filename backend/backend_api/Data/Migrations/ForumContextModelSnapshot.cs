@@ -33,6 +33,9 @@ namespace backend_api.Data.Migrations
                     b.Property<int>("ForumId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ForumThreadBody")
+                        .HasColumnType("text");
+
                     b.Property<string>("ForumThreadTitle")
                         .HasColumnType("text");
 

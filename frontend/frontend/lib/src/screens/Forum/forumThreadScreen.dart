@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'forumCreateThreadScreen.dart';
 
 class ForumThreadScreen extends StatefulWidget {
   createState() {
@@ -29,11 +33,24 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: fab(context),
-      floatingActionButtonLocation: fabl(context),
+      floatingActionButton: FancyFab(
+        numberOfItems: 2,
+        icon1: Icons.add,
+        onPressed1: () {
+          UtilModel.route(() => ForumCreateThreadScreen(), context);
+        },
+        icon2: Icons.delete,
+        onPressed2: () {},
+        icon3: Icons.airplane_ticket,
+        onPressed3: () {},
+      ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            UtilModel.route(() => Forum(), context);
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -68,7 +85,7 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
               fit: BoxFit.contain,
             ),
             Container(
-                padding: EdgeInsets.only(bottom: 75),
+                padding: EdgeInsets.only(bottom: 30),
                 child: ForumThreadsCards()),
           ],
         ),

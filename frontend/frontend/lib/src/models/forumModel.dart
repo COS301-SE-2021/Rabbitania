@@ -92,6 +92,7 @@ class ForumThreads {
 class ForumThread {
   final int forumThreadId;
   final String forumThreadTitle;
+  final String forumThreadBody;
   final String createdDate;
   final String imageURL;
   final int forumId;
@@ -102,6 +103,7 @@ class ForumThread {
   ForumThread({
     required this.forumThreadId,
     required this.forumThreadTitle,
+    required this.forumThreadBody,
     required this.createdDate,
     required this.imageURL,
     required this.forumId,
@@ -114,6 +116,7 @@ class ForumThread {
     return ForumThread(
       forumThreadId: json['forumThreadId'],
       forumThreadTitle: json['forumThreadTitle'],
+      forumThreadBody: json['forumThreadBody'],
       createdDate: json['createdDate'],
       imageURL: json['imageURL'],
       forumId: json['forumId'],
