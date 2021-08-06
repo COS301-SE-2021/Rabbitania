@@ -35,8 +35,8 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             context: context,
             builder: (context) {
               if (titleController.text != "" && contentController.text != "") {
-                futureStringReceived =
-                    addNewThread(titleController.text, contentController.text);
+                futureStringReceived = editNoticeboardThread(
+                    titleController.text, contentController.text);
               }
               return FutureBuilder<String>(
                 future: futureStringReceived,

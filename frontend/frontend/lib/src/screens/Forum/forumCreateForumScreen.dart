@@ -33,9 +33,28 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return AlertDialog(
-                        elevation: 5,
-                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                        content: Text(snapshot.data!));
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: Text(snapshot.data!),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      title: Text(snapshot.data!),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Color.fromRGBO(171, 255, 79, 1),
+                            size: 24.0,
+                          ),
+                          tooltip: 'Continue',
+                          onPressed: () async {
+                            UtilModel.route(() => Forum(), context);
+                          },
+                        ),
+                      ],
+                    );
                   } else if (snapshot.hasError) {
                     return AlertDialog(
                         elevation: 5,
