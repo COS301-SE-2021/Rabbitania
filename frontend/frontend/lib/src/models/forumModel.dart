@@ -73,7 +73,6 @@ Future<List<ForumObj>> fetchForum() async {
   return threadObj;
 }
 
-
 Future<bool> deleteForum(int currentForumID) async {
   try {
     if (currentForumID < 0) {
@@ -96,7 +95,6 @@ Future<bool> deleteForum(int currentForumID) async {
     }
   } catch (Exception) {
     return false;
-
   }
 }
 
@@ -186,7 +184,6 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   }
 }
 
-
 //////////////////////////
 ///ForumThreadComments:
 /////////////////////////
@@ -273,3 +270,5 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
     return CommentObj;
   } else {
     return CommentObj;
+  }
+}

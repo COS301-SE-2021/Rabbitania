@@ -92,8 +92,9 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
             ),
 
             Container(
-                padding: EdgeInsets.only(bottom: 30),
-                child: ForumThreadCommentsCards()),
+              padding: EdgeInsets.only(bottom: 30),
+              child: ForumThreadCommentsCards(),
+            ),
           ],
         ),
       ),
