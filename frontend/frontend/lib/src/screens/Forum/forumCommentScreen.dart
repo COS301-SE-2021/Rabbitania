@@ -10,6 +10,7 @@ import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'forumCreateThreadScreen.dart';
+import 'forumThreadScreen.dart';
 
 class ForumCommentScreen extends StatefulWidget {
   createState() {
@@ -49,7 +50,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            UtilModel.route(() => Forum(), context);
+            UtilModel.route(() => ForumThreadScreen(), context);
           },
         ),
         elevation: 0,

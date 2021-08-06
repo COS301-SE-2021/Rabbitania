@@ -20,8 +20,8 @@ Widget ForumLatestThread(int forumIdentifier) {
                   padding: EdgeInsets.only(bottom: 8, top: 8),
                   child: InkWell(
                     onTap: () {
-                      //noticeID = this.id;
-                      //UtilModel.route(() => Notice(), context);
+                      // noticeID = this.id;
+                      // UtilModel.route(() => Notice(), context);
                     },
                     child: Card(
                       color: Colors.transparent,
