@@ -26,7 +26,7 @@ class AppState extends State<App> {
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         //home: Login(),
-        home: InfoForm(new MockUser()),
+        home: Login(),
       ),
     );
   }
