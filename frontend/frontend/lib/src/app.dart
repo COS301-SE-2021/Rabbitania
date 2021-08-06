@@ -8,6 +8,7 @@ import 'package:frontend/src/screens/Login/supplyInfoScreen.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
 import 'package:provider/provider.dart';
 import './widgets/expandable_button_widget.dart';
+import 'models/Testing/mockUser.dart';
 import 'screens/Login/loginScreen.dart';
 import 'screens/Forum/forumScreen.dart';
 
@@ -25,7 +26,7 @@ class AppState extends State<App> {
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         //home: Login(),
-        home: InfoForm({}),
+        home: InfoForm(new MockUser()),
       ),
     );
   }
