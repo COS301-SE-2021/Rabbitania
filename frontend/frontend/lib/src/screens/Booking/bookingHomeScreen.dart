@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/models/Booking/view_booking_model.dart';
+import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
@@ -21,7 +21,15 @@ class _BookingState extends State<BookingScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        floatingActionButton: fab(context),
+        floatingActionButton: FloatingActionButton(
+          //Floating action button on Scaffold
+          onPressed: () {
+            //code to execute on button press
+          },
+          backgroundColor: Color.fromRGBO(172, 255, 79, 1),
+          child: Icon(Icons.apps_sharp,
+              color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        ),
         floatingActionButtonLocation: fabl(context),
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
@@ -32,6 +40,13 @@ class _BookingState extends State<BookingScreen> {
           backgroundColor: Colors.transparent,
           title: Column(
             children: <Widget>[
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

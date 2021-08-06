@@ -7,7 +7,7 @@ namespace backend_api.Models.Booking
 {
     public class Booking : IBooking
     {
-        public Booking(DateTime bookingDate, string timeSlot, OfficeLocation office, int userId)
+        public Booking(string bookingDate, string timeSlot, OfficeLocation office, int userId)
         {
             BookingDate = bookingDate;
             TimeSlot = timeSlot;
@@ -18,7 +18,7 @@ namespace backend_api.Models.Booking
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookingId { get; set; }
-        public DateTime BookingDate { get; set; }
+        public string BookingDate { get; set; }
         
         [ForeignKey("BookingSchedules")]
         public string TimeSlot { get; set; }
