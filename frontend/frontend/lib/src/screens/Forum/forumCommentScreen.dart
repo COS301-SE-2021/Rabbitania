@@ -20,6 +20,7 @@ class ForumCommentScreen extends StatefulWidget {
 
 late Future<List<ThreadComments>> futureThreadComments;
 
+//////
 class _ForumCommentScreen extends State<ForumCommentScreen> {
   void initState() {
     super.initState();
@@ -32,6 +33,9 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
     print("refresh");
   }
 
+//////////////////////////////
+  ///Navigation and FAB icons///
+//////////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,9 +90,11 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               _svg_background,
               fit: BoxFit.contain,
             ),
+
             Container(
-                padding: EdgeInsets.only(bottom: 30),
-                child: ForumThreadCommentsCards()),
+              padding: EdgeInsets.only(bottom: 30),
+              child: ForumThreadCommentsCards(),
+            ),
           ],
         ),
       ),
