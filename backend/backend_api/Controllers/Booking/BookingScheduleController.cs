@@ -197,5 +197,41 @@ namespace backend_api.Controllers.Booking
                         return BadRequest("Request is null or empty");
                     }
                 }
+                /// <summary>
+                ///     API endpoint for checking the availability of a booking schedule
+                ///     Checks if the given request is valid and then queries the service
+                ///     If the schedule has availability, 1 is deducted and the database is updated
+                ///     A bool is returned.
+                /// </summary>
+                /// <param name="request"></param>
+                /// <returns>bool</returns>
+                [HttpGet]
+                [Route("CheckAvailability")]
+                public async Task<bool> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
+                {
+                    if (request != null)
+                    {
+                        try
+                        {
+                            var resp = await _scheduleService.CheckAvailability(request);
+                            if (resp.Successful == true)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
     }
 }

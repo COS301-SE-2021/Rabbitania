@@ -97,5 +97,31 @@ namespace backend_api.Services.Booking
 
             }
         }
+
+        public async Task<CheckScheduleAvailabilityResponse> CheckAvailability(CheckScheduleAvailabilityRequest request)
+        {
+            if (request != null)
+            {
+                var bookingReqObj = new GetBookingScheduleRequest(request.TimeSlot, request.Office);
+                var resp = await _scheduleRepository.GetBookingSchedule(bookingReqObj);
+                if (resp.BookingSchedule.Availability > 0)
+                {
+                    //update booking request obj to update schedule availability
+                    var updateBookingReq = new UpdateBookingScheduleRequest(request.TimeSlot, 
+                        request.Office,
+                        resp.BookingSchedule.Availability - 1);
+                    return new CheckScheduleAvailabilityResponse((await _scheduleRepository.UpdateBookingSchedule(updateBookingReq)).Success);
+                }
+                else
+                {
+                    return new CheckScheduleAvailabilityResponse(false);
+                }
+            }
+            else
+            {
+                throw new InvalidBookingException("Request is null or empty");
+            }
+        }
+
     }
 }

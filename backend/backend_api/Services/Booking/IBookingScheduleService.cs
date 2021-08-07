@@ -22,5 +22,6 @@ namespace backend_api.Services.Booking
 
         Task<GetAllBookingSchedulesResponse> ViewAllBookingSchedules(GetAllBookingSchedulesRequest request);
 
+        Task<CheckScheduleAvailabilityResponse> CheckAvailability(CheckScheduleAvailabilityRequest request);
     }
 }
