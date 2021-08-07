@@ -157,10 +157,10 @@ namespace backend_api.Data.Forum
 
             try
             {
-                var foreignForumId = await _forum.Forums.FindAsync(forumThreadId);
-                if (foreignForumId == null)
+                var foreignForumThreadId = await _forum.ForumThreads.FindAsync(forumThreadId);
+                if (foreignForumThreadId == null)
                 {
-                    throw new InvalidForumRequestException("Forum does not exist in the database");
+                    throw new InvalidForumRequestException("Forum Thread does not exist in the database");
                 }
                 _forum.ThreadComments.Add(threadComment);
                 await _forum.SaveChanges();

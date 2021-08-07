@@ -197,7 +197,7 @@ class ForumThreadComments {
 
   factory ForumThreadComments.fromJson(Map<String, dynamic> json) {
     return ForumThreadComments(
-      forumCommentsList: json["ThreadComments"],
+      forumCommentsList: json["threadComments"],
     );
   }
 }
@@ -231,13 +231,13 @@ class ThreadComments {
         threadCommentId: json['threadCommentId'],
         commentBody: json['commentBody'],
         createdDate: json['createdDate'],
-        imageURL: json['imageUrl'],
+        imageURL: json['imageURL'],
         likes: json['likes'],
         dislikes: json['dislikes'],
-        userId: json['userId'],
-        user: json['user'],
         forumThreadId: json['forumThreadId'],
-        forumThread: json['forumThread']);
+        forumThread: json['forumThread'],
+        userId: json['userId'],
+        user: json['user']);
   }
 }
 

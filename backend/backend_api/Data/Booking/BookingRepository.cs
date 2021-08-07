@@ -48,9 +48,10 @@ namespace backend_api.Data.Booking
             var booking = await _bookings.Bookings.FirstOrDefaultAsync(x => x.BookingId == request.BookingId);
             try
             {
-                _bookings.Bookings.Remove(booking);
-                await _bookings.SaveChangesAsync();
-                if (_bookings.Entry(booking).State == EntityState.Deleted)
+                //_bookings.Bookings.Remove(booking);
+                _bookings.Entry(booking).State = EntityState.Deleted;
+                var deleted = await _bookings.SaveChangesAsync();
+                if (deleted >= 0)
                     return HttpStatusCode.Accepted;
                 else
                     return HttpStatusCode.NotFound;
