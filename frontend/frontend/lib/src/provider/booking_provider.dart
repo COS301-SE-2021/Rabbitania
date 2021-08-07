@@ -53,7 +53,7 @@ class BookingProvider {
       Uri.parse(
           'https://10.0.2.2:5001/api/Booking/DeleteBooking?BookingId=$bookingId'),
     );
-    if (response.statusCode == 201 || response.statusCode == 200) {
+    if (response.statusCode == 200) {
       return true;
     } else {
       throw ("Server Error Status Code:  " + response.statusCode.toString());
