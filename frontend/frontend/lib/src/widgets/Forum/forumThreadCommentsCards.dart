@@ -37,18 +37,12 @@ class ForumThreadCommentsCards extends StatelessWidget {
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
-                                "No Threads Currently In " + currentForumName,
+                                "No Comments",
                                 style: TextStyle(
                                     letterSpacing: 2.0,
                                     color: Colors.white,
                                     fontSize: 22),
                               ),
-                            ),
-                            subtitle: Text(
-                              "New Threads will be posted here",
-                              style: TextStyle(color: Colors.white),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
@@ -57,16 +51,16 @@ class ForumThreadCommentsCards extends StatelessWidget {
                   } else {
                     List<Widget> cards = [];
                     while (iterate.moveNext()) {
+
                       cards.add(forumCommentCard(
-                        threadCommentId: iterate.current.threadCommentId,
-                        commentBody: iterate.current.commentBody,
-                        createdDate: iterate.current.createdDate,
-                        imageURL: iterate.current.imageURL,
-                        likes: iterate.current.likes,
-                        dislikes: iterate.current.dislikes,
-                        forumThreadId: iterate.current.forumThreadId,
-                        userId: iterate.current.userId,
-                      ));
+                          threadCommentId: iterate.current.threadCommentId,
+                          commentBody: iterate.current.commentBody,
+                          createdDate: iterate.current.createdDate,
+                          imageURL: iterate.current.imageURL,
+                          likes: iterate.current.likes,
+                          dislikes: iterate.current.dislikes,
+                          forumThreadId: iterate.current.forumThreadId,
+                          userId: iterate.current.userId));
                     }
                     return new Column(children: cards);
                   }
@@ -94,15 +88,16 @@ class forumCommentCard extends StatelessWidget {
   final int forumThreadId;
   final int userId;
 
-  const forumCommentCard(
-      {required this.threadCommentId,
-      required this.commentBody,
-      required this.createdDate,
-      required this.imageURL,
-      required this.likes,
-      required this.dislikes,
-      required this.forumThreadId,
-      required this.userId});
+  const forumCommentCard({
+    required this.threadCommentId,
+    required this.commentBody,
+    required this.createdDate,
+    required this.imageURL,
+    required this.likes,
+    required this.dislikes,
+    required this.forumThreadId,
+    required this.userId,
+  });
 
   @override
   Widget build(BuildContext context) {
