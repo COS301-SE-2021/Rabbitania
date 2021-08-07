@@ -8,7 +8,13 @@
 
         private int _forumThreadId;
         private string _forumThreadTitle;
+        private string _forumThreadBody;
         private string _imageUrl;
+        public string ForumThreadBody
+        {
+            get => _forumThreadBody;
+            set => _forumThreadBody = value;
+        }
 
         public int ForumThreadId
         {
@@ -28,10 +34,11 @@
             set => _imageUrl = value;
         }
 
-        public EditForumThreadRequest(int forumThreadId, string forumThreadTitle, string imageUrl)
+        public EditForumThreadRequest(int forumThreadId, string forumThreadTitle, string forumThreadBody, string imageUrl)
         {
             _forumThreadId = forumThreadId;
             _forumThreadTitle = forumThreadTitle;
+            _forumThreadBody = forumThreadBody;
             _imageUrl = imageUrl;
         }
     }

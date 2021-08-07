@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
-import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
-import 'package:frontend/src/screens/userProfileScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumHome.dart';
+import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/widgets/Forum/forumThreadCommentsCards.dart';
+import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../Noticeboard/noticeboardScreen.dart';
+import 'forumCreateThreadScreen.dart';
+import 'forumThreadScreen.dart';
 
-class Forum extends StatefulWidget {
+class ForumCommentScreen extends StatefulWidget {
   createState() {
-    return _Forum();
+    return _ForumCommentScreen();
   }
 }
 
-late Future<List<ForumObj>> futureForum;
-late Future<List<ForumThread>> futureForumLatestThread;
+late Future<List<ThreadComments>> futureThreadComments;
 
-class _Forum extends State<Forum> {
+class _ForumCommentScreen extends State<ForumCommentScreen> {
   void initState() {
     super.initState();
-    futureForum = fetchForum();
+    futureThreadComments = fetchThreadComments(currentThreadID);
   }
 
   void refresh() {
-    UtilModel.route(() => Forum(), context);
+    UtilModel.route(() => ForumCommentScreen(), context);
     setState(() {});
     print("refresh");
   }
@@ -35,29 +35,33 @@ class _Forum extends State<Forum> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
-        onPressed: () {
-          //code to execute on button press
-
-          UtilModel.route(() => ForumCreateScreen(), context);
+      floatingActionButton: FancyFab(
+        numberOfItems: 2,
+        icon1: Icons.add,
+        onPressed1: () {
+          UtilModel.route(() => ForumCreateThreadScreen(), context);
         },
-        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        icon2: Icons.delete,
+        onPressed2: () {},
+        icon3: Icons.airplane_ticket,
+        onPressed3: () {},
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: BackButton(
+          onPressed: () {
+            UtilModel.route(() => ForumThreadScreen(), context);
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         title: Center(
           child: Text(
-            'Forum   ',
+            currentForumName.toString(),
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
-              fontSize: 35,
+              fontSize: 25,
             ),
           ),
         ),
@@ -82,7 +86,9 @@ class _Forum extends State<Forum> {
               _svg_background,
               fit: BoxFit.contain,
             ),
-            Container(padding: EdgeInsets.only(bottom: 0), child: ForumHome()),
+            Container(
+                padding: EdgeInsets.only(bottom: 30),
+                child: ForumThreadCommentsCards()),
           ],
         ),
       ),

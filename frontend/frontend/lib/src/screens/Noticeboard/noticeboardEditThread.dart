@@ -27,6 +27,7 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
         //Floating action button on Scaffold
         onPressed: () {
           //code to execute on button press
@@ -34,26 +35,54 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             context: context,
             builder: (context) {
               if (titleController.text != "" && contentController.text != "") {
-                futureStringReceived =
-                    addNewThread(titleController.text, contentController.text);
+                futureStringReceived = editNoticeboardThread(
+                    titleController.text, contentController.text);
               }
               return FutureBuilder<String>(
                 future: futureStringReceived,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return AlertDialog(content: Text(snapshot.data!));
+                    return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: Text(snapshot.data!),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      title: Text(snapshot.data!),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Color.fromRGBO(171, 255, 79, 1),
+                            size: 24.0,
+                          ),
+                          tooltip: 'Continue',
+                          onPressed: () async {
+                            UtilModel.route(() => NoticeBoard(), context);
+                          },
+                        ),
+                      ],
+                    );
                   } else if (snapshot.hasError) {
-                    return AlertDialog(content: Text('${snapshot.error}'));
+                    return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        content: Text('${snapshot.error}'));
                   }
-                  return AlertDialog(content: CircularProgressIndicator());
+                  return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: CircularProgressIndicator());
                 },
               );
             },
           );
         },
-        child: Icon(Icons.edit), //icon inside button
+        child: Icon(Icons.edit,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(

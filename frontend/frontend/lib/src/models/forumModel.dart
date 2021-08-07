@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 //GLOBAL VARIABLES
 var currentForumID = -1;
 var currentForumName = "ForumName";
+var currentThreadID = -1;
+var currentThreadName = "ThreadName";
 //
 
 ////////////////////////////////////////////////////////////////
@@ -71,6 +73,33 @@ Future<List<ForumObj>> fetchForum() async {
   return threadObj;
 }
 
+
+Future<bool> deleteForum(int currentForumID) async {
+  try {
+    if (currentForumID < 0) {
+      throw ("Error Forum ID is Incorrect");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteForum'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'forumId': currentForumID,
+      }),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Failed to delete, error code" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return false;
+
+  }
+}
+
 ////////////////////////////////////////////////////////////////
 /// Forum Getting Forum Threads
 ///////////////////////////////////////////////////////////////
@@ -92,6 +121,7 @@ class ForumThreads {
 class ForumThread {
   final int forumThreadId;
   final String forumThreadTitle;
+  final String forumThreadBody;
   final String createdDate;
   final String imageURL;
   final int forumId;
@@ -102,6 +132,7 @@ class ForumThread {
   ForumThread({
     required this.forumThreadId,
     required this.forumThreadTitle,
+    required this.forumThreadBody,
     required this.createdDate,
     required this.imageURL,
     required this.forumId,
@@ -114,6 +145,7 @@ class ForumThread {
     return ForumThread(
       forumThreadId: json['forumThreadId'],
       forumThreadTitle: json['forumThreadTitle'],
+      forumThreadBody: json['forumThreadBody'],
       createdDate: json['createdDate'],
       imageURL: json['imageURL'],
       forumId: json['forumId'],
@@ -153,3 +185,93 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
     return threadObj;
   }
 }
+
+
+//////////////////////////
+///ForumThreadComments:
+/////////////////////////
+
+class ForumThreadComments {
+  final List<dynamic>? forumCommentsList;
+
+  ForumThreadComments({
+    required this.forumCommentsList,
+  });
+
+  factory ForumThreadComments.fromJson(Map<String, dynamic> json) {
+    return ForumThreadComments(
+      forumCommentsList: json["ThreadComments"],
+    );
+  }
+}
+
+class ThreadComments {
+  final int threadCommentId;
+  final String commentBody;
+  final String createdDate;
+  final String imageURL;
+  final int likes;
+  final int dislikes;
+  final int forumThreadId;
+  final String? forumThread;
+  final int userId;
+  final String? user;
+
+  ThreadComments({
+    
+    required this.threadCommentId,
+    required this.commentBody,
+    required this.createdDate,
+    required this.imageURL,
+    required this.likes,
+    required this.dislikes,
+    required this.forumThreadId,
+    required this.forumThread,
+    required this.userId,
+    required this.user
+
+  });
+
+  factory ThreadComments.fromJson(Map<String, dynamic> json) {
+    return ThreadComments(
+      threadCommentId: json['threadCommentId'],
+      commentBody: json['commentBody'],
+      createdDate: json['createdDate'],
+      imageURL: json['imageUrl'],
+      likes: json['likes'],
+      dislikes: json['dislikes'],
+      userId: json['userId'],
+      user: json['user'],
+      forumThreadId: json['forumThreadId'],
+      forumThread: json['forumThread']
+    );
+  }
+}
+
+Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
+  HttpClient client = new HttpClient();
+  client.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+  String url = 'http://10.0.2.2:5000/api/Forum/RetrieveThreadComments?ForumThreadID=' +
+      ThreadIdentifier.toString();
+
+  HttpClientRequest request = await client.getUrl(Uri.parse(url));
+  request.headers.set('content-type', 'application/json');
+
+  HttpClientResponse response1 = await request.close();
+  String reply = await response1.transform(utf8.decoder).join();
+  print(jsonDecode(reply));
+
+  List? cList = ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
+
+  List<ThreadComments> CommentObj = [];
+
+  if (cList != null) {
+    for (var t in cList) {
+      CommentObj.add(ThreadComments.fromJson(t));
+    }
+
+    client.close();
+    return CommentObj;
+  } else {
+    return CommentObj;

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitialForumCreate : Migration
+    public partial class InitialForumModelMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,7 @@ namespace backend_api.Data.Migrations
                     ForumThreadId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ForumThreadTitle = table.Column<string>(type: "text", nullable: true),
+                    ForumThreadBody = table.Column<string>(type: "text", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     imageURL = table.Column<string>(type: "text", nullable: true),
                     ForumId = table.Column<int>(type: "integer", nullable: false),

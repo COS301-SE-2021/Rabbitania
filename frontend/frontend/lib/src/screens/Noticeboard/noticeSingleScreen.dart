@@ -1,8 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardEditThread.dart';
 import 'package:frontend/src/screens/userProfileScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
+import 'package:frontend/src/widgets/Noticeboard/noticeboardHome.dart';
 import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeCard.dart';
@@ -28,19 +31,63 @@ class _Notice extends State<Notice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
-        onPressed: () {
-          //code to execute on button press
+      floatingActionButton: FancyFab(
+        numberOfItems: 2,
+        icon1: Icons.edit,
+        onPressed1: () {
           titleController.clear();
           contentController.clear();
           imageFile = null;
           UtilModel.route(() => NoticeBoardEditThread(), context);
-          ;
         },
-        child: Icon(Icons.edit), //icon inside button
+        icon2: Icons.delete,
+        onPressed2: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
+                title: Text("Delete Notice"),
+                contentTextStyle: TextStyle(color: Colors.white, fontSize: 16),
+                content: Text("Are you sure you want to delete this notice?"),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.check,
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      size: 24.0,
+                    ),
+                    tooltip: 'Delete',
+                    onPressed: () async {
+                      // ignore: unused_local_variable
+                      final deleteResponse = await deleteThread(noticeID);
+                      UtilModel.route(() => NoticeBoard(), context);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.close,
+                      color: Color.fromRGBO(255, 79, 79, 1),
+                      size: 24.0,
+                    ),
+                    tooltip: 'Cancel',
+                    onPressed: () {
+                      //final deleteResponse = await deleteThread(this.id);
+                      UtilModel.route(() => NoticeBoard(), context);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        icon3: Icons.airplane_ticket,
+        onPressed3: () {
+          print("Fab 3");
+        },
       ),
-      floatingActionButtonLocation: fabl(context),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
