@@ -6,6 +6,7 @@ import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 
 class BookingProvider {
+  // GET ALL
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
     //UserProvider userProvider = new UserProvider();
     final response = await http.get(
@@ -23,6 +24,7 @@ class BookingProvider {
     }
   }
 
+  // POST
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
     final response = await http.post(
@@ -42,6 +44,19 @@ class BookingProvider {
     } else {
       throw ("Failed to create new booking - Error Status: " +
           response.statusCode.toString());
+    }
+  }
+
+  // DELETE
+  Future<bool> deleteBookingAsync(int bookingId) async {
+    final response = await http.delete(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/Booking/DeleteBooking?BookingId=$bookingId'),
+    );
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Server Error Status Code:  " + response.statusCode.toString());
     }
   }
 }
