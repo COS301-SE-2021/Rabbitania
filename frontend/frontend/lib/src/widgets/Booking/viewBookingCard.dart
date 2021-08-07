@@ -38,13 +38,17 @@ class BookingListVew extends StatelessWidget {
     return ListView.builder(
         itemCount: data.length,
         itemBuilder: (context, index) {
-          return _bookingCardTile(data[index].timeSlot, data[index].bookingDate,
-              data[index].office, Icons.bookmark_added_outlined);
+          return _bookingCardTile(
+              data[index].timeSlot,
+              data[index].bookingDate,
+              data[index].office,
+              data[index].id,
+              Icons.bookmark_added_outlined);
         });
   }
 
-  ListTile _bookingCardTile(
-          String title, String subtitle, int subsubtitle, IconData icon) =>
+  ListTile _bookingCardTile(String title, String subtitle, int subsubtitle,
+          int id, IconData icon) =>
       ListTile(
         isThreeLine: true,
         title: Text(
@@ -62,7 +66,7 @@ class BookingListVew extends StatelessWidget {
             fontSize: 20,
           ),
         ),
-        trailing: CancelBookingButton(),
+        trailing: CancelBookingButton(id),
         leading: Icon(
           icon,
           size: 35,
