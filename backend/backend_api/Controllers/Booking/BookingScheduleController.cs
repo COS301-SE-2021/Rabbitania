@@ -204,7 +204,7 @@ namespace backend_api.Controllers.Booking
                 ///     A bool is returned.
                 /// </summary>
                 /// <param name="request"></param>
-                /// <returns>Http response code</returns>
+                /// <returns>bool</returns>
                 [HttpGet]
                 [Route("CheckAvailability")]
                 public async Task<bool> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
