@@ -7,6 +7,7 @@ using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Hubs;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
@@ -56,7 +57,10 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-
+            
+            //SignalR
+            services.AddSignalR();
+            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -192,7 +196,11 @@ namespace backend_api
             app.UseAuthentication();
             app.UseAuthorization();
             
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/ChatHub");
+            });
         }
     }
 }
