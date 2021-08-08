@@ -137,10 +137,41 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               fit: BoxFit.contain,
             ),
 
-            Container(
-              padding: EdgeInsets.only(bottom: 30),
-              child: ForumThreadCommentsCards(),
-            ),
+            ListView(children: <Widget>[
+              Card(
+                color: Color.fromRGBO(57, 57, 57, 25),
+                shadowColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                clipBehavior: Clip.antiAlias,
+                elevation: 2,
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.only(
+                          bottom: 5.0, top: 10, left: 20, right: 10),
+                      title: Container(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          currentThreadName,
+                          style: TextStyle(
+                              letterSpacing: 2.0,
+                              color: Colors.white,
+                              fontSize: 22),
+                        ),
+                      ),
+                      subtitle: Text(
+                        "New Threads Will Be Posted Here",
+                        style: TextStyle(color: Colors.white),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ForumThreadCommentsCards(),
+            ]),
           ],
         ),
       ),
