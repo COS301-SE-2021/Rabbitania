@@ -45,7 +45,7 @@ class ForumThreadsCards extends StatelessWidget {
                               ),
                             ),
                             subtitle: Text(
-                              "New Threads will be posted here",
+                              "New Threads Will Be Posted Here",
                               style: TextStyle(color: Colors.white),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
