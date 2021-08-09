@@ -5,6 +5,8 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
+import 'package:comment_box/comment/comment.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ForumThreadCommentsCards extends StatelessWidget {
   @override
@@ -45,9 +47,9 @@ class ForumThreadCommentsCards extends StatelessWidget {
               ),
             );
           } else {
-            List<Widget> cards = [];
+            List<Widget> comments = [];
             while (iterate.moveNext()) {
-              cards.add(forumCommentCard(
+              comments.add(forumCommentCard(
                   threadCommentId: iterate.current.threadCommentId,
                   commentBody: iterate.current.commentBody,
                   createdDate: iterate.current.createdDate,
@@ -57,7 +59,7 @@ class ForumThreadCommentsCards extends StatelessWidget {
                   forumThreadId: iterate.current.forumThreadId,
                   userId: iterate.current.userId));
             }
-            return new Column(children: cards);
+            return new ListView(children: comments);
           }
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -94,40 +96,77 @@ class forumCommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 0, top: 0),
-      child: InkWell(
-        onTap: () {
-          // currentForumID = this.forumId;
-          // currentForumName = this.forumTitle;
-          // UtilModel.route(() => ForumThreadScreen(), context);
-        },
-        child: Card(
-          color: Color.fromRGBO(57, 57, 57, 100),
-          shadowColor: Colors.black,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          clipBehavior: Clip.antiAlias,
-          elevation: 2,
-          child: Column(
-            children: [
-              ListTile(
-                contentPadding:
-                    EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
-                leading: FlutterLogo(size: 50),
-                title: Container(
-                  padding: EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    commentBody,
-                    style: TextStyle(
-                        letterSpacing: 2.0, color: Colors.white, fontSize: 22),
-                  ),
-                ),
-              ),
-            ],
+    return new Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      child: new Container(
+        color: Color.fromRGBO(57, 57, 57, 1),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          new ListTile(
+            leading: new CircleAvatar(
+              backgroundColor: Color.fromRGBO(171, 255, 79, 1),
+              child:
+                  new Icon(Icons.person, color: Color.fromRGBO(33, 33, 33, 1)),
+              foregroundColor: Colors.white,
+            ),
+            title: new Text(
+              userId.toString(),
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitle: Text(
+              commentBody,
+              style: TextStyle(color: Colors.white),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                TextButton.icon(
+                  label: Text(likes.toString(),
+                      style: TextStyle(color: Color.fromRGBO(175, 255, 79, 1))),
+                  icon: const Icon(Icons.thumb_up_alt_rounded,
+                      size: 20, color: Color.fromRGBO(175, 255, 79, 1)),
+                  onPressed: () {},
+                  //   style: ButtonStyle(
+                  //       //backgroundColor:
+                  //           //MaterialStateProperty.all<Color>(Colors.green)),
+                ),
+                TextButton.icon(
+                  label: Text(dislikes.toString(),
+                      style: TextStyle(color: Colors.red)),
+                  icon: const Icon(Icons.thumb_down_alt_rounded,
+                      size: 20, color: Colors.red),
+                  onPressed: () {},
+                ),
+              ]),
+          new Divider(
+            height: 0.0,
+            thickness: 0.3,
+            color: Colors.black,
+          ),
+        ]),
       ),
+      actions: <Widget>[],
+      secondaryActions: <Widget>[
+        new IconSlideAction(
+          caption: 'Edit',
+          color: Color.fromRGBO(171, 255, 79, 1),
+          icon: Icons.edit,
+          onTap: () => {},
+        ),
+        new IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => {},
+        ),
+      ],
     );
   }
 }
