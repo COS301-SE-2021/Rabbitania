@@ -207,7 +207,7 @@ namespace backend_api.Controllers.Booking
                 /// <returns>bool</returns>
                 [HttpGet]
                 [Route("CheckAvailability")]
-                public async Task<bool> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
+                public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
                 {
                     if (request != null)
                     {
@@ -216,11 +216,12 @@ namespace backend_api.Controllers.Booking
                             var resp = await _scheduleService.CheckAvailability(request);
                             if (resp.Successful == true)
                             {
-                                return true;
+                                return Ok("Slot available, availability deducted");
+
                             }
                             else
                             {
-                                return false;
+                                return BadRequest("No slot available for schedule "+request.Office +", "+request.TimeSlot);
                             }
                         }
                         catch (Exception)
@@ -230,7 +231,7 @@ namespace backend_api.Controllers.Booking
                     }
                     else
                     {
-                        return false;
+                        return BadRequest("Request is null or empty");
                     }
                 }
     }
