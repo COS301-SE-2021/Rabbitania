@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 
 //helper class for booking functionality and business logic
 class BookingHelper {
@@ -40,5 +41,10 @@ class BookingHelper {
     //default return case. If reached and true not yet returned then false is only option
     //possibly replace with thrown exception?
     return false;
+  }
+
+  NavToBookingDayScreen(context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => BookingDayScreen('M')));
   }
 }
