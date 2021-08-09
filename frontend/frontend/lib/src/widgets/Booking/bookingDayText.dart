@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/Booking/bookingHelper.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
 
 class BookingDayText extends StatefulWidget {
   final String displayText;
@@ -206,15 +209,59 @@ class _BookingDayTextState extends State<BookingDayText> {
                         color: Color.fromRGBO(33, 33, 33, 1),
                       ),
                     ),
-                    onPressed: () async {
+                    onPressed: () {
                       int office = this.getOfficeIndex(this.dropdownValue);
                       DateTime date = DateTime.now();
                       String timeSlot =
                           widget.dayOfTheWeek + "," + this.dropdownValue2;
                       // await _bookingProvider.createBookingAsync(
                       //     date.toString(), timeSlot, office, 1);
-                      print(this.getOfficeIndex(this.dropdownValue));
-                      print(timeSlot);
+                      // print(this.getOfficeIndex(this.dropdownValue));
+                      // print(timeSlot);
+
+                      //return a futureBuilder that makes call to helper function
+                      final BookingHelper bookingHelper = BookingHelper();
+
+                      Widget build(context) => FutureBuilder<bool>(
+                            future: bookingHelper.checkAndMakeBooking(
+                                timeslot: timeSlot,
+                                office: office,
+                                bookingDate: date),
+                            builder: (context, snapshot) {
+                              List<Widget> children = [];
+                              if (snapshot.hasData) {
+                                //if future return true then show alert to let user know the booking has been made
+                                if (snapshot.data == true) {
+                                  //snackBar to show that booking has been made successfully
+                                  children = <Widget>[
+                                    SuccessBookingSnackBar(),
+                                  ];
+                                } else {
+                                  //if future returns false then show alert dialog to notify user that no bookings are availible
+                                }
+                              } else if (snapshot.hasError) {
+                                children = <Widget>[
+                                  const Icon(
+                                    Icons.error_outline,
+                                    color: Colors.red,
+                                    size: 60,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 16),
+                                    child: Text('Error: ${snapshot.error}'),
+                                  )
+                                ];
+                              } else {
+                                //show progress indicator when future is loading
+                                children = <Widget>[
+                                  BookingCircularProgressIndicator(),
+                                ];
+                              }
+                              return Center(
+                                child: Column(children: children),
+                              );
+                            },
+                          );
                     },
                   ),
                 ),

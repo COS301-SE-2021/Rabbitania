@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 
-//helper class for booking functionality
+//helper class for booking functionality and business logic
 class BookingHelper {
   final bookingProvider = BookingProvider();
   final userProvider = UserProvider();
