@@ -12,5 +12,7 @@ namespace backend_api.Data.NoticeBoard
         Task<List<Models.NoticeBoard.NoticeBoard>> RetrieveAllNoticeBoardThreads(RetrieveNoticeBoardThreadsRequest request);
 
         Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(DeleteNoticeBoardThreadRequest request);
+
+        Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(EditNoticeBoardThreadRequest request);
     }
 }

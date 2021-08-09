@@ -2,11 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_api.Data.Booking;
+using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Hubs;
+using backend_api.Models.Notification;
+using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
+using backend_api.Services.Booking;
+using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
@@ -50,7 +57,10 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-
+            
+            //SignalR
+            services.AddSignalR();
+            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -59,7 +69,10 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-
+            
+            // For sending an email
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            
             services.AddAuthentication(option =>
             {
                 option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -68,33 +81,63 @@ namespace backend_api
                 options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            // Booking DB Context
+            services.AddDbContext<BookingContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(BookingContext).Assembly.FullName)));
 
+            services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
+            
+            //TODO: Add services and repos
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IBookingService, BookingService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            //BookingSchedule DB Context
+            
+            services.AddDbContext<BookingScheduleContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+
+            services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
+            
+            //services.AddScoped<IForumRepository, ForumRepository>();
+            //services.AddScoped<IForumService, ForumService>();
+            //---------
+            //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
-            // Notification Configuration
             services.AddDbContext<NotificationContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
             services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
 
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INotificationService, NotificationService>();
-            //
-        //NoticeBoard DB Context
+            //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            //NoticeBoard DB Context
             services.AddDbContext<NoticeBoardContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(NoticeBoardContext).Assembly.FullName)));
 
             services.AddScoped<INoticeBoardContext>(provider => provider.GetService<NoticeBoardContext>());
 
             services.AddScoped<INoticeBoardRepository, NoticeBoardRepository>();
             services.AddScoped<INoticeBoardService, NoticeBoardService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("RabbitaniaDatabase"),
+                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
@@ -103,7 +146,21 @@ namespace backend_api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
             //----------------------------------------------------------------------------------------------------------------------
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            //Forum DB Context
+            
+            services.AddDbContext<ForumContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
 
+            services.AddScoped<IForumContext>(provider => provider.GetService<ForumContext>());
+            
+            services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<IForumService, ForumService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            
             services.AddControllers();
 
             #region Swagger
@@ -124,10 +181,8 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-          
-
-    if (env.IsDevelopment())
-            {
+            
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 #region Swagger
                 app.UseSwagger();
@@ -141,7 +196,11 @@ namespace backend_api
             app.UseAuthentication();
             app.UseAuthorization();
             
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/ChatHub");
+            });
         }
     }
 }

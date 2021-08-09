@@ -1,4 +1,3 @@
-
 # Rabbitania
 
 <img src="images_banners_logos/Rabbitania_Banner.png" width="150%" height="100%" style="justify-contents:center">
@@ -11,6 +10,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/COS301-SE-2021/Rabbitania)](https://github.com/COS301-SE-2021/Rabbitania/issues)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Rabbitania)
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788293813-682cc4757b474114e1dd0230)
+
 
 
 ## Project Description
@@ -104,6 +104,7 @@
 
 <div align="center">
    
+
 <img src= "https://media-exp3.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1632355200&v=beta&t=Fz1XGNeeUvsO6Qos8UuPw2ELFsLhzptBis6UqHwp7Ak" width="250" height="250">
 
 #### Dean Nortje | u17326622
@@ -128,6 +129,7 @@
 
 <div align="center">
    
+
 <img src="images_banners_logos/ReadME image.jpeg" width="190" height="250">
 
 #### James Hulett | u16003251

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using backend_api.Data.Notification;
+using backend_api.Models.User;
 
 namespace backend_api.Models.Notification
 {
@@ -9,10 +9,10 @@ namespace backend_api.Models.Notification
     {
         public Notification(string payload, NotificationTypeEnum nType, DateTime date, int userid)
         {
-            this.NotificationPayload = payload;
-            this.NotificationType = nType;
+            this.Payload = payload;
+            this.Type = nType;
             this.CreatedDate = date;
-            this.UserID = userid;
+            this.UserId = userid;
         }
         
         public Notification()
@@ -24,13 +24,12 @@ namespace backend_api.Models.Notification
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NotificationId { get; set; }
         
-        public string NotificationPayload { get; set; }
-        public NotificationTypeEnum NotificationType { get; set; }
+        public string Payload { get; set; }
+        public NotificationTypeEnum Type { get; set; }
         
         public DateTime CreatedDate { get; set; }
         
-        // User ID foreign key
-        [ForeignKey("User")] 
-        public int UserID { get; set; }
+        public int UserId { get; set; }
+        public Users User { get; set; }
     }
 }

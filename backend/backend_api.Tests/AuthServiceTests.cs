@@ -21,7 +21,7 @@ namespace backend_api.Tests
         private readonly AuthService _authService;
         private readonly Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
         private readonly ITestOutputHelper outHelper;
-        private readonly User _mockedUser;
+        private readonly Users _mockedUser;
         private readonly UserEmails _mockedEmail;
         private readonly UserService _userService;
 
@@ -32,7 +32,7 @@ namespace backend_api.Tests
             
             this.outHelper = outHelp;
             
-            this._mockedUser = new User(
+            this._mockedUser = new Users(
                 50,
                 "Unit Tests",
                 "0834758854",
@@ -44,11 +44,10 @@ namespace backend_api.Tests
                 UserRoles.Unassigned,
                 OfficeLocation.Unassigned
             );
-
-            this._mockedEmail = new UserEmails("test@castellodev.co.za", 50);
+            this._mockedEmail = new UserEmails("test@tuks.co.za", 50);
         }
         
-        [Fact]
+        [Fact(DisplayName = "Should be False if a non 'tuks.co.za' is used to login")]
         public void InvalidDomainLogin()
         {
             //Arrange
@@ -64,11 +63,11 @@ namespace backend_api.Tests
             Assert.Equal(false, response.CorrectDomain);
         }
 
-        [Fact(DisplayName = "Should be true if a 'castellodev.co.za' is used to login")]
+        [Fact(DisplayName = "Should be true if a 'tuks.co.za' is used to login")]
         public void CorrectDomainLogin()
         {
             //Arrange
-            string email = "test@castellodev.co.za";
+            string email = "test@tuks.co.za";
             GoogleSignInRequest request1 = new GoogleSignInRequest(email);
             
             //Act
@@ -79,18 +78,18 @@ namespace backend_api.Tests
             Assert.IsType<DomainResponse>(response);
             Assert.Equal(true, response.CorrectDomain);
         }
-        
+
         [Fact(DisplayName = "Should throw an exception for an invalid email in the database")]
         public async Task InvalidEmailLogin()
         {
             //Arrange
             var signInRequest = new GoogleSignInRequest(
-                _mockedUser.Name, _mockedEmail.UserEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl
+                _mockedUser.Name, _mockedEmail.UsersEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl
                 );
             
             var request2 = new GoogleSignInRequest(
                 "check",
-                "check@castellodev.co.za",
+                "check@tuks.co.za",
                 "1234567899",
                 "test.png");
            
@@ -124,7 +123,7 @@ namespace backend_api.Tests
         public async Task CheckCorrectEmail()
         {
             //Arrange
-            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, _mockedEmail.UserEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
+            var requestDoa = new GoogleSignInRequest(_mockedUser.Name, _mockedEmail.UsersEmail, _mockedUser.PhoneNumber, _mockedUser.UserImgUrl);
             var responseDoa = new CreateUserResponse("User created.");
 
             _userRepositoryMock.Setup(u => u.CreateUser(requestDoa)).ReturnsAsync(responseDoa);

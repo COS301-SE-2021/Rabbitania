@@ -30,22 +30,22 @@ namespace backend_api.Tests
             
             _mockedListDto = new List<Notification>(){
                 new Notification {
-                    NotificationPayload = "Well done to the Rabbitanaia Team!", 
-                    NotificationType = NotificationTypeEnum.Email,
+                    Payload = "Well done to the Rabbitanaia Team!", 
+                    Type = NotificationTypeEnum.Email,
                     CreatedDate = _mockedDate,
-                    UserID = 1
+                    UserId = 1
                 },
                 new Notification {
-                    NotificationPayload = "Meeting at 12:30 with Design Team", 
-                    NotificationType = NotificationTypeEnum.Push,
+                    Payload = "Meeting at 12:30 with Design Team", 
+                    Type = NotificationTypeEnum.Push,
                     CreatedDate = _mockedDate,
-                    UserID = 1
+                    UserId = 1
                 },
                 new Notification {
-                    NotificationPayload = "Don't forget to do you tests!", 
-                    NotificationType = NotificationTypeEnum.Email,
+                    Payload = "Don't forget to do you tests!", 
+                    Type = NotificationTypeEnum.Email,
                     CreatedDate = _mockedDate,
-                    UserID = 1
+                    UserId = 1
                 }
             };
         }

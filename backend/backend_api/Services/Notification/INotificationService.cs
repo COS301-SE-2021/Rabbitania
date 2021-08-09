@@ -22,5 +22,14 @@ namespace backend_api.Services.Notification
         /// <param name="request"></param>
         /// <returns>Response success message</returns>
         Task<CreateNotificationResponse> CreateNotification(CreateNotificationRequest request);
+        
+        
+        /// <summary>
+        /// Checks whether the email request is valid ( i.e valid email address and valid payload and subject),
+        /// then sends the appropriate email to the user.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Response Http status code </returns>
+        Task<SendEmailNotificationResponse> SendEmailNotification(SendEmailNotificationRequest request);
     }
 }

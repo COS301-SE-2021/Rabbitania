@@ -1,37 +1,126 @@
 {
   "project_info": {
-    "project_number": "956015917059",
-    "project_id": "rabbitania-c0174",
-    "storage_bucket": "rabbitania-c0174.appspot.com"
+    "project_number": "248471898739",
+    "project_id": "rabbitania-f761f",
+    "storage_bucket": "rabbitania-f761f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:956015917059:android:e8aad4c94f0db1db763636",
+        "mobilesdk_app_id": "1:248471898739:android:a7f4406ebf2570caac3806",
         "android_client_info": {
           "package_name": "com.example.frontend"
         }
       },
       "oauth_client": [
         {
-          "client_id": "956015917059-bvv7ec73bmd9g8iapsci44p660c6olln.apps.googleusercontent.com",
+          "client_id": "248471898739-260571vdokjdufohrke7g6im5kbb8h66.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.frontend",
-            "certificate_hash": "cfb128a92e6dca02634af3b82dbd01b5b435745c"
+            "certificate_hash": "fb5cabae1fffb0cbc4f6f291c9709e4d61130001"
           }
+        },
+        {
+          "client_id": "248471898739-419nh0ituue074vtl2bmcblv6ikmu3kt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "60d508e9cefcb38c15251b575d4f0ff152429b4b"
+          }
+        },
+        {
+          "client_id": "248471898739-81o5embj5i7t26v29cj29tukqleh6084.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "b7d47aff302417e839c4e333800b1dd9ca87f4b6"
+          }
+        },
+        {
+          "client_id": "248471898739-hrui5a4hgmu8c3m9qccglq0jl64nd4lj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "d65ec1382a63827ee9184557f0e4bd1363f8e53d"
+          }
+        },
+        {
+          "client_id": "248471898739-un0mj2crc33988f6805np2dbfom5j4l7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "4c807a711df3242e54fc7a74ec7eaa6e4fdadc5c"
+          }
+        },
+        {
+          "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBq_0q3weiYd284lBQROxhl0kNelJRSqGk"
+          "current_key": "AIzaSyCLCWqzHuJ-SRRdLMNvhJL-2tnWeFtGz0A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "956015917059-8ika0sebnt059r5n5vrtfle1aopnogb2.apps.googleusercontent.com",
+              "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248471898739:android:fde4b05719a7f7b1ac3806",
+        "android_client_info": {
+          "package_name": "com.rabbitania.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248471898739-nt970uqpimlcngbg0bjl7ub07qplckus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "4c807a711df3242e54fc7a74ec7eaa6e4fdadc5c"
+          }
+        },
+        {
+          "client_id": "248471898739-ovu9dq6k16rms2vlkb9v663b9i3nuq07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "fb5cabae1fffb0cbc4f6f291c9709e4d61130001"
+          }
+        },
+        {
+          "client_id": "248471898739-p52so992brm9kl29lvfpv8prsgka6jjb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "aba1a97d809cd335e5a49d36023d934405b76a7a"
+          }
+        },
+        {
+          "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLCWqzHuJ-SRRdLMNvhJL-2tnWeFtGz0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
