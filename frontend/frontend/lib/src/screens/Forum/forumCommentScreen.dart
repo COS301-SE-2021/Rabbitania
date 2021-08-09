@@ -1,3 +1,4 @@
+import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
@@ -34,68 +35,12 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
     print("refresh");
   }
 
-//////////////////////////////
-  ///Navigation and FAB icons///
-//////////////////////////////
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController commentController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FancyFab(
-        numberOfItems: 3,
-        icon1: Icons.add,
-        onPressed1: () {
-          UtilModel.route(() => ForumCreateThreadScreen(), context);
-        },
-        icon2: Icons.delete,
-        onPressed2: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                elevation: 5,
-                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
-                title: Text("Delete Forum Thread"),
-                contentTextStyle: TextStyle(color: Colors.white, fontSize: 16),
-                content:
-                    Text("Are you sure you want to delete this Forum Thread?"),
-                actions: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.check,
-                      color: Color.fromRGBO(171, 255, 79, 1),
-                      size: 24.0,
-                    ),
-                    tooltip: 'Delete',
-                    onPressed: () async {
-                      // ignore: unused_local_variable
-                      final deleteResponse =
-                          await deleteForumThread(currentThreadID);
-                      UtilModel.route(() => ForumThreadScreen(), context);
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.close,
-                      color: Color.fromRGBO(255, 79, 79, 1),
-                      size: 24.0,
-                    ),
-                    tooltip: 'Cancel',
-                    onPressed: () {
-                      //final deleteResponse = await deleteThread(this.id);
-                      UtilModel.route(() => Forum(), context);
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
-        icon3: Icons.edit,
-        onPressed3: () {
-          UtilModel.route(() => ForumEditThreadScreen(), context);
-        },
-      ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
@@ -127,54 +72,82 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
         ],
       ),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      body: Center(
-        child: Stack(
-          //HERE is the stack for the forum page, the stack fills back to front (last child will be on the top of the stack)
-          children: <Widget>[
-            // Children of type widget
-            SvgPicture.string(
-              _svg_background,
-              fit: BoxFit.contain,
-            ),
-
-            ListView(children: <Widget>[
-              Card(
-                color: Color.fromRGBO(57, 57, 57, 25),
-                shadowColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0)),
-                clipBehavior: Clip.antiAlias,
-                elevation: 2,
-                child: Column(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.only(
-                          bottom: 5.0, top: 10, left: 20, right: 10),
-                      title: Container(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Text(
+      body: Container(
+          child: Stack(
+        fit: StackFit.expand,
+        children: [
+          SvgPicture.string(
+            _svg_background,
+            fit: BoxFit.contain,
+          ),
+          Column(
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Card(
+                  color: Color.fromRGBO(57, 57, 57, 25),
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0)),
+                  clipBehavior: Clip.antiAlias,
+                  elevation: 2,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.only(
+                            bottom: 5.0, top: 10, left: 20, right: 10),
+                        title: Container(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            currentThreadName,
+                            style: TextStyle(
+                                letterSpacing: 2.0,
+                                color: Colors.white,
+                                fontSize: 22),
+                          ),
+                        ),
+                        subtitle: Text(
                           currentThreadName,
-                          style: TextStyle(
-                              letterSpacing: 2.0,
-                              color: Colors.white,
-                              fontSize: 22),
+                          style: TextStyle(color: Colors.white),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      subtitle: Text(
-                        "New Threads Will Be Posted Here",
-                        style: TextStyle(color: Colors.white),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              ForumThreadCommentsCards(),
-            ]),
-          ],
-        ),
-      ),
+              Expanded(
+                flex: 8,
+                child: Container(
+                  child: CommentBox(
+                    userImage:
+                        "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
+                    child: Card(
+                        color: Color.fromRGBO(57, 57, 57, 1),
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0)),
+                        clipBehavior: Clip.antiAlias,
+                        elevation: 2,
+                        child: ForumThreadCommentsCards()),
+                    labelText: 'Write a comment...',
+                    withBorder: false,
+                    errorText: 'Comment cannot be blank',
+                    sendButtonMethod: () {},
+                    formKey: formKey,
+                    commentController: commentController,
+                    backgroundColor: Colors.black,
+                    textColor: Colors.white,
+                    sendWidget:
+                        Icon(Icons.send_sharp, size: 30, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      )),
     );
   }
 
