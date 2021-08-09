@@ -59,4 +59,20 @@ class BookingProvider {
       throw ("Server Error Status Code:  " + response.statusCode.toString());
     }
   }
+
+  Future<bool> checkAvailibity(timeslot, office) async {
+    //TODO:make http call to check availibility based on booking pk
+    //if true then make booking
+    //if false show alert dialog and let user know can't make booking
+    final response = await http.get(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/Booking/DeleteBooking?Office=$office&TimeSlot=$timeslot'),
+    );
+    //TODO: ask james if we can use status code instead of true and false
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
