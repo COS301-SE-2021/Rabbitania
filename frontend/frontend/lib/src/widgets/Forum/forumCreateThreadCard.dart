@@ -63,12 +63,12 @@ class ForumCreateThreadCard extends StatelessWidget {
   }
 }
 
-Future<String> addNewForumThread(int currentId, String title, String body) async {
+Future<String> addNewForumThread(
+    int currentId, String title, String body) async {
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Fields");
     }
-    
 
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForumThread'),
@@ -76,17 +76,17 @@ Future<String> addNewForumThread(int currentId, String title, String body) async
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-      "forumThreadId": 0,
-      "forumThreadTitle": title,
-      "forumThreadBody": body,
-      "createdDate": "2021-08-04T13:45:13.091Z",
-      "imageUrl": "string",
-      "userId": 1,
-      "forumId": currentForumID
+        "forumThreadId": 0,
+        "forumThreadTitle": title,
+        "forumThreadBody": body,
+        "createdDate": "2021-08-04T13:45:13.091Z",
+        "imageUrl": "string",
+        "userId": 1,
+        "forumId": currentForumID
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
-      return ("Successfully uploaded new Form");
+      return ("Successfully uploaded new Forum Thread");
     } else {
       throw ("Failed to create new thread error" +
           response.statusCode.toString());

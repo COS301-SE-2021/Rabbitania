@@ -184,6 +184,31 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   }
 }
 
+Future<bool> deleteForumThread(int currentThreadID) async {
+  try {
+    if (currentThreadID < 0) {
+      throw ("Error: Forum Thread ID is Incorrect");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteForumThread'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'forumThreadId': currentThreadID,
+      }),
+    );
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Falied to delete, error code" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return false;
+  }
+}
+
 //////////////////////////
 ///ForumThreadComments:
 /////////////////////////
