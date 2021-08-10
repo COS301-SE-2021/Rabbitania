@@ -199,7 +199,7 @@ namespace backend_api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/ChatHub");//map signalR hub
+                endpoints.MapHub<ChatHub>("/api/ChatHub");//map signalR hub
             });
         }
     }
