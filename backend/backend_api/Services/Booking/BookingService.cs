@@ -4,7 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
 using backend_api.Exceptions.Booking;
-using backend_api.Exceptions.Notifications;
 using backend_api.Models.Booking.Requests;
 using backend_api.Models.Booking.Responses;
 using Castle.Core.Internal;
@@ -32,14 +31,9 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Invalid UserId");
             }
 
-            if (request.Date.Hour.Equals(0) || request.Date.Day.Equals(0))
+            if (request.BookingDate == "")
             {
                 throw new InvalidDateException("Date is not in correct format");
-            }
-
-            if (request.Duration.Equals(0) || request.Duration < 0)
-            {
-                throw new InvalidDurationException("The duration of the booking is invalid");
             }
 
             var response = new CreateBookingResponse(
@@ -71,7 +65,15 @@ namespace backend_api.Services.Booking
 
         public async Task<CancelBookingResponse> CancelBooking(CancelBookingRequest request)
         {
-            return null;
+            if (request != null)
+            {
+                var resp = await _bookingRepository.CancelBooking(request);
+                return new CancelBookingResponse(resp);
+            }
+            else
+            {
+                throw new InvalidBookingException("Request is null or empty");
+            }
         }
 
         public async Task<GetBookingResponse> ViewBooking(GetBookingRequest request)

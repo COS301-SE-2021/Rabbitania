@@ -27,5 +27,7 @@ namespace backend_api.Services.NoticeBoard
         
         
         Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(DeleteNoticeBoardThreadRequest request);
+
+        Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(EditNoticeBoardThreadRequest request);
     }
 }

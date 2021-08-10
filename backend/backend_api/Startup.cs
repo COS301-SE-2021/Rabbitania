@@ -7,10 +7,12 @@ using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Hubs;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
+using backend_api.Services.Booking;
 using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
@@ -55,7 +57,10 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-
+            
+            //SignalR
+            services.AddSignalR();
+            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -87,10 +92,21 @@ namespace backend_api
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
             
             //TODO: Add services and repos
-            //services.AddScoped<IBookingRepository, BookingRepository>();
-            //services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IBookingService, BookingService>();
             //----------------------------------------------------------------------------------------------------------------------
+            //BookingSchedule DB Context
             
+            services.AddDbContext<BookingScheduleContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+
+            services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
+            
+            //services.AddScoped<IForumRepository, ForumRepository>();
+            //services.AddScoped<IForumService, ForumService>();
+            //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
@@ -180,7 +196,11 @@ namespace backend_api
             app.UseAuthentication();
             app.UseAuthorization();
             
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/ChatHub");
+            });
         }
     }
 }

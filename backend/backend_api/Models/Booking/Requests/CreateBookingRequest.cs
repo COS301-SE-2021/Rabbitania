@@ -5,45 +5,46 @@ namespace backend_api.Models.Booking.Requests
 {
     public class CreateBookingRequest
     {
-        private int userID;
-        private float duration;
-        private DateTime date;
-        private OfficeLocation office;
-        
+        private string _bookingDate;
+        private string _timeSlot;
+        private OfficeLocation _office;
+        private int _userId;
+
         public CreateBookingRequest()
         {
             
         }
-        public CreateBookingRequest(int userId, float duration, DateTime date, OfficeLocation office)
+
+        public CreateBookingRequest(string bookingDate, string timeSlot, OfficeLocation office, int userId)
         {
-            userID = userId;
-            this.duration = duration;
-            this.date = date;
-            this.office = office;
+            _bookingDate = bookingDate;
+            _timeSlot = timeSlot;
+            _office = office;
+            _userId = userId;
         }
 
-        public int UserId
+        public string BookingDate
         {
-            get => userID;
-            set => userID = value;
+            get => _bookingDate;
+            set => _bookingDate = value;
         }
 
-        public float Duration
+        public string TimeSlot
         {
-            get => duration;
-            set => duration = value;
-        }
-
-        public DateTime Date
-        {
-            get => date;
-            set => date = value;
+            get => _timeSlot;
+            set => _timeSlot = value;
         }
 
         public OfficeLocation Office
         {
-            get => office;
-            set => office = value;
+            get => _office;
+            set => _office = value;
+        }
+
+        public int UserId
+        {
+            get => _userId;
+            set => _userId = value;
         }
     }
 }

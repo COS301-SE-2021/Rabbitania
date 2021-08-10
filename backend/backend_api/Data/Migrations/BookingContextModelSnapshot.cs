@@ -30,11 +30,11 @@ namespace backend_api.Data.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<float>("Duration")
-                        .HasColumnType("real");
-
-                    b.Property<int>("OfficeLocation")
+                    b.Property<int>("Office")
                         .HasColumnType("integer");
+
+                    b.Property<string>("TimeSlot")
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -46,45 +46,7 @@ namespace backend_api.Data.Migrations
                     b.ToTable("Bookings");
                 });
 
-            /*modelBuilder.Entity("backend_api.Models.User.Users", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EmployeeLevel")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("OfficeLocation")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<List<int>>("PinnedUserIds")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("UserDescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserImgUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserRole")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });*/
-
+            
             modelBuilder.Entity("backend_api.Models.Booking.Booking", b =>
                 {
                     b.HasOne("backend_api.Models.User.Users", "User")

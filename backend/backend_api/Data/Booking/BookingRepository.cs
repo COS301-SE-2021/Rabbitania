@@ -48,9 +48,10 @@ namespace backend_api.Data.Booking
             var booking = await _bookings.Bookings.FirstOrDefaultAsync(x => x.BookingId == request.BookingId);
             try
             {
-                _bookings.Bookings.Remove(booking);
-                await _bookings.SaveChanges();
-                if (_bookings.Entry(booking).State == EntityState.Deleted)
+                //_bookings.Bookings.Remove(booking);
+                _bookings.Entry(booking).State = EntityState.Deleted;
+                var deleted = await _bookings.SaveChangesAsync();
+                if (deleted >= 0)
                     return HttpStatusCode.Accepted;
                 else
                     return HttpStatusCode.NotFound;
@@ -66,8 +67,7 @@ namespace backend_api.Data.Booking
         {
             var bookingID = request.BookingId;
             var toUpdate = await _bookings.Bookings.FirstOrDefaultAsync(x => x.BookingId == bookingID);
-            toUpdate.Duration = request.Duration;
-            toUpdate.BookingDate = request.Date;
+            //toUpdate.BookingDate = request.Date; // NEED TO FIX
             try
             {
                 _bookings.Entry(toUpdate).State = EntityState.Modified;
@@ -83,17 +83,17 @@ namespace backend_api.Data.Booking
 
         public async Task<HttpStatusCode> CreateBooking(CreateBookingRequest request)
         {
-            var bookingDate = request.Date;
-            var bookingDuration = request.Duration;
+            var bookingDate = request.BookingDate;
             var bookingOffice = OfficeLocation.Unassigned;
+            var timeSlot = request.TimeSlot;
             var user = _users.Users.Where(x => x.UserId == request.UserId);
             foreach(var y in user)
             {
                 bookingOffice = y.OfficeLocation;
             }
             
-            var bookingUserID = request.UserId;
-            var booking = new Models.Booking.Booking(bookingDate, bookingDuration, bookingOffice, bookingUserID);
+            var bookingUserId = request.UserId;
+            var booking = new Models.Booking.Booking(bookingDate, timeSlot, bookingOffice, bookingUserId);
             try
             {
                 await _bookings.Bookings.AddAsync(booking);

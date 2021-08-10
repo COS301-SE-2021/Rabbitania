@@ -70,5 +70,21 @@ namespace backend_api.Services.NoticeBoard
 
             return await _noticeBoardRepository.DeleteNoticeBoardThread(request);
         }
+
+        public async Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(
+            EditNoticeBoardThreadRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid EditNoticeBoardThread Request");
+            }
+
+            if (request.ThreadId == 0)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
+            }
+
+            return await _noticeBoardRepository.EditNoticeBoardThread(request);
+        }
     }
 }

@@ -5,15 +5,16 @@ using backend_api.Models.User;
 
 namespace backend_api.Models.Forum
 {
-    public class ForumThreads : IForumThread
+    public class  ForumThreads : IForumThread
     {
-        public ForumThreads(string ForumThreadTitle, int userId, DateTime CreatedDate, string imageURL, int ForumId)
+        public ForumThreads(string forumThreadTitle, int userId, string forumThreadBody, DateTime createdDate, string imageUrl, int forumId)
         {
-            this.ForumThreadTitle = ForumThreadTitle;
+            this.ForumThreadTitle = forumThreadTitle;
             this.UserId = userId;
-            this.CreatedDate = CreatedDate;
-            this.imageURL = imageURL;
-            this.ForumId = ForumId;
+            this.ForumThreadBody = forumThreadBody;
+            this.CreatedDate = createdDate;
+            this.imageURL = imageUrl;
+            this.ForumId = forumId;
         }
 
         public ForumThreads()
@@ -26,14 +27,13 @@ namespace backend_api.Models.Forum
         public int ForumThreadId { get; set; }
 
         public string ForumThreadTitle { get; set; }
-
+        public string ForumThreadBody { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public string imageURL { get; set; }
         
-        [ForeignKey("Forums")]
         public int ForumId { get; set; }
-        public Forums Forums { get; set; }
+        public Forums Forum { get; set; }
         public int UserId { get; set; }
         public Users User { get; set; }
 
