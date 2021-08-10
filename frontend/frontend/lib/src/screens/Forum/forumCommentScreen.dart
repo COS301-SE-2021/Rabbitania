@@ -121,7 +121,11 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               Flexible(
                 flex: 10,
                 fit: FlexFit.tight,
-                child: Container(
+                child: InkWell(
+                  onTap: () => {
+                    FocusScope.of(context).unfocus(),
+                    commentController.clear()
+                  },
                   child: CommentBox(
                     userImage:
                         "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
@@ -136,7 +140,14 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                     labelText: 'Write a comment...',
                     withBorder: false,
                     errorText: 'Comment cannot be blank',
-                    sendButtonMethod: () {},
+                    sendButtonMethod: () {
+                      print(commentController.text);
+                      addNewComment(commentController.text);
+                      commentController.clear();
+                      FocusScope.of(context).unfocus();
+                      setState(() {});
+                      refresh();
+                    },
                     formKey: formKey,
                     commentController: commentController,
                     backgroundColor: Colors.black,

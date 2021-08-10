@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
@@ -120,7 +122,6 @@ class forumThreadCard extends StatelessWidget {
               ListTile(
                 contentPadding:
                     EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
-                leading: FlutterLogo(size: 50),
                 title: Container(
                   padding: EdgeInsets.only(bottom: 8),
                   child: Text(
@@ -132,8 +133,18 @@ class forumThreadCard extends StatelessWidget {
                 subtitle: Text(
                   forumThreadBody,
                   style: TextStyle(color: Colors.white),
-                  maxLines: 2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
+                ),
+                trailing: Container(
+                  constraints: const BoxConstraints(
+                      minWidth: 100,
+                      maxWidth: 100,
+                      minHeight: 300.0,
+                      maxHeight: 300),
+                  padding: EdgeInsets.only(top: 0),
+                  child: Image.memory(Base64Decoder().convert(imageURL),
+                      fit: BoxFit.cover),
                 ),
               ),
             ],
