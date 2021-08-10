@@ -36,7 +36,7 @@ class BookingProvider {
         'bookingDate': bookingDate,
         'timeSlot': timeSlot,
         'office': office,
-        'userId': 8
+        'userId': userId,
       }),
     );
     if (response.statusCode == 200) {
@@ -57,6 +57,22 @@ class BookingProvider {
       return true;
     } else {
       throw ("Server Error Status Code:  " + response.statusCode.toString());
+    }
+  }
+
+  Future<bool> checkAvailibity(timeslot, office) async {
+    //TODO:make http call to check availibility based on booking pk
+    //if true then make booking
+    //if false show alert dialog and let user know can't make booking
+    final response = await http.get(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot=$timeslot&Office=$office'),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

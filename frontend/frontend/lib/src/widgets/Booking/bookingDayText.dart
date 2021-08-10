@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/Booking/bookingHelper.dart';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
+import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
 
 class BookingDayText extends StatefulWidget {
   final String displayText;
@@ -13,12 +18,17 @@ class BookingDayText extends StatefulWidget {
 }
 
 class _BookingDayTextState extends State<BookingDayText> {
+  UtilModel utilModel = UtilModel();
   String dropdownValue = 'No Selection';
   String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
+  Widget body = Container();
+  var bookingColour = Color.fromRGBO(172, 255, 79, 1);
+  String bookingText = 'Book';
 
   final _bookingProvider = new BookingProvider();
+  final bookingHelper = BookingHelper();
 
   List<String> officeLocations = [
     'No Selection',
@@ -71,7 +81,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(172, 255, 79, 1), width: 2),
+                        color: Color.fromRGBO(172, 255, 79, 1), width: 1),
                     borderRadius: BorderRadius.circular(12),
                     color: Color.fromRGBO(33, 33, 33, 1),
                   ),
@@ -135,7 +145,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(172, 255, 79, 1), width: 2),
+                        color: Color.fromRGBO(172, 255, 79, 1), width: 1),
                     borderRadius: BorderRadius.circular(12),
                     color: Color.fromRGBO(33, 33, 33, 1),
                   ),
@@ -188,7 +198,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(11),
                       backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(172, 255, 79, 1),
+                        bookingColour,
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -200,21 +210,64 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     child: Text(
-                      "Book",
+                      bookingText,
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromRGBO(33, 33, 33, 1),
                       ),
                     ),
-                    onPressed: () async {
+                    onPressed: () {
                       int office = this.getOfficeIndex(this.dropdownValue);
                       DateTime date = DateTime.now();
                       String timeSlot =
                           widget.dayOfTheWeek + "," + this.dropdownValue2;
-                      // await _bookingProvider.createBookingAsync(
-                      //     date.toString(), timeSlot, office, 1);
-                      print(this.getOfficeIndex(this.dropdownValue));
-                      print(timeSlot);
+                      //use setState to change the value of Widget body member on press
+                      bookingHelper
+                          .checkAndMakeBooking(
+                              timeslot: timeSlot,
+                              office: office,
+                              bookingDate: date)
+                          .then((value) {
+                        print(value);
+                        if (value == "Created new Booking") {
+                          setState() {
+                            this.bookingText = 'Booked';
+                            this.bookingColour = utilModel.greyColor;
+                          }
+                          //if successful, change state of button to reflect successful booking
+                        } else {
+                          //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
+                          return showDialog<void>(
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                elevation: 5,
+                                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                                titleTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                                title: Text("No Booking Availible"),
+                                contentTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                                content: Text(
+                                    "There are no booking slots currently availible. Please try again later."),
+                                actions: [
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.close,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                      size: 24.0,
+                                    ),
+                                    tooltip: 'Close',
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                            context: context,
+                          );
+                        }
+                      });
                     },
                   ),
                 ),
@@ -224,3 +277,6 @@ class _BookingDayTextState extends State<BookingDayText> {
         ),
       );
 }
+
+//function for creating FutureBuilder on button click
+

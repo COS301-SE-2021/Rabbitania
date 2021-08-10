@@ -100,12 +100,12 @@ namespace backend_api
             services.AddDbContext<BookingScheduleContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("HerokuDatabase"),
-                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(BookingScheduleContext).Assembly.FullName)));
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
             
-            //services.AddScoped<IForumRepository, ForumRepository>();
-            //services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IBookingScheduleRepository, BookingScheduleRepository>();
+            services.AddScoped<IBookingScheduleService, BookingScheduleService>();
             //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
