@@ -64,9 +64,11 @@ class ForumThreadCommentsCards extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         } else {
-          return CircularProgressIndicator(
-            color: Color.fromRGBO(171, 255, 79, 1),
-          );
+          return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            CircularProgressIndicator(
+              color: Color.fromRGBO(171, 255, 79, 1),
+            )
+          ]);
         }
       },
     );
