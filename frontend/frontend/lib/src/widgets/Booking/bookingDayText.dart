@@ -37,8 +37,8 @@ class _BookingDayTextState extends State<BookingDayText> {
     'Amsterdam',
   ];
 
-  List<String> timeSlots = ['No Selection', 'Morning', 'Afternoon'];
-
+  List<String> timeSlots = ['No Selection', 'Full Day', 'Morning', 'Afternoon'];
+  //change to use endpoint to receive days of the week availible
   int getOfficeIndex(String office) {
     int officeIndex = -1;
     if (office == 'Pretoria') {
@@ -128,7 +128,7 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
               Center(
                 child: Text(
-                  'Time Slot: ',
+                  'Slot: ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -217,6 +217,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     onPressed: () {
+                      //TODO: change to check avavilibity on load of screen and not after button press
                       int office = this.getOfficeIndex(this.dropdownValue);
                       DateTime date = DateTime.now();
                       String timeSlot =
