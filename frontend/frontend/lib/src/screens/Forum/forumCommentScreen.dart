@@ -82,8 +82,9 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
           ),
           Column(
             children: <Widget>[
-              Expanded(
-                flex: 2,
+              Flexible(
+                flex: 4,
+                fit: FlexFit.loose,
                 child: Card(
                   color: Color.fromRGBO(57, 57, 57, 25),
                   shadowColor: Colors.black,
@@ -91,7 +92,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                       borderRadius: BorderRadius.circular(5.0)),
                   clipBehavior: Clip.antiAlias,
                   elevation: 2,
-                  child: Column(
+                  child: ListView(
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.only(
@@ -107,9 +108,9 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                           ),
                         ),
                         subtitle: Text(
-                          currentThreadName,
+                          currentThreadBody,
                           style: TextStyle(color: Colors.white),
-                          maxLines: 2,
+                          maxLines: 20,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -117,8 +118,9 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                   ),
                 ),
               ),
-              Expanded(
-                flex: 6,
+              Flexible(
+                flex: 10,
+                fit: FlexFit.tight,
                 child: Container(
                   child: CommentBox(
                     userImage:
