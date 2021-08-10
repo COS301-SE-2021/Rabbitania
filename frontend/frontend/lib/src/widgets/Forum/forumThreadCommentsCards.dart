@@ -166,7 +166,48 @@ class forumCommentCard extends StatelessWidget {
           caption: 'Delete',
           color: Colors.red,
           icon: Icons.delete,
-          onTap: () => {},
+          onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
+                title: Text("Delete Comment"),
+                contentTextStyle: TextStyle(color: Colors.white, fontSize: 16),
+                content: Text("Are you sure you want to delete this Comment?"),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.check,
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      size: 24.0,
+                    ),
+                    tooltip: 'Delete',
+                    onPressed: () async {
+                      // ignore: unused_local_variable
+                      final deleteResponse = await deleteComment(currentCommentId);
+                      UtilModel.route(() => ForumCommentScreen(), context);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.close,
+                      color: Color.fromRGBO(255, 79, 79, 1),
+                      size: 24.0,
+                    ),
+                    tooltip: 'Cancel',
+                    onPressed: () {
+                      //final deleteResponse = await deleteThread(this.id);
+                      UtilModel.route(() => ForumCommentScreen(), context);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        },
         ),
       ],
       secondaryActions: <Widget>[

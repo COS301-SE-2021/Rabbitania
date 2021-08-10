@@ -3,6 +3,7 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
+import 'package:frontend/src/widgets/Forum/ForumEditThreadCommentCard.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumCard.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -16,10 +17,10 @@ class ForumEditThreadCommentScreen extends StatefulWidget {
   }
 }
 
-TextEditingController forumThreadTitleController = new TextEditingController();
-TextEditingController forumThreadBodyController = new TextEditingController();
+TextEditingController threadCommentBodyController = new TextEditingController();
 
-class _ForumEditThreadCommentScreen extends State<ForumEditThreadCommentScreen> {
+class _ForumEditThreadCommentScreen
+    extends State<ForumEditThreadCommentScreen> {
   final util = new UtilModel();
 
   @override
@@ -33,10 +34,10 @@ class _ForumEditThreadCommentScreen extends State<ForumEditThreadCommentScreen> 
           showDialog(
             context: context,
             builder: (context) {
-              if (forumThreadTitleController.text != "") {
-                futureEditThreadString = editForumThread(
-                    forumThreadTitleController.text,
-                    forumThreadBodyController.text);
+              if (threadCommentBodyController.text != "") {
+                futureEditThreadString = editForumThreadComment(
+                  threadCommentBodyController.text,
+                );
               }
               return FutureBuilder<String>(
                 future: futureEditThreadString,
@@ -93,7 +94,7 @@ class _ForumEditThreadCommentScreen extends State<ForumEditThreadCommentScreen> 
         backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            'Edit Forum Thread        ',
+            'Edit Comment        ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
@@ -111,7 +112,7 @@ class _ForumEditThreadCommentScreen extends State<ForumEditThreadCommentScreen> 
               fit: BoxFit.contain,
             ),
             Container(
-              child: ForumEditForumThreadCard(),
+              child: ForumEditForumThreadCommentCard(),
             ),
           ],
         ),

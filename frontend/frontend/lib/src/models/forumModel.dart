@@ -306,3 +306,87 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
     return CommentObj;
   }
 }
+
+Future<bool> deleteComment(int currentCommentId) async {
+  try {
+    print(currentCommentId);
+    if (currentCommentId < 0) {
+      throw ("Error: Comment Id is invalid");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteThreadComment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'threadCommentId': currentCommentId,
+        },
+      ),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Failed to delete, error code" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return false;
+  }
+}
+
+Future<bool> deleteComment(int currentCommentId) async {
+  try {
+    print(currentCommentId);
+    if (currentCommentId < 0) {
+      throw ("Error: Comment Id is invalid");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteThreadComment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'threadCommentId': currentCommentId,
+        },
+      ),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Failed to delete, error code" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return false;
+  }
+}
+
+Future<bool> deleteComment(int currentCommentId) async {
+  try {
+    print(currentCommentId);
+    if (currentCommentId < 0) {
+      throw ("Error: Comment Id is invalid");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteThreadComment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'threadCommentId': currentCommentId,
+        },
+      ),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Failed to delete, error code" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return false;
+  }
+}

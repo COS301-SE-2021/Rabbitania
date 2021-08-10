@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditForumScreen.dart';
+import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
@@ -8,28 +10,33 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureEditThreadString;
+Future<String>? futureEditThreadCommentString;
 
-class ForumEditForumThreadCard extends StatelessWidget {
+class ForumEditForumThreadCommentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(children: <Widget>[
-        FutureBuilder<List<ForumThread>>(
-          future: futureForumThreads,
+        FutureBuilder<List<ThreadComments>>(
+          future: futureThreadComments,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var iterate = snapshot.data!.iterator;
               List<Widget> cards = [];
               while (iterate.moveNext()) {
                 if (iterate.current.forumThreadId == currentThreadID) {
-                  return EditForumThreadCard(
-                      forumThreadId: iterate.current.forumThreadId,
-                      forumThreadTitle: iterate.current.forumThreadTitle,
-                      forumThreadBody: iterate.current.forumThreadBody,
-                      createdDate: iterate.current.createdDate,
-                      imageURL: iterate.current.imageURL,
-                      userId: iterate.current.userId);
+                  return EditForumThreadCommentCard(
+                    threadCommentId: iterate.current.threadCommentId,
+                    commentBody: iterate.current.commentBody,
+                    likes: iterate.current.likes,
+                    dislikes: iterate.current.dislikes,
+                    createdDate: iterate.current.createdDate,
+                    userName: iterate.current.userName,
+                    profilePicture: iterate.current.profilePicture,
+                    imageURL: iterate.current.imageURL,
+                    userId: iterate.current.userId,
+                    forumThreadId: iterate.current.forumThreadId,
+                  );
                 }
               }
               return new Column(children: cards);
@@ -46,21 +53,30 @@ class ForumEditForumThreadCard extends StatelessWidget {
   }
 }
 
-class EditForumThreadCard extends StatelessWidget {
-  final int forumThreadId;
-  final String forumThreadTitle;
-  final String forumThreadBody;
+class EditForumThreadCommentCard extends StatelessWidget {
+  final int threadCommentId;
+  final String commentBody;
   final String createdDate;
   final String imageURL;
+  final int likes;
+  final int dislikes;
+  final String userName;
+  final String profilePicture;
+  final int forumThreadId;
   final int userId;
 
-  const EditForumThreadCard(
-      {required this.forumThreadId,
-      required this.forumThreadTitle,
-      required this.forumThreadBody,
-      required this.createdDate,
-      required this.imageURL,
-      required this.userId});
+  const EditForumThreadCommentCard({
+    required this.threadCommentId,
+    required this.commentBody,
+    required this.createdDate,
+    required this.imageURL,
+    required this.likes,
+    required this.dislikes,
+    required this.userName,
+    required this.profilePicture,
+    required this.forumThreadId,
+    required this.userId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -75,19 +91,7 @@ class EditForumThreadCard extends StatelessWidget {
           children: [
             TextFormField(
                 style: TextStyle(color: Colors.white),
-                controller: forumThreadTitleController,
-                cursorColor: Color.fromRGBO(171, 255, 79, 1),
-                decoration: InputDecoration(
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Color.fromRGBO(171, 255, 79, 1)),
-                  ),
-                  labelText: 'Title',
-                  labelStyle: TextStyle(color: Color.fromRGBO(171, 255, 79, 1)),
-                )),
-            TextFormField(
-                style: TextStyle(color: Colors.white),
-                controller: forumThreadBodyController,
+                controller: threadCommentBodyController,
                 cursorColor: Color.fromRGBO(171, 255, 79, 1),
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
@@ -104,30 +108,32 @@ class EditForumThreadCard extends StatelessWidget {
   }
 }
 
-Future<String> editForumThread(String title, String body) async {
+Future<String> editForumThreadComment(
+    String body) async {
   try {
-    if (title == "") {
-      throw ("Cannot Submit Empty Fields");
+    if (body == "") {
+      throw ("Cannot Submit Empty Comment");
     }
 
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/EditForumThread'),
+      Uri.parse('https://10.0.2.2:5001/api/Forum/EditThreadComment'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "forumThreadBody": body,
-        "forumThreadId": currentThreadID,
-        "forumThreadTitle": title,
-        "imageUrl": "image.png"
+        "threadCommentId": currentCommentId,
+        "commentBody": body,
+        "imageUrl": "image.png",
+        "likes": 0,
+        "dislikes": 0
       }),
     );
     if (response.statusCode == 201 ||
         response.statusCode == 200 ||
         response.statusCode == 100) {
-      return ("Successfully Edited Forum Thread");
+      return ("Successfully Edited Comment");
     } else {
-      throw ("Failed Edit Forum Thread" + response.statusCode.toString());
+      throw ("Failed To Edit Comment" + response.statusCode.toString());
     }
   } catch (Exception) {
     return Exception.toString();
