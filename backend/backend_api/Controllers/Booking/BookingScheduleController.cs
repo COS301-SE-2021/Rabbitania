@@ -92,7 +92,7 @@ namespace backend_api.Controllers.Booking
                         /// <returns>Http response code</returns>
                         [HttpPut]
                         [Route("EditBookingSchedule")]
-                        public async Task<ActionResult> UpdateBookingSchedule([FromQuery] UpdateBookingScheduleRequest request)
+                        public async Task<ActionResult> UpdateBookingSchedule([FromBody] UpdateBookingScheduleRequest request)
                         {
                             if (request != null)
                             {

@@ -85,7 +85,7 @@ namespace backend_api.Data.Booking
             var scheduleToUpdate = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
                 bookingSchedule.Availability);
             //setting new values
-            scheduleToUpdate.Availability = request.Availability;
+            scheduleToUpdate.Availability -= 1; 
             try
             {
                 _schedules.Entry(scheduleToUpdate).State = EntityState.Modified;

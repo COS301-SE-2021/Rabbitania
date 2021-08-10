@@ -110,7 +110,11 @@ namespace backend_api.Services.Booking
                     var updateBookingReq = new UpdateBookingScheduleRequest(request.TimeSlot, 
                         request.Office,
                         resp.BookingSchedule.Availability - 1);
-                    return new CheckScheduleAvailabilityResponse((await _scheduleRepository.UpdateBookingSchedule(updateBookingReq)).Success);
+                    //Update the bookings availability
+                    var UpdateResp = await _scheduleRepository.UpdateBookingScheduleAvailability(updateBookingReq);
+                    
+                    return new CheckScheduleAvailabilityResponse(UpdateResp.Success);
+                    
                 }
                 else
                 {
