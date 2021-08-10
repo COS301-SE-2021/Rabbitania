@@ -140,12 +140,13 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                     labelText: 'Write a comment...',
                     withBorder: false,
                     errorText: 'Comment cannot be blank',
-                    sendButtonMethod: () async {
+                    sendButtonMethod: () {
                       print(commentController.text);
-                      await addNewComment(commentController.text);
+                      addNewComment(commentController.text);
                       commentController.clear();
                       FocusScope.of(context).unfocus();
                       setState(() {});
+                      refresh();
                     },
                     formKey: formKey,
                     commentController: commentController,
