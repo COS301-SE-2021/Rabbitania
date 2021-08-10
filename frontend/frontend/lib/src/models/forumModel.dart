@@ -7,6 +7,7 @@ var currentForumID = -1;
 var currentForumName = "ForumName";
 var currentThreadID = -1;
 var currentThreadName = "ThreadName";
+var currentThreadBody = "Body";
 //
 
 ////////////////////////////////////////////////////////////////
@@ -234,6 +235,8 @@ class ThreadComments {
   final String imageURL;
   final int likes;
   final int dislikes;
+  final String userName;
+  final String profilePicture;
   final int forumThreadId;
   final String? forumThread;
   final int userId;
@@ -246,6 +249,8 @@ class ThreadComments {
       required this.imageURL,
       required this.likes,
       required this.dislikes,
+      required this.userName,
+      required this.profilePicture,
       required this.forumThreadId,
       required this.forumThread,
       required this.userId,
@@ -259,6 +264,8 @@ class ThreadComments {
         imageURL: json['imageURL'],
         likes: json['likes'],
         dislikes: json['dislikes'],
+        userName: json['userName'],
+        profilePicture: json['profilePicture'],
         forumThreadId: json['forumThreadId'],
         forumThread: json['forumThread'],
         userId: json['userId'],
