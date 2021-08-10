@@ -6,6 +6,7 @@ import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
+import 'package:intl/intl.dart';
 
 class BookingDayText extends StatefulWidget {
   final String displayText;
@@ -219,7 +220,11 @@ class _BookingDayTextState extends State<BookingDayText> {
                     onPressed: () {
                       //TODO: change to check avavilibity on load of screen and not after button press
                       int office = this.getOfficeIndex(this.dropdownValue);
+                      print(office);
                       DateTime date = DateTime.now();
+                      //convert date variable to string using format
+                      String formattedDate =
+                          DateFormat('yyyy-MM-dd – kk:mm').format(date);
                       String timeSlot =
                           widget.dayOfTheWeek + "," + this.dropdownValue2;
                       //use setState to change the value of Widget body member on press
@@ -227,7 +232,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                           .checkAndMakeBooking(
                               timeslot: timeSlot,
                               office: office,
-                              bookingDate: date)
+                              bookingDate: formattedDate)
                           .then((value) {
                         print(value);
                         if (value == "Created new Booking") {
