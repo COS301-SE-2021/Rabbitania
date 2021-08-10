@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
@@ -113,6 +115,19 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                           maxLines: 20,
                           overflow: TextOverflow.ellipsis,
                         ),
+                      ),
+                      Container(
+                        constraints: const BoxConstraints(
+                          minWidth: 0,
+                          maxWidth: double.infinity,
+                          minHeight: 0.0,
+                          maxHeight: double.infinity,
+                        ),
+                        padding: EdgeInsets.only(top: 5),
+                        child: Image.memory(
+                            Base64Decoder().convert(currentThreadImage),
+                            fit: BoxFit.cover,
+                            width: 10000),
                       ),
                     ],
                   ),
