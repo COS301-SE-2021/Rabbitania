@@ -118,7 +118,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
                 ),
               ),
               Expanded(
-                flex: 8,
+                flex: 6,
                 child: Container(
                   child: CommentBox(
                     userImage:
