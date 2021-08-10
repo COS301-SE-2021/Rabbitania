@@ -57,6 +57,7 @@ class _BookingDayState extends State<BookingDayScreen> {
           icon3: Icons.airplane_ticket,
           onPressed3: () {},
         ),
+        bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
           toolbarHeight: 120,
