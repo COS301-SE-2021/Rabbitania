@@ -207,7 +207,7 @@ namespace backend_api.Controllers.Booking
                 /// <returns>bool</returns>
                 [HttpGet]
                 [Route("CheckAvailability")]
-                public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
+                public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromQuery] CheckScheduleAvailabilityRequest request)
                 {
                     if (request != null)
                     {

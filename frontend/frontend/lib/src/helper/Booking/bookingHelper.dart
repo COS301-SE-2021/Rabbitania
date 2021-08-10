@@ -27,11 +27,11 @@ class BookingHelper {
         office,
         userID,
       );
-      //after making booking call, see what response code is and return boolean based on statusCode
+      //after making booking call, see what response code is and return string based on statusCode
     } else if (result == false) {
       return 'No bookings are availible';
     }
-    return 'No bookings are availible';
+    return 'shits not working';
     //default return case. If reached and true not yet returned then false is only option
     //possibly replace with thrown exception?
   }

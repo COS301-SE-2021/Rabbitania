@@ -13,12 +13,14 @@ class _BookingDayState extends State<BookingDayButton> {
   Widget build(context) => TextButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(widget.selectedColour),
-          shape: MaterialStateProperty.all(CircleBorder(
-            side: BorderSide(
-              width: 2,
-              color: Color.fromRGBO(171, 255, 79, 1),
+          shape: MaterialStateProperty.all(
+            CircleBorder(
+              side: BorderSide(
+                width: 2,
+                color: Color.fromRGBO(171, 255, 79, 1),
+              ),
             ),
-          )),
+          ),
         ),
         onPressed: () => {
           Navigator.push(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Booking/bookingHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
@@ -239,20 +240,25 @@ class _BookingDayTextState extends State<BookingDayText> {
                           return showDialog<void>(
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: const Text('Booking Not Made'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: const <Widget>[
-                                      Text(
-                                          'The reqyested booking slot was not availible. Please try again later'),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('Approve'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
+                                elevation: 5,
+                                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                                titleTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                                title: Text("No Booking Availible"),
+                                contentTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                                content: Text(
+                                    "There are no booking slots currently availible. Please try again later."),
+                                actions: [
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.close,
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                      size: 24.0,
+                                    ),
+                                    tooltip: 'Close',
+                                    onPressed: () async {
+                                      Navigator.pop(context);
                                     },
                                   ),
                                 ],
