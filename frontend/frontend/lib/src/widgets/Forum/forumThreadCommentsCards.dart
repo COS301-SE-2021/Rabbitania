@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
+import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
 import 'package:comment_box/comment/comment.dart';
@@ -175,7 +176,11 @@ class forumCommentCard extends StatelessWidget {
           caption: 'Edit',
           color: Color.fromRGBO(171, 255, 79, 1),
           icon: Icons.edit,
-          onTap: () => {},
+          onTap: () {
+            currentCommentId = this.threadCommentId;
+            currentCommentBody = this.commentBody;
+            UtilModel.route(() => ForumEditThreadCommentScreen(), context);
+          },
         ),
       ],
     );
