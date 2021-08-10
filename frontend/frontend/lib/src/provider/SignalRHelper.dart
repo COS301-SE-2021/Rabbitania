@@ -4,7 +4,7 @@ import 'package:signalr_core/signalr_core.dart';
 class SignalRHelper{
   static HubConnection connection = HubConnectionBuilder()
         .withUrl(//change this for deployment
-        "https://localhost:5001/ChatHub", HttpConnectionOptions(
+        "https://localhost:5001/api/ChatHub", HttpConnectionOptions(
             logging: (level, message) => print(message),
     )).build();
 
