@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Booking/bookingHelper.dart';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
@@ -16,12 +17,17 @@ class BookingDayText extends StatefulWidget {
 }
 
 class _BookingDayTextState extends State<BookingDayText> {
+  UtilModel utilModel = UtilModel();
   String dropdownValue = 'No Selection';
   String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
+  Widget body = Container();
+  var bookingColour = Color.fromRGBO(172, 255, 79, 1);
+  String bookingText = 'Book';
 
   final _bookingProvider = new BookingProvider();
+  final bookingHelper = BookingHelper();
 
   List<String> officeLocations = [
     'No Selection',
@@ -74,7 +80,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(172, 255, 79, 1), width: 2),
+                        color: Color.fromRGBO(172, 255, 79, 1), width: 1),
                     borderRadius: BorderRadius.circular(12),
                     color: Color.fromRGBO(33, 33, 33, 1),
                   ),
@@ -138,7 +144,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(172, 255, 79, 1), width: 2),
+                        color: Color.fromRGBO(172, 255, 79, 1), width: 1),
                     borderRadius: BorderRadius.circular(12),
                     color: Color.fromRGBO(33, 33, 33, 1),
                   ),
@@ -191,7 +197,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(11),
                       backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(172, 255, 79, 1),
+                        bookingColour,
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -203,7 +209,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     child: Text(
-                      "Book",
+                      bookingText,
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromRGBO(33, 33, 33, 1),
@@ -214,54 +220,48 @@ class _BookingDayTextState extends State<BookingDayText> {
                       DateTime date = DateTime.now();
                       String timeSlot =
                           widget.dayOfTheWeek + "," + this.dropdownValue2;
-                      // await _bookingProvider.createBookingAsync(
-                      //     date.toString(), timeSlot, office, 1);
-                      // print(this.getOfficeIndex(this.dropdownValue));
-                      // print(timeSlot);
-
-                      //return a futureBuilder that makes call to helper function
-                      final BookingHelper bookingHelper = BookingHelper();
-
-                      Widget build(context) => FutureBuilder<bool>(
-                            future: bookingHelper.checkAndMakeBooking(
-                                timeslot: timeSlot,
-                                office: office,
-                                bookingDate: date),
-                            builder: (context, snapshot) {
-                              List<Widget> children = [];
-                              if (snapshot.hasData) {
-                                //if future return true then show alert to let user know the booking has been made
-                                if (snapshot.data == true) {
-                                  //snackBar to show that booking has been made successfully
-                                  children = <Widget>[
-                                    SuccessBookingSnackBar(),
-                                  ];
-                                } else {
-                                  //if future returns false then show alert dialog to notify user that no bookings are availible
-                                }
-                              } else if (snapshot.hasError) {
-                                children = <Widget>[
-                                  const Icon(
-                                    Icons.error_outline,
-                                    color: Colors.red,
-                                    size: 60,
+                      //use setState to change the value of Widget body member on press
+                      bookingHelper
+                          .checkAndMakeBooking(
+                              timeslot: timeSlot,
+                              office: office,
+                              bookingDate: date)
+                          .then((value) {
+                        print(value);
+                        if (value == "Created new Booking") {
+                          setState() {
+                            this.bookingText = 'Booked';
+                            this.bookingColour = utilModel.greyColor;
+                          }
+                          //if successful, change state of button to reflect successful booking
+                        } else {
+                          //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
+                          return showDialog<void>(
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Booking Not Made'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: const <Widget>[
+                                      Text(
+                                          'The reqyested booking slot was not availible. Please try again later'),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 16),
-                                    child: Text('Error: ${snapshot.error}'),
-                                  )
-                                ];
-                              } else {
-                                //show progress indicator when future is loading
-                                children = <Widget>[
-                                  BookingCircularProgressIndicator(),
-                                ];
-                              }
-                              return Center(
-                                child: Column(children: children),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Approve'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
                               );
                             },
+                            context: context,
                           );
+                        }
+                      });
                     },
                   ),
                 ),
@@ -271,3 +271,6 @@ class _BookingDayTextState extends State<BookingDayText> {
         ),
       );
 }
+
+//function for creating FutureBuilder on button click
+
