@@ -104,8 +104,8 @@ namespace backend_api
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
             
-            //services.AddScoped<IForumRepository, ForumRepository>();
-            //services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IBookingScheduleRepository, BookingScheduleRepository>();
+            services.AddScoped<IBookingScheduleService, BookingScheduleService>();
             //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
