@@ -9,14 +9,12 @@ import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:http/http.dart' as http;
 
 class ForumThreadCommentsCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-        //Children in the list
-
-        FutureBuilder<List<ThreadComments>>(
+    return FutureBuilder<List<ThreadComments>>(
       future: futureThreadComments,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -114,9 +112,9 @@ class forumCommentCard extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           new ListTile(
             leading: new CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage(profilePicture),
               backgroundColor: Color.fromRGBO(171, 255, 79, 1),
-              child: new Image.memory(Base64Decoder().convert(profilePicture),
-                  fit: BoxFit.cover, width: 10000),
               foregroundColor: Colors.white,
             ),
             title: new Text(
@@ -179,5 +177,37 @@ class forumCommentCard extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+Future<String> addNewComment(String comment) async {
+  try {
+    if (comment == "") {
+      throw ("Cannot Submit Empty Fields");
+    }
+
+    final response = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/CreateThreadComment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        "threadCommentId": 0,
+        "commentBody": comment,
+        "createdDate": "2021-08-10T12:28:13.364Z",
+        "imageUrl": "string",
+        "likes": 0,
+        "dislikes": 0,
+        "userId": 8,
+        "forumThreadId": currentThreadID
+      }),
+    );
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return ("Success");
+    } else {
+      throw ("Failed to Send Message" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return ("Error: " + Exception.toString());
   }
 }
