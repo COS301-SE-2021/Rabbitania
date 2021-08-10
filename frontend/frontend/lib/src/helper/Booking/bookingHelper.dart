@@ -8,7 +8,7 @@ class BookingHelper {
   final bookingProvider = BookingProvider();
   final userProvider = UserProvider();
   //function to perform all logic required when making a booking
-  Future<bool> checkAndMakeBooking({
+  Future<String> checkAndMakeBooking({
     timeslot,
     office,
     bookingDate,
@@ -19,28 +19,21 @@ class BookingHelper {
     var result = await bookingProvider.checkAvailibity(timeslot, office);
     if (result == true) {
       //get userID via user provider
-      final userID = userProvider.getUserID();
+      final userID = 1; //userProvider.getUserID();
       //check availibility is true, hence must make create booking call
-      var createBookingResult = await bookingProvider.createBookingAsync(
+      return bookingProvider.createBookingAsync(
         bookingDate,
         timeslot,
         office,
         userID,
       );
-      //after making booking call, see what response code is and return boolean based on statusCode
-      if (createBookingResult == 'Created new Booking') {
-        return true;
-      } else {
-        //if something went wrong during the createBookingAsync call
-        throw (createBookingResult.toString());
-      }
-      //now booking space availible, hence return false
+      //after making booking call, see what response code is and return string based on statusCode
     } else if (result == false) {
-      return false;
+      return 'No bookings are availible';
     }
+    return 'shits not working';
     //default return case. If reached and true not yet returned then false is only option
     //possibly replace with thrown exception?
-    return false;
   }
 
   NavToBookingDayScreen(context) {

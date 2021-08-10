@@ -36,7 +36,7 @@ class BookingProvider {
         'bookingDate': bookingDate,
         'timeSlot': timeSlot,
         'office': office,
-        'userId': 8
+        'userId': userId,
       }),
     );
     if (response.statusCode == 200) {
@@ -66,9 +66,9 @@ class BookingProvider {
     //if false show alert dialog and let user know can't make booking
     final response = await http.get(
       Uri.parse(
-          'https://10.0.2.2:5001/api/Booking/DeleteBooking?Office=$office&TimeSlot=$timeslot'),
+          'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot=$timeslot&Office=$office'),
     );
-    //TODO: ask james if we can use status code instead of true and false
+
     if (response.statusCode == 200) {
       return true;
     } else {
