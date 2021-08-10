@@ -6,8 +6,12 @@ import 'package:frontend/src/models/userProfile_model.dart';
 import 'package:http/http.dart' as http;
 
 class UserProvider {
-  final user = FirebaseAuth.instance.currentUser!;
+  var user;
+  UserProvider();
 
+  UserProvider.withFirebase(FirebaseAuthInstance) {
+    this.user = FirebaseAuthInstance!;
+  }
   getUserID() async {
     String userEmail = user.providerData[0].email!;
     final response = await http.get(
