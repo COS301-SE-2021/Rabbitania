@@ -16,14 +16,7 @@ namespace backend_api.Controllers.Booking
     public class BookingScheduleController : ControllerBase
     {
         private readonly IBookingScheduleService _scheduleService;
-
-        private readonly IBookingService _bookingService;
-
-        public BookingScheduleController(IBookingScheduleService scheduleService, IBookingService bookingService)
-        {
-            _scheduleService = scheduleService;
-            _bookingService = bookingService;
-        }
+        
 
         public BookingScheduleController(IBookingScheduleService scheduleService)
         {
