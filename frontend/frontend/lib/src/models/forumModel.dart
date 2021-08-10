@@ -8,6 +8,7 @@ var currentForumName = "ForumName";
 var currentThreadID = -1;
 var currentThreadName = "ThreadName";
 var currentThreadBody = "Body";
+var currentThreadImage = "Image";
 //
 
 ////////////////////////////////////////////////////////////////

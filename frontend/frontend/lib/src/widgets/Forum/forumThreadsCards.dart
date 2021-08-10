@@ -108,6 +108,7 @@ class forumThreadCard extends StatelessWidget {
           currentThreadID = this.forumThreadId;
           currentThreadName = this.forumThreadTitle;
           currentThreadBody = this.forumThreadBody;
+          currentThreadImage = this.imageURL;
           UtilModel.route(() => ForumCommentScreen(), context);
         },
         child: Card(
