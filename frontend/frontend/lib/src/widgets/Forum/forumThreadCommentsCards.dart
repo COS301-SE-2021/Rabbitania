@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/forumModel.dart';
@@ -56,6 +58,8 @@ class ForumThreadCommentsCards extends StatelessWidget {
                   imageURL: iterate.current.imageURL,
                   likes: iterate.current.likes,
                   dislikes: iterate.current.dislikes,
+                  userName: iterate.current.userName,
+                  profilePicture: iterate.current.profilePicture,
                   forumThreadId: iterate.current.forumThreadId,
                   userId: iterate.current.userId));
             }
@@ -82,6 +86,8 @@ class forumCommentCard extends StatelessWidget {
   final String imageURL;
   final int likes;
   final int dislikes;
+  final String userName;
+  final String profilePicture;
   final int forumThreadId;
   final int userId;
 
@@ -92,6 +98,8 @@ class forumCommentCard extends StatelessWidget {
     required this.imageURL,
     required this.likes,
     required this.dislikes,
+    required this.userName,
+    required this.profilePicture,
     required this.forumThreadId,
     required this.userId,
   });
@@ -107,12 +115,12 @@ class forumCommentCard extends StatelessWidget {
           new ListTile(
             leading: new CircleAvatar(
               backgroundColor: Color.fromRGBO(171, 255, 79, 1),
-              child:
-                  new Icon(Icons.person, color: Color.fromRGBO(33, 33, 33, 1)),
+              child: new Image.memory(Base64Decoder().convert(profilePicture),
+                  fit: BoxFit.cover, width: 10000),
               foregroundColor: Colors.white,
             ),
             title: new Text(
-              userId.toString(),
+              userName,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               maxLines: 1,
@@ -154,18 +162,19 @@ class forumCommentCard extends StatelessWidget {
           ),
         ]),
       ),
-      actions: <Widget>[],
+      actions: <Widget>[
+        new IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => {},
+        ),
+      ],
       secondaryActions: <Widget>[
         new IconSlideAction(
           caption: 'Edit',
           color: Color.fromRGBO(171, 255, 79, 1),
           icon: Icons.edit,
-          onTap: () => {},
-        ),
-        new IconSlideAction(
-          caption: 'Delete',
-          color: Colors.red,
-          icon: Icons.delete,
           onTap: () => {},
         ),
       ],
