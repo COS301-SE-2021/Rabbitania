@@ -105,6 +105,7 @@ class forumThreadCard extends StatelessWidget {
         onTap: () {
           currentThreadID = this.forumThreadId;
           currentThreadName = this.forumThreadTitle;
+          currentThreadBody = this.forumThreadBody;
           UtilModel.route(() => ForumCommentScreen(), context);
         },
         child: Card(
