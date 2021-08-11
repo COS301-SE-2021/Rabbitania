@@ -33,14 +33,11 @@ namespace backend_api.Services.Booking
             {
                 resp.Successful = false;
             }
-            // await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
             return resp;
-            
         }
 
         public async Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request)
         {
-            //TODO: Increase availability when booking is cancelled
             if (request != null)
             {
                 var resp = await _scheduleRepository.CancelBookingSchedule(request);
