@@ -12,9 +12,23 @@ namespace backend_api.Models.Booking.Responses
         /// </summary>
         private HttpStatusCode _response;
 
+        private string _message;
+
         public CreateBookingResponse(HttpStatusCode response)
         {
             _response = response;
+        }
+
+        public CreateBookingResponse(HttpStatusCode response, string message)
+        {
+            _response = response;
+            _message = message;
+        }
+
+        public string Message
+        {
+            get => _message;
+            set => _message = value;
         }
 
         public HttpStatusCode Response
