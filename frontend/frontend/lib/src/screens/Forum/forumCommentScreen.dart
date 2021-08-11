@@ -82,98 +82,38 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
             _svg_background,
             fit: BoxFit.contain,
           ),
-          Column(
-            children: <Widget>[
-              Flexible(
-                flex: 4,
-                fit: FlexFit.loose,
-                child: Card(
-                  color: Color.fromRGBO(57, 57, 57, 25),
+          InkWell(
+            onTap: () =>
+                {FocusScope.of(context).unfocus(), commentController.clear()},
+            child: CommentBox(
+              userImage:
+                  "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
+              child: Card(
+                  color: Color.fromRGBO(57, 57, 57, 1),
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)),
                   clipBehavior: Clip.antiAlias,
                   elevation: 2,
-                  child: ListView(
-                    children: [
-                      ListTile(
-                        contentPadding: EdgeInsets.only(
-                            bottom: 5.0, top: 10, left: 20, right: 10),
-                        title: Container(
-                          padding: EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            currentThreadName,
-                            style: TextStyle(
-                                letterSpacing: 2.0,
-                                color: Colors.white,
-                                fontSize: 22),
-                          ),
-                        ),
-                        subtitle: Text(
-                          currentThreadBody,
-                          style: TextStyle(color: Colors.white),
-                          maxLines: 20,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Container(
-                        constraints: const BoxConstraints(
-                          minWidth: 0,
-                          maxWidth: double.infinity,
-                          minHeight: 0.0,
-                          maxHeight: double.infinity,
-                        ),
-                        padding: EdgeInsets.only(top: 5),
-                        child: Image.memory(
-                            Base64Decoder().convert(currentThreadImage),
-                            fit: BoxFit.cover,
-                            width: 10000),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                flex: 10,
-                fit: FlexFit.tight,
-                child: InkWell(
-                  onTap: () => {
-                    FocusScope.of(context).unfocus(),
-                    commentController.clear()
-                  },
-                  child: CommentBox(
-                    userImage:
-                        "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
-                    child: Card(
-                        color: Color.fromRGBO(57, 57, 57, 1),
-                        shadowColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)),
-                        clipBehavior: Clip.antiAlias,
-                        elevation: 2,
-                        child: ForumThreadCommentsCards()),
-                    labelText: 'Write a comment...',
-                    withBorder: false,
-                    errorText: 'Comment cannot be blank',
-                    sendButtonMethod: () {
-                      print(commentController.text);
-                      addNewComment(commentController.text);
-                      commentController.clear();
-                      FocusScope.of(context).unfocus();
-                      setState(() {});
-                      refresh();
-                    },
-                    formKey: formKey,
-                    commentController: commentController,
-                    backgroundColor: Colors.black,
-                    textColor: Colors.white,
-                    sendWidget:
-                        Icon(Icons.send_sharp, size: 30, color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
-          )
+                  child: ForumThreadCommentsCards()),
+              labelText: 'Write a comment...',
+              withBorder: false,
+              errorText: 'Comment cannot be blank',
+              sendButtonMethod: () async {
+                print(commentController.text);
+                await addNewComment(commentController.text);
+                commentController.clear();
+                FocusScope.of(context).unfocus();
+                setState(() {});
+                refresh();
+              },
+              formKey: formKey,
+              commentController: commentController,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.white),
+            ),
+          ),
         ],
       )),
     );

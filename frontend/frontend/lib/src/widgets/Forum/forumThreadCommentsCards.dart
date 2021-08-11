@@ -6,9 +6,6 @@ import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
-import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
-import 'package:comment_box/comment/comment.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,32 +18,35 @@ class ForumThreadCommentsCards extends StatelessWidget {
         if (snapshot.hasData) {
           var iterate = snapshot.data!.iterator;
           if (snapshot.data!.length == 0) {
-            return Card(
-              color: Color.fromRGBO(57, 57, 57, 25),
-              shadowColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
-              clipBehavior: Clip.antiAlias,
-              elevation: 2,
-              child: Column(
-                children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.only(
-                        bottom: 5.0, top: 10, left: 20, right: 10),
-                    title: Container(
-                      padding: EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        "No Comments",
-                        style: TextStyle(
-                            letterSpacing: 2.0,
-                            color: Colors.white,
-                            fontSize: 22),
+            return ListView(children: [
+              CurrentQuestionWidget(),
+              Card(
+                color: Color.fromRGBO(57, 57, 57, 25),
+                shadowColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                clipBehavior: Clip.antiAlias,
+                elevation: 2,
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.only(
+                          bottom: 5.0, top: 10, left: 20, right: 10),
+                      title: Container(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          "No Comments",
+                          style: TextStyle(
+                              letterSpacing: 2.0,
+                              color: Colors.white,
+                              fontSize: 22),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
+                  ],
+                ),
+              )
+            ]);
           } else {
             List<Widget> comments = [];
             while (iterate.moveNext()) {
@@ -62,7 +62,8 @@ class ForumThreadCommentsCards extends StatelessWidget {
                   forumThreadId: iterate.current.forumThreadId,
                   userId: iterate.current.userId));
             }
-            return new ListView(children: comments);
+            comments.add(CurrentQuestionWidget());
+            return new ListView(children: comments.reversed.toList());
           }
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -76,6 +77,51 @@ class ForumThreadCommentsCards extends StatelessWidget {
       },
     );
   }
+}
+
+Widget CurrentQuestionWidget() {
+  return Card(
+    color: Color.fromRGBO(57, 57, 57, 25),
+    shadowColor: Colors.black,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+    clipBehavior: Clip.antiAlias,
+    elevation: 2,
+    child: Column(
+      children: <Widget>[
+        Container(
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.only(bottom: 5.0, top: 10, left: 20, right: 10),
+            title: Container(
+              padding: EdgeInsets.only(bottom: 8),
+              child: Text(
+                currentThreadName,
+                style: TextStyle(
+                    letterSpacing: 2.0, color: Colors.white, fontSize: 22),
+              ),
+            ),
+            subtitle: Text(
+              currentThreadBody,
+              style: TextStyle(color: Colors.white),
+              maxLines: 20,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ),
+        Container(
+          constraints: const BoxConstraints(
+            minWidth: 0,
+            maxWidth: double.infinity,
+            minHeight: 0.0,
+            maxHeight: double.infinity,
+          ),
+          padding: EdgeInsets.only(top: 5),
+          child: Image.memory(Base64Decoder().convert(currentThreadImage),
+              fit: BoxFit.cover, width: 10000),
+        ),
+      ],
+    ),
+  );
 }
 
 class forumCommentCard extends StatelessWidget {
