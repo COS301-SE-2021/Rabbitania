@@ -37,6 +37,8 @@ namespace backend_api.Services.Booking
                 
                 if (res1.Successful && res2.Successful)
                 {
+                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(req1.TimeSlot, req1.Office));
+                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(req2.TimeSlot, req2.Office));
                     return new CreateBookingScheduleResponse(true);
                 }
                 else
@@ -44,6 +46,7 @@ namespace backend_api.Services.Booking
                     return new CreateBookingScheduleResponse(false);
                 }
             }
+            
             else
             {
                 var result = await _scheduleRepository.CreateBookingSchedule(request);
@@ -56,6 +59,7 @@ namespace backend_api.Services.Booking
                 {
                     resp.Successful = false;
                 }
+                await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
                 return resp;
             }
         }
@@ -131,13 +135,11 @@ namespace backend_api.Services.Booking
                 var resp = await _scheduleRepository.GetBookingSchedule(bookingReqObj);
                 if (resp.BookingSchedule.Availability > 0)
                 {
-                    //update booking request obj to update schedule availability
                     var updateBookingReq = new UpdateBookingScheduleRequest(request.TimeSlot, 
                         request.Office);
-                    //Update the bookings availability
                     var UpdateResp = await _scheduleRepository.UpdateBookingScheduleAvailability(updateBookingReq);
                     
-                    return new CheckScheduleAvailabilityResponse(UpdateResp.Success);
+                    return new CheckScheduleAvailabilityResponse(true);
                     
                 }
                 else
