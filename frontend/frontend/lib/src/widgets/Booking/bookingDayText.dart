@@ -244,10 +244,10 @@ class _BookingDayTextState extends State<BookingDayText> {
                           .then((value) {
                         print(value);
                         if (value == "Created new Booking") {
-                          setState() {
+                          setState(() {
                             this.bookingText = 'Booked';
                             this.bookingColour = utilModel.greyColor;
-                          }
+                          });
                           //if successful, change state of button to reflect successful booking
                         } else {
                           //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
