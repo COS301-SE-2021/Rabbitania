@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //helper class for all login related functionality
-class LoginHelper {
+class UserHelper {
   //function used to save userID to disk
   //function is async so must use callback when using
   void setUserID(userID) async {
