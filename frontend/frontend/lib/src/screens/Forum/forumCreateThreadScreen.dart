@@ -54,6 +54,8 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           ),
                           tooltip: 'Continue',
                           onPressed: () async {
+                            threadTitleController.text = "";
+                            threadBodyController.text = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),
