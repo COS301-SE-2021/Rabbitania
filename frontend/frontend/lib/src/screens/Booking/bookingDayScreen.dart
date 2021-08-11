@@ -48,15 +48,15 @@ class _BookingDayState extends State<BookingDayScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        floatingActionButton: FancyFab(
-          numberOfItems: 1,
-          icon1: Icons.share_location_outlined,
-          onPressed1: () {},
-          icon2: Icons.delete,
-          onPressed2: () {},
-          icon3: Icons.airplane_ticket,
-          onPressed3: () {},
-        ),
+        // floatingActionButton: FancyFab(
+        //   numberOfItems: 0,
+        //   icon1: Icons.share_location_outlined,
+        //   onPressed1: () {},
+        //   icon2: Icons.delete,
+        //   onPressed2: () {},
+        //   icon3: Icons.airplane_ticket,
+        //   onPressed3: () {},
+        // ),
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,

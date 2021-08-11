@@ -24,7 +24,7 @@ class _BookingDayTextState extends State<BookingDayText> {
   String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
-  Widget body = Container();
+  //Widget body = Container();
   var bookingColour = Color.fromRGBO(172, 255, 79, 1);
   String bookingText = 'Book';
 
@@ -196,6 +196,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   height: 60,
                   child: ElevatedButton(
+                    key: Key('BookingButton'),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(11),
                       backgroundColor: MaterialStateProperty.all(
@@ -225,8 +226,15 @@ class _BookingDayTextState extends State<BookingDayText> {
                       //convert date variable to string using format
                       String formattedDate =
                           DateFormat('yyyy-MM-dd – kk:mm').format(date);
-                      String timeSlot =
-                          widget.dayOfTheWeek + "," + this.dropdownValue2;
+                      // Checks for Full Day value
+                      String timeSlot;
+                      if (dropdownValue2 == "Full Day") {
+                        timeSlot = widget.dayOfTheWeek + ",Whole";
+                      } else {
+                        timeSlot =
+                            widget.dayOfTheWeek + "," + this.dropdownValue2;
+                      }
+
                       //use setState to change the value of Widget body member on press
                       bookingHelper
                           .checkAndMakeBooking(
