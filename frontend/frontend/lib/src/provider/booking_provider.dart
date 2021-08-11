@@ -44,8 +44,10 @@ class BookingProvider {
     if (response.statusCode == 200) {
       return ("Created new Booking");
     } else {
-      throw ("Failed to create new booking - Error Status: " +
-          response.statusCode.toString());
+      return ("Failed to create booking, Code: " +
+          response.statusCode.toString() +
+          " - Response Message: " +
+          response.body);
     }
   }
 
