@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 
 class BookingDayButton extends StatefulWidget {
-  final displayText;
+  final String displayText;
   final selectedColour;
   BookingDayButton(this.displayText, this.selectedColour);
   _BookingDayState createState() => _BookingDayState();
@@ -31,7 +31,7 @@ class _BookingDayState extends State<BookingDayButton> {
           ),
         },
         child: Text(
-          widget.displayText,
+          '${widget.displayText[0]}',
           style: TextStyle(
             fontSize: 40,
             color: Color.fromRGBO(171, 255, 79, 1),

@@ -78,23 +78,33 @@ class _BookingDayState extends State<BookingDayScreen> {
                 children: <Widget>[
                   this.displayText == 'Monday'
                       ? new BookingDayButton(
-                          'M', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'M',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('M', Colors.transparent), //else
                   this.displayText == 'Tuesday'
                       ? new BookingDayButton(
-                          'Tu', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'Tu',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('Tu', Colors.transparent), //
                   this.displayText == 'Wednesday'
                       ? new BookingDayButton(
-                          'W', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'W',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('W', Colors.transparent),
                   this.displayText == 'Thursday'
                       ? new BookingDayButton(
-                          'Th', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'Th',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('Th', Colors.transparent),
                   this.displayText == 'Friday'
                       ? new BookingDayButton(
-                          'F', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'F',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('F', Colors.transparent),
                 ],
               ),
