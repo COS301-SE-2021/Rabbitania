@@ -31,6 +31,7 @@ class BookingHelper {
     } else if (result == false) {
       return 'No bookings are availible';
     }
+    //TODO:change when done
     return 'shits not working';
     //default return case. If reached and true not yet returned then false is only option
     //possibly replace with thrown exception?

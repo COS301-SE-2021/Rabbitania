@@ -84,13 +84,13 @@ namespace backend_api.Data.Booking
         public async Task<HttpStatusCode> CreateBooking(CreateBookingRequest request)
         {
             var bookingDate = request.BookingDate;
-            var bookingOffice = OfficeLocation.Unassigned;
+            var bookingOffice = request.Office;
             var timeSlot = request.TimeSlot;
             var user = _users.Users.Where(x => x.UserId == request.UserId);
-            foreach(var y in user)
-            {
-                bookingOffice = y.OfficeLocation;
-            }
+            // foreach(var y in user)
+            // {
+            //     bookingOffice = y.OfficeLocation;
+            // }
             
             var bookingUserId = request.UserId;
             var booking = new Models.Booking.Booking(bookingDate, timeSlot, bookingOffice, bookingUserId);
