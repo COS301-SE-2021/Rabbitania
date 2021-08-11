@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/noticeboardModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
@@ -22,9 +23,12 @@ late Future<bool> deleteResponse;
 
 class _NoticeBoard extends State<NoticeBoard> {
   final util = new UtilModel();
-
+  UserHelper userHelper = UserHelper();
   void initState() {
     super.initState();
+    userHelper.getUserID().then((value) {
+      print(value);
+    });
     futureThread = fetchNotice();
     deleteResponse = deleteThread(-1);
   }

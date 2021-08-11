@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
+import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +19,8 @@ class ContinueButton extends StatefulWidget {
 }
 
 class _continueButton extends State<ContinueButton> {
+  UserProvider userProvider = UserProvider();
+  UserHelper userHelper = UserHelper();
   @protected
   @mustCallSuper
   void initState() {
@@ -41,10 +45,14 @@ class _continueButton extends State<ContinueButton> {
       }),
     );
     if (response.statusCode == 200) {
+      var userID = await userProvider.getUserID();
+      userHelper.setUserID(userID);
       setState(() {});
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
+      int userID = userProvider.getUserID();
+      userHelper.setUserID(userID);
       setState(() {});
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => InfoForm(widget.user)));
