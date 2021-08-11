@@ -13,7 +13,6 @@ class BookingHelper {
     office,
     bookingDate,
   }) async {
-    //TODO: check availibility of booking slot
     //if true then make booking
     //else show user booking cant be made
     var result = await bookingProvider.checkAvailibity(timeslot, office);
@@ -31,8 +30,7 @@ class BookingHelper {
     } else if (result == false) {
       return 'No bookings are availible';
     }
-    //TODO:change when done
-    return 'shits not working';
+    return 'Error when trying to book.';
     //default return case. If reached and true not yet returned then false is only option
     //possibly replace with thrown exception?
   }
