@@ -72,6 +72,8 @@ namespace backend_api.Services.Booking
                 var resp = await _scheduleRepository.CancelBookingSchedule(request);
                 if (resp.Response == true)
                 {
+                    var updateAvailability = new UpdateBookingScheduleRequest(request.TimeSlot, request.Office);
+                    await _scheduleRepository.UpdateBookingScheduleAvailabilityAdd(updateAvailability);
                     return new CancelBookingScheduleResponse(true);
                 }
                 else
