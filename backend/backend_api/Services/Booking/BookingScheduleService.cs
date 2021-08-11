@@ -22,22 +22,47 @@ namespace backend_api.Services.Booking
             {
                 throw new InvalidBookingException("Request is null or empty");
             }
-
-            var result = await _scheduleRepository.CreateBookingSchedule(request);
-            var resp = new CreateBookingScheduleResponse();
-            if (result.Successful)
+            
+            if (request.TimeSlot.Split(',')[1].ToLower() == "whole")
             {
-                resp.Successful = true;
+                var day = request.TimeSlot.Split(',')[0];
+                var booking1 = day + ",Morning";
+                var booking2 = day + ",Afternoon";
+                
+                var req1 = new CreateBookingScheduleRequest(request.Office, booking1, request.Availability);
+                var req2 = new CreateBookingScheduleRequest(request.Office, booking2, request.Availability);
+                
+                var res1 = await _scheduleRepository.CreateBookingSchedule(req1);
+                var res2 = await _scheduleRepository.CreateBookingSchedule(req2);
+                
+                if (res1.Successful && res2.Successful)
+                {
+                    return new CreateBookingScheduleResponse(true);
+                }
+                else
+                {
+                    return new CreateBookingScheduleResponse(false);
+                }
             }
             else
             {
-                resp.Successful = false;
+                var result = await _scheduleRepository.CreateBookingSchedule(request);
+                var resp = new CreateBookingScheduleResponse();
+                if (result.Successful)
+                {
+                    resp.Successful = true;
+                }
+                else
+                {
+                    resp.Successful = false;
+                }
+                return resp;
             }
-            return resp;
         }
 
         public async Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request)
         {
+            //TODO: Increase availability when booking is cancelled
             if (request != null)
             {
                 var resp = await _scheduleRepository.CancelBookingSchedule(request);
