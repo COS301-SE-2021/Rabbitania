@@ -8,6 +8,7 @@ import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_reaction_button/flutter_reaction_button.dart';
 
 class ForumThreadCommentsCards extends StatelessWidget {
   @override
@@ -182,23 +183,24 @@ class forumCommentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                TextButton.icon(
-                  label: Text(likes.toString(),
-                      style: TextStyle(color: Color.fromRGBO(175, 255, 79, 1))),
-                  icon: const Icon(Icons.thumb_up_alt_rounded,
-                      size: 20, color: Color.fromRGBO(175, 255, 79, 1)),
-                  onPressed: () {},
-                  //   style: ButtonStyle(
-                  //       //backgroundColor:
-                  //           //MaterialStateProperty.all<Color>(Colors.green)),
-                ),
-                TextButton.icon(
-                  label: Text(dislikes.toString(),
-                      style: TextStyle(color: Colors.red)),
-                  icon: const Icon(Icons.thumb_down_alt_rounded,
-                      size: 20, color: Colors.red),
-                  onPressed: () {},
-                ),
+                // TextButton.icon(
+                //   label: Text(likes.toString(),
+                //       style: TextStyle(color: Color.fromRGBO(175, 255, 79, 1))),
+                //   icon: const Icon(Icons.thumb_up_alt_rounded,
+                //       size: 20, color: Color.fromRGBO(175, 255, 79, 1)),
+                //   onPressed: () {},
+                //   //   style: ButtonStyle(
+                //   //       //backgroundColor:
+                //   //           //MaterialStateProperty.all<Color>(Colors.green)),
+                // ),
+                // TextButton.icon(
+                //   label: Text(dislikes.toString(),
+                //       style: TextStyle(color: Colors.red)),
+                //   icon: const Icon(Icons.thumb_down_alt_rounded,
+                //       size: 20, color: Colors.red),
+                //   onPressed: () {},
+                // ),
+                Reactions(context)
               ]),
           new Divider(
             height: 0.0,
@@ -305,4 +307,92 @@ Future<String> addNewComment(String comment) async {
   } catch (Exception) {
     return ("Error: " + Exception.toString());
   }
+}
+
+Widget Reactions(BuildContext context) {
+  return FlutterReactionButtonCheck(
+    boxColor: Color.fromRGBO(33, 33, 33, 1),
+    boxItemsSpacing: 7,
+    boxPadding: EdgeInsets.only(top: 3, bottom: 3, left: 3),
+    onReactionChanged: (reaction, index, isChecked) {
+      print('reaction selected index: $index');
+    },
+    reactions: <Reaction>[
+      Reaction(
+        previewIcon: Icon(Icons.thumb_up_alt_rounded,
+            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+        icon: Container(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+          child: Icon(Icons.thumb_up_alt_rounded,
+              size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+        ),
+      ),
+      Reaction(
+        previewIcon:
+            Icon(Icons.thumb_down_alt_rounded, size: 55, color: Colors.red),
+        icon: Container(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+          child: Icon(Icons.add_reaction_outlined, size: 25, color: Colors.red),
+        ),
+      ),
+      Reaction(
+        previewIcon: Icon(Icons.emoji_emotions,
+            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+        icon: Container(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+          child: Icon(Icons.emoji_emotions,
+              size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+        ),
+      ),
+      Reaction(
+        previewIcon: Icon(Icons.emoji_events,
+            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+        icon: Container(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+          child: Icon(Icons.emoji_events,
+              size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+        ),
+      ),
+      Reaction(
+        previewIcon: Icon(Icons.emoji_objects,
+            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+        icon: Container(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+          child: Icon(Icons.emoji_objects,
+              size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+        ),
+      ),
+      Reaction(
+        previewIcon: Icon(Icons.emoji_transportation,
+            size: 60, color: Color.fromRGBO(175, 255, 79, 1)),
+        icon: Container(
+          padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+          child: Icon(Icons.emoji_transportation,
+              size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+        ),
+      ),
+    ],
+    initialReaction: Reaction(
+      icon: Container(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+        child: Icon(Icons.add_reaction_outlined,
+            size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+      ),
+    ),
+    selectedReaction: Reaction(
+      icon: Container(
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
+        child: Icon((Icons.thumb_up_alt_rounded),
+            size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
+      ),
+    ),
+  );
 }
