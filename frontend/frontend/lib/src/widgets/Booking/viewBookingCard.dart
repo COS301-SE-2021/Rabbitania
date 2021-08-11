@@ -157,10 +157,10 @@ class CustomListItem extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: Icon(
                 icon,
-                size: 50,
+                size: 45,
                 color: Color.fromRGBO(171, 255, 79, 1),
               ),
             ),
@@ -194,7 +194,7 @@ class _BookingInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(5.0, 5.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
