@@ -91,6 +91,25 @@ namespace backend_api.Data.Booking
                 return new UpdateBookingScheduleResponse(false);
             }
         }
+
+        public async Task<UpdateBookingScheduleResponse> UpdateBookingScheduleAvailabilityAdd(
+            UpdateBookingScheduleRequest request)
+        {
+            var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
+                request.Office, request.TimeSlot).AsTask();
+
+            try
+            {
+                bookingSchedule.Availability += 1;
+                await _schedules.SaveChangesAsync();
+                return new UpdateBookingScheduleResponse(true);
+            }
+            catch (Exception)
+            {
+                return new UpdateBookingScheduleResponse(false);
+            }
+        }
+
         public async Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request)
         {
             var newSchedule = new BookingSchedule(request.TimeSlot, request.Office, request.Availability);
