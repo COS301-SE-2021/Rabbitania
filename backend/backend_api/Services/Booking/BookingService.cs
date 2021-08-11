@@ -13,10 +13,25 @@ namespace backend_api.Services.Booking
     public class BookingService : IBookingService
     {
         private readonly IBookingRepository _bookingRepository;
+        private readonly IBookingScheduleRepository _scheduleRepository;
+        private readonly IBookingScheduleService _scheduleService;
 
         public BookingService(IBookingRepository bookingRepository)
         {
             _bookingRepository = bookingRepository;
+        }
+
+        public BookingService(IBookingRepository bookingRepository, IBookingScheduleRepository scheduleService)
+        {
+            _bookingRepository = bookingRepository;
+            _scheduleRepository = scheduleService;
+        }
+
+        public BookingService(IBookingRepository bookingRepository, IBookingScheduleRepository scheduleRepository, IBookingScheduleService scheduleService)
+        {
+            _bookingRepository = bookingRepository;
+            _scheduleRepository = scheduleRepository;
+            _scheduleService = scheduleService;
         }
 
         public async Task<CreateBookingResponse> CreateBooking(CreateBookingRequest request)
@@ -35,12 +50,60 @@ namespace backend_api.Services.Booking
             {
                 throw new InvalidDateException("Date is not in correct format");
             }
+            
+            //Whole day booking
+            if (request.TimeSlot.Split(',')[1].ToLower() == "whole")
+            {
+                var day = request.TimeSlot.Split(',')[0];
+                var booking1 = day + ",Morning";
+                var booking2 = day + ",Afternoon";
 
-            var response = new CreateBookingResponse(
-                await _bookingRepository.CreateBooking(request)
-            );
+                var req1 = new CreateBookingRequest(request.BookingDate, booking1, request.Office, request.UserId);
+                var req2 = new CreateBookingRequest(request.BookingDate, booking2, request.Office, request.UserId);
 
-            return response;
+                var availability1 = await _scheduleService.CheckAvailability( new CheckScheduleAvailabilityRequest(booking1, request.Office));
+                var availability2 = await _scheduleService.CheckAvailability( new CheckScheduleAvailabilityRequest(booking2, request.Office));
+                
+                if (availability1.Successful && availability2.Successful)
+                {
+                    var res1 = await _bookingRepository.CreateBooking(req1);
+                    var res2 = await _bookingRepository.CreateBooking(req2);
+                
+                    if (res1 == HttpStatusCode.Created && res2 == HttpStatusCode.Created)
+                    {
+                        await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(booking1, request.Office));
+                        await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(booking2, request.Office));
+                        return new CreateBookingResponse(HttpStatusCode.Created, "Booking created successfully for the whole day.");
+                    }
+                    else
+                    {
+                        return new CreateBookingResponse(HttpStatusCode.BadRequest, "Booking creation failed.");
+                    }
+                }
+                else
+                {
+                    return new CreateBookingResponse(HttpStatusCode.BadRequest, "No available booking slots for whole day booking");
+                }
+            }
+            //booking for single slot
+            else
+            {
+                var availability = await _scheduleService.CheckAvailability( new CheckScheduleAvailabilityRequest(request.TimeSlot, request.Office));
+                if (availability.Successful)
+                {
+                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
+
+                    var response = new CreateBookingResponse(
+                        await _bookingRepository.CreateBooking(request)
+                    );
+                    return response;
+                }
+                else
+                {
+                    return new CreateBookingResponse(HttpStatusCode.BadRequest, "Booking creation failed for slot "+request.TimeSlot+" at "+request.Office);
+                }
+            }
+            
         }
 
         public async Task<UpdateBookingResponse> UpdateBooking(UpdateBookingRequest request)
@@ -68,6 +131,9 @@ namespace backend_api.Services.Booking
             if (request != null)
             {
                 var resp = await _bookingRepository.CancelBooking(request);
+                var booking = await _bookingRepository.GetBooking(new GetBookingRequest(request.BookingId));
+                var req = new UpdateBookingScheduleRequest(booking.TimeSlot, booking.Office);
+                await _scheduleRepository.UpdateBookingScheduleAvailabilityAdd(req);
                 return new CancelBookingResponse(resp);
             }
             else

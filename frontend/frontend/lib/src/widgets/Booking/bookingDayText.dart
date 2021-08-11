@@ -6,6 +6,7 @@ import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
+import 'package:intl/intl.dart';
 
 class BookingDayText extends StatefulWidget {
   final String displayText;
@@ -23,7 +24,7 @@ class _BookingDayTextState extends State<BookingDayText> {
   String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
-  Widget body = Container();
+  //Widget body = Container();
   var bookingColour = Color.fromRGBO(172, 255, 79, 1);
   String bookingText = 'Book';
 
@@ -37,8 +38,8 @@ class _BookingDayTextState extends State<BookingDayText> {
     'Amsterdam',
   ];
 
-  List<String> timeSlots = ['No Selection', 'Morning', 'Afternoon'];
-
+  List<String> timeSlots = ['No Selection', 'Full Day', 'Morning', 'Afternoon'];
+  //change to use endpoint to receive days of the week availible
   int getOfficeIndex(String office) {
     int officeIndex = -1;
     if (office == 'Pretoria') {
@@ -128,7 +129,7 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
               Center(
                 child: Text(
-                  'Time Slot: ',
+                  'Slot: ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -195,6 +196,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   height: 60,
                   child: ElevatedButton(
+                    key: Key('BookingButton'),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(11),
                       backgroundColor: MaterialStateProperty.all(
@@ -217,16 +219,28 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     onPressed: () {
+                      //TODO: change to check avavilibity on load of screen and not after button press
                       int office = this.getOfficeIndex(this.dropdownValue);
+                      print(office);
                       DateTime date = DateTime.now();
-                      String timeSlot =
-                          widget.dayOfTheWeek + "," + this.dropdownValue2;
+                      //convert date variable to string using format
+                      String formattedDate =
+                          DateFormat('yyyy-MM-dd – kk:mm').format(date);
+                      // Checks for Full Day value
+                      String timeSlot;
+                      if (dropdownValue2 == "Full Day") {
+                        timeSlot = widget.dayOfTheWeek + ",Whole";
+                      } else {
+                        timeSlot =
+                            widget.dayOfTheWeek + "," + this.dropdownValue2;
+                      }
+
                       //use setState to change the value of Widget body member on press
                       bookingHelper
                           .checkAndMakeBooking(
                               timeslot: timeSlot,
                               office: office,
-                              bookingDate: date)
+                              bookingDate: formattedDate)
                           .then((value) {
                         print(value);
                         if (value == "Created new Booking") {

@@ -66,11 +66,13 @@ namespace backend_api.Data.Booking
         public async Task<HttpStatusCode> UpdateBooking(UpdateBookingRequest request)
         {
             var bookingID = request.BookingId;
-            var toUpdate = await _bookings.Bookings.FirstOrDefaultAsync(x => x.BookingId == bookingID);
-            //toUpdate.BookingDate = request.Date; // NEED TO FIX
+            var toUpdate = await _bookings.Bookings.FindAsync(bookingID).AsTask();
             try
             {
-                _bookings.Entry(toUpdate).State = EntityState.Modified;
+                toUpdate.Office = request.Office;
+                toUpdate.TimeSlot = request.TimeSlot;
+                toUpdate.BookingDate = request.Date;
+                // _bookings.Entry(toUpdate).State = EntityState.Modified;
                 await _bookings.SaveChangesAsync();
                 return HttpStatusCode.Accepted;
             }
@@ -84,13 +86,10 @@ namespace backend_api.Data.Booking
         public async Task<HttpStatusCode> CreateBooking(CreateBookingRequest request)
         {
             var bookingDate = request.BookingDate;
-            var bookingOffice = OfficeLocation.Unassigned;
+            var bookingOffice = request.Office;
             var timeSlot = request.TimeSlot;
             var user = _users.Users.Where(x => x.UserId == request.UserId);
-            foreach(var y in user)
-            {
-                bookingOffice = y.OfficeLocation;
-            }
+            
             
             var bookingUserId = request.UserId;
             var booking = new Models.Booking.Booking(bookingDate, timeSlot, bookingOffice, bookingUserId);

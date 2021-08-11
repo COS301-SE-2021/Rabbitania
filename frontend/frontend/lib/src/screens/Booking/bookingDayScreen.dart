@@ -7,6 +7,7 @@ import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class BookingDayScreen extends StatefulWidget {
@@ -47,26 +48,23 @@ class _BookingDayState extends State<BookingDayScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        floatingActionButton: FloatingActionButton(
-          //Floating action button on Scaffold
-          onPressed: () {
-            //code to execute on button press
-          },
-          backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-          child: Icon(
-            Icons.apps_sharp,
-            color: Color.fromRGBO(33, 33, 33, 1),
-          ), //icon inside button
-        ),
-        floatingActionButtonLocation: fabl(context),
+        // floatingActionButton: FancyFab(
+        //   numberOfItems: 0,
+        //   icon1: Icons.share_location_outlined,
+        //   onPressed1: () {},
+        //   icon2: Icons.delete,
+        //   onPressed2: () {},
+        //   icon3: Icons.airplane_ticket,
+        //   onPressed3: () {},
+        // ),
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 150,
+          toolbarHeight: 120,
           elevation: 1,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
-          title: Column(
+          flexibleSpace: Column(
             children: <Widget>[
               Container(
                 child: Padding(
@@ -80,23 +78,33 @@ class _BookingDayState extends State<BookingDayScreen> {
                 children: <Widget>[
                   this.displayText == 'Monday'
                       ? new BookingDayButton(
-                          'M', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'M',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('M', Colors.transparent), //else
                   this.displayText == 'Tuesday'
                       ? new BookingDayButton(
-                          'Tu', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'Tu',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('Tu', Colors.transparent), //
                   this.displayText == 'Wednesday'
                       ? new BookingDayButton(
-                          'W', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'W',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('W', Colors.transparent),
                   this.displayText == 'Thursday'
                       ? new BookingDayButton(
-                          'Th', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'Th',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('Th', Colors.transparent),
                   this.displayText == 'Friday'
                       ? new BookingDayButton(
-                          'F', Color.fromRGBO(63, 63, 63, 1)) //if true
+                          'F',
+                          Color.fromRGBO(63, 63, 63, 1),
+                        ) //if true
                       : new BookingDayButton('F', Colors.transparent),
                 ],
               ),
