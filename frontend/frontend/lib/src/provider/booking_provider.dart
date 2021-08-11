@@ -21,6 +21,7 @@ class BookingProvider {
           )
           .toList();
     } else {
+      // TODO: fix this to return an empty shell when theres nothing in the database
       throw Exception('Failed to retreive bookings');
     }
   }
