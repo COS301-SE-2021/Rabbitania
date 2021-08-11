@@ -23,45 +23,19 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Request is null or empty");
             }
             
-            if (request.TimeSlot.Split(',')[1].ToLower() == "whole")
+            var result = await _scheduleRepository.CreateBookingSchedule(request);
+            var resp = new CreateBookingScheduleResponse();
+            if (result.Successful)
             {
-                var day = request.TimeSlot.Split(',')[0];
-                var booking1 = day + ",Morning";
-                var booking2 = day + ",Afternoon";
-                
-                var req1 = new CreateBookingScheduleRequest(request.Office, booking1, request.Availability);
-                var req2 = new CreateBookingScheduleRequest(request.Office, booking2, request.Availability);
-                
-                var res1 = await _scheduleRepository.CreateBookingSchedule(req1);
-                var res2 = await _scheduleRepository.CreateBookingSchedule(req2);
-                
-                if (res1.Successful && res2.Successful)
-                {
-                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(req1.TimeSlot, req1.Office));
-                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(req2.TimeSlot, req2.Office));
-                    return new CreateBookingScheduleResponse(true);
-                }
-                else
-                {
-                    return new CreateBookingScheduleResponse(false);
-                }
+                resp.Successful = true;
             }
-            
             else
             {
-                var result = await _scheduleRepository.CreateBookingSchedule(request);
-                var resp = new CreateBookingScheduleResponse();
-                if (result.Successful)
-                {
-                    resp.Successful = true;
-                }
-                else
-                {
-                    resp.Successful = false;
-                }
-                await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
-                return resp;
+                resp.Successful = false;
             }
+            // await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
+            return resp;
+            
         }
 
         public async Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request)
