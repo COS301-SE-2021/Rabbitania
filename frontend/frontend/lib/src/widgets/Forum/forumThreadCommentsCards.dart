@@ -190,7 +190,7 @@ class forumCommentCard extends StatelessWidget {
                       onPressed: () async {
                         // ignore: unused_local_variable
                         currentCommentId = this.threadCommentId;
-                            await deleteComment(currentCommentId);
+                        await deleteComment(currentCommentId);
                         UtilModel.route(() => ForumCommentScreen(), context);
                       },
                     ),
