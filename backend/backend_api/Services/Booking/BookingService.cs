@@ -73,7 +73,7 @@ namespace backend_api.Services.Booking
                     {
                         await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(booking1, request.Office));
                         await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(booking2, request.Office));
-                        return new CreateBookingResponse(HttpStatusCode.Accepted, "Booking created successfully for the whole day.");
+                        return new CreateBookingResponse(HttpStatusCode.Created, "Booking created successfully for the whole day.");
                     }
                     else
                     {
@@ -91,6 +91,8 @@ namespace backend_api.Services.Booking
                 var availability = await _scheduleService.CheckAvailability( new CheckScheduleAvailabilityRequest(request.TimeSlot, request.Office));
                 if (availability.Successful)
                 {
+                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
+
                     var response = new CreateBookingResponse(
                         await _bookingRepository.CreateBooking(request)
                     );
