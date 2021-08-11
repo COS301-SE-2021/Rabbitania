@@ -22,22 +22,51 @@ namespace backend_api.Services.Booking
             {
                 throw new InvalidBookingException("Request is null or empty");
             }
-
-            var result = await _scheduleRepository.CreateBookingSchedule(request);
-            var resp = new CreateBookingScheduleResponse();
-            if (result.Successful)
+            
+            if (request.TimeSlot.Split(',')[1].ToLower() == "whole")
             {
-                resp.Successful = true;
+                var day = request.TimeSlot.Split(',')[0];
+                var booking1 = day + ",Morning";
+                var booking2 = day + ",Afternoon";
+                
+                var req1 = new CreateBookingScheduleRequest(request.Office, booking1, request.Availability);
+                var req2 = new CreateBookingScheduleRequest(request.Office, booking2, request.Availability);
+                
+                var res1 = await _scheduleRepository.CreateBookingSchedule(req1);
+                var res2 = await _scheduleRepository.CreateBookingSchedule(req2);
+                
+                if (res1.Successful && res2.Successful)
+                {
+                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(req1.TimeSlot, req1.Office));
+                    await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(req2.TimeSlot, req2.Office));
+                    return new CreateBookingScheduleResponse(true);
+                }
+                else
+                {
+                    return new CreateBookingScheduleResponse(false);
+                }
             }
+            
             else
             {
-                resp.Successful = false;
+                var result = await _scheduleRepository.CreateBookingSchedule(request);
+                var resp = new CreateBookingScheduleResponse();
+                if (result.Successful)
+                {
+                    resp.Successful = true;
+                }
+                else
+                {
+                    resp.Successful = false;
+                }
+                await _scheduleRepository.UpdateBookingScheduleAvailability(new UpdateBookingScheduleRequest(request.TimeSlot, request.Office));
+                return resp;
             }
-            return resp;
         }
 
         public async Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request)
         {
+            //TODO: Increase availability when booking is cancelled
             if (request != null)
             {
                 var resp = await _scheduleRepository.CancelBookingSchedule(request);
@@ -106,14 +135,7 @@ namespace backend_api.Services.Booking
                 var resp = await _scheduleRepository.GetBookingSchedule(bookingReqObj);
                 if (resp.BookingSchedule.Availability > 0)
                 {
-                    //update booking request obj to update schedule availability
-                    var updateBookingReq = new UpdateBookingScheduleRequest(request.TimeSlot, 
-                        request.Office);
-                    //Update the bookings availability
-                    var UpdateResp = await _scheduleRepository.UpdateBookingScheduleAvailability(updateBookingReq);
-                    
-                    return new CheckScheduleAvailabilityResponse(UpdateResp.Success);
-                    
+                    return new CheckScheduleAvailabilityResponse(true);
                 }
                 else
                 {
