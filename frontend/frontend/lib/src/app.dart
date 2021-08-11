@@ -27,7 +27,7 @@ class AppState extends State<App> {
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         //home: Login(),
-        home: BookingScreen(),
+        home: Login(),
       ),
     );
   }

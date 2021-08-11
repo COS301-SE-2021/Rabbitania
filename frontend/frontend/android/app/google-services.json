@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "248471898739-74sso1unvpg1j4kovtnft2dfkp1r8aa9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "fbc68c799dce031ff51b817dadc88a2b597bb70f"
+          }
+        },
+        {
           "client_id": "248471898739-81o5embj5i7t26v29cj29tukqleh6084.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -82,6 +90,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "248471898739-d7l37jp27mjumbtknqjhe6j0j1v4f7a8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "fbc68c799dce031ff51b817dadc88a2b597bb70f"
+          }
+        },
+        {
+          "client_id": "248471898739-ehsqscotnq04j3i3bd8eeh5b55cupgm7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "cfb128a92e6dca02634af3b82dbd01b5b435745c"
+          }
+        },
         {
           "client_id": "248471898739-nt970uqpimlcngbg0bjl7ub07qplckus.apps.googleusercontent.com",
           "client_type": 1,
