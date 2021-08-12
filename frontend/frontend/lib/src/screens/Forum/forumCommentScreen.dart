@@ -27,20 +27,17 @@ late Future<List<ThreadComments>> futureThreadComments;
 
 //////
 class _ForumCommentScreen extends State<ForumCommentScreen> {
- 
- UserHelper userHelper = UserHelper();
- int threadCommentCreatorId = 0;
+  UserHelper userHelper = UserHelper();
+  int threadCommentCreatorId = 0;
   void initState() {
     super.initState();
-     userHelper.getUserID().then((value) {
+    userHelper.getUserID().then((value) {
       setState(() {
         this.threadCommentCreatorId = value;
       });
-    futureThreadComments = fetchThreadComments(currentThreadID);
-    
+      futureThreadComments = fetchThreadComments(currentThreadID);
     });
   }
-  
 
   void refresh() {
     UtilModel.route(() => ForumCommentScreen(), context);
@@ -112,7 +109,8 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               errorText: 'Comment cannot be blank',
               sendButtonMethod: () async {
                 print(commentController.text);
-                await addNewComment(commentController.text, threadCommentCreatorId);
+                await addNewComment(
+                    commentController.text, threadCommentCreatorId);
                 commentController.clear();
                 FocusScope.of(context).unfocus();
                 setState(() {});
