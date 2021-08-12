@@ -45,7 +45,7 @@ class ForumCreateCard extends StatelessWidget {
   }
 }
 
-Future<String> addNewForum(String title) async {
+Future<String> addNewForum(String title, int userID) async {
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Fields");
@@ -60,7 +60,7 @@ Future<String> addNewForum(String title) async {
         "forumId": 0,
         "forumTitle": title,
         "createdDate": "2021-08-04T11:50:49.398Z",
-        "userId": 1
+        "userId": userID
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
