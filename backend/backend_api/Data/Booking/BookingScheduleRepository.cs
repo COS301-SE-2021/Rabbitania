@@ -40,7 +40,7 @@ namespace backend_api.Data.Booking
                 request.Office, request.TimeSlot).AsTask();
             var scheduleToRemove = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
                 bookingSchedule.Availability);
-            try
+            try 
             {
                 _schedules.BookingSchedules.Remove(scheduleToRemove);
                 await _schedules.SaveChangesAsync();
@@ -60,15 +60,13 @@ namespace backend_api.Data.Booking
         {
             var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
                 request.Office, request.TimeSlot).AsTask();
-            var scheduleToUpdate = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
-                bookingSchedule.Availability);
+            
             //setting new values
-            scheduleToUpdate.Availability = request.Availability;
-            scheduleToUpdate.Office = request.Office;
-            scheduleToUpdate.TimeSlot = request.TimeSlot;
+            bookingSchedule.Availability = request.Availability;
+            bookingSchedule.Office = request.Office;
+            bookingSchedule.TimeSlot = request.TimeSlot;
             try
             {
-                _schedules.Entry(scheduleToUpdate).State = EntityState.Modified;
                 await _schedules.SaveChangesAsync();
                 return new UpdateBookingScheduleResponse(true);
             }
@@ -76,19 +74,15 @@ namespace backend_api.Data.Booking
             {
                 return new UpdateBookingScheduleResponse(false);
             }
-            
         }
         public async Task<UpdateBookingScheduleResponse> UpdateBookingScheduleAvailability(UpdateBookingScheduleRequest request)
         {
             var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
                 request.Office, request.TimeSlot).AsTask();
-            var scheduleToUpdate = new BookingSchedule(bookingSchedule.TimeSlot, bookingSchedule.Office,
-                bookingSchedule.Availability);
-            //setting new values
-            scheduleToUpdate.Availability = request.Availability;
+
             try
             {
-                _schedules.Entry(scheduleToUpdate).State = EntityState.Modified;
+                bookingSchedule.Availability -= 1;
                 await _schedules.SaveChangesAsync();
                 return new UpdateBookingScheduleResponse(true);
             }
@@ -96,8 +90,26 @@ namespace backend_api.Data.Booking
             {
                 return new UpdateBookingScheduleResponse(false);
             }
-            
         }
+
+        public async Task<UpdateBookingScheduleResponse> UpdateBookingScheduleAvailabilityAdd(
+            UpdateBookingScheduleRequest request)
+        {
+            var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
+                request.Office, request.TimeSlot).AsTask();
+
+            try
+            {
+                bookingSchedule.Availability += 1;
+                await _schedules.SaveChangesAsync();
+                return new UpdateBookingScheduleResponse(true);
+            }
+            catch (Exception)
+            {
+                return new UpdateBookingScheduleResponse(false);
+            }
+        }
+
         public async Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request)
         {
             var newSchedule = new BookingSchedule(request.TimeSlot, request.Office, request.Availability);

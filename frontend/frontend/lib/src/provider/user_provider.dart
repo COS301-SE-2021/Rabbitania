@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class UserProvider {
   final user = FirebaseAuth.instance.currentUser!;
-
+  UserProvider();
   getUserID() async {
     String userEmail = user.providerData[0].email!;
     final response = await http.get(

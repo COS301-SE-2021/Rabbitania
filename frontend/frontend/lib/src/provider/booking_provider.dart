@@ -17,7 +17,9 @@ class BookingProvider {
       List jsonResponse = json.decode(response.body);
 
       return jsonResponse
-          .map((bookings) => new ViewBookingModel.fromJson(bookings))
+          .map(
+            (bookings) => new ViewBookingModel.fromJson(bookings),
+          )
           .toList();
     } else {
       throw Exception('Failed to retreive bookings');
@@ -36,7 +38,7 @@ class BookingProvider {
         'bookingDate': bookingDate,
         'timeSlot': timeSlot,
         'office': office,
-        'userId': 8
+        'userId': userId,
       }),
     );
     if (response.statusCode == 200) {
@@ -57,6 +59,32 @@ class BookingProvider {
       return true;
     } else {
       throw ("Server Error Status Code:  " + response.statusCode.toString());
+    }
+  }
+
+  //POST
+  Future<bool> checkAvailibity(timeslot, office) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'timeSlot': timeslot,
+          'office': office,
+        },
+      ),
+    );
+    //TODO:make http call to check availibility based on booking pk
+    //if true then make booking
+    //if false show alert dialog and let user know can't make booking
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

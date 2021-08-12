@@ -12,6 +12,7 @@
 ![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788293813-682cc4757b474114e1dd0230)
 
 
+
 ## Project Description
 <p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
 
@@ -103,7 +104,8 @@
 
 <div align="center">
    
-<img src= "https://media-exp1.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1624492800&v=beta&t=WhbO7lyVpiaPDtohJWB8JqbQOFK1PJ7LZ5fYJVVoOPg" width="250" height="250">
+
+<img src= "https://media-exp3.licdn.com/dms/image/C4D03AQFBmnc5HivYAg/profile-displayphoto-shrink_800_800/0/1618678076273?e=1632355200&v=beta&t=Fz1XGNeeUvsO6Qos8UuPw2ELFsLhzptBis6UqHwp7Ak" width="250" height="250">
 
 #### Dean Nortje | u17326622
 
@@ -127,7 +129,8 @@
 
 <div align="center">
    
-<img src="https://media-exp1.licdn.com/dms/image/C4D03AQGcLJTVqfu0yQ/profile-displayphoto-shrink_200_200/0/1619101131263?e=1627516800&v=beta&t=3Zd7eXUkQwAUBKb5PSjuSzDtydWomCrX9MmOreQcfNo" width="250" height="250">
+
+<img src="images_banners_logos/ReadME image.jpeg" width="190" height="250">
 
 #### James Hulett | u16003251
 
@@ -218,4 +221,4 @@
 
 # Project Management Tools
 
-- :open_book: [Runtime Terrors - Rabbitania Project Board](https://github.com/COS301-SE-2021/Rabbitania/projects/1)
+- :open_book: [Runtime Terrors - Rabbitania Project Board](https://sharing.clickup.com/b/h/6-13854616-2/4a11359d740b761)

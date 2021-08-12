@@ -16,14 +16,7 @@ namespace backend_api.Controllers.Booking
     public class BookingScheduleController : ControllerBase
     {
         private readonly IBookingScheduleService _scheduleService;
-
-        private readonly IBookingService _bookingService;
-
-        public BookingScheduleController(IBookingScheduleService scheduleService, IBookingService bookingService)
-        {
-            _scheduleService = scheduleService;
-            _bookingService = bookingService;
-        }
+        
 
         public BookingScheduleController(IBookingScheduleService scheduleService)
         {
@@ -99,7 +92,7 @@ namespace backend_api.Controllers.Booking
                         /// <returns>Http response code</returns>
                         [HttpPut]
                         [Route("EditBookingSchedule")]
-                        public async Task<ActionResult> UpdateBookingSchedule([FromQuery] UpdateBookingScheduleRequest request)
+                        public async Task<ActionResult> UpdateBookingSchedule([FromBody] UpdateBookingScheduleRequest request)
                         {
                             if (request != null)
                             {
@@ -205,9 +198,9 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>bool</returns>
-                [HttpGet]
+                [HttpPost]
                 [Route("CheckAvailability")]
-                public async Task<bool> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
+                public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
                 {
                     if (request != null)
                     {
@@ -216,11 +209,12 @@ namespace backend_api.Controllers.Booking
                             var resp = await _scheduleService.CheckAvailability(request);
                             if (resp.Successful == true)
                             {
-                                return true;
+                                return Ok("Slot available, availability deducted");
+
                             }
                             else
                             {
-                                return false;
+                                return BadRequest("No slot available for schedule "+request.Office +", "+request.TimeSlot);
                             }
                         }
                         catch (Exception)
@@ -230,7 +224,7 @@ namespace backend_api.Controllers.Booking
                     }
                     else
                     {
-                        return false;
+                        return BadRequest("Request is null or empty");
                     }
                 }
     }

@@ -7,6 +7,7 @@ using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
+using backend_api.Hubs;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
@@ -56,7 +57,10 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-
+            
+            //SignalR
+            services.AddSignalR();
+            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -96,12 +100,12 @@ namespace backend_api
             services.AddDbContext<BookingScheduleContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("HerokuDatabase"),
-                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+                    b => b.MigrationsAssembly(typeof(BookingScheduleContext).Assembly.FullName)));
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
             
-            //services.AddScoped<IForumRepository, ForumRepository>();
-            //services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IBookingScheduleRepository, BookingScheduleRepository>();
+            services.AddScoped<IBookingScheduleService, BookingScheduleService>();
             //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
@@ -192,7 +196,11 @@ namespace backend_api
             app.UseAuthentication();
             app.UseAuthorization();
             
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/ChatHub");
+            });
         }
     }
 }

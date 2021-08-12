@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
+import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/Login/googleAuthTest.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
