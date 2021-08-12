@@ -19,7 +19,38 @@ class _BookingListView extends State<BookingListView> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<ViewBookingModel>? data = snapshot.data;
-          return _bookingCardListView(data);
+          if (snapshot.data!.length == 0) {
+            return ListView(children: [
+              Card(
+                color: Color.fromRGBO(57, 57, 57, 25),
+                shadowColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                clipBehavior: Clip.antiAlias,
+                elevation: 2,
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.only(
+                          bottom: 5.0, top: 10, left: 20, right: 10),
+                      title: Container(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          "No Bookings Made",
+                          style: TextStyle(
+                              letterSpacing: 2.0,
+                              color: Colors.white,
+                              fontSize: 22),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ]);
+          } else {
+            return _bookingCardListView(data);
+          }
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
