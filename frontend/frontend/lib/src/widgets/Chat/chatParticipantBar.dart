@@ -17,26 +17,34 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
   UtilModel utilModel = UtilModel();
   UserProvider userProvider = UserProvider(FirebaseAuth.instance.currentUser);
   @override
-  Widget build(BuildContext context) => Row(
-        children: <Widget>[
-          //profile picture container
-          Expanded(
-            child: Container(
-              child: ProfilePicture(20),
-            ),
-          ),
-
-          Expanded(
-            flex: 7,
-            child: Container(
-              child: Text(
-                userProvider.getUserDisplayName(),
-                style: TextStyle(
-                  color: utilModel.greenColor,
+  Widget build(BuildContext context) => Column(
+        children: [
+          Row(
+            children: <Widget>[
+              //profile picture container
+              Expanded(
+                child: Container(
+                  child: ProfilePicture(20),
                 ),
               ),
-            ),
-          )
+
+              Expanded(
+                flex: 7,
+                child: Container(
+                  child: Text(
+                    userProvider.getUserDisplayName(),
+                    style: TextStyle(
+                      color: utilModel.greenColor,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Divider(color: utilModel.greenColor, thickness: 2),
+          ),
         ],
       );
 }

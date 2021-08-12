@@ -22,9 +22,11 @@ class _chatMessageReceiverState extends State<ChatMessageReceiver> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              FittedBox(
+              Flexible(
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
+                  margin: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.1),
+                  //width: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     //color of recieved message border is grey
@@ -35,7 +37,7 @@ class _chatMessageReceiverState extends State<ChatMessageReceiver> {
                   ),
                   //get value sent through in the constructor
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Text(
                       widget.textSentValue,
                       textAlign: TextAlign.start,

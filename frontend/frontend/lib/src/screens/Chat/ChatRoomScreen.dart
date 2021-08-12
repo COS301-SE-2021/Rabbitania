@@ -54,20 +54,26 @@ class ChatPageState extends State<ChatPage> {
         backgroundColor: utilModel.greyColor,
         title: ChatParticipantBar(),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            ChatMessageSender(
-              textSentValue: 'Hello world',
-            ),
-            ChatMessageReceiver(
+      body: SafeArea(
+        minimum: EdgeInsets.only(left: 10, right: 10),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              ChatMessageSender(
+                textSentValue: 'Hello world',
+              ),
+              ChatMessageReceiver(
+                  textSentValue:
+                      'Fuck off dhsjakldashdiuewhdsfjhkdsaldfhakdlsfhajkdfnmnx,cndaklsdfhaifquwerh'),
+              ChatMessageSender(
+                textSentValue: 'Hello ',
+              ),
+              ChatMessageSender(
                 textSentValue:
-                    'Fuck off dhsjakldashdiuewhdsfjhkdsaldfhakdlsfhajkdfnmnx,cndaklsdfhaifquwerh'),
-            ChatMessageSender(
-              textSentValue:
-                  'Hello world sghjakduisdhiqwhwqdhjskadhsajkdhsajkdhsjakldhqwuieyqwdhaskdhsadhasdqwyueqwdhasjk',
-            ),
-          ],
+                    'Hello world sghjakduisdhiqwhwqdhjskadhsajkdhsajkdhsjakldhqwuieyqwdhaskdhsadhasdqwyueqwdhasjk',
+              ),
+            ],
+          ),
         ),
       ),
       // floatingActionButton: FloatingActionButton(
