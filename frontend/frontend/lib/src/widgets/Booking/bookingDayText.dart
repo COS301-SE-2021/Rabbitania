@@ -277,24 +277,27 @@ class _BookingDayTextState extends State<BookingDayText> {
                                     backgroundColor:
                                         Color.fromRGBO(33, 33, 33, 1),
                                     titleTextStyle: TextStyle(
-                                        color: Colors.white, fontSize: 32),
+                                        color: Colors.white, fontSize: 25),
                                     title: Text("No Booking Availible"),
                                     contentTextStyle: TextStyle(
-                                        color: Colors.white, fontSize: 16),
+                                        color: Colors.white, fontSize: 20),
                                     content: Text(
                                         "There are no booking slots currently availible. Please try again later."),
                                     actions: [
-                                      IconButton(
-                                        icon: const Icon(
-                                          Icons.close,
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          size: 24.0,
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: const Text(
+                                          "Close",
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(33, 33, 33, 1),
+                                              fontSize: 20),
                                         ),
-                                        tooltip: 'Close',
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.red,
+                                          shape: StadiumBorder(),
+                                        ),
                                       ),
                                     ],
                                   );
@@ -311,23 +314,26 @@ class _BookingDayTextState extends State<BookingDayText> {
                                 elevation: 5,
                                 backgroundColor: Color.fromRGBO(33, 33, 33, 1),
                                 titleTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 32),
-                                title: Text("Cannot Book: "),
+                                    color: Colors.white, fontSize: 25),
+                                title: Text("Issue with Booking"),
                                 contentTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 16),
+                                    color: Colors.white, fontSize: 20),
                                 content: Text(
                                     "You have already booked for this slot for the week!"),
                                 actions: [
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.close,
-                                      color: Color.fromRGBO(171, 255, 79, 1),
-                                      size: 24.0,
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(false),
+                                    child: const Text(
+                                      "Close",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(33, 33, 33, 1),
+                                          fontSize: 20),
                                     ),
-                                    tooltip: 'Close',
-                                    onPressed: () async {
-                                      Navigator.pop(context);
-                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                      shape: StadiumBorder(),
+                                    ),
                                   ),
                                 ],
                               );
