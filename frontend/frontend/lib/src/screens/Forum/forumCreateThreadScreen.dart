@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
@@ -21,7 +21,7 @@ final threadBodyController = TextEditingController();
 
 class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
   final util = new UtilModel();
-    UserHelper userHelper = UserHelper();
+  UserHelper userHelper = UserHelper();
 
   int ForumThreadCreatorId = 0;
   void initState() {
@@ -34,7 +34,6 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +43,11 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedThread = addNewForumThread(currentForumID,
-                  threadTitleController.text, threadBodyController.text, ForumThreadCreatorId);
+              futureStringReceivedThread = addNewForumThread(
+                  currentForumID,
+                  threadTitleController.text,
+                  threadBodyController.text,
+                  ForumThreadCreatorId);
               return FutureBuilder<String>(
                 future: futureStringReceivedThread,
                 builder: (context, snapshot) {

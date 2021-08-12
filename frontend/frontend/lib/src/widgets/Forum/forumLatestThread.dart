@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
@@ -38,7 +38,7 @@ Widget ForumLatestThread(int forumIdentifier) {
                             // leading: Icon(
                             //   Icons.announcement_outlined, size: 45,
                             //   color: Color.fromRGBO(171, 255, 79, 1),),
-                            
+
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(

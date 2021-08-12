@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
-import '../../models/noticeboardModel.dart';
+import '../../models/Noticeboard/noticeboardModel.dart';
 import '../../screens/Noticeboard/noticeboardScreen.dart';
 
 class NoticeCard extends StatelessWidget {
@@ -19,7 +17,7 @@ class NoticeCard extends StatelessWidget {
               List<Widget> cards = [];
               while (iterate.moveNext()) {
                 if (iterate.current.threadId == noticeID) {
-                  cards.add(singleCardObj(
+                  cards.add(singleNoticeCardObj(
                       id: iterate.current.threadId,
                       theThreadTitle: iterate.current.threadTitle,
                       theThreadContent: iterate.current.threadContent,
@@ -36,57 +34,6 @@ class NoticeCard extends StatelessWidget {
           },
         ),
       ]),
-    );
-  }
-}
-
-class singleCardObj extends StatelessWidget {
-  final int id;
-  final String theThreadTitle;
-  final String theThreadContent;
-  final String imageFile;
-
-  const singleCardObj(
-      {required this.id,
-      required this.theThreadTitle,
-      required this.theThreadContent,
-      required this.imageFile});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-        color: Color.fromRGBO(57, 57, 57, 1),
-        shadowColor: Colors.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-        clipBehavior: Clip.antiAlias,
-        elevation: 2,
-        child: Column(
-          children: [
-            Container(
-                child: Image.memory(
-              Base64Decoder().convert(imageFile),
-              fit: BoxFit.fill,
-            )),
-            ListTile(
-              contentPadding:
-                  EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
-              title: Container(
-                padding: EdgeInsets.only(bottom: 8),
-                child: Text(
-                  theThreadTitle,
-                  style: TextStyle(
-                      letterSpacing: 2.0, color: Colors.white, fontSize: 22),
-                ),
-              ),
-              subtitle: Text(
-                theThreadContent,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';

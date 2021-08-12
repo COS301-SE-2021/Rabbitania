@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
