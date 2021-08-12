@@ -70,6 +70,28 @@ class BookingProvider {
   }
 
   //POST (CheckAvailability)
+  Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
+    final response = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Booking/CheckIfBookingExists'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'timeSlot': timeSlot,
+          'office': office,
+          'userId': userId
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      return true; // can make booking
+    } else {
+      return false; // cannot make booking
+    }
+  }
+
+  //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
     final response = await http.post(
       Uri.parse(
