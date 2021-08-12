@@ -7,9 +7,8 @@ import 'package:http/http.dart' as http;
 
 class UserProvider {
   var user;
-  UserProvider();
 
-  UserProvider.withFirebase(FirebaseAuthInstance) {
+  UserProvider(FirebaseAuthInstance) {
     this.user = FirebaseAuthInstance!;
   }
   getUserID() async {
@@ -22,6 +21,14 @@ class UserProvider {
       },
     );
     return int.parse(response.body);
+  }
+
+  getUserProfileImage() {
+    return this.user.photoURL!;
+  }
+
+  getUserDisplayName() {
+    return this.user.displayName!;
   }
 
   Future<UserProfileModel> getUserProfile() async {

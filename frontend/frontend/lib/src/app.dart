@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
+import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
 import 'package:frontend/src/screens/Login/googleAuthTest.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Login/supplyInfoScreen.dart';
@@ -27,7 +28,7 @@ class AppState extends State<App> {
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         //home: Login(),
-        home: BookingScreen(),
+        home: ChatPage(),
       ),
     );
   }

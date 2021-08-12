@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/provider/user_provider.dart';
@@ -6,7 +7,7 @@ import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 //helper class for booking functionality and business logic
 class BookingHelper {
   final bookingProvider = BookingProvider();
-  final userProvider = UserProvider();
+  final userProvider = UserProvider(FirebaseAuth.instance.currentUser);
   //function to perform all logic required when making a booking
   Future<String> checkAndMakeBooking({
     timeslot,

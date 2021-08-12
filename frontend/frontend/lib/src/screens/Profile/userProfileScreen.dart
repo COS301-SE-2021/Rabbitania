@@ -25,7 +25,7 @@ class _profileState extends State<ProfileScreen> {
   String? phoneNumber;
 
   initState() {
-    var userProfile = new UserProvider();
+    var userProfile = new UserProvider(FirebaseAuth.instance.currentUser);
     setState(() {
       userDetails = userProfile.getUserProfile();
       user = FirebaseAuth.instance.currentUser;
@@ -35,7 +35,7 @@ class _profileState extends State<ProfileScreen> {
   }
 
   httpCall() async {
-    var userHttp = new UserProvider();
+    var userHttp = new UserProvider(FirebaseAuth.instance.currentUser);
     final user = await userHttp.getUserID();
 
     final response = await http.get(
@@ -115,7 +115,7 @@ class _profileState extends State<ProfileScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              ProfilePicture(),
+                              ProfilePicture(40),
                               Text(
                                 user.displayName,
                                 style: TextStyle(

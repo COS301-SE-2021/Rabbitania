@@ -1,3 +1,9 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
+import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
+import 'package:frontend/src/widgets/Chat/chatParticipantBar.dart';
+import 'package:frontend/src/widgets/Chat/chatSendMessageBar.dart';
 import 'package:signalr_core/signalr_core.dart';
 
 import '../../../main.dart';
@@ -6,13 +12,11 @@ import '../../models/Chat/ChatPageModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ChatPage extends StatefulWidget{
+class ChatPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
+    return ChatPageState();
   }
-
 }
 
 class ChatPageState extends State<ChatPage> {
@@ -20,6 +24,7 @@ class ChatPageState extends State<ChatPage> {
   final serverURL = "https://localhost:5001/api/ChatHub";
   final userID = 0;
   HubConnection? _hubConnection;
+  final utilModel = UtilModel();
 
   @override
   void initState() {
@@ -33,48 +38,69 @@ class ChatPageState extends State<ChatPage> {
     _hubConnection!.onclose((exception) {
       print('Connection closed');
     });
-    _hubConnection!.on("ReceiveMessage", sendMessage());
+    //_hubConnection!.on("ReceiveMessage", sendMessage());
   }
 
   sendMessage() {
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: utilModel.greyColor,
       appBar: AppBar(
-        title: Text("Chat"),
+        elevation: 0,
+        backgroundColor: utilModel.greyColor,
+        title: ChatParticipantBar(),
       ),
       body: Center(
         child: Column(
-
+          children: <Widget>[
+            ChatMessageSender(
+              textSentValue: 'Hello world',
+            ),
+            ChatMessageReceiver(
+                textSentValue:
+                    'Fuck off dhsjakldashdiuewhdsfjhkdsaldfhakdlsfhajkdfnmnx,cndaklsdfhaifquwerh'),
+            ChatMessageSender(
+              textSentValue:
+                  'Hello world sghjakduisdhiqwhwqdhjskadhsajkdhsajkdhsjakldhqwuieyqwdhaskdhsadhasdqwyueqwdhasjk',
+            ),
+          ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async{
-          _hubConnection!.state == HubConnectionState.disconnected ?
-              await _hubConnection!.start()
-              :
-              await _hubConnection!.stop();
-        },
-        tooltip: 'Start/Stop',
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: utilModel.greenColor,
+      //   child: Icon(
+      //     FontAwesomeIcons.paperPlane,
+      //     color: Colors.black,
+      //   ),
+      //   onPressed: () async {
+      //     _hubConnection!.state == HubConnectionState.disconnected
+      //         ? await _hubConnection!.start()
+      //         : await _hubConnection!.stop();
+      //   },
+      //   tooltip: 'Start/Stop',
+      // ),
+      bottomNavigationBar: Container(
+        height: 180,
+        child: Column(
+          children: <Widget>[
+            ChatSendMessageBar(),
+            Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+            ),
+            ChatSendMessageBar(),
+          ],
+        ),
       ),
     );
   }
 
   connect() {
     if (_hubConnection!.state == HubConnectionState.connected)
-      _hubConnection!.invoke("SendMessage", args:<Object>[
-        userID,
-        "Message"
-      ]);
-    setState(() {
-
-    });
+      _hubConnection!.invoke("SendMessage", args: <Object>[userID, "Message"]);
+    setState(() {});
   }
 }
-
-

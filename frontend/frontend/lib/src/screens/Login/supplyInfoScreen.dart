@@ -37,7 +37,7 @@ class _infoForm extends State<InfoForm> {
   }
 
   httpCallGetUser() async {
-    final userHttp = new UserProvider();
+    final userHttp = new UserProvider(FirebaseAuth.instance.currentUser);
     final userID = await userHttp.getUserID();
     return userID;
   }
@@ -113,7 +113,7 @@ class _infoForm extends State<InfoForm> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(12),
-                                    child: ProfilePicture(),
+                                    child: ProfilePicture(40),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.all(5),
