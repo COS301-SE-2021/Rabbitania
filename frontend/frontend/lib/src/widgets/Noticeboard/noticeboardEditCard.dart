@@ -161,7 +161,8 @@ Widget isImageWidget(String ImageF) {
   }
 }
 
-Future<String> editNoticeboardThread(String title, String content) async {
+Future<String> editNoticeboardThread(
+    String title, String content, int noticeboardEditId) async {
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
@@ -184,7 +185,7 @@ Future<String> editNoticeboardThread(String title, String content) async {
         'minLevel': 0,
         'imageUrl': inputImage,
         'permittedUserRoles': 0,
-        'userId': 1
+        'userId': noticeboardEditId
       }),
     );
     if (response.statusCode == 201 ||

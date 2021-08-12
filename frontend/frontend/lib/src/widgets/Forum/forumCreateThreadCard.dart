@@ -114,7 +114,7 @@ Widget isImageWidget() {
 }
 
 Future<String> addNewForumThread(
-    int currentId, String title, String body) async {
+    int currentId, String title, String body, int userId) async {
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Title");
