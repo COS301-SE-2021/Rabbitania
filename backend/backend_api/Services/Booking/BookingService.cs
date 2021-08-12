@@ -130,10 +130,12 @@ namespace backend_api.Services.Booking
         {
             if (request != null)
             {
-                var resp = await _bookingRepository.CancelBooking(request);
                 var booking = await _bookingRepository.GetBooking(new GetBookingRequest(request.BookingId));
+                var resp = await _bookingRepository.CancelBooking(request);
+
                 var req = new UpdateBookingScheduleRequest(booking.TimeSlot, booking.Office);
                 await _scheduleRepository.UpdateBookingScheduleAvailabilityAdd(req);
+                
                 return new CancelBookingResponse(resp);
             }
             else
