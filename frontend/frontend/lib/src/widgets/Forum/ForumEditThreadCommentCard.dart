@@ -108,8 +108,7 @@ class EditForumThreadCommentCard extends StatelessWidget {
   }
 }
 
-Future<String> editForumThreadComment(
-    String body) async {
+Future<String> editForumThreadComment(String body) async {
   try {
     if (body == "") {
       throw ("Cannot Submit Empty Comment");

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import '../../models/noticeboardModel.dart';
 import '../../screens/Noticeboard/noticeboardScreen.dart';
@@ -83,60 +82,6 @@ class singleCardObj extends StatelessWidget {
               subtitle: Text(
                 theThreadContent,
                 style: TextStyle(color: Colors.white),
-              ),
-              trailing: IconButton(
-                icon: const Icon(
-                  Icons.delete_forever_sharp,
-                  color: Color.fromRGBO(171, 255, 79, 1),
-                  size: 24.0,
-                ),
-                tooltip: 'Delete',
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        elevation: 5,
-                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                        titleTextStyle:
-                            TextStyle(color: Colors.white, fontSize: 32),
-                        title: Text("Delete Notice"),
-                        contentTextStyle:
-                            TextStyle(color: Colors.white, fontSize: 16),
-                        content: Text(
-                            "Are you sure you want to delete this notice?"),
-                        actions: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.check,
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              size: 24.0,
-                            ),
-                            tooltip: 'Delete',
-                            onPressed: () async {
-                              // ignore: unused_local_variable
-                              final deleteResponse =
-                                  await deleteThread(this.id);
-                              UtilModel.route(() => NoticeBoard(), context);
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.close,
-                              color: Color.fromRGBO(255, 79, 79, 1),
-                              size: 24.0,
-                            ),
-                            tooltip: 'Cancel',
-                            onPressed: () {
-                              //final deleteResponse = await deleteThread(this.id);
-                              UtilModel.route(() => NoticeBoard(), context);
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
               ),
             ),
           ],
