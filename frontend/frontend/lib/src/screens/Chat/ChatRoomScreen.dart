@@ -1,5 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/SignalRHelper.dart';
+import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
@@ -26,6 +27,7 @@ class ChatPageState extends State<ChatPage> {
   HubConnection? _hubConnection;
   final utilModel = UtilModel();
   final signalRHelper = SignalRHelper();
+  final chatHelper = ChatHelper();
 
   @override
   void initState() {
@@ -77,18 +79,58 @@ class ChatPageState extends State<ChatPage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              ChatMessageSender(
-                textSentValue: 'Hello world',
-              ),
-              ChatMessageReceiver(
-                  textSentValue:
-                      'Fuck off dhsjakldashdiuewhdsfjhkdsaldfhakdlsfhajkdfnmnx,cndaklsdfhaifquwerh'),
-              ChatMessageSender(
-                textSentValue: 'Hello ',
-              ),
-              ChatMessageSender(
-                textSentValue:
-                    'Hello world sghjakduisdhiqwhwqdhjskadhsajkdhsajkdhsjakldhqwuieyqwdhaskdhsadhasdqwyueqwdhasjk',
+              FutureBuilder(
+                future: signalRHelper.getMessagesList(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  List<Widget> children = [];
+                  if (snapshot.hasData) {
+                    ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        if (snapshot.data[index].messageType == 'Sender') {
+                          return ChatMessageSender(
+                              textSentValue:
+                                  snapshot.data[index].messageContent);
+                        } else {
+                          return ChatMessageReceiver(
+                              textSentValue:
+                                  snapshot.data[index].messageContent);
+                        }
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    children = [
+                      Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 60,
+                      ),
+                    ];
+                  } else {
+                    children = [
+                      Center(
+                        child: Stack(children: <Widget>[
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            decoration: new BoxDecoration(
+                              color: Color.fromRGBO(33, 33, 33, 1),
+                            ),
+                            child: Center(
+                              widthFactor: 0.5,
+                              heightFactor: 0.5,
+                              child: CircularProgressIndicator(
+                                color: Color.fromRGBO(171, 255, 79, 1),
+                              ),
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ];
+                  }
+                  return Column(children: children);
+                },
               ),
             ],
           ),

@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
+import 'package:flutter/material.dart';
+import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
+import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 
 class ChatHelper {
   //store message models used for creating message items in chatScreen
@@ -21,5 +24,19 @@ class ChatHelper {
     } else {
       return 'Receiver';
     }
+  }
+
+  buildMessageChatListView(List<ChatMessageModel> messages) {
+    ListView.builder(
+        itemCount: messages.length,
+        itemBuilder: (context, index) {
+          if (messages[index].messageType == 'Sender') {
+            return ChatMessageSender(
+                textSentValue: messages[index].messageContent);
+          } else {
+            return ChatMessageReceiver(
+                textSentValue: messages[index].messageContent);
+          }
+        });
   }
 }
