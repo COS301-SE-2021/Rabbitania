@@ -182,26 +182,7 @@ class forumCommentCard extends StatelessWidget {
           Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                // TextButton.icon(
-                //   label: Text(likes.toString(),
-                //       style: TextStyle(color: Color.fromRGBO(175, 255, 79, 1))),
-                //   icon: const Icon(Icons.thumb_up_alt_rounded,
-                //       size: 20, color: Color.fromRGBO(175, 255, 79, 1)),
-                //   onPressed: () {},
-                //   //   style: ButtonStyle(
-                //   //       //backgroundColor:
-                //   //           //MaterialStateProperty.all<Color>(Colors.green)),
-                // ),
-                // TextButton.icon(
-                //   label: Text(dislikes.toString(),
-                //       style: TextStyle(color: Colors.red)),
-                //   icon: const Icon(Icons.thumb_down_alt_rounded,
-                //       size: 20, color: Colors.red),
-                //   onPressed: () {},
-                // ),
-                Reactions(context)
-              ]),
+              children: <Widget>[Reactions(context)]),
           new Divider(
             height: 0.0,
             thickness: 0.3,
@@ -277,7 +258,7 @@ class forumCommentCard extends StatelessWidget {
   }
 }
 
-Future<String> addNewComment(String comment) async {
+Future<String> addNewComment(String comment, int userId) async {
   try {
     if (comment == "") {
       throw ("Cannot Submit Empty Fields");
@@ -295,7 +276,7 @@ Future<String> addNewComment(String comment) async {
         "imageUrl": "string",
         "likes": 0,
         "dislikes": 0,
-        "userId": 8,
+        "userId": userId,
         "forumThreadId": currentThreadID
       }),
     );
