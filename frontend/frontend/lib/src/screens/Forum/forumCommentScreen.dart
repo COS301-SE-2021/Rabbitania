@@ -27,20 +27,17 @@ late Future<List<ThreadComments>> futureThreadComments;
 
 //////
 class _ForumCommentScreen extends State<ForumCommentScreen> {
- 
- UserHelper userHelper = UserHelper();
- int threadCommentCreatorId = 0;
+  UserHelper userHelper = UserHelper();
+  int threadCommentCreatorId = 0;
   void initState() {
     super.initState();
-     userHelper.getUserID().then((value) {
+    userHelper.getUserID().then((value) {
       setState(() {
         this.threadCommentCreatorId = value;
       });
-    futureThreadComments = fetchThreadComments(currentThreadID);
-    
+      futureThreadComments = fetchThreadComments(currentThreadID);
     });
   }
-  
 
   void refresh() {
     UtilModel.route(() => ForumCommentScreen(), context);
@@ -96,9 +93,8 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
           InkWell(
             onTap: () =>
                 {FocusScope.of(context).unfocus(), commentController.clear()},
-            child: CommentBox(
-              userImage:
-                  "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
+            child: RRCommentBox(
+              userImage: "",
               child: Card(
                   color: Color.fromRGBO(57, 57, 57, 1),
                   shadowColor: Colors.black,
@@ -112,7 +108,8 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               errorText: 'Comment cannot be blank',
               sendButtonMethod: () async {
                 print(commentController.text);
-                await addNewComment(commentController.text, threadCommentCreatorId);
+                await addNewComment(
+                    commentController.text, threadCommentCreatorId);
                 commentController.clear();
                 FocusScope.of(context).unfocus();
                 setState(() {});
@@ -120,7 +117,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               },
               formKey: formKey,
               commentController: commentController,
-              backgroundColor: Colors.black,
+              backgroundColor: Color.fromRGBO(33, 33, 33, 1),
               textColor: Colors.white,
               sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.white),
             ),
