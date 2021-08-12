@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/helper/Chat/SignalRHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 
 class ChatSendMessageBar extends StatefulWidget {
@@ -10,13 +12,16 @@ class ChatSendMessageBar extends StatefulWidget {
 }
 
 class _chatSendMessageBarState extends State<ChatSendMessageBar> {
+  final messageController = TextEditingController();
   final utilModel = UtilModel();
+  final signalRHelper = SignalRHelper();
   @override
   Widget build(BuildContext context) => Row(
         children: <Widget>[
           Expanded(
             flex: 8,
             child: TextField(
+              controller: messageController,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -43,7 +48,11 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
                   FontAwesomeIcons.paperPlane,
                   color: Colors.black,
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  signalRHelper.sendMessage(
+                      FirebaseAuth.instance.currentUser!.displayName,
+                      messageController.text);
+                }),
           ),
         ],
       );

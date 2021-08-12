@@ -35,13 +35,13 @@ class ChatPageState extends State<ChatPage> {
     initSignalR();
     var user = 0;
     signalRHelper.initiateConnection(context).then((value) {
-      signalRHelper.sendMessage('Bob', 'testMessage').then((response) {
+      signalRHelper.sendMessage('bob', 'testMessage').then((response) {
         signalRHelper.getMessagesList().then((response) {
           var list = response;
           print(list[0].messageContent);
           print(list[0].associatedMessageSender);
           signalRHelper
-              .sendMessage('James', 'test james message')
+              .sendMessage('RuntimeTerrors', 'test james message')
               .then((secondResponse) {
             signalRHelper.getMessagesList().then((newList) {
               print(list[1].messageContent);
@@ -59,10 +59,6 @@ class ChatPageState extends State<ChatPage> {
       print('Connection closed');
     });
     //_hubConnection!.on("ReceiveMessage", sendMessage());
-  }
-
-  sendMessage() {
-    setState(() {});
   }
 
   @override
@@ -85,20 +81,24 @@ class ChatPageState extends State<ChatPage> {
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
-                    ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        if (snapshot.data[index].messageType == 'Sender') {
-                          return ChatMessageSender(
-                              textSentValue:
-                                  snapshot.data[index].messageContent);
+                    print(snapshot.data);
+                    if (snapshot.data.length == 0) {
+                      children = [Text('You have no chat history')];
+                    } else {
+                      snapshot.data.forEach((current) {
+                        if (current.messageType == 'Sender') {
+                          children.add(
+                            ChatMessageSender(
+                                textSentValue: current.messageContent),
+                          );
                         } else {
-                          return ChatMessageReceiver(
-                              textSentValue:
-                                  snapshot.data[index].messageContent);
+                          children.add(
+                            ChatMessageReceiver(
+                                textSentValue: current.messageContent),
+                          );
                         }
-                      },
-                    );
+                      });
+                    }
                   } else if (snapshot.hasError) {
                     children = [
                       Icon(
@@ -129,7 +129,11 @@ class ChatPageState extends State<ChatPage> {
                       ),
                     ];
                   }
-                  return Column(children: children);
+                  return Column(
+                    children: [
+                      ListView(shrinkWrap: true, children: children),
+                    ],
+                  );
                 },
               ),
             ],
@@ -150,16 +154,7 @@ class ChatPageState extends State<ChatPage> {
       //   tooltip: 'Start/Stop',
       // ),
       bottomNavigationBar: Container(
-        height: 180,
-        child: Column(
-          children: <Widget>[
-            ChatSendMessageBar(),
-            Padding(
-              padding: EdgeInsets.only(top: 5, bottom: 5),
-            ),
-            ChatSendMessageBar(),
-          ],
-        ),
+        child: ChatSendMessageBar(),
       ),
     );
   }

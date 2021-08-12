@@ -25,18 +25,4 @@ class ChatHelper {
       return 'Receiver';
     }
   }
-
-  buildMessageChatListView(List<ChatMessageModel> messages) {
-    ListView.builder(
-        itemCount: messages.length,
-        itemBuilder: (context, index) {
-          if (messages[index].messageType == 'Sender') {
-            return ChatMessageSender(
-                textSentValue: messages[index].messageContent);
-          } else {
-            return ChatMessageReceiver(
-                textSentValue: messages[index].messageContent);
-          }
-        });
-  }
 }
