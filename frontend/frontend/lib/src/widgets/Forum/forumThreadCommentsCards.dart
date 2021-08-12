@@ -320,7 +320,7 @@ Widget Reactions(BuildContext context) {
     reactions: <Reaction>[
       Reaction(
         previewIcon: Icon(Icons.thumb_up_alt_rounded,
-            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+            size: 50, color: Color.fromRGBO(175, 255, 79, 1)),
         icon: Container(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
@@ -330,16 +330,17 @@ Widget Reactions(BuildContext context) {
       ),
       Reaction(
         previewIcon:
-            Icon(Icons.thumb_down_alt_rounded, size: 55, color: Colors.red),
+            Icon(Icons.thumb_down_alt_rounded, size: 50, color: Colors.red),
         icon: Container(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
-          child: Icon(Icons.add_reaction_outlined, size: 25, color: Colors.red),
+          child:
+              Icon(Icons.thumb_down_alt_rounded, size: 25, color: Colors.red),
         ),
       ),
       Reaction(
         previewIcon: Icon(Icons.emoji_emotions,
-            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+            size: 50, color: Color.fromRGBO(175, 255, 79, 1)),
         icon: Container(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
@@ -348,32 +349,22 @@ Widget Reactions(BuildContext context) {
         ),
       ),
       Reaction(
-        previewIcon: Icon(Icons.emoji_events,
-            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+        previewIcon: Icon(Icons.people,
+            size: 50, color: Color.fromRGBO(175, 255, 79, 1)),
         icon: Container(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
-          child: Icon(Icons.emoji_events,
+          child: Icon(Icons.people,
               size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
         ),
       ),
       Reaction(
-        previewIcon: Icon(Icons.emoji_objects,
-            size: 55, color: Color.fromRGBO(175, 255, 79, 1)),
+        previewIcon:
+            Icon(Icons.pets, size: 50, color: Color.fromRGBO(175, 255, 79, 1)),
         icon: Container(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
-          child: Icon(Icons.emoji_objects,
-              size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
-        ),
-      ),
-      Reaction(
-        previewIcon: Icon(Icons.emoji_transportation,
-            size: 60, color: Color.fromRGBO(175, 255, 79, 1)),
-        icon: Container(
-          padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.06, bottom: 10),
-          child: Icon(Icons.emoji_transportation,
+          child: Icon(Icons.pets,
               size: 25, color: Color.fromRGBO(175, 255, 79, 1)),
         ),
       ),
