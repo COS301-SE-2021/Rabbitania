@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -118,7 +119,8 @@ Widget isImageWidget() {
   }
 }
 
-Future<String> addNewThread(String title, String content) async {
+Future<String> addNewThread(
+    String title, String content, int noticeboardCreatorId) async {
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
@@ -135,7 +137,7 @@ Future<String> addNewThread(String title, String content) async {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        'userId': 1,
+        'userId': noticeboardCreatorId,
         'threadTitle': title,
         'threadContent': content,
         'minLevel': 0,
