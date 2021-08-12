@@ -1,11 +1,11 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/helper/Chat/SignalRHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:frontend/src/widgets/Chat/chatParticipantBar.dart';
 import 'package:frontend/src/widgets/Chat/chatSendMessageBar.dart';
 import 'package:signalr_core/signalr_core.dart';
-
 import '../../../main.dart';
 import '../../widgets/Chat/ChatModelPropertyWidgetBuilder.dart';
 import '../../models/Chat/ChatPageModel.dart';
@@ -25,12 +25,30 @@ class ChatPageState extends State<ChatPage> {
   final userID = 0;
   HubConnection? _hubConnection;
   final utilModel = UtilModel();
+  final signalRHelper = SignalRHelper();
 
   @override
   void initState() {
     super.initState();
     initSignalR();
     var user = 0;
+    signalRHelper.initiateConnection(context).then((value) {
+      signalRHelper.sendMessage('Bob', 'testMessage').then((response) {
+        signalRHelper.getMessagesList().then((response) {
+          var list = response;
+          print(list[0].messageContent);
+          print(list[0].associatedMessageSender);
+          signalRHelper
+              .sendMessage('James', 'test james message')
+              .then((secondResponse) {
+            signalRHelper.getMessagesList().then((newList) {
+              print(list[1].messageContent);
+              print(list[1].associatedMessageSender);
+            });
+          });
+        });
+      });
+    });
   }
 
   void initSignalR() {

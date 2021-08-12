@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
 
 class ChatHelper {
@@ -11,5 +12,14 @@ class ChatHelper {
   //method for returning all messages as a list
   Future<List<ChatMessageModel>> getMessages() async {
     return this.messages;
+  }
+
+  String determineMessageType(username) {
+    var thisUserName = FirebaseAuth.instance.currentUser!.displayName;
+    if (thisUserName == username) {
+      return 'Sender';
+    } else {
+      return 'Receiver';
+    }
   }
 }
