@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/forumModel.dart';
+import 'package:frontend/src/models/Forum/forumModel.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
@@ -35,10 +36,6 @@ Widget ForumLatestThread(int forumIdentifier) {
                           ListTile(
                             contentPadding: EdgeInsets.only(
                                 bottom: 10.0, top: 10, left: 20, right: 10),
-                            // leading: Icon(
-                            //   Icons.announcement_outlined, size: 45,
-                            //   color: Color.fromRGBO(171, 255, 79, 1),),
-                            
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
@@ -50,7 +47,6 @@ Widget ForumLatestThread(int forumIdentifier) {
                                     fontSize: 22),
                               ),
                             ),
-
                             subtitle: Text(
                               snapshot.data!.last.forumThreadBody,
                               style: TextStyle(color: Colors.white),
@@ -58,13 +54,6 @@ Widget ForumLatestThread(int forumIdentifier) {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          // Container(
-                          //   padding: EdgeInsets.only(top: 5),
-                          //   child: Image.memory(
-                          //     Base64Decoder().convert(theImageURL),
-                          //     fit: BoxFit.fill,
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
