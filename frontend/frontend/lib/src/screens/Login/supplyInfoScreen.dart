@@ -47,8 +47,7 @@ class _infoForm extends State<InfoForm> {
     if (_dropDownOfficeValue == 'Braamfontein') {
       officeLocationInt = 1;
     }
-    //final int userID = await httpCallGetUser();
-    final int userID = 1;
+    final int userID = await httpCallGetUser();
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
       headers: <String, String>{
@@ -147,8 +146,8 @@ class _infoForm extends State<InfoForm> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          //user.providerData[0].email!,
-                                          'testEmail',
+                                          user.providerData[0].email!,
+
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color.fromRGBO(

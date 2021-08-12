@@ -145,6 +145,21 @@ Future<String> addNewThread(
         'permittedUserRoles': 0
       }),
     );
+
+    final emailResponse = await http.post(
+        Uri.parse(
+            'https://10.0.2.2:5001/api/Notifications/SendEmailNotification'),
+        headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8',
+        
+        
+        },
+        body: jsonEncode(<String, dynamic>{
+
+
+        })
+        
+        
+        );
     if (response.statusCode == 201 || response.statusCode == 200) {
       return ("Successfully uploaded new notice");
     } else {

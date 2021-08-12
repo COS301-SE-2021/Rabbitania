@@ -51,7 +51,7 @@ class _continueButton extends State<ContinueButton> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
-      int userID = userProvider.getUserID();
+      int userID = await userProvider.getUserID();
       userHelper.setUserID(userID);
       setState(() {});
       Navigator.push(context,
