@@ -1,15 +1,19 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 
 class BookingProvider {
-  // GET ALL
+  UserHelper loggedUser = new UserHelper();
+
+  // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
+    final loggedUserId = await loggedUser.getUserID();
     final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/Booking/GetBookings?UserId=1'),
+      Uri.parse(
+          'https://10.0.2.2:5001/api/Booking/GetBookings?UserId=$loggedUserId'),
     );
 
     if (response.statusCode == 200) {
@@ -27,7 +31,7 @@ class BookingProvider {
     }
   }
 
-  // POST
+  // POST (CreateBooking)
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
     final response = await http.post(
@@ -52,7 +56,7 @@ class BookingProvider {
     }
   }
 
-  // DELETE
+  // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
     final response = await http.delete(
       Uri.parse(
@@ -65,7 +69,7 @@ class BookingProvider {
     }
   }
 
-  //POST
+  //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
     final response = await http.post(
       Uri.parse(
@@ -80,10 +84,6 @@ class BookingProvider {
         },
       ),
     );
-    //TODO:make http call to check availibility based on booking pk
-    //if true then make booking
-    //if false show alert dialog and let user know can't make booking
-
     if (response.statusCode == 200) {
       return true;
     } else {
