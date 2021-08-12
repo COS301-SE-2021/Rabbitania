@@ -200,7 +200,9 @@ namespace backend_api.Controllers.Booking
                 return BadRequest("Request is null or empty");
             }
         }
-
+        
+        [HttpPost]
+        [Route("CheckIfBookingExists")]
         public async Task<ActionResult> CheckIfBookingExists([FromBody] CheckIfBookingExistsRequest request)
         {
             if (request != null)
