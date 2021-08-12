@@ -8,9 +8,8 @@ import 'package:http/http.dart' as http;
 class BookingProvider {
   // GET ALL
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
-    //UserProvider userProvider = new UserProvider();
     final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/Booking/GetBookings?UserId=8'),
+      Uri.parse('https://10.0.2.2:5001/api/Booking/GetBookings?UserId=1'),
     );
 
     if (response.statusCode == 200) {
@@ -22,6 +21,7 @@ class BookingProvider {
           )
           .toList();
     } else {
+      // TODO: fix this to return an empty shell when theres nothing in the database
       throw Exception('Failed to retreive bookings');
     }
   }
@@ -44,8 +44,10 @@ class BookingProvider {
     if (response.statusCode == 200) {
       return ("Created new Booking");
     } else {
-      throw ("Failed to create new booking - Error Status: " +
-          response.statusCode.toString());
+      return ("Failed to create booking, Code: " +
+          response.statusCode.toString() +
+          " - Response Message: " +
+          response.body);
     }
   }
 
@@ -58,7 +60,7 @@ class BookingProvider {
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw ("Server Error Status Code:  " + response.statusCode.toString());
+      return false;
     }
   }
 

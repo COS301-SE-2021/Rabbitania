@@ -60,7 +60,7 @@ class _BookingDayState extends State<BookingDayScreen> {
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 120,
+          toolbarHeight: 220,
           elevation: 1,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
@@ -69,8 +69,28 @@ class _BookingDayState extends State<BookingDayScreen> {
               Container(
                 child: Padding(
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.05,
+                      top: MediaQuery.of(context).size.height * 0.07,
+                      bottom: 10),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      'Day Booking',
+                      style: TextStyle(
+                        fontSize: 35,
+                        color: Color.fromRGBO(172, 255, 79, 1),
+                      ),
+                    ),
                   ),
+                ],
+              ),
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 10),
                 ),
               ),
               Row(
@@ -111,11 +131,14 @@ class _BookingDayState extends State<BookingDayScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    this.displayText,
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color.fromRGBO(172, 255, 79, 1),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      this.displayText,
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Color.fromRGBO(172, 255, 79, 1),
+                      ),
                     ),
                   ),
                 ],
