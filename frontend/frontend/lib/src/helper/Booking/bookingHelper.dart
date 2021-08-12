@@ -17,6 +17,7 @@ class BookingHelper {
   }) async {
     //Get User Id of the currently logged in user
     final loggedUserId = await loggedUser.getUserID();
+
     // return the createBookingAsync method which creates a future to book.
     return bookingProvider.createBookingAsync(
       bookingDate,
@@ -24,5 +25,15 @@ class BookingHelper {
       office,
       loggedUserId,
     );
+  }
+
+  Future<bool> confirmNoPriorBookings({
+    timeslot,
+    office,
+  }) async {
+    //Get User Id of the currently logged in user
+    final loggedUserId = await loggedUser.getUserID();
+    // return the createBookingAsync method which creates a future to book.
+    return bookingProvider.checkIfBookingExists(timeslot, office, loggedUserId);
   }
 }

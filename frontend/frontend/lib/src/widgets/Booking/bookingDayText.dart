@@ -232,63 +232,108 @@ class _BookingDayTextState extends State<BookingDayText> {
                         timeSlot =
                             widget.dayOfTheWeek + "," + this.dropdownValue2;
                       }
-
-                      //use setState to change the value of Widget body member on press
                       bookingHelper
-                          .checkAndMakeBooking(
-                              timeslot: timeSlot,
-                              office: office,
-                              bookingDate: formattedDate)
+                          .confirmNoPriorBookings(
+                              timeslot: timeSlot, office: office)
                           .then((value) {
-                        print(value);
-                        if (value == "Created new Booking") {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                value,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color.fromRGBO(171, 255, 79, 1),
-                                  fontSize: 20,
+                        if (value) {
+                          //use setState to change the value of Widget body member on press
+                          bookingHelper
+                              .checkAndMakeBooking(
+                                  timeslot: timeSlot,
+                                  office: office,
+                                  bookingDate: formattedDate)
+                              .then((value) {
+                            print(value);
+                            if (value == "Created new Booking") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    value,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 5000),
+                                  width: 300.0,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                  ),
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
                                 ),
-                              ),
-                              duration: const Duration(milliseconds: 5000),
-                              width: 300.0,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                              ),
-                              behavior: SnackBarBehavior.floating,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
-                          );
-                          //if successful, change state of button to reflect successful booking
+                              );
+                              //if successful, change state of button to reflect successful booking
+                            } else {
+                              //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
+                              return showDialog<void>(
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    elevation: 5,
+                                    backgroundColor:
+                                        Color.fromRGBO(33, 33, 33, 1),
+                                    titleTextStyle: TextStyle(
+                                        color: Colors.white, fontSize: 25),
+                                    title: Text("No Booking Availible"),
+                                    contentTextStyle: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                    content: Text(
+                                        "There are no booking slots currently availible. Please try again later."),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: const Text(
+                                          "Close",
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(33, 33, 33, 1),
+                                              fontSize: 20),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.red,
+                                          shape: StadiumBorder(),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                context: context,
+                              );
+                            }
+                          });
                         } else {
-                          //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
+                          //Error booking already exists
                           return showDialog<void>(
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 elevation: 5,
                                 backgroundColor: Color.fromRGBO(33, 33, 33, 1),
                                 titleTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 32),
-                                title: Text("No Booking Availible"),
+                                    color: Colors.white, fontSize: 25),
+                                title: Text("Issue with Booking"),
                                 contentTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 16),
+                                    color: Colors.white, fontSize: 20),
                                 content: Text(
-                                    "There are no booking slots currently availible. Please try again later."),
+                                    "You have already booked for this slot for the week!"),
                                 actions: [
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.close,
-                                      color: Color.fromRGBO(171, 255, 79, 1),
-                                      size: 24.0,
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(false),
+                                    child: const Text(
+                                      "Close",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(33, 33, 33, 1),
+                                          fontSize: 20),
                                     ),
-                                    tooltip: 'Close',
-                                    onPressed: () async {
-                                      Navigator.pop(context);
-                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                      shape: StadiumBorder(),
+                                    ),
                                   ),
                                 ],
                               );
