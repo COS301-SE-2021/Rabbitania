@@ -60,7 +60,7 @@ class BookingProvider {
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw ("Server Error Status Code:  " + response.statusCode.toString());
+      return false;
     }
   }
 

@@ -24,11 +24,9 @@ class _BookingDayTextState extends State<BookingDayText> {
   String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
-  //Widget body = Container();
   var bookingColour = Color.fromRGBO(172, 255, 79, 1);
   String bookingText = 'Book';
 
-  final _bookingProvider = new BookingProvider();
   final bookingHelper = BookingHelper();
 
   List<String> officeLocations = [
@@ -244,10 +242,27 @@ class _BookingDayTextState extends State<BookingDayText> {
                           .then((value) {
                         print(value);
                         if (value == "Created new Booking") {
-                          setState(() {
-                            this.bookingText = 'Booked';
-                            this.bookingColour = utilModel.greyColor;
-                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                value,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(171, 255, 79, 1),
+                                  fontSize: 20,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 5000),
+                              width: 300.0,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                          );
                           //if successful, change state of button to reflect successful booking
                         } else {
                           //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
