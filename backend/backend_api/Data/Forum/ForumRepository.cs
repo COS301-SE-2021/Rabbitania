@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using backend_api.Data.User;
 using backend_api.Exceptions.Forum;
 using backend_api.Exceptions.NoticeBoard;
+using backend_api.Exceptions.Notifications;
 using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
+using backend_api.Models.User;
 using Castle.Core.Internal;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace backend_api.Data.Forum
 {
     public class ForumRepository : IForumRepository
     {
         private readonly IForumContext _forum;
+        private readonly IUserContext _user;
 
-        public ForumRepository(IForumContext forum)
+        public ForumRepository(IForumContext forum, IUserContext user)
         {
             _forum = forum;
+            _user = user;
         }
 
         //Forum Repository
@@ -152,9 +158,22 @@ namespace backend_api.Data.Forum
             var forumThreadId = request.ForumThreadId;
             var userId = request.UserId;
             
-            var threadComment =
-                new ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, forumThreadId, userId);
+            
+       
+            var foreignUserId = await _user.Users.FindAsync(userId);
+            if (foreignUserId == null)
+            {
+                throw new InvalidUserIdException("User does not exist in the database");
+            }
 
+            var userName = foreignUserId.Name;
+            var profilePicture = foreignUserId.UserImgUrl;
+            
+            var threadComment =
+                new ThreadComments(commentBody, createDate, imageUrl, likes, dislikes, userName, profilePicture, forumThreadId, userId);
+
+            
+            
             try
             {
                 var foreignForumThreadId = await _forum.ForumThreads.FindAsync(forumThreadId);

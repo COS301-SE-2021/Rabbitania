@@ -10,7 +10,7 @@ namespace backend_api.Models.Forum
         string ImageURL { get; set; }
         int Likes { get; set; }
         int Dislikes { get; set; }
-
-        
+        string UserName { get; set; }
+        string ProfilePicture { get; set; }
     }
 }

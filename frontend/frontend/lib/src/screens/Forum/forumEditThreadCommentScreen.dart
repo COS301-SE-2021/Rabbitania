@@ -1,121 +1,122 @@
-import 'dart:convert';
-
-import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumThreadCommentsCards.dart';
-import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
-import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
+import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
+import 'package:frontend/src/widgets/Forum/ForumEditThreadCommentCard.dart';
+import 'package:frontend/src/widgets/Forum/forumEditForumCard.dart';
+import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'forumCreateThreadScreen.dart';
-import 'forumEditThreadScreen.dart';
-import 'forumThreadScreen.dart';
+import 'forumCommentScreen.dart';
 
-class ForumCommentScreen extends StatefulWidget {
+class ForumEditThreadCommentScreen extends StatefulWidget {
   createState() {
-    return _ForumCommentScreen();
+    return _ForumEditThreadCommentScreen();
   }
 }
 
-late Future<List<ThreadComments>> futureThreadComments;
+TextEditingController threadCommentBodyController = new TextEditingController();
 
-//////
-class _ForumCommentScreen extends State<ForumCommentScreen> {
-  void initState() {
-    super.initState();
-    futureThreadComments = fetchThreadComments(currentThreadID);
-  }
-
-  void refresh() {
-    UtilModel.route(() => ForumCommentScreen(), context);
-    setState(() {});
-    print("refresh");
-  }
-
-  final formKey = GlobalKey<FormState>();
-  final TextEditingController commentController = TextEditingController();
+class _ForumEditThreadCommentScreen
+    extends State<ForumEditThreadCommentScreen> {
+  final util = new UtilModel();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(172, 255, 79, 1),
+        //Floating action button on Scaffold
+        onPressed: () {
+          //code to execute on button press
+          showDialog(
+            context: context,
+            builder: (context) {
+              if (threadCommentBodyController.text != "") {
+                futureEditThreadString = editForumThreadComment(
+                  threadCommentBodyController.text,
+                );
+              }
+              return FutureBuilder<String>(
+                future: futureEditThreadString,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      title: Text(snapshot.data!),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Color.fromRGBO(171, 255, 79, 1),
+                            size: 24.0,
+                          ),
+                          tooltip: 'Continue',
+                          onPressed: () async {
+                            UtilModel.route(() => ForumThreadScreen(), context);
+                          },
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        content: Text('${snapshot.error}'));
+                  }
+                  return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: CircularProgressIndicator());
+                },
+              );
+            },
+          );
+        },
+        child: Icon(Icons.edit,
+            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+      ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
         leading: BackButton(
           onPressed: () {
-            UtilModel.route(() => ForumThreadScreen(), context);
+            UtilModel.route(() => ForumCommentScreen(), context);
           },
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
         title: Center(
           child: Text(
-            currentForumName.toString(),
+            'Edit Comment        ',
             style: TextStyle(
               color: Color.fromRGBO(171, 255, 79, 1),
               fontSize: 25,
             ),
           ),
         ),
-        actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  refresh();
-                },
-                child: Icon(Icons.refresh),
-              )),
-        ],
+        actions: [],
       ),
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      body: Container(
-          child: Stack(
-        fit: StackFit.expand,
-        children: [
-          SvgPicture.string(
-            _svg_background,
-            fit: BoxFit.contain,
-          ),
-          InkWell(
-            onTap: () =>
-                {FocusScope.of(context).unfocus(), commentController.clear()},
-            child: CommentBox(
-              userImage:
-                  "https://lh3.googleusercontent.com/a-/AOh14GjRHcaendrf6gU5fPIVd8GIl1OgblrMMvGUoCBj4g=s400",
-              child: Card(
-                  color: Color.fromRGBO(57, 57, 57, 1),
-                  shadowColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0)),
-                  clipBehavior: Clip.antiAlias,
-                  elevation: 2,
-                  child: ForumThreadCommentsCards()),
-              labelText: 'Write a comment...',
-              withBorder: false,
-              errorText: 'Comment cannot be blank',
-              sendButtonMethod: () async {
-                print(commentController.text);
-                await addNewComment(commentController.text);
-                commentController.clear();
-                FocusScope.of(context).unfocus();
-                setState(() {});
-                refresh();
-              },
-              formKey: formKey,
-              commentController: commentController,
-              backgroundColor: Colors.black,
-              textColor: Colors.white,
-              sendWidget: Icon(Icons.send_sharp, size: 30, color: Colors.white),
+      body: Center(
+        child: Stack(
+          children: <Widget>[
+            SvgPicture.string(
+              _svg_background,
+              fit: BoxFit.contain,
             ),
-          ),
-        ],
-      )),
+            Container(
+              child: ForumEditForumThreadCommentCard(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

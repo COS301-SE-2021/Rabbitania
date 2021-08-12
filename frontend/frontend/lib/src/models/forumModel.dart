@@ -7,6 +7,10 @@ var currentForumID = -1;
 var currentForumName = "ForumName";
 var currentThreadID = -1;
 var currentThreadName = "ThreadName";
+var currentThreadBody = "Body";
+var currentCommentId = -1;
+var currentCommentBody = "Body";
+var currentThreadImage = "";
 //
 
 ////////////////////////////////////////////////////////////////
@@ -234,6 +238,8 @@ class ThreadComments {
   final String imageURL;
   final int likes;
   final int dislikes;
+  final String userName;
+  final String profilePicture;
   final int forumThreadId;
   final String? forumThread;
   final int userId;
@@ -246,6 +252,8 @@ class ThreadComments {
       required this.imageURL,
       required this.likes,
       required this.dislikes,
+      required this.userName,
+      required this.profilePicture,
       required this.forumThreadId,
       required this.forumThread,
       required this.userId,
@@ -259,6 +267,8 @@ class ThreadComments {
         imageURL: json['imageURL'],
         likes: json['likes'],
         dislikes: json['dislikes'],
+        userName: json['userName'],
+        profilePicture: json['profilePicture'],
         forumThreadId: json['forumThreadId'],
         forumThread: json['forumThread'],
         userId: json['userId'],
@@ -295,5 +305,33 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
     return CommentObj;
   } else {
     return CommentObj;
+  }
+}
+
+Future<bool> deleteComment(int currentCommentId) async {
+  try {
+    print(currentCommentId);
+    if (currentCommentId < 0) {
+      throw ("Error: Comment Id is invalid");
+    }
+    final response = await http.delete(
+      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteThreadComment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'threadCommentId': currentCommentId,
+        },
+      ),
+    );
+    //print("CODE ============" + response.statusCode.toString());
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return true;
+    } else {
+      throw ("Failed to delete, error code" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return false;
   }
 }

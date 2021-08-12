@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace backend_api.Data.Migrations
 {
-    public partial class InitialForumModelMigration : Migration
+    public partial class InitialForumCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+          
+
             migrationBuilder.CreateTable(
                 name: "Forums",
                 columns: table => new
@@ -71,6 +73,8 @@ namespace backend_api.Data.Migrations
                     ImageURL = table.Column<string>(type: "text", nullable: true),
                     Likes = table.Column<int>(type: "integer", nullable: false),
                     Dislikes = table.Column<int>(type: "integer", nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: true),
+                    ProfilePicture = table.Column<string>(type: "text", nullable: true),
                     ForumThreadId = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
