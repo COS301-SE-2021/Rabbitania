@@ -126,7 +126,7 @@ class _BookingListView extends State<BookingListView> {
                       'Booking Successfully Deleted',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Color.fromRGBO(255, 1, 193, 1),
+                        color: Color.fromRGBO(171, 255, 79, 1),
                         fontSize: 20,
                       ),
                     ),
