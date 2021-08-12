@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +40,7 @@ namespace backend_api
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private string _conn = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -57,7 +59,7 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-            
+
             //SignalR
             services.AddSignalR();
             
