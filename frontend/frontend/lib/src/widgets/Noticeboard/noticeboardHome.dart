@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import '../../models/Noticeboard/noticeboardModel.dart';
 import '../../screens/Noticeboard/noticeboardScreen.dart';
 
-int like = 0;
-int dislike = 0;
-var id = 0;
 Uint8List? base64String;
 
 class NoticeboardCard extends StatelessWidget {
