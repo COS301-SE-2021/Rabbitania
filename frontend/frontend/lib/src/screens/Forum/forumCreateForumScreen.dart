@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
@@ -17,6 +18,19 @@ final forumTitleController = TextEditingController();
 class _ForumCreateScreen extends State<ForumCreateScreen> {
   final util = new UtilModel();
 
+  UserHelper userHelper = UserHelper();
+
+  int forumCreatorId = 0;
+  void initState() {
+    super.initState();
+    userHelper.getUserID().then((value) {
+      setState(() {
+        this.forumCreatorId = value;
+      });
+      print(value);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +41,7 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
             context: context,
             builder: (context) {
               futureStringReceivedForum =
-                  addNewForum(forumTitleController.text);
+                  addNewForum(forumTitleController.text, forumCreatorId);
               return FutureBuilder<String>(
                 future: futureStringReceivedForum,
                 builder: (context, snapshot) {

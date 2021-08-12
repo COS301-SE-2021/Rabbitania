@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -19,6 +20,19 @@ TextEditingController contentController = new TextEditingController();
 
 class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
   final util = new UtilModel();
+
+  UserHelper userHelper = UserHelper();
+
+  int noticeboardEditId = 0;
+  void initState() {
+    super.initState();
+    userHelper.getUserID().then((value) {
+      setState(() {
+        this.noticeboardEditId = value;
+      });
+    });
+  }
+
   void next() {
     UtilModel.route(() => Notice(), context);
   }
@@ -36,7 +50,9 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             builder: (context) {
               if (titleController.text != "" && contentController.text != "") {
                 futureStringReceived = editNoticeboardThread(
-                    titleController.text, contentController.text);
+                    titleController.text,
+                    contentController.text,
+                    noticeboardEditId);
               }
               return FutureBuilder<String>(
                 future: futureStringReceived,
