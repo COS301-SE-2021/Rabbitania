@@ -12,6 +12,8 @@ namespace backend_api.Data.Booking
     {
         private readonly BookingScheduleContext _schedules;
         private readonly BookingContext _bookings;
+        private readonly object availabilityLock = new object();
+
 
         public BookingScheduleRepository(BookingScheduleContext schedules)
         {
@@ -82,7 +84,10 @@ namespace backend_api.Data.Booking
 
             try
             {
-                bookingSchedule.Availability -= 1;
+                lock (availabilityLock)
+                {
+                    bookingSchedule.Availability -= 1;
+                }
                 await _schedules.SaveChangesAsync();
                 return new UpdateBookingScheduleResponse(true);
             }
@@ -100,7 +105,10 @@ namespace backend_api.Data.Booking
 
             try
             {
-                bookingSchedule.Availability += 1;
+                lock (availabilityLock)
+                {
+                    bookingSchedule.Availability += 1;
+                }
                 await _schedules.SaveChangesAsync();
                 return new UpdateBookingScheduleResponse(true);
             }
