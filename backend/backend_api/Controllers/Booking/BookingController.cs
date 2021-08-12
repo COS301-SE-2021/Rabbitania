@@ -201,10 +201,32 @@ namespace backend_api.Controllers.Booking
             }
         }
 
-        /*public async Task<ActionResult> CheckIfBookingExists([FromBody] CreateBookingRequest request)
+        public async Task<ActionResult> CheckIfBookingExists([FromBody] CheckIfBookingExistsRequest request)
         {
-            
-        }*/
+            if (request != null)
+            {
+                try
+                {
+                    var resp = await _bookingService.CheckIfBookingExists(request);
+                    if (resp.Response == HttpStatusCode.Accepted)
+                    {
+                        return Ok("Booking does not exist all clear!");
+                    }
+                    else
+                    {
+                        return BadRequest("Error booking already exists, cannot make another booking.");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
         
     }
 }

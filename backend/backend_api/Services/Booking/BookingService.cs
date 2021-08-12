@@ -183,5 +183,22 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Request is null or empty");
             }
         }
+
+        public async Task<CheckIfBookingExistsResponse> CheckIfBookingExists(CheckIfBookingExistsRequest request)
+        {
+            if (request.UserId is 0 or < 0)
+            {
+                throw new InvalidBookingException("UserId is invalid wih CheckIfBookingExists method...");
+            }
+
+            if (request.TimeSlot is "" or "")
+            {
+                throw new InvalidBookingException("Invalid Time Slots.");
+            }
+            
+            var resp =  await _bookingRepository.CheckIfBookingExists(request);
+            
+            return new CheckIfBookingExistsResponse(resp);
+        }
     }
 }
