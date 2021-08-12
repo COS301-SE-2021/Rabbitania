@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
