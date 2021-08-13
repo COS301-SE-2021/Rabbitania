@@ -171,7 +171,15 @@ namespace backend_api
             });
 
             #endregion
-            services.ConfigureIdentity();
+
+            services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
+            services.AddDbContext<IdentityContext>(o =>
+            {
+                o.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"));
+            });
+            
+            // services.ConfigureIdentity();
             services.ConfigJwt(Configuration);
             services.AddAuthentication();
             services.AddAuthorization();
