@@ -26,9 +26,9 @@ class _profileState extends State<ProfileScreen> {
   int userRole = 9;
   String phoneNumber = "";
   int userProfileCurrentID = -1;
-  String? dropdownDeveloperValue;
-  String? dropdownLevelValue;
-  String? dropdownLocationValue;
+  String dropdownDeveloperValue = "Unassigned";
+  String dropdownLevelValue = "Level: 0";
+  String dropdownLocationValue = "Pretoria";
   TextEditingController? _controller;
 
   final util = new UtilModel();
@@ -44,9 +44,6 @@ class _profileState extends State<ProfileScreen> {
     setState(() {
       userDetails = userProfile.getUserProfile();
       user = FirebaseAuth.instance.currentUser;
-      dropdownDeveloperValue = "Unassigned";
-      dropdownLevelValue = "Level: 0";
-      dropdownLocationValue = "Pretoria";
     });
     initFunction(userDetails);
     //print(user);
