@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;

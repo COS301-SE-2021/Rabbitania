@@ -1,4 +1,6 @@
-﻿namespace backend_api.Models.User.Requests
+﻿using backend_api.Models.Enumerations;
+
+namespace backend_api.Models.User.Requests
 {
     public class EditProfileRequest
     {
