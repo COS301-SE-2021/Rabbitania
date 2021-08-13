@@ -5,12 +5,10 @@ namespace backend_api.Models.Booking.Responses
     public class CreateBookingScheduleResponse
     {
         private bool _successful;
-        private string _mess;
-
-        public CreateBookingScheduleResponse(bool successful, string mess)
+        
+        public CreateBookingScheduleResponse(bool successful)
         {
             this._successful = successful;
-            this._mess = mess;
         }
 
         public CreateBookingScheduleResponse()
@@ -22,11 +20,6 @@ namespace backend_api.Models.Booking.Responses
             get => _successful;
             set => _successful = value;
         }
-
-        public string Mess
-        {
-            get => _mess;
-            set => _mess = value;
-        }
+        
     }
 }

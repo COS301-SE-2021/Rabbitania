@@ -122,29 +122,23 @@ namespace backend_api.Data.Booking
         {
             var bookingSchedule = await _schedules.BookingSchedules.FindAsync(
                 request.Office, request.TimeSlot).AsTask();
+            
             try
             {
-                var user = new BookingSchedule()
+                lock (availabilityLock)
                 {
-                    TimeSlot = request.TimeSlot, 
-                    Office = request.Office, 
-                    Availability = request.Availability
-                };
-                
-                _schedules.Entry(user).Property(x => x.Availability).IsModified = true;
+                    bookingSchedule.Availability = request.Availability;
+                }
                 
                 await _schedules.SaveChangesAsync();
-                
-                return new CreateBookingScheduleResponse(true, "Okay");
+                return new CreateBookingScheduleResponse(true);
             }
             catch (Exception error)
             {
-                return new CreateBookingScheduleResponse(false, error.ToString());
+                return new CreateBookingScheduleResponse(false);
             }
         }
-
-
-
+        
         
     }
 }

@@ -177,7 +177,7 @@ namespace backend_api.Controllers.Booking
                             }
                             else
                             {
-                                return BadRequest("Error");
+                                return BadRequest("Error while creating a new booking schedule.");
                             }
                         }
                         catch (Exception)
