@@ -112,4 +112,26 @@ class BookingProvider {
       return false;
     }
   }
+
+  //POST (CreateBookingSchedule)
+  Future<bool> createBookingSchedule(timeslot, office) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'timeSlot': timeslot,
+          'office': office,
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
