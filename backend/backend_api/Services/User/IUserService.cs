@@ -24,5 +24,7 @@ namespace backend_api.Services.User
 
         Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
 
+        Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request);
+
     }
 }

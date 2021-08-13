@@ -20,6 +20,18 @@ namespace backend_api.Models.User
             this.OfficeLocation = officeLocation;
         }
 
+        public Users(int userId, string name, string phoneNumber, string userImgUrl, string userDescription, int employeeLevel, OfficeLocation officeLocation, UserRoles userRole)
+        {
+            UserId = userId;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            UserImgUrl = userImgUrl;
+            UserDescription = userDescription;
+            EmployeeLevel = employeeLevel;
+            OfficeLocation = officeLocation;
+            EmployeeLevel = employeeLevel;
+        }
+
         public Users()
         {
         }

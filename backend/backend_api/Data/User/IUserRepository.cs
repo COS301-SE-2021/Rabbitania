@@ -20,6 +20,8 @@ namespace backend_api.Data.User
         
         ViewProfileResponse ViewProfile(ViewProfileRequest request);
 
+        Task<GetUserProfilesResponse> GetUserProfiles();
+
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
         Task<Models.User.Users> GetExistingUserDetails(GoogleSignInRequest request);
