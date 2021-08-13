@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
+using backend_api.Models.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using backend_api.Models.User.Requests;
+using backend_api.Services.User;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.Auth
@@ -12,6 +17,13 @@ namespace backend_api.Services.Auth
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _repository;
+        private readonly IUserService _userService;
+
+        public AuthService(IUserRepository repository, IUserService userService)
+        {
+            _repository = repository;
+            _userService = userService;
+        }
 
         public async Task<LoginResponse> checkEmailExists(GoogleSignInRequest request)
         {
@@ -80,7 +92,20 @@ namespace backend_api.Services.Auth
             return user;
         }
 
-        
+        public async Task<bool> Validate(Credentials credentials)
+        {
+            var id = credentials.UserID;
+            if (_userService.ViewProfile(new ViewProfileRequest(id)).Result.response == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
     
 }

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using backend_api.Exceptions.Auth;
+using backend_api.Models.Auth;
 using backend_api.Models.User.Requests;
 using backend_api.Services.Auth;
 using backend_api.Services.User;
@@ -104,6 +105,21 @@ namespace backend_api.Controllers.Auth
             var resp = await _service.GetUserID(request);
             var userId = resp.UserId;
             return userId;
+        }
+
+        [HttpPost,Authorize]
+        [Route("Auth")]
+        public async Task<IActionResult> Auth([FromBody] Credentials credentials)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!await _service.Validate(credentials))
+            {
+                return Unauthorized();
+            }
+
+            return Ok("User exists in the system");
         }
     }
 }

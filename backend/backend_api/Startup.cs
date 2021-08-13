@@ -41,16 +41,20 @@ namespace backend_api
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         private string _conn = null;
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           Configuration = configuration;
         }
+        
 
-        public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -59,10 +63,14 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
+            services.AddTransient<IAuthService, AuthService>();
+            
 
             //SignalR
             services.AddSignalR();
-            
+            services.ConfigureIdentity();
+            services.AddAuthentication();
+            services.ConfigJwt(Configuration);
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -93,7 +101,6 @@ namespace backend_api
 
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
             
-            //TODO: Add services and repos
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingService, BookingService>();
             //----------------------------------------------------------------------------------------------------------------------
@@ -173,7 +180,7 @@ namespace backend_api
             });
 
             #endregion
-
+            
             services.AddAuthorization();
 
             //Npgsql connection for Postresql
