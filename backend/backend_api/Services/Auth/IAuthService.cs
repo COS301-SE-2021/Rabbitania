@@ -52,5 +52,7 @@ namespace backend_api.Services.Auth
         Task<Models.User.Users> GetUserID(GoogleSignInRequest request);
 
         Task<bool> Validate(Credentials credentials);
+
+        Task<string> createJwt(Credentials credentials);
     }
 }

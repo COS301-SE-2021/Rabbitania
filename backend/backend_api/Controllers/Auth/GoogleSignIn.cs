@@ -119,7 +119,7 @@ namespace backend_api.Controllers.Auth
                 return Unauthorized();
             }
 
-            return Ok("User exists in the system");
+            return Ok(new {token = await _service.createJwt(credentials)});
         }
     }
 }

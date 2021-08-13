@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
@@ -9,7 +14,9 @@ using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using backend_api.Models.User.Requests;
 using backend_api.Services.User;
+using Castle.Core.Configuration;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.Auth
@@ -18,6 +25,14 @@ namespace backend_api.Services.Auth
     {
         private readonly IUserRepository _repository;
         private readonly IUserService _userService;
+        private readonly IConfiguration _configuration;
+
+        public AuthService(IUserRepository repository, IUserService userService, IConfiguration configuration)
+        {
+            _repository = repository;
+            _userService = userService;
+            _configuration = configuration;
+        }
 
         public AuthService(IUserRepository repository, IUserService userService)
         {
@@ -105,7 +120,32 @@ namespace backend_api.Services.Auth
             }
         }
 
+        public async Task<string> createJwt(Credentials credentials)
+        {
+            var settings = Startup.StaticConfig.GetSection("JwtSettings");
+            
+            var claims = await GetClaims(credentials);
 
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.GetSection("secret").Value));
+            var signingCred = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            
+            var token = new JwtSecurityToken(
+                issuer: settings.GetSection("validIssuer").Value,
+                audience: settings.GetSection("validAudience").Value,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: signingCred
+                );
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private async Task<List<Claim>> GetClaims(Credentials credentials)
+        {
+
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, credentials.Name) };
+            
+            return claims;
+        }
     }
     
 }

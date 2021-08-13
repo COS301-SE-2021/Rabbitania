@@ -46,10 +46,10 @@ namespace backend_api
         public Startup(IConfiguration configuration)
         {
            Configuration = configuration;
+           StaticConfig = configuration;
         }
-        
 
-
+        public static IConfiguration StaticConfig { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -63,7 +63,7 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-            services.AddTransient<IAuthService, AuthService>();
+            //services.AddTransient<IAuthService, AuthService>();
             
 
             //SignalR
