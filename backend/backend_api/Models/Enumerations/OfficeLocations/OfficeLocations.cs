@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace backend_api.Models.Enumerations
+namespace backend_api.Models.Enumerations.OfficeLocations
 {
-    public abstract class OfficeLocationModel
+    public class OfficeLocations : IOfficeLocations
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

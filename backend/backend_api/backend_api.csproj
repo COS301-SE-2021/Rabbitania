@@ -45,8 +45,6 @@
 
     <ItemGroup>
       <Folder Include="Data\Migrations" />
-      <Folder Include="Models\Enumerations\Requests" />
-      <Folder Include="Models\Enumerations\Responses" />
     </ItemGroup>
 
 </Project>

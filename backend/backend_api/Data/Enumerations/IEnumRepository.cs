@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Models.Enumerations;
+using backend_api.Models.Enumerations.Requests;
+using backend_api.Models.Enumerations.Responses;
 
 namespace backend_api.Data.Enumerations
 {
     public interface IEnumRepository
     {
-        Task<OfficeLocationModel> GetOfficeName();
+        Task<GetOfficeNameResponse> GetOfficeName(GetOfficeNameRequest request);
         
         Task<UserRolesModel> GetUserRoleType();
     }

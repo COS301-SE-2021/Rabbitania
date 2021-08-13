@@ -1,13 +1,14 @@
 ﻿using backend_api.Data.Booking;
 using System.Threading.Tasks;
 using backend_api.Models.Enumerations;
+using backend_api.Models.Enumerations.OfficeLocations;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Enumerations
 {
     public class EnumContext: DbContext, IEnumContext
     {
-        public EnumContext(DbContextOptions<BookingContext> options) : base(options)
+        public EnumContext(DbContextOptions<EnumContext> options) : base(options)
         {
 
         }
@@ -17,9 +18,9 @@ namespace backend_api.Data.Enumerations
             
         }
         
-        public DbSet<OfficeLocationModel> OfficeLocations { get; set; }
+        public DbSet<OfficeLocations> OfficeLocations { get; set; }
         
-        public DbSet<UserRolesModel> UserRoles { get; set; }
+        //public DbSet<UserRolesModel> UserRoles { get; set; }
 
         public new async Task<int> SaveChanges()
         {
