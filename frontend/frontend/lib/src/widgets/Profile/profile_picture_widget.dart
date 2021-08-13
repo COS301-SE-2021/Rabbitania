@@ -10,5 +10,7 @@ class ProfilePicture extends StatelessWidget {
           radius: 40,
           backgroundImage: NetworkImage(user.photoURL!),
         ),
+        width: 50,
+        height: 50,
       );
 }
