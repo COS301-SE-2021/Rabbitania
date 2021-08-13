@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
@@ -52,7 +53,9 @@ class _BookingDayState extends State<BookingDayScreen> {
           heroTag: "BookingDayScreenPage",
           numberOfItems: 1,
           icon1: Icons.shield_outlined,
-          onPressed1: () {},
+          onPressed1: () {
+            UtilModel.route(() => BookingAdminScreen(), context);
+          },
           icon2: Icons.shield_outlined,
           onPressed2: () {},
           icon3: Icons.edit,
