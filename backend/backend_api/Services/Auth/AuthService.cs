@@ -141,11 +141,12 @@ namespace backend_api.Services.Auth
 
         private async Task<List<Claim>> GetClaims(Credentials credentials)
         {
-
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, credentials.Name) };
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, credentials.Name)
+            };
             
             return claims;
         }
     }
-    
 }

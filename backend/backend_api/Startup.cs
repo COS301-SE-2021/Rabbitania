@@ -63,14 +63,12 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
-            //services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IAuthService, AuthService>();
             
 
             //SignalR
             services.AddSignalR();
-            services.ConfigureIdentity();
-            services.AddAuthentication();
-            services.ConfigJwt(Configuration);
+            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -82,16 +80,7 @@ namespace backend_api
             
             // For sending an email
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-            
-            services.AddAuthentication(option =>
-            {
-                option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
-            {
-                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
-                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
-            });
-            
+
             //----------------------------------------------------------------------------------------------------------------------
             // Booking DB Context
             services.AddDbContext<BookingContext>(options =>
@@ -176,14 +165,14 @@ namespace backend_api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v2"});
             });
 
             #endregion
-            
+            services.ConfigureIdentity();
+            services.ConfigJwt(Configuration);
+            services.AddAuthentication();
             services.AddAuthorization();
-
-            //Npgsql connection for Postresql
 
         }
 

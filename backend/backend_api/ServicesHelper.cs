@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using backend_api.Models.User;
+using backend_api.Services.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -12,8 +13,9 @@ namespace backend_api
     {
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddIdentityCore<Users>(o =>
+            var builder = services.AddIdentityCore<Users>(o =>
             {
+                
             }).AddDefaultTokenProviders();
         }
 
