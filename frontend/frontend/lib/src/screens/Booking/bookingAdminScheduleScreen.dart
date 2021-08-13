@@ -156,12 +156,12 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
                 utilModel.svg_background,
                 fit: BoxFit.contain,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ListView(
+                shrinkWrap: true,
                 children: <Widget>[
-                  BookingScheduleSpinbox('Pretoria'),
-                  // BookingScheduleSpinbox('Braamfontein'),
-                  // BookingScheduleSpinbox('Amsterdam'),
+                  BookingScheduleSpinbox('PRETORIA OFFICE'),
+                  BookingScheduleSpinbox('BRAAMFONTEIN OFFICE'),
+                  BookingScheduleSpinbox('ASMTERDAM OFFICE'),
                 ],
               ),
             ],
