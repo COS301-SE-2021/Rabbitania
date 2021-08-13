@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using backend_api.Models.Enumerations;
 using Microsoft.AspNetCore.Http;
 
 namespace backend_api.Models.User.Responses

@@ -4,6 +4,7 @@ using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 using backend_api.Models.User.Responses;
 using backend_api.Services.Auth;
