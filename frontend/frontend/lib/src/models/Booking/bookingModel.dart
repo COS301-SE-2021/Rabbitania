@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ViewBookingModel {
   final int id;
   final String bookingDate;
