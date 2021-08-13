@@ -109,7 +109,7 @@ namespace backend_api.Data.User
             var users = _users.Users;
             IEnumerable<Users> allUsers = users.Select(user => user);
 
-            var listOfUsers = users.ToList();
+            var listOfUsers = allUsers.ToList();
             var listOfUserProfiles = new List<Users>();
 
             foreach (var user in listOfUsers)
