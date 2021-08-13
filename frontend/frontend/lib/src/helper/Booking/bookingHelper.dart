@@ -36,4 +36,10 @@ class BookingHelper {
     // return the createBookingAsync method which creates a future to book.
     return bookingProvider.checkIfBookingExists(timeslot, office, loggedUserId);
   }
+
+  Future<bool> createBookingSchedule({timeslot, office, availability}) async {
+    // return the createBookingAsync method which creates a future to book.
+    return bookingProvider.createBookingSchedule(
+        timeslot, office, availability);
+  }
 }

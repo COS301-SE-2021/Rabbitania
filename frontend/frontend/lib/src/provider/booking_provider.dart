@@ -114,10 +114,10 @@ class BookingProvider {
   }
 
   //POST (CreateBookingSchedule)
-  Future<bool> createBookingSchedule(timeslot, office) async {
+  Future<bool> createBookingSchedule(timeslot, office, availability) async {
     final response = await http.post(
       Uri.parse(
-          'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot'),
+          'https://10.0.2.2:5001/api/BookingSchedule/CreateBookingSchedule'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -125,6 +125,7 @@ class BookingProvider {
         <String, dynamic>{
           'timeSlot': timeslot,
           'office': office,
+          'availability': availability
         },
       ),
     );
