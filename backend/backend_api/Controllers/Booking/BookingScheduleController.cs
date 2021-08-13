@@ -163,7 +163,7 @@ namespace backend_api.Controllers.Booking
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
                 [HttpPost]
-                [Route("CreateBooking")]
+                [Route("CreateBookingSchedule")]
                 public async Task<ActionResult> CreateBookingSchedule([FromBody] CreateBookingScheduleRequest request)
                 {
                     if (request != null)
@@ -173,11 +173,11 @@ namespace backend_api.Controllers.Booking
                             var resp = await _scheduleService.CreateBookingSchedule(request);
                             if (resp.Successful == true)
                             {
-                                return Ok("Booking Schedule created successfully");
+                                return Ok("Booking Schedule for : " + request.TimeSlot + " created.");
                             }
                             else
                             {
-                                return BadRequest("Error trying to create booking Schedule in system");
+                                return BadRequest("Error while creating a new booking schedule.");
                             }
                         }
                         catch (Exception)

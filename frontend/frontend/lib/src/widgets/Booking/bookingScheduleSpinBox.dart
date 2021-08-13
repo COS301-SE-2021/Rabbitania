@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
+import 'package:frontend/src/helper/Booking/bookingHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BookingScheduleSpinbox extends StatefulWidget {
   final officeName;
-  BookingScheduleSpinbox(this.officeName);
+  final day;
+  BookingScheduleSpinbox(this.officeName, this.day);
 
   _BookingScheduleSpinboxState createState() => _BookingScheduleSpinboxState();
 }
 
 class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
   UtilModel utilModel = UtilModel();
+  BookingHelper bookingHelper = BookingHelper();
   var spinBoxMorning = 0.0;
   var spinBoxAfternoon = 0.0;
   @override
@@ -53,9 +56,6 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
             cursorColor: Color.fromRGBO(171, 255, 79, 1),
             value: 0,
             onChanged: (value) => {spinBoxMorning = value},
-            afterChange: () {
-              print(spinBoxMorning);
-            },
           ),
         ),
         Padding(
@@ -88,7 +88,7 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
             ),
             cursorColor: Color.fromRGBO(171, 255, 79, 1),
             value: 0,
-            onChanged: (value) => print(value),
+            onChanged: (value) => {spinBoxAfternoon = value},
           ),
         ),
         ElevatedButton(
@@ -110,7 +110,28 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
               ),
             ),
           ),
-          onPressed: () => null,
+          onPressed: () async {
+            int office = -1;
+            if (widget.officeName == "PRETORIA OFFICE") {
+              office = 0;
+            } else if (widget.officeName == "BRAAMFONTEIN OFFICE") {
+              office = 1;
+            } else if (widget.officeName == "ASMTERDAM OFFICE") {
+              office = 2;
+            }
+            // Morning Slot
+            String slotMorning = widget.day + ",Morning";
+            await bookingHelper.createBookingSchedule(
+                timeslot: slotMorning,
+                office: office,
+                availability: this.spinBoxMorning.toInt().toString());
+            //Afternoon Slot
+            String slotAfternoon = widget.day + ",Afternoon";
+            await bookingHelper.createBookingSchedule(
+                timeslot: slotAfternoon,
+                office: office,
+                availability: this.spinBoxAfternoon.toInt().toString());
+          },
         ),
       ],
     );
