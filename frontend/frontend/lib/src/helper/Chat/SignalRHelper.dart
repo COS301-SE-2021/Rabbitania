@@ -46,8 +46,8 @@ class SignalRHelper {
     await connection.invoke('SendMessage', args: [recipient, message]);
   }
 
-  Future<List<ChatMessageModel>> getMessagesList() {
-    return this.chatHelper.getMessages();
+  Future<List<ChatMessageModel>> getMessagesList() async {
+    return await this.chatHelper.getMessages();
   }
 
   closeConnection(BuildContext context) async {

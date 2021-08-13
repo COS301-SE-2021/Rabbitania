@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/SignalRHelper.dart';
 import 'package:frontend/src/helper/Chat/chatHelper.dart';
+import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
@@ -28,32 +32,18 @@ class ChatPageState extends State<ChatPage> {
   final utilModel = UtilModel();
   final signalRHelper = SignalRHelper();
   final chatHelper = ChatHelper();
+  final messageController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     initSignalR();
     var user = 0;
-    signalRHelper.initiateConnection(context).then((value) {
-      signalRHelper.sendMessage('bob', 'testMessage').then((response) {
-        signalRHelper.getMessagesList().then((response) {
-          var list = response;
-          print(list[0].messageContent);
-          print(list[0].associatedMessageSender);
-          signalRHelper
-              .sendMessage('RuntimeTerrors', 'test james message')
-              .then((secondResponse) {
-            signalRHelper.getMessagesList().then((newList) {
-              print(list[1].messageContent);
-              print(list[1].associatedMessageSender);
-            });
-          });
-        });
-      });
-    });
   }
 
   void initSignalR() {
+    //used to start connection with signalR serverside
+    signalRHelper.initiateConnection(context);
     _hubConnection = HubConnectionBuilder().withUrl(serverURLEmulator).build();
     _hubConnection!.onclose((exception) {
       print('Connection closed');
@@ -81,7 +71,6 @@ class ChatPageState extends State<ChatPage> {
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
-                    print(snapshot.data);
                     if (snapshot.data.length == 0) {
                       children = [Text('You have no chat history')];
                     } else {
@@ -140,21 +129,53 @@ class ChatPageState extends State<ChatPage> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: utilModel.greenColor,
-      //   child: Icon(
-      //     FontAwesomeIcons.paperPlane,
-      //     color: Colors.black,
-      //   ),
-      //   onPressed: () async {
-      //     _hubConnection!.state == HubConnectionState.disconnected
-      //         ? await _hubConnection!.start()
-      //         : await _hubConnection!.stop();
-      //   },
-      //   tooltip: 'Start/Stop',
-      // ),
       bottomNavigationBar: Container(
-        child: ChatSendMessageBar(),
+        child: SafeArea(
+          minimum: EdgeInsets.all(10),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 8,
+                child: TextField(
+                  controller: messageController,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  cursorColor: utilModel.greenColor,
+                  textAlign: TextAlign.start,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: utilModel.greenColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    fillColor: Colors.transparent,
+                    focusColor: utilModel.greenColor,
+                    hoverColor: utilModel.greenColor,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: FloatingActionButton(
+                  backgroundColor: utilModel.greenColor,
+                  child: Icon(
+                    FontAwesomeIcons.paperPlane,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    signalRHelper.sendMessage(
+                        FirebaseAuth.instance.currentUser!.displayName,
+                        messageController.text);
+
+                    setState(() {});
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
