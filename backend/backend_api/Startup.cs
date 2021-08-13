@@ -67,8 +67,10 @@ namespace backend_api
             
 
             //SignalR
-            services.AddSignalR();
-            
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -197,7 +199,7 @@ namespace backend_api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/ChatHub");
+                endpoints.MapHub<ChatHub>("/ChatHub"); 
             });
         }
     }
