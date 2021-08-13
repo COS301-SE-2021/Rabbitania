@@ -109,7 +109,7 @@ class _profileState extends State<ProfileScreen> {
                   backgroundColor: Color.fromRGBO(33, 33, 33, 1),
                   body: Center(
                     child: Container(
-                      padding: EdgeInsets.only(top: 80),
+                      padding: EdgeInsets.only(top: 40),
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -120,7 +120,7 @@ class _profileState extends State<ProfileScreen> {
                                 user.displayName,
                                 style: TextStyle(
                                   color: Color.fromRGBO(171, 255, 79, 1),
-                                  fontSize: 25,
+                                  fontSize: 20,
                                 ),
                               ),
                             ],
