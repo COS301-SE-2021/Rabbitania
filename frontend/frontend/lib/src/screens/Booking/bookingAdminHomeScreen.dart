@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
+import 'package:frontend/src/widgets/Booking/bookingScheduleButton.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
-class BookingScreen extends StatefulWidget {
+class BookingAdminScreen extends StatefulWidget {
+  BookingAdminScreen();
+
   @override
-  _BookingState createState() => _BookingState();
+  _BookingAdminState createState() => _BookingAdminState();
 }
 
-class _BookingState extends State<BookingScreen> {
+class _BookingAdminState extends State<BookingAdminScreen> {
   UtilModel utilModel = UtilModel();
-
-  @override
   initState() {}
 
   @override
   Widget build(BuildContext context) => Scaffold(
         // floatingActionButton: FancyFab(
-        //   numberOfItems: 1,
+        //   numberOfItems: 0,
         //   icon1: Icons.share_location_outlined,
         //   onPressed1: () {},
         //   icon2: Icons.delete,
@@ -36,16 +37,16 @@ class _BookingState extends State<BookingScreen> {
         appBar: AppBar(
           centerTitle: true,
           toolbarHeight: 220,
-          automaticallyImplyLeading: false,
           elevation: 1,
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           flexibleSpace: Column(
             children: <Widget>[
               Container(
                 child: Padding(
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.07,
-                  ),
+                      top: MediaQuery.of(context).size.height * 0.07,
+                      bottom: 10),
                 ),
               ),
               Row(
@@ -54,7 +55,7 @@ class _BookingState extends State<BookingScreen> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      'Booking Home',
+                      'Admin Booking',
                       style: TextStyle(
                         fontSize: 35,
                         color: Color.fromRGBO(172, 255, 79, 1),
@@ -71,11 +72,11 @@ class _BookingState extends State<BookingScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  BookingDayButton('M', Colors.transparent),
-                  BookingDayButton('Tu', Colors.transparent),
-                  BookingDayButton('W', Colors.transparent),
-                  BookingDayButton('Th', Colors.transparent),
-                  BookingDayButton('F', Colors.transparent),
+                  BookingScheduleButton('M', Colors.transparent),
+                  BookingScheduleButton('Tu', Colors.transparent),
+                  BookingScheduleButton('W', Colors.transparent),
+                  BookingScheduleButton('Th', Colors.transparent),
+                  BookingScheduleButton('F', Colors.transparent),
                 ],
               ),
               Row(
@@ -97,7 +98,6 @@ class _BookingState extends State<BookingScreen> {
           ),
         ),
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-        // 63 63 63
         body: Center(
           child: Stack(
             children: <Widget>[
@@ -109,16 +109,14 @@ class _BookingState extends State<BookingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(top: 75.0, bottom: 25.0),
-                    child: Image(
-                      image: AssetImage('images/logo.png'),
-                      height: 150,
-                      width: 500,
+                  Center(
+                    child: Container(
+                      child: Image(
+                        image: AssetImage('images/logo.png'),
+                        height: 150,
+                        width: 500,
+                      ),
                     ),
-                  ),
-                  Container(
-                    child: BookingViewButton(),
                   ),
                 ],
               ),
