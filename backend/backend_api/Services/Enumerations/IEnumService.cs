@@ -7,5 +7,7 @@ namespace backend_api.Services.Enumerations
     public interface IEnumService
     {
         Task<GetOfficeNameResponse> GetOfficeName(GetOfficeNameRequest request);
+
+        Task<GetUserRoleTypeResponse> GetUserRoleType(GetUserRoleTypeRequest request);
     }
 }

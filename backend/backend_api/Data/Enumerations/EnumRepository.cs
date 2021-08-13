@@ -28,13 +28,12 @@ namespace backend_api.Data.Enumerations
         
         public async Task<GetUserRoleTypeResponse> GetUserRoleType(GetUserRoleTypeRequest request)
         {
-            /*var userRoleType = await _enums.
-                .Where(x => x.OfficeLocation == request.OfficeLocation).FirstOrDefaultAsync();
+            var userRoleType = await _enums.UsersRoles
+                .Where(x => x.UserRole == request.UserRole).FirstOrDefaultAsync();
             
-            var response = new GetOfficeNameResponse(officeName.Name);
+            var response = new GetUserRoleTypeResponse(userRoleType.Type);
 
-            return response;*/
-            return null;
+            return response;
         }
     }
 }

@@ -9,6 +9,10 @@
             _userRole = userRole;
         }
 
+        public GetUserRoleTypeRequest()
+        {
+        }
+
         public UserRoles UserRole
         {
             get => _userRole;

@@ -34,7 +34,29 @@ namespace backend_api.Controllers.Enumerations
                 }
                 else
                 {
-                    return BadRequest("Error with retrieving Office Location Name!");
+                    return BadRequest("Error with retrieving office location name!");
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
+        
+        [HttpGet]
+        [Route("GetUserRoleType")]
+        public async Task<ActionResult> GetUserRoleType([FromQuery] GetUserRoleTypeRequest request)
+        {
+            if (request != null)
+            {
+                var userRole = await _enumService.GetUserRoleType(request);
+                if (userRole.Response.Length > 0)
+                {
+                    return Ok(userRole.Response);
+                }
+                else
+                {
+                    return BadRequest("Error with retrieving user's role type!");
                 }
             }
             else

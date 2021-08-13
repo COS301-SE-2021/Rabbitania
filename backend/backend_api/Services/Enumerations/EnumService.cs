@@ -25,5 +25,15 @@ namespace backend_api.Services.Enumerations
             
             return await _enumRepository.GetOfficeName(request);
         }
+        
+        public async Task<GetUserRoleTypeResponse> GetUserRoleType(GetUserRoleTypeRequest request)
+        {
+            if (request.UserRole < 0)
+            {
+                throw new InvalidUserRoleTypeException("Error with enumerations");
+            }
+            
+            return await _enumRepository.GetUserRoleType(request);
+        }
     }
 }
