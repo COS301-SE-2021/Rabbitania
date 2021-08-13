@@ -131,6 +131,8 @@ namespace backend_api.Data.User
             toUpdate.UserImgUrl = request.UserImage;
             toUpdate.UserDescription = request.UserDescription;
             toUpdate.OfficeLocation = request.OfficeLocation;
+            toUpdate.EmployeeLevel = request.EmployeeLevel;
+            toUpdate.UserRole = request.UserRoles;
             _users.Entry(toUpdate).State = EntityState.Modified;
 
             try
