@@ -7,6 +7,7 @@ import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
+import 'package:frontend/src/widgets/Booking/bookingScheduleButton.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
@@ -14,10 +15,10 @@ class BookingAdminScreen extends StatefulWidget {
   BookingAdminScreen();
 
   @override
-  _BookingAdminScreen createState() => _BookingAdminScreen();
+  _BookingAdminState createState() => _BookingAdminState();
 }
 
-class _BookingAdminScreen extends State<BookingAdminScreen> {
+class _BookingAdminState extends State<BookingAdminScreen> {
   UtilModel utilModel = UtilModel();
   initState() {}
 
@@ -71,11 +72,11 @@ class _BookingAdminScreen extends State<BookingAdminScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  BookingDayButton('M', Colors.transparent),
-                  BookingDayButton('Tu', Colors.transparent),
-                  BookingDayButton('W', Colors.transparent),
-                  BookingDayButton('Th', Colors.transparent),
-                  BookingDayButton('F', Colors.transparent),
+                  BookingScheduleButton('M', Colors.transparent),
+                  BookingScheduleButton('Tu', Colors.transparent),
+                  BookingScheduleButton('W', Colors.transparent),
+                  BookingScheduleButton('Th', Colors.transparent),
+                  BookingScheduleButton('F', Colors.transparent),
                 ],
               ),
               Row(
@@ -103,6 +104,21 @@ class _BookingAdminScreen extends State<BookingAdminScreen> {
               SvgPicture.string(
                 utilModel.svg_background,
                 fit: BoxFit.contain,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      child: Image(
+                        image: AssetImage('images/logo.png'),
+                        height: 150,
+                        width: 500,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
