@@ -28,11 +28,11 @@ namespace backend_api.Controllers.Auth
     
     [AllowAnonymous, Route("api/[controller]")]
     [ApiController]
-    public class GoogleSignIn : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IAuthService _service;
         private readonly IUserService _userService;
-        public GoogleSignIn(IAuthService service, IUserService userService)
+        public AuthController(IAuthService service, IUserService userService)
         {
             this._service = service;
             this._userService = userService;

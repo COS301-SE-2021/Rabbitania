@@ -110,7 +110,7 @@ namespace backend_api.Services.Auth
         public async Task<bool> Validate(Credentials credentials)
         {
             var id = credentials.UserID;
-            if (_userService.ViewProfile(new ViewProfileRequest(id)).Result.response == HttpStatusCode.OK)
+            if (_userService.ViewProfileAsp(new ViewProfileRequest(id)).Result.response == HttpStatusCode.OK)
             {
                 return true;
             }

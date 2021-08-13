@@ -71,6 +71,18 @@ namespace backend_api.Services.User
             }
             return _userRepository.ViewProfile(request);
         }
+        public async Task<ViewProfileResponse> ViewProfileAsp(ViewProfileRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+            if (request.UserId.Equals(null))
+            {
+                throw new Exception("Error Missing UserID");
+            }
+            return _userRepository.ViewProfileAsp(request);
+        }
 
         public async Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request)
         {

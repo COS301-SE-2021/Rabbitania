@@ -27,5 +27,8 @@ namespace backend_api.Data.User
         Task<Models.User.Users> GetExistingUserDetails(GoogleSignInRequest request);
         
         Task<bool> checkEmailExists(GoogleSignInRequest request);
+
+        ViewProfileResponse ViewProfileAsp(ViewProfileRequest request);
+
     }
 }

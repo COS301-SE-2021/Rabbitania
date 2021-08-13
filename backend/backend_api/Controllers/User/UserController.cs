@@ -4,6 +4,7 @@ using backend_api.Data.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using backend_api.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,11 +54,11 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns> A response </returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("ViewProfile")]
         public async Task<ViewProfileResponse> ViewProfile([FromQuery] ViewProfileRequest request)
         {
-            return await _service.ViewProfile(request);
+            return await _service.ViewProfileAsp(request);
         }
 
         [HttpGet]

@@ -176,7 +176,7 @@ namespace backend_api
             services.AddDbContext<IdentityContext>(o =>
             {
                 o.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"));
+                    Configuration.GetConnectionString("localhost"));
             });
             
             // services.ConfigureIdentity();
