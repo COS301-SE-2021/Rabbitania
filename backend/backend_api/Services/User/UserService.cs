@@ -71,5 +71,15 @@ namespace backend_api.Services.User
             }
             return _userRepository.ViewProfile(request);
         }
+
+        public async Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+
+            return await _userRepository.GetUserProfiles();
+        }
     }
 }

@@ -102,8 +102,14 @@ namespace backend_api.Data.Migrations
                     b.Property<int>("Likes")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("text");
+
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
 
                     b.HasKey("ThreadCommentId");
 
@@ -113,7 +119,7 @@ namespace backend_api.Data.Migrations
 
                     b.ToTable("ThreadComments");
                 });
-            
+
             modelBuilder.Entity("backend_api.Models.Forum.ForumThreads", b =>
                 {
                     b.HasOne("backend_api.Models.Forum.Forums", "Forum")

@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using backend_api.Data.User;
 using backend_api.Exceptions.Notifications;
 using backend_api.Exceptions.User;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;

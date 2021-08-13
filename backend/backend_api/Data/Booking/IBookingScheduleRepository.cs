@@ -13,5 +13,8 @@ namespace backend_api.Data.Booking
         Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request);
         Task<UpdateBookingScheduleResponse> UpdateBookingSchedule(UpdateBookingScheduleRequest request);
         Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request);
+        Task<UpdateBookingScheduleResponse> UpdateBookingScheduleAvailability(UpdateBookingScheduleRequest request);
+        Task<UpdateBookingScheduleResponse> UpdateBookingScheduleAvailabilityAdd(UpdateBookingScheduleRequest request);
+
     }
 }

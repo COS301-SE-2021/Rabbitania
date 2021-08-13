@@ -1,4 +1,5 @@
 ﻿using System;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 
 namespace backend_api.Models.Booking.Requests
@@ -6,7 +7,7 @@ namespace backend_api.Models.Booking.Requests
     public class UpdateBookingRequest
     {
         private int BookingID;
-        private DateTime date;
+        private string date;
         private float duration;
         private string timeSlot;
         private OfficeLocation office;
@@ -15,7 +16,7 @@ namespace backend_api.Models.Booking.Requests
         {
         }
 
-        public UpdateBookingRequest(int bookingId, DateTime date, float duration, string timeSlot, OfficeLocation office)
+        public UpdateBookingRequest(int bookingId, string date, float duration, string timeSlot, OfficeLocation office)
         {
             BookingID = bookingId;
             this.date = date;
@@ -42,7 +43,7 @@ namespace backend_api.Models.Booking.Requests
             set => BookingID = value;
         }
 
-        public DateTime Date
+        public string Date
         {
             get => date;
             set => date = value;

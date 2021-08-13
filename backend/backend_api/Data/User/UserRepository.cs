@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Utilities.Collections;
 
 namespace backend_api.Data.User
 {
@@ -67,6 +69,8 @@ namespace backend_api.Data.User
 
             return allUsers.ToList();
         }
+        
+        
 
         public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
@@ -100,6 +104,22 @@ namespace backend_api.Data.User
 
             return response;
         }
+        
+        public async Task<GetUserProfilesResponse> GetUserProfiles()
+        {
+            var users = _users.Users;
+            IEnumerable<Users> allUsers = users.Select(user => user);
+
+            var listOfUsers = allUsers.ToList();
+            var listOfUserProfiles = new List<Users>();
+
+            foreach (var user in listOfUsers)
+            {
+                listOfUserProfiles.Add(new Users(user.UserId, user.Name, user.PhoneNumber, user.UserImgUrl, user.UserDescription, user.EmployeeLevel, user.OfficeLocation, user.UserRole));
+            }
+
+            return new GetUserProfilesResponse(listOfUserProfiles);
+        }
 
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
@@ -112,6 +132,8 @@ namespace backend_api.Data.User
             toUpdate.UserImgUrl = request.UserImage;
             toUpdate.UserDescription = request.UserDescription;
             toUpdate.OfficeLocation = request.OfficeLocation;
+            toUpdate.EmployeeLevel = request.EmployeeLevel;
+            toUpdate.UserRole = request.UserRoles;
             _users.Entry(toUpdate).State = EntityState.Modified;
 
             try

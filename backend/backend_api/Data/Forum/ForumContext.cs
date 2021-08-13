@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using backend_api.Data.User;
 using backend_api.Models.Forum;
 using Microsoft.EntityFrameworkCore;
 

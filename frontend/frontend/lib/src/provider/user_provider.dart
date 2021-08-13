@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class UserProvider {
   final user = FirebaseAuth.instance.currentUser!;
-
+  UserProvider();
   getUserID() async {
     String userEmail = user.providerData[0].email!;
     final response = await http.get(
@@ -34,3 +35,8 @@ class UserProvider {
     return UserDetails;
   }
 }
+
+// Future<List<UserProfileModel>> fetchUserProfiles() async {
+//   HttpClient client = new HttpClient();
+  
+// }

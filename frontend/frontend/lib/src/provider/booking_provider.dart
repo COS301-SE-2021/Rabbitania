@@ -1,30 +1,37 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 
 class BookingProvider {
-  // GET ALL
+  UserHelper loggedUser = new UserHelper();
+
+  // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
-    //UserProvider userProvider = new UserProvider();
+    final loggedUserId = await loggedUser.getUserID();
     final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/Booking/GetBookings?UserId=8'),
+      Uri.parse(
+          'https://10.0.2.2:5001/api/Booking/GetBookings?UserId=$loggedUserId'),
     );
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
 
       return jsonResponse
-          .map((bookings) => new ViewBookingModel.fromJson(bookings))
+          .map(
+            (bookings) => new ViewBookingModel.fromJson(bookings),
+          )
           .toList();
     } else {
-      throw Exception('Failed to retreive bookings');
+      List<ViewBookingModel> noBookings = List.empty();
+
+      return noBookings;
     }
   }
 
-  // POST
+  // POST (CreateBooking)
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
     final response = await http.post(
@@ -36,18 +43,20 @@ class BookingProvider {
         'bookingDate': bookingDate,
         'timeSlot': timeSlot,
         'office': office,
-        'userId': 8
+        'userId': userId,
       }),
     );
     if (response.statusCode == 200) {
       return ("Created new Booking");
     } else {
-      throw ("Failed to create new booking - Error Status: " +
-          response.statusCode.toString());
+      return ("Failed to create booking, Code: " +
+          response.statusCode.toString() +
+          " - Response Message: " +
+          response.body);
     }
   }
 
-  // DELETE
+  // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
     final response = await http.delete(
       Uri.parse(
@@ -56,7 +65,74 @@ class BookingProvider {
     if (response.statusCode == 200) {
       return true;
     } else {
-      throw ("Server Error Status Code:  " + response.statusCode.toString());
+      return false;
+    }
+  }
+
+  //POST (CheckAvailability)
+  Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
+    final response = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Booking/CheckIfBookingExists'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'timeSlot': timeSlot,
+          'office': office,
+          'userId': userId
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      return true; // can make booking
+    } else {
+      return false; // cannot make booking
+    }
+  }
+
+  //POST (CheckAvailability)
+  Future<bool> checkAvailibity(timeslot, office) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'timeSlot': timeslot,
+          'office': office,
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //POST (CreateBookingSchedule)
+  Future<bool> createBookingSchedule(timeslot, office, availability) async {
+    final response = await http.post(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/BookingSchedule/CreateBookingSchedule'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        <String, dynamic>{
+          'timeSlot': timeslot,
+          'office': office,
+          'availability': availability
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

@@ -2,6 +2,7 @@
 {
     public class EditThreadCommentRequest
     {
+
         private int _threadCommentId;
         private string _commentBody;
         private string _imageUrl;
@@ -50,5 +51,6 @@
             get => _dislikes;
             set => _dislikes = value;
         }
+
     }
 }

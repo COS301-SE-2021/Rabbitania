@@ -1,4 +1,5 @@
-﻿using backend_api.Models.User;
+﻿using backend_api.Models.Enumerations;
+using backend_api.Models.User;
 using Microsoft.AspNetCore.SignalR;
 
 namespace backend_api.Models.NoticeBoard.Requests
