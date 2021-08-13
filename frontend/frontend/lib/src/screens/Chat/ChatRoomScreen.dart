@@ -60,86 +60,75 @@ class ChatPageState extends State<ChatPage> {
         backgroundColor: utilModel.greyColor,
         title: ChatParticipantBar(),
       ),
-      body: SafeArea(
-        minimum: EdgeInsets.only(left: 10, right: 10),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              FutureBuilder(
-                future: signalRHelper.getMessagesList(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  List<Widget> children = [];
-                  if (snapshot.hasData) {
-                    if (snapshot.data.length == 0) {
-                      children = [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Text(
-                              'You have no chat history',
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: utilModel.greenColor,
-                              ),
-                            ),
-                          ),
-                        )
-                      ];
-                    } else {
-                      snapshot.data.forEach((current) {
-                        if (current.messageType == 'Sender') {
-                          children.add(
-                            ChatMessageSender(
-                                textSentValue: current.messageContent),
-                          );
-                        } else {
-                          children.add(
-                            ChatMessageReceiver(
-                                textSentValue: current.messageContent),
-                          );
-                        }
-                      });
-                    }
-                  } else if (snapshot.hasError) {
-                    children = [
-                      Icon(
-                        Icons.error_outline,
-                        color: Colors.red,
-                        size: 60,
+      body: Center(
+        child: FutureBuilder(
+          future: signalRHelper.getMessagesList(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            List<Widget> children = [];
+            if (snapshot.hasData) {
+              if (snapshot.data.length == 0) {
+                children = [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        'You have no chat history',
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: utilModel.greenColor,
+                        ),
                       ),
-                    ];
+                    ),
+                  )
+                ];
+              } else {
+                snapshot.data.forEach((current) {
+                  if (current.messageType == 'Sender') {
+                    children.add(
+                      ChatMessageSender(textSentValue: current.messageContent),
+                    );
                   } else {
-                    children = [
-                      Center(
-                        child: Stack(children: <Widget>[
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height,
-                            decoration: new BoxDecoration(
-                              color: Color.fromRGBO(33, 33, 33, 1),
-                            ),
-                            child: Center(
-                              widthFactor: 0.5,
-                              heightFactor: 0.5,
-                              child: CircularProgressIndicator(
-                                color: Color.fromRGBO(171, 255, 79, 1),
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ];
+                    children.add(
+                      ChatMessageReceiver(
+                          textSentValue: current.messageContent),
+                    );
                   }
-                  return Column(
-                    children: [
-                      ListView(shrinkWrap: true, children: children),
-                    ],
-                  );
-                },
-              ),
-            ],
-          ),
+                });
+              }
+            } else if (snapshot.hasError) {
+              children = [
+                Icon(
+                  Icons.error_outline,
+                  color: Colors.red,
+                  size: 60,
+                ),
+              ];
+            } else {
+              children = [
+                Center(
+                  child: Stack(children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      decoration: new BoxDecoration(
+                        color: Color.fromRGBO(33, 33, 33, 1),
+                      ),
+                      child: Center(
+                        widthFactor: 0.5,
+                        heightFactor: 0.5,
+                        child: CircularProgressIndicator(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ),
+              ];
+            }
+            return ListView(shrinkWrap: true, children: [
+              Column(children: children),
+            ]);
+          },
         ),
       ),
       bottomNavigationBar: Container(
