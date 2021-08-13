@@ -13,6 +13,7 @@ using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Utilities.Collections;
 
 namespace backend_api.Data.User
 {
@@ -67,6 +68,8 @@ namespace backend_api.Data.User
 
             return allUsers.ToList();
         }
+        
+        
 
         public ViewProfileResponse ViewProfile(ViewProfileRequest request)
         {
@@ -99,6 +102,22 @@ namespace backend_api.Data.User
                 userImage, description, phoneNumber, empLevel, userRole, officeLocation);
 
             return response;
+        }
+        
+        public async Task<GetUserProfilesResponse> GetUserProfiles()
+        {
+            var users = _users.Users;
+            IEnumerable<Users> allUsers = users.Select(user => user);
+
+            var listOfUsers = users.ToList();
+            var listOfUserProfiles = new List<Users>();
+
+            foreach (var user in listOfUsers)
+            {
+                listOfUserProfiles.Add(new Users(user.UserId, user.Name, user.PhoneNumber, user.UserImgUrl, user.UserDescription, user.EmployeeLevel, user.OfficeLocation, user.UserRole));
+            }
+
+            return new GetUserProfilesResponse(listOfUserProfiles);
         }
 
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)

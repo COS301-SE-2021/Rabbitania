@@ -2,6 +2,8 @@
 {
     public class GetUserProfilesRequest
     {
+        
+        
         public GetUserProfilesRequest()
         {
             
