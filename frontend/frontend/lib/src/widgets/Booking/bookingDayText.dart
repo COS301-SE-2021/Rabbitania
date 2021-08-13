@@ -188,8 +188,6 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30),
-                //child: BookingDayScreenButton(this.dropdownValue,
-                //  widget.displayText, widget.dayOfTheWeek),
                 child: SizedBox(
                   width: 300,
                   height: 60,
@@ -217,7 +215,6 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     onPressed: () {
-                      //TODO: change to check avavilibity on load of screen and not after button press
                       int office = this.getOfficeIndex(this.dropdownValue);
                       print(office);
                       DateTime date = DateTime.now();
