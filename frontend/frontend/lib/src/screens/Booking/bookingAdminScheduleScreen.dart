@@ -80,7 +80,7 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      'Create Schedule',
+                      'Booking Schedule',
                       style: TextStyle(
                         fontSize: 35,
                         color: Color.fromRGBO(172, 255, 79, 1),
@@ -152,16 +152,25 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
         body: Center(
           child: Stack(
             children: <Widget>[
-              SvgPicture.string(
-                utilModel.svg_background,
-                fit: BoxFit.contain,
-              ),
+              // SvgPicture.string(
+              //   utilModel.svg_background,
+              //   fit: BoxFit.contain,
+              // ),
               ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  BookingScheduleSpinbox('PRETORIA OFFICE'),
-                  BookingScheduleSpinbox('BRAAMFONTEIN OFFICE'),
-                  BookingScheduleSpinbox('ASMTERDAM OFFICE'),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: BookingScheduleSpinbox('PRETORIA OFFICE'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: BookingScheduleSpinbox('BRAAMFONTEIN OFFICE'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: BookingScheduleSpinbox('ASMTERDAM OFFICE'),
+                  ),
                 ],
               ),
             ],

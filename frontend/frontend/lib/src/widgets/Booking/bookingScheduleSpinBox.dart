@@ -91,6 +91,27 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
             onChanged: (value) => print(value),
           ),
         ),
+        ElevatedButton(
+          child: Text(
+            "CREATE SCHEDULE",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+          style: ButtonStyle(
+            foregroundColor:
+                MaterialStateProperty.all<Color>(utilModel.greyColor),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(utilModel.greenColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: new BorderRadius.all(
+                  new Radius.circular(15.0),
+                ),
+                side: BorderSide(color: utilModel.greenColor),
+              ),
+            ),
+          ),
+          onPressed: () => null,
+        ),
       ],
     );
   }
