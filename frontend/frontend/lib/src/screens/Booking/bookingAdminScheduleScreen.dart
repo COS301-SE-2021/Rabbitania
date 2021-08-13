@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 import 'package:frontend/src/widgets/Booking/bookingScheduleButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingScheduleSpinBox.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
@@ -154,6 +155,14 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
               SvgPicture.string(
                 utilModel.svg_background,
                 fit: BoxFit.contain,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  BookingScheduleSpinbox('Pretoria'),
+                  // BookingScheduleSpinbox('Braamfontein'),
+                  // BookingScheduleSpinbox('Amsterdam'),
+                ],
               ),
             ],
           ),
