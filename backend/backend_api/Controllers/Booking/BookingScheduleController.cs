@@ -173,7 +173,7 @@ namespace backend_api.Controllers.Booking
                             var resp = await _scheduleService.CreateBookingSchedule(request);
                             if (resp.Successful == true)
                             {
-                                return Ok("Booking Schedule created successfully");
+                                return Ok("Booking Schedule for : " + request.TimeSlot + " created.");
                             }
                             else
                             {
