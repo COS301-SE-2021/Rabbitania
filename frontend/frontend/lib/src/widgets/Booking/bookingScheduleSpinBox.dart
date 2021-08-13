@@ -5,7 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BookingScheduleSpinbox extends StatefulWidget {
   final officeName;
-  BookingScheduleSpinbox(this.officeName);
+  final day;
+  BookingScheduleSpinbox(this.officeName, this.day);
 
   _BookingScheduleSpinboxState createState() => _BookingScheduleSpinboxState();
 }
@@ -53,9 +54,6 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
             cursorColor: Color.fromRGBO(171, 255, 79, 1),
             value: 0,
             onChanged: (value) => {spinBoxMorning = value},
-            afterChange: () {
-              print(spinBoxMorning);
-            },
           ),
         ),
         Padding(
@@ -88,7 +86,7 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
             ),
             cursorColor: Color.fromRGBO(171, 255, 79, 1),
             value: 0,
-            onChanged: (value) => print(value),
+            onChanged: (value) => {spinBoxAfternoon = value},
           ),
         ),
         ElevatedButton(
@@ -110,7 +108,14 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
               ),
             ),
           ),
-          onPressed: () => null,
+          onPressed: () {
+            print(widget.day +
+                ",Morning: " +
+                this.spinBoxMorning.toInt().toString());
+            print(widget.day +
+                ",Afternoon: " +
+                this.spinBoxAfternoon.toInt().toString());
+          },
         ),
       ],
     );
