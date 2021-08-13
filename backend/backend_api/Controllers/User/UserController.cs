@@ -59,6 +59,13 @@ namespace backend_api.Controllers.User
         {
             return await _service.ViewProfile(request);
         }
+
+        [HttpGet]
+        [Route("GetUserProfiles")]
+        public async Task<GetUserProfilesResponse> GetUserProfiles([FromQuery] GetUserProfilesRequest request)
+        {
+            return await _service.GetUserProfiles(request);
+        } 
         
     }
 }
