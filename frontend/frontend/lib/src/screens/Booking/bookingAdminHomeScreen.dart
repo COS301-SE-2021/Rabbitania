@@ -54,7 +54,7 @@ class _BookingAdminScreen extends State<BookingAdminScreen> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      'Admin Home',
+                      'Admin Booking',
                       style: TextStyle(
                         fontSize: 35,
                         color: Color.fromRGBO(172, 255, 79, 1),
@@ -69,12 +69,22 @@ class _BookingAdminScreen extends State<BookingAdminScreen> {
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  BookingDayButton('M', Colors.transparent),
+                  BookingDayButton('Tu', Colors.transparent),
+                  BookingDayButton('W', Colors.transparent),
+                  BookingDayButton('Th', Colors.transparent),
+                  BookingDayButton('F', Colors.transparent),
+                ],
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "Hello",
+                      'No Day Selected',
                       style: TextStyle(
                         fontSize: 28,
                         color: Color.fromRGBO(172, 255, 79, 1),
