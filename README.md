@@ -153,7 +153,7 @@
 
 <div align="center">
    
-<img src="https://media-exp1.licdn.com/dms/image/C4D03AQElb-QF13hlpA/profile-displayphoto-shrink_800_800/0/1621416128906?e=1627516800&v=beta&t=-g-O584VxhaZ6N7IsJ5ZNYBrX1I6XuNUlr_NDeEsW98" width="250" height="250">
+<img src="images_banners_logos/devilliers_self_picture.jpeg" width="250" height="250">
 
 #### DeVilliers Meiring | u17074292
 
