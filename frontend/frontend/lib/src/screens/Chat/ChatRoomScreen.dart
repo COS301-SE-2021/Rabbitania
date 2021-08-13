@@ -72,7 +72,20 @@ class ChatPageState extends State<ChatPage> {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
                     if (snapshot.data.length == 0) {
-                      children = [Text('You have no chat history')];
+                      children = [
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Text(
+                              'You have no chat history',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: utilModel.greenColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      ];
                     } else {
                       snapshot.data.forEach((current) {
                         if (current.messageType == 'Sender') {

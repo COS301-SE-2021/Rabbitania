@@ -21,6 +21,7 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
   Widget build(BuildContext context) => Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //profile picture container
               Expanded(
