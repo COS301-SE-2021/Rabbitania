@@ -10,6 +10,6 @@ namespace backend_api.Data.Enumerations
     {
         Task<GetOfficeNameResponse> GetOfficeName(GetOfficeNameRequest request);
         
-        Task<UserRolesModel> GetUserRoleType();
+        Task<GetUserRoleTypeResponse> GetUserRoleType(GetUserRoleTypeRequest request);
     }
 }

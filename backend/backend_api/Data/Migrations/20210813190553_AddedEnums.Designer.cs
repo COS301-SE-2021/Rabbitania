@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Data.Enumerations;
 
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(EnumContext))]
-    partial class EnumContextModelSnapshot : ModelSnapshot
+    [Migration("20210813190553_AddedEnums")]
+    partial class AddedEnums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

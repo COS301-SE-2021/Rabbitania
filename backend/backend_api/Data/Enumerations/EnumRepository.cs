@@ -26,8 +26,14 @@ namespace backend_api.Data.Enumerations
             return response;
         }
         
-        public async Task<UserRolesModel> GetUserRoleType()
+        public async Task<GetUserRoleTypeResponse> GetUserRoleType(GetUserRoleTypeRequest request)
         {
+            /*var userRoleType = await _enums.
+                .Where(x => x.OfficeLocation == request.OfficeLocation).FirstOrDefaultAsync();
+            
+            var response = new GetOfficeNameResponse(officeName.Name);
+
+            return response;*/
             return null;
         }
     }
