@@ -96,7 +96,7 @@ class _profileState extends State<ProfileScreen> {
     if (location == 'Braamfontein') {
       return 1;
     }
-    return 0;
+    return 3;
   }
 
   determineRoleReversed(String role) {
