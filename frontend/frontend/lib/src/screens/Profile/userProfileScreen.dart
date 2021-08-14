@@ -26,7 +26,8 @@ class _profileState extends State<ProfileScreen> {
   int userRole = 9;
   String phoneNumber = "";
   int userProfileCurrentID = -1;
-  String dropdownDeveloperValue = "Unassigned";
+  String dropdownDeveloperValue =
+      determineRolePassIn(userInfoProfile.userRoles);
   String dropdownLevelValue = "Level: 0";
   String dropdownLocationValue = "Pretoria";
   TextEditingController? _controller;
