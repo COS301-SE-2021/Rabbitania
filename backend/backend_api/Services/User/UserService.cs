@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Notifications;
@@ -6,6 +7,8 @@ using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
+using backend_api.Services.Notification;
+using Castle.Core.Internal;
 using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.User
@@ -13,12 +16,12 @@ namespace backend_api.Services.User
     public class UserService: IUserService
     {
         private readonly IUserRepository _userRepository;
-
+      
         public UserService(IUserRepository userRepo)
         {
             _userRepository = userRepo;
         }
-        
+
         //Logical functions
         public void verifyLogin()
         {
@@ -87,6 +90,17 @@ namespace backend_api.Services.User
             }
 
             return await _userRepository.GetUserProfiles();
+        }
+
+        public List<string> GetAllUserEmails()
+        {
+            var response = _userRepository.GetAllUserEmails();
+            if (response.IsNullOrEmpty())
+            {
+                throw new Exception("Error with user emails");
+            }
+
+            return response;
         }
     }
 }

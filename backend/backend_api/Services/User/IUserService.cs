@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
@@ -25,6 +26,8 @@ namespace backend_api.Services.User
         Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
 
         Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request);
+
+        List<string> GetAllUserEmails();
 
     }
 }
