@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AgoraIO.Media;
 using backend_api.Data.Booking;
 using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
@@ -178,7 +179,8 @@ namespace backend_api
             //----------------------------------------------------------------------------------------------------------------------
             
             services.AddControllers();
-
+            
+            services.Configure <AgoraSettings>( Configuration.GetSection ("Appsettings"));
             #region Swagger
 
             services.AddSwaggerGen(c =>
