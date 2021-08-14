@@ -36,7 +36,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and json object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBookings")]
         public async Task<ActionResult> GetAllBookings([FromQuery] GetAllBookingsRequest request)
         {
@@ -67,7 +67,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and json object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBooking")]
         public async Task<ActionResult> GetBooking([FromQuery] GetBookingRequest request)
         {
@@ -98,7 +98,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditBooking")]
         public async Task<ActionResult> UpdateBooking([FromQuery] UpdateBookingRequest request)
         {
@@ -135,7 +135,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteBooking")]
         public async Task<ActionResult> DeleteBooking([FromQuery] CancelBookingRequest request)
         {
@@ -172,7 +172,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateBooking")]
         public async Task<ActionResult> CreateBooking([FromBody] CreateBookingRequest request)
         {
@@ -201,7 +201,7 @@ namespace backend_api.Controllers.Booking
             }
         }
         
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CheckIfBookingExists")]
         public async Task<ActionResult> CheckIfBookingExists([FromBody] CheckIfBookingExistsRequest request)
         {

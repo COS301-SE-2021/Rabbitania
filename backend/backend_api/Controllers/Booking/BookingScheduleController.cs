@@ -30,7 +30,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and list object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBookingSchedules")]
         public async Task<ActionResult> GetAllBookingSchedules([FromQuery] GetAllBookingSchedulesRequest request)
         {
@@ -60,7 +60,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code and json object</returns>
-                [HttpGet]
+                [HttpGet, Authorize]
                 [Route("GetBookingSchedule")]
                 public async Task<ActionResult> GetBookingSchedule([FromQuery] GetBookingScheduleRequest request)
                 {
@@ -90,7 +90,7 @@ namespace backend_api.Controllers.Booking
                         /// </summary>
                         /// <param name="request"></param>
                         /// <returns>Http response code</returns>
-                        [HttpPut]
+                        [HttpPut, Authorize]
                         [Route("EditBookingSchedule")]
                         public async Task<ActionResult> UpdateBookingSchedule([FromBody] UpdateBookingScheduleRequest request)
                         {
@@ -126,7 +126,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
-                [HttpDelete]
+                [HttpDelete, Authorize]
                 [Route("DeleteBookingSchedule")]
                 public async Task<ActionResult> DeleteBookingSchedule([FromQuery] CancelBookingScheduleRequest request)
                 {
@@ -162,7 +162,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
-                [HttpPost]
+                [HttpPost, Authorize]
                 [Route("CreateBooking")]
                 public async Task<ActionResult> CreateBookingSchedule([FromBody] CreateBookingScheduleRequest request)
                 {
@@ -198,7 +198,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>bool</returns>
-                [HttpPost]
+                [HttpPost, Authorize]
                 [Route("CheckAvailability")]
                 public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
                 {

@@ -15,9 +15,9 @@ namespace backend_api.Controllers.User
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
-        private readonly UserContext _context;
+        private readonly IUserContext _context;
 
-        public UserController(IUserService service, UserContext context)
+        public UserController(IUserService service, IUserContext context)
         {
             this._service = service;
             this._context = context;//not needed once other endpoints are configured
@@ -29,7 +29,7 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns>A list of users in the system</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("Admin/GetUser")]
         public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
         {
@@ -42,7 +42,7 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns> A response </returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditProfile")]
         public async Task<EditProfileResponse> EditProfile([FromBody] EditProfileRequest request)
         {
@@ -61,7 +61,7 @@ namespace backend_api.Controllers.User
             return await _service.ViewProfile(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetUserProfiles")]
         public async Task<GetUserProfilesResponse> GetUserProfiles([FromQuery] GetUserProfilesRequest request)
         {
