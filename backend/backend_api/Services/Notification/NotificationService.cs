@@ -6,6 +6,7 @@ using backend_api.Exceptions.Notifications;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
+using Castle.Core.Internal;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
@@ -69,7 +70,7 @@ namespace backend_api.Services.Notification
         /// <inheritdoc />
         public async Task<SendEmailNotificationResponse> SendEmailNotification(SendEmailNotificationRequest request)
         {
-            if (request.Email.Equals("") || request.Email == null)
+            if (request.Email.IsNullOrEmpty())
             {
                 throw new EmailFailedToSendException("Invalid email address, either null or empty");
             }
@@ -83,8 +84,13 @@ namespace backend_api.Services.Notification
             }
 
             var email = new MimeMessage();
+            var emailLists = new InternetAddressList();
+            foreach (var address in request.Email)
+            {
+                emailLists.Add(MailboxAddress.Parse(address));
+            }
             email.From.Add(new MailboxAddress(_settings.DisplayName,_settings.Mail));
-            email.To.Add(MailboxAddress.Parse(request.Email));
+            email.To.AddRange(emailLists);
             email.Subject = request.Subject;
             email.Body = new TextPart("plain")
             {
@@ -98,10 +104,10 @@ namespace backend_api.Services.Notification
                 await client.AuthenticateAsync(_settings.Mail, _settings.Password);
                 await client.SendAsync(email);
 
-                var response = new SendEmailNotificationResponse(HttpStatusCode.OK);
+                var response = new SendEmailNotificationResponse(HttpStatusCode.Accepted);
                 return response;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 var error = new SendEmailNotificationResponse(HttpStatusCode.BadRequest);
                 return error;

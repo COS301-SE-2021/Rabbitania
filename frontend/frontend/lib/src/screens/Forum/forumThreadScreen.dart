@@ -37,6 +37,7 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FancyFab(
+        heroTag: "ForumThreadPage",
         numberOfItems: 3,
         icon1: Icons.add,
         onPressed1: () {

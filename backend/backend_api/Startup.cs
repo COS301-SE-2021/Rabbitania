@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
+using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
@@ -13,6 +14,7 @@ using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
 using backend_api.Services.Booking;
+using backend_api.Services.Enumerations;
 using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
@@ -84,6 +86,19 @@ namespace backend_api
                 options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
             
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            // Enumeration DB Context
+            services.AddDbContext<EnumContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(EnumContext).Assembly.FullName)));
+
+            services.AddScoped<IEnumContext>(provider => provider.GetService<EnumContext>());
+            
+            services.AddScoped<IEnumRepository, EnumRepository>();
+            services.AddScoped<IEnumService, EnumService>();
+            //----------------------------------------------------------------------------------------------------------------------
             //----------------------------------------------------------------------------------------------------------------------
             // Booking DB Context
             services.AddDbContext<BookingContext>(options =>
@@ -93,7 +108,6 @@ namespace backend_api
 
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
             
-            //TODO: Add services and repos
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingService, BookingService>();
             //----------------------------------------------------------------------------------------------------------------------

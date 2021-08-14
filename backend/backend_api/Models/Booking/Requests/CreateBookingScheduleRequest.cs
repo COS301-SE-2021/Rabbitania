@@ -1,40 +1,41 @@
-﻿using backend_api.Models.User;
+﻿using backend_api.Models.Enumerations;
+using backend_api.Models.User;
 
 namespace backend_api.Models.Booking.Requests
 {
     public class CreateBookingScheduleRequest
     {
-        private OfficeLocation office;
-        private string timeSlot;
-        private int availability;
+        private string _timeSlot;
+        private OfficeLocation _office;
+        private int _availability;
 
-        public CreateBookingScheduleRequest(OfficeLocation office, string timeSlot, int availability)
+        public CreateBookingScheduleRequest(string timeSlot, OfficeLocation office, int availability)
         {
-            this.office = office;
-            this.timeSlot = timeSlot;
-            this.availability = availability;
+            this._office = office;
+            this._timeSlot = timeSlot;
+            this._availability = availability;
         }
 
         public CreateBookingScheduleRequest()
         {
         }
 
-        public OfficeLocation Office
-        {
-            get => office;
-            set => office = value;
-        }
-
         public string TimeSlot
         {
-            get => timeSlot;
-            set => timeSlot = value;
+            get => _timeSlot;
+            set => _timeSlot = value;
+        }
+
+        public OfficeLocation Office
+        {
+            get => _office;
+            set => _office = value;
         }
 
         public int Availability
         {
-            get => availability;
-            set => availability = value;
+            get => _availability;
+            set => _availability = value;
         }
     }
 }

@@ -15,6 +15,7 @@ var userLevelProfile;
 
 fab(BuildContext context) {
   return FloatingActionButton(
+    key: Key('NoticePage'),
     //Floating action button on Scaffold
     onPressed: () {
       //code to execute on button press
