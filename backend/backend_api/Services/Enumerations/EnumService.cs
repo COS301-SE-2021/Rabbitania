@@ -35,5 +35,25 @@ namespace backend_api.Services.Enumerations
             
             return await _enumRepository.GetUserRoleType(request);
         }
+
+        public async Task<GetOfficeIdResponse> GetOfficeId(GetOfficeIdRequest request)
+        {
+            if (request.OfficeName.Equals(""))
+            {
+                throw new InvalidOfficeRequestException("Error with enumerations");
+            }
+            
+            return await _enumRepository.GetOfficeId(request);
+        }
+
+        public async Task<GetUserRoleIdResponse> GetUserRoleId(GetUserRoleIdRequest request)
+        {
+            if (request.RoleName.Equals(""))
+            {
+                throw new InvalidUserRoleTypeException("Error with enumerations");
+            }
+            
+            return await _enumRepository.GetUserRoleId(request);
+        }
     }
 }

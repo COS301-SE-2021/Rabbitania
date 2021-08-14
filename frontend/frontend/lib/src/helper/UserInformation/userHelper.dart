@@ -26,3 +26,26 @@ class UserHelper {
     prefs.remove('UserID');
   }
 }
+
+determineRolePassIn(int r) {
+  switch (r) {
+    case 1:
+      return 'Developer';
+    case 2:
+      return 'Designer';
+    case 3:
+      return 'Care Taker';
+    case 4:
+      return 'Scrum Master';
+    case 5:
+      return 'CAM';
+    case 6:
+      return 'Director';
+    case 7:
+      return 'Graduate';
+    case 8:
+      return 'Intern';
+    default:
+      return 'Unassigned';
+  }
+}
