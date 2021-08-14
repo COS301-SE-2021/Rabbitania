@@ -1,17 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/userProfile_model.dart';
+import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
+import 'package:frontend/src/provider/user_provider.dart';
 
-var userInfoProfile;
-var userRoleProfile;
-var userOfficeProfile;
-var userLevelProfile;
+//var userP = new UserProvider();
+//ProfileUser? userProfile;
 
 fab(BuildContext context) {
   return FloatingActionButton(
@@ -81,11 +79,7 @@ Widget bnb(BuildContext context) {
             color: Color.fromRGBO(33, 33, 33, 1),
           ),
           onPressed: () async {
-            var userProfile = new UserProvider();
-            userInfoProfile = await userProfile.getUserProfile();
-            userRoleProfile = userInfoProfile.userRole;
-            userOfficeProfile = userInfoProfile.office;
-            userLevelProfile = userInfoProfile.userRole;
+            //userProfile = await userP.getUserProfileObj();
             UtilModel.route(() => ProfileScreen(), context);
           },
         ),

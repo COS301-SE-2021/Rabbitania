@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/userProfile_model.dart';
+import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -14,43 +14,36 @@ class ProfileScreen extends StatefulWidget {
   }
 }
 
-late Future<UserProfileModel>? userDetails;
-//TextEditingController phoneNumberController = new TextEditingController();
+late Future<ProfileUser>? furtureUserDetails;
+late Future<String>? saveFutureRecived;
 
 class _profileState extends State<ProfileScreen> {
-  var user;
-  String name = "";
-  String description = "";
-  int employeeLevel = 1;
-  int officeLocation = 1;
-  int userRole = 9;
-  String phoneNumber = "";
-  int userProfileCurrentID = -1;
-  String dropdownDeveloperValue =
-      determineRolePassIn(userInfoProfile.userRoles);
-  String dropdownLevelValue = "Level: 0";
-  String dropdownLocationValue = "Pretoria";
-  TextEditingController? _controller;
-
   final util = new UtilModel();
-  UserHelper userHelper = UserHelper();
 
-  initState() {
+  UserHelper userHelper = UserHelper();
+  int profileUserId = -1;
+
+  int? userProfileCurrentID;
+  String dropdownLocationValue = "";
+  String dropdownLocationHolder = "";
+  TextEditingController? _controller = new TextEditingController(text: "");
+
+  TextEditingController? _controllerDescription =
+      new TextEditingController(text: "");
+
+  void initState() {
     super.initState();
-    var userProfile = new UserProvider();
     userHelper.getUserID().then((value) {
-      //print(value);
-      userProfileCurrentID = value;
+      setState(() {
+        this.profileUserId = value;
+      });
+      furtureUserDetails = getUserProfileObj(profileUserId);
+      //print(furtureUserDetails);
     });
-    setState(() {
-      userDetails = userProfile.getUserProfile();
-      user = FirebaseAuth.instance.currentUser;
-    });
-    initFunction(userDetails);
-    //print(user);
   }
 
-  Widget build(context) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -86,90 +79,21 @@ class _profileState extends State<ProfileScreen> {
     );
   }
 
-  determineOffice() {
-    if (officeLocation == 1) {
-      return 'Braamfontein';
-    }
-    return 'Pretoria';
-  }
-
-  determineofficeReversed(String location) {
-    if (location == 'Braamfontein') {
-      return 1;
-    }
-    return 3;
-  }
-
-  determineRoleReversed(String role) {
-    switch (role) {
-      case 'Developer':
-        return 1;
-      case 'Designer':
-        return 2;
-      case 'Care Taker':
-        return 3;
-      case 'Scrum Master':
-        return 4;
-      case 'CAM':
-        return 5;
-      case 'Director':
-        return 6;
-      case 'Graduate':
-        return 7;
-      case 'Intern':
-        return 8;
-      default:
-        return 9;
-    }
-  }
-
-  determineRole() {
-    switch (userRole) {
-      case 1:
-        return 'Developer';
-      case 2:
-        return 'Designer';
-      case 3:
-        return 'Care Taker';
-      case 4:
-        return 'Scrum Master';
-      case 5:
-        return 'CAM';
-      case 6:
-        return 'Director';
-      case 7:
-        return 'Graduate';
-      case 8:
-        return 'Intern';
-      default:
-        return 'Unassigned';
-    }
-  }
-
-  initFunction(userDetails) async {
-    setState(() {
-      name = userDetails.name;
-      description = userDetails.description;
-      employeeLevel = userDetails.empLevel;
-      officeLocation = userDetails.officeLocation;
-      userRole = userDetails.userRoles;
-      phoneNumber = userDetails.phoneNumber;
-    });
-  }
-
   Widget profileBuilder() {
-    return FutureBuilder<UserProfileModel>(
-      future: userDetails,
+    return FutureBuilder<ProfileUser>(
+      future: furtureUserDetails,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         List<Widget> children = [];
-
         if (snapshot.hasData) {
-          name = snapshot.data.name;
-          description = snapshot.data.description;
-          employeeLevel = snapshot.data.empLevel;
-          officeLocation = snapshot.data.officeLocation;
-          userRole = snapshot.data.userRoles;
-          phoneNumber = snapshot.data.phoneNumber;
+          // print(snapshot.data.userId);
+          // print(snapshot.data.userName);
+          // print(snapshot.data.userImage);
+          // print(snapshot.data.userDescription);
+          // print(snapshot.data.userNumber);
+          // print(snapshot.data.userEmployeeLvl);
+          // print(snapshot.data.userOfficeLocation);
+          // print(snapshot.data.userRoles);
+          dropdownLocationValue = snapshot.data.userOfficeLocation;
 
           children = <Widget>[
             Column(
@@ -179,7 +103,7 @@ class _profileState extends State<ProfileScreen> {
                   children: <Widget>[
                     ProfilePicture(),
                     Text(
-                      user.displayName,
+                      snapshot.data.userName,
                       style: TextStyle(
                         color: Color.fromRGBO(171, 255, 79, 1),
                         fontSize: 25,
@@ -196,169 +120,270 @@ class _profileState extends State<ProfileScreen> {
                     thickness: 1,
                   ),
                 ),
-                Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  color: Color.fromRGBO(171, 255, 79, 1),
-                                  width: 2,
-                                ),
-                              ),
-                              child: DropdownDeveloper(),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  color: Color.fromRGBO(171, 255, 79, 1),
-                                  width: 2,
-                                ),
-                              ),
-                              child: DropdownOffice(),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  color: Color.fromRGBO(171, 255, 79, 1),
-                                  width: 2,
-                                ),
-                              ),
-                              child: DropdownLevel(),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(
-                                  color: Color.fromRGBO(171, 255, 79, 1),
-                                  width: 2,
-                                ),
-                              ),
-                              child: phoneNumberWidget(),
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                            key: Key('saveButton'),
-                            style: ButtonStyle(
-                              elevation: MaterialStateProperty.all(11),
-                              backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(172, 255, 79, 1),
-                              ),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  side: BorderSide(
-                                    style: BorderStyle.none,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Role: " + snapshot.data.userRoles,
+                      style: TextStyle(
+                        color: Color.fromRGBO(171, 255, 79, 1),
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      "Lvl: " + snapshot.data.userEmployeeLvl.toString(),
+                      style: TextStyle(
+                        color: Color.fromRGBO(171, 255, 79, 1),
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                InkWell(
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                    },
+                    child: Column(children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(171, 255, 79, 1),
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: descriptionWidget(
+                                        snapshot.data.userDescription),
                                   ),
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              "Save",
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Color.fromRGBO(33, 33, 33, 1),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(171, 255, 79, 1),
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: DropdownOffice(),
+                                  ),
+                                ),
                               ),
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    elevation: 5,
-                                    backgroundColor:
-                                        Color.fromRGBO(33, 33, 33, 1),
-                                    titleTextStyle: TextStyle(
-                                        color: Colors.white, fontSize: 32),
-                                    title: Text("Save Changes"),
-                                    contentTextStyle: TextStyle(
-                                        color: Colors.white, fontSize: 16),
-                                    content: Text(
-                                        "Are you sure you want to save these changes?"),
-                                    actions: [
-                                      IconButton(
-                                        icon: const Icon(
-                                          Icons.check,
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          size: 24.0,
-                                        ),
-                                        tooltip: 'Save',
-                                        onPressed: () async {
-                                          // ignore: unused_local_variable
-                                          final deleteResponse =
-                                              await SaveAllUserDetails(
-                                                  userProfileCurrentID,
-                                                  name,
-                                                  description,
-                                                  determineRoleReversed(
-                                                      dropdownDeveloperValue!),
-                                                  determineofficeReversed(
-                                                      dropdownLocationValue!),
-                                                  int.parse(dropdownLevelValue!
-                                                      .substring(7)),
-                                                  _controller!.text);
-                                          UtilModel.route(
-                                              () => ProfileScreen(), context);
-                                        },
+                              Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.9,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(171, 255, 79, 1),
+                                        width: 2,
                                       ),
-                                      IconButton(
-                                        icon: const Icon(
-                                          Icons.close,
-                                          color: Color.fromRGBO(255, 79, 79, 1),
-                                          size: 24.0,
+                                    ),
+                                    child: phoneNumberWidget(
+                                        snapshot.data.userNumber),
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                  key: Key('saveButton'),
+                                  style: ButtonStyle(
+                                    elevation: MaterialStateProperty.all(11),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Color.fromRGBO(172, 255, 79, 1),
+                                    ),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        side: BorderSide(
+                                          style: BorderStyle.none,
                                         ),
-                                        tooltip: 'Cancel',
-                                        onPressed: () {
-                                          //final deleteResponse = await deleteThread(this.id);
-                                          UtilModel.route(
-                                              () => ProfileScreen(), context);
-                                        },
                                       ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }),
-                      ],
-                    )),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Save",
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      color: Color.fromRGBO(33, 33, 33, 1),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          elevation: 5,
+                                          backgroundColor:
+                                              Color.fromRGBO(33, 33, 33, 1),
+                                          titleTextStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 32),
+                                          title: Text("Save Changes"),
+                                          contentTextStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                          content: Text(
+                                              "Are you sure you want to save these changes?"),
+                                          actions: [
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    171, 255, 79, 1),
+                                                size: 24.0,
+                                              ),
+                                              tooltip: 'Save',
+                                              onPressed: () async {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    saveFutureRecived =
+                                                        SaveAllUserDetails(
+                                                            profileUserId,
+                                                            snapshot
+                                                                .data.userName,
+                                                            _controllerDescription!
+                                                                .text,
+                                                            snapshot
+                                                                .data.userRoles,
+                                                            dropdownLocationHolder,
+                                                            snapshot.data
+                                                                .userEmployeeLvl,
+                                                            _controller!.text);
+                                                    return FutureBuilder<
+                                                        String>(
+                                                      future: saveFutureRecived,
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        if (snapshot.hasData) {
+                                                          return AlertDialog(
+                                                            elevation: 5,
+                                                            backgroundColor:
+                                                                Color.fromRGBO(
+                                                                    33,
+                                                                    33,
+                                                                    33,
+                                                                    1),
+                                                            content: Text(
+                                                                snapshot.data!),
+                                                            titleTextStyle:
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        32),
+                                                            title: Text(
+                                                                snapshot.data!),
+                                                            contentTextStyle:
+                                                                TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        16),
+                                                            actions: [
+                                                              IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons.check,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          171,
+                                                                          255,
+                                                                          79,
+                                                                          1),
+                                                                  size: 24.0,
+                                                                ),
+                                                                tooltip:
+                                                                    'Continue',
+                                                                onPressed:
+                                                                    () async {
+                                                                  UtilModel.route(
+                                                                      () =>
+                                                                          NoticeBoard(),
+                                                                      context);
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        } else if (snapshot
+                                                            .hasError) {
+                                                          return AlertDialog(
+                                                              elevation: 5,
+                                                              backgroundColor:
+                                                                  Color
+                                                                      .fromRGBO(
+                                                                          33,
+                                                                          33,
+                                                                          33,
+                                                                          1),
+                                                              content: Text(
+                                                                  '${snapshot.error}'));
+                                                        }
+                                                        return AlertDialog(
+                                                            elevation: 5,
+                                                            backgroundColor:
+                                                                Color.fromRGBO(
+                                                                    33,
+                                                                    33,
+                                                                    33,
+                                                                    1),
+                                                            content:
+                                                                CircularProgressIndicator());
+                                                      },
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.close,
+                                                color: Color.fromRGBO(
+                                                    255, 79, 79, 1),
+                                                size: 24.0,
+                                              ),
+                                              tooltip: 'Cancel',
+                                              onPressed: () {
+                                                //final deleteResponse = await deleteThread(this.id);
+                                                UtilModel.route(
+                                                    () => ProfileScreen(),
+                                                    context);
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }),
+                            ],
+                          )),
+                    ])),
               ],
             ),
           ];
@@ -404,8 +429,11 @@ class _profileState extends State<ProfileScreen> {
     );
   }
 
-  Widget phoneNumberWidget() {
-    _controller = TextEditingController(text: phoneNumber);
+  Widget phoneNumberWidget(String pn) {
+    if (_controller!.text == "") {
+      _controller = TextEditingController(text: pn);
+    }
+
     return TextFormField(
       maxLines: 1,
       style: TextStyle(fontSize: 30, color: Color.fromRGBO(171, 255, 79, 1)),
@@ -423,48 +451,35 @@ class _profileState extends State<ProfileScreen> {
     );
   }
 
-  Widget DropdownDeveloper() {
-    return DropdownButton<String>(
-      dropdownColor: Color.fromRGBO(33, 33, 33, 1),
-      value: dropdownDeveloperValue,
-      icon: const Padding(
-        padding: EdgeInsets.symmetric(),
-        child:
-            Icon(Icons.arrow_downward, color: Color.fromRGBO(171, 255, 79, 1)),
+  Widget descriptionWidget(String des) {
+    if (_controllerDescription!.text == "") {
+      _controllerDescription = TextEditingController(text: des);
+    }
+    return TextFormField(
+      minLines: 1,
+      maxLines: 20,
+      style: TextStyle(fontSize: 30, color: Color.fromRGBO(171, 255, 79, 1)),
+      controller: _controllerDescription,
+      cursorColor: Color.fromRGBO(171, 255, 79, 1),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        contentPadding:
+            EdgeInsets.only(left: 20, bottom: 11, top: 11, right: 15),
       ),
-      iconSize: 30,
-      elevation: 8,
-      style: const TextStyle(
-        fontSize: 30,
-        color: Color.fromRGBO(172, 255, 79, 1),
-      ),
-      underline: Container(
-        height: 0,
-        color: Color.fromRGBO(33, 33, 33, 1),
-      ),
-      onChanged: (String? selectedRole) {
-        setState(() {
-          userRole = determineRoleReversed(selectedRole!);
-          print(determineRole());
-          dropdownDeveloperValue = selectedRole;
-        });
-      },
-      items: userRoleList.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Padding(
-            padding: EdgeInsets.only(left: 30),
-            child: Text(value),
-          ),
-        );
-      }).toList(),
     );
   }
 
   Widget DropdownOffice() {
+    if (dropdownLocationHolder == "") {
+      dropdownLocationHolder = dropdownLocationValue;
+    }
     return DropdownButton<String>(
       dropdownColor: Color.fromRGBO(33, 33, 33, 1),
-      value: dropdownLocationValue,
+      value: dropdownLocationHolder,
       icon: const Padding(
         padding: EdgeInsets.symmetric(),
         child:
@@ -482,8 +497,7 @@ class _profileState extends State<ProfileScreen> {
       ),
       onChanged: (String? selectedOffice) {
         setState(() {
-          officeLocation = determineofficeReversed(selectedOffice!);
-          dropdownLocationValue = selectedOffice;
+          dropdownLocationHolder = selectedOffice!;
         });
       },
       items: officeList.map<DropdownMenuItem<String>>((String value) {
@@ -498,70 +512,5 @@ class _profileState extends State<ProfileScreen> {
     );
   }
 
-  Widget DropdownLevel() {
-    return DropdownButton<String>(
-      dropdownColor: Color.fromRGBO(33, 33, 33, 1),
-      value: dropdownLevelValue,
-      icon: const Padding(
-        padding: EdgeInsets.only(left: 85),
-        child:
-            Icon(Icons.arrow_downward, color: Color.fromRGBO(171, 255, 79, 1)),
-      ),
-      iconSize: 30,
-      elevation: 8,
-      style: const TextStyle(
-        fontSize: 30,
-        color: Color.fromRGBO(172, 255, 79, 1),
-      ),
-      underline: Container(
-        height: 0,
-        color: Color.fromRGBO(33, 33, 33, 1),
-      ),
-      onChanged: (String? selectedLVL) {
-        setState(() {
-          employeeLevel = int.parse(selectedLVL!.substring(7));
-          dropdownLevelValue = selectedLVL;
-        });
-      },
-      items: levelList.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Padding(
-            padding: EdgeInsets.only(left: 30),
-            child: Text(value),
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  List<String> levelList = [
-    "Level: 0",
-    "Level: 1",
-    "Level: 2",
-    "Level: 3",
-    "Level: 4",
-    "Level: 5",
-    "Level: 6",
-    "Level: 7",
-    "Level: 8",
-    "Level: 9"
-  ];
-
-  List<String> officeList = [
-    'Braamfontein',
-    'Pretoria',
-  ];
-
-  List<String> userRoleList = [
-    'Developer',
-    'Designer',
-    'Care Taker',
-    'Scrum Master',
-    'CAM',
-    'Director',
-    'Graduate',
-    'Intern',
-    'Unassigned'
-  ];
+  List<String> officeList = ['Braamfontein', 'Pretoria', 'Unassigned'];
 }
