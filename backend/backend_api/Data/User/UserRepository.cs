@@ -109,7 +109,7 @@ namespace backend_api.Data.User
             return response;
         }
 
-        public ViewProfileResponse ViewProfile(ViewProfileRequest request)
+        public async Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request)
         {
             if (request == null)
             {

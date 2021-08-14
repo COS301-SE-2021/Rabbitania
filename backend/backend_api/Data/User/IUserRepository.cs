@@ -18,7 +18,7 @@ namespace backend_api.Data.User
         
         Task<IEnumerable<Models.User.Users>> GetAllUsers();
         
-        ViewProfileResponse ViewProfile(ViewProfileRequest request);
+        Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
 
         Task<GetUserProfilesResponse> GetUserProfiles();
 
