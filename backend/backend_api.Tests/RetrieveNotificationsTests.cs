@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
 using backend_api.Exceptions.Notifications;
+using backend_api.Models.Enumerations;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;

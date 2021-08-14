@@ -27,8 +27,7 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        //home: Login(),
-        home: BookingAdminScreen(),
+        home: Login(),
       ),
     );
   }

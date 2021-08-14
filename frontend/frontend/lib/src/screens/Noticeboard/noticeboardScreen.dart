@@ -44,6 +44,7 @@ class _NoticeBoard extends State<NoticeBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FancyFab(
+        heroTag: "NoticeBoardPage",
         numberOfItems: 1,
         icon1: Icons.add,
         onPressed1: () {

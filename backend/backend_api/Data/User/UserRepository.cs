@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
+using Castle.Core.Internal;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
@@ -116,6 +118,7 @@ namespace backend_api.Data.User
             {
                 throw new InvalidUserRequest("Request object cannot be null");
             }
+
             var selectedUser =  _users.Users.Where(x => x.UserId == request.UserId);
             
             var name = "";
@@ -137,7 +140,11 @@ namespace backend_api.Data.User
                 userRole = x.UserRole;
             }
 
-            ViewProfileResponse response = new ViewProfileResponse(HttpStatusCode.OK, name,
+            if (name == "")
+            { 
+                return new ViewProfileResponse(HttpStatusCode.BadGateway);
+            }
+            var response = new ViewProfileResponse(HttpStatusCode.OK, name,
                 userImage, description, phoneNumber, empLevel, userRole, officeLocation);
 
             return response;
@@ -170,6 +177,8 @@ namespace backend_api.Data.User
             toUpdate.UserImgUrl = request.UserImage;
             toUpdate.UserDescription = request.UserDescription;
             toUpdate.OfficeLocation = request.OfficeLocation;
+            toUpdate.EmployeeLevel = request.EmployeeLevel;
+            toUpdate.UserRole = request.UserRoles;
             _users.Entry(toUpdate).State = EntityState.Modified;
 
             try
@@ -207,6 +216,13 @@ namespace backend_api.Data.User
             var userEmail = await _users.UserEmail.FirstOrDefaultAsync(x => x.UsersEmail == email);
             var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == userEmail.UserId);
             return user;
+        }
+
+        public List<string> GetAllUserEmails()
+        {
+            var emails = _users.UserEmail.Select(e => e.UsersEmail).Distinct().ToList();
+            
+            return emails;
         }
     }
 }

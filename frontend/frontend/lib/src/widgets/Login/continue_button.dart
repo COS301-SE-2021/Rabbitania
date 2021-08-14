@@ -51,7 +51,7 @@ class _continueButton extends State<ContinueButton> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
-      int userID = userProvider.getUserID();
+      int userID = await userProvider.getUserID();
       userHelper.setUserID(userID);
       setState(() {});
       Navigator.push(context,
@@ -61,7 +61,7 @@ class _continueButton extends State<ContinueButton> {
         context: context,
         builder: (context) => new AlertDialog(
           title: new Text("Login Error"),
-          content: new Text("Threre was an error"),
+          content: new Text("There was an error"),
           actions: <Widget>[
             ElevatedButton(
               child: Text('Close me!'),

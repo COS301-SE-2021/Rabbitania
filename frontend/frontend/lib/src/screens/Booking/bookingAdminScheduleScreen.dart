@@ -161,15 +161,18 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: BookingScheduleSpinbox('PRETORIA OFFICE'),
+                    child: BookingScheduleSpinbox(
+                        'PRETORIA OFFICE', this.displayText),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: BookingScheduleSpinbox('BRAAMFONTEIN OFFICE'),
+                    child: BookingScheduleSpinbox(
+                        'BRAAMFONTEIN OFFICE', this.displayText),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: BookingScheduleSpinbox('ASMTERDAM OFFICE'),
+                    child: BookingScheduleSpinbox(
+                        'ASMTERDAM OFFICE', this.displayText),
                   ),
                 ],
               ),

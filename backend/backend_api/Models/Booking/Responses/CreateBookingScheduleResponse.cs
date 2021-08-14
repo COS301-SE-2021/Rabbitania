@@ -4,21 +4,22 @@ namespace backend_api.Models.Booking.Responses
 {
     public class CreateBookingScheduleResponse
     {
-        private bool successful;
-
+        private bool _successful;
+        
         public CreateBookingScheduleResponse(bool successful)
         {
-            this.successful = successful;
+            this._successful = successful;
         }
 
         public CreateBookingScheduleResponse()
         {
         }
-
+        
         public bool Successful
         {
-            get => successful;
-            set => successful = value;
+            get => _successful;
+            set => _successful = value;
         }
+        
     }
 }

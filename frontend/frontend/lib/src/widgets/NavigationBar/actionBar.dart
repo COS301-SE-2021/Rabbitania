@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class FancyFab extends StatefulWidget {
+  final String heroTag;
   final int numberOfItems;
   final Function() onPressed1;
   final IconData icon1;
@@ -11,6 +12,7 @@ class FancyFab extends StatefulWidget {
   final IconData icon3;
 
   FancyFab({
+    required this.heroTag,
     required this.numberOfItems,
     required this.onPressed1,
     required this.icon1,
@@ -22,6 +24,7 @@ class FancyFab extends StatefulWidget {
 
   @override
   _FancyFabState createState() => _FancyFabState(
+      this.heroTag,
       this.numberOfItems,
       this.icon1,
       this.onPressed1,
@@ -30,6 +33,7 @@ class FancyFab extends StatefulWidget {
       this.icon3,
       this.onPressed3);
 
+  get getTag => this.heroTag;
   get getNumberofItems => this.numberOfItems;
 
   get getIcon1 => this.icon1;
@@ -51,8 +55,15 @@ class _FancyFabState extends State<FancyFab>
   Curve _curve = Curves.easeOut;
   double _fabHeight = 56.0;
 
-  _FancyFabState(int num, IconData icon1, Function() onPressed1, IconData icon2,
-      Function() onPressed2, IconData icon3, Function() onPressed3);
+  _FancyFabState(
+      String heroTag,
+      int num,
+      IconData icon1,
+      Function() onPressed1,
+      IconData icon2,
+      Function() onPressed2,
+      IconData icon3,
+      Function() onPressed3);
 
   @override
   initState() {
@@ -103,10 +114,11 @@ class _FancyFabState extends State<FancyFab>
     isOpened = !isOpened;
   }
 
-  Widget fab1(int num, IconData icon, Function() onPressed) {
+  Widget fab1(String heroTag, int num, IconData icon, Function() onPressed) {
     if (num > 0) {
       return Container(
         child: FloatingActionButton(
+          heroTag: heroTag,
           backgroundColor: Color.fromRGBO(171, 255, 79, 1),
           onPressed: onPressed,
           child: Icon(icon, color: Color.fromRGBO(33, 33, 33, 1)),
@@ -117,10 +129,11 @@ class _FancyFabState extends State<FancyFab>
     }
   }
 
-  Widget fab2(int num, IconData icon, Function() onPressed) {
+  Widget fab2(String heroTag, int num, IconData icon, Function() onPressed) {
     if (num > 1) {
       return Container(
         child: FloatingActionButton(
+          heroTag: heroTag,
           backgroundColor: Color.fromRGBO(171, 255, 79, 1),
           onPressed: onPressed,
           child: Icon(icon, color: Color.fromRGBO(33, 33, 33, 1)),
@@ -131,10 +144,11 @@ class _FancyFabState extends State<FancyFab>
     }
   }
 
-  Widget fab3(int num, IconData icon, Function() onPressed) {
+  Widget fab3(String heroTag, int num, IconData icon, Function() onPressed) {
     if (num > 2) {
       return Container(
         child: FloatingActionButton(
+          heroTag: heroTag,
           backgroundColor: Color.fromRGBO(171, 255, 79, 1),
           onPressed: onPressed,
           child: Icon(icon, color: Color.fromRGBO(33, 33, 33, 1)),
@@ -148,6 +162,7 @@ class _FancyFabState extends State<FancyFab>
   Widget toggle() {
     return Container(
       child: FloatingActionButton(
+        heroTag: 'hhhtag',
         backgroundColor: _buttonColor.value,
         onPressed: animate,
         tooltip: 'Toggle',
@@ -170,8 +185,8 @@ class _FancyFabState extends State<FancyFab>
             _translateButton.value * 3.0,
             0.0,
           ),
-          child:
-              fab3(widget.numberOfItems, widget.getIcon3, widget.getOnPressed3),
+          child: fab3(widget.heroTag, widget.numberOfItems, widget.getIcon3,
+              widget.getOnPressed3),
         ),
         Transform(
           transform: Matrix4.translationValues(
@@ -179,8 +194,8 @@ class _FancyFabState extends State<FancyFab>
             _translateButton.value * 2.0,
             0.0,
           ),
-          child:
-              fab2(widget.numberOfItems, widget.getIcon2, widget.getOnPressed2),
+          child: fab2(widget.heroTag, widget.numberOfItems, widget.getIcon2,
+              widget.getOnPressed2),
         ),
         Transform(
           transform: Matrix4.translationValues(
@@ -188,8 +203,8 @@ class _FancyFabState extends State<FancyFab>
             _translateButton.value,
             0.0,
           ),
-          child:
-              fab1(widget.numberOfItems, widget.getIcon1, widget.getOnPressed1),
+          child: fab1(widget.heroTag, widget.numberOfItems, widget.getIcon1,
+              widget.getOnPressed1),
         ),
         toggle(),
       ],

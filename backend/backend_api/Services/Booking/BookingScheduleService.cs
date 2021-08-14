@@ -25,7 +25,7 @@ namespace backend_api.Services.Booking
             
             var result = await _scheduleRepository.CreateBookingSchedule(request);
             var resp = new CreateBookingScheduleResponse();
-            if (result.Successful)
+            if(result.Successful)
             {
                 resp.Successful = true;
             }
@@ -33,6 +33,7 @@ namespace backend_api.Services.Booking
             {
                 resp.Successful = false;
             }
+            
             return resp;
         }
 
