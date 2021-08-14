@@ -50,6 +50,7 @@ class _continueButton extends State<ContinueButton> {
     if (response.statusCode == 200) {
       var userID = await userProvider.getUserID();
       userHelper.setUserID(userID);
+      userHelper.setUserName(widget.user.displayName);
       setState(() {});
       var token;
       final authReponse = await http.post(

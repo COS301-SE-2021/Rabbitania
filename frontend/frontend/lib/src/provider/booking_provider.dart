@@ -30,6 +30,25 @@ class BookingProvider {
             (bookings) => new ViewBookingModel.fromJson(bookings),
           )
           .toList();
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return fetchBookingsAsync();
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       List<ViewBookingModel> noBookings = List.empty();
 
@@ -40,6 +59,11 @@ class BookingProvider {
   // POST (CreateBooking)
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
+    var bd = bookingDate;
+    var ts = timeSlot;
+    var of = office;
+    var uid = userId;
+
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -57,6 +81,25 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return ("Created new Booking");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return createBookingAsync(bd, ts, of, uid);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       return ("Failed to create booking, Code: " +
           response.statusCode.toString() +
@@ -67,6 +110,7 @@ class BookingProvider {
 
   // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
+    var bid = bookingId;
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
@@ -79,6 +123,25 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return deleteBookingAsync(bid);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       return false;
     }
@@ -86,6 +149,10 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
+    var ts = timeSlot;
+    var of = office;
+    var uid = userId;
+
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -104,6 +171,25 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true; // can make booking
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return checkIfBookingExists(ts, of, uid);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       return false; // cannot make booking
     }
@@ -111,6 +197,8 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
+    var ts = timeslot;
+    var of = office;
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -129,6 +217,25 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return checkAvailibity(ts, of);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       return false;
     }
@@ -136,6 +243,10 @@ class BookingProvider {
 
   //POST (CreateBookingSchedule)
   Future<bool> createBookingSchedule(timeslot, office, availability) async {
+    var ts = timeslot;
+    var of = office;
+    var av = availability;
+
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -155,6 +266,25 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return createBookingSchedule(ts, of, av);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       return false;
     }
