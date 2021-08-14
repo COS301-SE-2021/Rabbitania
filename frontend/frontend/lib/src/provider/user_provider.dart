@@ -69,12 +69,15 @@ class UserProvider {
 
 httpCall() async {
   var userHttp = new UserProvider();
+  UserHelper loggedUser = new UserHelper();
+  SecurityHelper securityHelper = new SecurityHelper();
   final user = await userHttp.getUserID();
-
+  final token = securityHelper.getToken();
   final response = await http.get(
     Uri.parse('https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
     },
   );
   print(response.statusCode);
@@ -89,6 +92,9 @@ Future<String> SaveAllUserDetails(
     int level,
     String phoNum) async {
   final user = FirebaseAuth.instance.currentUser!;
+  UserHelper loggedUser = new UserHelper();
+  SecurityHelper securityHelper = new SecurityHelper();
+  final token = securityHelper.getToken();
 
   print(userID.toString() +
       " " +
@@ -120,6 +126,7 @@ Future<String> SaveAllUserDetails(
       Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
       },
       body: jsonEncode(<String, dynamic>{
         "userId": userID,
@@ -136,6 +143,26 @@ Future<String> SaveAllUserDetails(
         response.statusCode == 200 ||
         response.statusCode == 100) {
       return ("Successfully saved profile data");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return SaveAllUserDetails(
+            userID, username, description, Role, Location, level, phoNum);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed to save profile data error" +
           response.statusCode.toString());
@@ -147,12 +174,15 @@ Future<String> SaveAllUserDetails(
 
 Future<ProfileUser> getUserProfileObj(int usersid) async {
   final userID = usersid;
-
+  UserHelper loggedUser = new UserHelper();
+  SecurityHelper securityHelper = new SecurityHelper();
+  final token = securityHelper.getToken();
   final oldURI = "https://10.0.2.2:5001/api/User/ViewProfile?UserId=$userID";
   final response = await http.get(
     Uri.parse(oldURI),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
     },
   );
 
