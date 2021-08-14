@@ -43,6 +43,7 @@ class _BookingDayState extends State<BookingDayScreen> {
   }
 
   initState() {
+    super.initState();
     determineDisplayText();
   }
 

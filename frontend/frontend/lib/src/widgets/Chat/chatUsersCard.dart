@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 
 class ChatUsersCard extends StatefulWidget {
   final String displayName;
   final String displayImage;
+  final int idUser;
 
-  ChatUsersCard({required this.displayName, required this.displayImage});
+  ChatUsersCard(
+      {required this.displayName,
+      required this.displayImage,
+      required this.idUser});
 
   @override
   _ChatUsersCardState createState() => _ChatUsersCardState();
@@ -46,6 +51,12 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
           },
           onTap: () {
             //navigate to chatScreen when clicked
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChatRoomScreen(widget.idUser),
+              ),
+            );
           },
           splashColor: utilModel.greenColor,
           child: Row(
@@ -72,7 +83,7 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 35, right: 20),
+                padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Text(
                   widget.displayName,
                   style: TextStyle(
