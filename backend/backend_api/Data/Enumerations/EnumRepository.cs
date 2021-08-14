@@ -35,5 +35,25 @@ namespace backend_api.Data.Enumerations
 
             return response;
         }
+
+        public async Task<GetOfficeIdResponse> GetOfficeId(GetOfficeIdRequest request)
+        {
+            var officeId = await _enums.OfficeLocations
+                .Where(x => x.Name == request.OfficeName).FirstOrDefaultAsync();
+            
+            var response = new GetOfficeIdResponse(officeId.OfficeLocation);
+
+            return response;
+        }
+
+        public async Task<GetUserRoleIdResponse> GetUserRoleId(GetUserRoleIdRequest request)
+        {
+            var userRoleId = await _enums.UsersRoles
+                .Where(x => x.Type == request.RoleName).FirstOrDefaultAsync();
+            
+            var response = new GetUserRoleIdResponse(userRoleId.UserRole);
+
+            return response;
+        }
     }
 }
