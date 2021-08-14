@@ -33,9 +33,9 @@ class _continueButton extends State<ContinueButton> {
       user = widget.user;
     });
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/GoogleSignIn/GoogleLogin'),
+      Uri.parse('https://10.0.2.2:5001/api/Auth/GoogleLogin'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=UTF-8'
       },
       body: jsonEncode(<String, dynamic>{
         'displayName': widget.user.displayName,

@@ -11,11 +11,13 @@ class UserProvider {
   UserProvider();
   getUserID() async {
     String userEmail = user.providerData[0].email!;
+    String token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
     final response = await http.get(
-      Uri.parse(
-          'https://10.0.2.2:5001/api/GoogleSignIn/GetID?email=$userEmail'),
+      Uri.parse('https://10.0.2.2:5001/api/Auth/GetID?email=$userEmail'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
       },
     );
     return int.parse(response.body);
