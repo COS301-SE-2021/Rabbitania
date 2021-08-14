@@ -22,7 +22,7 @@ namespace backend_api.Controllers.Chat
         [HttpPost]
         public ActionResult<AgoraAuthResponse> index(AgoraAuthRequest request)
         {
-            if (string.IsNullOrEmpty(_settings.AppId) || string.IsNullOrEmpty(_settings.Certificate))
+            if (string.IsNullOrEmpty("e718dc1d125d4b59a3026ac5a600d65b") || string.IsNullOrEmpty("242a4dd6ab8e42b991df00b8bfa0a022"))
             {
                 return new StatusCodeResult((int)HttpStatusCode.PreconditionFailed);
             }
@@ -32,8 +32,8 @@ namespace backend_api.Controllers.Chat
                 : request.uid.GetString();
 
             var tBuilder = new AccessToken(
-                _settings.AppId,
-                _settings.Certificate,
+                "e718dc1d125d4b59a3026ac5a600d65b",
+                "242a4dd6ab8e42b991df00b8bfa0a022",
                 request.channel,
                 uid);
             

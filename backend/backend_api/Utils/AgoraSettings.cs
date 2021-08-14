@@ -11,6 +11,10 @@
             certificate = _certificate;
         }
 
+        public AgoraSettings()
+        {
+        }
+
         public string AppId
         {
             get => AppID;
