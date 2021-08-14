@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
@@ -38,11 +39,13 @@ Future<List<ForumObj>> fetchForum() async {
 }
 
 Future<bool> deleteForum(int currentForumID) async {
+  var cid = currentForumID;
   try {
     if (currentForumID < 0) {
       throw ("Error Forum ID is Incorrect");
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
       Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteForum'),
@@ -57,6 +60,25 @@ Future<bool> deleteForum(int currentForumID) async {
     //print("CODE ============" + response.statusCode.toString());
     if (response.statusCode == 201 || response.statusCode == 200) {
       return true;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return deleteForum(cid);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed to delete, error code" + response.statusCode.toString());
     }

@@ -59,11 +59,6 @@ class BookingProvider {
   // POST (CreateBooking)
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
-    var bd = bookingDate;
-    var ts = timeSlot;
-    var of = office;
-    var uid = userId;
-
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -96,7 +91,7 @@ class BookingProvider {
         Map<String, dynamic> obj = jsonDecode(authReponse.body);
         var token = '${obj['token']}';
         securityHelper.setToken(token);
-        return createBookingAsync(bd, ts, of, uid);
+        return createBookingAsync(bookingDate, timeSlot, office, userId);
       } else {
         throw new Exception("Error with Authentication");
       }
@@ -110,7 +105,6 @@ class BookingProvider {
 
   // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
-    var bid = bookingId;
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
@@ -138,7 +132,7 @@ class BookingProvider {
         Map<String, dynamic> obj = jsonDecode(authReponse.body);
         var token = '${obj['token']}';
         securityHelper.setToken(token);
-        return deleteBookingAsync(bid);
+        return deleteBookingAsync(bookingId);
       } else {
         throw new Exception("Error with Authentication");
       }
@@ -149,10 +143,6 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
-    var ts = timeSlot;
-    var of = office;
-    var uid = userId;
-
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -186,7 +176,7 @@ class BookingProvider {
         Map<String, dynamic> obj = jsonDecode(authReponse.body);
         var token = '${obj['token']}';
         securityHelper.setToken(token);
-        return checkIfBookingExists(ts, of, uid);
+        return checkIfBookingExists(timeSlot, office, userId);
       } else {
         throw new Exception("Error with Authentication");
       }
@@ -197,8 +187,6 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
-    var ts = timeslot;
-    var of = office;
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -232,7 +220,7 @@ class BookingProvider {
         Map<String, dynamic> obj = jsonDecode(authReponse.body);
         var token = '${obj['token']}';
         securityHelper.setToken(token);
-        return checkAvailibity(ts, of);
+        return checkAvailibity(timeslot, office);
       } else {
         throw new Exception("Error with Authentication");
       }
@@ -243,10 +231,6 @@ class BookingProvider {
 
   //POST (CreateBookingSchedule)
   Future<bool> createBookingSchedule(timeslot, office, availability) async {
-    var ts = timeslot;
-    var of = office;
-    var av = availability;
-
     SecurityHelper securityHelper = new SecurityHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
@@ -281,7 +265,7 @@ class BookingProvider {
         Map<String, dynamic> obj = jsonDecode(authReponse.body);
         var token = '${obj['token']}';
         securityHelper.setToken(token);
-        return createBookingSchedule(ts, of, av);
+        return createBookingSchedule(timeslot, office, availability);
       } else {
         throw new Exception("Error with Authentication");
       }
