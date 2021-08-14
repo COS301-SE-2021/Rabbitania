@@ -48,7 +48,14 @@ namespace backend_api.Services.User
         public async Task<GetUserResponse> GetUserByID(GetUserByIDRequest request)
         {
             var user = await _userRepository.GetUser(request.UserId);
-            return new GetUserResponse();
+            if (!user.Equals(null))
+            {
+                return new GetUserResponse(user, user.Name,user.EmployeeLevel,user.IsAdmin,user.UserDescription,user.UserId,user.PhoneNumber,user.UserRole,user.UserImgUrl,user.OfficeLocation,user.PinnedUserIds);
+            }
+            else
+            {
+                throw new InvalidUserRequest("User does not exist");
+            }
         }
 
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)

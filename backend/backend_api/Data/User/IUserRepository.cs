@@ -10,7 +10,7 @@ namespace backend_api.Data.User
 {
     public interface IUserRepository
     {
-        Task<List<Models.User.Users>> GetUser(int userID);
+        Task<Models.User.Users> GetUser(int userID);
 
         Task<List<Models.User.Users>> GetUser(String name);
 

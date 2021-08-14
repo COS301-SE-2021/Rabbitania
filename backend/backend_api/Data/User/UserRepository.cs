@@ -33,9 +33,10 @@ namespace backend_api.Data.User
             _aspUser = aspUser;
         }
 
-        public async Task<List<Models.User.Users>> GetUser(int userID)
+        public async Task<Models.User.Users> GetUser(int userID)
         {
-            return await _users.Users.Where(x => x.UserId == userID).ToListAsync();
+            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
+            
         }
 
         public async Task<List<Models.User.Users>> GetUser(String name)
