@@ -26,7 +26,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace backend_api.Controllers.Auth
 {
     
-    [AllowAnonymous, Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -107,7 +107,7 @@ namespace backend_api.Controllers.Auth
             return userId;
         }
 
-        [HttpPost,Authorize]
+        [HttpPost]
         [Route("Auth")]
         public async Task<IActionResult> Auth([FromBody] Credentials credentials)
         {
@@ -118,7 +118,6 @@ namespace backend_api.Controllers.Auth
             {
                 return Unauthorized();
             }
-
             return Ok(new {token = await _service.createJwt(credentials)});
         }
     }

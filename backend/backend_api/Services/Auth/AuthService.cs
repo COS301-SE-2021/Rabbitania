@@ -110,6 +110,7 @@ namespace backend_api.Services.Auth
         public async Task<bool> Validate(Credentials credentials)
         {
             var id = credentials.UserID;
+            
             if (_userService.ViewProfile(new ViewProfileRequest(id)).Result.response == HttpStatusCode.OK)
             {
                 return true;
@@ -133,7 +134,7 @@ namespace backend_api.Services.Auth
                 issuer: settings.GetSection("validIssuer").Value,
                 audience: settings.GetSection("validAudience").Value,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: signingCred
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
