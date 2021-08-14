@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Notifications;
@@ -6,6 +7,7 @@ using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
+using Castle.Core.Internal;
 using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.User
@@ -80,6 +82,17 @@ namespace backend_api.Services.User
             }
 
             return await _userRepository.GetUserProfiles();
+        }
+
+        public async Task<List<string>> GetAllUserEmails()
+        {
+            var response = await _userRepository.GetAllUserEmails();
+            if (response.IsNullOrEmpty())
+            {
+                throw new Exception("Error with user emails");
+            }
+
+            return response;
         }
     }
 }

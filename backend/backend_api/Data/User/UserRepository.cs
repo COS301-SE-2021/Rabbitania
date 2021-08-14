@@ -172,5 +172,12 @@ namespace backend_api.Data.User
             var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == userEmail.UserId);
             return user;
         }
+
+        public async Task<List<string>> GetAllUserEmails()
+        {
+            var emails = await _users.UserEmail.Select(e => e.UsersEmail).Distinct().ToListAsync();
+            
+            return emails;
+        }
     }
 }

@@ -24,6 +24,8 @@ namespace backend_api.Data.User
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
+        Task<List<string>> GetAllUserEmails();
+
         Task<Models.User.Users> GetExistingUserDetails(GoogleSignInRequest request);
         
         Task<bool> checkEmailExists(GoogleSignInRequest request);
