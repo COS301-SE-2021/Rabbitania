@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace backend_api.Controllers.Booking
 {
-    [AllowAnonymous, Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BookingScheduleController : ControllerBase
     {
