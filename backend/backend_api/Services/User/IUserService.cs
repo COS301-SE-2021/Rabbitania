@@ -27,7 +27,7 @@ namespace backend_api.Services.User
 
         Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request);
 
-        Task<List<string>> GetAllUserEmails();
+        List<string> GetAllUserEmails();
 
     }
 }

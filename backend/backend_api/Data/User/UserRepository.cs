@@ -179,9 +179,9 @@ namespace backend_api.Data.User
             return user;
         }
 
-        public async Task<List<string>> GetAllUserEmails()
+        public List<string> GetAllUserEmails()
         {
-            var emails = await _users.UserEmail.Select(e => e.UsersEmail).Distinct().ToListAsync();
+            var emails = _users.UserEmail.Select(e => e.UsersEmail).Distinct().ToList();
             
             return emails;
         }
