@@ -1,12 +1,14 @@
-﻿namespace backend_api.Models.Notification.Requests
+﻿using System.Collections.Generic;
+
+namespace backend_api.Models.Notification.Requests
 {
     public class SendEmailNotificationRequest
     {
         private string _payload;
         private string _subject;
-        private string _email;
+        private List<string> _email;
 
-        public SendEmailNotificationRequest(string payload, string subject, string email)
+        public SendEmailNotificationRequest(string payload, string subject, List<string> email)
         {
             _payload = payload;
             _subject = subject;
@@ -25,7 +27,7 @@
             set => _subject = value;
         }
 
-        public string Email
+        public List<string> Email
         {
             get => _email;
             set => _email = value;

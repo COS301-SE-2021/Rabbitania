@@ -1,3 +1,4 @@
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
@@ -48,9 +49,18 @@ namespace backend_api.Controllers.Notification
         /// <returns> HTTP Status response </returns>
         [HttpPost]
         [Route("SendEmailNotification")]
-        public async Task<SendEmailNotificationResponse> SendEmailNotification([FromBody] SendEmailNotificationRequest request)
+        public async Task<ActionResult> SendEmailNotification([FromBody] SendEmailNotificationRequest request)
         {
-            return await _service.SendEmailNotification(request);
+            
+            var response = await _service.SendEmailNotification(request);
+            if (response.Response == HttpStatusCode.Accepted)
+            {
+                return Ok("Email(s) successfully sent.");
+            }
+            else
+            {
+                return BadRequest("Error when sending an email(s)");
+            }
         }
         
     }
