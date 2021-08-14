@@ -86,7 +86,7 @@ namespace backend_api.Services.User
                 throw new Exception("Error Missing UserID");
             }
             
-            ViewProfileResponse returnObject = _userRepository.ViewProfile(request);
+            ViewProfileResponse returnObject = await _userRepository.ViewProfile(request);
             if (returnObject.name == null)
             {
                 throw new InvalidUserRequest("User does not exist");
