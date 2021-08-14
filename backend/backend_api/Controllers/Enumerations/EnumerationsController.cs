@@ -64,5 +64,50 @@ namespace backend_api.Controllers.Enumerations
                 return BadRequest("Request is null or empty");
             }
         }
+        [HttpGet]
+        [Route("GetOfficeId")]
+        public async Task<ActionResult> GetOfficeId([FromQuery] GetOfficeIdRequest request)
+        {
+            if (request != null)
+            {
+                var idResponse = await _enumService.GetOfficeId(request);
+                if (idResponse.OfficeLocation >= 0)
+                {
+                    return Ok(idResponse.OfficeLocation);
+                }
+                else
+                {
+                    return BadRequest("Error with retrieving office location ID!");
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
+        
+        [HttpGet]
+        [Route("GetUserRoleId")]
+        public async Task<ActionResult> GetUserRoleId([FromQuery] GetUserRoleIdRequest request)
+        {
+            if (request != null)
+            {
+                var userRole = await _enumService.GetUserRoleId(request);
+                if (userRole.UserRole >= 0)
+                {
+                    return Ok(userRole.UserRole);
+                }
+                else
+                {
+                    return BadRequest("Error with retrieving user's role ID!");
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
     }
+    
+    
 }
