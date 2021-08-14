@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
@@ -7,12 +8,12 @@ import 'package:http/http.dart' as http;
 
 class BookingProvider {
   UserHelper loggedUser = new UserHelper();
+  SecurityHelper securityHelper = new SecurityHelper();
 
   // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
     final loggedUserId = await loggedUser.getUserID();
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+    final token = await securityHelper.getToken();
     final response = await http.get(
       Uri.parse(
           'https://10.0.2.2:5001/api/Booking/GetBookings?UserId=$loggedUserId'),
@@ -39,8 +40,8 @@ class BookingProvider {
   // POST (CreateBooking)
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+    SecurityHelper securityHelper = new SecurityHelper();
+    final token = await securityHelper.getToken();
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/Booking/CreateBooking'),
       headers: <String, String>{
@@ -66,8 +67,8 @@ class BookingProvider {
 
   // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+    SecurityHelper securityHelper = new SecurityHelper();
+    final token = await securityHelper.getToken();
     final response = await http.delete(
       Uri.parse(
           'https://10.0.2.2:5001/api/Booking/DeleteBooking?BookingId=$bookingId'),
@@ -85,8 +86,8 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+    SecurityHelper securityHelper = new SecurityHelper();
+    final token = await securityHelper.getToken();
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/Booking/CheckIfBookingExists'),
       headers: <String, String>{
@@ -110,8 +111,8 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+    SecurityHelper securityHelper = new SecurityHelper();
+    final token = await securityHelper.getToken();
     final response = await http.post(
       Uri.parse(
           'https://10.0.2.2:5001/api/BookingSchedule/CheckAvailability?TimeSlot'),
@@ -135,8 +136,8 @@ class BookingProvider {
 
   //POST (CreateBookingSchedule)
   Future<bool> createBookingSchedule(timeslot, office, availability) async {
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+    SecurityHelper securityHelper = new SecurityHelper();
+    final token = await securityHelper.getToken();
     final response = await http.post(
       Uri.parse(
           'https://10.0.2.2:5001/api/BookingSchedule/CreateBookingSchedule'),

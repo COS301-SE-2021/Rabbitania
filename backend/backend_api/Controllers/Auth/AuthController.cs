@@ -110,7 +110,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="email"></param>
         /// <returns>integer</returns>
-        [HttpGet, Authorize]
+        [HttpGet]
         [Route("GetID")]
         public async Task<int> GetUserId(string email)
         {

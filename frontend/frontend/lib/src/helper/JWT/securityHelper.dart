@@ -3,12 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SecurityHelper {
   void setToken(token) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('token', token);
+    prefs.setString('token', token);
   }
 
   getToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('token');
+    return prefs.getString('token');
   }
 
   clearPersitantTokenData() async {

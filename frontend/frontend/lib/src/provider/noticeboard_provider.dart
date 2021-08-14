@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
@@ -7,11 +8,12 @@ import 'package:http/http.dart' as http;
 import 'package:frontend/src/models/Noticeboard/noticeboardModel.dart';
 
 Future<List<Thread>> fetchNotice() async {
+  SecurityHelper securityHelper = new SecurityHelper();
+  final token = await securityHelper.getToken();
   HttpClient client = new HttpClient();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
+  //print(securityHelper.getToken());
   String url =
       'http://10.0.2.2:5000/api/NoticeBoard/RetrieveNoticeBoardThreads';
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
@@ -33,12 +35,12 @@ Future<List<Thread>> fetchNotice() async {
 }
 
 Future<bool> deleteThread(int threadID) async {
+  SecurityHelper securityHelper = new SecurityHelper();
+  final token = await securityHelper.getToken();
   try {
     if (threadID < 0) {
       throw ("Error Thread ID is Incorrect");
     }
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
     final response = await http.delete(
       Uri.parse(
           'https://10.0.2.2:5001/api/NoticeBoard/DeleteNoticeBoardThread'),
@@ -62,6 +64,8 @@ Future<bool> deleteThread(int threadID) async {
 
 Future<String> addNewThread(
     String title, String content, int noticeboardCreatorId) async {
+  SecurityHelper securityHelper = new SecurityHelper();
+  final token = await securityHelper.getToken();
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
@@ -70,8 +74,6 @@ Future<String> addNewThread(
     if (noticeboardCreateImg64 != "") {
       noticeboardCreateInputImage = noticeboardCreateImg64;
     }
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
       headers: <String, String>{
@@ -100,6 +102,8 @@ Future<String> addNewThread(
 
 Future<String> editNoticeboardThread(
     String title, String content, int noticeboardEditId) async {
+  SecurityHelper securityHelper = new SecurityHelper();
+  final token = await securityHelper.getToken();
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
@@ -108,8 +112,6 @@ Future<String> editNoticeboardThread(
     if (noticeboardEditImg64 != "") {
       noticeboardEditInputImage = noticeboardEditImg64;
     }
-    String token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiUnVudGltZVRlcnJvcnMiLCJleHAiOjE2Mjg5NjkyNDcsImlzcyI6InJ1bnRpbWUudGVycm9ycyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMDE7aHR0cDovL2xvY2FsaG9zdDo1MDAwIn0.MBTk3DXysmd7UxtLRuDEzLMXfUH0yeaoU8BluEnW3b0";
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/EditNoticeBoardThread'),
       headers: <String, String>{
