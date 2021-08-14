@@ -115,7 +115,7 @@ namespace backend_api.Data.User
             {
                 throw new InvalidUserRequest("Request object cannot be null");
             }
-            var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
+            var selectedUser =  _users.Users.Where(x => x.UserId == request.UserId);
             
             var name = "";
             var userImage = "";

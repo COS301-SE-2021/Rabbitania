@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace backend_api.Models.User
 {
-    public class Users : IdentityUser<int>
+    public class Users
     {
         public Users(int userId, string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
         {

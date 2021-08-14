@@ -58,7 +58,7 @@ namespace backend_api.Controllers.User
         [Route("ViewProfile")]
         public async Task<ViewProfileResponse> ViewProfile([FromQuery] ViewProfileRequest request)
         {
-            return await _service.ViewProfileAsp(request);
+            return await _service.ViewProfile(request);
         }
 
         [HttpGet]

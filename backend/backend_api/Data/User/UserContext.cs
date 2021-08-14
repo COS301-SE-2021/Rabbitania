@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.User
 {
-    public class UserContext: IdentityDbContext, IUserContext
+    public class UserContext: DbContext, IUserContext
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {

@@ -172,12 +172,12 @@ namespace backend_api
 
             #endregion
 
-            services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
-            services.AddDbContext<IdentityContext>(o =>
-            {
-                o.UseNpgsql(
-                    Configuration.GetConnectionString("localhost"));
-            });
+            // services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
+            // services.AddDbContext<IdentityContext>(o =>
+            // {
+            //     o.UseNpgsql(
+            //         Configuration.GetConnectionString("localhost"));
+            // });
             
             // services.ConfigureIdentity();
             services.ConfigJwt(Configuration);
