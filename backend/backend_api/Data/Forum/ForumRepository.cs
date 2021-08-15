@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -76,26 +77,39 @@ namespace backend_api.Data.Forum
         public async Task<bool> CreateForumThreadApi(CreateForumThreadRequest request)
         {
             {
-                var ListOfForumThreads = _forum.ForumThreads.ToList();
+                var ListOfForumThreads = await _forum.ForumThreads.ToListAsync();
                 var ListOfForumThreadTitles = new List<string>();
                 var ListOfForumThreadBodies = new List<string>();
 
-                foreach (var forumThread in ListOfForumThreads)
+                if (ListOfForumThreads.IsNullOrEmpty() != true)
                 {
-                    ListOfForumThreadTitles.Add(forumThread.ForumThreadTitle);
-                    ListOfForumThreadBodies.Add(forumThread.ForumThreadBody);
-                }
+                    foreach (var forumThread in ListOfForumThreads)
+                    {
+                        ListOfForumThreadTitles.Add(forumThread.ForumThreadTitle);
+                        ListOfForumThreadBodies.Add(forumThread.ForumThreadBody);
+                    }
+                
 
                 var queryTitle = request.ForumThreadTitle;
                 var queryBody = request.ForumThreadBody;
 
                 var tfidf = new TFIDF.TFIDF();
-                var isSimilar = tfidf.tfidf_call(ListOfForumThreadTitles, ListOfForumThreadBodies, queryTitle,
+                var shouldnt_create = tfidf.tfidf_call(ListOfForumThreadTitles, ListOfForumThreadBodies, queryTitle,
                     queryBody);
-
-                if (isSimilar != "false") return true;
+                Console.Write(shouldnt_create);
+                if (shouldnt_create == "false")
+                    {
+                        await CreateForumThread(request);
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
                 await CreateForumThread(request);
                 return false;
+                
 
             }
         }
