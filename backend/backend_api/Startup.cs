@@ -94,7 +94,7 @@ namespace backend_api
             }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
             {
                 options.ClientId = "fake-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
-                options.ClientSecret = "placeholder";
+                options.ClientSecret = "place-holder";
             });
             
             
