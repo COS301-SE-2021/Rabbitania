@@ -5,6 +5,7 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
+import 'package:frontend/src/widgets/Chat/chatParticipantBar.dart';
 import 'package:frontend/src/widgets/Chat/chatSendMessageBar.dart';
 
 class ChatRoomScreen extends StatefulWidget {
@@ -29,6 +30,11 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
     //TODO: must filter to only see messages sent to current user
     return Scaffold(
       backgroundColor: utilModel.greyColor,
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+        title: ChatParticipantBar(widget.idUser),
+        backgroundColor: Colors.transparent,
+      ),
       body: Stack(
         children: [
           SvgPicture.string(
@@ -38,7 +44,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
           Column(
             children: [
               Expanded(
-                flex: 6,
+                flex: 12,
                 child: StreamBuilder(
                   stream: fireStoreHelper.getChat(widget.idUser, widget.myId),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
