@@ -67,7 +67,6 @@ class _continueButton extends State<ContinueButton> {
         Map<String, dynamic> obj = jsonDecode(authReponse.body);
         var token = '${obj['token']}';
         securityHelper.setToken(token);
-        print(token);
       } else {
         throw new Exception("Error with Authentication");
       }
