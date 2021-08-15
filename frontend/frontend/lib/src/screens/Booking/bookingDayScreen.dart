@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
-import 'package:frontend/src/screens/Booking/bookingSchedulesHome.dart';
+import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
