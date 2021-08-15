@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
@@ -7,37 +7,39 @@ import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 //helper class for booking functionality and business logic
 class BookingHelper {
   final bookingProvider = BookingProvider();
-  final userProvider = UserProvider(FirebaseAuth.instance.currentUser);
+  final userProvider = UserProvider();
+  final loggedUser = new UserHelper();
   //function to perform all logic required when making a booking
   Future<String> checkAndMakeBooking({
     timeslot,
     office,
     bookingDate,
   }) async {
-    //if true then make booking
-    //else show user booking cant be made
-    // var result = await bookingProvider.checkAvailibity(timeslot, office);
-    // if (result == true) {
-    //get userID via user provider
-    final userID = 1; //userProvider.getUserID();
-    //check availibility is true, hence must make create booking call
+    //Get User Id of the currently logged in user
+    final loggedUserId = await loggedUser.getUserID();
+
+    // return the createBookingAsync method which creates a future to book.
     return bookingProvider.createBookingAsync(
       bookingDate,
       timeslot,
       office,
-      userID,
+      loggedUserId,
     );
-    //after making booking call, see what response code is and return string based on statusCode
-    // } else if (result == false) {
-    //   return 'No bookings are availible';
-    // }
-    //return 'Error when trying to book.';
-    //default return case. If reached and true not yet returned then false is only option
-    //possibly replace with thrown exception?
   }
 
-  NavToBookingDayScreen(context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => BookingDayScreen('M')));
+  Future<bool> confirmNoPriorBookings({
+    timeslot,
+    office,
+  }) async {
+    //Get User Id of the currently logged in user
+    final loggedUserId = await loggedUser.getUserID();
+    // return the createBookingAsync method which creates a future to book.
+    return bookingProvider.checkIfBookingExists(timeslot, office, loggedUserId);
+  }
+
+  Future<bool> createBookingSchedule({timeslot, office, availability}) async {
+    // return the createBookingAsync method which creates a future to book.
+    return bookingProvider.createBookingSchedule(
+        timeslot, office, availability);
   }
 }

@@ -104,5 +104,26 @@ namespace backend_api.Data.Booking
                 return HttpStatusCode.BadRequest;
             }
         }
+        
+        public async Task<HttpStatusCode> CheckIfBookingExists(CheckIfBookingExistsRequest request)
+        {
+            var timeSlot = request.TimeSlot;
+            var office = request.Office;
+            var userId = request.UserId;
+            
+            var bookingChecked =  await _bookings.Bookings
+                .Where(x => x.UserId == request.UserId)
+                .Where(y => y.TimeSlot == request.TimeSlot)
+                .Where(z => z.Office == request.Office).ToListAsync();
+            
+            // No booking therefore all good
+            if(!bookingChecked.Any())
+            {
+                return HttpStatusCode.Accepted;
+            }
+            
+            // Yes there is a booking already
+            return HttpStatusCode.BadRequest; 
+        }
     }
 }

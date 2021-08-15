@@ -130,10 +130,12 @@ namespace backend_api.Services.Booking
         {
             if (request != null)
             {
-                var resp = await _bookingRepository.CancelBooking(request);
                 var booking = await _bookingRepository.GetBooking(new GetBookingRequest(request.BookingId));
+                var resp = await _bookingRepository.CancelBooking(request);
+
                 var req = new UpdateBookingScheduleRequest(booking.TimeSlot, booking.Office);
                 await _scheduleRepository.UpdateBookingScheduleAvailabilityAdd(req);
+                
                 return new CancelBookingResponse(resp);
             }
             else
@@ -180,6 +182,23 @@ namespace backend_api.Services.Booking
             {
                 throw new InvalidBookingException("Request is null or empty");
             }
+        }
+
+        public async Task<CheckIfBookingExistsResponse> CheckIfBookingExists(CheckIfBookingExistsRequest request)
+        {
+            if (request.UserId is 0 or < 0)
+            {
+                throw new InvalidBookingException("UserId is invalid wih CheckIfBookingExists method...");
+            }
+
+            if (request.TimeSlot is "" or "")
+            {
+                throw new InvalidBookingException("Invalid Time Slots.");
+            }
+            
+            var resp =  await _bookingRepository.CheckIfBookingExists(request);
+            
+            return new CheckIfBookingExistsResponse(resp);
         }
     }
 }

@@ -33,14 +33,7 @@ class _CancelBookingButton extends State<CancelBookingButton> {
                   FaIcon(
                     Icons.delete,
                     color: Colors.red,
-                    size: 30,
-                  ),
-                  Text(
-                    'Delete',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.red,
-                    ),
+                    size: 40,
                   ),
                 ],
               ),

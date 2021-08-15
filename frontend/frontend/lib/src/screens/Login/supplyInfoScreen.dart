@@ -47,8 +47,33 @@ class _infoForm extends State<InfoForm> {
     if (_dropDownOfficeValue == 'Braamfontein') {
       officeLocationInt = 1;
     }
-    //final int userID = await httpCallGetUser();
-    final int userID = 1;
+
+    DetermineRole(_dropDownRoleValue) {
+      switch (_dropDownRoleValue) {
+        case "developer":
+          return 0;
+        case "Designer":
+          return 1;
+        case "Care Taker":
+          return 2;
+        case "Scrum Master":
+          return 3;
+        case "CAM":
+          return 4;
+        case "Director":
+          return 5;
+        case "Graduate":
+          return 6;
+        case "Intern":
+          return 7;
+        default:
+          return 0;
+      }
+    }
+
+    int userRole = DetermineRole(_dropDownRoleValue);
+
+    final int userID = await httpCallGetUser();
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
       headers: <String, String>{
@@ -57,10 +82,12 @@ class _infoForm extends State<InfoForm> {
       body: jsonEncode(<String, dynamic>{
         'userId': userID,
         'name': user.displayName,
+        'userImage': user.photoURL,
         'phoneNumber': phoneNumberController.text,
         'userDescription': userBioController.text,
-        'userImage': user.photoURL,
-        'officeLocation': officeLocationInt
+        'officeLocation': officeLocationInt,
+        'employeeLevel': _dropDownLevelValue,
+        'userRoles': userRole,
       }),
     );
 
@@ -147,8 +174,8 @@ class _infoForm extends State<InfoForm> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          //user.providerData[0].email!,
-                                          'testEmail',
+                                          user.providerData[0].email!,
+                                          
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color.fromRGBO(
@@ -167,7 +194,7 @@ class _infoForm extends State<InfoForm> {
                               width: MediaQuery.of(context).size.width,
                               child: Center(
                                 child: Text(
-                                  'please enter missing information to proceed',
+                                  'Please enter missing information to proceed',
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Color.fromRGBO(171, 255, 79, 1)),

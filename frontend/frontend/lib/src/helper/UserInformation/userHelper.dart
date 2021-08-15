@@ -12,6 +12,11 @@ class UserHelper {
     prefs.setInt('userID', userID);
   }
 
+  void setUserName(name) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('name', name);
+  }
+
   //funtion used to retrieve stored userID
   //function is async so must use callback when using
   getUserID() async {
@@ -19,10 +24,43 @@ class UserHelper {
     return prefs.getInt('userID');
   }
 
+  getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('name');
+  }
+
   //clear all user specific data from disk
   //function is async so must use callback when using
   clearPersitantUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove('UserID');
+    prefs.remove('userID');
+  }
+
+  clearPersitantUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('name');
+  }
+}
+
+determineRolePassIn(int r) {
+  switch (r) {
+    case 1:
+      return 'Developer';
+    case 2:
+      return 'Designer';
+    case 3:
+      return 'Care Taker';
+    case 4:
+      return 'Scrum Master';
+    case 5:
+      return 'CAM';
+    case 6:
+      return 'Director';
+    case 7:
+      return 'Graduate';
+    case 8:
+      return 'Intern';
+    default:
+      return 'Unassigned';
   }
 }

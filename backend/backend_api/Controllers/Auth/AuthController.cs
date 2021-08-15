@@ -14,8 +14,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using backend_api.Exceptions.Auth;
+using backend_api.Models.Notification.Requests;
+using backend_api.Models.Auth;
 using backend_api.Models.User.Requests;
 using backend_api.Services.Auth;
+using backend_api.Services.Notification;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
@@ -25,16 +28,18 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 namespace backend_api.Controllers.Auth
 {
     
-    [AllowAnonymous, Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class GoogleSignIn : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IAuthService _service;
         private readonly IUserService _userService;
-        public GoogleSignIn(IAuthService service, IUserService userService)
+        private readonly INotificationService _notificationService;
+        public AuthController(IAuthService service, IUserService userService, INotificationService notificationService)
         {
             this._service = service;
             this._userService = userService;
+            this._notificationService = notificationService;
         }
 
         /// <summary>
@@ -73,6 +78,15 @@ namespace backend_api.Controllers.Auth
                         // user needs to be added as they are a valid retro rabbit employee
                         // but are not in the system yet.
                         await _userService.CreateUser(request);
+                        
+                        // Sends email to the newly created user.
+                        var userEmail = new List<string>();
+                        userEmail.Add(request.Email);
+                        var payload = "We hope you have a pleasant experience! \n\nPlease make sure to input the correct details or get hold of admin!";
+                        var emailReq = new SendEmailNotificationRequest(payload, "Welcome to Rabbitania " + request.DisplayName + " !!! ", userEmail);
+            
+                        await _notificationService.SendEmailNotification(emailReq);
+                        
                         return Created("", "User has been created.");
                         //throw new InvalidEmailException("Email does not exist in database");
                     }
@@ -104,6 +118,20 @@ namespace backend_api.Controllers.Auth
             var resp = await _service.GetUserID(request);
             var userId = resp.UserId;
             return userId;
+        }
+
+        [HttpPost]
+        [Route("Auth")]
+        public async Task<IActionResult> Auth([FromBody] Credentials credentials)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!await _service.Validate(credentials))
+            {
+                return Unauthorized();
+            }
+            return Ok(new {token = await _service.createJwt(credentials)});
         }
     }
 }

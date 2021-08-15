@@ -5,6 +5,9 @@ using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.Notifications;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
+using backend_api.Models.Notification.Requests;
+using backend_api.Services.Notification;
+using backend_api.Services.User;
 using Castle.Core.Internal;
 using Xunit.Sdk;
 
@@ -12,11 +15,22 @@ namespace backend_api.Services.NoticeBoard
 {
     public class NoticeBoardService : INoticeBoardService
     {
+        //GetAllUserEmails()
         private readonly INoticeBoardRepository _noticeBoardRepository;
+        private readonly IUserService _userService;
+        private readonly INotificationService _notificationService;
         public NoticeBoardService(INoticeBoardRepository noticeBoardRepo)
         {
             _noticeBoardRepository = noticeBoardRepo;
         }
+
+        public NoticeBoardService(INoticeBoardRepository noticeBoardRepository, IUserService userService, INotificationService notificationService)
+        {
+            _noticeBoardRepository = noticeBoardRepository;
+            _userService = userService;
+            _notificationService = notificationService;
+        }
+
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
             if (request == null)
@@ -38,6 +52,13 @@ namespace backend_api.Services.NoticeBoard
             {
                 throw new InvalidUserIdException("UserID is invalid");
             }
+
+            var userEmails = _userService.GetAllUserEmails();
+            var payload = "A new notice has been created, please go and check it out!";
+            var emailReq = new SendEmailNotificationRequest(payload, "New Notice Created! " + request.ThreadTitle, userEmails);
+            
+            await _notificationService.SendEmailNotification(emailReq);
+            
             return await _noticeBoardRepository.AddNoticeBoardThread(request);
         }
 

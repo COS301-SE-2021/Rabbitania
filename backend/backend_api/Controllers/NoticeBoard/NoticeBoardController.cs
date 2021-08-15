@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
 using backend_api.Services.NoticeBoard;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace backend_api.Controllers.NoticeBoard
             this._service = service;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("AddNoticeBoardThread")]
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(
             [FromBody] AddNoticeBoardThreadRequest request)
@@ -28,7 +29,7 @@ namespace backend_api.Controllers.NoticeBoard
         }
         
         
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveNoticeBoardThreads")]
         public async Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(
             [FromQuery] RetrieveNoticeBoardThreadsRequest request)
@@ -36,7 +37,7 @@ namespace backend_api.Controllers.NoticeBoard
             return await _service.RetrieveNoticeBoardThreads(request);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteNoticeBoardThread")]
         public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
             [FromBody] DeleteNoticeBoardThreadRequest request)
@@ -44,7 +45,7 @@ namespace backend_api.Controllers.NoticeBoard
             return await _service.DeleteNoticeBoardThread(request);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditNoticeBoardThread")]
         public async Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(
             [FromBody] EditNoticeBoardThreadRequest request)

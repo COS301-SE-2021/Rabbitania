@@ -4,7 +4,8 @@ namespace backend_api.Models.Forum.Requests
 {
     public class CreateThreadCommentRequest
     {
-        
+
+
         private int _threadCommentId;
         private string _commentBody;
         private DateTime _createdDate;
@@ -67,7 +68,7 @@ namespace backend_api.Models.Forum.Requests
             get => _dislikes;
             set => _dislikes = value;
         }
-
+        
         public int UserId
         {
             get => _userId;

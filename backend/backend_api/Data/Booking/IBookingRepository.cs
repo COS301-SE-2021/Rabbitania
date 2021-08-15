@@ -19,6 +19,8 @@ namespace backend_api.Data.Booking
         Task<HttpStatusCode> UpdateBooking(UpdateBookingRequest request);
 
         Task<HttpStatusCode> CreateBooking(CreateBookingRequest request);
-        
+
+        Task<HttpStatusCode> CheckIfBookingExists(CheckIfBookingExistsRequest request);
+
     }
 }
