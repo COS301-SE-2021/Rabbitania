@@ -49,7 +49,9 @@ namespace backend_api.Services.Auth
         /// </summary>
         /// <param name="request"></param>
         /// <returns>User object</returns>
-        Task<Models.User.Users> GetUserID(GoogleSignInRequest request);
+        Task<Models.User.Users> GetUserId(GoogleSignInRequest request);
+        
+        Task<Models.User.Users> GetUserAdminStatus(GoogleSignInRequest request);
 
         Task<bool> Validate(Credentials credentials);
 

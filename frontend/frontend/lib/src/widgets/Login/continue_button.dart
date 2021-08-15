@@ -49,8 +49,11 @@ class _continueButton extends State<ContinueButton> {
     );
     if (response.statusCode == 200) {
       var userID = await userProvider.getUserID();
+      var userStatus = await userProvider.getUserAdminStatus();
       userHelper.setUserID(userID);
       userHelper.setUserName(widget.user.displayName);
+      userHelper.setAdminStatus(userStatus);
+      print('VALUES: ' + userID.toString() + ' ' + userStatus.toString());
       setState(() {});
       var token;
       final authReponse = await http.post(
@@ -74,7 +77,9 @@ class _continueButton extends State<ContinueButton> {
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
       int userID = await userProvider.getUserID();
+      bool userStatus = await userProvider.getUserAdminStatus();
       userHelper.setUserID(userID);
+      userHelper.setAdminStatus(userStatus);
       setState(() {});
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => InfoForm(widget.user)));
