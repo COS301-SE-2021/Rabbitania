@@ -12,6 +12,7 @@ using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using backend_api.Models.User;
 using Castle.Core.Internal;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
@@ -70,6 +71,34 @@ namespace backend_api.Data.Forum
             {
                 return new DeleteForumResponse(HttpStatusCode.BadRequest);
             }
+        }
+
+        public async Task<CreateForumThreadResponse> CreateForumThreadApi(CreateForumThreadRequest request)
+        {
+            var ListOfForumThreads = _forum.ForumThreads.ToList();
+            var ListOfForumThreadTitles = new List<string>();
+            var ListOfForumThreadBodies = new List<string>();
+            
+            foreach (var forumThread in ListOfForumThreads)
+            {
+                ListOfForumThreadTitles.Add(forumThread.ForumThreadTitle);
+                ListOfForumThreadBodies.Add(forumThread.ForumThreadBody);
+            }
+
+            var queryTitle = request.ForumThreadTitle;
+            var queryBody = request.ForumThreadBody;
+
+            var tfidf = new TFIDF.TFIDF();
+            var is_similar = tfidf.tfidf_call(ListOfForumThreadTitles, ListOfForumThreadBodies, queryTitle, queryBody);
+
+            if (is_similar == "false")
+            {
+                var response = await CreateForumThread(request);
+                return response;
+            }
+
+           
+
         }
         
         //ForumThread Repository
