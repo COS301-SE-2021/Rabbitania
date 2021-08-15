@@ -8,7 +8,7 @@ import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 
 class BookingProvider {
-  // Instances
+  // Booking Provider Instances
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
   URLHelper url = new URLHelper();

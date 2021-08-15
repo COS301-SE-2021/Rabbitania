@@ -11,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
+import 'dart:math';
 
 class BookingScreen extends StatefulWidget {
   @override
@@ -21,15 +22,22 @@ class _BookingState extends State<BookingScreen> {
   UtilModel utilModel = UtilModel();
   UserHelper loggedUser = new UserHelper();
 
+  heroTagSeeder() {
+    var rando = new Random();
+    var heroSeed = '';
+    heroSeed = "BookingScreenPage-" + rando.nextInt(100).toString();
+    return heroSeed;
+  }
+
   @override
   initState() {}
 
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FancyFab(
-          heroTag: "BookingScreenPage",
-          numberOfItems: 1,
-          icon1: Icons.shield_outlined,
+          heroTag: heroTagSeeder(),
+          numberOfItems: 2,
+          icon1: Icons.admin_panel_settings_sharp,
           onPressed1: () async {
             var name = await loggedUser.getUserName();
             if (await loggedUser.getAdminStatus()) {
@@ -70,8 +78,10 @@ class _BookingState extends State<BookingScreen> {
               );
             }
           },
-          icon2: Icons.edit,
-          onPressed2: () {},
+          icon2: Icons.schedule,
+          onPressed2: () {
+            UtilModel.route(() => BookingAdminScreen(), context);
+          },
           icon3: Icons.edit,
           onPressed3: () {},
         ),
