@@ -55,20 +55,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0b7dbcd-f030-45c8-a6db-001b89a5416a" name="Default Changelist" comment="Framework for fluttter">
-      <change afterPath="$PROJECT_DIR$/../backend/.idea/.idea.backend_api/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/.idea/modules/android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frontend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/lib/src/screens/notificationScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/src/screens/notificationScreen.dart" afterDir="false" />
-    </list>
+    <list default="true" id="e0b7dbcd-f030-45c8-a6db-001b89a5416a" name="Default Changelist" comment="Framework for fluttter" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\James\.android\avd\Pixel_2_API_30.avd]" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -144,41 +137,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Framework for fluttter" />
     <option name="LAST_COMMIT_MESSAGE" value="Framework for fluttter" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="987" y="370" key="FileChooserDialogImpl" timestamp="1623787781956">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623263677076" />
-    <state x="987" y="370" key="FileChooserDialogImpl/2560.-1135.1152.2008/-1920.169.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1623787781956" />
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom" timestamp="1623263634786">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623263634786" />
-    <state width="1877" height="275" key="GridCell.Tab.0.center" timestamp="1623263634786">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623263634786" />
-    <state width="1877" height="275" key="GridCell.Tab.0.left" timestamp="1623263634786">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623263634786" />
-    <state width="1877" height="275" key="GridCell.Tab.0.right" timestamp="1623263634786">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="275" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623263634786" />
-    <state x="615" y="222" key="SettingsEditor" timestamp="1623787610631">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1623263623166" />
-    <state x="615" y="222" key="SettingsEditor/2560.-1135.1152.2008/-1920.169.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1623787610631" />
-    <state x="872" y="432" key="Vcs.Push.Dialog.v2" timestamp="1623787207325">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="872" y="432" key="Vcs.Push.Dialog.v2/2560.-1135.1152.2008/-1920.169.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1623787207325" />
-    <state x="1097" y="613" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1623787689715">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1097" y="613" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/2560.-1135.1152.2008/-1920.169.1920.1040/0.0.2560.1400@0.0.2560.1400" timestamp="1623787689715" />
   </component>
 </project>
