@@ -5,7 +5,7 @@ namespace backend_api.Models.Auth
     public class Credentials
     {
         [Required]
-        public int UserID { get; set; } 
+        public string Email { get; set; }
         [Required]
         public string Name { get; set; }
     }
