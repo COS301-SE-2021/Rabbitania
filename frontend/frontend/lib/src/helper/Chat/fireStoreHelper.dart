@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
+import 'package:rxdart/streams.dart';
 
 class FireStoreHelper {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -21,7 +22,6 @@ class FireStoreHelper {
     //filter those messages by searching for messages he sent to me
     return firestore
         .collection('chats/$myId/messages')
-        .where('uid', whereIn: [idUser, myId])
         .orderBy('dateCreated', descending: true)
         .snapshots();
   }
@@ -33,6 +33,7 @@ class FireStoreHelper {
     //create new message and show that you sent it
     final newMessage = ChatMessageModel(
       uid: myId,
+      toUid: idUser,
       message: message,
       dateCreated: DateTime.now(),
     );
@@ -45,7 +46,7 @@ class FireStoreHelper {
       newMessage.toJson(),
     );
     //update messaged user that he/she has a new message
-    final refUsers = firestore.collection('users').doc('$idUser').update({});
+    final refUsers = firestore.collection('users/$idUser').doc().update({});
   }
 
   //function to get user object using user idUser

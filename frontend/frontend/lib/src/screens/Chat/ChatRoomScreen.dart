@@ -12,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 class ChatRoomScreen extends StatefulWidget {
   final idUser;
   //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
-  final int myId = 6;
+  final int myId = 4;
   //i am currently retard
   // final int myId = 2
   ChatRoomScreen(this.idUser);
@@ -77,16 +77,23 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                 //messages correspond to current user and selected user
 
                                 if (snapshot.data.docs[i]['uid'] ==
-                                    widget.myId) {
+                                        widget.myId &&
+                                    snapshot.data.docs[i]['toUid'] ==
+                                        widget.idUser) {
                                   children.add(ChatMessageSender(
                                       textSentValue: snapshot.data.docs[i]
                                           ['message']));
                                 } else if (snapshot.data.docs[i]['uid'] ==
-                                    widget.idUser) {
+                                        widget.idUser &&
+                                    snapshot.data.docs[i]['toUid'] ==
+                                        widget.myId) {
                                   children.add(
                                     ChatMessageReceiver(
                                       textSentValue: snapshot.data.docs[i]
                                           ['message'],
+                                      dateCreated: snapshot
+                                          .data.docs[i]['dateCreated']
+                                          .toString(),
                                     ),
                                   );
                                 }

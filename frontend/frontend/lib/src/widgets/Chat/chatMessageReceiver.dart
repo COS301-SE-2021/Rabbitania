@@ -4,8 +4,9 @@ import 'package:frontend/src/models/util_model.dart';
 //widget for messages being sent by user
 class ChatMessageReceiver extends StatefulWidget {
   final textSentValue;
+  final String dateCreated;
 
-  ChatMessageReceiver({required this.textSentValue});
+  ChatMessageReceiver({required this.textSentValue, required this.dateCreated});
 
   @override
   State<StatefulWidget> createState() {
