@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AgoraIO.Media;
 using backend_api.Data.Booking;
 using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
@@ -84,6 +85,7 @@ namespace backend_api
             
             // For sending an email
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.Configure <AgoraSettings>( Configuration.GetSection ("AppSettings"));
 
             
             services.AddAuthentication(option =>
@@ -91,8 +93,8 @@ namespace backend_api
                 option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
             {
-                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
-                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
+                options.ClientId = "fake-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
+                options.ClientSecret = "placeholder";
             });
             
             
@@ -186,8 +188,8 @@ namespace backend_api
             services.AddScoped<IForumService, ForumService>();
             //----------------------------------------------------------------------------------------------------------------------
             
-            services.AddControllers();
-
+            // services.AddControllers();
+            
             #region Swagger
 
             services.AddSwaggerGen(c =>
@@ -197,13 +199,6 @@ namespace backend_api
 
             #endregion
 
-            // services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
-            // services.AddDbContext<IdentityContext>(o =>
-            // {
-            //     o.UseNpgsql(
-            //         Configuration.GetConnectionString("localhost"));
-            // });
-            
             // services.ConfigureIdentity();
             services.ConfigJwt(Configuration);
             services.AddAuthentication();
@@ -232,7 +227,7 @@ namespace backend_api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/ChatHub"); 
+                // endpoints.MapHub<ChatHub>("/ChatHub"); 
             });
         }
     }
