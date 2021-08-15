@@ -16,18 +16,12 @@ class _BookingGridState extends State<BookingGridSchedule> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<BookingScheduleModel>? data = snapshot.data;
+          // print(snapshot.data!.map((element) {
+          //   return element.timeSlot;
+          // }));
           if (snapshot.data!.length == 0) {
             return GridView.count(
               crossAxisCount: 2,
-              // Generate 100 widgets that display their index in the List.
-              // children: List.generate(100, (index) {
-              //   return Center(
-              //     child: Text(
-              //       'Item $index',
-              //       style: Theme.of(context).textTheme.headline5,
-              //     ),
-              //   );
-              // }),
               children: [
                 Card(
                   color: Color.fromRGBO(57, 57, 57, 25),

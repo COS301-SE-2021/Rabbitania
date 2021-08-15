@@ -295,12 +295,14 @@ class BookingProvider {
       },
     );
     if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      return jsonResponse
-          .map(
-            (schedules) => new BookingScheduleModel.fromJson(schedules),
-          )
-          .toList();
+      //var schedules = BookingScheduleModel.fromJson(jsonDecode(response.body));
+      // List<BookingScheduleModel> jsonResponse = json.decode(response.body);
+      final jsonMap = json.decode(response.body);
+      List<BookingScheduleModel> schedules =
+          (jsonMap['bookingSchedules'] as List)
+              .map((itemWord) => BookingScheduleModel.fromJson(itemWord))
+              .toList();
+      return schedules;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
         Uri.parse(baseURL + '/api/Auth/Auth'),
