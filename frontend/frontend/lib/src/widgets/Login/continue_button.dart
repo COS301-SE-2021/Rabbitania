@@ -33,11 +33,8 @@ class _continueButton extends State<ContinueButton> {
   }
 
   Future httpCall() async {
-    var user;
     final baseURL = await url.getBaseURL();
-    setState(() {
-      user = widget.user;
-    });
+    setState(() {});
     final response = await http.post(
       Uri.parse(baseURL + '/api/Auth/GoogleLogin'),
       headers: <String, String>{
