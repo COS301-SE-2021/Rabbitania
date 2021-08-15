@@ -45,7 +45,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var bookings = await _bookingService.ViewAllBookings(request);
-                    var list = bookings.Bookings.ToList();
+                    var list = JsonConvert.SerializeObject(bookings.Bookings.ToList());
                     return Ok(list);
                 }
                 catch (InvalidBookingException e)
