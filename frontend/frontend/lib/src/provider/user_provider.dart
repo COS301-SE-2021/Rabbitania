@@ -1,22 +1,27 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
+import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/userProfile_model.dart';
-import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
 import 'package:http/http.dart' as http;
 
 class UserProvider {
   final user = FirebaseAuth.instance.currentUser!;
+
+  URLHelper url = new URLHelper();
+  SecurityHelper securityHelper = new SecurityHelper();
+  UserHelper loggedUser = new UserHelper();
   UserProvider();
+
   getUserID() async {
-    SecurityHelper securityHelper = new SecurityHelper();
+    final baseURL = await url.getBaseURL();
     String userEmail = user.providerData[0].email!;
     final token = securityHelper.getToken();
+
     final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/Auth/GetID?email=$userEmail'),
+      Uri.parse(baseURL + '/api/Auth/GetID?email=$userEmail'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -26,12 +31,12 @@ class UserProvider {
   }
 
   getUserAdminStatus() async {
-    SecurityHelper securityHelper = new SecurityHelper();
     String userEmail = user.providerData[0].email!;
     final token = securityHelper.getToken();
+    final baseURL = await url.getBaseURL();
+
     final response = await http.get(
-      Uri.parse(
-          'https://10.0.2.2:5001/api/Auth/GetAdminStatus?email=$userEmail'),
+      Uri.parse(baseURL + '/api/Auth/GetAdminStatus?email=$userEmail'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -48,12 +53,11 @@ class UserProvider {
 
   Future<UserProfileModel> getUserProfile() async {
     final user = await getUserID();
-    SecurityHelper securityHelper = new SecurityHelper();
-    UserHelper loggedUser = new UserHelper();
-    final token = securityHelper.getToken();
-    final oldURI = "https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user";
+    final baseURL = await url.getBaseURL();
+    final token = await securityHelper.getToken();
+
     final response = await http.get(
-      Uri.parse(oldURI),
+      Uri.parse(baseURL + "/api/User/ViewProfile?UserId=$user"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -61,11 +65,11 @@ class UserProvider {
     );
 
     if (response.statusCode == 200) {
-      final UserDetails = UserProfileModel.fromJSON(jsonDecode(response.body));
-      return UserDetails;
+      final userDetails = UserProfileModel.fromJSON(jsonDecode(response.body));
+      return userDetails;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -92,10 +96,14 @@ httpCall() async {
   var userHttp = new UserProvider();
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
+  URLHelper url = new URLHelper();
+
+  final baseURL = await url.getBaseURL();
   final user = await userHttp.getUserID();
   final token = securityHelper.getToken();
+
   final response = await http.get(
-    Uri.parse('https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user'),
+    Uri.parse(baseURL + '/api/User/ViewProfile?UserId=$user'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
@@ -115,6 +123,9 @@ Future<String> SaveAllUserDetails(
   final user = FirebaseAuth.instance.currentUser!;
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
+  URLHelper url = new URLHelper();
+
+  final baseURL = await url.getBaseURL();
   final token = securityHelper.getToken();
 
   print(userID.toString() +
@@ -144,7 +155,7 @@ Future<String> SaveAllUserDetails(
     String officeLocation = await (getLocationIdEnum(Location));
 
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
+      Uri.parse(baseURL + '/api/User/EditProfile'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -166,7 +177,7 @@ Future<String> SaveAllUserDetails(
       return ("Successfully saved profile data");
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -197,10 +208,12 @@ Future<ProfileUser> getUserProfileObj(int usersid) async {
   final userID = usersid;
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
+  URLHelper url = new URLHelper();
+
+  final baseURL = await url.getBaseURL();
   final token = await securityHelper.getToken();
-  final oldURI = "https://10.0.2.2:5001/api/User/ViewProfile?UserId=$userID";
   final response = await http.get(
-    Uri.parse(oldURI),
+    Uri.parse(baseURL + "/api/User/ViewProfile?UserId=$userID"),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
@@ -215,7 +228,7 @@ Future<ProfileUser> getUserProfileObj(int usersid) async {
   print(response.statusCode);
   if (response.statusCode == 401) {
     final authReponse = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      Uri.parse(baseURL + '/api/Auth/Auth'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
@@ -261,11 +274,14 @@ Future<String> getRoleEnum(int roleInt) async {
     }
     UserHelper loggedUser = new UserHelper();
     SecurityHelper securityHelper = new SecurityHelper();
+    URLHelper url = new URLHelper();
+
+    final baseURL = await url.getBaseURL();
     final token = await securityHelper.getToken();
-    final oldURI =
-        "https://10.0.2.2:5001/api/Enumerations/GetUserRoleType?UserRole=$roleInt";
+
     final response = await http.get(
-      Uri.parse(oldURI),
+      Uri.parse(
+          baseURL + "/api/Enumerations/GetUserRoleType?UserRole=$roleInt"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -276,7 +292,7 @@ Future<String> getRoleEnum(int roleInt) async {
       return response.body;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -308,11 +324,14 @@ Future<String> getLocationEnum(int officeInt) async {
     }
     UserHelper loggedUser = new UserHelper();
     SecurityHelper securityHelper = new SecurityHelper();
+    URLHelper url = new URLHelper();
+
+    final baseURL = await url.getBaseURL();
     final token = await securityHelper.getToken();
-    final oldURI =
-        "https://10.0.2.2:5001/api/Enumerations/GetOfficeName?OfficeLocation=$officeInt";
+
     final response = await http.get(
-      Uri.parse(oldURI),
+      Uri.parse(baseURL +
+          "/api/Enumerations/GetOfficeName?OfficeLocation=$officeInt"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -322,7 +341,7 @@ Future<String> getLocationEnum(int officeInt) async {
       return response.body;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -354,11 +373,13 @@ Future<String> getRoleIdEnum(String role) async {
     }
     UserHelper loggedUser = new UserHelper();
     SecurityHelper securityHelper = new SecurityHelper();
+    URLHelper url = new URLHelper();
+
+    final baseURL = await url.getBaseURL();
     final token = await securityHelper.getToken();
-    final oldURI =
-        "https://10.0.2.2:5001/api/Enumerations/GetUserRoleId?RoleName=$role";
+
     final response = await http.get(
-      Uri.parse(oldURI),
+      Uri.parse(baseURL + "/api/Enumerations/GetUserRoleId?RoleName=$role"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -401,11 +422,13 @@ Future<String> getLocationIdEnum(String office) async {
     }
     UserHelper loggedUser = new UserHelper();
     SecurityHelper securityHelper = new SecurityHelper();
+    URLHelper url = new URLHelper();
+
+    final baseURL = await url.getBaseURL();
     final token = await securityHelper.getToken();
-    final oldURI =
-        "https://10.0.2.2:5001/api/Enumerations/GetOfficeId?OfficeName=$office";
+
     final response = await http.get(
-      Uri.parse(oldURI),
+      Uri.parse(baseURL + "/api/Enumerations/GetOfficeId?OfficeName=$office"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -415,7 +438,7 @@ Future<String> getLocationIdEnum(String office) async {
       return response.body;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
+import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
@@ -15,10 +16,13 @@ Future<List<ForumObj>> fetchForum() async {
   HttpClient client = new HttpClient();
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
+  final baseAltURL = await urlBase.getAltBaseURL();
   final token = await securityHelper.getToken();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
-  String url = 'http://10.0.2.2:5000/api/Forum/RetrieveForums';
+  String url = baseAltURL + '/api/Forum/RetrieveForums';
 
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
   request.headers.set('content-type', 'application/json');
@@ -29,7 +33,7 @@ Future<List<ForumObj>> fetchForum() async {
 
   if (response1.statusCode == 401) {
     final authReponse = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      Uri.parse(baseURL + '/api/Auth/Auth'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
@@ -67,9 +71,12 @@ Future<bool> deleteForum(int currentForumID) async {
     }
     SecurityHelper securityHelper = new SecurityHelper();
     UserHelper loggedUser = new UserHelper();
+    URLHelper url = new URLHelper();
+
+    final baseURL = await url.getBaseURL();
     final token = await securityHelper.getToken();
     final response = await http.delete(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteForum'),
+      Uri.parse(baseURL + '/api/Forum/DeleteForum'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -78,7 +85,7 @@ Future<bool> deleteForum(int currentForumID) async {
         'forumId': currentForumID,
       }),
     );
-    //print("CODE ============" + response.statusCode.toString());
+
     if (response.statusCode == 201 || response.statusCode == 200) {
       return true;
     } else if (response.statusCode == 401) {
@@ -115,9 +122,14 @@ Future<bool> deleteForum(int currentForumID) async {
 Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   HttpClient client = new HttpClient();
   UserHelper loggedUser = new UserHelper();
+  URLHelper urlBase = new URLHelper();
+  final baseAltURL = await urlBase.getAltBaseURL();
+  final baseURL = await urlBase.getBaseURL();
+
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
-  String url = 'http://10.0.2.2:5000/api/Forum/RetrieveForumThreads?ForumID=' +
+  String url = baseAltURL +
+      '/api/Forum/RetrieveForumThreads?ForumID=' +
       forumIdentifier.toString();
   SecurityHelper securityHelper = new SecurityHelper();
   final token = await securityHelper.getToken();
@@ -130,7 +142,7 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   //print(jsonDecode(reply));
   if (response1.statusCode == 401) {
     final authReponse = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      Uri.parse(baseURL + '/api/Auth/Auth'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
@@ -165,6 +177,8 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
 }
 
 Future<bool> deleteForumThread(int currentThreadID) async {
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
   try {
     if (currentThreadID < 0) {
       throw ("Error: Forum Thread ID is Incorrect");
@@ -173,7 +187,7 @@ Future<bool> deleteForumThread(int currentThreadID) async {
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteForumThread'),
+      Uri.parse(baseURL + '/api/Forum/DeleteForumThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -187,7 +201,7 @@ Future<bool> deleteForumThread(int currentThreadID) async {
       return true;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -213,6 +227,8 @@ Future<bool> deleteForumThread(int currentThreadID) async {
 }
 
 Future<String> addNewForum(String title, int userID) async {
+  URLHelper url = new URLHelper();
+  final baseURL = await url.getBaseURL();
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Fields");
@@ -221,7 +237,7 @@ Future<String> addNewForum(String title, int userID) async {
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForum'),
+      Uri.parse(baseURL + '/api/Forum/CreateForum'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -237,7 +253,7 @@ Future<String> addNewForum(String title, int userID) async {
       return ("Successfully uploaded new Form");
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -265,6 +281,8 @@ Future<String> addNewForum(String title, int userID) async {
 
 Future<String> addNewForumThread(
     int currentId, String title, String body, int userId) async {
+  URLHelper url = new URLHelper();
+  final baseURL = await url.getBaseURL();
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Title");
@@ -277,7 +295,7 @@ Future<String> addNewForumThread(
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForumThread'),
+      Uri.parse(baseURL + '/api/Forum/CreateForumThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -297,7 +315,7 @@ Future<String> addNewForumThread(
       return ("Successfully uploaded new Forum Thread");
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -326,6 +344,8 @@ Future<String> addNewForumThread(
 }
 
 Future<String> editNewForum(String title) async {
+  URLHelper url = new URLHelper();
+  final baseURL = await url.getBaseURL();
   print(title);
   try {
     if (title == "") {
@@ -335,7 +355,7 @@ Future<String> editNewForum(String title) async {
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/EditForum'),
+      Uri.parse(baseURL + '/api/Forum/EditForum'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -349,7 +369,7 @@ Future<String> editNewForum(String title) async {
       return ("Successfully uploaded new notice");
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -380,12 +400,16 @@ Future<String> editNewForum(String title) async {
 ///////////////////////////////////////////////////////////////
 
 Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
+  final baseAltURL = await urlBase.getAltBaseURL();
+
   HttpClient client = new HttpClient();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
-  String url =
-      'http://10.0.2.2:5000/api/Forum/RetrieveThreadComments?ForumThreadID=' +
-          ThreadIdentifier.toString();
+  String url = baseAltURL +
+      '/api/Forum/RetrieveThreadComments?ForumThreadID=' +
+      ThreadIdentifier.toString();
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
   final token = await securityHelper.getToken();
@@ -398,7 +422,7 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
 
   if (response1.statusCode == 401) {
     final authReponse = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      Uri.parse(baseURL + '/api/Auth/Auth'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
@@ -434,6 +458,8 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
 }
 
 Future<bool> deleteComment(int currentCommentId) async {
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
   try {
     print(currentCommentId);
     if (currentCommentId < 0) {
@@ -443,7 +469,7 @@ Future<bool> deleteComment(int currentCommentId) async {
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteThreadComment'),
+      Uri.parse(baseURL + '/api/Forum/DeleteThreadComment'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -459,7 +485,7 @@ Future<bool> deleteComment(int currentCommentId) async {
       return true;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -485,6 +511,8 @@ Future<bool> deleteComment(int currentCommentId) async {
 }
 
 Future<String> editForumThread(String title, String body) async {
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
   try {
     if (title == "") {
       throw ("Cannot Submit Empty Fields");
@@ -497,7 +525,7 @@ Future<String> editForumThread(String title, String body) async {
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/EditForumThread'),
+      Uri.parse(baseURL + '/api/Forum/EditForumThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -515,7 +543,7 @@ Future<String> editForumThread(String title, String body) async {
       return ("Successfully Edited Forum Thread");
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -541,6 +569,8 @@ Future<String> editForumThread(String title, String body) async {
 }
 
 Future<String> editForumThreadComment(String body) async {
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
   try {
     if (body == "") {
       throw ("Cannot Submit Empty Comment");
@@ -549,7 +579,7 @@ Future<String> editForumThreadComment(String body) async {
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/EditThreadComment'),
+      Uri.parse(baseURL + '/api/Forum/EditThreadComment'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -568,7 +598,7 @@ Future<String> editForumThreadComment(String body) async {
       return ("Successfully Edited Comment");
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        Uri.parse(baseURL + '/api/Auth/Auth'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8'
         },
