@@ -5,6 +5,10 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
 
 class ChatViewUsersScreen extends StatefulWidget {
+  //id of currently logged in user
+  //TODO:need to set up global accessor to get this value
+  //myId: 1=runtimeTerrors , 2=retard, 3=diff, 4=matt
+  final myId = 2;
   @override
   State<StatefulWidget> createState() => _chatViewUserScreenState();
 }
@@ -23,11 +27,14 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
             List<Widget> children = [];
             if (snapshot.hasData) {
               for (int i = 0; i < snapshot.data.docs.length; i++) {
-                children.add(ChatUsersCard(
-                  displayName: snapshot.data.docs[i]['displayName'].toString(),
-                  displayImage: snapshot.data.docs[i]['avatar'].toString(),
-                  idUser: snapshot.data.docs[i]['uid'].toInt(),
-                ));
+                if (snapshot.data.docs[i]['uid'] != widget.myId) {
+                  children.add(ChatUsersCard(
+                    displayName:
+                        snapshot.data.docs[i]['displayName'].toString(),
+                    displayImage: snapshot.data.docs[i]['avatar'].toString(),
+                    idUser: snapshot.data.docs[i]['uid'].toInt(),
+                  ));
+                }
               }
             } else {
               children.add(CircularProgressIndicator());
