@@ -69,9 +69,11 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                     ['message']));
                           } else if (snapshot.data.docs[i]['uid'] ==
                               widget.idUser) {
-                            children.add(ChatMessageReceiver(
-                                textSentValue: snapshot.data.docs[i]
-                                    ['message']));
+                            children.add(
+                              ChatMessageReceiver(
+                                textSentValue: snapshot.data.docs[i]['message'],
+                              ),
+                            );
                           }
                         }
                       }

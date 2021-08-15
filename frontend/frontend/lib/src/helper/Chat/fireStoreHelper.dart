@@ -31,11 +31,26 @@ class FireStoreHelper {
     final refMessagesThem = firestore.collection('chats/$idUser/messages');
     //create new message and show that you sent it
     final newMessage = ChatMessageModel(
-        uid: myId, message: message, dateCreated: DateTime.now());
+      uid: myId,
+      message: message,
+      dateCreated: DateTime.now(),
+    );
     //add new message to recipeint collection
-    await refMessagesMe.add(newMessage.toJson());
-    await refMessagesThem.add(newMessage.toJson());
+    await refMessagesMe.add(
+      newMessage.toJson(),
+    );
+    await refMessagesThem.add(
+      newMessage.toJson(),
+    );
     //update messaged user that he/she has a new message
     final refUsers = firestore.collection('users').doc('$idUser').update({});
+  }
+
+  //function to get user object using user idUser
+  Stream<QuerySnapshot<Map<String, dynamic>>> getUserById(idUser) {
+    return firestore
+        .collection('users')
+        .where('uid', isEqualTo: idUser)
+        .snapshots();
   }
 }
