@@ -2,72 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
-import 'package:frontend/src/screens/Booking/bookingSchedulesHome.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
-class BookingScreen extends StatefulWidget {
+class BookingSchedules extends StatefulWidget {
   @override
-  _BookingState createState() => _BookingState();
+  _BookingScheduleState createState() => _BookingScheduleState();
 }
 
-class _BookingState extends State<BookingScreen> {
+class _BookingScheduleState extends State<BookingSchedules> {
   UtilModel utilModel = UtilModel();
   UserHelper loggedUser = new UserHelper();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FancyFab(
-          heroTag: "BookingScreenPage",
-          numberOfItems: 2,
+          heroTag: "BookingSchedulesPage",
+          numberOfItems: 0,
           icon1: Icons.admin_panel_settings_sharp,
-          onPressed1: () async {
-            var name = await loggedUser.getUserName();
-            if (await loggedUser.getAdminStatus()) {
-              UtilModel.route(() => BookingAdminScreen(), context);
-            } else {
-              return showDialog<void>(
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    key: Key('HomeAdminError'),
-                    elevation: 5,
-                    backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                    titleTextStyle:
-                        TextStyle(color: Colors.white, fontSize: 25),
-                    title: Text("Permission Denied: "),
-                    contentTextStyle:
-                        TextStyle(color: Colors.white, fontSize: 20),
-                    content: Text("Sorry " +
-                        name +
-                        ", You do not have permission to access admin related pages!"),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text(
-                          "Return",
-                          style: TextStyle(
-                              color: Color.fromRGBO(33, 33, 33, 1),
-                              fontSize: 20),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          shape: StadiumBorder(),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                context: context,
-              );
-            }
-          },
+          onPressed1: () {},
           icon2: Icons.schedule,
-          onPressed2: () {
-            UtilModel.route(() => BookingSchedules(), context);
-          },
+          onPressed2: () {},
           icon3: Icons.edit,
           onPressed3: () {},
         ),
@@ -93,7 +51,7 @@ class _BookingState extends State<BookingScreen> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     child: Text(
-                      'Booking Home',
+                      'Booking Schedules',
                       style: TextStyle(
                         fontSize: 35,
                         color: Color.fromRGBO(172, 255, 79, 1),
@@ -148,16 +106,14 @@ class _BookingState extends State<BookingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(top: 75.0, bottom: 25.0),
-                    child: Image(
-                      image: AssetImage('images/logo.png'),
-                      height: 150,
-                      width: 500,
+                  Center(
+                    child: Container(
+                      child: Image(
+                        image: AssetImage('images/logo.png'),
+                        height: 150,
+                        width: 500,
+                      ),
                     ),
-                  ),
-                  Container(
-                    child: BookingViewButton(),
                   ),
                 ],
               ),
