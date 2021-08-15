@@ -22,15 +22,23 @@ namespace backend_api.Data.User
     public class UserRepository : IUserRepository
     {
         private readonly UserContext _users;
+        private readonly IdentityContext _aspUser;
 
         public UserRepository(UserContext users)
         {
             this._users = users;
         }
 
-        public async Task<List<Models.User.Users>> GetUser(int userID)
+        public UserRepository(UserContext users, IdentityContext aspUser)
         {
-            return await _users.Users.Where(x => x.UserId == userID).ToListAsync();
+            _users = users;
+            _aspUser = aspUser;
+        }
+
+        public async Task<Models.User.Users> GetUser(int userID)
+        {
+            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
+            
         }
 
         public async Task<List<Models.User.Users>> GetUser(String name)
@@ -70,17 +78,48 @@ namespace backend_api.Data.User
 
             return allUsers.ToList();
         }
-        
-        
 
-        public ViewProfileResponse ViewProfile(ViewProfileRequest request)
+        public ViewProfileResponse ViewProfileAsp(ViewProfileRequest request)
         {
             if (request == null)
             {
                 throw new InvalidUserRequest("Request object cannot be null");
             }
-            var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
+            var selectedUser = _aspUser.Users.Where(x => x.UserId == request.UserId);
+            
+            var name = "";
+            var userImage = "";
+            var description = "";
+            var phoneNumber = "";
+            var empLevel = 111;
+            OfficeLocation officeLocation = OfficeLocation.Braamfontein;
+            UserRoles userRole = UserRoles.Administrator;
 
+            foreach (var x in selectedUser)
+            {
+                name = x.Name;
+                userImage = x.UserImgUrl;
+                description = x.UserDescription;
+                phoneNumber = x.PhoneNumber;
+                empLevel = x.EmployeeLevel;
+                officeLocation = x.OfficeLocation;
+                userRole = x.UserRole;
+            }
+
+            ViewProfileResponse response = new ViewProfileResponse(HttpStatusCode.OK, name,
+                userImage, description, phoneNumber, empLevel, userRole, officeLocation);
+
+            return response;
+        }
+
+        public async Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+
+            var selectedUser =  _users.Users.Where(x => x.UserId == request.UserId);
             
             var name = "";
             var userImage = "";

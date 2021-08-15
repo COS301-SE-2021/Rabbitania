@@ -47,8 +47,21 @@ namespace backend_api.Services.User
             GetUserResponse response = new GetUserResponse(user, name, user.EmployeeLevel, user.IsAdmin, user.UserDescription, user.UserId, user.PhoneNumber, user.UserRole, user.UserImgUrl, user.OfficeLocation, user.PinnedUserIds);
             return response;
         }
+        
+        public async Task<GetUserResponse> GetUserByID(GetUserByIDRequest request)
+        {
+            var user = await _userRepository.GetUser(request.UserId);
+            if (!user.Equals(null))
+            {
+                return new GetUserResponse(user, user.Name,user.EmployeeLevel,user.IsAdmin,user.UserDescription,user.UserId,user.PhoneNumber,user.UserRole,user.UserImgUrl,user.OfficeLocation,user.PinnedUserIds);
+            }
+            else
+            {
+                throw new InvalidUserRequest("User does not exist");
+            }
+        }
 
-        public Task<EditProfileResponse> EditProfile(EditProfileRequest request)
+        public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             if (request == null)
             {
@@ -59,7 +72,7 @@ namespace backend_api.Services.User
                 throw new InvalidUserIdException("UserID is invalid");
             }
             
-            return _userRepository.EditProfile(request);
+            return await _userRepository.EditProfile(request);
         }
         
         public async Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request)
@@ -73,13 +86,25 @@ namespace backend_api.Services.User
                 throw new Exception("Error Missing UserID");
             }
             
-            ViewProfileResponse returnObject = _userRepository.ViewProfile(request);
+            ViewProfileResponse returnObject = await _userRepository.ViewProfile(request);
             if (returnObject.name == null)
             {
                 throw new InvalidUserRequest("User does not exist");
             }
 
             return returnObject;
+        }
+        public async Task<ViewProfileResponse> ViewProfileAsp(ViewProfileRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+            if (request.UserId.Equals(null))
+            {
+                throw new Exception("Error Missing UserID");
+            }
+            return _userRepository.ViewProfileAsp(request);
         }
 
         public async Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request)

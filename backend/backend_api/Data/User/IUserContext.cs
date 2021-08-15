@@ -8,7 +8,6 @@ namespace backend_api.Data.User
     {
         DbSet<Models.User.Users> Users { get; set; }
         DbSet<UserEmails> UserEmail { get; set; }
-        
         Task<int> SaveChanges();
     }
 }

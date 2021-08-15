@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using backend_api.Models.Enumerations;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend_api.Models.User
 {

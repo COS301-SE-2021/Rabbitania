@@ -44,16 +44,20 @@ namespace backend_api
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         private string _conn = null;
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           Configuration = configuration;
+           StaticConfig = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration StaticConfig { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -62,10 +66,14 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
+            services.AddTransient<IAuthService, AuthService>();
+            
 
             //SignalR
-            services.AddSignalR();
-            
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -77,6 +85,7 @@ namespace backend_api
             
             // For sending an email
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+
             
             services.AddAuthentication(option =>
             {
@@ -185,14 +194,22 @@ namespace backend_api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v2"});
             });
 
             #endregion
 
+            // services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
+            // services.AddDbContext<IdentityContext>(o =>
+            // {
+            //     o.UseNpgsql(
+            //         Configuration.GetConnectionString("localhost"));
+            // });
+            
+            // services.ConfigureIdentity();
+            services.ConfigJwt(Configuration);
+            services.AddAuthentication();
             services.AddAuthorization();
-
-            //Npgsql connection for Postresql
 
         }
 
@@ -217,7 +234,7 @@ namespace backend_api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/ChatHub");
+                endpoints.MapHub<ChatHub>("/ChatHub"); 
             });
         }
     }

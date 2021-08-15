@@ -10,7 +10,7 @@ namespace backend_api.Data.User
 {
     public interface IUserRepository
     {
-        Task<List<Models.User.Users>> GetUser(int userID);
+        Task<Models.User.Users> GetUser(int userID);
 
         Task<List<Models.User.Users>> GetUser(String name);
 
@@ -18,7 +18,7 @@ namespace backend_api.Data.User
         
         Task<IEnumerable<Models.User.Users>> GetAllUsers();
         
-        ViewProfileResponse ViewProfile(ViewProfileRequest request);
+        Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
 
         Task<GetUserProfilesResponse> GetUserProfiles();
 
@@ -29,5 +29,8 @@ namespace backend_api.Data.User
         Task<Models.User.Users> GetExistingUserDetails(GoogleSignInRequest request);
         
         Task<bool> checkEmailExists(GoogleSignInRequest request);
+
+        ViewProfileResponse ViewProfileAsp(ViewProfileRequest request);
+
     }
 }
