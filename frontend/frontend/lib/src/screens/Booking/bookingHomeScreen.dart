@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
-import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
@@ -22,14 +18,11 @@ class _BookingState extends State<BookingScreen> {
   UserHelper loggedUser = new UserHelper();
 
   @override
-  initState() {}
-
-  @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FancyFab(
           heroTag: "BookingScreenPage",
-          numberOfItems: 1,
-          icon1: Icons.shield_outlined,
+          numberOfItems: 2,
+          icon1: Icons.admin_panel_settings_sharp,
           onPressed1: () async {
             var name = await loggedUser.getUserName();
             if (await loggedUser.getAdminStatus()) {
@@ -70,8 +63,10 @@ class _BookingState extends State<BookingScreen> {
               );
             }
           },
-          icon2: Icons.edit,
-          onPressed2: () {},
+          icon2: Icons.schedule,
+          onPressed2: () {
+            UtilModel.route(() => BookingAdminScreen(), context);
+          },
           icon3: Icons.edit,
           onPressed3: () {},
         ),

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
 using backend_api.Exceptions.Booking;
@@ -57,6 +58,16 @@ namespace backend_api.Services.Forum
                 );
             await _notificationService.SendEmailNotification(emailReq);
 
+            var tfidf = new TFIDF.TFIDF();
+            var titlesList = new List<string>();
+            titlesList.Add("Stupid Question");
+            titlesList.Add("2nd Thread Title Test");
+
+            var bodiesList = new List<string>();
+            bodiesList.Add("1st Thread Body Test");
+            bodiesList.Add("2nd Thread body test");
+            tfidf.tfidf_call(titlesList, bodiesList, "Dumb Question 1", "2nd Thread Body Test");
+            
             return await _forumRepository.CreateForum(request);
         }
 
