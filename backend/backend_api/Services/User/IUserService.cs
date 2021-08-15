@@ -24,7 +24,9 @@ namespace backend_api.Services.User
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
         Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
-
+        
+        Task<ViewProfileResponse> ViewProfileAsp(ViewProfileRequest request);
+        Task<GetUserResponse> GetUserByID(GetUserByIDRequest request);
         Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request);
 
         List<string> GetAllUserEmails();

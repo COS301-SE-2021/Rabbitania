@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.Notification.Responses;
 using backend_api.Services.Notification;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend_api.Controllers.Notification
@@ -23,7 +24,7 @@ namespace backend_api.Controllers.Notification
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveNotifications")]
         public async Task<RetrieveNotificationsResponse> RetrieveNotifications([FromQuery] RetrieveNotificationRequest request)
         {
@@ -35,7 +36,7 @@ namespace backend_api.Controllers.Notification
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateNotification")]
         public async Task<CreateNotificationResponse> CreateNotification([FromBody] CreateNotificationRequest request)
         {
@@ -47,7 +48,7 @@ namespace backend_api.Controllers.Notification
         /// </summary>
         /// <param name="request"></param>
         /// <returns> HTTP Status response </returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("SendEmailNotification")]
         public async Task<ActionResult> SendEmailNotification([FromBody] SendEmailNotificationRequest request)
         {

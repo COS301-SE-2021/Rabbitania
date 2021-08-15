@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using backend_api.Models.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
 using Newtonsoft.Json.Linq;
@@ -50,5 +51,8 @@ namespace backend_api.Services.Auth
         /// <returns>User object</returns>
         Task<Models.User.Users> GetUserID(GoogleSignInRequest request);
 
+        Task<bool> Validate(Credentials credentials);
+
+        Task<string> createJwt(Credentials credentials);
     }
 }

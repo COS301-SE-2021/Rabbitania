@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +22,8 @@ class ContinueButton extends StatefulWidget {
 class _continueButton extends State<ContinueButton> {
   UserProvider userProvider = UserProvider();
   UserHelper userHelper = UserHelper();
+  SecurityHelper securityHelper = SecurityHelper();
+
   @protected
   @mustCallSuper
   void initState() {
@@ -33,9 +36,9 @@ class _continueButton extends State<ContinueButton> {
       user = widget.user;
     });
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/GoogleSignIn/GoogleLogin'),
+      Uri.parse('https://10.0.2.2:5001/api/Auth/GoogleLogin'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=UTF-8'
       },
       body: jsonEncode(<String, dynamic>{
         'displayName': widget.user.displayName,
@@ -47,7 +50,26 @@ class _continueButton extends State<ContinueButton> {
     if (response.statusCode == 200) {
       var userID = await userProvider.getUserID();
       userHelper.setUserID(userID);
+      userHelper.setUserName(widget.user.displayName);
       setState(() {});
+      var token;
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': userID,
+          'name': widget.user.displayName
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
