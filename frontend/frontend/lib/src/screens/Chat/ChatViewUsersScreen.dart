@@ -8,8 +8,8 @@ import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 class ChatViewUsersScreen extends StatefulWidget {
   //id of currently logged in user
   //TODO:need to set up global accessor to get this value
-  //myId: 1=runtimeTerrors , 2=retard, 3=diff, 4=matt
-  final myId = 3;
+  //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
+  final myId = 6;
   @override
   State<StatefulWidget> createState() => _chatViewUserScreenState();
 }
@@ -17,7 +17,7 @@ class ChatViewUsersScreen extends StatefulWidget {
 class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
   final utilModel = UtilModel();
   final fireStoreHelper = FireStoreHelper();
-  final _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,14 +41,9 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
             } else {
               children.add(CircularProgressIndicator());
             }
-            _scrollController
-                .jumpTo(_scrollController.position.maxScrollExtent);
+
             return ListView(
-              controller: () {
-                _scrollController
-                    .jumpTo(_scrollController.position.maxScrollExtent);
-                return _scrollController;
-              }(),
+              shrinkWrap: true,
               children: children,
             );
           },

@@ -21,7 +21,8 @@ class FireStoreHelper {
     //filter those messages by searching for messages he sent to me
     return firestore
         .collection('chats/$myId/messages')
-        .orderBy('dateCreated')
+        .where('uid', whereIn: [idUser, myId])
+        .orderBy('dateCreated', descending: true)
         .snapshots();
   }
 
@@ -35,6 +36,7 @@ class FireStoreHelper {
       message: message,
       dateCreated: DateTime.now(),
     );
+
     //add new message to recipeint collection
     await refMessagesMe.add(
       newMessage.toJson(),
