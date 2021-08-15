@@ -94,11 +94,12 @@ namespace backend_api.Data.Forum
                 var queryBody = request.ForumThreadBody;
 
                 var tfidf = new TFIDF.TFIDF();
-                var shouldnt_create = tfidf.tfidf_call(ListOfForumThreadTitles, ListOfForumThreadBodies, queryTitle,
+                var shouldnt_create = await tfidf.tfidf_call(ListOfForumThreadTitles, ListOfForumThreadBodies, queryTitle,
                     queryBody);
                 Console.Write(shouldnt_create);
-                if (shouldnt_create == "false")
+                if (shouldnt_create == false)
                     {
+                        Console.Write("Here it is bitch");
                         await CreateForumThread(request);
                         return false;
                     }

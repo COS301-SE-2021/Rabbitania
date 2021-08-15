@@ -19,7 +19,7 @@ namespace backend_api.Controllers.Forum
             _service = service;
         }
 
-        [HttpPost, Authorize]
+        [HttpPost]
         [Route("CreateForum")]
         public async Task<CreateForumResponse> CreateForum(
             [FromBody] CreateForumRequest request)
@@ -43,7 +43,7 @@ namespace backend_api.Controllers.Forum
             return await _service.EditForum(request);
         }
 
-        [HttpDelete, Authorize]
+        [HttpDelete]
         [Route("DeleteForum")]
         public async Task<DeleteForumResponse> DeleteForum(
             [FromBody] DeleteForumRequest request)
