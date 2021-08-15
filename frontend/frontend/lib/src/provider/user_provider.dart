@@ -25,6 +25,27 @@ class UserProvider {
     return int.parse(response.body);
   }
 
+  getUserAdminStatus() async {
+    SecurityHelper securityHelper = new SecurityHelper();
+    String userEmail = user.providerData[0].email!;
+    final token = securityHelper.getToken();
+    final response = await http.get(
+      Uri.parse(
+          'https://10.0.2.2:5001/api/Auth/GetAdminStatus?email=$userEmail'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    var isAdmin;
+    if (response.body == "true") {
+      isAdmin = true;
+    } else {
+      isAdmin = false;
+    }
+    return isAdmin;
+  }
+
   Future<UserProfileModel> getUserProfile() async {
     final user = await getUserID();
     SecurityHelper securityHelper = new SecurityHelper();

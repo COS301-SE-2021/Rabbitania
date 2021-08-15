@@ -17,6 +17,11 @@ class UserHelper {
     prefs.setString('name', name);
   }
 
+  void setAdminStatus(isAdmin) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isAdmin', isAdmin);
+  }
+
   //funtion used to retrieve stored userID
   //function is async so must use callback when using
   getUserID() async {
@@ -29,6 +34,11 @@ class UserHelper {
     return prefs.getString('name');
   }
 
+  getAdminStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isAdmin');
+  }
+
   //clear all user specific data from disk
   //function is async so must use callback when using
   clearPersitantUserData() async {
@@ -39,6 +49,11 @@ class UserHelper {
   clearPersitantUserName() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('name');
+  }
+
+  clearPersitantUserStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('isAdmin');
   }
 }
 
