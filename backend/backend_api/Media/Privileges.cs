@@ -2,6 +2,7 @@
 {
     public enum Privileges
     {
+        
         kJoinChannel = 1,
         kPublishAudioStream = 2,
         kPublishVideoStream = 3,

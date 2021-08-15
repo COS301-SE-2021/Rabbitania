@@ -4,6 +4,7 @@ namespace AgoraIO.Media
 {
     public class PrivilegeMessage : IPackable
     {
+        
         public uint salt;
         public uint ts;
         public Dictionary<ushort, uint> messages;

@@ -39,6 +39,7 @@ namespace backend_api.Controllers.Auth
             this._service = service;
             this._userService = userService;
             this._notificationService = notificationService;
+            
         }
 
         /// <summary>

@@ -21,6 +21,7 @@ using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.Auth
 {
+    
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _repository;

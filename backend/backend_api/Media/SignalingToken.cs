@@ -6,6 +6,7 @@ namespace AgoraIO.Media
 {
     public class SignalingToken
     {
+        
         public static String getToken(String appId, String certificate, String account, int expiredTsInSeconds)
         {
             StringBuilder digest_String = new StringBuilder().Append(account).Append(appId).Append(certificate).Append(expiredTsInSeconds);

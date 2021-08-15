@@ -2,6 +2,7 @@
 
 namespace AgoraIO.Media
 {
+    
     /// <summary>
         /// 创建一个可变长的Byte数组方便Push数据和Pop数据
         /// 数组的最大长度为1024,超过会产生溢出

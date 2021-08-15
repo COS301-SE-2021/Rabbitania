@@ -3,6 +3,7 @@ using System.IO;
 
 namespace AgoraIO.Media
 {
+    
     public class DynamicKey4
     {
         private static String PUBLIC_SHARING_SERVICE = "APSS";

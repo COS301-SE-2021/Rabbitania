@@ -2,6 +2,7 @@
 {
     public class PackContent : IPackable
     {
+        
         public byte[] signature;
         public uint crcChannelName;
         public uint crcUid;

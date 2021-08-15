@@ -1,5 +1,6 @@
 ﻿namespace AgoraIO.Media
 {
+    
     public class AgoraSettings
     {
         private string AppID;

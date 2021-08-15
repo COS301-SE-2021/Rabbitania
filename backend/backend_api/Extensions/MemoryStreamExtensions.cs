@@ -3,6 +3,7 @@ using System.Text;
 
 namespace AgoraIO.Media
 {
+    
     public static class MemoryStreamExtensions
     {
         public static void write(this MemoryStream obj, string data)

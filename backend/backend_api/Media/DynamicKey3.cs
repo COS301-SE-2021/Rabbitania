@@ -3,6 +3,7 @@ using System.IO;
 
 namespace AgoraIO.Media
 {
+    
     public class DynamicKey3
     {
         public static String generate(String appID, String appCertificate, String channelName, int unixTs, int randomInt, long uid, int expiredTs) //throws Exception

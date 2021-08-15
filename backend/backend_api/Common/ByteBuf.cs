@@ -4,6 +4,7 @@ namespace AgoraIO.Media
 {
     public class ByteBuf
     {
+        
         ByteBuffer buffer = new ByteBuffer();
         public ByteBuf()
         {

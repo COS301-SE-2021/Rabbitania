@@ -4,6 +4,7 @@ namespace backend_api.Models.Chat.Requests
 {
     public class AgoraAuthRequest
     {
+        
         [Required] 
         public string channel { get; set; }
         

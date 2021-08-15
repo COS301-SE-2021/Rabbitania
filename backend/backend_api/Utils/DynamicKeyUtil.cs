@@ -4,6 +4,7 @@ using System.Text;
 
 namespace AgoraIO.Media
 {
+    
     public class DynamicKeyUtil
     {
         public static byte[] encodeHMAC(String key, byte[] message, string alg = "SHA1")// throws NoSuchAlgorithmException, InvalidKeyException

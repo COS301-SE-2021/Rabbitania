@@ -6,6 +6,7 @@ namespace AgoraIO.Media
 {
     public class AccessToken
     {
+        
         private string _appId;
         private string _appCertificate;
         private string _channelName;

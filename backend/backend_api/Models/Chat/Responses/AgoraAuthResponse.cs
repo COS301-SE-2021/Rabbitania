@@ -2,6 +2,7 @@
 {
     public class AgoraAuthResponse
     {
+        
         public string channel { get; set; }
 
         public dynamic uid { get; set; }

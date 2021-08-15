@@ -40,6 +40,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace backend_api
 {
+    
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
