@@ -52,12 +52,7 @@ class _BookingScheduleState extends State<BookingSchedules> {
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5),
                   itemBuilder: (BuildContext context, int index) {
-                    return Card(color: Colors.transparent, shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(40), // if you need this
-    side: BorderSide(
-      color: Colors.grey.withOpacity(0.2),
-      width: 1,
-    ),);
+                    return Card(color: Colors.transparent);
                   },
                 ),
               ),
