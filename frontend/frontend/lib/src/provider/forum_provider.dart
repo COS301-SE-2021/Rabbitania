@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 Future<List<ForumObj>> fetchForum() async {
   HttpClient client = new HttpClient();
   SecurityHelper securityHelper = new SecurityHelper();
+  UserHelper loggedUser = new UserHelper();
   final token = await securityHelper.getToken();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
@@ -26,6 +27,26 @@ Future<List<ForumObj>> fetchForum() async {
   HttpClientResponse response1 = await request.close();
   String reply = await response1.transform(utf8.decoder).join();
 
+  if (response1.statusCode == 401) {
+    final authReponse = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'userID': loggedUser.getUserID(),
+        'name': loggedUser.getUserName()
+      }),
+    );
+    if (authReponse.statusCode == 200) {
+      Map<String, dynamic> obj = jsonDecode(authReponse.body);
+      var token = '${obj['token']}';
+      securityHelper.setToken(token);
+      return fetchForum();
+    } else {
+      throw new Exception("Error with Authentication");
+    }
+  }
   List<dynamic> tList = ForumObjs.fromJson(jsonDecode(reply)).forumThreadList;
 
   List<ForumObj> threadObj = [];
@@ -93,6 +114,7 @@ Future<bool> deleteForum(int currentForumID) async {
 
 Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   HttpClient client = new HttpClient();
+  UserHelper loggedUser = new UserHelper();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
   String url = 'http://10.0.2.2:5000/api/Forum/RetrieveForumThreads?ForumID=' +
@@ -106,7 +128,26 @@ Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
   HttpClientResponse response1 = await request.close();
   String reply = await response1.transform(utf8.decoder).join();
   //print(jsonDecode(reply));
-
+  if (response1.statusCode == 401) {
+    final authReponse = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'userID': loggedUser.getUserID(),
+        'name': loggedUser.getUserName()
+      }),
+    );
+    if (authReponse.statusCode == 200) {
+      Map<String, dynamic> obj = jsonDecode(authReponse.body);
+      var token = '${obj['token']}';
+      securityHelper.setToken(token);
+      return fetchForumThreads(forumIdentifier);
+    } else {
+      throw new Exception("Error with Authentication");
+    }
+  }
   List? tList = ForumThreads.fromJson(jsonDecode(reply)).forumThreadList;
 
   List<ForumThread> threadObj = [];
@@ -129,6 +170,7 @@ Future<bool> deleteForumThread(int currentThreadID) async {
       throw ("Error: Forum Thread ID is Incorrect");
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
       Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteForumThread'),
@@ -143,6 +185,25 @@ Future<bool> deleteForumThread(int currentThreadID) async {
 
     if (response.statusCode == 201 || response.statusCode == 200) {
       return true;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return deleteForumThread(currentThreadID);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Falied to delete, error code" + response.statusCode.toString());
     }
@@ -157,6 +218,7 @@ Future<String> addNewForum(String title, int userID) async {
       throw ("Cannot Submit Empty Fields");
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForum'),
@@ -173,6 +235,25 @@ Future<String> addNewForum(String title, int userID) async {
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
       return ("Successfully uploaded new Form");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return addNewForum(title, userID);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed to create new thread error" +
           response.statusCode.toString());
@@ -193,6 +274,7 @@ Future<String> addNewForumThread(
       ForumCreateInputImage = ForumCreateImg64;
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.post(
       Uri.parse('https://10.0.2.2:5001/api/Forum/CreateForumThread'),
@@ -213,6 +295,25 @@ Future<String> addNewForumThread(
     if (response.statusCode == 201 || response.statusCode == 200) {
       ForumCreateImageFile = null;
       return ("Successfully uploaded new Forum Thread");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return addNewForumThread(currentId, title, body, userId);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       ForumCreateImageFile = null;
       throw ("Failed to create new thread error" +
@@ -231,6 +332,7 @@ Future<String> editNewForum(String title) async {
       throw ("Cannot Submit Empty Fields");
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/Forum/EditForum'),
@@ -245,6 +347,25 @@ Future<String> editNewForum(String title) async {
         response.statusCode == 200 ||
         response.statusCode == 100) {
       return ("Successfully uploaded new notice");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return editNewForum(title);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed to create new thread error" +
           response.statusCode.toString());
@@ -266,6 +387,7 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
       'http://10.0.2.2:5000/api/Forum/RetrieveThreadComments?ForumThreadID=' +
           ThreadIdentifier.toString();
   SecurityHelper securityHelper = new SecurityHelper();
+  UserHelper loggedUser = new UserHelper();
   final token = await securityHelper.getToken();
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
   request.headers.set('content-type', 'application/json');
@@ -274,6 +396,26 @@ Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
   String reply = await response1.transform(utf8.decoder).join();
   print(jsonDecode(reply));
 
+  if (response1.statusCode == 401) {
+    final authReponse = await http.post(
+      Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'userID': loggedUser.getUserID(),
+        'name': loggedUser.getUserName()
+      }),
+    );
+    if (authReponse.statusCode == 200) {
+      Map<String, dynamic> obj = jsonDecode(authReponse.body);
+      var token = '${obj['token']}';
+      securityHelper.setToken(token);
+      return fetchThreadComments(ThreadIdentifier);
+    } else {
+      throw new Exception("Error with Authentication");
+    }
+  }
   List? cList =
       ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
 
@@ -298,6 +440,7 @@ Future<bool> deleteComment(int currentCommentId) async {
       throw ("Error: Comment Id is invalid");
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.delete(
       Uri.parse('https://10.0.2.2:5001/api/Forum/DeleteThreadComment'),
@@ -314,6 +457,25 @@ Future<bool> deleteComment(int currentCommentId) async {
     //print("CODE ============" + response.statusCode.toString());
     if (response.statusCode == 201 || response.statusCode == 200) {
       return true;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return deleteComment(currentCommentId);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed to delete, error code" + response.statusCode.toString());
     }
@@ -332,6 +494,7 @@ Future<String> editForumThread(String title, String body) async {
       editForumThreadInputImage = editForumThreadImg64;
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/Forum/EditForumThread'),
@@ -350,6 +513,25 @@ Future<String> editForumThread(String title, String body) async {
         response.statusCode == 200 ||
         response.statusCode == 100) {
       return ("Successfully Edited Forum Thread");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return editForumThread(title, body);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed Edit Forum Thread" + response.statusCode.toString());
     }
@@ -364,6 +546,7 @@ Future<String> editForumThreadComment(String body) async {
       throw ("Cannot Submit Empty Comment");
     }
     SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/Forum/EditThreadComment'),
@@ -383,6 +566,25 @@ Future<String> editForumThreadComment(String body) async {
         response.statusCode == 200 ||
         response.statusCode == 100) {
       return ("Successfully Edited Comment");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return editForumThreadComment(body);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       throw ("Failed To Edit Comment" + response.statusCode.toString());
     }
