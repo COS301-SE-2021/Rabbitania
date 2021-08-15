@@ -27,7 +27,6 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace backend_api.Controllers.Auth
 {
-    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
