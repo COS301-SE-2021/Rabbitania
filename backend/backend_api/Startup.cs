@@ -93,8 +93,8 @@ namespace backend_api
                 option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
             {
-                options.ClientId = "";
-                options.ClientSecret = "";
+                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
+                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
             });
             
             
