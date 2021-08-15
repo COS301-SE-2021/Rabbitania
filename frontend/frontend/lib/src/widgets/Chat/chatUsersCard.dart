@@ -25,9 +25,9 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
 
   bool isSelected = false;
   //TODO: create function for setting hasNotification to true if count > 0
-  bool hasNotifications = true;
+  bool hasNotifications = false;
   //TODO: make to get notification count with http to server
-  int notificatioCount = 1;
+  int notificationCount = 1;
   void toggle() {
     if (this.isSelected) {
       setState(() {
@@ -44,6 +44,7 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
         InkWell(
           onLongPress: () {
             toggle();
@@ -100,7 +101,7 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
                       backgroundColor: utilModel.greenColor,
                       //backgroundColor: utilModel.greenColor,
                       child: Text(
-                        notificatioCount.toString(),
+                        notificationCount.toString(),
                         style: TextStyle(
                             color: utilModel.greyColor,
                             fontWeight: FontWeight.bold),

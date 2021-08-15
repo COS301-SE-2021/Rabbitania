@@ -37,7 +37,7 @@ class _infoForm extends State<InfoForm> {
   }
 
   httpCallGetUser() async {
-    final userHttp = new UserProvider(FirebaseAuth.instance.currentUser);
+    final userHttp = new UserProvider();
     final userID = await userHttp.getUserID();
     return userID;
   }
@@ -175,7 +175,6 @@ class _infoForm extends State<InfoForm> {
                                       child: Center(
                                         child: Text(
                                           user.providerData[0].email!,
-                                          
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color.fromRGBO(

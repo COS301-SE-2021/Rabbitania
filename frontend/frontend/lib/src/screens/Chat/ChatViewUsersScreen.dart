@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 class ChatViewUsersScreen extends StatefulWidget {
   //id of currently logged in user
   //TODO:need to set up global accessor to get this value
   //myId: 1=runtimeTerrors , 2=retard, 3=diff, 4=matt
-  final myId = 2;
+  final myId = 3;
   @override
   State<StatefulWidget> createState() => _chatViewUserScreenState();
 }
@@ -16,6 +17,7 @@ class ChatViewUsersScreen extends StatefulWidget {
 class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
   final utilModel = UtilModel();
   final fireStoreHelper = FireStoreHelper();
+  final _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,10 +41,19 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
             } else {
               children.add(CircularProgressIndicator());
             }
-
-            return ListView(children: children);
+            _scrollController
+                .jumpTo(_scrollController.position.maxScrollExtent);
+            return ListView(
+              controller: () {
+                _scrollController
+                    .jumpTo(_scrollController.position.maxScrollExtent);
+                return _scrollController;
+              }(),
+              children: children,
+            );
           },
         ),
+        bottomNavigationBar: bnb(context),
       ),
     );
   }

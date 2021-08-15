@@ -101,7 +101,7 @@ class _profileState extends State<ProfileScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    ProfilePicture(),
+                    ProfilePicture(30),
                     Text(
                       snapshot.data.userName,
                       style: TextStyle(
