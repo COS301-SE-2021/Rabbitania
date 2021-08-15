@@ -33,6 +33,6 @@ namespace backend_api.Data.Forum
 
         Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request);
 
-        Task<CreateForumThreadResponse> CreateForumThreadApi(CreateForumRequest request);
+        Task<bool> CreateForumThreadApi(CreateForumThreadRequest request);
     }
 }
