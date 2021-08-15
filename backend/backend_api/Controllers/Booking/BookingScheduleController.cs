@@ -30,7 +30,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and list object</returns>
-        [HttpGet, Authorize]
+        [HttpGet]
         [Route("GetBookingSchedules")]
         public async Task<ActionResult> GetAllBookingSchedules([FromQuery] GetAllBookingSchedulesRequest request)
         {
@@ -39,8 +39,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var schedules = await _scheduleService.ViewAllBookingSchedules(request);
-                    var list = schedules.BookingSchedules.ToList();
-                    return Ok(JsonConvert.SerializeObject(list));
+                    return Ok(schedules);
                 }
                 catch (InvalidBookingException e)
                 {

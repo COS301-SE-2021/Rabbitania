@@ -9,6 +9,7 @@ import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
 import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/Booking/bookingGridSchedule.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
 import 'package:frontend/src/widgets/Booking/viewBookingCard.dart';
 
@@ -42,20 +43,7 @@ class _BookingScheduleState extends State<BookingSchedules> {
                 utilModel.svg_background,
                 fit: BoxFit.contain,
               ),
-              Container(
-                padding: EdgeInsets.all(12.0),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(color: Colors.transparent);
-                  },
-                ),
-              ),
+              BookingGridSchedule(),
             ],
           ),
         ),
