@@ -93,7 +93,7 @@ namespace backend_api.Controllers.Auth
                 }
                 else
                 {
-                    throw new InvalidDomainException("Domain is not part of the retro rabbit workspace");
+                    throw new InvalidDomainException("Domain in not part of the retro rabbit workspace");
                 }
             }
             catch (Exception e)
