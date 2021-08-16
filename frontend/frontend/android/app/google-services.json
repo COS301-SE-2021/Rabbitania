@@ -131,6 +131,22 @@
           }
         },
         {
+          "client_id": "248471898739-u850s8l780qmis85jsf8454ulpq2g5ee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "b90fe5f72d231025a769792ba82acd83cb104773"
+          }
+        },
+        {
+          "client_id": "248471898739-uq7irtha8ngjicg2at4dv9hu0mauioqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "32bf98c4d1786cca64224c0145e6a6e2463aece7"
+          }
+        },
+        {
           "client_id": "248471898739-etobben46flals880qnr0cb4vdl09lbh.apps.googleusercontent.com",
           "client_type": 3
         }
