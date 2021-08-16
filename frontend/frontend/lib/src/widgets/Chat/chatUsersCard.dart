@@ -9,11 +9,12 @@ class ChatUsersCard extends StatefulWidget {
   final String displayName;
   final String displayImage;
   final int idUser;
-
+  final int myId;
   ChatUsersCard(
       {required this.displayName,
       required this.displayImage,
-      required this.idUser});
+      required this.idUser,
+      required this.myId});
 
   @override
   _ChatUsersCardState createState() => _ChatUsersCardState();

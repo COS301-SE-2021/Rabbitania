@@ -16,49 +16,53 @@ class ChatViewUsersScreen extends StatefulWidget {
 }
 
 class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
-  int? myId;
   final userProvider = UserProvider();
   final utilModel = UtilModel();
   final fireStoreHelper = FireStoreHelper();
-  initState() {
-    super.initState();
-    userProvider.getUserID().then(
-      (response) {
-        this.myId = response;
-        print(this.myId);
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: utilModel.greyColor,
-        body: StreamBuilder<QuerySnapshot>(
-          stream: fireStoreHelper.getUsersDocumentsFromFireStoreAsStream(),
-          builder: (context, AsyncSnapshot snapshot) {
-            List<Widget> children = [];
+        body: FutureBuilder(
+          future: userProvider.getUserID(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasData) {
-              for (int i = 0; i < snapshot.data.docs.length; i++) {
-                if (snapshot.data.docs[i]['uid'] != this.myId) {
-                  children.add(
-                    ChatUsersCard(
-                      displayName:
-                          snapshot.data.docs[i]['displayName'].toString(),
-                      displayImage: snapshot.data.docs[i]['avatar'].toString(),
-                      idUser: snapshot.data.docs[i]['uid'].toInt(),
-                    ),
-                  );
-                }
-              }
-            } else {
-              children.add(CircularProgressIndicator());
-            }
+              int userId = snapshot.data;
+              return StreamBuilder<QuerySnapshot>(
+                stream:
+                    fireStoreHelper.getUsersDocumentsFromFireStoreAsStream(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  List<Widget> children = [];
+                  if (snapshot.hasData) {
+                    for (int i = 0; i < snapshot.data.docs.length; i++) {
+                      if (snapshot.data.docs[i]['uid'] != userId) {
+                        children.add(
+                          ChatUsersCard(
+                            displayName:
+                                snapshot.data.docs[i]['displayName'].toString(),
+                            displayImage:
+                                snapshot.data.docs[i]['avatar'].toString(),
+                            idUser: snapshot.data.docs[i]['uid'].toInt(),
+                            myId: userId,
+                          ),
+                        );
+                      }
+                    }
+                  } else {
+                    children.add(CircularProgressIndicator());
+                  }
 
-            return ListView(
-              shrinkWrap: true,
-              children: children,
+                  return ListView(
+                    shrinkWrap: true,
+                    children: children,
+                  );
+                },
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(color: utilModel.greenColor),
             );
           },
         ),
