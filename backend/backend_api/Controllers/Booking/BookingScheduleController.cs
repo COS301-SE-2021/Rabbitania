@@ -30,7 +30,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and list object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBookingSchedules")]
         public async Task<ActionResult> GetAllBookingSchedules([FromQuery] GetAllBookingSchedulesRequest request)
         {
