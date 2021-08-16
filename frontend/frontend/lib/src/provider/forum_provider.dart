@@ -115,6 +115,59 @@ Future<bool> deleteForum(int currentForumID) async {
   }
 }
 
+Future<String> addNewForum(String title, int userID) async {
+  URLHelper url = new URLHelper();
+  final baseURL = await url.getBaseURL();
+  try {
+    if (title == "") {
+      throw ("Cannot Submit Empty Fields");
+    }
+    SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
+    final token = await securityHelper.getToken();
+    final response = await http.post(
+      Uri.parse(baseURL + '/api/Forum/CreateForum'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(<String, dynamic>{
+        "forumId": 0,
+        "forumTitle": title,
+        "createdDate": "2021-08-04T11:50:49.398Z",
+        "userId": userID
+      }),
+    );
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      return ("Successfully uploaded new Form");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse(baseURL + '/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return addNewForum(title, userID);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      throw ("Failed to create new thread error" +
+          response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return ("Error: " + Exception.toString());
+  }
+}
+
 ////////////////////////////////////////////////////////////////
 /// Forum Threads
 ///////////////////////////////////////////////////////////////
@@ -226,59 +279,6 @@ Future<bool> deleteForumThread(int currentThreadID) async {
   }
 }
 
-Future<String> addNewForum(String title, int userID) async {
-  URLHelper url = new URLHelper();
-  final baseURL = await url.getBaseURL();
-  try {
-    if (title == "") {
-      throw ("Cannot Submit Empty Fields");
-    }
-    SecurityHelper securityHelper = new SecurityHelper();
-    UserHelper loggedUser = new UserHelper();
-    final token = await securityHelper.getToken();
-    final response = await http.post(
-      Uri.parse(baseURL + '/api/Forum/CreateForum'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token'
-      },
-      body: jsonEncode(<String, dynamic>{
-        "forumId": 0,
-        "forumTitle": title,
-        "createdDate": "2021-08-04T11:50:49.398Z",
-        "userId": userID
-      }),
-    );
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      return ("Successfully uploaded new Form");
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return addNewForum(title, userID);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
-    } else {
-      throw ("Failed to create new thread error" +
-          response.statusCode.toString());
-    }
-  } catch (Exception) {
-    return ("Error: " + Exception.toString());
-  }
-}
-
 Future<String> addNewForumThread(
     int currentId, String title, String body, int userId) async {
   URLHelper url = new URLHelper();
@@ -313,6 +313,77 @@ Future<String> addNewForumThread(
     if (response.statusCode == 201 || response.statusCode == 200) {
       ForumCreateImageFile = null;
       return ("Successfully uploaded new Forum Thread");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse(baseURL + '/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return addNewForumThread(currentId, title, body, userId);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      ForumCreateImageFile = null;
+      throw ("Failed to create new thread error" +
+          response.statusCode.toString());
+    }
+  } catch (Exception) {
+    ForumCreateImageFile = null;
+    return ("Error: " + Exception.toString());
+  }
+}
+
+Future<String> addNewForumThreadNLP(
+    int currentId, String title, String body, int userId) async {
+  URLHelper url = new URLHelper();
+  final baseURL = await url.getBaseURL();
+  try {
+    if (title == "") {
+      throw ("Cannot Submit Empty Title");
+    }
+
+    if (ForumCreateImg64 != "") {
+      ForumCreateInputImage = ForumCreateImg64;
+    }
+    SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
+    final token = await securityHelper.getToken();
+    final response = await http.post(
+      Uri.parse(baseURL + '/api/Forum/CreateForumThreadAPI'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(<String, dynamic>{
+        "forumThreadId": 0,
+        "forumThreadTitle": title,
+        "forumThreadBody": body,
+        "createdDate": "2021-08-04T13:45:13.091Z",
+        "imageUrl": ForumCreateInputImage,
+        "userId": userId,
+        "forumId": currentForumID
+      }),
+    );
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      ForumCreateImageFile = null;
+
+      if (response.body == "true") {
+        //bring up an alert etc...
+        return (response.body.toString());
+      } else {
+        //dont do anytthing jsut return success
+        return ("Successfully uploaded new Forum Thread");
+      }
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
         Uri.parse(baseURL + '/api/Auth/Auth'),
