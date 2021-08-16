@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
+import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
@@ -65,7 +66,7 @@ class _BookingState extends State<BookingScreen> {
           },
           icon2: Icons.schedule,
           onPressed2: () {
-            UtilModel.route(() => BookingAdminScreen(), context);
+            UtilModel.route(() => BookingSchedules(), context);
           },
           icon3: Icons.edit,
           onPressed3: () {},
@@ -73,7 +74,7 @@ class _BookingState extends State<BookingScreen> {
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 220,
+          toolbarHeight: 250,
           automaticallyImplyLeading: false,
           elevation: 1,
           backgroundColor: Colors.transparent,

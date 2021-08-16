@@ -8,6 +8,7 @@
   </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Crc32.NET" Version="1.2.0" />
       <PackageReference Include="DotNetTools" Version="0.0.2" />
       <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
       <PackageReference Include="MailKit" Version="2.13.0" />
@@ -52,22 +53,18 @@
 
     <ItemGroup>
       <Compile Remove="Migrations\**" />
-      <Compile Remove="Utils\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="Migrations\**" />
-      <EmbeddedResource Remove="Utils\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Migrations\**" />
-      <None Remove="Utils\**" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="Migrations\**" />
-      <Content Remove="Utils\**" />
     </ItemGroup>
 
 </Project>

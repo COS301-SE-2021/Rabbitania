@@ -4,6 +4,7 @@ import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
+import 'package:frontend/src/models/Booking/bookingScheduleModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,8 +42,8 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -89,8 +90,8 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -130,8 +131,8 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -175,8 +176,8 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -219,8 +220,8 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -264,8 +265,8 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -278,6 +279,52 @@ class BookingProvider {
       }
     } else {
       return false;
+    }
+  }
+
+  // GET ALL SCHEDULES (GetBookingSchedules)
+  Future<List<BookingScheduleModel>> fetchSchedulesAsync() async {
+    final token = await securityHelper.getToken();
+    final baseURL = await url.getBaseURL();
+
+    final response = await http.get(
+      Uri.parse(baseURL + '/api/BookingSchedule/GetBookingSchedules'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+    );
+    if (response.statusCode == 200) {
+      //var schedules = BookingScheduleModel.fromJson(jsonDecode(response.body));
+      // List<BookingScheduleModel> jsonResponse = json.decode(response.body);
+      final jsonMap = json.decode(response.body);
+      List<BookingScheduleModel> schedules =
+          (jsonMap['bookingSchedules'] as List)
+              .map((itemWord) => BookingScheduleModel.fromJson(itemWord))
+              .toList();
+      return schedules;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse(baseURL + '/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return fetchSchedulesAsync();
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      List<BookingScheduleModel> noSchedules = List.empty();
+      return noSchedules;
     }
   }
 }
