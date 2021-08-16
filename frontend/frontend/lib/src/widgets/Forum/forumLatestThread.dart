@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
+import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
@@ -21,8 +23,11 @@ Widget ForumLatestThread(int forumIdentifier) {
                   padding: EdgeInsets.only(bottom: 8, top: 8),
                   child: InkWell(
                     onTap: () {
-                      // noticeID = this.id;
-                      // UtilModel.route(() => Notice(), context);
+                      currentThreadID = snapshot.data!.last.forumThreadId;
+                      currentThreadName = snapshot.data!.last.forumThreadTitle;
+                      currentThreadBody = snapshot.data!.last.forumThreadBody;
+                      currentThreadImage = snapshot.data!.last.imageURL;
+                      UtilModel.route(() => ForumCommentScreen(), context);
                     },
                     child: Card(
                       color: Colors.transparent,
