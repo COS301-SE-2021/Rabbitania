@@ -101,7 +101,7 @@ namespace backend_api
             // Enumeration DB Context
             services.AddDbContext<EnumContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Configuration.GetConnectionString("localhost"),
                     b => b.MigrationsAssembly(typeof(EnumContext).Assembly.FullName)));
 
             services.AddScoped<IEnumContext>(provider => provider.GetService<EnumContext>());
