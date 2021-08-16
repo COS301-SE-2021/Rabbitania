@@ -32,7 +32,8 @@ namespace backend_api.Data.Booking
 
         public async Task<GetAllBookingSchedulesResponse> GetAllBookingSchedules(GetAllBookingSchedulesRequest request)
         {
-            var schedules = await _schedules.BookingSchedules.Where(s => s.Office == request.Office).ToListAsync();
+            var schedules = await _schedules.BookingSchedules
+                .OrderByDescending(schedules => schedules.Availability).ToListAsync();
             return new GetAllBookingSchedulesResponse(schedules);
         }
 

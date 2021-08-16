@@ -45,7 +45,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var bookings = await _bookingService.ViewAllBookings(request);
-                    var list = JsonConvert.SerializeObject(bookings.Bookings.ToList());
+                    var list = bookings.Bookings.ToList();
                     return Ok(list);
                 }
                 catch (InvalidBookingException e)
@@ -76,8 +76,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var booking = await _bookingService.ViewBooking(request);
-                    var json = JsonConvert.SerializeObject(booking);
-                    return Ok(json);
+                    return Ok(booking);
                 }
                 catch (InvalidBookingException e)
                 {
