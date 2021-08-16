@@ -44,7 +44,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedThread = addNewForumThread(
+              futureStringReceivedThread = addNewForumThreadNLP(
                   currentForumID,
                   forumThreadTitleController.text,
                   forumThreadBodyController.text,
@@ -52,7 +52,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
               return FutureBuilder<String>(
                 future: futureStringReceivedThread,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData && snapshot.data! != "true") {
                     return AlertDialog(
                       elevation: 5,
                       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
@@ -70,6 +70,52 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                             size: 24.0,
                           ),
                           tooltip: 'Continue',
+                          onPressed: () async {
+                            forumThreadTitleController.text = "";
+                            forumThreadBodyController.text = "";
+                            UtilModel.route(() => Forum(), context);
+                          },
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasData && snapshot.data! == "true") {
+                    return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: Text(
+                          "It is possible that a similar forum thread already exists, are you sure you want to continue"),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      title: Text("A similar forum thread has been detected"),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Color.fromRGBO(171, 255, 79, 1),
+                            size: 24.0,
+                          ),
+                          tooltip: 'Continue',
+                          onPressed: () async {
+                            futureStringReceivedThread = addNewForumThread(
+                                currentForumID,
+                                forumThreadTitleController.text,
+                                forumThreadBodyController.text,
+                                ForumThreadCreatorId);
+
+                            forumThreadTitleController.text = "";
+                            forumThreadBodyController.text = "";
+                            UtilModel.route(() => Forum(), context);
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            size: 24.0,
+                          ),
+                          tooltip: 'Cancel',
                           onPressed: () async {
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
