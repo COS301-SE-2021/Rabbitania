@@ -126,8 +126,6 @@ namespace backend_api
             services.AddDbContext<BookingScheduleContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("localhost"),
-                    b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
-                    Configuration.GetConnectionString("HerokuDatabase"),
                     b => b.MigrationsAssembly(typeof(BookingScheduleContext).Assembly.FullName)));
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
