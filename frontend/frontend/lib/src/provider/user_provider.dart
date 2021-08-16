@@ -18,7 +18,7 @@ class UserProvider {
   getUserID() async {
     final baseURL = await url.getBaseURL();
     String userEmail = user.providerData[0].email!;
-    final token = securityHelper.getToken();
+    final token = await securityHelper.getToken();
 
     final response = await http.get(
       Uri.parse(baseURL + '/api/Auth/GetID?email=$userEmail'),
@@ -32,7 +32,7 @@ class UserProvider {
 
   getUserAdminStatus() async {
     String userEmail = user.providerData[0].email!;
-    final token = securityHelper.getToken();
+    final token = await securityHelper.getToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
@@ -100,7 +100,7 @@ httpCall() async {
 
   final baseURL = await url.getBaseURL();
   final user = await userHttp.getUserID();
-  final token = securityHelper.getToken();
+  final token = await securityHelper.getToken();
 
   final response = await http.get(
     Uri.parse(baseURL + '/api/User/ViewProfile?UserId=$user'),
@@ -126,7 +126,7 @@ Future<String> SaveAllUserDetails(
   URLHelper url = new URLHelper();
 
   final baseURL = await url.getBaseURL();
-  final token = securityHelper.getToken();
+  final token = await securityHelper.getToken();
 
   print(userID.toString() +
       " " +
@@ -182,8 +182,8 @@ Future<String> SaveAllUserDetails(
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
-          'name': loggedUser.getUserName()
+          'userID': await loggedUser.getUserID(),
+          'name': await loggedUser.getUserName()
         }),
       );
       if (authReponse.statusCode == 200) {

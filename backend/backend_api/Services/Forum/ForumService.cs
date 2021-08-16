@@ -6,6 +6,7 @@ using backend_api.Exceptions.Booking;
 using backend_api.Exceptions.Forum;
 using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.Notifications;
+using backend_api.Exceptions.User;
 using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
@@ -96,6 +97,26 @@ namespace backend_api.Services.Forum
             }
 
             return await _forumRepository.DeleteForum(request);
+        }
+
+        public async Task<bool> CreateForumThreadAPI(CreateForumThreadRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
+            }
+
+            if (request.ForumId == 0)
+            {
+                throw new InvalidForumRequestException("Invalid ForumId");
+            }
+
+            if (request.UserId == 0)
+            {
+                throw new InvalidUserIdException();
+            }
+
+            return await _forumRepository.CreateForumThreadApi(request);
         }
 
         public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
