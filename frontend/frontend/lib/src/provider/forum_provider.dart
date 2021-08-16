@@ -122,6 +122,8 @@ Future<String> addNewForum(String title, int userID) async {
     if (title == "") {
       throw ("Cannot Submit Empty Fields");
     }
+    String datetime = DateTime.now().toString();
+    String Date = datetime.replaceAll(" ", "T");
     SecurityHelper securityHelper = new SecurityHelper();
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
@@ -131,10 +133,12 @@ Future<String> addNewForum(String title, int userID) async {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
       },
+      //"2021-08-04T13:45:13.091Z"
+
       body: jsonEncode(<String, dynamic>{
         "forumId": 0,
         "forumTitle": title,
-        "createdDate": "2021-08-04T11:50:49.398Z",
+        "createdDate": Date,
         "userId": userID
       }),
     );
@@ -294,6 +298,8 @@ Future<String> addNewForumThread(
     SecurityHelper securityHelper = new SecurityHelper();
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
+    String datetime = DateTime.now().toString();
+    String Date = datetime.replaceAll(" ", "T");
     final response = await http.post(
       Uri.parse(baseURL + '/api/Forum/CreateForumThread'),
       headers: <String, String>{
@@ -304,7 +310,7 @@ Future<String> addNewForumThread(
         "forumThreadId": 0,
         "forumThreadTitle": title,
         "forumThreadBody": body,
-        "createdDate": "2021-08-04T13:45:13.091Z",
+        "createdDate": Date,
         "imageUrl": ForumCreateInputImage,
         "userId": userId,
         "forumId": currentForumID
@@ -358,6 +364,9 @@ Future<String> addNewForumThreadNLP(
     SecurityHelper securityHelper = new SecurityHelper();
     UserHelper loggedUser = new UserHelper();
     final token = await securityHelper.getToken();
+    String datetime = DateTime.now().toString();
+    String Date = datetime.replaceAll(" ", "T");
+
     final response = await http.post(
       Uri.parse(baseURL + '/api/Forum/CreateForumThreadAPI'),
       headers: <String, String>{
@@ -368,7 +377,7 @@ Future<String> addNewForumThreadNLP(
         "forumThreadId": 0,
         "forumThreadTitle": title,
         "forumThreadBody": body,
-        "createdDate": "2021-08-04T13:45:13.091Z",
+        "createdDate": Date,
         "imageUrl": ForumCreateInputImage,
         "userId": userId,
         "forumId": currentForumID

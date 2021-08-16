@@ -47,7 +47,7 @@ namespace backend_api.Data.Forum
 
         public async Task<List<Forums>> RetrieveForums(RetrieveForumsRequest request)
         {
-            var forums = _forum.Forums.ToList();
+            var forums = await _forum.Forums.OrderByDescending(d=>d.CreatedDate).ToListAsync(); 
             return forums;
         }
 
@@ -160,7 +160,7 @@ namespace backend_api.Data.Forum
                         "Cannot retrieve forum threads for a forum that does not exist");
                 }
 
-                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync(), HttpStatusCode.Accepted);
+                return new RetrieveForumThreadsResponse(await forumThreads.OrderByDescending(d=> d.CreatedDate).ToListAsync(), HttpStatusCode.Accepted);
             }
             catch (InvalidForumRequestException)
             {

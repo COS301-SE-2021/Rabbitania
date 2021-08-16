@@ -19,7 +19,7 @@ namespace backend_api.Controllers.Forum
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateForum")]
         public async Task<CreateForumResponse> CreateForum(
             [FromBody] CreateForumRequest request)
@@ -27,7 +27,7 @@ namespace backend_api.Controllers.Forum
             return await _service.CreateForum(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveForums")]
         public async Task<RetrieveForumsResponse> RetrieveForums(
             [FromQuery] RetrieveForumsRequest request)
@@ -43,7 +43,7 @@ namespace backend_api.Controllers.Forum
             return await _service.EditForum(request);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteForum")]
         public async Task<DeleteForumResponse> DeleteForum(
             [FromBody] DeleteForumRequest request)
@@ -51,7 +51,7 @@ namespace backend_api.Controllers.Forum
             return await _service.DeleteForum(request);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateForumThreadAPI")]
         public async Task<bool> CreateForumThreadAPI(
             [FromBody] CreateForumThreadRequest request)
@@ -59,7 +59,7 @@ namespace backend_api.Controllers.Forum
             return await _service.CreateForumThreadAPI(request);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateForumThread")]
         public async Task<CreateForumThreadResponse> CreateForumThread(
             [FromBody] CreateForumThreadRequest request)
@@ -67,7 +67,7 @@ namespace backend_api.Controllers.Forum
             return await _service.CreateForumThread(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveForumThreads")]
         public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(
             [FromQuery] RetrieveForumThreadsRequest request)
