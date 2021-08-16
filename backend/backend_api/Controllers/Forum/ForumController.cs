@@ -52,6 +52,14 @@ namespace backend_api.Controllers.Forum
         }
 
         [HttpPost, Authorize]
+        [Route("CreateForumThreadAPI")]
+        public async Task<bool> CreateForumThreadAPI(
+            [FromBody] CreateForumThreadRequest request)
+        {
+            return await _service.CreateForumThreadAPI(request);
+        }
+
+        [HttpPost, Authorize]
         [Route("CreateForumThread")]
         public async Task<CreateForumThreadResponse> CreateForumThread(
             [FromBody] CreateForumThreadRequest request)

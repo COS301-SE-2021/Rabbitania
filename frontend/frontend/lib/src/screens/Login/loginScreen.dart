@@ -27,7 +27,7 @@ class _loginState extends State<Login> {
           title: Center(
             child: Container(
               child: Text(
-                'Welcome to Rabbitania',
+                'WELCOME TO RABBITANIA',
                 maxLines: 2,
                 style: TextStyle(
                   color: Color.fromRGBO(171, 255, 79, 1),

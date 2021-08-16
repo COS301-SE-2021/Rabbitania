@@ -1,10 +1,12 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
 using backend_api.Exceptions.Booking;
 using backend_api.Exceptions.Forum;
 using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.Notifications;
+using backend_api.Exceptions.User;
 using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
@@ -57,6 +59,16 @@ namespace backend_api.Services.Forum
                 );
             await _notificationService.SendEmailNotification(emailReq);
 
+            var tfidf = new TFIDF.TFIDF();
+            var titlesList = new List<string>();
+            titlesList.Add("Stupid Question");
+            titlesList.Add("2nd Thread Title Test");
+
+            var bodiesList = new List<string>();
+            bodiesList.Add("1st Thread Body Test");
+            bodiesList.Add("2nd Thread body test");
+            tfidf.tfidf_call(titlesList, bodiesList, "Dumb Question 1", "2nd Thread Body Test");
+            
             return await _forumRepository.CreateForum(request);
         }
 
@@ -85,6 +97,26 @@ namespace backend_api.Services.Forum
             }
 
             return await _forumRepository.DeleteForum(request);
+        }
+
+        public async Task<bool> CreateForumThreadAPI(CreateForumThreadRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
+            }
+
+            if (request.ForumId == 0)
+            {
+                throw new InvalidForumRequestException("Invalid ForumId");
+            }
+
+            if (request.UserId == 0)
+            {
+                throw new InvalidUserIdException();
+            }
+
+            return await _forumRepository.CreateForumThreadApi(request);
         }
 
         public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)

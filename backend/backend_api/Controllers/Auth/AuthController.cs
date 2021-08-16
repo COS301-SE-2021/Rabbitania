@@ -115,9 +115,25 @@ namespace backend_api.Controllers.Auth
         public async Task<int> GetUserId(string email)
         {
             var request = new GoogleSignInRequest(email);
-            var resp = await _service.GetUserID(request);
+            var resp = await _service.GetUserId(request);
             var userId = resp.UserId;
             return userId;
+        }
+        
+        /// <summary>
+        ///     API endpoint for GetUserAdminStatus
+        ///     Returns the admin status of a user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>integer</returns>
+        [HttpGet]
+        [Route("GetAdminStatus")]
+        public async Task<bool> GetUserAdminStatus(string email)
+        {
+            var request = new GoogleSignInRequest(email);
+            var resp = await _service.GetUserAdminStatus(request);
+            var adminStatus = resp.IsAdmin;
+            return adminStatus;
         }
 
         [HttpPost]

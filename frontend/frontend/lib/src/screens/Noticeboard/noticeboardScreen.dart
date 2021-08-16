@@ -25,9 +25,6 @@ class _NoticeBoard extends State<NoticeBoard> {
   UserHelper userHelper = UserHelper();
   void initState() {
     super.initState();
-    userHelper.getUserID().then((value) {
-      print(value);
-    });
     futureThread = fetchNotice();
     // deleteResponse = deleteThread(-1);
   }

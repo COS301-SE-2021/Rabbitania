@@ -3,7 +3,6 @@ import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
-import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 import 'package:flutter_svg/svg.dart';
@@ -84,256 +83,213 @@ class _profileState extends State<ProfileScreen> {
       future: furtureUserDetails,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         List<Widget> children = [];
-        if (snapshot.hasData) {
-          // print(snapshot.data.userId);
-          // print(snapshot.data.userName);
-          // print(snapshot.data.userImage);
-          // print(snapshot.data.userDescription);
-          // print(snapshot.data.userNumber);
-          // print(snapshot.data.userEmployeeLvl);
-          // print(snapshot.data.userOfficeLocation);
-          // print(snapshot.data.userRoles);
-          dropdownLocationValue = snapshot.data.userOfficeLocation;
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            // print(snapshot.data.userId);
+            // print(snapshot.data.userName);
+            // print(snapshot.data.userImage);
+            // print(snapshot.data.userDescription);
+            // print(snapshot.data.userNumber);
+            // print(snapshot.data.userEmployeeLvl);
+            // print(snapshot.data.userOfficeLocation);
+            // print(snapshot.data.userRoles);
+            dropdownLocationValue = snapshot.data.userOfficeLocation;
 
-          children = <Widget>[
-            Column(
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ProfilePicture(30),
-                    Text(
-                      snapshot.data.userName,
-                      style: TextStyle(
-                        color: Color.fromRGBO(171, 255, 79, 1),
-                        fontSize: 25,
+            children = <Widget>[
+              Column(
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ProfilePicture(30),
+                      Text(
+                        snapshot.data.userName,
+                        style: TextStyle(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          fontSize: 25,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: Divider(
-                    color: Color.fromRGBO(171, 255, 79, 1),
-                    indent: MediaQuery.of(context).size.width * 0.10,
-                    endIndent: MediaQuery.of(context).size.width * 0.10,
-                    thickness: 1,
+                    ],
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      "Role: " + snapshot.data.userRoles,
-                      style: TextStyle(
-                        color: Color.fromRGBO(171, 255, 79, 1),
-                        fontSize: 20,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Divider(
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      indent: MediaQuery.of(context).size.width * 0.10,
+                      endIndent: MediaQuery.of(context).size.width * 0.10,
+                      thickness: 1,
                     ),
-                    Text(
-                      "Lvl: " + snapshot.data.userEmployeeLvl.toString(),
-                      style: TextStyle(
-                        color: Color.fromRGBO(171, 255, 79, 1),
-                        fontSize: 20,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "Role: " + snapshot.data.userRoles,
+                        style: TextStyle(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                InkWell(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
-                    },
-                    child: Column(children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(top: 10, bottom: 10),
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.9,
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        color: Color.fromRGBO(171, 255, 79, 1),
-                                        width: 2,
+                      Text(
+                        "Lvl: " + snapshot.data.userEmployeeLvl.toString(),
+                        style: TextStyle(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  InkWell(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                      child: Column(children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
                                       ),
+                                      child: descriptionWidget(
+                                          snapshot.data.userDescription),
                                     ),
-                                    child: descriptionWidget(
-                                        snapshot.data.userDescription),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10, bottom: 10),
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.9,
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        color: Color.fromRGBO(171, 255, 79, 1),
-                                        width: 2,
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
                                       ),
+                                      child: DropdownOffice(),
                                     ),
-                                    child: DropdownOffice(),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10, bottom: 10),
-                                child: InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.9,
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        color: Color.fromRGBO(171, 255, 79, 1),
-                                        width: 2,
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
                                       ),
+                                      child: phoneNumberWidget(
+                                          snapshot.data.userNumber),
                                     ),
-                                    child: phoneNumberWidget(
-                                        snapshot.data.userNumber),
                                   ),
                                 ),
-                              ),
-                              ElevatedButton(
-                                  key: Key('saveButton'),
-                                  style: ButtonStyle(
-                                    elevation: MaterialStateProperty.all(11),
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Color.fromRGBO(172, 255, 79, 1),
-                                    ),
-                                    shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        side: BorderSide(
-                                          style: BorderStyle.none,
+                                ElevatedButton(
+                                    key: Key('saveButton'),
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(11),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Color.fromRGBO(172, 255, 79, 1),
+                                      ),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          side: BorderSide(
+                                            style: BorderStyle.none,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  child: Text(
-                                    "Save",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: Color.fromRGBO(33, 33, 33, 1),
+                                    child: Text(
+                                      "Save",
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: Color.fromRGBO(33, 33, 33, 1),
+                                      ),
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          elevation: 5,
-                                          backgroundColor:
-                                              Color.fromRGBO(33, 33, 33, 1),
-                                          titleTextStyle: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 32),
-                                          title: Text("Save Changes"),
-                                          contentTextStyle: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16),
-                                          content: Text(
-                                              "Are you sure you want to save these changes?"),
-                                          actions: [
-                                            IconButton(
-                                              icon: const Icon(
-                                                Icons.check,
-                                                color: Color.fromRGBO(
-                                                    171, 255, 79, 1),
-                                                size: 24.0,
-                                              ),
-                                              tooltip: 'Save',
-                                              onPressed: () async {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    saveFutureRecived =
-                                                        SaveAllUserDetails(
-                                                            profileUserId,
-                                                            snapshot
-                                                                .data.userName,
-                                                            _controllerDescription!
-                                                                .text,
-                                                            snapshot
-                                                                .data.userRoles,
-                                                            dropdownLocationHolder,
-                                                            snapshot.data
-                                                                .userEmployeeLvl,
-                                                            _controller!.text);
-                                                    return FutureBuilder<
-                                                        String>(
-                                                      future: saveFutureRecived,
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        if (snapshot.hasData) {
-                                                          return AlertDialog(
-                                                            elevation: 5,
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    33,
-                                                                    33,
-                                                                    33,
-                                                                    1),
-                                                            content: Text(
-                                                                snapshot.data!),
-                                                            titleTextStyle:
-                                                                TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        32),
-                                                            title: Text(
-                                                                snapshot.data!),
-                                                            contentTextStyle:
-                                                                TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16),
-                                                            actions: [
-                                                              IconButton(
-                                                                icon:
-                                                                    const Icon(
-                                                                  Icons.check,
-                                                                  color: Color
-                                                                      .fromRGBO(
-                                                                          171,
-                                                                          255,
-                                                                          79,
-                                                                          1),
-                                                                  size: 24.0,
-                                                                ),
-                                                                tooltip:
-                                                                    'Continue',
-                                                                onPressed:
-                                                                    () async {
-                                                                  UtilModel.route(
-                                                                      () =>
-                                                                          NoticeBoard(),
-                                                                      context);
-                                                                },
-                                                              ),
-                                                            ],
-                                                          );
-                                                        } else if (snapshot
-                                                            .hasError) {
-                                                          return AlertDialog(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            elevation: 5,
+                                            backgroundColor:
+                                                Color.fromRGBO(33, 33, 33, 1),
+                                            titleTextStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 32),
+                                            title: Text("Save Changes"),
+                                            contentTextStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                            content: Text(
+                                                "Are you sure you want to save these changes?"),
+                                            actions: [
+                                              IconButton(
+                                                icon: const Icon(
+                                                  Icons.check,
+                                                  color: Color.fromRGBO(
+                                                      171, 255, 79, 1),
+                                                  size: 24.0,
+                                                ),
+                                                tooltip: 'Save',
+                                                onPressed: () async {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      saveFutureRecived =
+                                                          SaveAllUserDetails(
+                                                              profileUserId,
+                                                              snapshot.data
+                                                                  .userName,
+                                                              _controllerDescription!
+                                                                  .text,
+                                                              snapshot.data
+                                                                  .userRoles,
+                                                              dropdownLocationHolder,
+                                                              snapshot.data
+                                                                  .userEmployeeLvl,
+                                                              _controller!
+                                                                  .text);
+                                                      return FutureBuilder<
+                                                          String>(
+                                                        future:
+                                                            saveFutureRecived,
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                              .hasData) {
+                                                            return AlertDialog(
                                                               elevation: 5,
                                                               backgroundColor:
                                                                   Color
@@ -343,82 +299,140 @@ class _profileState extends State<ProfileScreen> {
                                                                           33,
                                                                           1),
                                                               content: Text(
-                                                                  '${snapshot.error}'));
-                                                        }
-                                                        return AlertDialog(
-                                                            elevation: 5,
-                                                            backgroundColor:
-                                                                Color.fromRGBO(
-                                                                    33,
-                                                                    33,
-                                                                    33,
-                                                                    1),
-                                                            content:
-                                                                CircularProgressIndicator());
-                                                      },
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                            IconButton(
-                                              icon: const Icon(
-                                                Icons.close,
-                                                color: Color.fromRGBO(
-                                                    255, 79, 79, 1),
-                                                size: 24.0,
+                                                                  snapshot
+                                                                      .data!),
+                                                              titleTextStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          32),
+                                                              title: Text(
+                                                                  snapshot
+                                                                      .data!),
+                                                              contentTextStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          16),
+                                                              actions: [
+                                                                IconButton(
+                                                                  icon:
+                                                                      const Icon(
+                                                                    Icons.check,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            171,
+                                                                            255,
+                                                                            79,
+                                                                            1),
+                                                                    size: 24.0,
+                                                                  ),
+                                                                  tooltip:
+                                                                      'Continue',
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(
+                                                                        () {});
+                                                                    UtilModel.route(
+                                                                        () =>
+                                                                            ProfileScreen(),
+                                                                        context);
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            );
+                                                          } else if (snapshot
+                                                              .hasError) {
+                                                            return AlertDialog(
+                                                                elevation: 5,
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromRGBO(
+                                                                            33,
+                                                                            33,
+                                                                            33,
+                                                                            1),
+                                                                content: Text(
+                                                                    '${snapshot.error}'));
+                                                          }
+                                                          return AlertDialog(
+                                                              elevation: 5,
+                                                              backgroundColor:
+                                                                  Color
+                                                                      .fromRGBO(
+                                                                          33,
+                                                                          33,
+                                                                          33,
+                                                                          1),
+                                                              content:
+                                                                  CircularProgressIndicator());
+                                                        },
+                                                      );
+                                                    },
+                                                  );
+                                                },
                                               ),
-                                              tooltip: 'Cancel',
-                                              onPressed: () {
-                                                //final deleteResponse = await deleteThread(this.id);
-                                                UtilModel.route(
-                                                    () => ProfileScreen(),
-                                                    context);
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  }),
-                            ],
-                          )),
-                    ])),
-              ],
-            ),
-          ];
-        } else if (snapshot.hasError) {
-          children = <Widget>[
-            const Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Error: ${snapshot.error}'),
-            )
-          ];
-        } else {
-          children = <Widget>[
-            Center(
-              child: Stack(children: <Widget>[
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    decoration: new BoxDecoration(
-                      color: Color.fromRGBO(33, 33, 33, 1),
-                    ),
-                    child: Center(
-                      widthFactor: 0.5,
-                      heightFactor: 0.5,
-                      child: CircularProgressIndicator(
-                        color: Color.fromRGBO(171, 255, 79, 1),
+                                              IconButton(
+                                                icon: const Icon(
+                                                  Icons.close,
+                                                  color: Color.fromRGBO(
+                                                      255, 79, 79, 1),
+                                                  size: 24.0,
+                                                ),
+                                                tooltip: 'Cancel',
+                                                onPressed: () {
+                                                  //final deleteResponse = await deleteThread(this.id);
+                                                  UtilModel.route(
+                                                      () => ProfileScreen(),
+                                                      context);
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }),
+                              ],
+                            )),
+                      ])),
+                ],
+              ),
+            ];
+          } else if (snapshot.hasError) {
+            children = <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              )
+            ];
+          } else {
+            children = <Widget>[
+              Center(
+                child: Stack(children: <Widget>[
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      decoration: new BoxDecoration(
+                        color: Color.fromRGBO(33, 33, 33, 1),
                       ),
-                    )),
-              ]),
-            ),
-          ];
+                      child: Center(
+                        widthFactor: 0.5,
+                        heightFactor: 0.5,
+                        child: CircularProgressIndicator(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                        ),
+                      )),
+                ]),
+              ),
+            ];
+          }
         }
         return Center(
           child: ListView(
