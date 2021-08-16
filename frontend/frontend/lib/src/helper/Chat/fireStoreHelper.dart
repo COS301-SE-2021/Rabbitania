@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
+import 'package:frontend/src/models/Chat/ChatFirestoreUserModel.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
 import 'package:rxdart/streams.dart';
 
 class FireStoreHelper {
+//TODO: get user id from db and create new message and user instance in firestore
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   getUsersCollectionFromFireStore() {
@@ -11,6 +15,19 @@ class FireStoreHelper {
     print(users.doc().get());
   }
 
+  createNewUsersDocsWithUid(uid, displayName, email, avatar) async {
+    var refCollection = firestore.collection('users');
+    var refChatsCollection = firestore.collection('chats').doc('$uid').set({});
+    ChatFirestoreUserModel newUser = ChatFirestoreUserModel(
+      uid: uid,
+      displayName: displayName,
+      email: email,
+      avatar: avatar,
+    );
+    refCollection.add(newUser.toJson());
+  }
+
+//function adds user from inHouse api information to firestore users collection
   getUsersDocumentsFromFireStoreAsStream() {
     CollectionReference users = firestore.collection('users');
 
@@ -46,7 +63,7 @@ class FireStoreHelper {
       newMessage.toJson(),
     );
     //update messaged user that he/she has a new message
-    final refUsers = firestore.collection('users/$idUser').doc().update({});
+    //final refUsers = firestore.collection('users/$idUser').doc().update({});
   }
 
   //function to get user object using user idUser

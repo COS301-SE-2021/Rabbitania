@@ -12,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 class ChatRoomScreen extends StatefulWidget {
   final idUser;
   //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
-  final int myId = 4;
+  final int myId = 3;
   //i am currently retard
   // final int myId = 2
   ChatRoomScreen(this.idUser);

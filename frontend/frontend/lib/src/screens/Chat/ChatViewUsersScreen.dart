@@ -9,7 +9,7 @@ class ChatViewUsersScreen extends StatefulWidget {
   //id of currently logged in user
   //TODO:need to set up global accessor to get this value
   //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
-  final myId = 4;
+  final myId = 3;
   @override
   State<StatefulWidget> createState() => _chatViewUserScreenState();
 }
