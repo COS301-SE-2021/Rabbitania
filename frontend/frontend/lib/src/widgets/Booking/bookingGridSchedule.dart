@@ -57,7 +57,7 @@ class _BookingGridState extends State<BookingGridSchedule> {
             return GridView.builder(
               itemCount: data!.length,
               gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3),
+                  crossAxisCount: 2),
               itemBuilder: (BuildContext context, int index) {
                 return _scheduleCard(
                   Icons.schedule,
@@ -71,9 +71,11 @@ class _BookingGridState extends State<BookingGridSchedule> {
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
-        return CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(
-            Color.fromRGBO(171, 255, 79, 1),
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: new AlwaysStoppedAnimation<Color>(
+              Color.fromRGBO(171, 255, 79, 1),
+            ),
           ),
         );
       },
@@ -94,25 +96,132 @@ class _BookingGridState extends State<BookingGridSchedule> {
       officeName = "Amsterdam";
     }
 
-    return Card(
-      color: Colors.transparent,
-      child: Column(
-        children: <Widget>[
-          //Icon(icon:icon),
-          Text(
-            day,
-            style: TextStyle(color: utilModel.greenColor),
-          ),
-          Text(
-            slot,
-            style: TextStyle(color: utilModel.greenColor),
-          ),
-          Text(
-            officeName,
-            style: TextStyle(color: utilModel.greenColor),
-          ),
-        ],
-      ),
-    );
+    if (availability == 0) {
+      return Card(
+        color: Colors.transparent,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(
+                icon,
+                color: Colors.red,
+                size: 35,
+              ),
+              title: Text(
+                day,
+                style: TextStyle(
+                  color: utilModel.greenColor,
+                  fontSize: 20,
+                  decoration: TextDecoration.lineThrough,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 2, left: 5),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Slot: ' + slot,
+                    style: TextStyle(
+                      color: utilModel.greenColor,
+                      fontSize: 20,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 10, left: 5),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Office: ' + officeName,
+                    style: TextStyle(
+                      color: utilModel.greenColor,
+                      fontSize: 20,
+                      decoration: TextDecoration.lineThrough,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Text(
+                availability.toString(),
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 40,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Card(
+        color: Colors.transparent,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(
+                icon,
+                color: Color.fromRGBO(57, 219, 188, 1),
+                size: 35,
+              ),
+              title: Text(
+                day,
+                style: TextStyle(
+                  color: utilModel.greenColor,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 2, left: 5),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Slot: ' + slot,
+                    style: TextStyle(color: utilModel.greenColor, fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 10, left: 5),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Office: ' + officeName,
+                    style: TextStyle(
+                      color: utilModel.greenColor,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Text(
+                availability.toString(),
+                style: TextStyle(
+                  color: Color.fromRGBO(57, 219, 188, 1),
+                  fontSize: 40,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
