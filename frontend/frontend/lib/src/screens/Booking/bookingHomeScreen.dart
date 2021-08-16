@@ -74,7 +74,7 @@ class _BookingState extends State<BookingScreen> {
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 220,
+          toolbarHeight: 250,
           automaticallyImplyLeading: false,
           elevation: 1,
           backgroundColor: Colors.transparent,

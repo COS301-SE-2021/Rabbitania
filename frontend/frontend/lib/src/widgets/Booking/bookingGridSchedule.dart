@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Booking/bookingScheduleModel.dart';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 
 class BookingGridSchedule extends StatefulWidget {
@@ -9,6 +10,7 @@ class BookingGridSchedule extends StatefulWidget {
 
 class _BookingGridState extends State<BookingGridSchedule> {
   final _bookingProvider = new BookingProvider();
+  UtilModel utilModel = new UtilModel();
 
   Widget build(BuildContext context) {
     return FutureBuilder<List<BookingScheduleModel>>(
@@ -52,7 +54,19 @@ class _BookingGridState extends State<BookingGridSchedule> {
               ],
             );
           } else {
-            return _scheduleCard(data);
+            return GridView.builder(
+              itemCount: data!.length,
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
+              itemBuilder: (BuildContext context, int index) {
+                return _scheduleCard(
+                  Icons.schedule,
+                  data[index].timeSlot,
+                  data[index].office,
+                  data[index].availability,
+                );
+              },
+            );
           }
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
@@ -66,10 +80,39 @@ class _BookingGridState extends State<BookingGridSchedule> {
     );
   }
 
-  Card _scheduleCard(data) {
+  Card _scheduleCard(
+      IconData icon, String timeSlot, int office, int availability) {
+    var resTimeSlot = timeSlot.split(',');
+    var day = resTimeSlot[0];
+    var slot = resTimeSlot[1];
+    var officeName;
+    if (office == 0) {
+      officeName = "Pretoria";
+    } else if (office == 1) {
+      officeName = "Braamfontein";
+    } else if (office == 2) {
+      officeName = "Amsterdam";
+    }
+
     return Card(
       color: Colors.transparent,
-      child: Text('Helloo'),
+      child: Column(
+        children: <Widget>[
+          //Icon(icon:icon),
+          Text(
+            day,
+            style: TextStyle(color: utilModel.greenColor),
+          ),
+          Text(
+            slot,
+            style: TextStyle(color: utilModel.greenColor),
+          ),
+          Text(
+            officeName,
+            style: TextStyle(color: utilModel.greenColor),
+          ),
+        ],
+      ),
     );
   }
 }
