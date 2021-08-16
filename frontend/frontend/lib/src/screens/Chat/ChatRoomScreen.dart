@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:frontend/src/widgets/Chat/chatParticipantBar.dart';
@@ -12,7 +13,7 @@ import 'package:rxdart/rxdart.dart';
 class ChatRoomScreen extends StatefulWidget {
   final idUser;
   //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
-  final int myId = 3;
+
   //i am currently retard
   // final int myId = 2
   ChatRoomScreen(this.idUser);
@@ -23,6 +24,15 @@ class ChatRoomScreen extends StatefulWidget {
 class _chatRoomScreenState extends State<ChatRoomScreen> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
+  final userProvider = UserProvider();
+  int? myId;
+  initState() {
+    super.initState();
+    userProvider.getUserID().then((response) {
+      this.myId = response;
+      print(this.myId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +60,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                       flex: 9,
                       child: StreamBuilder(
                         stream:
-                            fireStoreHelper.getChat(widget.idUser, widget.myId),
+                            fireStoreHelper.getChat(widget.idUser, this.myId!),
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
                           print(widget.idUser);
@@ -77,7 +87,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                 //messages correspond to current user and selected user
 
                                 if (snapshot.data.docs[i]['uid'] ==
-                                        widget.myId &&
+                                        this.myId! &&
                                     snapshot.data.docs[i]['toUid'] ==
                                         widget.idUser) {
                                   children.add(ChatMessageSender(
@@ -86,7 +96,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                 } else if (snapshot.data.docs[i]['uid'] ==
                                         widget.idUser &&
                                     snapshot.data.docs[i]['toUid'] ==
-                                        widget.myId) {
+                                        this.myId!) {
                                   children.add(
                                     ChatMessageReceiver(
                                       textSentValue: snapshot.data.docs[i]
@@ -122,7 +132,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                       child: Container(
                         margin:
                             const EdgeInsets.only(top: 10, right: 5, left: 5),
-                        child: ChatSendMessageBar(widget.idUser, widget.myId),
+                        child: ChatSendMessageBar(widget.idUser, this.myId!),
                       ),
                     ),
                   ],
