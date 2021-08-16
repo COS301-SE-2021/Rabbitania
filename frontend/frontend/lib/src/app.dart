@@ -4,6 +4,7 @@ import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
+import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
 import 'package:frontend/src/screens/Login/googleAuthTest.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
