@@ -63,7 +63,7 @@ namespace backend_api.Data.NoticeBoard
         public async Task<List<Models.NoticeBoard.NoticeBoard>> RetrieveAllNoticeBoardThreads(
             RetrieveNoticeBoardThreadsRequest request)
         {
-            List<Models.NoticeBoard.NoticeBoard> threads = _noticeBoard.NoticeBoard.ToList();
+            var threads = await _noticeBoard.NoticeBoard.OrderBy(id=>id.ThreadId).ToListAsync();
 
             return threads;
         }

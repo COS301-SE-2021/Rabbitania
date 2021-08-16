@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,7 @@ using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using backend_api.Models.User;
 using Castle.Core.Internal;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
@@ -45,7 +47,7 @@ namespace backend_api.Data.Forum
 
         public async Task<List<Forums>> RetrieveForums(RetrieveForumsRequest request)
         {
-            var forums = _forum.Forums.ToList();
+            var forums = await _forum.Forums.OrderByDescending(d=>d.CreatedDate).ToListAsync(); 
             return forums;
         }
 
@@ -71,7 +73,48 @@ namespace backend_api.Data.Forum
                 return new DeleteForumResponse(HttpStatusCode.BadRequest);
             }
         }
-        
+
+        public async Task<bool> CreateForumThreadApi(CreateForumThreadRequest request)
+        {
+            {
+                var ListOfForumThreads = await _forum.ForumThreads.ToListAsync();
+                var ListOfForumThreadTitles = new List<string>();
+                var ListOfForumThreadBodies = new List<string>();
+
+                if (ListOfForumThreads.IsNullOrEmpty() != true)
+                {
+                    foreach (var forumThread in ListOfForumThreads)
+                    {
+                        ListOfForumThreadTitles.Add(forumThread.ForumThreadTitle);
+                        ListOfForumThreadBodies.Add(forumThread.ForumThreadBody);
+                    }
+                
+
+                var queryTitle = request.ForumThreadTitle;
+                var queryBody = request.ForumThreadBody;
+
+                var tfidf = new TFIDF.TFIDF();
+                var shouldnt_create = await tfidf.tfidf_call(ListOfForumThreadTitles, ListOfForumThreadBodies, queryTitle,
+                    queryBody);
+                Console.Write(shouldnt_create);
+                if (shouldnt_create == false)
+                    {
+                        Console.Write("Here it is bitch");
+                        await CreateForumThread(request);
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                await CreateForumThread(request);
+                return false;
+                
+
+            }
+        }
+
         //ForumThread Repository
         public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
         {
@@ -117,7 +160,7 @@ namespace backend_api.Data.Forum
                         "Cannot retrieve forum threads for a forum that does not exist");
                 }
 
-                return new RetrieveForumThreadsResponse(await forumThreads.ToListAsync(), HttpStatusCode.Accepted);
+                return new RetrieveForumThreadsResponse(await forumThreads.OrderByDescending(d=> d.CreatedDate).ToListAsync(), HttpStatusCode.Accepted);
             }
             catch (InvalidForumRequestException)
             {

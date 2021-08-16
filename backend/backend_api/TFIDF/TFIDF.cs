@@ -35,7 +35,7 @@ namespace backend_api.TFIDF
             
         }
 
-        public string tfidf_call(List<string> title, List<string> body, string newTitle, string newBody)
+        public async Task<bool> tfidf_call(List<string> title, List<string> body, string newTitle, string newBody)
         {
             
             _title = "?threadTitle=" + string.Join(",", title);
@@ -49,20 +49,19 @@ namespace backend_api.TFIDF
             var requestObjGet = WebRequest.Create(pythonUrl);
             requestObjGet.Method = "GET";
             HttpWebResponse responseObjGet = null;
-            responseObjGet = (HttpWebResponse)requestObjGet.GetResponse();
+            responseObjGet = (HttpWebResponse)await requestObjGet.GetResponseAsync();
 
             string pythonResult = null;
-            using (var stream = responseObjGet.GetResponseStream())
+            await using (var stream = responseObjGet.GetResponseStream())
             {
                 var sr = new StreamReader(stream);
-                pythonResult = sr.ReadToEnd();
+                pythonResult = await sr.ReadToEndAsync();
                 sr.Close();
             }
 
             Console.Write(pythonResult);
-            return pythonResult;
-
-
+            Console.Write(pythonResult);
+            return pythonResult == "true";
         }
     }
 }

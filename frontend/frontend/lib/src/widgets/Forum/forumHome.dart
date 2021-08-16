@@ -42,7 +42,7 @@ class ForumHome extends StatelessWidget {
                               ),
                             ),
                             subtitle: Text(
-                              "New Notifications will be posted here",
+                              "New Forums will be posted here",
                               style: TextStyle(color: Colors.white),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
