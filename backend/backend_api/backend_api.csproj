@@ -53,7 +53,6 @@
 
     <ItemGroup>
       <Compile Remove="Migrations\**" />
-      <Compile Include="Utils\AgoraSettings.cs" />
     </ItemGroup>
 
     <ItemGroup>
