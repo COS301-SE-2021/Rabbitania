@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
+using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
@@ -13,6 +14,7 @@ using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
 using backend_api.Services.Booking;
+using backend_api.Services.Enumerations;
 using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
@@ -24,6 +26,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,16 +42,21 @@ namespace backend_api
     public class Startup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private string _conn = null;
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           Configuration = configuration;
+           StaticConfig = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration StaticConfig { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -57,10 +65,14 @@ namespace backend_api
                         builder.AllowAnyOrigin();
                     });
             });
+            services.AddTransient<IAuthService, AuthService>();
             
+
             //SignalR
-            services.AddSignalR();
-            
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -72,16 +84,31 @@ namespace backend_api
             
             // For sending an email
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+
             
             services.AddAuthentication(option =>
             {
                 option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
             {
-                options.ClientId = "833458984650-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
-                options.ClientSecret = "kRAj8pP1eUEzRaOosZ6JShGJ";
+                options.ClientId = "fake-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
+                options.ClientSecret = "place-holder";
+
             });
             
+            
+            //----------------------------------------------------------------------------------------------------------------------
+            // Enumeration DB Context
+            services.AddDbContext<EnumContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(EnumContext).Assembly.FullName)));
+
+            services.AddScoped<IEnumContext>(provider => provider.GetService<EnumContext>());
+            
+            services.AddScoped<IEnumRepository, EnumRepository>();
+            services.AddScoped<IEnumService, EnumService>();
+            //----------------------------------------------------------------------------------------------------------------------
             //----------------------------------------------------------------------------------------------------------------------
             // Booking DB Context
             services.AddDbContext<BookingContext>(options =>
@@ -91,7 +118,6 @@ namespace backend_api
 
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
             
-            //TODO: Add services and repos
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingService, BookingService>();
             //----------------------------------------------------------------------------------------------------------------------
@@ -101,11 +127,13 @@ namespace backend_api
                 options.UseNpgsql(
                     Configuration.GetConnectionString("localhost"),
                     b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
+                    Configuration.GetConnectionString("HerokuDatabase"),
+                    b => b.MigrationsAssembly(typeof(BookingScheduleContext).Assembly.FullName)));
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
             
-            //services.AddScoped<IForumRepository, ForumRepository>();
-            //services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IBookingScheduleRepository, BookingScheduleRepository>();
+            services.AddScoped<IBookingScheduleService, BookingScheduleService>();
             //---------
             //----------------------------------------------------------------------------------------------------------------------
             // Notification DB Context
@@ -167,14 +195,22 @@ namespace backend_api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Rabbitania API Gateway", Version = "v2"});
             });
 
             #endregion
 
+            // services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
+            // services.AddDbContext<IdentityContext>(o =>
+            // {
+            //     o.UseNpgsql(
+            //         Configuration.GetConnectionString("localhost"));
+            // });
+            
+            // services.ConfigureIdentity();
+            services.ConfigJwt(Configuration);
+            services.AddAuthentication();
             services.AddAuthorization();
-
-            //Npgsql connection for Postresql
 
         }
 
@@ -199,7 +235,7 @@ namespace backend_api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/ChatHub");
+                endpoints.MapHub<ChatHub>("/ChatHub"); 
             });
         }
     }

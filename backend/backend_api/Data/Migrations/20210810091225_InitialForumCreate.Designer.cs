@@ -11,8 +11,8 @@ using backend_api.Data.Forum;
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(ForumContext))]
-    [Migration("20210804133104_InitialForumModelMigration")]
-    partial class InitialForumModelMigration
+    [Migration("20210810091225_InitialForumCreate")]
+    partial class InitialForumCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,43 +80,49 @@ namespace backend_api.Data.Migrations
                 });
 
             modelBuilder.Entity("backend_api.Models.Forum.ThreadComments", b =>
-            {
-                b.Property<int>("ThreadCommentId")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("integer")
-                    .HasAnnotation("Npgsql:ValueGenerationStrategy",
-                        NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                {
+                    b.Property<int>("ThreadCommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                b.Property<string>("CommentBody")
-                    .HasColumnType("text");
+                    b.Property<string>("CommentBody")
+                        .HasColumnType("text");
 
-                b.Property<DateTime>("CreatedDate")
-                    .HasColumnType("timestamp without time zone");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
 
-                b.Property<int>("Dislikes")
-                    .HasColumnType("integer");
+                    b.Property<int>("Dislikes")
+                        .HasColumnType("integer");
 
-                b.Property<int>("ForumThreadId")
-                    .HasColumnType("integer");
+                    b.Property<int>("ForumThreadId")
+                        .HasColumnType("integer");
 
-                b.Property<string>("ImageURL")
-                    .HasColumnType("text");
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("text");
 
-                b.Property<int>("Likes")
-                    .HasColumnType("integer");
+                    b.Property<int>("Likes")
+                        .HasColumnType("integer");
 
-                b.Property<int>("UserId")
-                    .HasColumnType("integer");
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("text");
 
-                b.HasKey("ThreadCommentId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
-                b.HasIndex("ForumThreadId");
+                    b.Property<string>("UserName")
+                        .HasColumnType("text");
 
-                b.HasIndex("UserId");
+                    b.HasKey("ThreadCommentId");
 
-                b.ToTable("ThreadComments");
-            });
+                    b.HasIndex("ForumThreadId");
 
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ThreadComments");
+                });
+
+            
             modelBuilder.Entity("backend_api.Models.Forum.ForumThreads", b =>
                 {
                     b.HasOne("backend_api.Models.Forum.Forums", "Forum")

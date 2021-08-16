@@ -1,13 +1,19 @@
-﻿namespace backend_api.Models.User.Requests
+﻿using backend_api.Models.Enumerations;
+
+namespace backend_api.Models.User.Requests
 {
     public class EditProfileRequest
     {
+  
         private int _userId;
         private string _name;
         private string _phoneNumber;
         private string _userDescription;
         private string _userImage;
+        private int _employeeLevel;
         private OfficeLocation _officeLocation;
+        private UserRoles _userRoles;
+        
         
         public EditProfileRequest()
         {
@@ -22,8 +28,9 @@
             this._userDescription = userDescription;
             this._userImage = userImage;
             this._officeLocation = officeLocation;
+            this._employeeLevel = empLevel;
+            this._userRoles = userRoles;
         }
-
         public int UserId
         {
             get => _userId;
@@ -59,5 +66,18 @@
             get => _officeLocation;
             set => _officeLocation = value;
         }
+        public int EmployeeLevel
+        {
+            get => _employeeLevel;
+            set => _employeeLevel = value;
+        }
+        
+        public UserRoles UserRoles
+        {
+            get => _userRoles;
+            set => _userRoles = value;
+        }
+
+
     }
 }

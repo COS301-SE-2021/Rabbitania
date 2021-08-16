@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/Booking/bookingHelper.dart';
+import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
+import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
+import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
+import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
+import 'package:intl/intl.dart';
 
 class BookingDayText extends StatefulWidget {
   final String displayText;
@@ -13,12 +19,15 @@ class BookingDayText extends StatefulWidget {
 }
 
 class _BookingDayTextState extends State<BookingDayText> {
+  UtilModel utilModel = UtilModel();
   String dropdownValue = 'No Selection';
   String dropdownValue2 = 'No Selection';
   String selectedOffice = '';
   String selectedTimeSlot = '';
+  var bookingColour = Color.fromRGBO(172, 255, 79, 1);
+  String bookingText = 'Book';
 
-  final _bookingProvider = new BookingProvider();
+  final bookingHelper = BookingHelper();
 
   List<String> officeLocations = [
     'No Selection',
@@ -27,8 +36,8 @@ class _BookingDayTextState extends State<BookingDayText> {
     'Amsterdam',
   ];
 
-  List<String> timeSlots = ['No Selection', 'Morning', 'Afternoon'];
-
+  List<String> timeSlots = ['No Selection', 'Full Day', 'Morning', 'Afternoon'];
+  //change to use endpoint to receive days of the week availible
   int getOfficeIndex(String office) {
     int officeIndex = -1;
     if (office == 'Pretoria') {
@@ -71,7 +80,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(172, 255, 79, 1), width: 2),
+                        color: Color.fromRGBO(172, 255, 79, 1), width: 1),
                     borderRadius: BorderRadius.circular(12),
                     color: Color.fromRGBO(33, 33, 33, 1),
                   ),
@@ -118,7 +127,7 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
               Center(
                 child: Text(
-                  'Time Slot: ',
+                  'Slot: ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -135,7 +144,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                   width: 300,
                   decoration: BoxDecoration(
                     border: Border.all(
-                        color: Color.fromRGBO(172, 255, 79, 1), width: 2),
+                        color: Color.fromRGBO(172, 255, 79, 1), width: 1),
                     borderRadius: BorderRadius.circular(12),
                     color: Color.fromRGBO(33, 33, 33, 1),
                   ),
@@ -179,16 +188,15 @@ class _BookingDayTextState extends State<BookingDayText> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 30),
-                //child: BookingDayScreenButton(this.dropdownValue,
-                //  widget.displayText, widget.dayOfTheWeek),
                 child: SizedBox(
                   width: 300,
                   height: 60,
                   child: ElevatedButton(
+                    key: Key('BookingButton'),
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(11),
                       backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(172, 255, 79, 1),
+                        bookingColour,
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -200,21 +208,137 @@ class _BookingDayTextState extends State<BookingDayText> {
                       ),
                     ),
                     child: Text(
-                      "Book",
+                      bookingText,
                       style: TextStyle(
                         fontSize: 30,
                         color: Color.fromRGBO(33, 33, 33, 1),
                       ),
                     ),
-                    onPressed: () async {
+                    onPressed: () {
                       int office = this.getOfficeIndex(this.dropdownValue);
+                      print(office);
                       DateTime date = DateTime.now();
-                      String timeSlot =
-                          widget.dayOfTheWeek + "," + this.dropdownValue2;
-                      // await _bookingProvider.createBookingAsync(
-                      //     date.toString(), timeSlot, office, 1);
-                      print(this.getOfficeIndex(this.dropdownValue));
-                      print(timeSlot);
+                      //convert date variable to string using format
+                      String formattedDate =
+                          DateFormat('yyyy-MM-dd – kk:mm').format(date);
+                      // Checks for Full Day value
+                      String timeSlot;
+                      if (dropdownValue2 == "Full Day") {
+                        timeSlot = widget.dayOfTheWeek + ",Whole";
+                      } else {
+                        timeSlot =
+                            widget.dayOfTheWeek + "," + this.dropdownValue2;
+                      }
+                      bookingHelper
+                          .confirmNoPriorBookings(
+                              timeslot: timeSlot, office: office)
+                          .then((value) {
+                        if (value) {
+                          //use setState to change the value of Widget body member on press
+                          bookingHelper
+                              .checkAndMakeBooking(
+                                  timeslot: timeSlot,
+                                  office: office,
+                                  bookingDate: formattedDate)
+                              .then((value) {
+                            print(value);
+                            if (value == "Created new Booking") {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    value,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(171, 255, 79, 1),
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 5000),
+                                  width: 300.0,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                  ),
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                ),
+                              );
+                              //if successful, change state of button to reflect successful booking
+                            } else {
+                              //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
+                              return showDialog<void>(
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    elevation: 5,
+                                    backgroundColor:
+                                        Color.fromRGBO(33, 33, 33, 1),
+                                    titleTextStyle: TextStyle(
+                                        color: Colors.white, fontSize: 25),
+                                    title: Text("No Booking Availible"),
+                                    contentTextStyle: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                    content: Text(
+                                        "There are no booking slots currently availible. Please try again later."),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: const Text(
+                                          "Close",
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(33, 33, 33, 1),
+                                              fontSize: 20),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.red,
+                                          shape: StadiumBorder(),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                context: context,
+                              );
+                            }
+                          });
+                        } else {
+                          //Error booking already exists
+                          return showDialog<void>(
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                elevation: 5,
+                                backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                                titleTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 25),
+                                title: Text("Issue with Booking"),
+                                contentTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                                content: Text(
+                                    "You have already booked for this slot for the week!"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(false),
+                                    child: const Text(
+                                      "Close",
+                                      style: TextStyle(
+                                          color: Color.fromRGBO(33, 33, 33, 1),
+                                          fontSize: 20),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                      shape: StadiumBorder(),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                            context: context,
+                          );
+                        }
+                      });
                     },
                   ),
                 ),
@@ -224,3 +348,6 @@ class _BookingDayTextState extends State<BookingDayText> {
         ),
       );
 }
+
+//function for creating FutureBuilder on button click
+

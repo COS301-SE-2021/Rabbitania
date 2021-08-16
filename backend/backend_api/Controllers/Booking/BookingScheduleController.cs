@@ -11,19 +11,12 @@ using Newtonsoft.Json;
 
 namespace backend_api.Controllers.Booking
 {
-    [AllowAnonymous, Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BookingScheduleController : ControllerBase
     {
         private readonly IBookingScheduleService _scheduleService;
-
-        private readonly IBookingService _bookingService;
-
-        public BookingScheduleController(IBookingScheduleService scheduleService, IBookingService bookingService)
-        {
-            _scheduleService = scheduleService;
-            _bookingService = bookingService;
-        }
+        
 
         public BookingScheduleController(IBookingScheduleService scheduleService)
         {
@@ -37,7 +30,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and list object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBookingSchedules")]
         public async Task<ActionResult> GetAllBookingSchedules([FromQuery] GetAllBookingSchedulesRequest request)
         {
@@ -46,8 +39,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var schedules = await _scheduleService.ViewAllBookingSchedules(request);
-                    var list = schedules.BookingSchedules.ToList();
-                    return Ok(JsonConvert.SerializeObject(list));
+                    return Ok(schedules);
                 }
                 catch (InvalidBookingException e)
                 {
@@ -67,7 +59,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code and json object</returns>
-                [HttpGet]
+                [HttpGet, Authorize]
                 [Route("GetBookingSchedule")]
                 public async Task<ActionResult> GetBookingSchedule([FromQuery] GetBookingScheduleRequest request)
                 {
@@ -76,8 +68,7 @@ namespace backend_api.Controllers.Booking
                         try
                         {
                             var booking = await _scheduleService.ViewBookingSchedule(request);
-                            var json = JsonConvert.SerializeObject(booking);
-                            return Ok(json);
+                            return Ok(booking);
                         }
                         catch (InvalidBookingException e)
                         {
@@ -97,9 +88,9 @@ namespace backend_api.Controllers.Booking
                         /// </summary>
                         /// <param name="request"></param>
                         /// <returns>Http response code</returns>
-                        [HttpPut]
+                        [HttpPut, Authorize]
                         [Route("EditBookingSchedule")]
-                        public async Task<ActionResult> UpdateBookingSchedule([FromQuery] UpdateBookingScheduleRequest request)
+                        public async Task<ActionResult> UpdateBookingSchedule([FromBody] UpdateBookingScheduleRequest request)
                         {
                             if (request != null)
                             {
@@ -133,7 +124,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
-                [HttpDelete]
+                [HttpDelete, Authorize]
                 [Route("DeleteBookingSchedule")]
                 public async Task<ActionResult> DeleteBookingSchedule([FromQuery] CancelBookingScheduleRequest request)
                 {
@@ -169,8 +160,8 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
-                [HttpPost]
-                [Route("CreateBooking")]
+                [HttpPost, Authorize]
+                [Route("CreateBookingSchedule")]
                 public async Task<ActionResult> CreateBookingSchedule([FromBody] CreateBookingScheduleRequest request)
                 {
                     if (request != null)
@@ -180,11 +171,11 @@ namespace backend_api.Controllers.Booking
                             var resp = await _scheduleService.CreateBookingSchedule(request);
                             if (resp.Successful == true)
                             {
-                                return Ok("Booking Schedule created successfully");
+                                return Ok("Booking Schedule for : " + request.TimeSlot + " created.");
                             }
                             else
                             {
-                                return BadRequest("Error trying to create booking Schedule in system");
+                                return BadRequest("Error while creating a new booking schedule.");
                             }
                         }
                         catch (Exception)
@@ -205,7 +196,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>bool</returns>
-                [HttpGet]
+                [HttpPost, Authorize]
                 [Route("CheckAvailability")]
                 public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
                 {

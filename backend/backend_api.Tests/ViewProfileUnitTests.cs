@@ -37,7 +37,7 @@ namespace backend_api.Tests
         {
             var requestDto = new ViewProfileRequest(1);
             var responseDto = new ViewProfileResponse(HttpStatusCode.Accepted);
-            _userRepoMock.Setup(n => n.ViewProfile(requestDto)).Returns(responseDto);
+            //_userRepoMock.Setup(n => n.ViewProfile(requestDto)).Returns(responseDto.respons);
 
             var profile = await _sut.ViewProfile(requestDto);
             Assert.Equal(responseDto.response, profile.response);

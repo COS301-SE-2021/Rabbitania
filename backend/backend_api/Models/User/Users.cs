@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using backend_api.Models.Enumerations;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend_api.Models.User
 {
@@ -18,6 +20,18 @@ namespace backend_api.Models.User
             this.EmployeeLevel = employeeLevel;
             this.UserRole = userRole;
             this.OfficeLocation = officeLocation;
+        }
+
+        public Users(int userId, string name, string phoneNumber, string userImgUrl, string userDescription, int employeeLevel, OfficeLocation officeLocation, UserRoles userRole)
+        {
+            UserId = userId;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            UserImgUrl = userImgUrl;
+            UserDescription = userDescription;
+            EmployeeLevel = employeeLevel;
+            OfficeLocation = officeLocation;
+            EmployeeLevel = employeeLevel;
         }
 
         public Users()

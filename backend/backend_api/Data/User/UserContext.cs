@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using backend_api.Models.User;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.User

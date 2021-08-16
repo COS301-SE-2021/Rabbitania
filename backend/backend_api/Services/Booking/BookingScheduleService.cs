@@ -22,10 +22,10 @@ namespace backend_api.Services.Booking
             {
                 throw new InvalidBookingException("Request is null or empty");
             }
-
+            
             var result = await _scheduleRepository.CreateBookingSchedule(request);
             var resp = new CreateBookingScheduleResponse();
-            if (result.Successful)
+            if(result.Successful)
             {
                 resp.Successful = true;
             }
@@ -33,6 +33,7 @@ namespace backend_api.Services.Booking
             {
                 resp.Successful = false;
             }
+            
             return resp;
         }
 
@@ -43,6 +44,8 @@ namespace backend_api.Services.Booking
                 var resp = await _scheduleRepository.CancelBookingSchedule(request);
                 if (resp.Response == true)
                 {
+                    var updateAvailability = new UpdateBookingScheduleRequest(request.TimeSlot, request.Office);
+                    await _scheduleRepository.UpdateBookingScheduleAvailabilityAdd(updateAvailability);
                     return new CancelBookingScheduleResponse(true);
                 }
                 else
@@ -106,11 +109,7 @@ namespace backend_api.Services.Booking
                 var resp = await _scheduleRepository.GetBookingSchedule(bookingReqObj);
                 if (resp.BookingSchedule.Availability > 0)
                 {
-                    //update booking request obj to update schedule availability
-                    var updateBookingReq = new UpdateBookingScheduleRequest(request.TimeSlot, 
-                        request.Office,
-                        resp.BookingSchedule.Availability - 1);
-                    return new CheckScheduleAvailabilityResponse((await _scheduleRepository.UpdateBookingSchedule(updateBookingReq)).Success);
+                    return new CheckScheduleAvailabilityResponse(true);
                 }
                 else
                 {

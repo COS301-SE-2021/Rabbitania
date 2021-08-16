@@ -1,4 +1,5 @@
 ﻿using System;
+using backend_api.Models.Enumerations;
 
 namespace backend_api.Models.Notification
 {

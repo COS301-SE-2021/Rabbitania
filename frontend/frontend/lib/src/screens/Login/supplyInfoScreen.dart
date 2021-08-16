@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/JWT/securityHelper.dart';
+import 'package:frontend/src/helper/URL/urlHelper.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/provider/user_provider.dart';
@@ -21,6 +24,10 @@ class InfoForm extends StatefulWidget {
 }
 
 class _infoForm extends State<InfoForm> {
+  UserHelper loggedUser = new UserHelper();
+  SecurityHelper securityHelper = new SecurityHelper();
+  URLHelper url = new URLHelper();
+
   var user;
   final _formKey = GlobalKey<FormState>();
   final userBioController = TextEditingController();
@@ -33,7 +40,6 @@ class _infoForm extends State<InfoForm> {
     setState(() {
       user = widget.user;
     });
-    print(user);
   }
 
   httpCallGetUser() async {
@@ -47,26 +53,75 @@ class _infoForm extends State<InfoForm> {
     if (_dropDownOfficeValue == 'Braamfontein') {
       officeLocationInt = 1;
     }
-    //final int userID = await httpCallGetUser();
-    final int userID = 1;
+
+    DetermineRole(_dropDownRoleValue) {
+      switch (_dropDownRoleValue) {
+        case "developer":
+          return 0;
+        case "Designer":
+          return 1;
+        case "Care Taker":
+          return 2;
+        case "Scrum Master":
+          return 3;
+        case "CAM":
+          return 4;
+        case "Director":
+          return 5;
+        case "Graduate":
+          return 6;
+        case "Intern":
+          return 7;
+        default:
+          return 0;
+      }
+    }
+
+    int userRole = DetermineRole(_dropDownRoleValue);
+
+    final token = await securityHelper.getToken();
+    final baseURL = await url.getBaseURL();
+    final int userID = await httpCallGetUser();
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/User/EditProfile'),
+      Uri.parse(baseURL + '/api/User/EditProfile'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
       },
       body: jsonEncode(<String, dynamic>{
         'userId': userID,
         'name': user.displayName,
+        'userImage': user.photoURL,
         'phoneNumber': phoneNumberController.text,
         'userDescription': userBioController.text,
-        'userImage': user.photoURL,
-        'officeLocation': officeLocationInt
+        'officeLocation': officeLocationInt,
+        'employeeLevel': _dropDownLevelValue,
+        'userRoles': userRole,
       }),
     );
 
     if (response.statusCode == 200) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse(baseURL + '/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return httpCallUpdateUserInfo();
+      } else {
+        throw new Exception("Error with Authentication");
+      }
     } else {
       showDialog(
         context: context,
@@ -147,8 +202,7 @@ class _infoForm extends State<InfoForm> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          //user.providerData[0].email!,
-                                          'testEmail',
+                                          user.providerData[0].email!,
                                           style: TextStyle(
                                             fontSize: 18,
                                             color: Color.fromRGBO(
@@ -167,7 +221,7 @@ class _infoForm extends State<InfoForm> {
                               width: MediaQuery.of(context).size.width,
                               child: Center(
                                 child: Text(
-                                  'please enter missing information to proceed',
+                                  'Please enter missing information to proceed',
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Color.fromRGBO(171, 255, 79, 1)),

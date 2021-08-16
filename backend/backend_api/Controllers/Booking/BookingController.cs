@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 
 namespace backend_api.Controllers.Booking
 {
-    [AllowAnonymous, Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and json object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBookings")]
         public async Task<ActionResult> GetAllBookings([FromQuery] GetAllBookingsRequest request)
         {
@@ -67,7 +67,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and json object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBooking")]
         public async Task<ActionResult> GetBooking([FromQuery] GetBookingRequest request)
         {
@@ -76,8 +76,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var booking = await _bookingService.ViewBooking(request);
-                    var json = JsonConvert.SerializeObject(booking);
-                    return Ok(json);
+                    return Ok(booking);
                 }
                 catch (InvalidBookingException e)
                 {
@@ -98,7 +97,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditBooking")]
         public async Task<ActionResult> UpdateBooking([FromQuery] UpdateBookingRequest request)
         {
@@ -135,7 +134,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteBooking")]
         public async Task<ActionResult> DeleteBooking([FromQuery] CancelBookingRequest request)
         {
@@ -172,7 +171,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateBooking")]
         public async Task<ActionResult> CreateBooking([FromBody] CreateBookingRequest request)
         {
@@ -188,6 +187,35 @@ namespace backend_api.Controllers.Booking
                     else
                     {
                         return BadRequest("Error trying to create booking in system");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return BadRequest("Request is null or empty");
+            }
+        }
+        
+        [HttpPost, Authorize]
+        [Route("CheckIfBookingExists")]
+        public async Task<ActionResult> CheckIfBookingExists([FromBody] CheckIfBookingExistsRequest request)
+        {
+            if (request != null)
+            {
+                try
+                {
+                    var resp = await _bookingService.CheckIfBookingExists(request);
+                    if (resp.Response == HttpStatusCode.Accepted)
+                    {
+                        return Ok("Booking does not exist all clear!");
+                    }
+                    else
+                    {
+                        return BadRequest("Error booking already exists, cannot make another booking.");
                     }
                 }
                 catch (Exception)

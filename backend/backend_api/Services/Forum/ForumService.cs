@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
 using backend_api.Exceptions.Booking;
@@ -8,6 +9,9 @@ using backend_api.Exceptions.Notifications;
 using backend_api.Models.Forum;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
+using backend_api.Models.Notification.Requests;
+using backend_api.Services.Notification;
+using backend_api.Services.User;
 using Castle.Core.Internal;
 
 namespace backend_api.Services.Forum
@@ -15,10 +19,18 @@ namespace backend_api.Services.Forum
     public class ForumService : IForumService
     {
         private readonly IForumRepository _forumRepository;
-
+        private readonly IUserService _userService;
+        private readonly INotificationService _notificationService;
         public ForumService(IForumRepository forumRepository)
         {
             _forumRepository = forumRepository;
+        }
+
+        public ForumService(IForumRepository forumRepository, IUserService userService, INotificationService notificationService)
+        {
+            _forumRepository = forumRepository;
+            _userService = userService;
+            _notificationService = notificationService;
         }
 
         public async Task<CreateForumResponse> CreateForum(CreateForumRequest request)
@@ -37,7 +49,25 @@ namespace backend_api.Services.Forum
             {
                 throw new InvalidUserIdException("UserID is invalid");
             }
+            
+            var userEmails = _userService.GetAllUserEmails();
+            var emailReq = new SendEmailNotificationRequest(
+                "Forum Name: " + request.ForumTitle + "\n\n\nHey there Rabbit! \n\nSo a new forum has been created, do you think it interests you? \n\nIf so please check it out!",
+                "New Forum Created!",
+                userEmails
+                );
+            await _notificationService.SendEmailNotification(emailReq);
 
+            var tfidf = new TFIDF.TFIDF();
+            var titlesList = new List<string>();
+            titlesList.Add("Stupid Question");
+            titlesList.Add("2nd Thread Title Test");
+
+            var bodiesList = new List<string>();
+            bodiesList.Add("1st Thread Body Test");
+            bodiesList.Add("2nd Thread body test");
+            tfidf.tfidf_call(titlesList, bodiesList, "Dumb Question 1", "2nd Thread Body Test");
+            
             return await _forumRepository.CreateForum(request);
         }
 

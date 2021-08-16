@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using backend_api.Models.Enumerations;
 
 namespace backend_api.Models.User.Responses
 {

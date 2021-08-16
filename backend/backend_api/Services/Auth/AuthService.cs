@@ -1,10 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
+using backend_api.Models.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
+using backend_api.Models.User.Requests;
+using backend_api.Services.User;
+using Castle.Core.Configuration;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.Auth
@@ -12,6 +24,21 @@ namespace backend_api.Services.Auth
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _repository;
+        private readonly IUserService _userService;
+        private readonly IConfiguration _configuration;
+
+        public AuthService(IUserRepository repository, IUserService userService, IConfiguration configuration)
+        {
+            _repository = repository;
+            _userService = userService;
+            _configuration = configuration;
+        }
+
+        public AuthService(IUserRepository repository, IUserService userService)
+        {
+            _repository = repository;
+            _userService = userService;
+        }
 
         public async Task<LoginResponse> checkEmailExists(GoogleSignInRequest request)
         {
@@ -74,13 +101,59 @@ namespace backend_api.Services.Auth
             return user;
         }
 
-        public async Task<Models.User.Users> GetUserID(GoogleSignInRequest request)
+        public async Task<Models.User.Users> GetUserId(GoogleSignInRequest request)
+        {
+            var user = await _repository.GetExistingUserDetails(request);
+            return user;
+        }
+        
+        public async Task<Models.User.Users> GetUserAdminStatus(GoogleSignInRequest request)
         {
             var user = await _repository.GetExistingUserDetails(request);
             return user;
         }
 
-        
+        public async Task<bool> Validate(Credentials credentials)
+        {
+            var req = new GetUserByIDRequest(credentials.UserID);
+            try
+            {
+                var resp = await _userService.GetUserByID(req);
+                return resp!=null || true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<string> createJwt(Credentials credentials)
+        {
+            var settings = Startup.StaticConfig.GetSection("JwtSettings");
+            
+            var claims = await GetClaims(credentials);
+
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.GetSection("secret").Value));
+            var signingCred = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            
+            var token = new JwtSecurityToken(
+                issuer: settings.GetSection("validIssuer").Value,
+                audience: settings.GetSection("validAudience").Value,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(120),
+                signingCredentials: signingCred
+                );
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private async Task<List<Claim>> GetClaims(Credentials credentials)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, credentials.Name)
+            };
+            
+            return claims;
+        }
     }
-    
 }
