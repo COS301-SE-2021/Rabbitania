@@ -224,11 +224,12 @@ namespace backend_api.Tests.Auth.IntegrationTests
         {
             //Arrange
             var req = new Credentials();
-            
+            req.Email = "test@gmail.com";
+            req.Name = "Unit Tests";
             //Act
-            
+            var resp = await authService.Validate(req);
             //Assert
-            //await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserId(req));
+            Assert.False(resp);// wucky true
         }
     }
 }
