@@ -26,7 +26,7 @@ class _NoticeBoard extends State<NoticeBoard> {
   void initState() {
     super.initState();
     futureThread = fetchNotice();
-    deleteResponse = deleteThread(-1);
+    // deleteResponse = deleteThread(-1);
   }
 
   void refresh() {

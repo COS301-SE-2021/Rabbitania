@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
+import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
@@ -70,7 +71,7 @@ Widget bnb(BuildContext context) {
             color: Color.fromRGBO(33, 33, 33, 1),
           ),
           onPressed: () {
-            UtilModel.route(() => NoticeBoard(), context);
+            UtilModel.route(() => ChatViewUsersScreen(), context);
           },
         ),
         IconButton(

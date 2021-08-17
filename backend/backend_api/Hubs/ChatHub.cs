@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
 namespace backend_api.Hubs
@@ -8,6 +9,7 @@ namespace backend_api.Hubs
         public async Task SendMessage(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
+            Console.WriteLine("Send the following to "+user+" : "+message);
         }
     }
 }
