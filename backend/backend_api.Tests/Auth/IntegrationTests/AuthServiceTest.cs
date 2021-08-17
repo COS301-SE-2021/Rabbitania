@@ -107,7 +107,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         public async void CheckEmailExists_False()
         {
             //Arrange
-            var req = new GoogleSignInRequest("test1@gmail.com");
+            var req = new GoogleSignInRequest("t@gmail.com");
             
             //Act
             var resp = await authService.checkEmailExists(req);
@@ -145,7 +145,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         public void GetValidUser_False()
         {
             //Arrange
-            var request = new GoogleSignInRequest("test1@gmail.com");
+            var request = new GoogleSignInRequest("t@gmail.com");
             //Act
             
             //Assert
@@ -175,6 +175,17 @@ namespace backend_api.Tests.Auth.IntegrationTests
             Assert.Equal(name,respone.Name);
             
         }
+        [Fact]
+        public async void GetUserName_NullUser()
+        {
+            //Arrange
+            var name = "Unit Tests";
+            //Act
+            var respone = await authService.GetUserName(null);
+            //Assert
+            Assert.Null(respone);
+            
+        }
         
         [Fact(DisplayName = "Checks that the user exists in the database and returns the user from a given name, should return null")]
         public async void GetUserName_InvalidUser()
@@ -202,7 +213,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         public async void GetUserID_Invalid()
         {
             //Arrange
-            var req = new GoogleSignInRequest("test1@gmail.com");
+            var req = new GoogleSignInRequest("t@gmail.com");
             //Act
             
             //Assert
@@ -231,5 +242,74 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Assert
             Assert.False(resp);// wucky true
         }
+        
+        // [Fact(DisplayName = "Returns false when attempting to validate a use that doesn't exist")]
+        // public async void Validate_InvalidUser()
+        // {
+        //     //Arrange
+        //     var req = new Credentials();
+        //     req.Email = "test2@gmail.com";
+        //     req.Name = "Unit Tests";
+        //     //Act
+        //     var resp = await authService.Validate(req);
+        //     //Assert
+        //     Assert.True(resp);// wucky true
+        // }
+        [Fact(DisplayName = "Returns a user with ID 7 as admin")]
+        public async void GetUserAdmin_ValidAdmin()
+        {
+            //Arrange
+            var req = new GoogleSignInRequest("test@gmail.com");
+            //Act
+            var resp = await authService.GetUserAdminStatus(req);
+            //Assert
+            Assert.Equal(7, resp.UserId);
+        }
+        [Fact]
+        public async void GetUserAdmin_InvalidAdmin()
+        {
+            //Arrange
+            var req = new GoogleSignInRequest("t@gmail.com");
+            //Act
+
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserAdminStatus(req));
+
+        }
+        [Fact(DisplayName = "Throws InvalidUserRequest when trying to get Admin of Null user")]
+        public async void GetUserAdmin_NullUser()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserAdminStatus(null));
+        }
+        
+        // [Fact]
+        // public async void CreateJWT_ValidUser()
+        // {
+        //     //Arrange
+        //     Credentials credentials = new Credentials();
+        //     credentials.Email = "test@gmail.com";
+        //     credentials.Name = "Unit Tests";
+        //     //Act
+        //     var req = await authService.createJwt(credentials);
+        //     //Assert
+        //     Assert.NotNull(req);
+        // }
+
+        [Fact]
+        public async void CreateClaims()
+        {
+            //Arranges
+            Credentials credentials = new Credentials();
+            credentials.Email = "test@gmail.com";
+            credentials.Name = "Unit Tests";
+            //Act
+            var resp = await authService.GetClaims(credentials);
+            //Assert
+            Assert.NotNull(resp);
+        }
+        
     }
 }

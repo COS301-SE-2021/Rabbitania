@@ -182,7 +182,7 @@ namespace backend_api.Services.Auth
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private async Task<List<Claim>> GetClaims(Credentials credentials)
+        public async Task<List<Claim>> GetClaims(Credentials credentials)
         {
             var claims = new List<Claim>
             {
