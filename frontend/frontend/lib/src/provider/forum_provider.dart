@@ -702,3 +702,65 @@ Future<String> editForumThreadComment(String body) async {
     return Exception.toString();
   }
 }
+
+Future<String> addNewComment(String comment, int userId) async {
+  URLHelper urlBase = new URLHelper();
+  final baseURL = await urlBase.getBaseURL();
+  try {
+    if (comment == "") {
+      throw ("Cannot Submit Empty Fields");
+    }
+    SecurityHelper securityHelper = new SecurityHelper();
+    UserHelper loggedUser = new UserHelper();
+    final token = await securityHelper.getToken();
+    String datetime = DateTime.now().toString();
+    String Date = datetime.replaceAll(" ", "T");
+    final response = await http.post(
+      Uri.parse(baseURL + '/api/Forum/CreateThreadComment'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(<String, dynamic>{
+        "threadCommentId": 0,
+        "commentBody": comment,
+        "createdDate": Date,
+        "imageUrl": "string",
+        "likes": 0,
+        "dislikes": 0,
+        "userId": userId,
+        "forumThreadId": currentThreadID
+      }),
+    );
+    if (response.statusCode == 201 ||
+        response.statusCode == 200 ||
+        response.statusCode == 100) {
+      return ("Success");
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse(baseURL + '/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'userID': loggedUser.getUserID(),
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return addNewComment(comment, userId);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      //print("Failed to Send Message" + response.statusCode.toString());
+      throw ("Failed to Send Message" + response.statusCode.toString());
+    }
+  } catch (Exception) {
+    //print("Error: " + Exception.toString());
+    return ("Error: " + Exception.toString());
+  }
+}
