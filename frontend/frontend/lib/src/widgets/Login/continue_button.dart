@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
@@ -76,13 +77,23 @@ class _continueButton extends State<ContinueButton> {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
+      final fireStoreHelper = FireStoreHelper();
+      //function to add user to firestore when created on our db
+
       int userID = await userProvider.getUserID();
+      fireStoreHelper.createNewUsersDocsWithUid(userID, widget.user.displayName,
+          widget.user.providerData[0].email, widget.user.photoURL);
       bool userStatus = await userProvider.getUserAdminStatus();
       userHelper.setUserID(userID);
       userHelper.setAdminStatus(userStatus);
       setState(() {});
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => InfoForm(widget.user)));
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => InfoForm(widget.user),
+        ),
+      );
     } else {
       showDialog(
         context: context,

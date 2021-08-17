@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
+using backend_api.Exceptions.User;
 using backend_api.Models.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Auth.Responses;
@@ -80,37 +81,71 @@ namespace backend_api.Services.Auth
         }
         public JObject GetUser(GoogleSignInRequest request)
         {
-            var user = _repository.GetExistingUserDetails(request).Result;
-            JObject json = new JObject(
-                new JProperty("description", user.UserDescription),
-                new JProperty("pinnedIDs", user.PinnedUserIds.ToArray()),
-                new JProperty("admin", user.IsAdmin),
-                new JProperty("role", user.UserRole.ToString()),
-                new JProperty("empLevel", user.EmployeeLevel),
-                new JProperty("office", user.OfficeLocation.ToString()),
-                new JProperty("email", request.Email));
-            return json;
+            try
+            {
+                var user = _repository.GetExistingUserDetails(request).Result;
+                JObject json = new JObject(
+                    new JProperty("description", user.UserDescription),
+                    new JProperty("pinnedIDs", user.PinnedUserIds.ToArray()),
+                    new JProperty("admin", user.IsAdmin),
+                    new JProperty("role", user.UserRole.ToString()),
+                    new JProperty("empLevel", user.EmployeeLevel),
+                    new JProperty("office", user.OfficeLocation.ToString()),
+                    new JProperty("email", request.Email));
+                return json;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+            
         }
 
         public async Task<Models.User.Users> GetUserName(string name)
         {
-            var UserName = name;
-
-            var resp = await _repository.GetUser(name);
-            var user = resp.FirstOrDefault();
-            return user;
+            try
+            {
+                var resp = await _repository.GetUser(name);
+                var user = resp.FirstOrDefault();
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new InvalidUserRequest("The user does not exist in the database");
+            }
+            
         }
 
         public async Task<Models.User.Users> GetUserId(GoogleSignInRequest request)
         {
-            var user = await _repository.GetExistingUserDetails(request);
-            return user;
+            try
+            {
+                var user = await _repository.GetExistingUserDetails(request);
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new InvalidUserRequest("The user does not exist in the database");
+            }
+            
         }
         
         public async Task<Models.User.Users> GetUserAdminStatus(GoogleSignInRequest request)
         {
-            var user = await _repository.GetExistingUserDetails(request);
-            return user;
+            try
+            {
+                var user = await _repository.GetExistingUserDetails(request);
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new InvalidUserRequest("The user does not exist in the database");
+            }
+            
         }
 
         public async Task<bool> Validate(Credentials credentials)

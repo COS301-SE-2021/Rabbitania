@@ -168,7 +168,7 @@ class _infoForm extends State<InfoForm> {
                                 children: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(12),
-                                    child: ProfilePicture(),
+                                    child: ProfilePicture(40),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.all(5),

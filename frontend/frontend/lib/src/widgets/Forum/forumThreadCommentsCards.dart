@@ -258,38 +258,6 @@ class forumCommentCard extends StatelessWidget {
   }
 }
 
-Future<String> addNewComment(String comment, int userId) async {
-  try {
-    if (comment == "") {
-      throw ("Cannot Submit Empty Fields");
-    }
-
-    final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/CreateThreadComment'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        "threadCommentId": 0,
-        "commentBody": comment,
-        "createdDate": "2021-08-10T12:28:13.364Z",
-        "imageUrl": "string",
-        "likes": 0,
-        "dislikes": 0,
-        "userId": userId,
-        "forumThreadId": currentThreadID
-      }),
-    );
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      return ("Success");
-    } else {
-      throw ("Failed to Send Message" + response.statusCode.toString());
-    }
-  } catch (Exception) {
-    return ("Error: " + Exception.toString());
-  }
-}
-
 Widget Reactions(BuildContext context) {
   return FlutterReactionButtonCheck(
     boxColor: Color.fromRGBO(33, 33, 33, 1),
