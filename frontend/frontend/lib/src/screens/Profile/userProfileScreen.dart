@@ -416,15 +416,15 @@ class _profileState extends State<ProfileScreen> {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {
+                                    onPressed: () async {
                                       final googleProvider =
                                           GoogleSignInProvider();
-                                      googleProvider.googleLogout();
+                                      await googleProvider.googleLogout();
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => Login()),
-                                        (Route<dynamic> route) => false,
+                                        (Route<dynamic> route) => true,
                                       );
                                     },
                                     child: Text(
