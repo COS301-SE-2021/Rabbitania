@@ -24,6 +24,7 @@ namespace backend_api.Data.User
         private readonly UserContext _users;
         private readonly IdentityContext _aspUser;
 
+
         public UserRepository(UserContext users)
         {
             this._users = users;
@@ -39,6 +40,13 @@ namespace backend_api.Data.User
         {
             return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
             
+        }
+
+        public async Task<Models.User.Users> GetUserByEmail(string email)
+        {
+            var userEmail = _users.UserEmail.Where(x => x.UsersEmail == email).FirstOrDefaultAsync();
+            var userID = userEmail.Result.UserId;
+            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
         }
 
         public async Task<List<Models.User.Users>> GetUser(String name)

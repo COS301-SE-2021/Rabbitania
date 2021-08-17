@@ -60,6 +60,18 @@ namespace backend_api.Services.User
                 throw new InvalidUserRequest("User does not exist");
             }
         }
+        public async Task<GetUserResponse> GetUserByEmail(GetUserByEmailRequest request)
+        {
+            var user = await _userRepository.GetUserByEmail(request.Email);
+            if (!user.Equals(null))
+            {
+                return new GetUserResponse(user, user.Name,user.EmployeeLevel,user.IsAdmin,user.UserDescription,user.UserId,user.PhoneNumber,user.UserRole,user.UserImgUrl,user.OfficeLocation,user.PinnedUserIds);
+            }
+            else
+            {
+                throw new InvalidUserRequest("User does not exist");
+            }
+        }
 
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
