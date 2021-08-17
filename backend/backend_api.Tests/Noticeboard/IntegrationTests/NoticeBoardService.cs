@@ -58,6 +58,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
         public async void DeleteNoticeBoardThread()
         {
             var noticeboardRepo = new NoticeBoardRepository(_noticeboardContext);
+            var noticeboardService = new NoticeBoardService(noticeboardRepo);
 
             var Addreq = new AddNoticeBoardThreadRequest(_mockNoticeboard.ThreadTitle, _mockNoticeboard.ThreadContent,
                 _mockNoticeboard.MinEmployeeLevel, _mockNoticeboard.ImageUrl, _mockNoticeboard.PermittedUserRoles,
@@ -73,7 +74,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             Assert.NotEmpty(noticeBoardThreads);
 
             var deleteReq = new DeleteNoticeBoardThreadRequest(noticeBoardThreads.Last().ThreadId);
-            var deleteResponse = noticeboardRepo.DeleteNoticeBoardThread(deleteReq);
+            var deleteResponse = noticeboardService.DeleteNoticeBoardThread(deleteReq);
             
             Assert.Equal(HttpStatusCode.Accepted, deleteResponse.Result.HttpStatusCode);
 
