@@ -80,16 +80,25 @@ namespace backend_api.Services.Auth
         }
         public JObject GetUser(GoogleSignInRequest request)
         {
-            var user = _repository.GetExistingUserDetails(request).Result;
-            JObject json = new JObject(
-                new JProperty("description", user.UserDescription),
-                new JProperty("pinnedIDs", user.PinnedUserIds.ToArray()),
-                new JProperty("admin", user.IsAdmin),
-                new JProperty("role", user.UserRole.ToString()),
-                new JProperty("empLevel", user.EmployeeLevel),
-                new JProperty("office", user.OfficeLocation.ToString()),
-                new JProperty("email", request.Email));
-            return json;
+            try
+            {
+                var user = _repository.GetExistingUserDetails(request).Result;
+                JObject json = new JObject(
+                    new JProperty("description", user.UserDescription),
+                    new JProperty("pinnedIDs", user.PinnedUserIds.ToArray()),
+                    new JProperty("admin", user.IsAdmin),
+                    new JProperty("role", user.UserRole.ToString()),
+                    new JProperty("empLevel", user.EmployeeLevel),
+                    new JProperty("office", user.OfficeLocation.ToString()),
+                    new JProperty("email", request.Email));
+                return json;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+            
         }
 
         public async Task<Models.User.Users> GetUserName(string name)
