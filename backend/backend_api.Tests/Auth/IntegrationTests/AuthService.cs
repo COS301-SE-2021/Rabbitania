@@ -40,7 +40,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
                 OfficeLocation.Unassigned
             );
             
-            _mockedEmail = new UserEmails("test@gnail.com", 50);
+            _mockedEmail = new UserEmails("test@gmail.com", 50);
         }
 
         [Fact(DisplayName = "Should be False if a non 'gmail.com' email is used to login")]
