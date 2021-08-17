@@ -41,7 +41,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Auth\IntegrationTests" />
       <Folder Include="Auth\UnitTests" />
       <Folder Include="Booking\Integration" />
       <Folder Include="Booking\Unit" />
