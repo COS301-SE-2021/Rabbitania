@@ -150,10 +150,12 @@ namespace backend_api.Services.Auth
 
         public async Task<bool> Validate(Credentials credentials)
         {
-            var req = new GetUserByIDRequest(credentials.UserID);
+            var email = credentials.Email;
+            var req = new GetUserByEmailRequest(email);
+            
             try
             {
-                var resp = await _userService.GetUserByID(req);
+                var resp = await _userService.GetUserByEmail(req);
                 return resp!=null || true;
             }
             catch (Exception)

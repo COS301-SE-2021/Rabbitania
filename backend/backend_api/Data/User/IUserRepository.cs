@@ -11,7 +11,8 @@ namespace backend_api.Data.User
     public interface IUserRepository
     {
         Task<Models.User.Users> GetUser(int userID);
-
+        Task<Models.User.Users> GetUserByEmail(string email);
+        
         Task<List<Models.User.Users>> GetUser(String name);
 
         Task<CreateUserResponse> CreateUser(GoogleSignInRequest request);
