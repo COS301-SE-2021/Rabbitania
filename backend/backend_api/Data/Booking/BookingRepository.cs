@@ -88,7 +88,7 @@ namespace backend_api.Data.Booking
             var bookingDate = request.BookingDate;
             var bookingOffice = request.Office;
             var timeSlot = request.TimeSlot;
-            var user = _users.Users.Where(x => x.UserId == request.UserId);
+            //var user = _users.Users.Where(x => x.UserId == request.UserId);
             
             
             var bookingUserId = request.UserId;

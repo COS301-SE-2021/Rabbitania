@@ -42,7 +42,6 @@
 
     <ItemGroup>
       <Folder Include="Auth\UnitTests" />
-      <Folder Include="Booking\Integration" />
       <Folder Include="Booking\Unit" />
       <Folder Include="NoticeBoardTests\UnitTests" />
       <Folder Include="NotificationTests\IntegrationTests" />
