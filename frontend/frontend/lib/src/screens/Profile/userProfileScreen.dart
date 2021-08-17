@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Login/loginScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +20,7 @@ late Future<String>? saveFutureRecived;
 
 class _profileState extends State<ProfileScreen> {
   final util = new UtilModel();
-
+  final userProvider = UserProvider();
   UserHelper userHelper = UserHelper();
   int profileUserId = -1;
 
@@ -37,7 +39,7 @@ class _profileState extends State<ProfileScreen> {
         this.profileUserId = value;
       });
       furtureUserDetails = getUserProfileObj(profileUserId);
-      //print(furtureUserDetails);
+      print(furtureUserDetails);
     });
   }
 
@@ -394,6 +396,46 @@ class _profileState extends State<ProfileScreen> {
                                         },
                                       );
                                     }),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0),
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(11),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Color.fromRGBO(172, 255, 79, 1),
+                                      ),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          side: BorderSide(
+                                            style: BorderStyle.none,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      final googleProvider =
+                                          GoogleSignInProvider();
+                                      await googleProvider.googleLogout();
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()),
+                                        (Route<dynamic> route) => true,
+                                      );
+                                    },
+                                    child: Text(
+                                      'Log Out',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             )),
                       ])),
