@@ -13,8 +13,6 @@ namespace backend_api.Tests.Auth.IntegrationTests
 {
     public class AuthServiceTest
     {
-       // private readonly AuthService _authService;
-        //private readonly IUserService _userService;
         private readonly Users _mockedUser;
         private readonly UserEmails _mockedEmail;
         private UserContext _userContext;
@@ -30,21 +28,19 @@ namespace backend_api.Tests.Auth.IntegrationTests
 
             _userContext = new UserContext(builder.Options);
             
-            // this._mockedUser = new Users(
-            //     "Unit Tests",
-            //     "0834758854",
-            //     new List<int>(){1},
-            //     "www.google/test.png",
-            //     "This is a Test",
-            //     true,
-            //     1,
-            //     UserRoles.Unassigned,
-            //     OfficeLocation.Unassigned
-            // );
+            _mockedUser = new Users(
+                "Unit Tests",
+                "0834758854",
+                new List<int>(){1},
+                "www.google/test.png",
+                "This is a Test",
+                true,
+                1,
+                UserRoles.Unassigned,
+                OfficeLocation.Unassigned
+            );
             
-            this._mockedEmail = new UserEmails("test@gnail.com", 50);
-           
-            
+            _mockedEmail = new UserEmails("test@gnail.com", 50);
         }
 
         [Fact(DisplayName = "Should be False if a non 'gmail.com' email is used to login")]
@@ -60,6 +56,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Arrange
             string email = "test@tuks.co.za";
             var req = new GoogleSignInRequest(email);
+            
             //Act
             var resp = authService.CheckEmailDomain(req);
             
