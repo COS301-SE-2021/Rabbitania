@@ -63,7 +63,7 @@ Future<bool> deleteThread(int threadID) async {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': loggedUser.getUserID(),
           'name': loggedUser.getUserName()
         }),
       );
