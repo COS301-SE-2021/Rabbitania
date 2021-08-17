@@ -98,7 +98,6 @@ namespace backend_api.Services.Auth
                 Console.WriteLine(e);
                 throw e;
             }
-            
         }
 
         public async Task<Models.User.Users> GetUserName(string name)

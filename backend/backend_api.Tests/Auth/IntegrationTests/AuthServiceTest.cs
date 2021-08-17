@@ -128,18 +128,83 @@ namespace backend_api.Tests.Auth.IntegrationTests
         }
         
         [Fact(DisplayName = "Checks that the user exists in the database, should return true")]
-        public async void GetValidUser_True()
+        public void GetValidUser_True()
         {
             //Arrange
-            _userContext.Users.Add(_mockedUser);
-            await _userContext.SaveChanges();
             var request = new GoogleSignInRequest("test@gmail.com");
             //Act
             var resp = authService.GetUser(request);
             //Assert
             Assert.Equal(resp.Type, JTokenType.Object);
             Assert.NotNull(resp);
+
+        }
+        [Fact(DisplayName = "Checks that the user exists in the database, should throw aggregate exception")]
+        public void GetValidUser_False()
+        {
+            //Arrange
+            var request = new GoogleSignInRequest("test1@gmail.com");
+            //Act
+            
+            //Assert
+            Assert.Throws<AggregateException>(() => authService.GetUser(request));
         }
         
+        [Fact(DisplayName = "Checks that the user exists in the database, should throw aggregate exception")]
+        public void GetValidUser_Null()
+        {
+            //Arrange
+            var request = new GoogleSignInRequest();
+            //Act
+            
+            //Assert
+            Assert.Throws<AggregateException>(() => authService.GetUser(request));
+        }
+        
+        [Fact(DisplayName = "Checks that the user exists in the database and returns the user from a given name, should pass")]
+        public async void GetUserName_ValidUser()
+        {
+            //Arrange
+            var name = "Unit Tests";
+            //Act
+            var respone = await authService.GetUserName(name);
+            //Assert
+            Assert.NotNull(respone);
+            Assert.Equal(name,respone.Name);
+            
+        }
+        
+        [Fact(DisplayName = "Checks that the user exists in the database and returns the user from a given name, should return null")]
+        public async void GetUserName_InvalidUser()
+        {
+            //Arrange
+            var name = "Unit";
+            //Act
+            var respone = await authService.GetUserName(name);
+            //Assert
+            Assert.Null(respone);
+        }
+        
+        [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should return a user of ID 7")]
+        public async void GetUserID_Valid()
+        {
+            //Arrange
+            var req = new GoogleSignInRequest("test@gmail.com");
+            //Act
+            var response = await authService.GetUserId(req);
+            //Assert
+            Assert.Equal(7, response.UserId);
+        }
+        
+        [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should thrown an exception")]
+        public async void GetUserID_Invalid()
+        {
+            //Arrange
+            var req = new GoogleSignInRequest("test1@gmail.com");
+            //Act
+            var response = await authService.GetUserId(req);
+            //Assert
+            Assert.Equal(7, response.UserId);
+        }
     }
 }
