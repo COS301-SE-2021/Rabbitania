@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
 using backend_api.Models.Auth.Requests;
@@ -8,6 +9,7 @@ using backend_api.Services.Auth;
 using backend_api.Services.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace backend_api.Tests.Auth.IntegrationTests
@@ -122,9 +124,22 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Act
             
             //Assert
-            Assert.ThrowsAsync<NullEmailException>(() => authService.checkEmailExists(request));
+            Assert.ThrowsAsync<NullEmailException>(() => authService.checkEmailExists(request)); 
         }
         
+        [Fact(DisplayName = "Checks that the user exists in the database, should return true")]
+        public async void GetValidUser_True()
+        {
+            //Arrange
+            _userContext.Users.Add(_mockedUser);
+            await _userContext.SaveChanges();
+            var request = new GoogleSignInRequest("test@gmail.com");
+            //Act
+            var resp = authService.GetUser(request);
+            //Assert
+            Assert.Equal(resp.Type, JTokenType.Object);
+            Assert.NotNull(resp);
+        }
         
     }
 }
