@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using backend_api.Data.User;
 using backend_api.Exceptions.Auth;
+using backend_api.Exceptions.User;
+using backend_api.Models.Auth;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.Enumerations;
 using backend_api.Models.User;
@@ -196,15 +198,37 @@ namespace backend_api.Tests.Auth.IntegrationTests
             Assert.Equal(7, response.UserId);
         }
         
-        [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should thrown an exception")]
+        [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should thrown an exception for invalid user")]
         public async void GetUserID_Invalid()
         {
             //Arrange
             var req = new GoogleSignInRequest("test1@gmail.com");
             //Act
-            var response = await authService.GetUserId(req);
+            
             //Assert
-            Assert.Equal(7, response.UserId);
+            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserId(req));
+        }
+        
+        [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should thrown an exception for null email")]
+        public async void GetUserID_NullInvalid()
+        {
+            //Arrange
+            var req = new GoogleSignInRequest("");
+            //Act
+            
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserId(req));
+        }
+        [Fact(DisplayName = "Returns true when attempting to validate an existing user")]
+        public async void Validate_ValidUser()
+        {
+            //Arrange
+            var req = new Credentials();
+            
+            //Act
+            
+            //Assert
+            //await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserId(req));
         }
     }
 }
