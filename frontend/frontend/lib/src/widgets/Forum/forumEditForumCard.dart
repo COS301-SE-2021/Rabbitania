@@ -1,17 +1,17 @@
 import 'package:frontend/src/models/Forum/forumModel.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureEditString;
-
 class ForumEditForumCard extends StatelessWidget {
+  final ForumProvider ForumEditProvider = new ForumProvider();
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(children: <Widget>[
         FutureBuilder<List<ForumObj>>(
-          future: futureForum,
+          future: ForumEditProvider.fetchForum(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var iterate = snapshot.data!.iterator;
