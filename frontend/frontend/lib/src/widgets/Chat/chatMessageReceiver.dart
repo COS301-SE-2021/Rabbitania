@@ -29,7 +29,11 @@ class _chatMessageReceiverState extends State<ChatMessageReceiver> {
                       right: MediaQuery.of(context).size.width * 0.1),
                   //width: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: new BorderRadius.only(
+                      topRight: const Radius.circular(40.0),
+                      bottomRight: const Radius.circular(40.0),
+                      topLeft: const Radius.circular(40.0),
+                    ),
                     //color of recieved message border is grey
                     border: Border.all(
                       color: utilModel.greenColor,
