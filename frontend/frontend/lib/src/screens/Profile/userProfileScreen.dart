@@ -15,9 +15,6 @@ class ProfileScreen extends StatefulWidget {
   }
 }
 
-late Future<ProfileUser>? furtureUserDetails;
-late Future<String>? saveFutureRecived;
-
 class _profileState extends State<ProfileScreen> {
   final util = new UtilModel();
   final userProvider = UserProvider();
@@ -38,8 +35,6 @@ class _profileState extends State<ProfileScreen> {
       setState(() {
         this.profileUserId = value;
       });
-      furtureUserDetails = getUserProfileObj(profileUserId);
-      print(furtureUserDetails);
     });
   }
 
@@ -82,19 +77,11 @@ class _profileState extends State<ProfileScreen> {
 
   Widget profileBuilder() {
     return FutureBuilder<ProfileUser>(
-      future: furtureUserDetails,
+      future: getUserProfileObj(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         List<Widget> children = [];
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
-            // print(snapshot.data.userId);
-            // print(snapshot.data.userName);
-            // print(snapshot.data.userImage);
-            // print(snapshot.data.userDescription);
-            // print(snapshot.data.userNumber);
-            // print(snapshot.data.userEmployeeLvl);
-            // print(snapshot.data.userOfficeLocation);
-            // print(snapshot.data.userRoles);
             dropdownLocationValue = snapshot.data.userOfficeLocation;
 
             children = <Widget>[
@@ -269,24 +256,20 @@ class _profileState extends State<ProfileScreen> {
                                                   showDialog(
                                                     context: context,
                                                     builder: (context) {
-                                                      saveFutureRecived =
-                                                          SaveAllUserDetails(
-                                                              profileUserId,
-                                                              snapshot.data
-                                                                  .userName,
-                                                              _controllerDescription!
-                                                                  .text,
-                                                              snapshot.data
-                                                                  .userRoles,
-                                                              dropdownLocationHolder,
-                                                              snapshot.data
-                                                                  .userEmployeeLvl,
-                                                              _controller!
-                                                                  .text);
                                                       return FutureBuilder<
                                                           String>(
-                                                        future:
-                                                            saveFutureRecived,
+                                                        future: SaveAllUserDetails(
+                                                            profileUserId,
+                                                            snapshot
+                                                                .data.userName,
+                                                            _controllerDescription!
+                                                                .text,
+                                                            snapshot
+                                                                .data.userRoles,
+                                                            dropdownLocationHolder,
+                                                            snapshot.data
+                                                                .userEmployeeLvl,
+                                                            _controller!.text),
                                                         builder: (context,
                                                             snapshot) {
                                                           if (snapshot
@@ -358,18 +341,19 @@ class _profileState extends State<ProfileScreen> {
                                                                             1),
                                                                 content: Text(
                                                                     '${snapshot.error}'));
+                                                          } else {
+                                                            return AlertDialog(
+                                                                elevation: 5,
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromRGBO(
+                                                                            33,
+                                                                            33,
+                                                                            33,
+                                                                            1),
+                                                                content:
+                                                                    CircularProgressIndicator());
                                                           }
-                                                          return AlertDialog(
-                                                              elevation: 5,
-                                                              backgroundColor:
-                                                                  Color
-                                                                      .fromRGBO(
-                                                                          33,
-                                                                          33,
-                                                                          33,
-                                                                          1),
-                                                              content:
-                                                                  CircularProgressIndicator());
                                                         },
                                                       );
                                                     },
@@ -455,26 +439,30 @@ class _profileState extends State<ProfileScreen> {
               )
             ];
           } else {
-            children = <Widget>[
-              Center(
-                child: Stack(children: <Widget>[
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      decoration: new BoxDecoration(
-                        color: Color.fromRGBO(33, 33, 33, 1),
+            return Center(
+              child: Stack(children: <Widget>[
+                Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    decoration: new BoxDecoration(
+                      color: Color.fromRGBO(33, 33, 33, 1),
+                    ),
+                    child: Center(
+                      widthFactor: 0.5,
+                      heightFactor: 0.5,
+                      child: CircularProgressIndicator(
+                        color: Color.fromRGBO(171, 255, 79, 1),
                       ),
-                      child: Center(
-                        widthFactor: 0.5,
-                        heightFactor: 0.5,
-                        child: CircularProgressIndicator(
-                          color: Color.fromRGBO(171, 255, 79, 1),
-                        ),
-                      )),
-                ]),
-              ),
-            ];
+                    )),
+              ]),
+            );
           }
+        }
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+              child: CircularProgressIndicator(
+            color: Color.fromRGBO(171, 255, 79, 1),
+          ));
         }
         return Center(
           child: ListView(
