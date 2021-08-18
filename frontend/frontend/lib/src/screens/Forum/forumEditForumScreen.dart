@@ -17,7 +17,7 @@ TextEditingController forumEditTitleController = new TextEditingController();
 
 class _ForumEditForumScreen extends State<ForumEditForumScreen> {
   final util = new UtilModel();
-
+  final ForumProvider ForumEditProvider = new ForumProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,46 +30,51 @@ class _ForumEditForumScreen extends State<ForumEditForumScreen> {
             context: context,
             builder: (context) {
               if (forumEditTitleController.text != "") {
-                futureEditString = editNewForum(forumEditTitleController.text);
-              }
-              return FutureBuilder<String>(
-                future: futureEditString,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return AlertDialog(
-                      elevation: 5,
-                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                      titleTextStyle:
-                          TextStyle(color: Colors.white, fontSize: 32),
-                      title: Text(snapshot.data!),
-                      contentTextStyle:
-                          TextStyle(color: Colors.white, fontSize: 16),
-                      actions: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.check,
-                            color: Color.fromRGBO(171, 255, 79, 1),
-                            size: 24.0,
+                return FutureBuilder<String>(
+                  future: ForumEditProvider.editNewForum(
+                      forumEditTitleController.text),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        titleTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 32),
+                        title: Text(snapshot.data!),
+                        contentTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 16),
+                        actions: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.check,
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              size: 24.0,
+                            ),
+                            tooltip: 'Continue',
+                            onPressed: () async {
+                              UtilModel.route(() => Forum(), context);
+                            },
                           ),
-                          tooltip: 'Continue',
-                          onPressed: () async {
-                            UtilModel.route(() => Forum(), context);
-                          },
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return AlertDialog(
+                          elevation: 5,
+                          backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                          content: Text('${snapshot.error}'));
+                    }
                     return AlertDialog(
                         elevation: 5,
                         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                        content: Text('${snapshot.error}'));
-                  }
-                  return AlertDialog(
-                      elevation: 5,
-                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                      content: CircularProgressIndicator());
-                },
-              );
+                        content: CircularProgressIndicator());
+                  },
+                );
+              } else {
+                return AlertDialog(
+                    elevation: 5,
+                    backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                    content: CircularProgressIndicator());
+              }
             },
           );
         },
