@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
@@ -13,6 +14,8 @@ class BookingProvider {
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
   URLHelper url = new URLHelper();
+  // Variables for the Booking Provider
+  var email = FirebaseAuth.instance.currentUser!.providerData[0].email!;
 
   // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
@@ -42,7 +45,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -90,7 +93,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -131,7 +134,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -176,7 +179,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -220,7 +223,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -265,7 +268,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -327,4 +330,6 @@ class BookingProvider {
       return noSchedules;
     }
   }
+
+  static setState(Null Function() param0) {}
 }
