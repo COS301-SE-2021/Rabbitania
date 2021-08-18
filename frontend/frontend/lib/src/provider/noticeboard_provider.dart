@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
@@ -7,6 +8,8 @@ import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
 import 'package:http/http.dart' as http;
 import 'package:frontend/src/models/Noticeboard/noticeboardModel.dart';
+
+final fireBaseEmail = FirebaseAuth.instance.currentUser!.providerData[0].email!;
 
 Future<List<Thread>> fetchNotice() async {
   SecurityHelper securityHelper = new SecurityHelper();
@@ -63,7 +66,7 @@ Future<bool> deleteThread(int threadID) async {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'email': loggedUser.getUserID(),
+          'email': fireBaseEmail,
           'name': loggedUser.getUserName()
         }),
       );
@@ -120,7 +123,7 @@ Future<String> addNewThread(
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': fireBaseEmail,
           'name': loggedUser.getUserName()
         }),
       );
@@ -181,7 +184,7 @@ Future<String> editNoticeboardThread(
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': fireBaseEmail,
           'name': loggedUser.getUserName()
         }),
       );

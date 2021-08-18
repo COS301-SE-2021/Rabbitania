@@ -365,6 +365,7 @@ class forumThreadCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ForumThreadProvider forumThreadProvider = new ForumThreadProvider();
     return new Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -449,7 +450,8 @@ class forumThreadCard extends StatelessWidget {
                       tooltip: 'Delete',
                       onPressed: () async {
                         currentThreadID = this.forumThreadId;
-                        await deleteForumThread(currentThreadID);
+                        await forumThreadProvider
+                            .deleteForumThread(currentThreadID);
                         UtilModel.route(() => ForumThreadScreen(), context);
                       },
                     ),
@@ -479,6 +481,7 @@ class forumThreadCard extends StatelessWidget {
           icon: Icons.edit,
           onTap: () {
             currentThreadID = this.forumThreadId;
+
             //currentCommentBody = this.commentBody;
             UtilModel.route(() => ForumEditThreadScreen(), context);
           },
@@ -506,6 +509,8 @@ class EditForumCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    forumEditTitleController.text = forumTitle;
+
     return Container(
       padding: EdgeInsets.all(16),
       child: Card(

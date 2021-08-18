@@ -2,8 +2,6 @@ import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureStringReceivedForum;
-
 class ForumCreateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

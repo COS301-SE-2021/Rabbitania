@@ -7,14 +7,15 @@ import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_reaction_button/flutter_reaction_button.dart';
 
 class ForumThreadCommentsCards extends StatelessWidget {
+  ForumThreadCommentProvider ForumThreadCommentsProvider =
+      new ForumThreadCommentProvider();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ThreadComments>>(
-      future: futureThreadComments,
+      future: ForumThreadCommentsProvider.fetchThreadComments(currentThreadID),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var iterate = snapshot.data!.iterator;
@@ -152,6 +153,8 @@ class forumCommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ForumThreadCommentProvider ForumThreadCommentsDeleteProvider =
+        new ForumThreadCommentProvider();
     return new Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -219,7 +222,8 @@ class forumCommentCard extends StatelessWidget {
                       onPressed: () async {
                         // ignore: unused_local_variable
                         currentCommentId = this.threadCommentId;
-                        await deleteComment(currentCommentId);
+                        await ForumThreadCommentsDeleteProvider.deleteComment(
+                            currentCommentId);
                         UtilModel.route(() => ForumCommentScreen(), context);
                       },
                     ),
