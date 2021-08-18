@@ -43,8 +43,8 @@ class _infoForm extends State<InfoForm> {
   }
 
   httpCallGetUser() async {
-    final userHttp = new UserProvider();
-    final userID = await userHttp.getUserID();
+    final userProvider = new UserProvider();
+    final userID = await userProvider.getUserID();
     return userID;
   }
 
@@ -110,7 +110,7 @@ class _infoForm extends State<InfoForm> {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': user.providerData[0].email,
           'name': loggedUser.getUserName()
         }),
       );
@@ -391,51 +391,6 @@ class _infoForm extends State<InfoForm> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Container(
-                                    width: 170,
-                                    height: 55,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(right: 15),
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          onSurface: Colors.transparent,
-                                          primary:
-                                              Color.fromRGBO(33, 33, 33, 1),
-                                          side: BorderSide(
-                                            width: 0.5,
-                                            color:
-                                                Color.fromRGBO(171, 255, 79, 1),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Cancel',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color:
-                                                Color.fromRGBO(171, 255, 79, 1),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          final provider =
-                                              Provider.of<GoogleSignInProvider>(
-                                                  context,
-                                                  listen: false);
-                                          provider.googleLogout();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Login()));
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => Login(),
-                                          //   ),
-                                          // );
-                                        },
-                                      ),
-                                    ),
-                                  ),
                                   Container(
                                     width: 170,
                                     height: 55,
