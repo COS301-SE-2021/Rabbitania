@@ -24,6 +24,8 @@ class _ForumEditThreadCommentScreen
 
   @override
   Widget build(BuildContext context) {
+    final ForumThreadCommentProvider ForumEditProvider =
+        new ForumThreadCommentProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
@@ -34,49 +36,53 @@ class _ForumEditThreadCommentScreen
             context: context,
             builder: (context) {
               if (threadCommentEditBodyController.text != "") {
-                futureEditThreadString = editForumThreadComment(
-                  threadCommentEditBodyController.text,
-                );
-              }
-              return FutureBuilder<String>(
-                future: futureEditThreadString,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return AlertDialog(
-                      elevation: 5,
-                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                      titleTextStyle:
-                          TextStyle(color: Colors.white, fontSize: 32),
-                      title: Text(snapshot.data!),
-                      contentTextStyle:
-                          TextStyle(color: Colors.white, fontSize: 16),
-                      actions: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.check,
-                            color: Color.fromRGBO(171, 255, 79, 1),
-                            size: 24.0,
+                return FutureBuilder<String>(
+                  future: ForumEditProvider.editForumThreadComment(
+                    threadCommentEditBodyController.text,
+                  ),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return AlertDialog(
+                        elevation: 5,
+                        backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                        titleTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 32),
+                        title: Text(snapshot.data!),
+                        contentTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 16),
+                        actions: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.check,
+                              color: Color.fromRGBO(171, 255, 79, 1),
+                              size: 24.0,
+                            ),
+                            tooltip: 'Continue',
+                            onPressed: () async {
+                              UtilModel.route(
+                                  () => ForumCommentScreen(), context);
+                            },
                           ),
-                          tooltip: 'Continue',
-                          onPressed: () async {
-                            UtilModel.route(
-                                () => ForumCommentScreen(), context);
-                          },
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return AlertDialog(
+                          elevation: 5,
+                          backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                          content: Text('${snapshot.error}'));
+                    }
                     return AlertDialog(
                         elevation: 5,
                         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                        content: Text('${snapshot.error}'));
-                  }
-                  return AlertDialog(
-                      elevation: 5,
-                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                      content: CircularProgressIndicator());
-                },
-              );
+                        content: CircularProgressIndicator());
+                  },
+                );
+              } else {
+                return AlertDialog(
+                    elevation: 5,
+                    backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                    content: CircularProgressIndicator());
+              }
             },
           );
         },

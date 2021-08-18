@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using backend_api.Models.Enumerations;
+using Microsoft.AspNetCore.Identity;
 
 namespace backend_api.Models.User
 {
@@ -35,6 +36,19 @@ namespace backend_api.Models.User
 
         public Users()
         {
+        }
+
+        public Users(string name, string phoneNumber, List<int> pinnedUserIds, string userImgUrl, string userDescription, bool isAdmin, int employeeLevel, UserRoles userRole, OfficeLocation officeLocation)
+        {
+            Name = name;
+            PhoneNumber = phoneNumber;
+            PinnedUserIds = pinnedUserIds;
+            UserImgUrl = userImgUrl;
+            UserDescription = userDescription;
+            IsAdmin = isAdmin;
+            EmployeeLevel = employeeLevel;
+            UserRole = userRole;
+            OfficeLocation = officeLocation;
         }
 
         [Key]

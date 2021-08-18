@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'src/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+const ServerURL = "https://localhost:5001/ChatHub";
+
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

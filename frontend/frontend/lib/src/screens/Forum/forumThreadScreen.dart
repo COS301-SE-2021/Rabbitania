@@ -18,13 +18,13 @@ class ForumThreadScreen extends StatefulWidget {
   }
 }
 
-late Future<List<ForumThread>> futureForumThreads;
+// late Future<List<ForumThread>> futureForumThreads;
 
 class _ForumThreadScreen extends State<ForumThreadScreen> {
   final util = new UtilModel();
   void initState() {
     super.initState();
-    futureForumThreads = fetchForumThreads(currentForumID);
+    //futureForumThreads = fetchForumThreads(currentForumID);
   }
 
   void refresh() {
@@ -35,6 +35,7 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ForumProvider ForumThreadProvider = new ForumProvider();
     return Scaffold(
       floatingActionButton: FancyFab(
         heroTag: "ForumThreadPage",
@@ -65,7 +66,8 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
                     tooltip: 'Delete',
                     onPressed: () async {
                       // ignore: unused_local_variable
-                      final deleteResponse = await deleteForum(currentForumID);
+                      final deleteResponse =
+                          await ForumThreadProvider.deleteForum(currentForumID);
                       UtilModel.route(() => Forum(), context);
                     },
                   ),

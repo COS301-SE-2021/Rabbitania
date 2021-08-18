@@ -1,4 +1,4 @@
-﻿namespace backend_api.Models.Enumerations
+namespace backend_api.Models.Enumerations
 {
     public enum UserRoles
     {

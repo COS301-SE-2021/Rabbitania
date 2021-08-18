@@ -24,6 +24,18 @@ namespace backend_api.Models.Forum.Requests
             _userId = userId;
             _forumId = forumId;
         }
+        
+        public CreateForumThreadRequest( string forumThreadTitle, string forumThreadBody, DateTime createdDate, string imageUrl,
+            int userId, int forumId)
+        {
+            _forumThreadTitle = forumThreadTitle;
+            _forumThreadBody = forumThreadBody;
+            _createdDate = createdDate;
+            _imageUrl = imageUrl;
+            _userId = userId;
+            _forumId = forumId;
+        }
+
 
         public CreateForumThreadRequest()
         {

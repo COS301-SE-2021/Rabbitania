@@ -82,7 +82,8 @@ class NoticeboardThreadCard extends StatelessWidget {
                     )),
                 Container(
                   margin: EdgeInsets.only(top: 20),
-                  child: noticeboardCreateImageWidget(),
+                  child:
+                      noticeboardCreateImageWidget(noticeboardCreateImageFile),
                 ),
               ],
             ),

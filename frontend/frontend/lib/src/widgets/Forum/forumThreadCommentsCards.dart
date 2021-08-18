@@ -7,14 +7,15 @@ import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_reaction_button/flutter_reaction_button.dart';
 
 class ForumThreadCommentsCards extends StatelessWidget {
+  ForumThreadCommentProvider ForumThreadCommentsProvider =
+      new ForumThreadCommentProvider();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ThreadComments>>(
-      future: futureThreadComments,
+      future: ForumThreadCommentsProvider.fetchThreadComments(currentThreadID),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var iterate = snapshot.data!.iterator;
@@ -152,6 +153,8 @@ class forumCommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ForumThreadCommentProvider ForumThreadCommentsDeleteProvider =
+        new ForumThreadCommentProvider();
     return new Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -219,7 +222,8 @@ class forumCommentCard extends StatelessWidget {
                       onPressed: () async {
                         // ignore: unused_local_variable
                         currentCommentId = this.threadCommentId;
-                        await deleteComment(currentCommentId);
+                        await ForumThreadCommentsDeleteProvider.deleteComment(
+                            currentCommentId);
                         UtilModel.route(() => ForumCommentScreen(), context);
                       },
                     ),
@@ -255,38 +259,6 @@ class forumCommentCard extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-Future<String> addNewComment(String comment, int userId) async {
-  try {
-    if (comment == "") {
-      throw ("Cannot Submit Empty Fields");
-    }
-
-    final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/Forum/CreateThreadComment'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        "threadCommentId": 0,
-        "commentBody": comment,
-        "createdDate": "2021-08-10T12:28:13.364Z",
-        "imageUrl": "string",
-        "likes": 0,
-        "dislikes": 0,
-        "userId": userId,
-        "forumThreadId": currentThreadID
-      }),
-    );
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      return ("Success");
-    } else {
-      throw ("Failed to Send Message" + response.statusCode.toString());
-    }
-  } catch (Exception) {
-    return ("Error: " + Exception.toString());
   }
 }
 

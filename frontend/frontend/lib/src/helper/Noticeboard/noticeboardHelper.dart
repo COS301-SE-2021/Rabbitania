@@ -6,10 +6,10 @@ import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
 import 'package:image_picker/image_picker.dart';
 
-Widget noticeboardCreateImageWidget() {
+Widget noticeboardCreateImageWidget(File? ImageFile) {
   try {
     return Image.file(
-      noticeboardCreateImageFile!,
+      ImageFile!,
       height: 250,
       width: 350,
       fit: BoxFit.cover,

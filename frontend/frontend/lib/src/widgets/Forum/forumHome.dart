@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 class ForumHome extends StatelessWidget {
+  ForumProvider ForumHomeProvider = new ForumProvider();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -14,7 +16,7 @@ class ForumHome extends StatelessWidget {
             //Children in the list
 
             FutureBuilder<List<ForumObj>>(
-              future: futureForum,
+              future: ForumHomeProvider.fetchForum(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var iterate = snapshot.data!.iterator;
@@ -42,7 +44,7 @@ class ForumHome extends StatelessWidget {
                               ),
                             ),
                             subtitle: Text(
-                              "New Notifications will be posted here",
+                              "New Forums will be posted here",
                               style: TextStyle(color: Colors.white),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,

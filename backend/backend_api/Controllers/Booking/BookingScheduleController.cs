@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace backend_api.Controllers.Booking
 {
-    [AllowAnonymous, Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BookingScheduleController : ControllerBase
     {
@@ -30,7 +30,7 @@ namespace backend_api.Controllers.Booking
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code and list object</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetBookingSchedules")]
         public async Task<ActionResult> GetAllBookingSchedules([FromQuery] GetAllBookingSchedulesRequest request)
         {
@@ -39,8 +39,7 @@ namespace backend_api.Controllers.Booking
                 try
                 {
                     var schedules = await _scheduleService.ViewAllBookingSchedules(request);
-                    var list = schedules.BookingSchedules.ToList();
-                    return Ok(JsonConvert.SerializeObject(list));
+                    return Ok(schedules);
                 }
                 catch (InvalidBookingException e)
                 {
@@ -60,7 +59,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code and json object</returns>
-                [HttpGet]
+                [HttpGet, Authorize]
                 [Route("GetBookingSchedule")]
                 public async Task<ActionResult> GetBookingSchedule([FromQuery] GetBookingScheduleRequest request)
                 {
@@ -69,8 +68,7 @@ namespace backend_api.Controllers.Booking
                         try
                         {
                             var booking = await _scheduleService.ViewBookingSchedule(request);
-                            var json = JsonConvert.SerializeObject(booking);
-                            return Ok(json);
+                            return Ok(booking);
                         }
                         catch (InvalidBookingException e)
                         {
@@ -90,7 +88,7 @@ namespace backend_api.Controllers.Booking
                         /// </summary>
                         /// <param name="request"></param>
                         /// <returns>Http response code</returns>
-                        [HttpPut]
+                        [HttpPut, Authorize]
                         [Route("EditBookingSchedule")]
                         public async Task<ActionResult> UpdateBookingSchedule([FromBody] UpdateBookingScheduleRequest request)
                         {
@@ -126,7 +124,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
-                [HttpDelete]
+                [HttpDelete, Authorize]
                 [Route("DeleteBookingSchedule")]
                 public async Task<ActionResult> DeleteBookingSchedule([FromQuery] CancelBookingScheduleRequest request)
                 {
@@ -162,7 +160,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>Http response code</returns>
-                [HttpPost]
+                [HttpPost, Authorize]
                 [Route("CreateBookingSchedule")]
                 public async Task<ActionResult> CreateBookingSchedule([FromBody] CreateBookingScheduleRequest request)
                 {
@@ -198,7 +196,7 @@ namespace backend_api.Controllers.Booking
                 /// </summary>
                 /// <param name="request"></param>
                 /// <returns>bool</returns>
-                [HttpPost]
+                [HttpPost, Authorize]
                 [Route("CheckAvailability")]
                 public async Task<ActionResult> CheckBookingAvailabilityEndpoint([FromBody] CheckScheduleAvailabilityRequest request)
                 {

@@ -22,12 +22,13 @@ class _loginState extends State<Login> {
   Widget build(context) => Scaffold(
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.transparent,
           title: Center(
             child: Container(
               child: Text(
-                'Welcome to Rabbitania',
+                'WELCOME TO RABBITANIA',
                 maxLines: 2,
                 style: TextStyle(
                   color: Color.fromRGBO(171, 255, 79, 1),

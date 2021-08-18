@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/models/userProfile_model.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
+import 'package:frontend/src/models/Profile/profileModel.dart';
+import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/provider/user_provider.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
+import 'package:frontend/src/screens/Login/loginScreen.dart';
+import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_svg/svg.dart';
 
 class ProfileScreen extends StatefulWidget {
   createState() {
@@ -13,259 +15,433 @@ class ProfileScreen extends StatefulWidget {
   }
 }
 
-late Future<UserProfileModel>? userDetails;
-
 class _profileState extends State<ProfileScreen> {
-  var user;
-  String? name;
-  String? description;
-  int? employeeLevel;
-  int? officeLocation;
-  int? userRole;
-  String? phoneNumber;
+  final util = new UtilModel();
+  final userProvider = UserProvider();
+  UserHelper userHelper = UserHelper();
+  int profileUserId = -1;
 
-  initState() {
-    var userProfile = new UserProvider();
-    setState(() {
-      userDetails = userProfile.getUserProfile();
-      user = FirebaseAuth.instance.currentUser;
-    });
-    initFunction(userDetails);
-    print(user);
-  }
+  int? userProfileCurrentID;
+  String dropdownLocationValue = "";
+  String dropdownLocationHolder = "";
+  TextEditingController? _controller = new TextEditingController(text: "");
 
-  httpCall() async {
-    var userHttp = new UserProvider();
-    final user = await userHttp.getUserID();
+  TextEditingController? _controllerDescription =
+      new TextEditingController(text: "");
 
-    final response = await http.get(
-      Uri.parse('https://10.0.2.2:5001/api/User/ViewProfile?UserId=$user'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-    );
-    print(response.statusCode);
-  }
-
-  determineOffice() {
-    if (officeLocation == 1) {
-      return 'Braamfontein';
-    }
-    return 'Pretoria';
-  }
-
-  determineRole() {
-    print(employeeLevel);
-    switch (employeeLevel) {
-      case 0:
-        return 'Developer';
-      case 1:
-        return 'Designer';
-      case 2:
-        return 'Care Taker';
-      case 3:
-        return 'Scrum Master';
-      case 4:
-        return 'CAM';
-      case 5:
-        return 'Director';
-      case 6:
-        return 'Graduate';
-      case 7:
-        return 'Intern';
-    }
-  }
-
-  initFunction(userDetails) async {
-    setState(() {
-      name = userDetails.name;
-      description = userDetails.description;
-      employeeLevel = userDetails.empLevel;
-      officeLocation = userDetails.officeLocation;
-      userRole = userDetails.userRoles;
-      phoneNumber = userDetails.phoneNumber;
+  void initState() {
+    super.initState();
+    userHelper.getUserID().then((value) {
+      setState(() {
+        this.profileUserId = value;
+      });
     });
   }
 
-  Widget build(context) {
-    return FutureBuilder<UserProfileModel>(
-      future: userDetails,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        List<Widget> children;
-        if (snapshot.hasData) {
-          print(snapshot.data);
-          name = snapshot.data.name;
-          description = snapshot.data.description;
-          employeeLevel = snapshot.data.empLevel;
-          officeLocation = snapshot.data.officeLocation;
-          userRole = snapshot.data.userRoles;
-          phoneNumber = snapshot.data.phoneNumber;
-          children = <Widget>[
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: bnb(context),
+      appBar: AppBar(
+        leading: const BackButton(),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Center(
+          child: Text(
+            'Profile      ',
+            style: TextStyle(
+              color: Color.fromRGBO(171, 255, 79, 1),
+              fontSize: 35,
+            ),
+          ),
+        ),
+        actions: [],
+      ),
+      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+      body: Center(
+        child: Stack(
+          children: <Widget>[
+            SvgPicture.string(
+              util.svg_background,
+              fit: BoxFit.contain,
+            ),
             Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Scaffold(
-                  floatingActionButton: ExampleExpandableFab(),
-                  backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-                  body: Center(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 40),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ProfilePicture(),
-                              Text(
-                                user.displayName,
-                                style: TextStyle(
-                                  color: Color.fromRGBO(171, 255, 79, 1),
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[]),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Divider(
-                              color: Color.fromRGBO(171, 255, 79, 1),
-                              thickness: 3,
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 25, bottom: 25),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.9,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'User Role: ' + determineRole(),
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 25, bottom: 25),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.9,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Office Location : ' +
-                                            determineOffice(),
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 25, bottom: 25),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.9,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Employee Level: ' +
-                                            employeeLevel.toString(),
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 25, bottom: 25),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.9,
-                                      padding: EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Phone Number: ' + phoneNumber!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(171, 255, 79, 1),
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ],
+              padding: EdgeInsets.only(bottom: 0),
+              child: profileBuilder(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget profileBuilder() {
+    return FutureBuilder<ProfileUser>(
+      future: getUserProfileObj(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        List<Widget> children = [];
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            dropdownLocationValue = snapshot.data.userOfficeLocation;
+
+            children = <Widget>[
+              Column(
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ProfilePicture(30),
+                      Text(
+                        snapshot.data.userName,
+                        style: TextStyle(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          fontSize: 25,
+                        ),
                       ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Divider(
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      indent: MediaQuery.of(context).size.width * 0.10,
+                      endIndent: MediaQuery.of(context).size.width * 0.10,
+                      thickness: 1,
                     ),
                   ),
-                )),
-          ];
-        } else if (snapshot.hasError) {
-          children = <Widget>[
-            const Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Text('Error: ${snapshot.error}'),
-            )
-          ];
-        } else {
-          children = <Widget>[
-            Center(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        "Role: " + snapshot.data.userRoles,
+                        style: TextStyle(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        "Lvl: " + snapshot.data.userEmployeeLvl.toString(),
+                        style: TextStyle(
+                          color: Color.fromRGBO(171, 255, 79, 1),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  InkWell(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                      child: Column(children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: descriptionWidget(
+                                          snapshot.data.userDescription),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: DropdownOffice(),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(171, 255, 79, 1),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: phoneNumberWidget(
+                                          snapshot.data.userNumber),
+                                    ),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                    key: Key('saveButton'),
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(11),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Color.fromRGBO(172, 255, 79, 1),
+                                      ),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          side: BorderSide(
+                                            style: BorderStyle.none,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Save",
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: Color.fromRGBO(33, 33, 33, 1),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            elevation: 5,
+                                            backgroundColor:
+                                                Color.fromRGBO(33, 33, 33, 1),
+                                            titleTextStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 32),
+                                            title: Text("Save Changes"),
+                                            contentTextStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                            content: Text(
+                                                "Are you sure you want to save these changes?"),
+                                            actions: [
+                                              IconButton(
+                                                icon: const Icon(
+                                                  Icons.check,
+                                                  color: Color.fromRGBO(
+                                                      171, 255, 79, 1),
+                                                  size: 24.0,
+                                                ),
+                                                tooltip: 'Save',
+                                                onPressed: () async {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return FutureBuilder<
+                                                          String>(
+                                                        future: SaveAllUserDetails(
+                                                            profileUserId,
+                                                            snapshot
+                                                                .data.userName,
+                                                            _controllerDescription!
+                                                                .text,
+                                                            snapshot
+                                                                .data.userRoles,
+                                                            dropdownLocationHolder,
+                                                            snapshot.data
+                                                                .userEmployeeLvl,
+                                                            _controller!.text),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                              .hasData) {
+                                                            return AlertDialog(
+                                                              elevation: 5,
+                                                              backgroundColor:
+                                                                  Color
+                                                                      .fromRGBO(
+                                                                          33,
+                                                                          33,
+                                                                          33,
+                                                                          1),
+                                                              content: Text(
+                                                                  snapshot
+                                                                      .data!),
+                                                              titleTextStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          32),
+                                                              title: Text(
+                                                                  snapshot
+                                                                      .data!),
+                                                              contentTextStyle:
+                                                                  TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          16),
+                                                              actions: [
+                                                                IconButton(
+                                                                  icon:
+                                                                      const Icon(
+                                                                    Icons.check,
+                                                                    color: Color
+                                                                        .fromRGBO(
+                                                                            171,
+                                                                            255,
+                                                                            79,
+                                                                            1),
+                                                                    size: 24.0,
+                                                                  ),
+                                                                  tooltip:
+                                                                      'Continue',
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(
+                                                                        () {});
+                                                                    UtilModel.route(
+                                                                        () =>
+                                                                            ProfileScreen(),
+                                                                        context);
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            );
+                                                          } else if (snapshot
+                                                              .hasError) {
+                                                            return AlertDialog(
+                                                                elevation: 5,
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromRGBO(
+                                                                            33,
+                                                                            33,
+                                                                            33,
+                                                                            1),
+                                                                content: Text(
+                                                                    '${snapshot.error}'));
+                                                          } else {
+                                                            return AlertDialog(
+                                                                elevation: 5,
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromRGBO(
+                                                                            33,
+                                                                            33,
+                                                                            33,
+                                                                            1),
+                                                                content:
+                                                                    CircularProgressIndicator());
+                                                          }
+                                                        },
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                              IconButton(
+                                                icon: const Icon(
+                                                  Icons.close,
+                                                  color: Color.fromRGBO(
+                                                      255, 79, 79, 1),
+                                                  size: 24.0,
+                                                ),
+                                                tooltip: 'Cancel',
+                                                onPressed: () {
+                                                  //final deleteResponse = await deleteThread(this.id);
+                                                  UtilModel.route(
+                                                      () => ProfileScreen(),
+                                                      context);
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20.0),
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(11),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Color.fromRGBO(172, 255, 79, 1),
+                                      ),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          side: BorderSide(
+                                            style: BorderStyle.none,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      final googleProvider =
+                                          GoogleSignInProvider();
+                                      await googleProvider.googleLogout();
+                                      await userHelper.clearPersitantUserData();
+                                      await userHelper.clearPersitantUserName();
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login()),
+                                        //(Route<dynamic> route) => true,
+                                      );
+                                    },
+                                    child: Text(
+                                      'Log Out',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ])),
+                ],
+              ),
+            ];
+          } else if (snapshot.hasError) {
+            children = <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              )
+            ];
+          } else {
+            return Center(
               child: Stack(children: <Widget>[
                 Container(
                     width: MediaQuery.of(context).size.width,
@@ -281,13 +457,17 @@ class _profileState extends State<ProfileScreen> {
                       ),
                     )),
               ]),
-            ),
-          ];
+            );
+          }
+        }
+        if (snapshot.connectionState != ConnectionState.done) {
+          return Center(
+              child: CircularProgressIndicator(
+            color: Color.fromRGBO(171, 255, 79, 1),
+          ));
         }
         return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: children,
           ),
         );
@@ -295,8 +475,88 @@ class _profileState extends State<ProfileScreen> {
     );
   }
 
-  static const String _svg_background =
-      '<svg viewBox="32.3 41.7 658.7 649.8" ><path  d="M 689.260986328125 519.9199829101563 L 683.8150024414063 546.9500122070313 L 681.343994140625 458.83203125 L 689.260009765625 480.2820434570313 L 689.260009765625 519.9199829101563 Z M 636.583984375 533.6820068359375 L 657.8359985351563 535.5079956054688 L 681.3499755859375 547.990966796875 L 654.3509521484375 540.448974609375 L 636.583984375 533.6820068359375 Z M 611.8579711914063 489.4670104980469 L 612.0759887695313 488.56201171875 L 635.8819580078125 524.8140258789063 L 635.6119384765625 532.6940307617188 L 611.8579711914063 489.4670104980469 Z M 616.8350219726563 533.93701171875 L 615.322021484375 499.4530029296875 L 626.9210205078125 520.5540161132813 L 616.8350219726563 533.93701171875 Z M 550.031982421875 570.35498046875 L 472.5499877929688 597.18798828125 L 477.5589904785156 593.094970703125 L 565.885009765625 561.5449829101563 L 574.176025390625 560.281005859375 L 550.031982421875 570.35498046875 Z M 519.5430297851563 617.3319702148438 L 513.125 622.4759521484375 L 473.9140014648438 643.3119506835938 L 530.4190063476563 579.0209350585938 L 548.20703125 572.8629150390625 L 519.5430297851563 617.3319702148438 Z M 491.8989868164063 639.4940185546875 L 474.8499755859375 643.3170166015625 L 511.2739868164063 623.9639892578125 L 491.8989868164063 639.4940185546875 Z M 406.4800109863281 632.8209838867188 C 413.1580200195313 630.5169677734375 419.2020263671875 628.4469604492188 424.0230102539063 626.81396484375 L 433.9049987792969 641.4969482421875 L 428.9329833984375 641.5589599609375 L 423.7989807128906 638.864990234375 L 406.4800109863281 632.8209838867188 Z M 383.1369934082031 681.0670166015625 L 383.0539855957031 681.1400146484375 L 369.8009948730469 682.9920043945313 L 386.1999816894531 639.843017578125 C 391.6139831542969 637.9650268554688 396.9869689941406 636.10302734375 402.083984375 634.3400268554688 L 383.1369934082031 681.0670166015625 Z M 373.2340087890625 689.6959838867188 L 365.1929931640625 689.0929565429688 L 369.5780029296875 683.5799560546875 L 369.6199951171875 683.4659423828125 L 382.4410095214844 681.6769409179688 L 373.2340087890625 689.6959838867188 Z M 343.9159851074219 629.3930053710938 L 349.823974609375 633.0180053710938 L 349.9019775390625 636.4199829101563 L 349.9959716796875 636.7839965820313 L 356.2009582519531 649.489990234375 L 357.2879638671875 649.93701171875 C 358.2919616699219 649.5830078125 359.3109741210938 649.2300415039063 360.3459777832031 648.8660278320313 L 360.0239868164063 681.633056640625 L 355.3479919433594 681.633056640625 L 354.8429870605469 681.2430419921875 L 343.9159851074219 629.3930053710938 Z M 319.7250061035156 608.927001953125 L 285.4080200195313 604.552978515625 L 317.3380126953125 599.876953125 L 317.35400390625 599.876953125 L 336.7019958496094 610.2119750976563 L 319.7250061035156 608.927001953125 Z M 311.2780151367188 618.1900024414063 L 300.6360168457031 617.1080322265625 L 312.7130126953125 609.821044921875 L 317.8830261230469 610.4820556640625 L 311.2780151367188 618.1900024414063 Z M 281.6629943847656 605.8579711914063 L 312.0069885253906 609.7329711914063 L 300.0549926757813 616.9469604492188 L 281.6629943847656 605.8579711914063 Z M 244.64599609375 600.8759765625 L 244.6559906005859 600.8079833984375 L 211.9509887695313 594.1659545898438 L 276.7160034179688 597.6719360351563 L 281.4280090332031 604.0429077148438 L 277.4909973144531 603.5379028320313 L 277.4859924316406 603.5899047851563 L 244.6619873046875 600.8748779296875 L 244.64599609375 600.8748779296875 Z M 86.63600158691406 560.6290283203125 L 111.5599975585938 579.56103515625 L 98.6719970703125 573.7770385742188 L 86.63600158691406 560.6290283203125 Z M 62.43500137329102 510.9429931640625 L 66.08599853515625 499.593994140625 L 68.81700134277344 501.1130065917969 L 82.04900360107422 543.6430053710938 L 81.89300537109375 543.6430053710938 L 81.89300537109375 555.2620239257813 L 62.43500137329102 510.9429931640625 Z M 34.34299850463867 477.02099609375 L 44.54199981689453 486.0870056152344 L 39.42399978637695 512.166015625 L 34.34299850463867 477.02099609375 Z M 40.9640007019043 435.4739990234375 L 41.74900054931641 440.2380065917969 L 35.89300155639648 465.125 L 40.9640007019043 435.4739990234375 Z M 59.97999954223633 409.197998046875 L 59.98500061035156 409.218994140625 L 102.9309997558594 396.8190002441406 L 108.5690002441406 396.9179992675781 L 113.181999206543 419.3399963378906 L 99.93499755859375 418.9759826660156 L 99.65899658203125 419.0119934082031 L 57.93499755859375 431.4580078125 L 59.97999954223633 409.197998046875 Z M 70.63700103759766 399.8460083007813 L 79.00600433349609 397.8330078125 L 101.1060028076172 396.8970031738281 L 60.42800140380859 408.6260070800781 L 70.63700103759766 399.8460083007813 Z M 93.36599731445313 394.385009765625 L 103.4769973754883 394.5050048828125 L 102.7490005493164 396.3829956054688 L 81.25299835205078 397.2980041503906 L 93.36599731445313 394.385009765625 Z M 226.0839996337891 388.6170043945313 L 226.6089935302734 388.3619995117188 L 230.3849945068359 384.5809936523438 L 241.8849945068359 382.9629821777344 L 240.9850006103516 385.2669677734375 L 235.3520050048828 388.990966796875 L 235.8769989013672 390.6139526367188 L 269.8349914550781 389.0069580078125 L 270.6309814453125 388.4189453125 L 271.9989929199219 384.52294921875 L 299.7729797363281 386.2289428710938 L 300.989990234375 394.1559448242188 L 300.989990234375 394.2699584960938 L 301.0059814453125 394.2699584960938 L 301.0059814453125 394.2749633789063 L 301.0419921875 394.2699584960938 L 305.5359802246094 394.2129516601563 L 181.4419860839844 397.6869506835938 L 221.8079833984375 389.1049499511719 L 226.0839996337891 388.6170043945313 Z M 245.9519958496094 377.4190063476563 L 248.0739898681641 376.4200134277344 L 243.4349975585938 383.8730163574219 L 245.9519958496094 377.4190063476563 Z M 251.1840057373047 369.2479858398438 L 253.1030120849609 374.8809814453125 L 249.041015625 375.6349792480469 L 251.1840057373047 369.2479858398438 Z M 257.9249877929688 366.6419982910156 L 258.5390014648438 366.6520080566406 L 259.4599914550781 374.6199951171875 L 253.6189880371094 374.875 L 254.7739868164063 369.1690063476563 L 255.0809936523438 369.0750122070313 L 257.9249877929688 366.6419982910156 Z M 272.9609985351563 376.4509887695313 L 272.5759887695313 377.5429992675781 L 260.1499938964844 374.7550048828125 L 265.0339965820313 369.8760070800781 L 270.93701171875 373.4389953613281 L 272.9609985351563 376.4509887695313 Z M 271.7650146484375 379.8580017089844 L 269.1540222167969 387.2640075683594 L 266.5850219726563 387.3890075683594 L 271.7650146484375 379.8580017089844 Z M 259.4230041503906 387.7269897460938 L 258.5130004882813 379.7999877929688 L 264.22900390625 381.3190002441406 L 265.3210144042969 387.4460144042969 L 259.4230041503906 387.7269897460938 Z M 258.1069946289063 380.1650085449219 L 258.9759826660156 387.7480163574219 L 253.2229766845703 388.0180053710938 L 258.1069946289063 380.1650085449219 Z M 251.0749969482422 380.6690063476563 L 252.3130035400391 388.0599975585938 L 245.3379974365234 388.3930053710938 L 251.0749969482422 380.6690063476563 Z M 242.1130065917969 386.6510009765625 L 243.6160125732422 388.4769897460938 L 239.0180053710938 388.6900024414063 L 242.1130065917969 386.6510009765625 Z M 257.8469848632813 379.7439880371094 L 252.7449798583984 387.9509887695313 L 251.4709777832031 380.3359985351563 L 257.8469848632813 379.7439880371094 Z M 257.1029968261719 379.3689880371094 L 251.2469940185547 379.9149780273438 L 249.1299896240234 376.4719848632813 L 257.1029968261719 379.3689880371094 Z M 264.4630126953125 380.8569946289063 L 260.375 375.260986328125 L 272.0979919433594 377.8929748535156 L 264.4630126953125 380.8569946289063 Z M 265.7680053710938 387.4259948730469 L 264.6650085449219 381.2519836425781 L 272.3050231933594 378.2869873046875 L 266.0270385742188 387.4149780273438 L 265.7680053710938 387.4259948730469 Z M 263.8389892578125 380.7630004882813 L 258.5130004882813 379.3380126953125 L 259.8080139160156 375.2400207519531 L 263.8389892578125 380.7630004882813 Z M 259.7349853515625 366.6830139160156 L 264.6449890136719 369.6420288085938 L 259.8809814453125 374.4010314941406 L 258.9859924316406 366.6620178222656 L 259.7349853515625 366.6830139160156 Z M 253.3220062255859 375.2909851074219 L 253.3530120849609 375.3269958496094 L 259.3970031738281 375.0669860839844 L 258.0759887695313 379.2489929199219 L 249.2549896240234 376.0449829101563 L 253.3220062255859 375.2909851074219 Z M 254.3000030517578 369.2739868164063 L 253.3170013427734 374.1269836425781 L 251.5540008544922 368.9569702148438 L 254.3000030517578 369.2739868164063 Z M 242.5350036621094 386.1719970703125 L 242.5559997558594 386.1199951171875 L 248.5839996337891 376.4349975585938 L 250.8880004882813 380.1799926757813 L 244.7660064697266 388.4190063476563 L 244.1679992675781 388.4500122070313 L 242.4259948730469 386.3330078125 L 242.4830017089844 386.239013671875 L 242.5350036621094 386.1719970703125 Z M 299.3160095214844 384.3359985351563 L 299.5660095214844 384.8869934082031 L 299.7010192871094 385.7760009765625 L 272.156005859375 384.0910034179688 L 272.2440185546875 383.8259887695313 L 299.3160095214844 384.3359985351563 Z M 258.9289855957031 313.9280090332031 L 258.9389953613281 313.9330139160156 L 268.5769958496094 309.3300170898438 L 268.6549987792969 309.3200073242188 L 282.4020080566406 326.7749938964844 L 277.2839965820313 331.4400024414063 L 258.9289855957031 313.9280090332031 Z M 248.9579925537109 299.18798828125 L 246.0609893798828 288.322998046875 L 257.9559936523438 295.7349853515625 L 258.6219787597656 313.6319885253906 L 258.1279907226563 313.1640014648438 L 248.9579925537109 299.18798828125 Z M 261.5450134277344 235.0679931640625 L 261.5090026855469 235.3019866943359 L 272.5459899902344 237.0129852294922 L 252.9579925537109 262.4779968261719 L 244.7249908447266 257.2300109863281 L 244.708984375 256.7570190429688 L 261.5450134277344 235.0679931640625 Z M 261.9819946289063 234.2729949951172 L 263.72998046875 213.8999938964844 L 275.0059814453125 219.6679992675781 L 272.7589721679688 236.5979919433594 L 261.6859741210938 234.8819885253906 L 261.7949829101563 234.7359924316406 L 261.9819946289063 234.2729949951172 Z M 236.1369934082031 169.4250030517578 L 236.3449859619141 169.5130004882813 L 267.7909851074219 153.5709991455078 L 260.6189880371094 210.3159942626953 L 260.5099792480469 210.2589874267578 L 236.1369934082031 169.4250030517578 Z M 239.0189971923828 185.7149963378906 L 238.3479919433594 185.4550018310547 L 237.343994140625 185.4970092773438 L 240.6779937744141 180.4880065917969 L 251.0279998779297 197.8290100097656 L 239.0189971923828 185.7149963378906 Z M 196.093994140625 176.5140075683594 L 235.2379913330078 185.5850067138672 L 217.9549865722656 186.3290100097656 L 196.093994140625 176.5140075683594 Z M 170.5200042724609 158.2010040283203 L 170.1920013427734 157.8630065917969 L 171.7469940185547 122.1260070800781 L 192.9779968261719 175.1150054931641 L 192.093994140625 174.7150115966797 L 170.5200042724609 158.2010040283203 Z M 143.5879974365234 122.5940017700195 L 160.9649963378906 148.2929992675781 L 141.2839965820313 127.8789978027344 L 143.5879974365234 122.5940017700195 Z M 167.7630004882813 110.2669982910156 L 168.9380035400391 113.8190002441406 L 144.4720001220703 120.5650024414063 L 144.6750030517578 120.1020050048828 L 167.7630004882813 110.2669982910156 Z M 217.9179992675781 77.29199981689453 L 219.2550048828125 77.11499786376953 L 234.8430023193359 93.93599700927734 L 208.7120056152344 84.61599731445313 L 217.9179992675781 77.29199981689453 Z M 297.7139892578125 45.83000183105469 L 315.2519836425781 43.68200302124023 L 274.5369873046875 67.07200622558594 L 297.7139892578125 45.83000183105469 Z M 326.2109985351563 54.3390007019043 L 338.5530090332031 73.31800079345703 L 271.7960205078125 69.58399963378906 L 273.0440063476563 68.44499969482422 L 316.385009765625 43.5469970703125 L 316.9000244140625 43.4849967956543 L 326.2109985351563 54.3390007019043 Z M 382.3359985351563 109.6949996948242 L 359.7319946289063 116.6330032348633 L 360.6629943847656 94.50700378417969 L 360.6789855957031 94.52300262451172 L 382.3359985351563 109.6949996948242 Z M 397.9240112304688 138.3059997558594 L 361.1210021972656 117.7819976806641 L 403.3909912109375 130.4100036621094 L 397.9240112304688 138.3059997558594 Z M 406.0429992675781 168 L 402.0849914550781 165.5919952392578 L 400.8889770507813 153.4109954833984 L 406.0429992675781 168 Z M 403.1830139160156 197.2089996337891 L 402.7770080566406 197.218994140625 L 402.5690002441406 176.2899932861328 L 406.3760070800781 180.5599975585938 L 406.3290100097656 183.3529968261719 L 403.1830139160156 197.2089996337891 Z M 374.1709899902344 192.8139953613281 L 374.1609802246094 192.8710021972656 L 398.3669738769531 197.3130035400391 L 365.469970703125 198.031005859375 L 374.1709899902344 192.8139953613281 Z M 353.6730041503906 203.0290069580078 L 332.7900085449219 209.8270111083984 L 353.9120178222656 171.6400146484375 L 355.3270263671875 202.0350189208984 L 353.6730041503906 203.0290069580078 Z M 334.9800109863281 234.4810028076172 L 328.9100036621094 225.7120056152344 L 338.2619934082031 209.9990081787109 L 349.8659973144531 206.1610107421875 L 334.9800109863281 234.4810028076172 Z M 334.5690002441406 235.322998046875 L 327.7300109863281 265.083984375 L 328.9210205078125 226.7879791259766 L 329.072021484375 226.7259826660156 L 334.7460327148438 234.9229888916016 L 334.6470336914063 235.1099853515625 L 334.5690002441406 235.322998046875 Z M 291.7900085449219 298.0799865722656 L 291.4620056152344 298.3349914550781 L 291.1400146484375 298.7359924316406 L 270.4240112304688 308.0249938964844 L 313.5050048828125 275.7569885253906 L 317.4530029296875 285.9619750976563 L 317.0679931640625 286.6849670410156 L 291.7900085449219 298.0799865722656 Z M 299.2579956054688 312.1029968261719 L 286.5879821777344 307.197998046875 L 289.7869873046875 303.2300109863281 L 299.2579956054688 312.1029968261719 Z M 326.7879943847656 378.3760070800781 L 326.6839904785156 392.1799926757813 L 323.3399963378906 392.2219848632813 L 286.0740051269531 307.8329772949219 L 286.2919921875 307.56298828125 L 300.1269836425781 312.9149780273438 L 301.1519775390625 313.8769836425781 L 326.7879943847656 378.3760070800781 Z M 346.2659912109375 387.6279907226563 L 346.4739990234375 387.6589965820313 L 430.6860046386719 390.7120056152344 L 327.927001953125 393.5880126953125 L 328.4519958496094 393.0570068359375 L 328.5299987792969 382.5769958496094 L 346.2659912109375 387.6279907226563 Z M 451.2879943847656 378.5780029296875 L 450.3619995117188 389.7969970703125 L 450.1849975585938 389.760986328125 L 448.1409912109375 378.968994140625 L 451.2879943847656 378.5780029296875 Z M 466.7040100097656 376.6489868164063 L 474.1620178222656 373.3509826660156 L 477.9070129394531 373.7249755859375 L 470.7660217285156 376.4969787597656 L 471.635009765625 380.2629699707031 L 462.5639953613281 378.7959594726563 L 464.5509948730469 376.91796875 L 466.7040100097656 376.6489868164063 Z M 490.8529968261719 366.1789855957031 L 484.2219848632813 371.2760009765625 L 480.4559936523438 372.7380065917969 L 481.0390014648438 362.2109985351563 L 490.8529968261719 366.1789855957031 Z M 516.916015625 375.4989929199219 L 501.718017578125 366.3970031738281 L 512.0270385742188 362.4030151367188 L 515.070068359375 365.3520202636719 L 516.916015625 375.4989929199219 Z M 531.385986328125 382.7239990234375 L 505.677001953125 394.7959899902344 L 505.3080139160156 394.7439880371094 L 517.9520263671875 376.8779907226563 L 531.385986328125 382.7239990234375 Z M 528.85302734375 394.364013671875 L 519.9490356445313 396.8140258789063 L 519.6840209960938 396.7780151367188 L 531.2570190429688 383.9940185546875 L 530.0029907226563 393.1010131835938 L 528.85302734375 394.364013671875 Z M 521.051025390625 396.9700012207031 L 528.291015625 394.9779968261719 L 525.8519897460938 397.64599609375 L 521.051025390625 396.9700012207031 Z M 586.0599975585938 407.1069946289063 L 586.4660034179688 407.2160034179688 L 588.3590087890625 411.1270141601563 L 510.6380004882813 397.2870178222656 L 526.5330200195313 399.5340270996094 L 526.8660278320313 399.1700134277344 L 586.0599975585938 407.1069946289063 Z M 588.89501953125 411.2210083007813 L 587.0330200195313 407.3670043945313 L 624.6890258789063 417.5920104980469 L 588.89501953125 411.2210083007813 Z M 630.072021484375 424.9309997558594 L 596.8309936523438 417.7739868164063 L 596.6699829101563 418.5489807128906 L 591.8949584960938 417.4199829101563 L 589.1329345703125 411.7139892578125 L 626.950927734375 418.4440002441406 L 630.072021484375 424.9309997558594 Z M 678.6090087890625 451.4150085449219 L 639.3820190429688 438.2669982910156 L 639.1840209960938 438.1730041503906 L 639.2880249023438 438.1260070800781 L 639.4020385742188 438.1419982910156 L 673.1470336914063 439.02099609375 L 674.1720581054688 439.385009765625 L 678.6090087890625 451.4150085449219 Z M 644.385986328125 455.6130065917969 L 678.927001953125 452.2789916992188 L 680.8670043945313 457.531982421875 L 683.39501953125 547.8919677734375 L 644.385986328125 455.6130065917969 Z M 658.0960083007813 535.1380004882813 L 644.6090087890625 457.2869873046875 L 683.1439819335938 548.43701171875 L 658.0960083007813 535.1380004882813 Z M 614.9210205078125 476.510986328125 L 633.2860107421875 492.5459899902344 L 635.8030395507813 523.8880004882813 L 612.26806640625 488.052001953125 L 612.1800537109375 488.1090087890625 L 614.9210205078125 476.510986328125 Z M 599.9420166015625 532.1790161132813 L 578.4660034179688 531.7579956054688 L 568.7550048828125 519.676025390625 L 567.3510131835938 519.70703125 L 535.06201171875 563.9739990234375 L 557.64501953125 469.1000061035156 L 557.2130126953125 468.9960021972656 L 534.6610107421875 563.7509765625 L 523.010009765625 459.4519653320313 L 557.6500244140625 468.0599670410156 L 577.175048828125 507.10498046875 L 599.2120361328125 531.8209838867188 L 599.592041015625 531.6129760742188 L 581.6690673828125 473.1419677734375 L 613.1720581054688 476.2159729003906 L 599.9420166015625 532.1790161132813 Z M 565.6510009765625 560.8740234375 L 549.3510131835938 547.3930053710938 L 567.6539916992188 522.2969970703125 L 565.6510009765625 560.8740234375 Z M 568.1270141601563 521.718994140625 L 577.0159912109375 532.781982421875 L 566.14599609375 560.0050048828125 L 568.1270141601563 521.718994140625 Z M 504.760986328125 539.4340209960938 L 518.2579956054688 562.8390502929688 L 518.8410034179688 563.2600708007813 L 534.64697265625 566.6620483398438 L 535.552001953125 566.3190307617188 L 549.0910034179688 547.7510375976563 L 565.4119873046875 561.248046875 L 477.8979797363281 592.5020751953125 L 504.760986328125 539.4340209960938 Z M 468.3689880371094 598.6339721679688 L 468.1449890136719 598.7479858398438 C 457.5659790039063 606.2899780273438 442.1179809570313 617.1289672851563 436.927978515625 620.3999633789063 L 411.6239624023438 550.501953125 L 429.2559509277344 560.9039306640625 L 429.4689636230469 561.324951171875 L 429.8429565429688 561.7049560546875 L 433.0259704589844 563.3689575195313 L 433.0159606933594 563.3949584960938 L 477.0849609375 592.9219360351563 L 471.3429565429688 597.6029663085938 L 468.3689880371094 598.6339721679688 Z M 367.0759887695313 533.083984375 L 380.406982421875 539.2730102539063 L 381.5879821777344 538.8309936523438 L 386.1079711914063 528.7100219726563 L 410.8649597167969 550.113037109375 L 380.2559509277344 639.7500610351563 L 371.1019592285156 536.1640625 L 370.6599731445313 536.2000732421875 L 379.8499755859375 640.1710815429688 C 373.3229675292969 642.4490966796875 366.0199890136719 645.0030517578125 357.864990234375 647.8580932617188 L 367.0759887695313 533.083984375 Z M 350.593994140625 592.3040161132813 L 357.2460021972656 647.5970458984375 L 351.6700134277344 636.1800537109375 L 350.593994140625 592.3040161132813 Z M 348.6170043945313 596.552978515625 L 339.3330078125 610.4660034179688 L 339.260009765625 610.4039916992188 L 337.7980041503906 610.2949829101563 L 318.1480102539063 599.7990112304688 L 348.6170043945313 596.552978515625 Z M 317.3059997558594 599.4299926757813 L 277.1119995117188 597.2559814453125 L 311.6679992675781 527.2639770507813 L 317.3160095214844 599.4299926757813 L 317.3059997558594 599.4299926757813 Z M 204.6649932861328 592.6840209960938 L 184.2919921875 558.5850219726563 L 190.4499969482422 555.822998046875 L 190.8759918212891 555.4119873046875 L 197.8919982910156 541.5869750976563 L 205.3759918212891 592.708984375 L 205.7139892578125 592.864990234375 L 271.5139770507813 550.833984375 L 272.6059875488281 552.9769897460938 L 273.198974609375 552.9769897460938 L 276.5539855957031 597.2229614257813 L 208.9699859619141 593.5609741210938 L 204.6649932861328 592.6840209960938 Z M 192.6920013427734 595.8150024414063 L 201.6540069580078 593.885009765625 L 232.3880004882813 600.1260375976563 L 192.6920013427734 595.8150024414063 Z M 173.343994140625 588.0960083007813 L 173.4059906005859 588.1430053710938 L 175.9079895019531 588.6530151367188 L 191.2099914550781 596.0910034179688 L 191.3449859619141 596.1010131835938 L 191.3499908447266 596.1060180664063 L 191.3549957275391 596.1060180664063 L 237.10400390625 601.0840454101563 L 239.6210021972656 601.5940551757813 L 157.9530029296875 613.5880737304688 L 173.343994140625 588.0960083007813 Z M 116.2460021972656 568.2230224609375 L 153.1430053710938 610.4510498046875 L 122.9710083007813 587.1080322265625 L 116.2460021972656 568.2230224609375 Z M 95.68499755859375 549.9409790039063 L 106.6699981689453 548.5780029296875 L 107.1380004882813 548.375 L 119.7249984741211 537.5980224609375 L 139.9779968261719 528.1680297851563 L 115.5429992675781 567.010009765625 L 83.60800170898438 557.3250122070313 L 82.49500274658203 556.113037109375 L 95.68499755859375 549.9409790039063 Z M 84.22200012207031 550.6220092773438 L 85.17900085449219 551.2410278320313 L 94.26000213623047 550.1119995117188 L 82.33399963378906 555.697998046875 L 82.33399963378906 544.56201171875 L 84.22200012207031 550.6220092773438 Z M 66.00299835205078 497.5180053710938 L 65.97699737548828 497.5280151367188 L 45.59799957275391 484.6400146484375 L 54.22100067138672 449.7920227050781 L 69.34600067138672 499.2450256347656 L 69.76200103759766 499.2710266113281 L 94.62400054931641 442.4120178222656 L 85.76599884033203 549.3790283203125 L 85.69300079345703 549.3890380859375 L 70.40699768066406 500.2430419921875 L 69.98600006103516 499.7330322265625 L 66.00299835205078 497.5180053710938 Z M 55.69900131225586 433.7000122070313 L 42.14500045776367 439.9210205078125 L 41.3129997253418 434.8500061035156 L 55.69900131225586 433.7000122070313 Z M 65.18599700927734 431.1470031738281 L 93.80799865722656 440.8259887695313 L 42.87799835205078 440.0769958496094 L 56.9839973449707 433.5960083007813 L 56.99999618530273 433.5960083007813 L 57.01599502563477 433.5800170898438 L 65.18599700927734 431.1470031738281 Z M 124.6510009765625 421.4259948730469 L 107.7210006713867 429.6589965820313 L 107.9970016479492 430.2210083007813 L 105.0690002441406 431.8590087890625 L 66.88700103759766 430.6370239257813 L 100.0289993286133 420.7500305175781 L 124.6510009765625 421.4259948730469 Z M 129.5919952392578 419.0379943847656 L 127.984992980957 419.7449951171875 L 113.6399917602539 419.3500061035156 L 109.1459884643555 397.531005859375 L 129.5919952392578 419.0379943847656 Z M 145.4499969482422 397.5570068359375 L 130.2989959716797 418.7260131835938 L 130.0229949951172 418.8460083007813 L 109.1869964599609 396.9280090332031 L 145.4499969482422 397.5570068359375 Z M 146.2610015869141 397.1310119628906 L 103.2270050048828 396.3820190429688 L 103.9500045776367 394.510009765625 L 154.0370025634766 395.1029968261719 L 146.2610015869141 397.1310119628906 Z M 179.3410034179688 397.6820068359375 L 171.5130004882813 394.8789978027344 L 217.1840057373047 389.635986328125 L 179.3410034179688 397.6820068359375 Z M 440.2770080566406 391.0610046386719 L 249.2230072021484 443.3269958496094 L 180.2190093994141 398.1650085449219 L 437.593017578125 390.9609985351563 L 440.2770080566406 391.0610046386719 Z M 477.6629943847656 457.2560119628906 L 338.7139892578125 446.0320129394531 L 442.6069946289063 391.1440124511719 L 443.6780090332031 391.1800231933594 L 477.6629943847656 457.2560119628906 Z M 455.7969970703125 390.9519958496094 L 450.7990112304688 389.8909912109375 L 451.6620178222656 379.3949890136719 L 455.7969970703125 390.9519958496094 Z M 461.9710083007813 379.031005859375 L 459.9630126953125 391.8359985351563 L 456.301025390625 391.0610046386719 L 451.8180236816406 378.5110168457031 L 458.9070129394531 377.6270141601563 L 461.9710083007813 379.031005859375 Z M 462.1170043945313 378.6099853515625 L 459.7449951171875 377.5229797363281 L 463.8070068359375 377.0129699707031 L 462.1170043945313 378.6099853515625 Z M 467.781005859375 388.9389953613281 L 463.2919921875 392.5429992675781 L 460.3949890136719 391.9289855957031 L 462.3299865722656 379.6019897460938 L 467.781005859375 388.9389953613281 Z M 471.7650146484375 380.8250122070313 L 468.051025390625 388.5180053710938 L 462.6470336914063 379.260009765625 L 471.7440185546875 380.7319946289063 L 471.7650146484375 380.8250122070313 Z M 475.0419921875 395.0400085449219 L 474.7720031738281 394.9830017089844 L 468.3280029296875 388.9599914550781 L 471.9219970703125 381.5169982910156 L 475.0419921875 395.0400085449219 Z M 466.8450012207031 393.2980041503906 L 463.8489990234375 392.6629943847656 L 467.7239990234375 389.5530090332031 L 466.8450012207031 393.2980041503906 Z M 468.2019958496094 389.4490051269531 L 473.9339904785156 394.8059997558594 L 467.2769775390625 393.3909912109375 L 468.2019958496094 389.4490051269531 Z M 474.7760009765625 376.8410034179688 L 482.8590087890625 396.7040100097656 L 476.9559936523438 395.4510192871094 L 472.8370056152344 377.5950317382813 L 474.7760009765625 376.8410034179688 Z M 475.3689880371094 376.6119995117188 L 488.1169738769531 390.43701171875 L 485.958984375 397.3600158691406 L 483.3839721679688 396.8140258789063 L 475.1869812011719 376.6800231933594 L 475.3689880371094 376.6119995117188 Z M 489.6990051269531 371.0580139160156 L 501.5780029296875 366.4500122070313 L 501.4120178222656 366.7310180664063 L 516.0640258789063 375.5050048828125 L 489.6990051269531 371.0580139160156 Z M 503.6119995117188 396.4859924316406 L 588.593994140625 411.6159973144531 L 591.3399658203125 417.2850036621094 L 503.6119995117188 396.4859924316406 Z M 495.5549926757813 395.1549987792969 L 496.8500061035156 395.3370056152344 L 589.0250244140625 417.1920166015625 L 494.64501953125 399.8620300292969 L 495.5549926757813 395.1549987792969 Z M 492.5490112304688 398.7640075683594 L 486.3910217285156 397.4530029296875 L 488.4140319824219 390.9670104980469 L 492.5490112304688 398.7640075683594 Z M 493.0530090332031 398.7690124511719 L 488.9340209960938 391.0039978027344 L 493.9430236816406 394.1399841308594 L 493.0530090332031 398.7690124511719 Z M 487.8110046386719 371.7909851074219 L 488.2430114746094 389.9169921875 L 475.8170166015625 376.4409790039063 L 487.8110046386719 371.7909851074219 Z M 599.093994140625 420.072998046875 L 636.2459716796875 437.2990112304688 L 582.9129638671875 430.6620178222656 L 591.8169555664063 418.1580200195313 L 596.5659790039063 419.0270080566406 L 596.4619750976563 419.5110168457031 L 599.093994140625 420.072998046875 Z M 643.7509765625 455.1289978027344 L 612.7779541015625 448.5289916992188 L 638.6229248046875 438.4019775390625 L 639.1119384765625 438.6309814453125 L 643.7509765625 455.1289978027344 Z M 644.2249755859375 455.1809997558594 L 639.6219482421875 438.81298828125 L 678.5629272460938 451.8679809570313 L 644.2249755859375 455.1809997558594 Z M 644.010986328125 456.4140014648438 L 657.4559936523438 534.041015625 L 633.8009643554688 492.302001953125 L 644.010986328125 456.4140014648438 Z M 581.5770263671875 472.68798828125 L 581 450.9469909667969 L 612.6799926757813 461.6510009765625 L 612.6959838867188 461.593994140625 L 613.68896484375 475.8089904785156 L 613.2879638671875 475.7099914550781 L 613.27197265625 475.7779846191406 L 581.5770263671875 472.68798828125 Z M 581.197021484375 473.0780029296875 L 598.8760375976563 530.7739868164063 L 577.5560302734375 506.8799743652344 L 558.2080078125 468.177978515625 L 581.197021484375 473.0780029296875 Z M 554.6510009765625 446.0840148925781 L 580.4180297851563 450.656005859375 L 580.4800415039063 450.656005859375 L 557.7560424804688 467.6270141601563 L 523.4280395507813 459.0970153808594 L 554.6510009765625 446.0840148925781 Z M 522.6370239257813 458.9620056152344 L 480.4610290527344 457.3909912109375 L 552.8660278320313 446.3489990234375 L 522.6370239257813 458.9459838867188 L 522.6370239257813 458.9620056152344 Z M 513.7960205078125 520.5650024414063 L 522.7260131835938 460.8970031738281 L 534.2470092773438 563.9840087890625 L 513.7960205078125 520.5650024414063 Z M 519.2150268554688 560.9459838867188 L 514.0140380859375 522.0669555664063 L 534.1060180664063 564.73193359375 L 519.6000366210938 561.6109619140625 L 519.2150268554688 560.9459838867188 Z M 502.4410095214844 531.8720092773438 L 513.5189819335938 521.7349853515625 L 518.6319580078125 559.93701171875 L 502.4410095214844 531.8720092773438 Z M 419.8210144042969 538.6539916992188 L 419.6860046386719 538.4619750976563 L 400.3900146484375 517.2669677734375 L 407.4690246582031 511.8939819335938 L 453.4520263671875 572.0759887695313 L 430.9210205078125 560.2639770507813 L 419.8210144042969 538.6539916992188 Z M 421.9330139160156 546.6589965820313 L 428.8710021972656 560.166015625 L 411.6340026855469 549.9979858398438 L 421.9330139160156 546.6589965820313 Z M 421.7300109863281 546.2579956054688 L 411.7440185546875 549.4929809570313 L 418.5630187988281 540.083984375 L 421.7300109863281 546.2579956054688 Z M 388.2449951171875 523.9190063476563 L 399.3179931640625 518.7230224609375 L 409.8609924316406 530.301025390625 L 410.77099609375 549.446044921875 L 386.2940063476563 528.2880249023438 L 388.2449951171875 523.9190063476563 Z M 379.6730041503906 536.97900390625 L 373.302001953125 525.5469970703125 L 406.0690002441406 512.4039916992188 L 400.0039978027344 517.0070190429688 L 399.156005859375 516.8410034179688 L 387.1929931640625 522.4530029296875 L 386.760986328125 522.89501953125 L 380.3320007324219 537.2870483398438 L 379.6730041503906 536.97900390625 Z M 340.1969909667969 611.7410278320313 L 349.3559875488281 614.0350341796875 L 349.5899963378906 623.7200317382813 L 340.3370056152344 612.4180297851563 L 340.1969909667969 611.7410278320313 Z M 321.8630065917969 498.9169921875 L 327.4750061035156 501.9539794921875 L 328.322998046875 501.948974609375 L 334.4660034179688 498.5889892578125 L 348.8259887695313 592.56298828125 L 348.8729858398438 594.3939819335938 L 312.0849914550781 526.5139770507813 L 321.8630065917969 498.9169921875 Z M 277.8819885253906 545.85302734375 L 295.0299987792969 512.8310546875 L 311.3770141601563 526.4890747070313 L 277.8819885253906 545.85302734375 Z M 274.1789855957031 552.9829711914063 L 277.5029907226563 546.5859985351563 L 311.2739868164063 527.0609741210938 L 276.9519958496094 596.5799560546875 L 273.6489868164063 552.9839477539063 L 274.1789855957031 552.9839477539063 Z M 250.0350036621094 504.7579956054688 L 249.9150085449219 504.6589965820313 L 255.3760070800781 460.1529846191406 L 305.5150146484375 488.9829711914063 L 305.39501953125 489.0249633789063 L 273.4030151367188 550.637939453125 L 250.0350036621094 504.7579956054688 Z M 231.1289978027344 499.8280029296875 L 248.614990234375 505.8819885253906 L 271.3079833984375 550.4349975585938 L 205.9609832763672 592.1849975585938 L 231.1289978027344 499.8280029296875 Z M 220.8820037841797 496.2799987792969 L 230.7070007324219 499.6820068359375 L 205.6580047607422 591.5969848632813 L 198.2360076904297 540.906982421875 L 220.8820037841797 496.2799987792969 Z M 178.2539978027344 559.343994140625 L 217.8760070800781 498.2879943847656 L 189.4410095214844 554.3300170898438 L 178.2539978027344 559.343994140625 Z M 164.1119995117188 564.4210205078125 L 155.6600036621094 537.4429931640625 L 176.5690002441406 561.3579711914063 L 177.5989990234375 561.5819702148438 L 183.8820037841797 558.7679443359375 L 204.0780029296875 592.56494140625 L 203.5790100097656 592.4659423828125 L 203.6570129394531 592.345947265625 L 164.1119995117188 564.4210205078125 Z M 185.3529968261719 588.7620239257813 L 165.1049957275391 565.6580200195313 L 202.8389892578125 592.3140258789063 L 185.3529968261719 588.7620239257813 Z M 187.2830047607422 590.9619750976563 L 200.5770111083984 593.6609497070313 L 191.3870086669922 595.64794921875 L 187.2830047607422 590.9619750976563 Z M 186.5650024414063 590.8170166015625 L 190.4140014648438 595.2120361328125 L 177.6499938964844 589.0070190429688 L 186.5650024414063 590.8170166015625 Z M 168.9179992675781 576.8519897460938 L 164.4969940185547 565.6439819335938 L 184.635986328125 588.6179809570313 L 174.1609802246094 586.490966796875 L 168.9179992675781 576.8519897460938 Z M 171.7630004882813 585.7919921875 L 116.0220031738281 567.0889892578125 L 140.4570007324219 528.2420043945313 L 171.7630004882813 585.7919921875 Z M 128.6239929199219 529.9840087890625 L 128.8889923095703 529.593994140625 L 133.5649871826172 515.5659790039063 L 140.1179809570313 527.6119995117188 L 120.9829788208008 536.5269775390625 L 128.6239929199219 529.9840087890625 Z M 105.3600006103516 445.0910034179688 L 104.1999969482422 503.125 L 86.57899475097656 547.6259765625 L 105.3600006103516 445.0910034179688 Z M 105.390998840332 442.468994140625 L 86.5469970703125 545.3480224609375 L 95.16499328613281 441.2310180664063 L 105.390998840332 442.468994140625 Z M 94.63999938964844 441.2730102539063 L 69.59600067138672 498.5429992675781 L 54.48100280761719 449.1319885253906 L 94.63999938964844 441.2730102539063 Z M 94.91100311279297 440.7369995117188 L 66.32000732421875 431.0580139160156 L 104.5480041503906 432.2850036621094 L 94.91100311279297 440.7369995117188 Z M 337.8460083007813 446.0480041503906 L 337.6540222167969 446.0060119628906 L 250.6800231933594 443.3900146484375 L 441.666015625 391.1390075683594 L 337.8410034179688 445.9960021972656 L 337.8460083007813 446.0480041503906 Z M 399.260986328125 460.1119995117188 L 340.2379760742188 446.5989990234375 L 474.4019775390625 457.43798828125 L 399.260986328125 460.1119995117188 Z M 494.4159851074219 486.7049865722656 L 478.4949951171875 457.760986328125 L 522.2369995117188 459.3889770507813 L 494.4159851074219 486.7049865722656 Z M 513.4420166015625 519.9349975585938 L 494.6400146484375 487.10498046875 L 522.4400024414063 459.8089904785156 L 513.4420166015625 519.9349975585938 Z M 417.4490051269531 471.0029907226563 L 453.9299926757813 571.9779663085938 L 407.7489929199219 511.5349731445313 L 417.4490051269531 471.0029907226563 Z M 407.3489990234375 511.3009948730469 L 380.4800109863281 502.4849853515625 L 416.9660034179688 471.1269836425781 L 407.3489990234375 511.3009948730469 Z M 380.1619873046875 502.8500061035156 L 406.864990234375 511.6090087890625 L 373.2919921875 525.0750122070313 L 380.1619873046875 502.8500061035156 Z M 356.9179992675781 526.4110107421875 L 372.8389892578125 525.635986328125 L 378.9920043945313 536.6619873046875 L 356.9179992675781 526.4110107421875 Z M 355.1969909667969 525.6099853515625 L 379.6219787597656 503.114990234375 L 372.79296875 525.1939697265625 L 356.0559692382813 526.010986328125 L 355.1969909667969 525.6099853515625 Z M 351.0929870605469 487.6210021972656 L 351.2749938964844 487.5169982910156 L 351.3840026855469 487.3190002441406 L 350.739013671875 470.5299987792969 L 379.7610168457031 502.3770141601563 L 354.7640075683594 525.4130249023438 L 354.5980224609375 525.3350219726563 L 352.2630310058594 488.2660217285156 L 351.0929870605469 487.6210021972656 Z M 308.9010009765625 489.8930053710938 L 327.5369873046875 494.1889953613281 L 327.7549743652344 500.0870056152344 L 308.9010009765625 489.8930053710938 Z M 333.3099975585938 455.8519897460938 L 305.9100036621094 488.7019958496094 L 255.875 459.9289855957031 L 333.3099975585938 455.8519897460938 Z M 255.2149963378906 459.5190124511719 L 255.1889953613281 459.5290222167969 L 241.9680023193359 450.9210205078125 L 329.6130065917969 455.6020202636719 L 255.2149963378906 459.5190124511719 Z M 210.843994140625 490.5799865722656 L 193.9709930419922 459.0189819335938 L 241.0779876708984 450.7179870605469 L 241.0359802246094 450.8429870605469 L 254.77197265625 459.7890014648438 L 210.843994140625 490.5799865722656 Z M 210.8699951171875 491.1990051269531 L 219.3689880371094 495.1730041503906 L 179.2729797363281 556.968017578125 L 210.8699951171875 491.1990051269531 Z M 134.6990051269531 510.781005859375 L 134.6679992675781 510.7860107421875 L 130.5639953613281 506.2400207519531 L 193.2999877929688 459.4140319824219 L 177.406005859375 559.6199951171875 L 134.6990051269531 510.781005859375 Z M 147.4579925537109 528.0700073242188 L 154.9369964599609 536.614990234375 L 162.7440032958984 561.5390014648438 L 147.4579925537109 528.0700073242188 Z M 103.0189971923828 534.6699829101563 L 86.4949951171875 549.0409545898438 L 104.1479949951172 504.4519653320313 L 103.0189971923828 534.6699829101563 Z M 115.0029983520508 497.6019897460938 L 115.1589965820313 497.7059936523438 L 103.5189971923828 533.177978515625 L 104.6369934082031 503.302978515625 L 115.0029983520508 497.6019897460938 Z M 131.1940002441406 454.7489929199219 L 115.6110000610352 496.5350036621094 L 115.3669967651367 496.8990173339844 L 104.9799957275391 502.6050109863281 L 131.1940002441406 454.7489929199219 Z M 132.02099609375 452.3200073242188 L 104.6579971313477 502.2669982910156 L 105.8539962768555 442.531982421875 L 132.02099609375 452.3200073242188 Z M 105.4010009765625 442.0270080566406 L 95.47700500488281 440.8309936523438 L 104.922004699707 432.5509948730469 L 105.4010009765625 442.0270080566406 Z M 132.6600036621094 452.0289916992188 L 132.4100036621094 452.0029907226563 L 132.3320007324219 451.9719848632813 L 105.7379989624023 432.3579711914063 L 247.1619873046875 443.6239624023438 L 132.6600036621094 452.0289916992188 Z M 242.8049926757813 450.0419921875 L 249.3119964599609 443.7899780273438 L 332.6400146484375 446.2919921875 L 242.8049926757813 450.0419921875 Z M 193.7319946289063 459.5140075683594 L 210.5159912109375 490.9129943847656 L 178.0239868164063 558.5379638671875 L 193.7319946289063 459.5140075683594 Z M 147.3280029296875 465.8590087890625 L 132.9730072021484 452.5020141601563 L 191.9440002441406 458.8940124511719 L 147.3280029296875 465.8590087890625 Z M 147.35400390625 466.3009948730469 L 192.8430023193359 459.2009887695313 L 130.6790008544922 505.5999755859375 L 147.35400390625 466.3009948730469 Z M 135.1049957275391 452.2940063476563 L 246.4149932861328 444.1230163574219 L 193.6179962158203 458.6290283203125 L 135.1049957275391 452.2940063476563 Z M 105.8489990234375 442.0849914550781 L 105.370002746582 432.6289978027344 L 130.8190002441406 451.4049987792969 L 105.9209976196289 442.0950012207031 L 105.8489990234375 442.0849914550781 Z M 130.1219940185547 505.7780151367188 L 116.1879959106445 496.2650146484375 L 132.4570007324219 452.6270141601563 L 146.9530029296875 466.1190185546875 L 130.1219940185547 505.7780151367188 Z M 242.1239929199219 450.0790100097656 L 198.2519836425781 457.8180236816406 L 248.4219818115234 444.030029296875 L 242.1239929199219 450.0790100097656 Z M 333.6640014648438 455.3789978027344 L 242.4049987792969 450.5060119628906 L 337.4509887695313 446.5380249023438 L 333.6640014648438 455.3789978027344 Z M 337.8720092773438 446.677001953125 L 349.7510070800781 469 L 334.0750122070313 455.5450134277344 L 337.8720092773438 446.677001953125 Z M 350.614990234375 469.68701171875 L 338.3399963378906 446.6150207519531 L 398.2210083007813 460.3300170898438 L 350.614990234375 469.68701171875 Z M 416.6170043945313 470.0559997558594 L 388.2860107421875 471.7460021972656 L 399.35400390625 460.6570129394531 L 416.6170043945313 470.0559997558594 Z M 438.9819946289063 474.0559997558594 L 454.1539916992188 571.291015625 L 417.7409973144531 470.4980163574219 L 438.9819946289063 474.0559997558594 Z M 417.4809875488281 470.0150146484375 L 401.5549926757813 461.3500061035156 L 436.5069885253906 473.197998046875 L 417.4809875488281 470.0150146484375 Z M 387.89599609375 472.2149963378906 L 417.0480041503906 470.4729919433594 L 380.4110107421875 501.9660034179688 L 387.89599609375 472.2149963378906 Z M 387.4389953613281 472.2099914550781 L 379.9599914550781 501.9400024414063 L 351.0260009765625 470.18701171875 L 387.4389953613281 472.2099914550781 Z M 387.6310119628906 471.7730102539063 L 352.2740173339844 469.81201171875 L 398.7050170898438 460.6840209960938 L 387.6310119628906 471.7730102539063 Z M 350.2349853515625 470.0039978027344 L 328.0779724121094 493.3420104980469 L 333.9609680175781 456.0339965820313 L 350.2349853515625 470.0039978027344 Z M 306.6080017089844 488.6499938964844 L 306.5090026855469 488.6809997558594 L 333.4609985351563 456.3609924316406 L 327.5679931640625 493.7420043945313 L 307.4339904785156 489.0970153808594 L 306.6080017089844 488.6499938964844 Z M 328.197998046875 499.9989929199219 L 327.9739990234375 494.0960083007813 L 348.4150085449219 472.5630187988281 L 328.6610107421875 499.7440185546875 L 328.197998046875 499.9989929199219 Z M 343.552001953125 491.5989990234375 L 329.5710144042969 499.2449951171875 L 350.3030090332031 470.7169799804688 L 350.9380187988281 487.2049865722656 L 343.552001953125 491.5989990234375 Z M 439.2109985351563 473.6449890136719 L 400.4570007324219 460.5119934082031 L 476.9140014648438 457.7919921875 L 439.2109985351563 473.6449890136719 Z M 493.927001953125 486.7359924316406 L 439.8300170898438 473.8630065917969 L 478.0170288085938 457.8070068359375 L 493.927001953125 486.7359924316406 Z M 127.2880020141602 528.7979736328125 L 126.5910034179688 529.3909912109375 L 103.5709991455078 534.4409790039063 L 115.5390014648438 497.9649658203125 L 128.9420013427734 507.0879516601563 L 133.0200042724609 511.6079406738281 L 132.7030029296875 512.56494140625 L 132.1100006103516 512.886962890625 L 132.406005859375 513.43798828125 L 127.2880020141602 528.7979736328125 Z M 134.3350067138672 513.2670288085938 L 134.3820037841797 513.1110229492188 L 146.4430084228516 526.904052734375 L 162.6190032958984 562.3240356445313 L 155.1090087890625 551.4540405273438 L 134.3350067138672 513.2670288085938 Z M 167.1860046386719 573.6630249023438 L 157.1009979248047 555.1210327148438 L 163.6020050048828 564.5350341796875 L 163.5920104980469 564.5450439453125 L 167.1860046386719 573.6630249023438 Z M 249.5149993896484 504.3160095214844 L 220.7319946289063 494.3510131835938 L 219.6499938964844 494.7929992675781 L 219.6399993896484 494.8139953613281 L 211.2089996337891 490.8710021972656 L 254.9250030517578 460.2260131835938 L 249.5149993896484 504.3160095214844 Z M 298.43701171875 506.2720031738281 L 300.3300170898438 502.6260070800781 L 311.2000122070313 525.7659912109375 L 295.3110046386719 512.4869995117188 L 298.43701171875 506.2720031738281 Z M 311.8039855957031 525.9949951171875 L 300.5849914550781 502.1319885253906 L 306.5559997558594 490.6369934082031 L 321.4729919433594 498.7039794921875 L 311.8039855957031 525.9949951171875 Z M 348.7420043945313 589.0689697265625 L 334.8810119628906 498.3609619140625 L 350.3650207519531 489.8879699707031 L 347.2500305175781 528.2049560546875 L 347.2500305175781 528.2989501953125 L 348.7420043945313 589.0689697265625 Z M 500.7409973144531 531.0239868164063 L 500.7099914550781 531.0189819335938 L 454.7989807128906 572.5549926757813 L 439.4559936523438 474.2269897460938 L 494.2139892578125 487.260986328125 L 512.947998046875 519.9660034179688 L 512.8909912109375 519.9039916992188 L 500.7409973144531 531.0239868164063 Z M 554.5570068359375 445.6419982910156 L 480.2330017089844 456.9809875488281 L 590.5859985351563 418.5079956054688 L 554.5570068359375 445.6419982910156 Z M 582.3930053710938 430.6260070800781 L 557.1519775390625 444.2430114746094 L 590.68896484375 418.9810180664063 L 582.3930053710938 430.6260070800781 Z M 611.281005859375 448.4089965820313 L 580.4429931640625 450.218994140625 L 555.2899780273438 445.7510070800781 L 582.4920043945313 431.0679931640625 L 611.281005859375 448.4089965820313 Z M 611.8060302734375 448.8250122070313 L 612.6690063476563 461.1780090332031 L 581.3740234375 450.60400390625 L 611.8060302734375 448.8250122070313 Z M 581.1300048828125 472.614990234375 L 558.3280029296875 467.7519836425781 L 580.56298828125 451.1449890136719 L 581.1300048828125 472.614990234375 Z M 633.4840087890625 491.8070068359375 L 612.4089965820313 448.9030151367188 L 643.781982421875 455.5860290527344 L 633.4840087890625 491.8070068359375 Z M 638.0670166015625 438.1470031738281 L 612.030029296875 448.3410034179688 L 583.5480346679688 431.1820068359375 L 637.56201171875 437.9070129394531 L 638.0670166015625 438.1470031738281 Z M 147.5570068359375 405.2919921875 L 147.635009765625 405.4169921875 L 152.3060150146484 409.0159912109375 L 131.0960083007813 418.3729858398438 L 145.6790008544922 398 L 147.5570068359375 405.2919921875 Z M 176.7660064697266 398.2229919433594 L 152.7680053710938 408.81298828125 L 147.9670104980469 405.1099853515625 L 146.0480041503906 397.6409912109375 L 146.3079986572266 397.572998046875 L 178.6279907226563 398.135009765625 L 177.1039886474609 398.9830017089844 L 176.7660064697266 398.2229919433594 Z M 108.4960021972656 431.2560119628906 L 128.5780029296875 421.4880065917969 L 128.552001953125 421.4309997558594 L 177.4840087890625 399.8460083007813 L 177.281005859375 399.3880004882813 L 179.4450073242188 398.18701171875 L 248.3340148925781 443.2760009765625 L 105.864013671875 431.9219970703125 L 108.1890106201172 430.6159973144531 L 108.4960021972656 431.2560119628906 Z M 45.1510009765625 484.5830078125 L 42.22800064086914 440.7109985351563 L 53.94599914550781 449.0539855957031 L 45.1510009765625 484.5830078125 Z M 54.24800109863281 448.7210083007813 L 42.71700286865234 440.5140075683594 L 92.46099853515625 441.2470092773438 L 54.24800109863281 448.7210083007813 Z M 86.947998046875 549.2329711914063 L 103.3419952392578 534.9449462890625 L 125.8789978027344 530.0039672851563 L 106.1869964599609 546.85595703125 L 86.947998046875 549.2329711914063 Z M 312.1369934082031 527.5390014648438 L 348.8939819335938 595.3670043945313 L 348.9149780273438 596.073974609375 L 317.7599792480469 599.3919677734375 L 312.1369934082031 527.5390014648438 Z M 340.0669860839844 611.1060180664063 L 339.6719970703125 610.7579956054688 L 348.9349975585938 596.8759765625 L 349.3410034179688 613.5769653320313 L 340.0989990234375 611.2569580078125 L 340.0669860839844 611.1060180664063 Z M 350.4949951171875 587.7739868164063 L 350.4849853515625 587.7789916992188 L 349.0179748535156 528.3040161132813 L 351.2699890136719 500.6490173339844 L 352.8619995117188 525.968017578125 L 353.3720092773438 526.717041015625 L 366.64501953125 532.8800659179688 L 357.5430297851563 646.3430786132813 L 350.4949951171875 587.7739868164063 Z M 411.2179870605469 549.4669799804688 L 410.3289794921875 530.8159790039063 L 418.2969665527344 539.5700073242188 L 418.3329772949219 539.6430053710938 L 411.2179870605469 549.4669799804688 Z M 380.6820068359375 639.8790283203125 L 410.89599609375 551.3920288085938 L 410.3909912109375 615.3770141601563 L 381.0619812011719 639.75 C 380.93701171875 639.791015625 380.8070068359375 639.8369750976563 380.6820068359375 639.8790283203125 M 435.7210083007813 621.1339721679688 L 410.8390197753906 615.2509765625 L 411.343017578125 551.0379638671875 L 436.5430297851563 620.6449584960938 C 436.2149963378906 620.8480224609375 435.9339904785156 621.0089721679688 435.7210083007813 621.1339721679688 M 477.3670043945313 592.5750122070313 L 436.4800109863281 565.1799926757813 L 454.3670043945313 574.5579833984375 L 455.3710021972656 574.427978515625 L 501.0840148925781 533.0689697265625 L 504.4960021972656 538.9779663085938 L 477.3670043945313 592.5750122070313 Z M 615 475.9859924316406 L 614.906005859375 476.0950012207031 L 614.1409912109375 475.9129943847656 L 612.3099975585938 449.7039794921875 L 632.89599609375 491.6199951171875 L 615 475.9859924316406 Z M 653.1290283203125 431.7969970703125 L 671.8270263671875 438.5429992675781 L 640.1780395507813 437.7160034179688 L 653.1290283203125 431.7969970703125 Z M 631.4970092773438 427.0060119628906 L 652.4110107421875 431.635009765625 L 639.2160034179688 437.6679992675781 L 637.68701171875 437.4809875488281 L 601.0599975585938 420.5 L 631.4710083007813 427.0429992675781 L 631.4970092773438 427.0060119628906 Z M 506.4779968261719 394.9100036621094 L 531.344970703125 383.2330017089844 L 519.1589965820313 396.7040100097656 L 506.4779968261719 394.9100036621094 Z M 517.093017578125 376.5029907226563 L 517.5350341796875 376.6949768066406 L 504.8180236816406 394.6749877929688 L 494.1300354003906 393.1669921875 L 494.0310363769531 393.6719970703125 L 488.6890258789063 390.3280029296875 L 488.2470397949219 371.6190185546875 L 488.8920288085938 371.3690185546875 L 517.0250244140625 376.1180114746094 L 517.093017578125 376.5029907226563 Z M 491.5710144042969 366.1889953613281 L 502.8890075683594 364.0409851074219 L 485.6889953613281 370.708984375 L 491.5710144042969 366.1889953613281 Z M 494.4320068359375 400.9750061035156 L 494.56201171875 400.2990112304688 L 590.7830200195313 417.9670104980469 L 478.1520385742188 457.2360229492188 L 444.1880493164063 391.2020263671875 L 449.31103515625 391.3890380859375 L 494.4320068359375 400.9750061035156 Z M 282.5840148925781 327.2120056152344 L 294.3700256347656 369.0660095214844 L 277.5440368652344 331.8000183105469 L 282.5840148925781 327.2120056152344 Z M 285.3190002441406 307.2860107421875 L 282.5570068359375 326.2650146484375 L 269.1640014648438 309.2570190429688 L 285.3190002441406 307.2860107421875 Z M 268.3580017089844 308.9450073242188 L 259.0530090332031 313.3869934082031 L 258.4240112304688 296.3320007324219 L 268.3580017089844 308.9450073242188 Z M 245.4210052490234 284.0740051269531 L 244.7340087890625 257.7669982910156 L 252.7540130615234 262.875 L 245.4210052490234 284.0740051269531 Z M 245.4730072021484 286.1329956054688 L 245.4520111083984 285.3269958496094 L 252.9260101318359 263.6900024414063 L 257.8880004882813 295.18798828125 L 245.8890075683594 287.697998046875 L 245.4730072021484 286.1329956054688 Z M 272.8890075683594 237.2940063476563 L 278.8550109863281 251.9660034179688 L 278.8550109863281 252.0440063476563 L 278.8500061035156 252.0440063476563 L 253.6820068359375 262.2640075683594 L 272.8890075683594 237.2940063476563 Z M 279.364013671875 221.8990020751953 L 278.875 250.8379974365234 L 273.1799926757813 236.8260040283203 L 275.4219970703125 219.8810119628906 L 279.364013671875 221.8990020751953 Z M 316.64599609375 191.3320007324219 L 316.5989990234375 191.4409942626953 L 316.7080078125 191.4879913330078 L 261.1230163574219 210.5709838867188 L 261.0400085449219 210.5289764404297 L 268.2490234375 153.5189819335938 L 316.64599609375 191.3320007324219 Z M 334.5950012207031 150.9499969482422 L 316.8330078125 190.9160003662109 L 268.7330017089844 153.3379974365234 L 334.5950012207031 150.9499969482422 Z M 227.8150024414063 138.7590026855469 L 227.8150024414063 138.7590026855469 L 291.6749877929688 132.6630096435547 L 268.0309753417969 152.85400390625 L 227.8150024414063 138.7590026855469 Z M 232.6470031738281 156.4629974365234 L 228.0489959716797 139.3099975585938 L 267.5989990234375 153.1709899902344 L 236.3820037841797 168.9979858398438 L 232.6470031738281 156.4629974365234 Z M 230.0679931640625 153.6860046386719 L 234.4319915771484 169.9500122070313 L 234.4739990234375 170.0590057373047 L 193.47900390625 175.1660003662109 L 172.0090026855469 121.5839996337891 L 230.0679931640625 153.6860046386719 Z M 171.2790069580078 120.8669967651367 L 145.6740112304688 120.6949996948242 L 169.0840148925781 114.2350006103516 L 171.2790069580078 120.8669967651367 Z M 226.3329925537109 139.7570037841797 L 226.8169860839844 141.5619964599609 L 171.7629852294922 120.9189987182617 L 168.2729797363281 110.4020004272461 L 226.3329925537109 139.7570037841797 Z M 182.7940063476563 103.536003112793 L 235.4349975585938 94.69900512695313 L 235.5339965820313 94.70900726318359 L 244.5789947509766 101.6010055541992 L 182.8829956054688 103.5830078125 L 182.7839965820313 103.6250076293945 L 182.7940063476563 103.536003112793 Z M 184.0429992675781 89.59700012207031 L 184.2720031738281 89.55500030517578 L 233.7610015869141 94.53199768066406 L 182.8370056152344 103.077995300293 L 184.0429992675781 89.59700012207031 Z M 235.5859985351563 94.08599853515625 L 219.7949981689453 77.04199981689453 L 269.7000122070313 70.38500213623047 L 235.5859985351563 94.08599853515625 Z M 336.2590026855469 91.12699890136719 L 324.02099609375 83.78800201416016 L 323.8550109863281 83.76200103759766 L 288.7579956054688 92.53600311279297 L 270.8919982910156 70.21300506591797 L 271.333984375 70.01000213623047 L 271.343994140625 70 L 338.7200012207031 73.77099609375 L 336.2590026855469 91.12699890136719 Z M 339.14599609375 73.4219970703125 L 328.3999938964844 56.89299774169922 L 356.4289855957031 89.57199859619141 L 339.14599609375 73.4219970703125 Z M 340.1549987792969 94.05999755859375 L 338.7919921875 93.02499389648438 L 336.7639770507813 91.42799377441406 L 336.6699829101563 91.37599182128906 L 339.1349792480469 74.01998901367188 L 359.0449829101563 92.61898803710938 L 360.0019836425781 93.73198699951172 L 340.1549987792969 94.05999755859375 Z M 340.4719848632813 94.49700164794922 L 360.2359924316406 94.17500305175781 L 359.2890014648438 116.5559997558594 L 340.4719848632813 94.49700164794922 Z M 397.7630004882813 139.7259979248047 L 384.9320068359375 147.3869934082031 L 346.8699951171875 119.2229919433594 L 346.9119873046875 119.1029891967773 L 346.5690002441406 118.9939880371094 L 346.1950073242188 118.723991394043 L 346.1690063476563 118.739990234375 L 336.864013671875 92.114990234375 L 338.6840209960938 93.49799346923828 L 339.7760314941406 94.35599517822266 L 359.176025390625 117.0949935913086 L 359.1400146484375 117.182991027832 L 359.3480224609375 117.296989440918 L 383.7100219726563 145.8619842529297 L 384.0480346679688 145.5759887695313 L 360.4500427246094 117.9109878540039 L 397.7630310058594 138.7259826660156 L 397.6900329589844 139.0069885253906 L 397.7630004882813 139.7259979248047 Z M 406.3349914550781 168.8209991455078 L 402.5279846191406 170.0899963378906 L 402.1379699707031 166.1419982910156 L 406.2779846191406 168.6589965820313 L 406.3349914550781 168.8209991455078 Z M 402.9070129394531 173.9909973144531 L 402.5690002441406 170.5429992675781 L 406.4800109863281 169.2380065917969 L 406.5480041503906 169.4250030517578 L 406.5320129394531 170.5850067138672 L 402.9070129394531 173.9909973144531 Z M 402.9639892578125 174.5480041503906 L 406.5220031738281 171.197998046875 L 406.3869934082031 179.9049987792969 L 402.6319885253906 175.6920013427734 L 403.0009765625 174.9530029296875 L 402.9639892578125 174.5480041503906 Z M 376.2669982910156 180.9089965820313 L 376.3760070800781 181.4449920654297 L 396.7440185546875 177.2269897460938 L 358.4950256347656 200.1379852294922 L 376.2669982910156 180.9089965820313 Z M 375.7990112304688 180.7630004882813 L 357.1430053710938 200.9490051269531 L 355.7590026855469 201.7760009765625 L 354.3340148925781 171.1829986572266 L 375.7990112304688 180.7630004882813 Z M 376.2460021972656 179.6609954833984 L 376.0169982910156 179.7079925537109 L 376.1109924316406 180.1709899902344 L 376.0539855957031 180.3949890136719 L 354.635986328125 170.8349914550781 L 384.573974609375 148.2409973144531 L 376.2460021972656 179.6609954833984 Z M 401.0610046386719 173.3049926757813 L 401.1750183105469 174.4959869384766 L 376.7350158691406 179.5619812011719 L 385.0360107421875 148.2199859619141 L 401.0610046386719 173.3049926757813 Z M 400.9620056152344 172.3320007324219 L 385.239013671875 147.7200012207031 L 397.8100280761719 140.2149963378906 L 400.9620056152344 172.3320007324219 Z M 346.510986328125 120.3410034179688 L 346.7289733886719 119.6650009155273 L 384.5779724121094 147.6780090332031 L 354.260986328125 170.5630035400391 L 346.510986328125 120.3410034179688 Z M 319.0490112304688 190.2920074462891 L 337.1280212402344 149.6240081787109 L 346.2090148925781 121.2880096435547 L 353.8550109863281 170.8290100097656 L 319.0490112304688 190.2920074462891 Z M 331.3760070800781 210.2850036621094 L 318.0299987792969 192.0760040283203 L 318.2219848632813 192.1640014648438 L 318.7529907226563 190.9680023193359 L 353.4389953613281 171.5830078125 L 332.177001953125 210.0250091552734 L 331.3760070800781 210.2850036621094 Z M 328.4419860839844 225.0670013427734 L 324.6609802246094 226.6380004882813 L 332.3949890136719 211.9400024414063 L 337.6170043945313 210.2129974365234 L 328.5830078125 225.3950042724609 L 328.4419860839844 225.0670013427734 Z M 327.2040100097656 267.3829956054688 L 318.5390014648438 242.6409912109375 L 328.2550048828125 227.0639953613281 L 328.4729919433594 226.9759979248047 L 327.218994140625 267.3160095214844 L 327.2040100097656 267.3829956054688 Z M 325.7219848632813 270.4989929199219 L 317.7279968261719 285.4469909667969 L 313.8739929199219 275.4759826660156 L 325.7219848632813 270.4989929199219 Z M 313.9830017089844 274.2120056152344 L 314.5970153808594 274.2799987792969 L 319.1950073242188 230.8240051269531 L 327.5480041503906 227.3550109863281 L 318.1080017089844 242.4960174560547 L 318.0870056152344 242.6880187988281 L 326.9909973144531 268.1270141601563 L 326.0549926757813 269.8800048828125 L 313.8789978027344 274.9980163574219 L 313.9830017089844 274.2120056152344 Z M 259.4649963378906 294.8710021972656 L 273.1959838867188 284.68701171875 L 274.2519836425781 285.2070007324219 L 313.1669921875 270.9819946289063 L 312.833984375 274.0919799804688 L 313.5409851074219 274.1649780273438 L 313.4059753417969 275.1839904785156 L 259.4649963378906 294.8710021972656 Z M 269.6900024414063 273.7699890136719 L 272.9930114746094 284.2869873046875 L 258.7420043945313 294.8559875488281 L 269.6900024414063 273.7699890136719 Z M 269.6380004882813 272.9119873046875 L 258.2789916992188 294.7929992675781 L 253.3019866943359 263.2059936523438 L 269.6380004882813 272.9119873046875 Z M 270.5119934082031 271.7470092773438 L 269.7890014648438 272.4389953613281 L 269.7789916992188 272.4809875488281 L 253.5099945068359 262.8119812011719 L 278.7149963378906 252.5809783935547 L 270.5119934082031 271.7470092773438 Z M 288.0339965820313 254.9369964599609 L 271.3280029296875 270.9620056152344 L 279.2080078125 252.5550079345703 L 288.0339965820313 254.9369964599609 Z M 286.468994140625 228.4210052490234 L 287.1969909667969 228.8730010986328 L 290.60400390625 229.0500030517578 L 288.6019897460938 254.3950042724609 L 288.4100036621094 254.5770111083984 L 279.4639892578125 252.1640167236328 L 286.4230041503906 228.3380126953125 L 286.468994140625 228.4210052490234 Z M 297.625 223.1369934082031 L 317.1610107421875 233.1859893798828 L 313.375 269.0169982910156 L 274.5169982910156 283.2269897460938 L 271.4119873046875 273.3399963378906 L 290.0679931640625 255.4429931640625 L 290.3379821777344 254.8709869384766 L 292.4439697265625 228.2829895019531 L 291.6069641113281 227.3309936523438 L 287.7789611816406 227.1329956054688 L 287.0659484863281 225.8430023193359 L 287.6119384765625 226.1240081787109 L 288.2879333496094 226.1760101318359 L 297.625 223.1369934082031 Z M 288.5230102539063 224.2339935302734 L 317.3170166015625 191.8569946289063 L 330.9280090332031 210.4299926757813 L 288.5230102539063 224.2339935302734 Z M 324.1669921875 214.4980010986328 L 330.0499877929688 212.5839996337891 L 323.3609924316406 225.3009948730469 L 324.1669921875 214.4980010986328 Z M 319.6159973144531 228.7279968261719 L 316.68798828125 217.0249938964844 L 322.3359985351563 215.2049865722656 L 321.3840026855469 227.9949798583984 L 319.6159973144531 228.7279968261719 Z M 318.0289916992188 229.3890075683594 L 317.4880065917969 230.1120147705078 L 317.3630065917969 231.2980194091797 L 300.0330200195313 222.3830261230469 L 316.2660217285156 217.1610260009766 L 319.2050170898438 228.905029296875 L 318.0289916992188 229.3890075683594 Z M 292.3569946289063 132.6629943847656 L 334.4920043945313 150.5079956054688 L 268.656005859375 152.8949890136719 L 292.3569946289063 132.6629943847656 Z M 239.2530059814453 111.427001953125 L 293.9530029296875 121.5800018310547 L 292.0549926757813 132.0910034179688 L 239.2530059814453 111.427001953125 Z M 227.4669952392578 138.3430023193359 L 227.1449890136719 138.1820068359375 L 209.7059936523438 117.3200073242188 L 290.572998046875 132.3250122070313 L 227.4669952392578 138.3430023193359 Z M 209.0240020751953 117.1949996948242 L 226.14599609375 137.677001953125 L 171.4769897460938 110.0380020141602 L 209.0240020751953 117.1949996948242 Z M 235.1750030517578 110.9690017700195 L 209.1380004882813 116.7630004882813 L 171.4039916992188 109.5699996948242 L 171.3309936523438 109.9599990844727 L 170.4939880371094 109.5390014648438 L 235.1750030517578 110.9690017700195 Z M 200.1609954833984 106.0329971313477 L 183.6629943847656 104.004997253418 L 240.4440002441406 102.1790008544922 L 200.1609954833984 106.0329971313477 Z M 290.0320129394531 131.7740020751953 L 210.2050170898438 116.9609985351563 L 236.9860229492188 111.015998840332 L 290.0320129394531 131.7740020751953 Z M 236.9589996337891 110.5579986572266 L 202.1999969482422 106.2829971313477 L 244.2359924316406 102.2619934082031 L 236.9589996337891 110.5579986572266 Z M 171.4969940185547 108.7740020751953 L 182.2169952392578 104.5190048217773 L 182.3889923095703 104.2900085449219 L 198.1219940185547 106.2250061035156 L 171.4969940185547 108.7740020751953 Z M 200.156005859375 106.4749984741211 L 232.5750122070313 110.463996887207 L 172.3770141601563 109.1329956054688 L 200.156005859375 106.4749984741211 Z M 245.22900390625 102.1009979248047 L 245.2860107421875 102.1220016479492 L 245.2860107421875 102.1320037841797 L 292.0700073242188 120.7779998779297 L 237.4739990234375 110.64599609375 L 245.072998046875 101.9759979248047 L 245.22900390625 102.1009979248047 Z M 281.1480102539063 108.0250015258789 L 245.4580078125 101.7160034179688 L 236.5950012207031 94.96500396728516 L 281.1480102539063 108.0250015258789 Z M 288.1849975585938 93.07700347900391 L 284.8930053710938 108.6600036621094 L 237.0580139160156 94.63800048828125 L 288.1849975585938 93.07700347900391 Z M 336.2070007324219 91.61000061035156 L 336.5759887695313 124.2989959716797 L 324.1609802246094 84.38499450683594 L 336.2070007324219 91.61000061035156 Z M 345.2210083007813 118.568000793457 L 344.9250183105469 119.4940032958984 L 337.0350036621094 125.4080047607422 L 336.666015625 92.89600372314453 L 345.6900024414063 118.7200012207031 L 345.2210083007813 118.568000793457 Z M 335.4849853515625 148.947998046875 L 335.3909912109375 149.1609954833984 L 337.1229858398438 125.89599609375 L 344.6909790039063 120.2220001220703 L 335.4849853515625 148.947998046875 Z M 336.6600036621094 126.0830001831055 L 334.8860168457031 150.1959991455078 L 293.0950317382813 132.4909973144531 L 336.6600036621094 126.0830001831055 Z M 294.3949890136719 121.6100006103516 L 335.125 125.859001159668 L 292.4960021972656 132.1320037841797 L 294.3949890136719 121.6100006103516 Z M 285.5220031738281 109.1949996948242 L 308.364990234375 110.745002746582 L 294.2649841308594 121.0330047607422 L 285.5220031738281 109.1949996948242 Z M 284.9400024414063 109.1429977416992 L 293.6310119628906 120.9239959716797 L 247.4600067138672 102.5169982910156 L 284.9400024414063 109.1429977416992 Z M 308.864990234375 110.3339996337891 L 285.7460021972656 108.7630004882813 L 323.2099914550781 84.75 L 308.864990234375 110.3339996337891 Z M 309.2919921875 110.4800033569336 L 323.7769775390625 84.64600372314453 L 336.3999938964844 125.2200012207031 L 309.2919921875 110.4800033569336 Z M 309.010986328125 110.8290023803711 L 336 125.5070037841797 L 294.781005859375 121.2060012817383 L 309.010986328125 110.8290023803711 Z M 322.8139953613281 84.47899627685547 L 285.3919982910156 108.4669952392578 L 288.6380004882813 93.06099700927734 L 288.7260131835938 93.06099700927734 L 288.7570190429688 92.99299621582031 L 322.8139953613281 84.47899627685547 Z M 288.2680053710938 92.62999725341797 L 236.1730041503906 94.22200012207031 L 270.468994140625 70.39599609375 L 288.2680053710938 92.62999725341797 Z M 229.9120025634766 153.0930023193359 L 174.2860107421875 122.3390045166016 L 226.9580078125 142.0880126953125 L 229.9120025634766 153.0930023193359 Z M 281.8139953613281 223.1529998779297 L 284.2689819335938 224.4429931640625 L 286.1209716796875 227.7929992675781 L 279.2969665527344 251.1669921875 L 279.8069763183594 222.1289978027344 L 281.8139953613281 223.1529998779297 Z M 258.4920043945313 295.697998046875 L 312.4179992675781 276.0169982910156 L 268.7489929199219 308.7269897460938 L 258.4920043945313 295.697998046875 Z M 284.8510131835938 306.89599609375 L 269.9760131835938 308.7109985351563 L 290.5210266113281 299.5 L 284.6700134277344 306.75 L 284.8510131835938 306.89599609375 Z M 311.9809875488281 392.3619995117188 L 282.927001953125 326.7860107421875 L 285.6629943847656 307.9940185546875 L 322.8619995117188 392.2270202636719 L 311.9809875488281 392.3619995117188 Z M 400.5660095214844 197.2660064697266 L 374.6750183105469 192.5120086669922 L 402.0120239257813 176.1340026855469 L 402.0480346679688 176.1289978027344 L 402.0480346679688 176.1129913330078 L 402.1210327148438 176.0659942626953 L 402.3340454101563 197.2289886474609 L 400.5660095214844 197.2660064697266 Z M 383.6000061035156 110.5839996337891 L 402.7870178222656 129.7659912109375 L 360.0490112304688 116.9969940185547 L 382.7990112304688 110.0169906616211 L 383.6000061035156 110.5839996337891 Z M 234.031005859375 94.11699676513672 L 185.8110046386719 89.26399993896484 L 207.9779968261719 85.07199859619141 L 208.2740020751953 84.93199920654297 L 234.031005859375 94.11699676513672 Z M 162.7440032958984 150.1390075683594 L 143.7960052490234 122.1150054931641 L 144.2280120849609 121.1270065307617 L 171.3360137939453 121.3090057373047 L 169.7650146484375 157.4210052490234 L 162.7440032958984 150.1390075683594 Z M 194.2630004882813 175.6869964599609 L 193.9609985351563 175.552001953125 L 234.7019958496094 170.4810028076172 L 240.4279937744141 180.0670013427734 L 236.8079986572266 185.4969940185547 L 194.2729949951172 175.635986328125 L 194.2630004882813 175.6869964599609 Z M 263.3909912109375 211.4759979248047 L 263.1470031738281 211.6109924316406 L 261.6700134277344 210.8519897460938 L 316.6100158691406 191.9929962158203 L 288.0710144042969 224.0789947509766 L 288.3210144042969 224.3029937744141 L 288.0920104980469 224.3759918212891 L 282.6360168457031 221.5829925537109 L 263.3909912109375 211.4759979248047 Z M 302.5199890136719 392.4809875488281 L 301.302978515625 384.4969787597656 L 301.22998046875 384.2679748535156 L 295.5869750976563 371.7699890136719 L 283.7539672851563 329.72900390625 L 311.4969787597656 392.3659973144531 L 302.5199890136719 392.4809875488281 Z M 168.1430053710938 395.2690124511719 L 170.5200042724609 394.9930114746094 L 178.0200042724609 397.6820068359375 L 147.9000091552734 397.1570129394531 L 155.6970062255859 395.1230163574219 L 168.1430053710938 395.2690124511719 Z M 34.11899948120117 475.4859924316406 L 34.68099975585938 472.208984375 L 41.85300064086914 441.72998046875 L 44.78100204467773 485.7059936523438 L 34.24300384521484 476.343994140625 L 34.11899948120117 475.4859924316406 Z M 60.92100143432617 509.8659973144531 L 39.75199890136719 512.7730102539063 L 44.947998046875 486.3300170898438 L 64.50999450683594 498.6930236816406 L 60.92100143432617 509.8659973144531 Z M 115.5230026245117 581.3400268554688 L 113.3489990234375 580.3670043945313 L 84.96099853515625 558.802978515625 L 84.19599914550781 557.9660034179688 L 115.5019989013672 567.4580078125 L 122.3259963989258 586.60302734375 L 115.5230026245117 581.3400268554688 Z M 157.3190002441406 613.6810302734375 L 154.9580078125 611.8550415039063 L 116.3500061035156 567.666015625 L 172.0750122070313 586.364013671875 L 172.8030090332031 587.7009887695313 L 172.9850158691406 587.8359985351563 L 157.3870239257813 613.6699829101563 L 157.3190002441406 613.6810302734375 Z M 282.0379943847656 604.1209716796875 L 277.2890014648438 597.7029418945313 L 315.1069946289063 599.751953125 L 283.7749938964844 604.344970703125 L 282.0379943847656 604.1209716796875 Z M 340.5400085449219 613.3579711914063 L 349.6110229492188 624.4419555664063 L 349.8090209960938 632.4929809570313 L 343.791015625 628.7949829101563 L 340.5400085449219 613.3579711914063 Z M 369.218994140625 683.0689697265625 L 360.4710083007813 681.6699829101563 L 360.7879943847656 648.7099609375 C 368.5639953613281 645.989990234375 377.1510009765625 642.9889526367188 385.6549987792969 640.0349731445313 L 369.31298828125 683.0589599609375 L 369.218994140625 683.0689697265625 Z M 360.1170043945313 682.0759887695313 L 363.5970153808594 687.989990234375 L 355.9250183105469 682.0759887695313 L 360.1170043945313 682.0759887695313 Z M 364.7770080566406 688.9000244140625 L 364.5379943847656 688.718017578125 L 360.6739807128906 682.1490478515625 L 369.073974609375 683.4960327148438 L 364.7770080566406 688.9000244140625 Z M 382.2579956054688 639.3330078125 L 410.7239990234375 615.677978515625 L 435.0910034179688 621.4409790039063 C 433.1409912109375 621.8880004882813 424.4710083007813 624.6240234375 382.2579956054688 639.3330078125 M 434.3789978027344 641.4080200195313 L 424.4549865722656 626.6680297851563 C 430.7589721679688 624.5360107421875 434.8889770507813 623.1880493164063 435.4809875488281 623.0950317382813 L 435.4759826660156 623.0690307617188 C 436.5419921875 622.8300170898438 441.1139831542969 620.177001953125 469.0699768066406 600.2670288085938 L 488.9119873046875 593.3960571289063 L 434.3789978027344 641.4080200195313 Z M 473.6839904785156 641.3870239257813 L 490.8110046386719 592.7350463867188 L 500.5370178222656 589.3700561523438 L 473.6839904785156 641.3870239257813 Z M 529.5709838867188 579.3170166015625 L 472.9929809570313 643.68603515625 L 501.1419677734375 589.1620483398438 L 529.5709838867188 579.3170166015625 Z M 434.8989868164063 641.5380249023438 L 490.02099609375 593.0110473632813 L 490.281005859375 592.9230346679688 L 472.3370056152344 643.8790283203125 L 470.6100158691406 644.26904296875 L 434.8989868164063 641.5380249023438 Z M 434.2439880371094 641.9390258789063 L 442.8729858398438 648.8880004882813 L 429.7559814453125 641.9910278320313 L 434.2439880371094 641.9390258789063 Z M 444.906005859375 649.958984375 L 435.0130004882813 641.990966796875 L 469.1329956054688 644.6019897460938 L 445.0050048828125 650.010986328125 L 444.906005859375 649.958984375 Z M 575.8660278320313 559.572998046875 L 567.1490478515625 560.9099731445313 L 607.593017578125 540.073974609375 L 580.7239990234375 557.5499877929688 L 575.8660278320313 559.572998046875 Z M 614.8380126953125 498.5740051269531 L 616.4089965820313 534.3419799804688 L 611.281005859375 537.6759643554688 L 566.2750244140625 560.8579711914063 L 577.3380126953125 533.177001953125 L 577.3480224609375 533.18701171875 L 578.01904296875 533.52001953125 L 600.6180419921875 533.9620361328125 L 601.4970703125 533.281005859375 L 611.2490844726563 492.0360107421875 L 614.8380126953125 498.5740051269531 Z M 636.2979736328125 524.5180053710938 L 633.7809448242188 493.1650085449219 L 657.3529663085938 534.759033203125 L 636.2979736328125 524.5180053710938 Z M 636.0380249023438 533.18798828125 L 636.3190307617188 525.0169677734375 L 656.7750244140625 534.9719848632813 L 636.0380249023438 533.18798828125 Z M 690.97802734375 479.8190002441406 L 675.6920166015625 438.3869934082031 L 675.1610107421875 437.8619995117188 L 653.6699829101563 430.1069946289063 L 632.2459716796875 425.3580017089844 L 628.240966796875 417.041015625 L 627.678955078125 416.5680236816406 L 586.4649658203125 405.3800354003906 L 528.3209838867188 397.5730285644531 L 531.6859741210938 393.8910217285156 L 533.365966796875 381.6530151367188 L 518.6729736328125 375.2560119628906 L 516.7119750976563 364.47900390625 L 512.5199584960938 360.4120178222656 L 491.27294921875 364.4380187988281 L 479.3989562988281 359.6430053710938 L 478.7179565429688 372.0320129394531 L 473.8649597167969 371.5429992675781 L 466.3489685058594 374.9079895019531 L 446.0489807128906 377.4459838867188 L 448.3429870605469 389.5799865722656 L 346.6449890136719 385.8919982910156 L 328.5809936523438 380.7529907226563 L 328.5390014648438 380.8930053710938 L 328.5599975585938 378.2140197753906 L 328.4979858398438 377.8810119628906 L 302.7259826660156 313.0380249023438 L 302.5079956054688 312.7160339355469 L 290.9039916992188 301.8460388183594 L 292.708984375 299.6100463867188 L 318.0699768066406 288.1780395507813 L 318.4859619140625 287.7880249023438 L 328.6749572753906 268.7360229492188 L 328.7579650878906 268.5120239257813 L 336.2679748535156 235.8330230712891 L 352.2979736328125 205.3390197753906 L 354.3109741210938 204.6840209960938 L 354.4929809570313 204.6010284423828 L 363.1319885253906 199.426025390625 L 363.1419982910156 199.8520202636719 L 403.9089965820313 198.968017578125 L 404.7569885253906 198.2760162353516 L 408.0749816894531 183.6560211181641 L 408.3189697265625 169.2900238037109 L 408.27197265625 168.9830169677734 L 400.5169677734375 147.0500183105469 L 400.2669677734375 147.1330108642578 L 399.4869689941406 139.1600036621094 L 405.2809753417969 130.7910003662109 L 405.1819763183594 129.6569976806641 L 384.7989807128906 109.2740020751953 L 361.9499816894531 93.28600311279297 L 317.9360046386719 41.97000122070313 L 317.156005859375 41.66800308227539 L 297.2149963378906 44.10200500488281 L 296.7210083007813 44.33100509643555 L 270.3410034179688 68.51100158691406 L 217.4450073242188 75.56400299072266 L 217.0130004882813 75.75099945068359 L 207.4320068359375 83.37100219726563 L 183.0540008544922 87.97900390625 L 182.3359985351563 88.77000427246094 L 181.0509948730469 103.0730056762695 L 167.6059875488281 108.4090042114258 L 167.6009826660156 108.4610061645508 L 167.5849761962891 108.4190063476563 L 143.6539764404297 118.6080093383789 L 143.1909790039063 119.0710067749023 L 139.4249725341797 127.7100067138672 L 139.5969696044922 128.6830139160156 L 169.2849731445313 159.4790191650391 L 191.0989685058594 176.1850128173828 L 217.4169616699219 188.0330200195313 L 217.8169555664063 188.1060180664063 L 238.0339508056641 187.2370147705078 L 254.7969512939453 204.1510162353516 L 259.1139526367188 211.3860168457031 L 259.4729614257813 211.7190093994141 L 262.02197265625 213.0250091552734 L 260.2379760742188 233.8560028076172 L 243.1159820556641 255.9190063476563 L 242.9289855957031 256.4859924316406 L 243.7039794921875 286.2829895019531 L 247.2769775390625 299.7799987792969 L 247.3909759521484 300.0400085449219 L 256.6959838867188 314.218017578125 L 275.9769897460938 332.6460266113281 L 298.5079956054688 382.5460205078125 L 272.8609924316406 382.0680236816406 L 274.7799987792969 376.6170349121094 L 274.6809997558594 375.83203125 L 272.2990112304688 372.2850341796875 L 272.0230102539063 372.02001953125 L 260.4450073242188 365.0400085449219 L 260.0079956054688 364.9150085449219 L 257.6260070800781 364.8580017089844 L 257.0280151367188 365.0710144042969 L 254.2190093994141 367.47900390625 L 250.7860107421875 367.0790100097656 L 249.8390045166016 367.677001953125 L 247.4670104980469 374.7449951171875 L 244.8720092773438 375.9669799804688 L 244.4300079345703 376.4449768066406 L 242.6200103759766 381.0689697265625 L 229.8410034179688 382.8689575195313 L 229.3359985351563 383.1189575195313 L 225.5699920654297 386.8899536132813 L 168.1029968261719 393.4949645996094 L 93.27399444580078 392.6109619140625 L 70.01399230957031 398.1709594726563 L 69.64498901367188 398.3629455566406 L 58.56698989868164 407.8919372558594 L 58.25999069213867 408.4799499511719 L 56.11199188232422 431.8849487304688 L 40.23799133300781 433.158935546875 L 39.43699264526367 433.8919372558594 L 32.34799194335938 475.3189392089844 L 32.34299087524414 475.5999450683594 L 37.88199234008789 513.9269409179688 L 38.8809928894043 514.6809692382813 L 60.81399536132813 511.6689758300781 L 80.48999786376953 556.4769897460938 L 80.64599609375 556.7160034179688 L 97.48199462890625 575.1069946289063 L 97.77299499511719 575.3150024414063 L 114.5159912109375 582.8049926757813 L 156.5309906005859 615.31201171875 L 157.2019958496094 615.4840087890625 L 244.6179962158203 602.6530151367188 L 277.39599609375 605.3580322265625 L 299.5220031738281 618.6940307617188 L 299.8909912109375 618.8140258789063 L 311.5589904785156 620 L 312.3240051269531 619.6929931640625 L 320.0060119628906 610.7260131835938 L 338.4650268554688 612.1199951171875 L 353.1740112304688 681.9249877929688 L 353.5020141601563 682.4450073242188 L 364.1380004882813 690.6420288085938 L 364.6059875488281 690.8240356445313 L 373.4739990234375 691.4900512695313 L 374.1239929199219 691.2770385742188 L 384.458984375 682.2630615234375 L 384.697998046875 681.9300537109375 L 404.1759948730469 633.8920288085938 L 423.0350036621094 640.4609985351563 L 444.4639892578125 651.7319946289063 L 445.072998046875 651.8099975585938 L 492.4869995117188 641.1790161132813 L 492.8510131835938 641.0020141601563 L 520.7659912109375 618.6270141601563 L 520.958984375 618.4140014648438 L 550.93798828125 571.9000244140625 L 581.47900390625 559.1520385742188 L 617.7360229492188 535.591064453125 L 617.9600219726563 535.383056640625 L 627.8580322265625 522.2610473632813 L 634.64501953125 534.6140747070313 L 635.1080322265625 535.0140991210938 L 653.7960205078125 542.1290893554688 L 683.926025390625 550.5501098632813 L 685.0339965820313 549.8740844726563 L 691.0150146484375 520.1810913085938 L 691.031005859375 480.1270751953125 L 690.97802734375 479.8190002441406 Z" fill="#ffffff" fill-opacity="0.22" stroke="none" stroke-width="1" stroke-opacity="0.22" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
-  static const String _svg_bolder =
-      '<svg viewBox="0.0 0.0 123.0 105.7" ><path transform="translate(-53.48, -42.18)" d="M 154.7925415039063 116.0178909301758 L 152.8450164794922 117.585090637207 L 149.8764038085938 116.7683868408203 L 151.5950775146484 112.8755798339844 L 151.5021514892578 112.8011016845703 L 145.8061828613281 117.6804275512695 L 143.9405670166016 114.3470687866211 L 147.5234832763672 104.7726364135742 L 147.5248565673828 104.7337799072266 L 144.00390625 90.58078765869141 L 145.6946868896484 91.04814147949219 L 148.5473175048828 112.2992095947266 L 148.9664916992188 112.4287338256836 L 154.7137451171875 105.4954299926758 L 154.3981628417969 109.3947143554688 L 153.8767852783203 113.8437423706055 L 153.9789886474609 113.8955459594727 L 154.1830596923828 113.6821975708008 L 154.4645690917969 113.8196334838867 L 158.5936431884766 109.5030059814453 L 154.7925415039063 116.0178909301758 Z M 172.4039154052734 57.47032928466797 L 170.7657775878906 53.71675491333008 L 170.2120361328125 50.82521057128906 L 173.2935333251953 50.96444702148438 L 172.4039154052734 57.47032928466797 Z M 175.7686462402344 67.68517303466797 L 172.6049041748047 64.72886657714844 L 172.4517517089844 57.86824417114258 L 175.7686462402344 67.68517303466797 Z M 173.888916015625 72.89117431640625 L 172.6265869140625 70.70623779296875 L 175.7686462402344 68.67960357666016 L 173.888916015625 72.89117431640625 Z M 167.1549987792969 79.46398162841797 L 175.1870269775391 75.66831207275391 L 175.4950408935547 85.62267303466797 L 167.1549987792969 79.46398162841797 Z M 154.0670928955078 113.6260833740234 L 154.0175323486328 113.6778869628906 L 154.1304168701172 112.7075653076172 L 154.0578002929688 113.6213989257813 L 154.0670928955078 113.6260833740234 Z M 157.5075225830078 83.91804504394531 L 158.8052978515625 108.5737075805664 L 154.5895080566406 112.9809951782227 L 155.2530212402344 104.7715530395508 L 155.0706176757813 104.6924057006836 L 157.5075225830078 83.91804504394531 Z M 143.9326477050781 90.79630279541016 L 147.4040679931641 104.7470932006836 L 143.9326477050781 114.0207595825195 L 143.9326477050781 90.79630279541016 Z M 140.5989074707031 122.2298355102539 L 143.8800048828125 114.4895401000977 L 145.7132720947266 117.7613754272461 L 140.5989074707031 122.2298355102539 Z M 126.9201049804688 147.2949066162109 L 120.5757598876953 145.5143585205078 L 114.0039215087891 140.7724761962891 L 114.0039215087891 136.5170288085938 L 127.7260894775391 139.9619140625 L 127.766357421875 139.9572296142578 L 133.4038238525391 137.2128448486328 L 130.8371734619141 141.2528076171875 L 126.9201049804688 147.2949066162109 Z M 95.31744384765625 115.215950012207 L 109.9801635742188 116.0196914672852 L 113.5475921630859 135.952880859375 L 113.1903686523438 135.7150573730469 L 95.31744384765625 115.215950012207 Z M 77.57771301269531 110.8345565795898 L 85.29726409912109 113.351203918457 L 85.28659057617188 113.3933029174805 L 80.22936248779297 114.6791534423828 L 77.57771301269531 110.8345565795898 Z M 79.96333312988281 114.7467956542969 L 76.08651733398438 111.3440017700195 L 73.02808380126953 106.660400390625 L 77.35813903808594 110.7392120361328 L 77.37982177734375 110.7618789672852 L 80.10408782958984 114.7111740112305 L 79.96333312988281 114.7467956542969 Z M 72.44613647460938 105.7692260742188 L 74.95703125 108.3099822998047 L 72.74176025390625 106.2221908569336 L 72.44613647460938 105.7692260742188 Z M 58.03567504882813 66.24893951416016 L 54.5518798828125 72.66343688964844 L 54.02602005004883 71.42795562744141 L 57.87496185302734 65.12535095214844 L 58.03567504882813 66.24893951416016 Z M 65.16433715820313 63.76502227783203 L 67.17861938476563 63.17138671875 L 74.11077117919922 63.38473510742188 L 65.20287322998047 65.27861785888672 L 59.0412712097168 64.57992553710938 L 60.75236892700195 64.30973052978516 L 65.16433715820313 63.76502227783203 Z M 71.30149841308594 61.70133209228516 L 70.06704711914063 62.16544342041016 L 70.10249328613281 62.09925079345703 L 71.30149841308594 61.70133209228516 Z M 152.00634765625 50.46111297607422 L 149.3206329345703 49.40660095214844 L 149.8065643310547 49.45013427734375 L 152.00634765625 50.46111297607422 Z M 162.2942657470703 50.46435165405273 L 170.0881500244141 50.81837463378906 L 170.6281127929688 53.63904190063477 L 162.2942657470703 50.46435165405273 Z M 161.6334991455078 50.43376922607422 L 161.8964385986328 50.44672393798828 L 165.2566833496094 51.72609710693359 L 161.6334991455078 50.43376922607422 Z M 154.6752014160156 51.47353363037109 L 163.4237518310547 52.74319458007813 L 170.6670074462891 53.79446411132813 L 172.2745208740234 57.47392272949219 L 154.6752014160156 51.47353363037109 Z M 160.1237335205078 61.19656372070313 L 154.1569061279297 51.42819976806641 L 172.3268280029297 57.62251663208008 L 172.4830780029297 64.67562866210938 L 160.1237335205078 61.19656372070313 Z M 172.4844512939453 70.62241363525391 L 167.3033294677734 70.62241363525391 L 160.2459106445313 61.36170196533203 L 172.4844665527344 64.80478668212891 L 172.4844665527344 70.62241363525391 Z M 175.0015411376953 75.25241088867188 L 167.4984436035156 70.74833679199219 L 172.5109405517578 70.74833679199219 L 173.8273162841797 73.02861785888672 L 173.7082366943359 73.29881286621094 L 175.0015411376953 75.25241088867188 Z M 167.2926483154297 74.41628265380859 L 167.3267211914063 73.56072235107422 L 175.1560668945313 75.54670715332031 L 167.0975189208984 79.35388946533203 L 167.2926483154297 74.41628265380859 Z M 159.13671875 108.3308563232422 L 166.9505615234375 79.98134613037109 L 166.0857238769531 99.50043487548828 L 165.47314453125 113.3235092163086 L 161.1214141845703 112.1106872558594 L 159.3545684814453 111.3407669067383 L 159.1752624511719 108.8953475952148 L 159.4257965087891 108.633430480957 L 159.13671875 108.3308563232422 Z M 148.4375457763672 75.22830200195313 L 148.4451141357422 75.21067810058594 L 157.2893524169922 83.07868194580078 L 146.1957702636719 79.99610137939453 L 148.4375457763672 75.22830200195313 Z M 121.8504791259766 71.21101379394531 L 121.7730407714844 71.28692626953125 L 124.48974609375 81.51795959472656 L 121.601318359375 71.11890411376953 L 121.9664611816406 71.25310516357422 L 121.8504791259766 71.21101379394531 Z M 139.5110626220703 88.86212921142578 L 139.4645843505859 88.86537170410156 L 138.3908538818359 89.35395050048828 L 133.6863708496094 91.16687774658203 L 139.3004302978516 84.33216094970703 L 140.0413818359375 83.87271881103516 L 139.5110626220703 88.86212921142578 Z M 143.8135833740234 114.0901947021484 L 133.2148895263672 92.25340270996094 L 139.5792083740234 89.36006164550781 L 143.8132476806641 90.52934265136719 L 143.8132476806641 114.0901947021484 Z M 140.4023895263672 122.3820190429688 L 133.1856384277344 121.327507019043 L 143.7409515380859 114.5122146606445 L 143.0092926025391 116.2344818115234 L 140.4023895263672 122.3820190429688 Z M 133.6959991455078 136.8487396240234 L 135.4659576416016 130.9019470214844 L 135.4256896972656 130.8616638183594 L 139.9322967529297 129.7150421142578 L 140.787841796875 129.4966583251953 L 135.1211090087891 135.4225769042969 L 133.6959991455078 136.8487396240234 Z M 123.5646667480469 135.1246643066406 L 127.5684661865234 139.7938842773438 L 114.0166625976563 136.3928833007813 L 123.5646667480469 135.1246643066406 Z M 111.3818664550781 109.9775619506836 L 113.5152435302734 135.0858154296875 L 110.0916748046875 115.9614028930664 L 111.3818664550781 109.9775619506836 Z M 94.93853759765625 115.1673736572266 L 95.14572143554688 115.2044296264648 L 112.8035430908203 135.4560241699219 L 106.4113616943359 131.1897583007813 L 92.37533569335938 115.6832885742188 L 92.33506774902344 115.6397552490234 L 87.38004302978516 113.8268280029297 L 94.93853759765625 115.1673736572266 Z M 80.37184143066406 109.4778289794922 L 83.53385925292969 108.0692977905273 L 83.55691528320313 108.2052993774414 L 83.587890625 108.2294006347656 L 83.58479309082031 108.2488327026367 L 83.70248413085938 108.320068359375 L 84.00740051269531 109.0252380371094 L 85.83448028564453 113.2609100341797 L 85.82380676269531 113.256233215332 L 85.59323120117188 113.3159561157227 L 77.5997314453125 110.7122344970703 L 80.37184143066406 109.4778289794922 Z M 75.03755950927734 63.28147888183594 L 75.01140594482422 63.28615570068359 L 70.88542938232422 63.15987396240234 L 75.03755950927734 63.28147888183594 Z M 74.43116760253906 60.92024993896484 L 79.51628112792969 60.46585083007813 L 75.54207611083984 63.16994476318359 L 67.93678283691406 62.94832611083984 L 69.97103118896484 62.35001373291016 L 69.98170471191406 62.33058166503906 L 74.01785278320313 60.81339263916016 L 74.43116760253906 60.92024993896484 Z M 73.77660369873047 60.75187683105469 L 70.18440246582031 61.94058227539063 L 71.15730285644531 60.07908630371094 L 73.77660369873047 60.75187683105469 Z M 154.0237274169922 51.25046920776367 L 150.1730804443359 49.48287200927734 L 159.08544921875 50.25747680664063 L 154.0237274169922 51.25046920776367 Z M 159.8050537109375 50.32044219970703 L 157.6269378662109 50.67122650146484 L 159.5345458984375 50.29777526855469 L 159.8050537109375 50.32044219970703 Z M 153.8427124023438 51.43144226074219 L 153.9896545410156 51.38790512084961 L 157.2924499511719 56.79466247558594 L 153.8427124023438 51.43144226074219 Z M 151.0984802246094 63.27644348144531 L 160.0617980957031 61.31960296630859 L 167.0775604248047 70.52851104736328 L 151.0984802246094 63.27644348144531 Z M 162.1752014160156 72.11981201171875 L 151.3290710449219 63.51749420166016 L 167.0961456298828 70.67242431640625 L 162.1752014160156 72.11981201171875 Z M 118.1560668945313 94.02280426025391 L 117.5992279052734 94.08252716064453 L 117.5001220703125 93.42412567138672 L 121.5238800048828 71.28836059570313 L 127.1861267089844 91.68064117431641 L 118.1560668945313 94.02280426025391 Z M 127.4583435058594 91.53060913085938 L 127.2976226806641 91.63098907470703 L 127.2728424072266 91.53565216064453 L 127.4583435058594 91.53060913085938 Z M 127.6703338623047 91.39965057373047 L 127.4167022705078 91.4061279296875 L 134.2948150634766 87.29169464111328 L 127.6703338623047 91.39965057373047 Z M 138.8816223144531 84.59407043457031 L 138.9156951904297 84.57140350341797 L 138.97900390625 84.53110504150391 L 137.6626434326172 86.13392639160156 L 138.8816223144531 84.59407043457031 Z M 132.9595336914063 91.72633361816406 L 133.5180816650391 91.36583709716797 L 136.4667358398438 90.22892761230469 L 132.9984130859375 91.80583953857422 L 132.9595336914063 91.72633361816406 Z M 132.4646453857422 92.0479736328125 L 132.857666015625 91.79252624511719 L 132.8886413574219 91.85549163818359 L 132.4646453857422 92.0479736328125 Z M 116.6135864257813 106.7201232910156 L 113.9185791015625 94.37682342529297 L 117.1580352783203 94.37682342529297 L 117.1611328125 94.39445495605469 L 117.4226837158203 94.60456848144531 L 131.3196716308594 93.10212707519531 L 131.3891906738281 93.08270263671875 L 133.1047515869141 92.30305480957031 L 143.7946472167969 114.3290863037109 L 133.0166625976563 121.2882919311523 L 116.6135864257813 106.7201232910156 Z M 135.0960083007813 130.7774658203125 L 133.7283630371094 128.4759674072266 L 145.2720794677734 118.3129272460938 L 135.0960083007813 130.7774658203125 Z M 135.1083831787109 131.0555725097656 L 135.3155517578125 130.9828948974609 L 134.2232360839844 134.6558685302734 L 135.1083831787109 131.0555725097656 Z M 113.7176055908203 136.0658569335938 L 111.4961242675781 109.8966064453125 L 123.4965209960938 135.0084686279297 L 114.0039215087891 136.2684173583984 L 114.0039215087891 136.2572631835938 L 113.7176055908203 136.0658569335938 Z M 67.38304901123047 91.54500579833984 L 68.79232788085938 91.48528289794922 L 68.81401062011719 91.64394378662109 L 67.38304901123047 91.54500579833984 Z M 142.5557250976563 54.745361328125 L 153.7222595214844 51.46705627441406 L 159.9351348876953 61.12892150878906 L 142.5557250976563 54.745361328125 Z M 155.8893432617188 70.09173583984375 L 153.1633605957031 69.20883941650391 L 133.7548675537109 55.24833297729492 L 133.8168029785156 55.27747344970703 L 150.8710021972656 63.30882263183594 L 161.8547821044922 72.02267456054688 L 155.8893432617188 70.09173583984375 Z M 167.28955078125 73.29737091064453 L 167.2881774902344 73.29737091064453 L 167.2868041992188 73.29557037353516 L 162.4105834960938 72.18132781982422 L 167.2668304443359 70.75336456298828 L 174.9275512695313 75.352783203125 L 167.28955078125 73.29737091064453 Z M 163.1591033935547 78.30585479736328 L 162.2354125976563 72.27163696289063 L 167.0792846679688 73.49920654296875 L 166.1728057861328 74.61019897460938 L 163.1591033935547 78.30585479736328 Z M 163.2299957275391 78.41270446777344 L 165.7298889160156 75.3463134765625 L 167.2073059082031 73.53662109375 L 166.9767303466797 79.37331390380859 L 163.2299957275391 78.41270446777344 Z M 162.5943603515625 78.9786376953125 L 163.0400390625 78.60015106201172 L 158.9870147705078 107.8602600097656 L 157.5932312011719 83.23698425292969 L 162.5943603515625 78.9786376953125 Z M 162.148681640625 72.49829864501953 L 163.05517578125 78.42421722412109 L 157.7766418457031 82.9185791015625 L 160.8553771972656 77.81619262695313 L 162.148681640625 72.49829864501953 Z M 166.9598541259766 79.497802734375 L 159.1071166992188 107.8617095947266 L 163.1694183349609 78.52712249755859 L 163.8873138427734 78.70988464355469 L 166.9598541259766 79.497802734375 Z M 149.2249450683594 74.55047607421875 L 151.1772918701172 72.98976135253906 L 151.1865844726563 72.97357177734375 L 151.1927795410156 72.97032928466797 L 153.1668090820313 69.34123992919922 L 162.0406341552734 72.21371459960938 L 162.0901947021484 72.22990417480469 L 160.7490539550781 77.75791168212891 L 157.5171813964844 83.11430358886719 L 148.5211791992188 75.11353302001953 L 149.2249450683594 74.55047607421875 Z M 127.2618408203125 91.79109191894531 L 127.4690093994141 91.84757232666016 L 130.4951019287109 92.68693542480469 L 119.0098876953125 93.92889404296875 L 124.7027587890625 92.45379638671875 L 127.2618408203125 91.79109191894531 Z M 130.397705078125 91.45289611816406 L 127.5061798095703 91.64682006835938 L 127.7040710449219 91.52377319335938 L 130.397705078125 91.45289611816406 Z M 133.4623413085938 91.24602508544922 L 127.9146881103516 91.39317321777344 L 138.5859985351563 84.77503204345703 L 133.4623413085938 91.24602508544922 Z M 131.2329559326172 92.6077880859375 L 130.8306427001953 92.65132141113281 L 127.8558349609375 91.82491302490234 L 127.6314392089844 91.76338958740234 L 133.1990509033203 91.38993835449219 L 132.8246154785156 91.58566284179688 L 132.7984771728516 91.66984558105469 L 132.8029479980469 91.68100738525391 L 131.7061462402344 92.39264678955078 L 131.2329559326172 92.6077880859375 Z M 114.5779724121094 86.27423858642578 L 115.7119293212891 86.19652557373047 L 116.8644714355469 92.41027069091797 L 117.1398010253906 94.25090026855469 L 113.9251251220703 94.25090026855469 L 114.5779724121094 86.27423858642578 Z M 111.5009460449219 109.4519195556641 L 113.2629699707031 102.3243408203125 L 113.2629699707031 102.3228988647461 L 113.2643585205078 102.3149871826172 L 113.8831329345703 94.77041625976563 L 116.4914093017578 106.7222747802734 L 111.5009460449219 109.4519195556641 Z M 123.6465759277344 124.2611541748047 L 116.7113342285156 106.9705352783203 L 132.8886413574219 121.3386764526367 L 123.6465759277344 124.2611541748047 Z M 126.3367614746094 130.0237274169922 L 133.6216735839844 128.5324554443359 L 134.9566192626953 130.7803497314453 L 126.3367614746094 130.0237274169922 Z M 105.8528137207031 112.8172988891602 L 106.0276336669922 112.9241485595703 L 95.42584991455078 115.0313720703125 L 101.6480255126953 110.2732925415039 L 105.8528137207031 112.8172988891602 Z M 83.79231262207031 108.2225646972656 L 83.88213348388672 108.2031326293945 L 87.86872863769531 110.6791305541992 L 83.79541015625 108.2304763793945 L 83.79231262207031 108.2225646972656 Z M 69.64305877685547 94.19441986083984 L 69.89222717285156 93.55400848388672 L 69.63858032226563 94.22535705566406 L 69.587646484375 93.83895111083984 L 71.84318542480469 75.8514404296875 L 69.64305877685547 94.19441986083984 Z M 72.81299591064453 66.91056823730469 L 65.47544097900391 65.45490264892578 L 75.41509246826172 63.3282470703125 L 72.81299591064453 66.91056823730469 Z M 98.78437805175781 55.83225250244141 L 126.7311706542969 43.80592346191406 L 129.381103515625 42.8582649230957 L 128.5671997070313 47.34146881103516 L 98.78437805175781 55.83225250244141 Z M 128.4192047119141 47.51272583007813 L 121.0059356689453 55.34511566162109 L 98.376220703125 56.07762908935547 L 128.4192047119141 47.51272583007813 Z M 133.0648498535156 54.84718322753906 L 130.8943023681641 54.9360466003418 L 121.1821441650391 55.33720016479492 L 128.6095123291016 47.49185943603516 L 129.5641784667969 49.06697082519531 L 133.0648498535156 54.84718322753906 Z M 142.3313446044922 54.80184936523438 L 144.1167755126953 56.58095550537109 L 150.6063385009766 63.04690551757813 L 133.4389190673828 54.96375274658203 L 137.1860046386719 54.89395141601563 L 142.3313446044922 54.80184936523438 Z M 142.5990753173828 54.89395141601563 L 159.8638916015625 61.23541259765625 L 150.9205474853516 63.18577575683594 L 142.5990753173828 54.89395141601563 Z M 151.1108703613281 72.86851501464844 L 116.4900360107422 64.21438598632813 L 121.0692596435547 55.46816253662109 L 133.1546630859375 54.96842956542969 L 138.1933135986328 58.59284210205078 L 153.0587310791016 69.28475189208984 L 152.3160705566406 70.65119171142578 L 151.1108703613281 72.86851501464844 Z M 147.0729827880859 71.98741149902344 L 151.0038299560547 72.97068786621094 L 148.4141387939453 75.04086303710938 L 117.863525390625 64.68714141845703 L 147.0729827880859 71.98741149902344 Z M 114.5531921386719 86.14975738525391 L 111.3213043212891 81.38520050048828 L 114.4988098144531 76.60122680664063 L 115.7783508300781 85.15352630615234 L 115.9407806396484 86.55738830566406 L 115.9438781738281 86.55738830566406 L 116.2732238769531 88.56459045410156 L 115.8199920654297 86.11917114257813 L 115.7580413818359 86.06916046142578 L 114.5531921386719 86.14975738525391 Z M 113.1638641357422 102.072135925293 L 107.2156372070313 88.93660736083984 L 106.4388885498047 87.22225952148438 L 107.6454620361328 86.83081817626953 L 107.7707366943359 86.73368072509766 L 111.2483367919922 81.49530029296875 L 114.4616394042969 86.23250579833984 L 113.7840118408203 94.30918884277344 L 113.1759033203125 101.9267883300781 L 113.1638641357422 102.072135925293 Z M 101.8472900390625 110.2491912841797 L 111.1743469238281 109.6508865356445 L 106.1959228515625 112.8806228637695 L 101.8472900390625 110.2491912841797 Z M 94.05029296875 109.002197265625 L 98.58168029785156 109.9840393066406 L 99.35359191894531 110.1959457397461 L 99.37045288085938 110.1847915649414 L 99.37184143066406 110.1991806030273 L 99.37184143066406 110.1847915649414 L 99.42758178710938 110.1445007324219 L 99.44754028320313 109.9923095703125 L 99.54493713378906 109.9196395874023 L 99.9888916015625 106.5977935791016 L 101.5699005126953 110.1783142089844 L 95.21488189697266 115.0367736816406 L 94.72137451171875 112.4816207885742 L 94.05029296875 109.002197265625 Z M 77.80828857421875 89.37625885009766 L 74.37232971191406 82.02884674072266 L 75.60368347167969 70.60262298583984 L 80.57109832763672 68.3885498046875 L 81.10486602783203 68.15073394775391 L 78.54613494873047 90.20410919189453 L 78.20439910888672 89.37265777587891 L 77.80828857421875 89.37625885009766 Z M 75.486328125 70.57852172851563 L 74.25187683105469 82.024169921875 L 69.87535858154297 93.26582336425781 L 72.99573516845703 67.25164031982422 L 75.486328125 70.57852172851563 Z M 81.15304565429688 64.87602233886719 L 72.98162841796875 66.97209167480469 L 75.58200073242188 63.30558776855469 L 81.15304565429688 64.87602233886719 Z M 107.0235900878906 70.24392700195313 L 94.5283203125 68.17879486083984 L 99.84400939941406 67.2408447265625 L 116.1076965332031 64.37161254882813 L 111.4032135009766 67.41390228271484 L 107.0235900878906 70.24392700195313 Z M 117.6023254394531 70.62384796142578 L 117.5606842041016 70.65946960449219 L 117.5469207763672 70.65479278564453 L 117.4880676269531 70.75984954833984 L 107.2314605712891 70.25687408447266 L 116.3867950439453 64.33922576904297 L 121.3789978027344 70.94585418701172 L 117.6023254394531 70.62384796142578 Z M 116.2254028320313 84.90599822998047 L 117.6377716064453 70.89224243164063 L 121.4388732910156 71.07825469970703 L 117.4460906982422 93.05571746826172 L 116.2254028320313 84.90599822998047 Z M 100.6176452636719 101.8875732421875 L 103.5459899902344 102.1753921508789 L 101.6277160644531 110.0128173828125 L 100.0202026367188 106.3689804077148 L 100.6176452636719 101.8875732421875 Z M 84.41246032714844 92.78084564208984 L 84.55494689941406 92.99275970458984 L 84.40936279296875 92.79056549072266 L 84.41246032714844 92.78084564208984 Z M 85.52165222167969 75.36897277832031 L 85.54022979736328 75.66183471679688 L 84.87361907958984 80.40371704101563 L 86.09740447998047 85.07436370849609 L 84.30612182617188 91.74251556396484 L 83.84187316894531 92.91035461425781 L 83.48155212402344 92.81645202636719 L 79.05857849121094 91.45648956298828 L 78.79701995849609 90.81932067871094 L 85.52165222167969 75.36897277832031 Z M 94.16352081298828 68.11691284179688 L 89.28868103027344 66.21979522705078 L 115.2122344970703 64.40183258056641 L 95.74453735351563 67.83699798583984 L 94.16352081298828 68.11691284179688 Z M 114.7434997558594 75.79099273681641 L 111.6231231689453 73.39090728759766 L 111.6200256347656 73.39090728759766 L 111.6213989257813 73.38767242431641 L 107.2510833740234 70.38279724121094 L 117.4213104248047 70.88108825683594 L 114.7434997558594 75.79099273681641 Z M 116.1541595458984 84.42425537109375 L 114.8794403076172 75.9061279296875 L 114.8254089355469 75.89497375488281 L 117.5080413818359 70.97679138183594 L 116.1541595458984 84.42425537109375 Z M 114.4465026855469 75.80250549316406 L 108.0464019775391 85.44171142578125 L 111.6200256347656 73.54345703125 L 114.6072235107422 75.84172821044922 L 114.4465026855469 75.80250549316406 Z M 106.0413970947266 102.10595703125 L 103.6867523193359 102.0591812133789 L 104.3612823486328 92.91179656982422 L 104.7419128417969 87.77523803710938 L 106.3229217529297 87.25930786132813 L 113.1098327636719 102.2433853149414 L 106.0413970947266 102.10595703125 Z M 110.6887664794922 102.3211059570313 L 113.12841796875 102.3696746826172 L 111.3756713867188 109.4551620483398 L 103.7796783447266 102.1869049072266 L 110.6887664794922 102.3211059570313 Z M 103.6544036865234 102.2369155883789 L 111.2641754150391 109.5181274414063 L 101.7237396240234 110.1311874389648 L 103.6544036865234 102.2369155883789 Z M 86.58747100830078 87.31256103515625 L 86.58747100830078 87.3157958984375 L 86.67109680175781 95.86631011962891 L 86.67866516113281 95.93251037597656 L 84.46649169921875 92.64449310302734 L 86.58747100830078 87.31256103515625 Z M 86.18860626220703 85.42047882080078 L 85.50650787353516 87.73818206787109 L 86.15935516357422 85.30895233154297 L 86.18860626220703 85.42047882080078 Z M 85.57911682128906 76.24539947509766 L 86.15006256103516 84.80094146728516 L 84.99441528320313 80.40840148925781 L 85.57911682128906 76.24539947509766 Z M 85.51407623291016 74.52313232421875 L 85.47863006591797 74.60408782958984 L 85.47242736816406 74.63466644287109 L 85.50340270996094 75.10706329345703 L 78.73368835449219 90.662109375 L 78.64077758789063 90.43400573730469 L 81.21809387207031 68.21872711181641 L 85.51407623291016 74.52313232421875 Z M 82.11666107177734 64.88897705078125 L 111.0707702636719 64.40866851806641 L 89.008544921875 66.11330413818359 L 83.78268432617188 65.21241760253906 L 82.11666107177734 64.88897705078125 Z M 115.6916198730469 64.17588806152344 L 116.0041046142578 64.15178680419922 L 115.9996337890625 64.02729797363281 L 112.6349029541016 64.0999755859375 L 76.60308074951172 63.19765472412109 L 120.9205780029297 55.48974609375 L 116.3647613525391 64.19387817382813 L 115.6916198730469 64.17588806152344 Z M 114.0548553466797 64.35829925537109 L 106.3910522460938 64.89508819580078 L 113.1421813964844 64.37268829345703 L 114.0548553466797 64.35829925537109 Z M 81.52438354492188 64.77240753173828 L 76.13160705566406 63.32321166992188 L 109.9092712402344 64.15933990478516 L 81.52438354492188 64.77240753173828 Z M 112.6101379394531 64.22589874267578 L 113.2306213378906 64.24029541015625 L 113.1346130371094 64.24820709228516 L 106.2967529296875 64.36154174804688 L 112.6101379394531 64.22589874267578 Z M 106.9248199462891 70.35545349121094 L 104.4621124267578 73.60137939453125 L 104.3103485107422 73.80033874511719 L 104.1726837158203 73.80825042724609 L 94.49149322509766 68.29967498779297 L 106.9248199462891 70.35545349121094 Z M 104.4710693359375 73.79206085205078 L 107.0483856201172 70.39430999755859 L 111.4032135009766 73.38947296142578 L 104.4710693359375 73.79206085205078 Z M 100.6345062255859 101.7630920410156 L 101.3988647460938 96.0426025390625 L 103.5322265625 102.0476760864258 L 100.6345062255859 101.7630920410156 Z M 92.92733764648438 108.2031326293945 L 97.96427917480469 90.15589141845703 L 99.21592712402344 108.7643890380859 L 99.10615539550781 109.5861206054688 L 93.21504974365234 108.3099822998047 L 92.92733764648438 108.2031326293945 Z M 86.30767822265625 85.43991088867188 L 86.30767822265625 85.43199157714844 L 86.31077575683594 85.43199157714844 L 86.55512237548828 83.89249420166016 L 86.57508087158203 86.05800628662109 L 86.56888580322266 86.05620574951172 L 84.87017822265625 90.32246398925781 L 86.30767822265625 85.43991088867188 Z M 85.70266723632813 75.37221527099609 L 85.86682891845703 78.76384735107422 L 85.66102600097656 75.6668701171875 L 85.70266723632813 75.37221527099609 Z M 103.9930419921875 73.84890747070313 L 103.9854736328125 73.85539245605469 L 103.9421081542969 73.96871948242188 L 96.71123504638672 75.933837890625 L 96.37259674072266 74.87932586669922 L 94.26263427734375 68.31299591064453 L 97.38748168945313 70.09030151367188 L 103.9930419921875 73.84890747070313 Z M 107.4245300292969 86.37786102294922 L 102.1119384765625 88.10515594482422 L 101.9463958740234 88.30878448486328 L 101.9326324462891 88.41707611083984 L 98.17799377441406 89.53779602050781 L 98.17179870605469 89.41978454589844 L 104.3213500976563 74.00037384033203 L 111.5040435791016 73.50855255126953 L 107.8158264160156 85.78709411621094 L 107.4245300292969 86.37786102294922 Z M 101.4329376220703 95.78068542480469 L 102.3999786376953 88.53688812255859 L 104.6183624267578 87.81409454345703 L 103.5835113525391 101.8310775756836 L 101.4329376220703 95.78068542480469 Z M 98.18556213378906 89.66587829589844 L 101.9140472412109 88.55307769775391 L 99.30575561523438 108.1013107299805 L 98.18556213378906 89.66587829589844 Z M 98.07267761230469 89.76949310302734 L 98.20277404785156 91.92205047607422 L 98.06201171875 89.80978393554688 L 98.07267761230469 89.76949310302734 Z M 89.78528594970703 73.25851440429688 L 89.78528594970703 73.25851440429688 L 92.63791656494141 107.923583984375 L 87.44612121582031 98.9783935546875 L 87.34700775146484 95.932861328125 L 89.29143524169922 67.15306091308594 L 89.78528594970703 73.25851440429688 Z M 86.66972351074219 83.40212249755859 L 89.1341552734375 67.69488525390625 L 87.30879974365234 94.73264312744141 L 87.02866363525391 86.14327239990234 L 86.71927642822266 86.08499145507813 L 86.66972351074219 83.40212249755859 Z M 89.14964294433594 66.82170104980469 L 86.46083068847656 83.72556304931641 L 86.26431274414063 84.454833984375 L 85.79249572753906 74.74619293212891 L 89.14964294433594 66.82170104980469 Z M 85.71987915039063 74.6087646484375 L 85.65345764160156 74.51018524169922 L 87.32257080078125 70.82280731201172 L 85.71987915039063 74.6087646484375 Z M 89.90435791015625 73.08869171142578 L 89.35372161865234 66.435302734375 L 94.05373382568359 68.20793151855469 L 89.90435791015625 73.08869171142578 Z M 104.0302124023438 74.07521057128906 L 104.1788787841797 74.034912109375 L 100.7663269042969 82.59046173095703 L 104.0302124023438 74.07521057128906 Z M 103.8863525390625 74.11406707763672 L 98.13910675048828 89.10642242431641 L 96.73912048339844 76.05471801757813 L 103.8863525390625 74.11406707763672 Z M 89.94635009765625 73.22613525390625 L 94.13426971435547 68.30327606201172 L 96.57530212402344 75.90145111083984 L 94.53623962402344 75.07827758789063 L 89.94635009765625 73.22613525390625 Z M 89.92604064941406 73.35385131835938 L 94.17866516113281 75.06964111328125 L 96.61659240722656 76.05291748046875 L 98.04446411132813 89.350341796875 L 97.93467712402344 89.63672637939453 L 97.94225311279297 89.64643859863281 L 97.93157958984375 89.66407012939453 L 97.93914794921875 89.787109375 L 92.77832794189453 107.7713851928711 L 89.92604064941406 73.35385131835938 Z M 81.27969360351563 68.09280395507813 L 89.18027496337891 66.43026733398438 L 85.57258605957031 74.39397430419922 L 81.48996734619141 68.40042114257813 L 81.27969360351563 68.09280395507813 Z M 92.81137084960938 108.1610336303711 L 92.80689239501953 108.1092300415039 L 93.60049438476563 105.342170715332 L 92.81309509277344 108.1628341674805 L 92.81137084960938 108.1610336303711 Z M 85.59288024902344 74.6429443359375 L 85.59288024902344 74.64114379882813 L 85.66239929199219 74.74152374267578 L 85.60836791992188 74.86780548095703 L 85.59288024902344 74.6429443359375 Z M 75.55584716796875 70.46842193603516 L 73.05734252929688 67.1318359375 L 81.32305908203125 64.96128845214844 L 77.30995941162109 68.79257965087891 L 75.55584716796875 70.46842193603516 Z M 118.0555725097656 70.78719329833984 L 117.6501617431641 70.76776123046875 L 117.6518859863281 70.75337219238281 L 118.0555725097656 70.78719329833984 Z M 81.1544189453125 67.99242401123047 L 77.49270629882813 69.62582397460938 L 75.84974670410156 70.35833740234375 L 79.59819030761719 66.77925872802734 L 81.51509094238281 64.94834136962891 L 83.76443481445313 65.33654022216797 L 88.96862030029297 66.34572601318359 L 81.23667907714844 67.95645141601563 L 81.1544189453125 67.99242401123047 Z M 76.44856262207031 63.01776123046875 L 97.88098907470703 56.220458984375 L 120.1287078857422 55.49909973144531 L 76.44856262207031 63.01776123046875 Z M 69.67092895507813 94.47720336914063 L 74.31657409667969 82.19541931152344 L 74.82384490966797 83.27907562255859 L 77.71984100341797 89.473388671875 L 75.21513366699219 95.81305694580078 L 69.69226837158203 94.64701080322266 L 69.67092895507813 94.47720336914063 Z M 83.6697998046875 107.9268188476563 L 81.1031494140625 92.6077880859375 L 83.90622711181641 93.46981811523438 L 84.19565582275391 93.32411193847656 L 84.35499572753906 92.92475891113281 L 86.71102142333984 96.20774078369141 L 86.93849945068359 98.111328125 L 86.96947479248047 99.060791015625 L 87.0035400390625 99.18203735351563 L 91.28713989257813 106.5632629394531 L 83.90312957763672 108.0721817016602 L 83.6697998046875 107.9268188476563 Z M 95.0899658203125 115.0202255249023 L 84.05971527099609 108.1678695678711 L 91.35391235351563 106.6765823364258 L 92.45552062988281 108.5751342773438 L 92.61177062988281 108.6899108886719 L 93.92193603515625 108.974494934082 L 94.83013916015625 113.6760787963867 L 95.0899658203125 115.0202255249023 Z M 123.6944122314453 124.3795166015625 L 123.6944122314453 124.3780746459961 L 133.0166778564453 121.4296875 L 140.2984771728516 122.4939117431641 L 133.6385498046875 128.3906860351563 L 123.6944122314453 124.3795166015625 Z M 123.7594604492188 124.5396194458008 L 131.420166015625 127.6301193237305 L 133.4358367919922 128.4435729980469 L 125.9406585693359 129.9783782958984 L 123.7594604492188 124.5396194458008 Z M 125.8370666503906 130.0478363037109 L 123.5860137939453 134.9160003662109 L 111.4882202148438 109.5990753173828 L 116.5282440185547 106.8417282104492 L 123.4528198242188 124.3957061767578 L 123.4528198242188 124.3975067138672 L 125.8370666503906 130.0478363037109 Z M 135.0079040527344 130.9584350585938 L 123.7037048339844 134.9516143798828 L 125.9392852783203 130.1143951416016 L 135.0189056396484 130.9116668701172 L 135.0079040527344 130.9584350585938 Z M 85.99037170410156 113.3170318603516 L 83.88006591796875 108.4262008666992 L 94.85456085205078 115.0249099731445 L 86.69552612304688 113.5757217407227 L 85.99037170410156 113.3170318603516 Z M 80.45993804931641 60.38166046142578 L 124.8548889160156 44.47871017456055 L 122.5081481933594 45.48789215087891 L 97.85174560546875 56.09885406494141 L 76.20594787597656 62.96271514892578 L 76.04798889160156 63.01272583007813 L 80.44618225097656 60.38310241699219 L 80.45993804931641 60.38166046142578 Z M 80.16122436523438 60.40756225585938 L 77.33164978027344 62.10104370117188 L 79.76510620117188 60.44318389892578 L 80.16122436523438 60.40756225585938 Z M 65.41211700439453 66.28635406494141 L 65.31919860839844 65.67005157470703 L 72.7293701171875 67.02390289306641 L 72.70631408691406 67.05772399902344 L 72.76824951171875 67.15630340576172 L 72.81298828125 67.14334869384766 L 69.52570343017578 93.37088012695313 L 69.23627471923828 91.19062042236328 L 69.16194152832031 91.12442016601563 L 67.79911804199219 82.09828186035156 L 67.81288146972656 82.07238006591797 L 67.82354736328125 82.05294799804688 L 65.41211700439453 66.28635406494141 Z M 123.6930389404297 135.0876159667969 L 134.9724578857422 131.1041412353516 L 133.5198059082031 137.0185546875 L 127.7556915283203 139.824462890625 L 123.6930389404297 135.0876159667969 Z M 145.5955657958984 118.110725402832 L 141.5177764892578 128.6133880615234 L 141.2145690917969 129.0516052246094 L 140.9516448974609 129.3264770507813 L 135.2539520263672 130.777099609375 L 139.946044921875 125.0307159423828 L 145.5955657958984 118.110725402832 Z M 146.0797882080078 79.95903778076172 L 121.5472869873047 70.96707916259766 L 116.56884765625 64.37989044189453 L 135.6992950439453 70.86347198486328 L 148.3415222167969 75.14772033691406 L 146.1957702636719 79.71331787109375 L 146.0797882080078 79.95903778076172 Z M 167.6639862060547 53.23141479492188 L 154.4308471679688 51.3116340637207 L 160.317138671875 50.36541748046875 L 160.5398101806641 50.38484191894531 L 161.2081298828125 50.41398620605469 L 170.0957183837891 53.58399963378906 L 167.6639862060547 53.23141479492188 Z M 153.8241271972656 51.30695343017578 L 153.7731781005859 51.32135009765625 L 153.7470245361328 51.27925491333008 L 153.6806182861328 51.25514984130859 L 142.4060211181641 54.65793991088867 L 141.3494873046875 46.69279098510742 L 147.2295684814453 48.72086334228516 L 153.8241271972656 51.30695343017578 Z M 129.9630432128906 42.76292419433594 L 141.2221527099609 46.64925384521484 L 142.2866058349609 54.67736434936523 L 133.2038726806641 54.84250259399414 L 128.6817779541016 47.37888336181641 L 129.5108337402344 42.81149291992188 L 129.7940673828125 42.70967483520508 L 129.9630432128906 42.76292419433594 Z M 56.58922576904297 69.16350555419922 L 58.13478851318359 66.31873321533203 L 64.96163177490234 65.43727874755859 L 64.8563232421875 65.45814514160156 L 65.17362213134766 65.52111053466797 L 65.29132080078125 66.29247283935547 L 67.67384338378906 82.07238006591797 L 62.83789825439453 90.55345153808594 L 62.02880859375 90.27030944824219 L 54.61244583129883 72.80519104003906 L 56.58922576904297 69.16350555419922 Z M 62.95387649536133 90.59410858154297 L 67.64768981933594 82.38790130615234 L 68.91002655029297 90.97726440429688 L 64.59683227539063 91.16471099853516 L 62.95387649536133 90.59410858154297 Z M 71.64186096191406 104.5369873046875 L 65.08552551269531 91.64537811279297 L 66.22120666503906 91.59680938720703 L 68.83087158203125 91.77130889892578 L 69.24247741699219 94.89095306396484 L 69.43106079101563 95.10105895996094 L 75.3607177734375 96.35453033447266 L 75.63156127929688 96.20233917236328 L 77.96762847900391 90.18108367919922 L 78.4071044921875 91.4539794921875 L 78.44737243652344 91.49283599853516 L 78.56954193115234 91.53169250488281 L 78.66246032714844 91.76123046875 L 78.81560516357422 91.90370178222656 L 80.97512817382813 92.56678009033203 L 83.51217651367188 107.9422988891602 L 77.43866729736328 110.6464004516602 L 72.11849975585938 105.2673416137695 L 71.64186096191406 104.5369873046875 Z M 95.67466735839844 115.1105346679688 L 106.2083129882813 113.0144577026367 L 106.220703125 113.0065383911133 L 106.228271484375 113.0065383911133 L 111.3178558349609 109.7041320800781 L 109.98291015625 115.8952026367188 L 95.67466735839844 115.1105346679688 Z M 140.1208801269531 83.67878723144531 L 140.0885314941406 83.65792083740234 L 139.3025054931641 84.17060852050781 L 139.2918395996094 84.15766143798828 L 127.231201171875 91.37410736083984 L 121.9186096191406 71.36823272705078 L 145.9686279296875 80.05149841308594 L 140.1208801269531 83.67878723144531 Z M 170.0726776123047 104.6726226806641 L 165.6142578125 113.3623657226563 L 165.5912017822266 113.3558883666992 L 167.0903015136719 79.56903076171875 L 175.4985046386719 85.77953338623047 L 172.9566345214844 98.90535736083984 L 170.0726776123047 104.6726226806641 Z M 175.9606781005859 68.25147247314453 L 175.8615570068359 68.47309112548828 L 172.6052398681641 70.57383728027344 L 172.6052398681641 64.89724731445313 L 175.8526153564453 67.93126678466797 L 175.9606781005859 68.25147247314453 Z M 58.25868225097656 64.61734008789063 L 64.68666076660156 65.34661102294922 L 58.14889907836914 66.19100952148438 L 57.97269439697266 64.96524810791016 L 58.17987060546875 64.62741088867188 L 58.25868225097656 64.61734008789063 Z M 149.7463226318359 116.7651519775391 L 141.8116760253906 128.1913757324219 L 145.8402557373047 117.8131866455078 L 151.3768920898438 113.0694961547852 L 149.7463226318359 116.7651519775391 Z M 154.8328094482422 104.5869979858398 L 148.9496307373047 111.6836395263672 L 146.1479339599609 90.81429290771484 L 145.9717254638672 90.607421875 L 139.6335754394531 88.85746002197266 L 140.1718292236328 83.79212951660156 L 146.1186828613281 80.10475921630859 L 157.4645080566406 83.25678253173828 L 154.9567108154297 104.6406173706055 L 154.8328094482422 104.5869979858398 Z M 175.6574859619141 75.36250305175781 L 174.2574920654297 73.24880218505859 L 176.4775848388672 68.27737426757813 L 172.8695526123047 57.60308837890625 L 173.8424530029297 50.48845672607422 L 160.5704345703125 49.88510894775391 L 150.5936126708984 49.01516342163086 L 149.2104797363281 48.87772750854492 L 129.7968139648438 42.17900085449219 L 80.36012268066406 59.88660430908203 L 74.46902465820313 60.41368103027344 L 70.91398620605469 59.49983978271484 L 69.77382659912109 61.68009948730469 L 69.58523559570313 61.94382476806641 L 65.08964538574219 63.26852416992188 L 57.89766693115234 64.15789794921875 L 53.48398208618164 71.38406372070313 L 61.63200378417969 90.57467651367188 L 61.67536544799805 90.67649841308594 L 64.45675659179688 91.64537811279297 L 64.45675659179688 91.6727294921875 L 64.52799987792969 91.66948699951172 L 64.56034851074219 91.68064117431641 L 71.22337341308594 104.7837905883789 L 74.16583251953125 109.2911071777344 L 75.5985107421875 111.5472793579102 L 75.68833923339844 111.6217498779297 L 75.71002197265625 111.6541290283203 L 79.83909606933594 115.2929382324219 L 85.79971313476563 113.7775421142578 L 92.06661987304688 116.0707702636719 L 101.1166534423828 126.0704650878906 L 105.8534851074219 131.3444671630859 L 105.9415893554688 131.4009552001953 L 106.0823516845703 131.5563812255859 L 106.1023101806641 131.5790405273438 L 113.5234832763672 136.5310516357422 L 113.5234832763672 139.2545776367188 L 113.4632568359375 140.9833068847656 L 113.4911346435547 141.0383605957031 L 114.4581909179688 141.7079010009766 L 120.3351745605469 145.9518585205078 L 120.3692474365234 145.9759521484375 L 125.9275512695313 147.533447265625 L 126.7628021240234 147.8083190917969 L 126.8247528076172 147.7856597900391 L 127.1234741210938 147.8698425292969 L 133.9148712158203 137.3880462646484 L 141.5662841796875 129.3905181884766 L 149.9603729248047 117.3095016479492 L 152.9506530761719 118.131233215332 L 155.1552581787109 116.3586044311523 L 158.7846374511719 110.1351470947266 L 158.8992309570313 111.6843490600586 L 160.9520721435547 112.5787658691406 L 165.9583740234375 113.9761505126953 L 173.3950347900391 99.10504150390625 L 173.4119110107422 99.07266235351563 L 175.9737396240234 85.84645843505859 L 175.9782104492188 85.81732177734375 L 175.6581573486328 75.43589782714844 L 175.6574859619141 75.36250305175781 Z" fill="#ffffff" fill-opacity="0.33" stroke="none" stroke-width="1" stroke-opacity="0.33" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+  Widget phoneNumberWidget(String pn) {
+    if (_controller!.text == "") {
+      _controller = TextEditingController(text: pn);
+    }
+
+    return TextFormField(
+      maxLines: 1,
+      style: TextStyle(fontSize: 30, color: Color.fromRGBO(171, 255, 79, 1)),
+      controller: _controller,
+      cursorColor: Color.fromRGBO(171, 255, 79, 1),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        contentPadding:
+            EdgeInsets.only(left: 20, bottom: 11, top: 11, right: 15),
+      ),
+    );
+  }
+
+  Widget descriptionWidget(String des) {
+    if (_controllerDescription!.text == "") {
+      _controllerDescription = TextEditingController(text: des);
+    }
+    return TextFormField(
+      minLines: 1,
+      maxLines: 20,
+      style: TextStyle(fontSize: 30, color: Color.fromRGBO(171, 255, 79, 1)),
+      controller: _controllerDescription,
+      cursorColor: Color.fromRGBO(171, 255, 79, 1),
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        contentPadding:
+            EdgeInsets.only(left: 20, bottom: 11, top: 11, right: 15),
+      ),
+    );
+  }
+
+  Widget DropdownOffice() {
+    if (dropdownLocationHolder == "") {
+      dropdownLocationHolder = dropdownLocationValue;
+    }
+    return DropdownButton<String>(
+      dropdownColor: Color.fromRGBO(33, 33, 33, 1),
+      value: dropdownLocationHolder,
+      icon: const Padding(
+        padding: EdgeInsets.symmetric(),
+        child:
+            Icon(Icons.arrow_downward, color: Color.fromRGBO(171, 255, 79, 1)),
+      ),
+      iconSize: 30,
+      elevation: 8,
+      style: const TextStyle(
+        fontSize: 30,
+        color: Color.fromRGBO(172, 255, 79, 1),
+      ),
+      underline: Container(
+        height: 0,
+        color: Color.fromRGBO(33, 33, 33, 1),
+      ),
+      onChanged: (String? selectedOffice) {
+        setState(() {
+          dropdownLocationHolder = selectedOffice!;
+        });
+      },
+      items: officeList.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Padding(
+            padding: EdgeInsets.only(left: 35),
+            child: Text(value),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  List<String> officeList = ['Braamfontein', 'Pretoria', 'Unassigned'];
 }

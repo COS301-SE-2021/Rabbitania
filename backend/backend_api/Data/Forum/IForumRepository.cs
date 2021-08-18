@@ -32,5 +32,7 @@ namespace backend_api.Data.Forum
         Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request);
 
         Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request);
+
+        Task<bool> CreateForumThreadApi(CreateForumThreadRequest request);
     }
 }

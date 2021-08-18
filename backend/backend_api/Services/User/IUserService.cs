@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
@@ -23,8 +24,13 @@ namespace backend_api.Services.User
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
         Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request);
-
+        
+        Task<ViewProfileResponse> ViewProfileAsp(ViewProfileRequest request);
+        Task<GetUserResponse> GetUserByID(GetUserByIDRequest request);
+        Task<GetUserResponse> GetUserByEmail(GetUserByEmailRequest request);
         Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request);
+
+        List<string> GetAllUserEmails();
 
     }
 }

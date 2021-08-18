@@ -7,6 +7,7 @@ import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
+import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,12 +32,12 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
       setState(() {
         this.ForumThreadCreatorId = value;
       });
-      print(value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ForumThreadProvider ForumCreateThreadProvider = new ForumThreadProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
@@ -44,15 +45,14 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedThread = addNewForumThread(
-                  currentForumID,
-                  forumThreadTitleController.text,
-                  forumThreadBodyController.text,
-                  ForumThreadCreatorId);
               return FutureBuilder<String>(
-                future: futureStringReceivedThread,
+                future: ForumCreateThreadProvider.addNewForumThreadNLP(
+                    currentForumID,
+                    forumThreadTitleController.text,
+                    forumThreadBodyController.text,
+                    ForumThreadCreatorId),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.hasData && snapshot.data! != "true") {
                     return AlertDialog(
                       elevation: 5,
                       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
@@ -73,6 +73,55 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           onPressed: () async {
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
+                            ForumCreateImg64 = "";
+                            UtilModel.route(() => Forum(), context);
+                          },
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasData && snapshot.data! == "true") {
+                    return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      content: Text(
+                          "It is possible that a similar forum thread already exists, are you sure you want to continue"),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      title: Text("A similar forum thread has been detected"),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.check,
+                            color: Color.fromRGBO(171, 255, 79, 1),
+                            size: 24.0,
+                          ),
+                          tooltip: 'Continue',
+                          onPressed: () async {
+                            ForumCreateThreadProvider.addNewForumThread(
+                                currentForumID,
+                                forumThreadTitleController.text,
+                                forumThreadBodyController.text,
+                                ForumThreadCreatorId);
+
+                            forumThreadTitleController.text = "";
+                            forumThreadBodyController.text = "";
+                            ForumCreateImg64 = "";
+                            UtilModel.route(() => Forum(), context);
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            size: 24.0,
+                          ),
+                          tooltip: 'Cancel',
+                          onPressed: () async {
+                            forumThreadTitleController.text = "";
+                            forumThreadBodyController.text = "";
+                            ForumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),

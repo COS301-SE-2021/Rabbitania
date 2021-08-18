@@ -27,12 +27,12 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
       setState(() {
         this.forumCreatorId = value;
       });
-      print(value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final ForumProvider ForumCreateProvider = new ForumProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
@@ -40,10 +40,9 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedForum =
-                  addNewForum(forumCreateTitleController.text, forumCreatorId);
               return FutureBuilder<String>(
-                future: futureStringReceivedForum,
+                future: ForumCreateProvider.addNewForum(
+                    forumCreateTitleController.text, forumCreatorId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return AlertDialog(
@@ -64,6 +63,8 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
                           ),
                           tooltip: 'Continue',
                           onPressed: () async {
+                            forumCreateTitleController.text = "";
+
                             UtilModel.route(() => Forum(), context);
                           },
                         ),

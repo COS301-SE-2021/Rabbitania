@@ -12,6 +12,7 @@ using backend_api.Models.Enumerations;
 using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
+using Castle.Core.Internal;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Utilities.Collections;
@@ -21,15 +22,31 @@ namespace backend_api.Data.User
     public class UserRepository : IUserRepository
     {
         private readonly UserContext _users;
+        private readonly IdentityContext _aspUser;
+
 
         public UserRepository(UserContext users)
         {
             this._users = users;
         }
 
-        public async Task<List<Models.User.Users>> GetUser(int userID)
+        public UserRepository(UserContext users, IdentityContext aspUser)
         {
-            return await _users.Users.Where(x => x.UserId == userID).ToListAsync();
+            _users = users;
+            _aspUser = aspUser;
+        }
+
+        public async Task<Models.User.Users> GetUser(int userID)
+        {
+            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
+            
+        }
+
+        public async Task<Models.User.Users> GetUserByEmail(string email)
+        {
+            var userEmail = _users.UserEmail.Where(x => x.UsersEmail == email).FirstOrDefaultAsync();
+            var userID = userEmail.Result.UserId;
+            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
         }
 
         public async Task<List<Models.User.Users>> GetUser(String name)
@@ -69,16 +86,14 @@ namespace backend_api.Data.User
 
             return allUsers.ToList();
         }
-        
-        
 
-        public ViewProfileResponse ViewProfile(ViewProfileRequest request)
+        public ViewProfileResponse ViewProfileAsp(ViewProfileRequest request)
         {
             if (request == null)
             {
                 throw new InvalidUserRequest("Request object cannot be null");
             }
-            var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
+            var selectedUser = _aspUser.Users.Where(x => x.UserId == request.UserId);
             
             var name = "";
             var userImage = "";
@@ -100,6 +115,44 @@ namespace backend_api.Data.User
             }
 
             ViewProfileResponse response = new ViewProfileResponse(HttpStatusCode.OK, name,
+                userImage, description, phoneNumber, empLevel, userRole, officeLocation);
+
+            return response;
+        }
+
+        public async Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+
+            var selectedUser =  _users.Users.Where(x => x.UserId == request.UserId);
+            
+            var name = "";
+            var userImage = "";
+            var description = "";
+            var phoneNumber = "";
+            var empLevel = 111;
+            OfficeLocation officeLocation = OfficeLocation.Braamfontein;
+            UserRoles userRole = UserRoles.Administrator;
+
+            foreach (var x in selectedUser)
+            {
+                name = x.Name;
+                userImage = x.UserImgUrl;
+                description = x.UserDescription;
+                phoneNumber = x.PhoneNumber;
+                empLevel = x.EmployeeLevel;
+                officeLocation = x.OfficeLocation;
+                userRole = x.UserRole;
+            }
+
+            if (name == "")
+            { 
+                return new ViewProfileResponse(HttpStatusCode.BadGateway);
+            }
+            var response = new ViewProfileResponse(HttpStatusCode.OK, name,
                 userImage, description, phoneNumber, empLevel, userRole, officeLocation);
 
             return response;
@@ -171,6 +224,13 @@ namespace backend_api.Data.User
             var userEmail = await _users.UserEmail.FirstOrDefaultAsync(x => x.UsersEmail == email);
             var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == userEmail.UserId);
             return user;
+        }
+
+        public List<string> GetAllUserEmails()
+        {
+            var emails = _users.UserEmail.Select(e => e.UsersEmail).Distinct().ToList();
+            
+            return emails;
         }
     }
 }

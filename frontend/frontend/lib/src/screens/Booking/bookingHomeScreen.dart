@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/models/Booking/bookingModel.dart';
+import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
-import 'package:frontend/src/widgets/Booking/bookingButton.dart';
+import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
@@ -18,28 +16,65 @@ class BookingScreen extends StatefulWidget {
 
 class _BookingState extends State<BookingScreen> {
   UtilModel utilModel = UtilModel();
-
-  @override
-  initState() {}
+  UserHelper loggedUser = new UserHelper();
 
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FancyFab(
           heroTag: "BookingScreenPage",
-          numberOfItems: 1,
-          icon1: Icons.shield_outlined,
-          onPressed1: () {
-            UtilModel.route(() => BookingAdminScreen(), context);
+          numberOfItems: 2,
+          icon1: Icons.admin_panel_settings_sharp,
+          onPressed1: () async {
+            var name = await loggedUser.getUserName();
+            if (await loggedUser.getAdminStatus()) {
+              UtilModel.route(() => BookingAdminScreen(), context);
+            } else {
+              return showDialog<void>(
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    key: Key('HomeAdminError'),
+                    elevation: 5,
+                    backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                    titleTextStyle:
+                        TextStyle(color: Colors.white, fontSize: 25),
+                    title: Text("Permission Denied: "),
+                    contentTextStyle:
+                        TextStyle(color: Colors.white, fontSize: 20),
+                    content: Text("Sorry " +
+                        name +
+                        ", You do not have permission to access admin related pages!"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text(
+                          "Return",
+                          style: TextStyle(
+                              color: Color.fromRGBO(33, 33, 33, 1),
+                              fontSize: 20),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                          shape: StadiumBorder(),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                context: context,
+              );
+            }
           },
-          icon2: Icons.edit,
-          onPressed2: () {},
+          icon2: Icons.schedule,
+          onPressed2: () {
+            UtilModel.route(() => BookingSchedules(), context);
+          },
           icon3: Icons.edit,
           onPressed3: () {},
         ),
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
-          toolbarHeight: 220,
+          toolbarHeight: 250,
           automaticallyImplyLeading: false,
           elevation: 1,
           backgroundColor: Colors.transparent,

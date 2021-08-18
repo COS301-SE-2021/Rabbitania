@@ -1,6 +1,6 @@
 class BookingScheduleModel {
   final String timeSlot; // composite key
-  final String office; // composite key
+  final int office; // composite key
   final int availability;
 
   BookingScheduleModel(

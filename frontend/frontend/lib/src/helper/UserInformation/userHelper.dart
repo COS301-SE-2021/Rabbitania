@@ -12,6 +12,16 @@ class UserHelper {
     prefs.setInt('userID', userID);
   }
 
+  void setUserName(name) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('name', name);
+  }
+
+  void setAdminStatus(isAdmin) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isAdmin', isAdmin);
+  }
+
   //funtion used to retrieve stored userID
   //function is async so must use callback when using
   getUserID() async {
@@ -19,10 +29,66 @@ class UserHelper {
     return prefs.getInt('userID');
   }
 
+  getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('name');
+  }
+
+  getAdminStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isAdmin');
+  }
+
   //clear all user specific data from disk
   //function is async so must use callback when using
   clearPersitantUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove('UserID');
+    prefs.remove('userID');
+  }
+
+  clearPersitantUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('name');
+  }
+
+  clearPersitantUserStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('isAdmin');
+  }
+
+  String determineRolePassIn(int r) {
+    switch (r) {
+      case 0:
+        return 'Developer';
+      case 1:
+        return 'Designer';
+      case 2:
+        return 'Care Taker';
+      case 3:
+        return 'Scrum Master';
+      case 4:
+        return 'CAM';
+      case 5:
+        return 'Director';
+      case 6:
+        return 'Graduate';
+      case 7:
+        return 'Intern';
+      default:
+        return 'Unassigned';
+    }
+  }
+
+  String determineOfficePassIn(r) {
+    switch (r) {
+      case 0:
+        return 'Pretoria';
+      case 1:
+        return 'Braamfontein';
+      case 2:
+        return 'Amsterdam';
+      default:
+        return 'Undetermined';
+    }
   }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using backend_api.Models.Forum.Requests;
 using backend_api.Models.Forum.Responses;
 using backend_api.Services.Forum;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend_api.Controllers.Forum
@@ -18,7 +19,7 @@ namespace backend_api.Controllers.Forum
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateForum")]
         public async Task<CreateForumResponse> CreateForum(
             [FromBody] CreateForumRequest request)
@@ -26,7 +27,7 @@ namespace backend_api.Controllers.Forum
             return await _service.CreateForum(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveForums")]
         public async Task<RetrieveForumsResponse> RetrieveForums(
             [FromQuery] RetrieveForumsRequest request)
@@ -34,7 +35,7 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveForums(request);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditForum")]
         public async Task<EditForumResponse> EditForum(
             [FromBody] EditForumRequest request)
@@ -42,7 +43,7 @@ namespace backend_api.Controllers.Forum
             return await _service.EditForum(request);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteForum")]
         public async Task<DeleteForumResponse> DeleteForum(
             [FromBody] DeleteForumRequest request)
@@ -50,7 +51,15 @@ namespace backend_api.Controllers.Forum
             return await _service.DeleteForum(request);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
+        [Route("CreateForumThreadAPI")]
+        public async Task<bool> CreateForumThreadAPI(
+            [FromBody] CreateForumThreadRequest request)
+        {
+            return await _service.CreateForumThreadAPI(request);
+        }
+
+        [HttpPost, Authorize]
         [Route("CreateForumThread")]
         public async Task<CreateForumThreadResponse> CreateForumThread(
             [FromBody] CreateForumThreadRequest request)
@@ -58,7 +67,7 @@ namespace backend_api.Controllers.Forum
             return await _service.CreateForumThread(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveForumThreads")]
         public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(
             [FromQuery] RetrieveForumThreadsRequest request)
@@ -66,7 +75,7 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveForumThreads(request);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditForumThread")]
         public async Task<EditForumThreadResponse> EditForumThread(
             [FromBody] EditForumThreadRequest request)
@@ -74,7 +83,7 @@ namespace backend_api.Controllers.Forum
             return await _service.EditForumThread(request);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteForumThread")]
         public async Task<DeleteForumThreadResponse> DeleteForumThread(
             [FromBody] DeleteForumThreadRequest request)
@@ -82,7 +91,7 @@ namespace backend_api.Controllers.Forum
             return await _service.DeleteForumThread(request);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateThreadComment")]
         public async Task<CreateThreadCommentResponse> CreateThreadComment(
             [FromBody] CreateThreadCommentRequest request)
@@ -90,7 +99,7 @@ namespace backend_api.Controllers.Forum
             return await _service.CreateThreadComment(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveThreadComments")]
         public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(
             [FromQuery] RetrieveThreadCommentsRequest request)
@@ -98,7 +107,7 @@ namespace backend_api.Controllers.Forum
             return await _service.RetrieveThreadComments(request);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditThreadComment")]
         public async Task<EditThreadCommentResponse> EditThreadComment(
             [FromBody] EditThreadCommentRequest request)
@@ -106,7 +115,7 @@ namespace backend_api.Controllers.Forum
             return await _service.EditThreadComment(request);
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteThreadComment")]
         public async Task<DeleteThreadCommentResponse> DeleteThreadComment(
             [FromBody] DeleteThreadCommentRequest request)
@@ -114,7 +123,7 @@ namespace backend_api.Controllers.Forum
             return await _service.DeleteThreadComment(request);
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("RetrieveNumThreads")]
         public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(
             [FromQuery] RetrieveNumThreadsRequest request)
