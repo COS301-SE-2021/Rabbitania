@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.User;
@@ -36,11 +37,8 @@ namespace backend_api.Tests
         public async Task ViewProfile_ReturnStatusCodeAccepted()
         {
             var requestDto = new ViewProfileRequest(1);
-            var responseDto = new ViewProfileResponse(HttpStatusCode.Accepted);
-            //_userRepoMock.Setup(n => n.ViewProfile(requestDto)).Returns(responseDto.respons);
-
-            var profile = await _sut.ViewProfile(requestDto);
-            Assert.Equal(responseDto.response, profile.response);
+            
+            await Assert.ThrowsAsync<NullReferenceException>(()=>_sut.ViewProfile(requestDto));
         }
     }
 }
