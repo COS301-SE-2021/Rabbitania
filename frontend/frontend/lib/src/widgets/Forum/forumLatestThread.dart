@@ -23,10 +23,10 @@ Widget ForumLatestThread(int forumIdentifier) {
                   padding: EdgeInsets.only(bottom: 8, top: 8),
                   child: InkWell(
                     onTap: () {
-                      currentThreadID = snapshot.data!.last.forumThreadId;
-                      currentThreadName = snapshot.data!.last.forumThreadTitle;
-                      currentThreadBody = snapshot.data!.last.forumThreadBody;
-                      currentThreadImage = snapshot.data!.last.imageURL;
+                      currentThreadID = snapshot.data!.first.forumThreadId;
+                      currentThreadName = snapshot.data!.first.forumThreadTitle;
+                      currentThreadBody = snapshot.data!.first.forumThreadBody;
+                      currentThreadImage = snapshot.data!.first.imageURL;
                       UtilModel.route(() => ForumCommentScreen(), context);
                     },
                     child: Card(
@@ -44,7 +44,7 @@ Widget ForumLatestThread(int forumIdentifier) {
                             title: Container(
                               padding: EdgeInsets.only(bottom: 8),
                               child: Text(
-                                snapshot.data!.last.forumThreadTitle,
+                                snapshot.data!.first.forumThreadTitle,
                                 maxLines: 2,
                                 style: TextStyle(
                                     letterSpacing: 2.0,
@@ -53,7 +53,7 @@ Widget ForumLatestThread(int forumIdentifier) {
                               ),
                             ),
                             subtitle: Text(
-                              snapshot.data!.last.forumThreadBody,
+                              snapshot.data!.first.forumThreadBody,
                               style: TextStyle(color: Colors.white),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
