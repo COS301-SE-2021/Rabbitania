@@ -16,6 +16,13 @@ namespace backend_api.Models.Forum.Requests
             _createdDate = createdDate;
             _userId = userId;
         }
+        
+        public CreateForumRequest(string forumTitle, DateTime createdDate, int userId)
+        {
+            _forumTitle = forumTitle;
+            _createdDate = createdDate;
+            _userId = userId;
+        }
 
         public CreateForumRequest()
         {
