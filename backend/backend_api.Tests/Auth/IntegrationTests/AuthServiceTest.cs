@@ -30,7 +30,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             var serviceProvider = new ServiceCollection().AddEntityFrameworkNpgsql().BuildServiceProvider();
             var builder = new DbContextOptionsBuilder<UserContext>();
             
-            builder.UseNpgsql("Server=localhost;Port=5432;Database=RabbitaniaTesting;Username=postgres;Password=1234")
+            builder.UseNpgsql("Server=ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432;Port=5432;Database=d924vmqoqh9aba;Username=jpbxojhfderusg;Password=a231e88acb43722af04a63aeab3cb65aeb770459b6e201e9498a7d7543a60d5c;SslMode=Require;Trust Server Certificate=true;")
                 .UseInternalServiceProvider(serviceProvider);
 
             _userContext = new UserContext(builder.Options);
@@ -88,9 +88,6 @@ namespace backend_api.Tests.Auth.IntegrationTests
         public async void CheckEmailExists_True()
         {
             //Arrange
-            _userContext.UserEmail.Add(_mockedEmail);
-            await _userContext.SaveChanges();
-            
             var req = new GoogleSignInRequest(_mockedEmail.UsersEmail);
             
             //Act
@@ -99,9 +96,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Assert
             Assert.True(resp.EmailExists);
             
-            //Remove test user
-            _userContext.UserEmail.Remove(_mockedEmail);
-            await _userContext.SaveChanges();
+            
         }
         [Fact(DisplayName = "Should be false if the 'test1@gmail.com' email is not in the database")]
         public async void CheckEmailExists_False()
@@ -167,7 +162,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         public async void GetUserName_ValidUser()
         {
             //Arrange
-            var name = "Unit Tests";
+            var name = "test";
             //Act
             var respone = await authService.GetUserName(name);
             //Assert
@@ -206,7 +201,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Act
             var response = await authService.GetUserId(req);
             //Assert
-            Assert.Equal(7, response.UserId);
+            Assert.Equal(1, response.UserId);
         }
         
         [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should thrown an exception for invalid user")]
@@ -263,7 +258,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Act
             var resp = await authService.GetUserAdminStatus(req);
             //Assert
-            Assert.Equal(7, resp.UserId);
+            Assert.Equal(1, resp.UserId);
         }
         [Fact]
         public async void GetUserAdmin_InvalidAdmin()
