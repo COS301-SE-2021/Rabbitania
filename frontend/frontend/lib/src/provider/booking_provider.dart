@@ -16,16 +16,11 @@ class BookingProvider {
   URLHelper url = new URLHelper();
   // Variables for the Booking Provider
   var email = FirebaseAuth.instance.currentUser!.providerData[0].email!;
-  var token;
 
-  BookingProvider({this.token}) async {
-    token = await securityHelper.getToken();
-    loggedUserId = loggedUser.getUserID();
-  }
   // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
     final loggedUserId = await loggedUser.getUserID();
-    this.token = await securityHelper.getToken();
+    final token = await securityHelper.getToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
@@ -184,7 +179,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -228,7 +223,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -273,7 +268,7 @@ class BookingProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': email,
           'name': await loggedUser.getUserName()
         }),
       );
