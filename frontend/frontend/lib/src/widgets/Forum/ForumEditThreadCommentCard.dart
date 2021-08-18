@@ -1,20 +1,23 @@
 import 'dart:convert';
 import 'package:frontend/src/models/Forum/forumModel.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureEditThreadCommentString;
-
 class ForumEditForumThreadCommentCard extends StatelessWidget {
+  ForumThreadCommentProvider ForumEditForumThreadCommentProvider =
+      new ForumThreadCommentProvider();
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(children: <Widget>[
         FutureBuilder<List<ThreadComments>>(
-          future: futureThreadComments,
+          future: ForumEditForumThreadCommentProvider.fetchThreadComments(
+              currentThreadID),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var iterate = snapshot.data!.iterator;
