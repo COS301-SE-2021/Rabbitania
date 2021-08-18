@@ -204,7 +204,16 @@
 
 # Documentation
 
-- [Software Requirements Specification 2 - Rabbitania](https://www.overleaf.com/read/gkcftybbyjsk)
+- [Software Requirements Specification 3 - Rabbitania](https://www.overleaf.com/read/rtbqmkkgvgcp)
+
+# Technical Installation
+- [Technical Installation - Rabbitania](https://www.overleaf.com/read/hxdfpnkqpytk)
+
+# User Manual
+- [User Manual - Rabbitania](https://www.overleaf.com/read/fythjbhjqjtc)
+
+# Coding Standards
+- [Coding Standards - Rabbitania](https://www.overleaf.com/read/mwsygzynvrmx)
 
 
 # Demo-Video-Links
@@ -213,7 +222,7 @@
 
 * <a href="https://drive.google.com/file/d/1VzDT_z24Rofzv6nKbINAixBn9qgndyxM/view?usp=sharing"> Demo 1 </a>
 * <a href="https://drive.google.com/file/d/1CuYkNfcZkJnfMleqHkDjEJzWyepBUZE3/view?usp=sharing"> Demo 2 </a>
-* <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 3 </a>
+* <a href="https://drive.google.com/file/d/1afs-Fjafqt-HEDGnNDvjxauv-I4ZlCMF/view?usp=sharing"> Demo 3 </a>
 * <a href="https://youtu.be/dQw4w9WgXcQ"> Demo 4 </a>
 </div>
 
