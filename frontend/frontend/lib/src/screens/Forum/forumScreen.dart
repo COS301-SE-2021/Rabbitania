@@ -18,14 +18,14 @@ class Forum extends StatefulWidget {
   }
 }
 
-late Future<List<ForumObj>> futureForum;
+//late Future<List<ForumObj>> futureForum;
 late Future<List<ForumThread>> futureForumLatestThread;
 
 class _Forum extends State<Forum> {
   final util = new UtilModel();
   void initState() {
     super.initState();
-    futureForum = fetchForum();
+    //futureForum = fetchForum();
   }
 
   void refresh() {
