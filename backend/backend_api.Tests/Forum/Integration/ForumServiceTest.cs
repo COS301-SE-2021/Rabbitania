@@ -34,13 +34,13 @@ namespace backend_api.Tests.Forum.Integration
 
             _mockForum = new Forums(
                 "Forum Title",
-                50,
+                1,
                 Convert.ToDateTime("2021-08-16 18:57:54.627600")
             );
 
             _mockForumThread = new ForumThreads(
                 "Forum Thread Title",
-                50,
+                1,
                 "Forum Thread Body",
                 Convert.ToDateTime("2021-08-16 18:57:54.5265000"),
                 "image.url",
