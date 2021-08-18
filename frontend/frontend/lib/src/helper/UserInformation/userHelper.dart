@@ -55,27 +55,40 @@ class UserHelper {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('isAdmin');
   }
-}
 
-determineRolePassIn(int r) {
-  switch (r) {
-    case 1:
-      return 'Developer';
-    case 2:
-      return 'Designer';
-    case 3:
-      return 'Care Taker';
-    case 4:
-      return 'Scrum Master';
-    case 5:
-      return 'CAM';
-    case 6:
-      return 'Director';
-    case 7:
-      return 'Graduate';
-    case 8:
-      return 'Intern';
-    default:
-      return 'Unassigned';
+  String determineRolePassIn(int r) {
+    switch (r) {
+      case 0:
+        return 'Developer';
+      case 1:
+        return 'Designer';
+      case 2:
+        return 'Care Taker';
+      case 3:
+        return 'Scrum Master';
+      case 4:
+        return 'CAM';
+      case 5:
+        return 'Director';
+      case 6:
+        return 'Graduate';
+      case 7:
+        return 'Intern';
+      default:
+        return 'Unassigned';
+    }
+  }
+
+  String determineOfficePassIn(r) {
+    switch (r) {
+      case 0:
+        return 'Pretoria';
+      case 1:
+        return 'Braamfontein';
+      case 2:
+        return 'Amsterdam';
+      default:
+        return 'Undetermined';
+    }
   }
 }

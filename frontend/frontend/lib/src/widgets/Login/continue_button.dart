@@ -30,6 +30,7 @@ class _continueButton extends State<ContinueButton> {
   @protected
   @mustCallSuper
   void initState() {
+    super.initState();
     httpCall();
   }
 
@@ -63,8 +64,8 @@ class _continueButton extends State<ContinueButton> {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'email': widget.user.providerData[0].email,
-          'name': widget.user.displayName
+          'email': await widget.user.providerData[0].email,
+          'name': await widget.user.displayName
         }),
       );
       if (authReponse.statusCode == 200) {
@@ -81,14 +82,17 @@ class _continueButton extends State<ContinueButton> {
       //function to add user to firestore when created on our db
 
       int userID = await userProvider.getUserID();
-      fireStoreHelper.createNewUsersDocsWithUid(userID, widget.user.displayName,
-          widget.user.providerData[0].email, widget.user.photoURL);
+      await fireStoreHelper.createNewUsersDocsWithUid(
+          userID,
+          widget.user.displayName,
+          widget.user.providerData[0].email,
+          widget.user.photoURL);
       bool userStatus = await userProvider.getUserAdminStatus();
       userHelper.setUserID(userID);
       userHelper.setAdminStatus(userStatus);
       setState(() {});
 
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => InfoForm(widget.user),

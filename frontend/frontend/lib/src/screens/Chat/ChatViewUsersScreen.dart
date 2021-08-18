@@ -24,6 +24,15 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            title: Center(
+              child: Text(
+                'Users',
+                style: TextStyle(color: utilModel.greenColor, fontSize: 20),
+              ),
+            )),
         backgroundColor: utilModel.greyColor,
         body: FutureBuilder(
           future: userProvider.getUserID(),
