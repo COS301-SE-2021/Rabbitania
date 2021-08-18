@@ -77,7 +77,7 @@ jobs:
     steps:
       - checkout
       - run:
-          working_directory: ~/project/backend/backend_api.Tests/Auth/IntegrationTests
+          working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
             dotnet test --filter AuthService
