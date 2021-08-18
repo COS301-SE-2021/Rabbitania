@@ -5,7 +5,6 @@ import 'package:frontend/src/screens/Forum/forumCreateThreadScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureStringReceivedThread;
 File? ForumCreateImageFile;
 String ForumCreateImg64 = "";
 

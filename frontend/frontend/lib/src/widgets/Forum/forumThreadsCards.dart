@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 
 class ForumThreadsCards extends StatelessWidget {
+  final ForumThreadProvider ForumThreadCardProvider = new ForumThreadProvider();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -14,7 +15,7 @@ class ForumThreadsCards extends StatelessWidget {
             //Children in the list
 
             FutureBuilder<List<ForumThread>>(
-              future: futureForumThreads,
+              future: ForumThreadCardProvider.fetchForumThreads(currentForumID),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var iterate = snapshot.data!.iterator;

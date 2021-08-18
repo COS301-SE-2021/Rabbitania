@@ -14,8 +14,6 @@ class ForumCommentScreen extends StatefulWidget {
   }
 }
 
-late Future<List<ThreadComments>> futureThreadComments;
-
 class _ForumCommentScreen extends State<ForumCommentScreen> {
   final util = new UtilModel();
 
@@ -27,7 +25,6 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
       setState(() {
         this.threadCommentCreatorId = value;
       });
-      futureThreadComments = fetchThreadComments(currentThreadID);
     });
   }
 
@@ -42,6 +39,8 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ForumThreadCommentProvider CommentProvider =
+        new ForumThreadCommentProvider();
     return Scaffold(
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -100,7 +99,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               errorText: 'Comment cannot be blank',
               sendButtonMethod: () async {
                 print(commentController.text);
-                await addNewComment(
+                await CommentProvider.addNewComment(
                     commentController.text, threadCommentCreatorId);
                 commentController.clear();
                 FocusScope.of(context).unfocus();

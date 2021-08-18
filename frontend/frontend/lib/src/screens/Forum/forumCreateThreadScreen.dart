@@ -7,6 +7,7 @@ import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
+import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,12 +32,12 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
       setState(() {
         this.ForumThreadCreatorId = value;
       });
-      print(value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ForumThreadProvider ForumCreateThreadProvider = new ForumThreadProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
@@ -44,13 +45,12 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
           showDialog(
             context: context,
             builder: (context) {
-              futureStringReceivedThread = addNewForumThreadNLP(
-                  currentForumID,
-                  forumThreadTitleController.text,
-                  forumThreadBodyController.text,
-                  ForumThreadCreatorId);
               return FutureBuilder<String>(
-                future: futureStringReceivedThread,
+                future: ForumCreateThreadProvider.addNewForumThreadNLP(
+                    currentForumID,
+                    forumThreadTitleController.text,
+                    forumThreadBodyController.text,
+                    ForumThreadCreatorId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data! != "true") {
                     return AlertDialog(
@@ -73,6 +73,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           onPressed: () async {
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
+                            ForumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),
@@ -98,7 +99,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           ),
                           tooltip: 'Continue',
                           onPressed: () async {
-                            futureStringReceivedThread = addNewForumThread(
+                            ForumCreateThreadProvider.addNewForumThread(
                                 currentForumID,
                                 forumThreadTitleController.text,
                                 forumThreadBodyController.text,
@@ -106,6 +107,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
 
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
+                            ForumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),
@@ -119,6 +121,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           onPressed: () async {
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
+                            ForumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),

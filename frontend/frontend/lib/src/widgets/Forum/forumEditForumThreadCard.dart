@@ -1,21 +1,23 @@
 import 'dart:io';
 import 'package:frontend/src/models/Forum/forumModel.dart';
+import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<String>? futureEditThreadString;
 File? editForumThreadImageFile;
 String editForumThreadInputImage = "";
 String editForumThreadImg64 = "";
 
 class ForumEditForumThreadCard extends StatelessWidget {
+  final ForumThreadProvider ForumEditThreadProvider = new ForumThreadProvider();
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: ListView(children: <Widget>[
         FutureBuilder<List<ForumThread>>(
-          future: futureForumThreads,
+          future: ForumEditThreadProvider.fetchForumThreads(currentForumID),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               var iterate = snapshot.data!.iterator;
