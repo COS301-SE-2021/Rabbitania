@@ -63,7 +63,7 @@ class _continueButton extends State<ContinueButton> {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': userID,
+          'email': widget.user.providerData[0].email,
           'name': widget.user.displayName
         }),
       );

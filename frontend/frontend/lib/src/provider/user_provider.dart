@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 
 class UserProvider {
   final user = FirebaseAuth.instance.currentUser!;
+  var email = FirebaseAuth.instance.currentUser!.providerData[0].email!;
 
   URLHelper url = new URLHelper();
   SecurityHelper securityHelper = new SecurityHelper();
@@ -17,7 +18,7 @@ class UserProvider {
 
   getUserID() async {
     final baseURL = await url.getBaseURL();
-    String userEmail = user.providerData[0].email!;
+    var userEmail = user.providerData[0].email!;
     final token = await securityHelper.getToken();
 
     final response = await http.get(
@@ -74,7 +75,7 @@ class UserProvider {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': user.providerData[0].email!,
           'name': loggedUser.getUserName()
         }),
       );
@@ -109,7 +110,24 @@ httpCall() async {
       'Authorization': 'Bearer $token',
     },
   );
-  print(response.statusCode);
+  final authReponse = await http.post(
+    Uri.parse(baseURL + '/api/Auth/Auth'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: jsonEncode(<String, dynamic>{
+      'email': user.providerData[0].email!,
+      'name': loggedUser.getUserName()
+    }),
+  );
+  if (authReponse.statusCode == 200) {
+    Map<String, dynamic> obj = jsonDecode(authReponse.body);
+    var token = '${obj['token']}';
+    securityHelper.setToken(token);
+    return httpCall();
+  } else {
+    throw new Exception("Error with Authentication");
+  }
 }
 
 Future<String> SaveAllUserDetails(
@@ -182,7 +200,7 @@ Future<String> SaveAllUserDetails(
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
+          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
           'name': await loggedUser.getUserName()
         }),
       );
@@ -233,7 +251,7 @@ Future<ProfileUser> getUserProfileObj() async {
         'Content-Type': 'application/json; charset=UTF-8'
       },
       body: jsonEncode(<String, dynamic>{
-        'userID': loggedUser.getUserID(),
+        'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
         'name': loggedUser.getUserName()
       }),
     );
@@ -297,7 +315,7 @@ Future<String> getRoleEnum(int roleInt) async {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
           'name': loggedUser.getUserName()
         }),
       );
@@ -346,7 +364,7 @@ Future<String> getLocationEnum(int officeInt) async {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
           'name': loggedUser.getUserName()
         }),
       );
@@ -395,7 +413,7 @@ Future<String> getRoleIdEnum(String role) async {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
           'name': loggedUser.getUserName()
         }),
       );
@@ -443,7 +461,7 @@ Future<String> getLocationIdEnum(String office) async {
           'Content-Type': 'application/json; charset=UTF-8'
         },
         body: jsonEncode(<String, dynamic>{
-          'userID': loggedUser.getUserID(),
+          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
           'name': loggedUser.getUserName()
         }),
       );

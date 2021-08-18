@@ -34,17 +34,4 @@ class GoogleSignInProvider extends ChangeNotifier {
     await firebaseAuth.signOut();
     notifyListeners();
   }
-
-  void sendUser() async {
-    HttpClient client = new HttpClient();
-    client.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
-    String url = 'http://10.0.2.2:5000/api/';
-    //Map map = { "email" : "email" , "password" : "password" };
-    HttpClientRequest request = await client.getUrl(Uri.parse(url));
-    request.headers.set('content-type', 'application/json');
-    //request.add(utf8.encode(json.encode(map)));
-    HttpClientResponse response1 = await request.close();
-    String reply = await response1.transform(utf8.decoder).join();
-  }
 }
