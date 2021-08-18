@@ -404,6 +404,8 @@ class _profileState extends State<ProfileScreen> {
                                       final googleProvider =
                                           GoogleSignInProvider();
                                       await googleProvider.googleLogout();
+                                      await userHelper.clearPersitantUserData();
+                                      await userHelper.clearPersitantUserName();
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
