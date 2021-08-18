@@ -420,11 +420,11 @@ class _profileState extends State<ProfileScreen> {
                                       final googleProvider =
                                           GoogleSignInProvider();
                                       await googleProvider.googleLogout();
-                                      Navigator.pushAndRemoveUntil(
+                                      Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => Login()),
-                                        (Route<dynamic> route) => true,
+                                        //(Route<dynamic> route) => true,
                                       );
                                     },
                                     child: Text(
