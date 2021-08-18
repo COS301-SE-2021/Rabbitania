@@ -7,13 +7,13 @@ import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
-  futureForumLatestThread = fetchForumThreads(forumIdentifier);
+  ForumThreadProvider ForumLatestThreadProvider = new ForumThreadProvider();
 
   return Center(
     child: Column(
       children: [
         FutureBuilder<List<ForumThread>>(
-          future: futureForumLatestThread,
+          future: ForumLatestThreadProvider.fetchForumThreads(forumIdentifier),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.length == 0) {
