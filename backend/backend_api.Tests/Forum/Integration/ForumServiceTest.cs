@@ -48,7 +48,7 @@ namespace backend_api.Tests.Forum.Integration
             );
 
         }
-        [Fact(DisplayName = "Should return created HTTP response")]
+        [Fact(DisplayName = "Create Forum should return created HTTP response")]
         public async void CreateForumTest()
         {
             var forumRepo = new ForumRepository(_forumContext, _userContext);
@@ -58,7 +58,7 @@ namespace backend_api.Tests.Forum.Integration
             Assert.Equal(HttpStatusCode.Created, resp.Result.Response);
         }
 
-        [Fact(DisplayName = "Delete Forum Should return HTTP Status Code ACCEPTED")]
+        [Fact(DisplayName = "Delete Forum should return HTTP Status Code ACCEPTED")]
         public async void DeleteForum()
         {
             var forumRepo = new ForumRepository(_forumContext, _userContext);
