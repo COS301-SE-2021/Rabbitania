@@ -204,9 +204,9 @@ Future<String> SaveAllUserDetails(
   }
 }
 
-Future<ProfileUser> getUserProfileObj(int usersid) async {
-  final userID = usersid;
+Future<ProfileUser> getUserProfileObj() async {
   UserHelper loggedUser = new UserHelper();
+  final userID = await loggedUser.getUserID();
   SecurityHelper securityHelper = new SecurityHelper();
   URLHelper url = new URLHelper();
 
@@ -241,7 +241,7 @@ Future<ProfileUser> getUserProfileObj(int usersid) async {
       Map<String, dynamic> obj = jsonDecode(authReponse.body);
       var token = '${obj['token']}';
       securityHelper.setToken(token);
-      return getUserProfileObj(usersid);
+      return getUserProfileObj();
     } else {
       throw new Exception("Error with Authentication");
     }

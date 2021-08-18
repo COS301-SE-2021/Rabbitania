@@ -22,6 +22,7 @@ class _loginState extends State<Login> {
   Widget build(context) => Scaffold(
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.transparent,
           title: Center(
