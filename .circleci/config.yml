@@ -172,7 +172,64 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter RetrieveNoticeBoardThreadTests
+            
+  IntegrationTest_NoticeBoardService:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter NoticeBoardService
     ################################################### NOTICEBOARD TESTS #########################################
+    ################################################### FORUM TESTS #########################################
+  Forum:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+
+  IntegrationTest_ForumServiceTest:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter ForumServiceTest
+    ################################################### FORUM TESTS #########################################
+    ################################################### BOOKING TESTS #########################################
+  Booking:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+
+  IntegrationTest_BookingServiceTests:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter BookingServiceTests
+    ################################################### BOOKING TESTS #########################################
 
     ################################################### WORKFLOW ################################################## 
 
@@ -189,6 +246,12 @@ workflows:
       - Noticeboard:
           requires:
             - build
+      - Forum:
+          requires:
+            - build
+      - Booking:
+          requires:
+            - build
 
       - UnitTest_AuthServiceIntegrationTest:
           requires:
@@ -200,7 +263,7 @@ workflows:
 
       -  IntegrationTest_AuthService:
           requires:
-              - User
+            - User
 
       - UnitTest_ViewProfileUnitTests:
           requires:
@@ -233,6 +296,17 @@ workflows:
       - UnitTest_RetrieveNoticeBoardThread:
           requires:
             - Noticeboard
+      - IntegrationTest_NoticeBoardService:
+          requires:
+            - Noticeboard
+
+      - IntegrationTest_ForumServiceTest:
+          requires:
+            - Forum
+
+      - IntegrationTest_BookingServiceTests:
+          requires:
+            - Booking
       
 
 
