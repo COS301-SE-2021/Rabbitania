@@ -34,7 +34,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
                 3,
                 "string.url",
                 UserRoles.Administrator,
-                50
+                1
             );
 
             

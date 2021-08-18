@@ -37,7 +37,7 @@ namespace backend_api.Tests.Booking.Integration
             _bookingSchedule = new BookingScheduleContext(builder1.Options);
             
              this._mockBooking = new Models.Booking.Booking(
-                "2021-08-17 19:58",
+                 "2021-08-17 19:58",
                 "Monday,Morning",
                 0,
                 1
@@ -52,7 +52,7 @@ namespace backend_api.Tests.Booking.Integration
             var bookingScheduleRepo = new BookingScheduleRepository(_bookingSchedule);
             var bookingScheduleServ = new BookingScheduleService(bookingScheduleRepo);
             
-            var bookingService = new BookingService(bookingRepository, bookingScheduleRepo, bookingScheduleServ);
+            var bookingService = new BookingService(bookingRepository);
 
             var requestDto = new CreateBookingRequest
             {
@@ -64,7 +64,9 @@ namespace backend_api.Tests.Booking.Integration
 
             //Act
             var actualResponse = await bookingRepository.CreateBooking(requestDto);
-
+            /*_bookingContext.Bookings.Remove(_mockBooking);
+            await _bookingContext.SaveChanges();*/
+    
             //Assert
             actualResponse.Should().Be(HttpStatusCode.Created);
         }
@@ -131,8 +133,8 @@ namespace backend_api.Tests.Booking.Integration
             var actualResponse = await bookingService.ViewAllBookings(requestDto);
             
             //Assert
-            var error = Assert.ThrowsAsync<InvalidBookingException>(() => bookingService.ViewAllBookings(requestDto));
-            Assert.Equal("Authentication Failed", error.Result.Message);
+            Assert.Empty(actualResponse.Bookings);
+            //Assert.Equal("Authentication Failed", error.Result.Message);
         }
     }
 }

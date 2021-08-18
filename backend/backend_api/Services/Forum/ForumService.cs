@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Forum;
@@ -121,22 +122,34 @@ namespace backend_api.Services.Forum
 
         public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
         {
-            if (request == null)
+            try
             {
-                throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
-            }
+                if (request == null)
+                {
+                    throw new InvalidForumRequestException("Invalid CreateForumThreadRequest Object");
+                }
 
-            if (request.ForumId == 0)
+                if (request.ForumId == 0)
+                {
+                    throw new InvalidForumRequestException("Invalid ForumId");
+                }
+
+                if (request.ForumThreadTitle.IsNullOrEmpty())
+                {
+                    throw new InvalidForumTitleException("Invalid Forum Thread Title");
+                }
+
+                if (request.UserId == 0)
+                {
+                    throw new InvalidUserIdException("Invalid UserId");
+                }
+
+                return await _forumRepository.CreateForumThread(request);
+            }
+            catch (Exception)
             {
-                throw new InvalidForumRequestException("Invalid ForumId");
+                return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
             }
-
-            if (request.UserId == 0)
-            {
-                throw new InvalidUserIdException("Invalid UserId");
-            }
-
-            return await _forumRepository.CreateForumThread(request);
         }
 
         public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(RetrieveForumThreadsRequest request)

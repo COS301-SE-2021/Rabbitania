@@ -16,6 +16,7 @@ namespace backend_api.Tests.Forum.Integration
     public class ForumServiceTest
     {
         private readonly Forums _mockForum;
+        private readonly ForumThreads _mockForumThread;
         private readonly ForumContext _forumContext;
         private readonly UserContext _userContext;
 
@@ -33,12 +34,21 @@ namespace backend_api.Tests.Forum.Integration
 
             _mockForum = new Forums(
                 "Forum Title",
-                50,
+                1,
                 Convert.ToDateTime("2021-08-16 18:57:54.627600")
             );
 
-          }
-        [Fact(DisplayName = "Should return created HTTP response")]
+            _mockForumThread = new ForumThreads(
+                "Forum Thread Title",
+                1,
+                "Forum Thread Body",
+                Convert.ToDateTime("2021-08-16 18:57:54.5265000"),
+                "image.url",
+                1
+            );
+
+        }
+        [Fact(DisplayName = "Create Forum should return created HTTP response")]
         public async void CreateForumTest()
         {
             var forumRepo = new ForumRepository(_forumContext, _userContext);
@@ -48,7 +58,7 @@ namespace backend_api.Tests.Forum.Integration
             Assert.Equal(HttpStatusCode.Created, resp.Result.Response);
         }
 
-        [Fact(DisplayName = "Delete Forum Should return HTTP Status Code ACCEPTED")]
+        [Fact(DisplayName = "Delete Forum should return HTTP Status Code ACCEPTED")]
         public async void DeleteForum()
         {
             var forumRepo = new ForumRepository(_forumContext, _userContext);
@@ -59,11 +69,11 @@ namespace backend_api.Tests.Forum.Integration
             Assert.Equal(HttpStatusCode.Created, resp.Result.Response);
 
             var req = new RetrieveForumsRequest();
-            var forums = await forumRepo.RetrieveForums(req);
+            var forums = await forumService.RetrieveForums(req);
             
-            Assert.NotEmpty(forums);
+            Assert.NotEmpty(forums.Forums);
 
-            var deleteReq = new DeleteForumRequest(forums.Last().ForumId);
+            var deleteReq = new DeleteForumRequest(forums.Forums.Last().ForumId);
             var deleteResponse = forumService.DeleteForum(deleteReq);
             
             Assert.Equal(HttpStatusCode.Accepted, deleteResponse.Result.HttpStatusCode);
@@ -81,15 +91,59 @@ namespace backend_api.Tests.Forum.Integration
             Assert.Equal(HttpStatusCode.Created, resp.Result.Response);
 
             var req = new RetrieveForumsRequest();
-            var forums = await forumRepo.RetrieveForums(req);
+            var forums = await forumService.RetrieveForums(req);
             
-            Assert.NotEmpty(forums);
+            Assert.NotEmpty(forums.Forums);
 
-            var editReq = new EditForumRequest(forums.Last().ForumId, forums.Last().ForumTitle);
+            var editReq = new EditForumRequest(forums.Forums.Last().ForumId, forums.Forums.Last().ForumTitle);
 
             var editResponse = forumService.EditForum(editReq);
             
             Assert.Equal(HttpStatusCode.Accepted, editResponse.Result.Response);
         }
+
+        [Fact(DisplayName = "Create Forum Thread should return HTTP status Code Created")]
+        public async void CreateForumThread()
+        {
+            var forumRepo = new ForumRepository(_forumContext, _userContext);
+            var forumService = new ForumService(forumRepo);
+            
+            var retrieveReq = new RetrieveForumsRequest();
+            var forums = await forumService.RetrieveForums(retrieveReq);
+            
+            Assert.NotEmpty(forums.Forums);
+
+            var ForumId = forums.Forums.Last().ForumId;
+
+            var req = new CreateForumThreadRequest(_mockForumThread.ForumThreadTitle, _mockForumThread.ForumThreadBody,
+                _mockForumThread.CreatedDate, _mockForumThread.imageURL, _mockForumThread.UserId, ForumId);
+
+            var resp = forumService.CreateForumThread(req);
+            
+            Assert.Equal(HttpStatusCode.Created, resp.Result.Response);
+        }
+
+
+        [Fact(DisplayName = "Create Forum Thread with empty title should return HTTP status Code BadRequest")]
+        public async void CreateForumThreadEmptyTitle()
+        {
+            var forumRepo = new ForumRepository(_forumContext, _userContext);
+            var forumService = new ForumService(forumRepo);
+            
+            var retrieveReq = new RetrieveForumsRequest();
+            var forums = await forumService.RetrieveForums(retrieveReq);
+            
+            Assert.NotEmpty(forums.Forums);
+
+            var forumId = forums.Forums.Last().ForumId;
+
+            var req = new CreateForumThreadRequest(null, _mockForumThread.ForumThreadBody,
+                _mockForumThread.CreatedDate, _mockForumThread.imageURL, _mockForumThread.UserId, forumId);
+
+            var resp = forumService.CreateForumThread(req);
+            
+            Assert.Equal(HttpStatusCode.BadRequest, resp.Result.Response);
+        }
+        
     }
 }
