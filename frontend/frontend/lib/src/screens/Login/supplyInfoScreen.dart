@@ -37,6 +37,7 @@ class _infoForm extends State<InfoForm> {
   String _dropDownOfficeValue = 'Pretoria';
 
   initState() {
+    super.initState();
     setState(() {
       user = widget.user;
     });
@@ -101,7 +102,7 @@ class _infoForm extends State<InfoForm> {
     );
 
     if (response.statusCode == 200) {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
@@ -414,8 +415,8 @@ class _infoForm extends State<InfoForm> {
                                             color: Colors.black,
                                           ),
                                         ),
-                                        onPressed: () {
-                                          httpCallUpdateUserInfo();
+                                        onPressed: () async {
+                                          await httpCallUpdateUserInfo();
 
                                           // Navigator.push(
                                           //   context,

@@ -29,6 +29,7 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
             Expanded(
               flex: 9,
               child: TextField(
+                cursorColor: utilModel.greenColor,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -38,6 +39,12 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
                     setState(
                       () {
                         this.icon = FontAwesomeIcons.paperPlane;
+                      },
+                    );
+                  } else {
+                    setState(
+                      () {
+                        this.icon = FontAwesomeIcons.microphone;
                       },
                     );
                   }
@@ -74,11 +81,12 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
                 height: MediaQuery.of(context).size.height * 0.05,
                 child: FloatingActionButton(
                   backgroundColor: utilModel.greenColor,
-                  child: Icon(this.icon, color: utilModel.greyColor, size: 15),
+                  child: Icon(this.icon, color: utilModel.greyColor, size: 20),
                   onPressed: () {
                     if (messageController.text != '') {
                       fireStoreHelper.sendMessage(
                           widget.idUser, widget.myId, messageController.text);
+                      messageController.text = '';
                     }
                   },
                 ),

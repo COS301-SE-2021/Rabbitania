@@ -5,6 +5,7 @@ import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Chat/ChatViewUsersProfileScreen.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 
 //Widget used to display information about other chat participant
@@ -39,9 +40,21 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
                 child: Container(
                   child: Row(
                     children: [
-                      ProfilePicture(
-                        30,
-                        altDisplayImage: snapshot.data.docs[0]['avatar'],
+                      InkWell(
+                        splashColor: utilModel.greenColor,
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChatViewUsersProfileScreen(
+                                  idUser: widget.idUser),
+                            ),
+                          );
+                        },
+                        child: ProfilePicture(
+                          30,
+                          altDisplayImage: snapshot.data.docs[0]['avatar'],
+                        ),
                       ),
                       SizedBox(width: 10),
                       Text(

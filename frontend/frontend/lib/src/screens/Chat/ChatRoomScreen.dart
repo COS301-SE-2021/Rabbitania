@@ -128,13 +128,10 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                         ],
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin:
-                              const EdgeInsets.only(top: 10, right: 5, left: 5),
-                          child: ChatSendMessageBar(widget.idUser, myId)),
-                    ),
+                    Container(
+                        margin:
+                            const EdgeInsets.only(top: 10, right: 5, left: 5),
+                        child: ChatSendMessageBar(widget.idUser, myId)),
                   ],
                 ),
               ],

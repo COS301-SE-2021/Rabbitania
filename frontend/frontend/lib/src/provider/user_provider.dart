@@ -91,6 +91,45 @@ class UserProvider {
       throw Exception("Error with user profile");
     }
   }
+
+  Future<UserProfileModel> getUserProfileFromUserId(idUser) async {
+    final baseURL = await url.getBaseURL();
+    final token = await securityHelper.getToken();
+
+    final response = await http.get(
+      Uri.parse(baseURL + "/api/User/ViewProfile?UserId=$idUser"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final userDetails = UserProfileModel.fromJSON(jsonDecode(response.body));
+      return userDetails;
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse(baseURL + '/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'email': user.providerData[0].email!,
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return getUserProfile();
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      throw Exception("Error with user profile");
+    }
+  }
 }
 
 httpCall() async {

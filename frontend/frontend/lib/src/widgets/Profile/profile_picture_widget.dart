@@ -16,6 +16,8 @@ class ProfilePicture extends StatelessWidget {
   Widget build(context) => CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: this.radius,
-        backgroundImage: NetworkImage(this.displayImage),
+        backgroundImage: NetworkImage(
+          this.displayImage,
+        ),
       );
 }

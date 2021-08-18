@@ -4,10 +4,10 @@ import 'package:frontend/src/models/Chat/ChatFirestoreUserModel.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
 import 'package:rxdart/streams.dart';
 
+FirebaseFirestore firestore = FirebaseFirestore.instance;
+
 class FireStoreHelper {
 //TODO: get user id from db and create new message and user instance in firestore
-
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   getUsersCollectionFromFireStore() {
     CollectionReference users = firestore.collection('users');
