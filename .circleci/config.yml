@@ -302,7 +302,7 @@ workflows:
 
       - IntegrationTest_ForumServiceTest:
           requires:
-            - Noticeboard
+            - Forum
 
       - IntegrationTest_BookingServiceTests:
           requires:
