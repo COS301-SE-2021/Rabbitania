@@ -175,7 +175,7 @@ namespace backend_api.Services.Booking
                 }
                 else
                 {
-                    throw new InvalidBookingException("The specified user: " + request.UserId + " has no bookings");
+                    return new GetAllBookingsResponse(resp);
                 }
             }
             else
