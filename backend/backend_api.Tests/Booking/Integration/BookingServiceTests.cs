@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using backend_api.Data.Booking;
@@ -30,7 +31,8 @@ namespace backend_api.Tests.Booking.Integration
             var builder = new DbContextOptionsBuilder<BookingContext>();
             var builder1 = new DbContextOptionsBuilder<BookingScheduleContext>();
             
-            builder.UseNpgsql("Server=ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432;Port=5432;Database=d924vmqoqh9aba;Username=jpbxojhfderusg;Password=a231e88acb43722af04a63aeab3cb65aeb770459b6e201e9498a7d7543a60d5c;SslMode=Require;Trust Server Certificate=true;")
+            var env = Environment.GetEnvironmentVariable("CONN_STRING");
+            builder.UseNpgsql(env.ToString())
                 .UseInternalServiceProvider(serviceProvider);
             
             _bookingContext = new BookingContext(builder.Options);
