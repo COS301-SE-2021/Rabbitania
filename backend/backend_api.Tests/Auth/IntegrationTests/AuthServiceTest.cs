@@ -29,7 +29,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         {
             var serviceProvider = new ServiceCollection().AddEntityFrameworkNpgsql().BuildServiceProvider();
             var builder = new DbContextOptionsBuilder<UserContext>();
-            var variable = Environment.GetEnvironmentVariable("$CONN_STRING");
+            var variable = Environment.GetEnvironmentVariable("CONN_STRING");
             builder.UseNpgsql(variable)
                 .UseInternalServiceProvider(serviceProvider);
 
