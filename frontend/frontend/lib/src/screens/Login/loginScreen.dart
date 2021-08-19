@@ -25,17 +25,23 @@ class _loginState extends State<Login> {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.transparent,
-          title: Center(
-            child: Container(
-              child: Text(
-                'WELCOME TO RABBITANIA',
-                maxLines: 2,
-                style: TextStyle(
-                  color: Color.fromRGBO(171, 255, 79, 1),
-                  fontSize: 30,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'WELCOME TO RABBITANIA',
+                    maxLines: 2,
+                    style: TextStyle(
+                      color: Color.fromRGBO(171, 255, 79, 1),
+                      fontSize: 25,
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ),
         body: Stack(
