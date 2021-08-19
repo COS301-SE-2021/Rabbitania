@@ -200,6 +200,11 @@ namespace backend_api.Controllers.Booking
             }
         }
         
+        /// <summary>
+        ///     API endpoint to check if a booking exists
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>If a booking does not exist, it will return an OK Http Status response</returns>
         [HttpPost, Authorize]
         [Route("CheckIfBookingExists")]
         public async Task<ActionResult> CheckIfBookingExists([FromBody] CheckIfBookingExistsRequest request)
@@ -218,9 +223,9 @@ namespace backend_api.Controllers.Booking
                         return BadRequest("Error booking already exists, cannot make another booking.");
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    throw;
+                    return BadRequest(e.Message);
                 }
             }
             else

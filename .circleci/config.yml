@@ -14,6 +14,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
+            export CONN_STRING=`echo $CONN_STRING`
             dotnet build
   ################################################### USER TESTS ############################################### 
   User:
@@ -71,7 +72,7 @@ jobs:
           command: |
             dotnet test --filter EditProfileUnitTests
 
-  IntegrationTest_AuthService:
+  IntegrationTest_AuthServiceTest:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -80,7 +81,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter AuthService
+            dotnet test --filter AuthServiceTest
   ################################################### USER TESTS ################################################ 
 
   ################################################### NOTIFICATION TESTS ######################################## 
@@ -116,7 +117,7 @@ jobs:
           command: |
             dotnet test --filter RetrieveNotificationsTests
 
-  IntegrationTest_NotificationController:
+  IntegrationTest_NotificationServiceTests:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -125,7 +126,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter NotificationControllerTests
+            dotnet test --filter NotificationServiceTests
   ################################################### NOTIFICATION TESTS ########################################
 
   ################################################### NOTICEBOARD TESTS ######################################### 
@@ -261,7 +262,8 @@ workflows:
           requires:
             - User
 
-      -  IntegrationTest_AuthService:
+
+      -  IntegrationTest_AuthServiceTest:
           requires:
             - User
 
@@ -281,7 +283,7 @@ workflows:
           requires:
             - Notification
 
-      - IntegrationTest_NotificationController:
+      - IntegrationTest_NotificationServiceTests:
           requires:
             - Notification
 

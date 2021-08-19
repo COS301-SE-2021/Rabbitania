@@ -326,7 +326,7 @@ class forumCard extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 15, right: 15, bottom: 10),
                 padding: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(171, 255, 79, 230),
+                  color: Color.fromRGBO(171, 255, 79, 1),
                   borderRadius: BorderRadius.circular(20.0),
                   border: Border.all(
                       color: Color.fromRGBO(171, 255, 79, 1),

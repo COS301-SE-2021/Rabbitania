@@ -34,7 +34,8 @@ namespace backend_api.Services.Forum
             _userService = userService;
             _notificationService = notificationService;
         }
-
+        
+        /// <inheritdoc />
         public async Task<CreateForumResponse> CreateForum(CreateForumRequest request)
         {
             if (request == null)
@@ -60,19 +61,10 @@ namespace backend_api.Services.Forum
                 );
             await _notificationService.SendEmailNotification(emailReq);
 
-            var tfidf = new TFIDF.TFIDF();
-            var titlesList = new List<string>();
-            titlesList.Add("Stupid Question");
-            titlesList.Add("2nd Thread Title Test");
-
-            var bodiesList = new List<string>();
-            bodiesList.Add("1st Thread Body Test");
-            bodiesList.Add("2nd Thread body test");
-            tfidf.tfidf_call(titlesList, bodiesList, "Dumb Question 1", "2nd Thread Body Test");
-            
             return await _forumRepository.CreateForum(request);
         }
-
+        
+        /// <inheritdoc />
         public async Task<RetrieveForumsResponse> RetrieveForums(RetrieveForumsRequest request)
         {
             RetrieveForumsResponse response = new RetrieveForumsResponse(
@@ -84,7 +76,8 @@ namespace backend_api.Services.Forum
 
             return response;
         }
-
+        
+        /// <inheritdoc />
         public async Task<DeleteForumResponse> DeleteForum(DeleteForumRequest request)
         {
             if (request == null)
@@ -99,7 +92,8 @@ namespace backend_api.Services.Forum
 
             return await _forumRepository.DeleteForum(request);
         }
-
+        
+        /// <inheritdoc />
         public async Task<bool> CreateForumThreadAPI(CreateForumThreadRequest request)
         {
             if (request == null)
@@ -119,7 +113,8 @@ namespace backend_api.Services.Forum
 
             return await _forumRepository.CreateForumThreadApi(request);
         }
-
+        
+        /// <inheritdoc />
         public async Task<CreateForumThreadResponse> CreateForumThread(CreateForumThreadRequest request)
         {
             try
@@ -151,7 +146,8 @@ namespace backend_api.Services.Forum
                 return new CreateForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<RetrieveForumThreadsResponse> RetrieveForumThreads(RetrieveForumThreadsRequest request)
         {
             if (request == null)
@@ -166,7 +162,8 @@ namespace backend_api.Services.Forum
 
             return await _forumRepository.RetrieveForumThreads(request);
         }
-
+        
+        /// <inheritdoc />
         public async Task<DeleteForumThreadResponse> DeleteForumThread(DeleteForumThreadRequest request)
         {
             try
@@ -188,7 +185,8 @@ namespace backend_api.Services.Forum
                 return new DeleteForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<CreateThreadCommentResponse> CreateThreadComment(CreateThreadCommentRequest request)
         {
             try
@@ -210,7 +208,8 @@ namespace backend_api.Services.Forum
                 return new CreateThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<RetrieveThreadCommentsResponse> RetrieveThreadComments(RetrieveThreadCommentsRequest request)
         {
             try
@@ -232,7 +231,8 @@ namespace backend_api.Services.Forum
                 return new RetrieveThreadCommentsResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<DeleteThreadCommentResponse> DeleteThreadComment(DeleteThreadCommentRequest request)
         {
             try
@@ -254,7 +254,8 @@ namespace backend_api.Services.Forum
                 return new DeleteThreadCommentResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<RetrieveNumThreadsResponse> RetrieveNumThreads(RetrieveNumThreadsRequest request)
         {
             try
@@ -277,7 +278,7 @@ namespace backend_api.Services.Forum
             }
         }
 
-
+        /// <inheritdoc />
         public async Task<EditForumResponse> EditForum(EditForumRequest request)
         {
             try
@@ -299,7 +300,8 @@ namespace backend_api.Services.Forum
                 return new EditForumResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<EditForumThreadResponse> EditForumThread(EditForumThreadRequest request)
         {
             try
@@ -321,7 +323,8 @@ namespace backend_api.Services.Forum
                 return new EditForumThreadResponse(HttpStatusCode.BadRequest);
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<EditThreadCommentResponse> EditThreadComment(EditThreadCommentRequest request)
         {
             try

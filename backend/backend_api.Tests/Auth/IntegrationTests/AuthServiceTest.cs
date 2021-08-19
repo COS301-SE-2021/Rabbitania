@@ -21,7 +21,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         private readonly Users _mockedUser;
         private readonly UserEmails _mockedEmail;
         private UserContext _userContext;
-        private readonly UserRepository userRepo;
+        private readonly IUserRepository userRepo;
         private readonly AuthService authService;
         
         
@@ -29,8 +29,8 @@ namespace backend_api.Tests.Auth.IntegrationTests
         {
             var serviceProvider = new ServiceCollection().AddEntityFrameworkNpgsql().BuildServiceProvider();
             var builder = new DbContextOptionsBuilder<UserContext>();
-            
-            builder.UseNpgsql("Server=ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432;Port=5432;Database=d924vmqoqh9aba;Username=jpbxojhfderusg;Password=a231e88acb43722af04a63aeab3cb65aeb770459b6e201e9498a7d7543a60d5c;SslMode=Require;Trust Server Certificate=true;")
+            var env = Environment.GetEnvironmentVariable("CONN_STRING");
+            builder.UseNpgsql(env.ToString())
                 .UseInternalServiceProvider(serviceProvider);
 
             _userContext = new UserContext(builder.Options);
@@ -71,7 +71,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         }
         
         [Fact(DisplayName = "Should be True if a 'gmail.com' email is used to login")]
-        public async void ValidDomainLogin()
+        public void ValidDomainLogin()
         {
             //Arrange
             string email = "test@gmail.com";
@@ -164,10 +164,10 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Arrange
             var name = "test";
             //Act
-            var respone = await authService.GetUserName(name);
+            var response = await authService.GetUserName(name);
             //Assert
-            Assert.NotNull(respone);
-            Assert.Equal(name,respone.Name);
+            Assert.NotNull(response);
+            Assert.Equal(name,response.Name);
             
         }
         [Fact]

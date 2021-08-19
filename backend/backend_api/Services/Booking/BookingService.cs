@@ -33,7 +33,8 @@ namespace backend_api.Services.Booking
             _scheduleRepository = scheduleRepository;
             _scheduleService = scheduleService;
         }
-
+        
+        /// <inheritdoc />
         public async Task<CreateBookingResponse> CreateBooking(CreateBookingRequest request)
         {
             if (request == null)
@@ -105,7 +106,8 @@ namespace backend_api.Services.Booking
             }
             
         }
-
+        
+        /// <inheritdoc />
         public async Task<UpdateBookingResponse> UpdateBooking(UpdateBookingRequest request)
         {
             if (request != null)
@@ -125,7 +127,8 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("request is null or empty");
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<CancelBookingResponse> CancelBooking(CancelBookingRequest request)
         {
             if (request != null)
@@ -143,7 +146,8 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Request is null or empty");
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<GetBookingResponse> ViewBooking(GetBookingRequest request)
         {
             if (request != null)
@@ -163,7 +167,8 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("request is null or empty");
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<GetAllBookingsResponse> ViewAllBookings(GetAllBookingsRequest request)
         {
             if (request != null)
@@ -183,7 +188,8 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Request is null or empty");
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<CheckIfBookingExistsResponse> CheckIfBookingExists(CheckIfBookingExistsRequest request)
         {
             if (request.UserId is 0 or < 0)

@@ -148,16 +148,10 @@ class _BookingState extends State<BookingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(top: 75.0, bottom: 25.0),
-                    child: Image(
-                      image: AssetImage('images/logo.png'),
-                      height: 150,
-                      width: 500,
+                  Center(
+                    child: Container(
+                      child: BookingViewButton(),
                     ),
-                  ),
-                  Container(
-                    child: BookingViewButton(),
                   ),
                 ],
               ),

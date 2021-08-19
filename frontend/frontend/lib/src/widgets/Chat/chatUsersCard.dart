@@ -53,7 +53,7 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
             //profile picture of the user
 
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 decoration: BoxDecoration(
                     border: isSelected
@@ -85,7 +85,7 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
               ),
             ),
             Expanded(
-              flex: 8,
+              flex: 7,
               child: InkWell(
                 radius: MediaQuery.of(context).size.width,
                 splashColor: utilModel.greenColor,
