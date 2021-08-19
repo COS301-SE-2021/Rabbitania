@@ -35,8 +35,7 @@ namespace backend_api.Services.NoticeBoard
         /// <inheritdoc />
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
-            try
-            {
+
                 if (request == null)
                 {
                     throw new InvalidNoticeBoardRequestException("Invalid AddNoticeBoardRequest object");
@@ -65,11 +64,6 @@ namespace backend_api.Services.NoticeBoard
                 await _notificationService.SendEmailNotification(emailReq);
 
                 return await _noticeBoardRepository.AddNoticeBoardThread(request);
-            }
-            catch
-            {
-                return new AddNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
-            }
         }
         
         /// <inheritdoc />
