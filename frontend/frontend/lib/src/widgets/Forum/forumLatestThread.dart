@@ -7,6 +7,7 @@ import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
+  final utilModel = UtilModel();
   ForumThreadProvider ForumLatestThreadProvider = new ForumThreadProvider();
 
   return Center(
@@ -48,13 +49,13 @@ Widget ForumLatestThread(int forumIdentifier) {
                                 maxLines: 2,
                                 style: TextStyle(
                                     letterSpacing: 2.0,
-                                    color: Colors.white,
+                                    color: utilModel.greyColor,
                                     fontSize: 22),
                               ),
                             ),
                             subtitle: Text(
                               snapshot.data!.first.forumThreadBody,
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: utilModel.greyColor),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -68,9 +69,7 @@ Widget ForumLatestThread(int forumIdentifier) {
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             } else {
-              return CircularProgressIndicator(
-                color: Color.fromRGBO(171, 255, 79, 1),
-              );
+              return Align();
             }
           },
         ),

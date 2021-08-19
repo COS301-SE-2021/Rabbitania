@@ -209,7 +209,7 @@ class _BookingDayState extends State<BookingDayScreen> {
                         'Morning', this.displayText, widget.bookText),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 50),
+                    padding: const EdgeInsets.only(top: 45),
                   ),
                 ],
               ),
