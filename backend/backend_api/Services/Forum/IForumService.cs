@@ -8,12 +8,17 @@ namespace backend_api.Services.Forum
     {
         
         /// <summary>
-        /// Validates the request after which it will create a new Forum and store
+        ///     Validates the request after which it will create a new Forum and store
         /// </summary>
         /// <param name="request"></param>
         /// <returns>An HTTPS status code stating whether the operation was successful or not</returns>
         Task<CreateForumResponse> CreateForum(CreateForumRequest request);
-
+        
+        /// <summary>
+        ///     Validates whether or not the request is valid 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>An HTTPS status code stating whether the operation was successful or not</returns>
         Task<RetrieveForumsResponse> RetrieveForums(RetrieveForumsRequest request);
 
         Task<DeleteForumResponse> DeleteForum(DeleteForumRequest request);
