@@ -82,6 +82,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
+            export CONN_STRING=`echo $CONN_STRING`
             dotnet test --filter AuthServiceTest
   ################################################### USER TESTS ################################################ 
 
