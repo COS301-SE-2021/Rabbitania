@@ -43,9 +43,6 @@
     <ItemGroup>
       <Folder Include="Auth\UnitTests" />
       <Folder Include="Booking\Unit" />
-      <Folder Include="NoticeBoardTests\UnitTests" />
-      <Folder Include="NotificationTests\IntegrationTests" />
-      <Folder Include="NotificationTests\UnitTests" />
     </ItemGroup>
 
 </Project>
