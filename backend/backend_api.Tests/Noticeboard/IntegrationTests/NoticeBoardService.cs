@@ -25,7 +25,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             var builder = new DbContextOptionsBuilder<NoticeBoardContext>();
             
             var env = Environment.GetEnvironmentVariable("CONN_STRING");
-            builder.UseNpgsql(env.ToString())
+            builder.UseNpgsql(env)
                 .UseInternalServiceProvider(serviceProvider);
 
             _noticeboardContext = new NoticeBoardContext(builder.Options);
@@ -56,7 +56,10 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             Assert.Equal(resp.Result.Response, HttpStatusCode.Created);
         }
 
-        [Fact(DisplayName = "Should return accepted HTTP response")]
+
+
+
+        [Fact(DisplayName = "Should return Delete HTTP response")]
         public async void DeleteNoticeBoardThread()
         {
             var noticeboardRepo = new NoticeBoardRepository(_noticeboardContext);
@@ -109,5 +112,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             Assert.Equal(HttpStatusCode.Accepted, editThreadResponse.Result.Response);
 
         }
+        
+        
     }
 }
