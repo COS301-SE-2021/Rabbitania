@@ -18,6 +18,12 @@ namespace backend_api.Controllers.Forum
         {
             _service = service;
         }
+        
+        /// <summary>
+        /// Create Forum API endpoint that will return an HTTP status code Created when an Forum has been created.
+        /// </summary>
+        /// <param name="request">A CreateForum Request object</param>
+        /// <returns>HTTP status code Created</returns>
 
         [HttpPost, Authorize]
         [Route("CreateForum")]
