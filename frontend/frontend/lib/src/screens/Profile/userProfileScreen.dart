@@ -516,7 +516,7 @@ class _profileState extends State<ProfileScreen> {
 
     return TextFormField(
       maxLines: 1,
-      style: TextStyle(fontSize: 30, color: Color.fromRGBO(171, 255, 79, 1)),
+      style: TextStyle(fontSize: 25, color: Color.fromRGBO(171, 255, 79, 1)),
       controller: _controller,
       cursorColor: Color.fromRGBO(171, 255, 79, 1),
       decoration: InputDecoration(
@@ -538,7 +538,7 @@ class _profileState extends State<ProfileScreen> {
     return TextFormField(
       minLines: 1,
       maxLines: 20,
-      style: TextStyle(fontSize: 30, color: Color.fromRGBO(171, 255, 79, 1)),
+      style: TextStyle(fontSize: 25, color: Color.fromRGBO(171, 255, 79, 1)),
       controller: _controllerDescription,
       cursorColor: Color.fromRGBO(171, 255, 79, 1),
       decoration: InputDecoration(
@@ -568,7 +568,7 @@ class _profileState extends State<ProfileScreen> {
       iconSize: 30,
       elevation: 8,
       style: const TextStyle(
-        fontSize: 30,
+        fontSize: 25,
         color: Color.fromRGBO(172, 255, 79, 1),
       ),
       underline: Container(
