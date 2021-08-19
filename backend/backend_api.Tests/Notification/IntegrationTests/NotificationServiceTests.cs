@@ -154,16 +154,5 @@ namespace backend_api.Tests.Notification.IntegrationTests
             //Assert
             await Assert.ThrowsAsync<EmailFailedToSendException>(async () => await _notificationService.SendEmailNotification(req));
         }
-        [Fact]
-        public async void SendEmailNotification_ValidEmail()
-        {
-            //Arrange
-            var email = new List<string>() { "matthewnharty@gmail.com" };
-            var req = new SendEmailNotificationRequest("Test", "Test", email);
-            //Act
-            var resp = await _notificationService.SendEmailNotification(req);
-            //Assert
-            Assert.Equal(HttpStatusCode.Accepted, resp.Response);
-        }
     }
 }
