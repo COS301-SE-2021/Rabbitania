@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -25,7 +26,8 @@ namespace backend_api.Tests.Notification.IntegrationTests
             var serviceProvider = new ServiceCollection().AddEntityFrameworkNpgsql().BuildServiceProvider();
             var builder = new DbContextOptionsBuilder<NotificationContext>();
             
-            builder.UseNpgsql("Server=ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432;Port=5432;Database=d924vmqoqh9aba;Username=jpbxojhfderusg;Password=a231e88acb43722af04a63aeab3cb65aeb770459b6e201e9498a7d7543a60d5c;SslMode=Require;Trust Server Certificate=true;")
+            var env = Environment.GetEnvironmentVariable("CONN_STRING");
+            builder.UseNpgsql(env ?? string.Empty)
                 .UseInternalServiceProvider(serviceProvider);
 
             _notificationContext = new NotificationContext(builder.Options);
@@ -121,6 +123,47 @@ namespace backend_api.Tests.Notification.IntegrationTests
             //Act
             //Assert
             await Assert.ThrowsAsync<NullReferenceException>(async () => await _notificationService.SendEmailNotification(req));
+        }
+        [Fact]
+        public async void SendEmailNotification_InvalidPayload()
+        {
+            //Arrange
+            var email = new List<string>() { "test@gmail.com" };
+            var req = new SendEmailNotificationRequest("", "test", email);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<EmailFailedToSendException>(async () => await _notificationService.SendEmailNotification(req));
+        }
+        [Fact]
+        public async void SendEmailNotification_InvalidSubject()
+        {
+            //Arrange
+            var email = new List<string>() { "test@gmail.com" };
+            var req = new SendEmailNotificationRequest("Valid", "", email);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<EmailFailedToSendException>(async () => await _notificationService.SendEmailNotification(req));
+        }
+        [Fact]
+        public async void SendEmailNotification_EmptyEmail()
+        {
+            //Arrange
+            var email = new List<string>() { "" };
+            var req = new SendEmailNotificationRequest("Valid", "", email);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<EmailFailedToSendException>(async () => await _notificationService.SendEmailNotification(req));
+        }
+        [Fact]
+        public async void SendEmailNotification_ValidEmail()
+        {
+            //Arrange
+            var email = new List<string>() { "matthewnharty@gmail.com" };
+            var req = new SendEmailNotificationRequest("Test", "Test", email);
+            //Act
+            var resp = await _notificationService.SendEmailNotification(req);
+            //Assert
+            Assert.Equal(HttpStatusCode.Accepted, resp.Response);
         }
     }
 }

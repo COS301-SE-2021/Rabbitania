@@ -82,6 +82,10 @@ namespace backend_api.Services.Notification
             {
                 throw new EmailFailedToSendException("Invalid email address, either null or empty");
             }
+            if (request == null)
+            {
+                throw new EmailFailedToSendException("Request is null");
+            }
 
             var email = new MimeMessage();
             var emailLists = new InternetAddressList();
