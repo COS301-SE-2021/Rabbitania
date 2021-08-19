@@ -85,6 +85,7 @@ namespace backend_api.Tests
             Assert.Equal("The thread title cannot be null or empty", exception.Message);
         }
 
+        
         [Fact(DisplayName =
             "When Thread Content is Empty, AddNoticeBoardThread should throw an InvalidThreadContentException")]
         public async Task AddNoticeBoardThread_ExceptionOnEmptyThreadContent()
@@ -92,7 +93,7 @@ namespace backend_api.Tests
             var requestDto = new AddNoticeBoardThreadRequest(
                 "Thread Title",
                 "",
-                1,
+                2,
                 "image.png",
                 UserRoles.Administrator,
                 1
