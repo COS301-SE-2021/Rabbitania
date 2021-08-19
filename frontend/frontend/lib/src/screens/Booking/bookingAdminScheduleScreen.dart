@@ -172,7 +172,7 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: BookingScheduleSpinbox(
-                        'ASMTERDAM OFFICE', this.displayText),
+                        'AMSTERDAM OFFICE', this.displayText),
                   ),
                 ],
               ),

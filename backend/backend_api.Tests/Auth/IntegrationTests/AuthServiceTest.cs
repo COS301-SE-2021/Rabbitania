@@ -164,10 +164,10 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Arrange
             var name = "test";
             //Act
-            var respone = await authService.GetUserName(name);
+            var response = await authService.GetUserName(name);
             //Assert
-            Assert.NotNull(respone);
-            Assert.Equal(name,respone.Name);
+            Assert.NotNull(response);
+            Assert.Equal(name,response.Name);
             
         }
         [Fact]

@@ -84,17 +84,6 @@ namespace backend_api
             
             // For sending an email
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-
-            
-            services.AddAuthentication(option =>
-            {
-                option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options => { options.LoginPath = "/api/googleSignIn"; }).AddGoogle(options =>
-            {
-                options.ClientId = "fake-lgvrm8l1tr0pns2h5iqo8pdtlsmjlrj0.apps.googleusercontent.com";
-                options.ClientSecret = "place-holder";
-
-            });
             
             
             //----------------------------------------------------------------------------------------------------------------------
