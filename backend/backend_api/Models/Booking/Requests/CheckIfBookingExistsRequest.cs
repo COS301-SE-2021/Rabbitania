@@ -15,6 +15,8 @@ namespace backend_api.Models.Booking.Requests
             _office = office;
             _userId = userId;
         }
+        
+        
 
         public string TimeSlot
         {
