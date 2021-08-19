@@ -75,7 +75,7 @@ jobs:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     environment:
-      CONN_STRING: CONN_STRING
+      CONN_STRING: $CONN_STRING
     steps:
       - checkout
       - run:
