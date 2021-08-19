@@ -74,14 +74,13 @@ jobs:
   IntegrationTest_AuthServiceTest:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
-    environment:
-      CONN_STRING: CONN_STRING
     steps:
       - checkout
       - run:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
+            export CONN_STRING=`echo $CONN_STRING'
             dotnet test --filter AuthServiceTest
   ################################################### USER TESTS ################################################ 
 
