@@ -99,7 +99,6 @@ namespace backend_api.Data.Forum
                 Console.Write(shouldnt_create);
                 if (shouldnt_create == false)
                     {
-                        Console.Write("Here it is bitch");
                         await CreateForumThread(request);
                         return false;
                     }

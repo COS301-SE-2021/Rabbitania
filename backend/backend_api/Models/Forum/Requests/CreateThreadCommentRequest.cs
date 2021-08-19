@@ -27,6 +27,18 @@ namespace backend_api.Models.Forum.Requests
             _userId = userId;
             _forumThreadId = forumThreadId;
         }
+        
+        public CreateThreadCommentRequest(string commentBody, DateTime createdDate,
+            string imageUrl, int likes, int dislikes, int userId, int forumThreadId)
+        {
+            _commentBody = commentBody;
+            _createdDate = createdDate;
+            _imageUrl = imageUrl;
+            _likes = likes;
+            _dislikes = dislikes;
+            _userId = userId;
+            _forumThreadId = forumThreadId;
+        }
 
         public CreateThreadCommentRequest()
         {

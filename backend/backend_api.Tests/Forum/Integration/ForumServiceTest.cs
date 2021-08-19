@@ -17,6 +17,7 @@ namespace backend_api.Tests.Forum.Integration
     {
         private readonly Forums _mockForum;
         private readonly ForumThreads _mockForumThread;
+        private readonly ThreadComments _mockThreadComment;
         private readonly ForumContext _forumContext;
         private readonly UserContext _userContext;
 
@@ -44,6 +45,18 @@ namespace backend_api.Tests.Forum.Integration
                 "Forum Thread Body",
                 Convert.ToDateTime("2021-08-16 18:57:54.5265000"),
                 "image.url",
+                1
+            );
+
+            _mockThreadComment = new ThreadComments(
+                "Thread Body",
+                Convert.ToDateTime("2021-08-16 18:57:54.5265000"),
+                "img.url",
+                10,
+                10,
+                "Joseph",
+                "img.url",
+                1,
                 1
             );
 
@@ -113,10 +126,10 @@ namespace backend_api.Tests.Forum.Integration
             
             Assert.NotEmpty(forums.Forums);
 
-            var ForumId = forums.Forums.Last().ForumId;
+            var forumId = forums.Forums.Last().ForumId;
 
             var req = new CreateForumThreadRequest(_mockForumThread.ForumThreadTitle, _mockForumThread.ForumThreadBody,
-                _mockForumThread.CreatedDate, _mockForumThread.imageURL, _mockForumThread.UserId, ForumId);
+                _mockForumThread.CreatedDate, _mockForumThread.imageURL, _mockForumThread.UserId, forumId);
 
             var resp = forumService.CreateForumThread(req);
             
@@ -144,6 +157,86 @@ namespace backend_api.Tests.Forum.Integration
             
             Assert.Equal(HttpStatusCode.BadRequest, resp.Result.Response);
         }
+
+        [Fact(DisplayName = "Create Forum Thread with 0 user Id")]
+        public async void CreateForumThreadInvalidUserId()
+        {
+            var forumRepo = new ForumRepository(_forumContext, _userContext);
+            var forumService = new ForumService(forumRepo);
+
+            var retrieveReq = new RetrieveForumsRequest();
+            var forums = await forumService.RetrieveForums(retrieveReq);
+
+            Assert.NotEmpty((forums.Forums));
+
+            var forumId = forums.Forums.Last().ForumId;
+
+            var req = new CreateForumThreadRequest(_mockForumThread.ForumThreadTitle, _mockForumThread.ForumThreadBody,
+                _mockForumThread.CreatedDate, _mockForumThread.imageURL, 0, forumId);
+
+            var resp = forumService.CreateForumThread(req);
+            
+            Assert.Equal(HttpStatusCode.BadRequest, resp.Result.Response);
+        }
+
+        [Fact(DisplayName = "Edit Forum Thread should return status code ACCEPTED")]
+        public async void EditForumThread()
+        {
+            var forumRepo = new ForumRepository(_forumContext, _userContext);
+            var forumService = new ForumService(forumRepo);
+            var retrieveReq = new RetrieveForumsRequest();
+            var forums = await forumService.RetrieveForums(retrieveReq);
+
+            Assert.NotEmpty(forums.Forums);
+            
+            var forumId = forums.Forums.Last().ForumId;
+            var createReq = new CreateForumThreadRequest(_mockForumThread.ForumThreadTitle, _mockForumThread.ForumThreadBody,
+                _mockForumThread.CreatedDate, _mockForumThread.imageURL, _mockForumThread.UserId, forumId);
+            var createResp = forumService.CreateForumThread(createReq);
+            
+            Assert.Equal(HttpStatusCode.Created, createResp.Result.Response);
+
+            var retrieveThreadsReq = new RetrieveForumThreadsRequest(forumId);
+            var threadsResp = forumService.RetrieveForumThreads(retrieveThreadsReq);
+            
+            Assert.NotEmpty(threadsResp.Result.ForumThreads);
+
+            var req = new EditForumThreadRequest(threadsResp.Result.ForumThreads.Last().ForumThreadId, "Edit Test", "Edit Test", "img.url");
+            var resp = forumService.EditForumThread(req);
+            
+            Assert.Equal(HttpStatusCode.Accepted, resp.Result.Response);
+        }
+        [Fact(DisplayName = "Delete Forum Thread should return status code ACCEPTED")]
+        public async void DeleteForumThread()
+        {
+            var forumRepo = new ForumRepository(_forumContext, _userContext);
+            var forumService = new ForumService(forumRepo);
+            var retrieveReq = new RetrieveForumsRequest();
+            var forums = await forumService.RetrieveForums(retrieveReq);
+
+            Assert.NotEmpty(forums.Forums);
+            
+            var forumId = forums.Forums.Last().ForumId;
+            var createReq = new CreateForumThreadRequest(_mockForumThread.ForumThreadTitle, _mockForumThread.ForumThreadBody,
+                _mockForumThread.CreatedDate, _mockForumThread.imageURL, _mockForumThread.UserId, forumId);
+            var createResp = forumService.CreateForumThread(createReq);
+            
+            Assert.Equal(HttpStatusCode.Created, createResp.Result.Response);
+
+            var retrieveThreadsReq = new RetrieveForumThreadsRequest(forumId);
+            var threadsResp = forumService.RetrieveForumThreads(retrieveThreadsReq);
+            
+            Assert.NotEmpty(threadsResp.Result.ForumThreads);
+
+            var req = new DeleteForumThreadRequest(threadsResp.Result.ForumThreads.Last().ForumThreadId);
+            var resp = forumService.DeleteForumThread(req);
+            
+            Assert.Equal(HttpStatusCode.Accepted, resp.Result.HttpStatusCode);
+        }
+
+
+        
+        
         
     }
 }
