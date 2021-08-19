@@ -243,26 +243,43 @@ class _BookingDayTextState extends State<BookingDayText> {
                               .then((value) {
                             print(value);
                             if (value == "Created new Booking") {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    value,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(171, 255, 79, 1),
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 5000),
-                                  width: 300.0,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0,
-                                  ),
-                                  behavior: SnackBarBehavior.floating,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                ),
+                              return showDialog<void>(
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    elevation: 5,
+                                    backgroundColor:
+                                        Color.fromRGBO(33, 33, 33, 1),
+                                    titleTextStyle: TextStyle(
+                                        color: Colors.white, fontSize: 25),
+                                    title: Text("Create Booking for " +
+                                        widget.dayOfTheWeek),
+                                    contentTextStyle: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                    content: Text("Booking for slot " +
+                                        this.dropdownValue2 +
+                                        " @ " +
+                                        this.dropdownValue +
+                                        " successfully created!"),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: const Text(
+                                          "Close",
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(33, 33, 33, 1),
+                                              fontSize: 20),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.red,
+                                          shape: StadiumBorder(),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                context: context,
                               );
                               //if successful, change state of button to reflect successful booking
                             } else {
