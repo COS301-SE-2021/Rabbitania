@@ -28,7 +28,7 @@ namespace backend_api.Tests.Forum.Integration
             var builder_user = new DbContextOptionsBuilder<UserContext>();
             
             var env = Environment.GetEnvironmentVariable("CONN_STRING");
-            builder.UseNpgsql(env.ToString())
+            builder.UseNpgsql(env)
                 .UseInternalServiceProvider(serviceProvider);
 
             _forumContext = new ForumContext(builder.Options);

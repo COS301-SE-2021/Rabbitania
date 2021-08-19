@@ -20,6 +20,11 @@ namespace backend_api.Controllers.NoticeBoard
             this._service = service;
         }
 
+        /// <summary>
+        /// API endpoint to create a notice board thread
+        /// </summary>
+        /// <param name="request">Details of the notice board thread to create</param>
+        /// <returns>HTTP status code Created or BadRequest</returns>
         [HttpPost, Authorize]
         [Route("AddNoticeBoardThread")]
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(
@@ -29,6 +34,11 @@ namespace backend_api.Controllers.NoticeBoard
         }
         
         
+        /// <summary>
+        /// API endpoint to retrieve all noticeboard threads in the system
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A list of noticeboard threads along with an ACCEPTED response, or BadRequest if unsuccesful</returns>
         [HttpGet, Authorize]
         [Route("RetrieveNoticeBoardThreads")]
         public async Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(
@@ -37,6 +47,11 @@ namespace backend_api.Controllers.NoticeBoard
             return await _service.RetrieveNoticeBoardThreads(request);
         }
 
+        /// <summary>
+        /// API enpoint to delete a noticeboard thread
+        /// </summary>
+        /// <param name="request">the Id of the thread to delete</param>
+        /// <returns>HTTP status code Deleted or BadRequest</returns>
         [HttpDelete, Authorize]
         [Route("DeleteNoticeBoardThread")]
         public async Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(
@@ -45,6 +60,11 @@ namespace backend_api.Controllers.NoticeBoard
             return await _service.DeleteNoticeBoardThread(request);
         }
 
+        /// <summary>
+        /// API endpoint to edit a noticeboard thread
+        /// </summary>
+        /// <param name="request">The details of the noticeboard thread to edit</param>
+        /// <returns>HTTP status code Accepted or BadRequest</returns>
         [HttpPut, Authorize]
         [Route("EditNoticeBoardThread")]
         public async Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(
