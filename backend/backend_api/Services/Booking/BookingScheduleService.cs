@@ -15,7 +15,8 @@ namespace backend_api.Services.Booking
         {
             _scheduleRepository = scheduleRepository;
         }
-
+        
+        /// <inheritdoc />
         public async Task<CreateBookingScheduleResponse> CreateBookingSchedule(CreateBookingScheduleRequest request)
         {
             if (request == null)
@@ -36,7 +37,8 @@ namespace backend_api.Services.Booking
             
             return resp;
         }
-
+        
+        /// <inheritdoc />
         public async Task<CancelBookingScheduleResponse> CancelBookingSchedule(CancelBookingScheduleRequest request)
         {
             if (request != null)
@@ -58,7 +60,8 @@ namespace backend_api.Services.Booking
                 throw new InvalidBookingException("Request is null or empty");
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<UpdateBookingScheduleResponse> UpdateBookingSchedule(UpdateBookingScheduleRequest request)
         {
             if (request != null)
@@ -72,7 +75,8 @@ namespace backend_api.Services.Booking
 
             }
         }
-
+            
+        /// <inheritdoc />
         public async Task<GetBookingScheduleResponse> ViewBookingSchedule(GetBookingScheduleRequest request)
         {
             if (request != null)
@@ -86,7 +90,8 @@ namespace backend_api.Services.Booking
 
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<GetAllBookingSchedulesResponse> ViewAllBookingSchedules(GetAllBookingSchedulesRequest request)
         {
             if (request != null)
