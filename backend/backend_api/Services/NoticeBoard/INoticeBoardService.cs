@@ -12,7 +12,7 @@ namespace backend_api.Services.NoticeBoard
         /// store it in the database
         /// </summary>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <returns> AddNoticeBoardThreadResponse </returns>
         Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request);
         
         /// <summary>
@@ -21,13 +21,25 @@ namespace backend_api.Services.NoticeBoard
         ///     the database
         /// </summary>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <returns> RetrieveNoticeBoardThreadsResponse </returns>
         Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(RetrieveNoticeBoardThreadsRequest request);
         
         
-        
+        /// <summary>
+        ///     Validates whether or not the request is valid, after which it
+        ///     deletes the threads in the repository and passes through a
+        ///     response successfully or not successful.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> DeleteNoticeBoardThreadResponse </returns>
         Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(DeleteNoticeBoardThreadRequest request);
-
+        
+        /// <summary>
+        ///     Validates whether or not the request is valid, after which it
+        ///     edits a noticeboard thread.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns> EditNoticeBoardThreadResponse </returns>
         Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(EditNoticeBoardThreadRequest request);
     }
 }
