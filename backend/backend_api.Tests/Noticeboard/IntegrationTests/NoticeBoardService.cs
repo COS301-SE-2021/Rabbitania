@@ -25,7 +25,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             var builder = new DbContextOptionsBuilder<NoticeBoardContext>();
             
             var env = Environment.GetEnvironmentVariable("CONN_STRING");
-            builder.UseNpgsql(env.ToString())
+            builder.UseNpgsql(env)
                 .UseInternalServiceProvider(serviceProvider);
 
             _noticeboardContext = new NoticeBoardContext(builder.Options);
@@ -56,7 +56,52 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             Assert.Equal(resp.Result.Response, HttpStatusCode.Created);
         }
 
-        [Fact(DisplayName = "Should return accepted HTTP response")]
+        [Fact(DisplayName = "Should return HTTP status code Bad Request on Empty Title")]
+        public void CreateNoticeBoardThreadEmptyTitle()
+        {
+            var noticeboardRepo = new NoticeBoardRepository(_noticeboardContext);
+            var noticeboardService = new NoticeBoardService(noticeboardRepo);
+
+            var req = new AddNoticeBoardThreadRequest("", _mockNoticeboard.ThreadContent,
+                _mockNoticeboard.MinEmployeeLevel, _mockNoticeboard.ImageUrl, _mockNoticeboard.PermittedUserRoles,
+                _mockNoticeboard.UserId);
+
+            var resp = noticeboardService.AddNoticeBoardThread(req);
+            
+            Assert.Equal(HttpStatusCode.BadRequest, resp.Result.Response);
+        }
+        
+        [Fact(DisplayName = "Should return HTTP status BadRequest on Empty Thread Body")]
+        public void CreateNoticeBoardThreadEmptyBody()
+        {
+            var noticeboardRepo = new NoticeBoardRepository(_noticeboardContext);
+            var noticeboardService = new NoticeBoardService(noticeboardRepo);
+
+            var req = new AddNoticeBoardThreadRequest(_mockNoticeboard.ThreadTitle, "",
+                _mockNoticeboard.MinEmployeeLevel, _mockNoticeboard.ImageUrl, _mockNoticeboard.PermittedUserRoles,
+                _mockNoticeboard.UserId);
+
+            var resp = noticeboardService.AddNoticeBoardThread(req);
+            
+            Assert.Equal(HttpStatusCode.BadRequest, resp.Result.Response);
+        }
+
+        [Fact(DisplayName = "Should return HTTP status code Bad Request on Invalid user Id")]
+        public void CreateNoticeBoardThreadNullUser()
+        {
+            var noticeboardRepo = new NoticeBoardRepository(_noticeboardContext);
+            var noticeboardService = new NoticeBoardService(noticeboardRepo);
+
+            var req = new AddNoticeBoardThreadRequest(_mockNoticeboard.ThreadTitle, _mockNoticeboard.ThreadContent,
+                _mockNoticeboard.MinEmployeeLevel, _mockNoticeboard.ImageUrl, _mockNoticeboard.PermittedUserRoles,
+                0);
+
+            var resp = noticeboardService.AddNoticeBoardThread(req);
+            
+            Assert.Equal(HttpStatusCode.BadRequest, resp.Result.Response);
+        }
+
+        [Fact(DisplayName = "Should return Delete HTTP response")]
         public async void DeleteNoticeBoardThread()
         {
             var noticeboardRepo = new NoticeBoardRepository(_noticeboardContext);
@@ -109,5 +154,7 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             Assert.Equal(HttpStatusCode.Accepted, editThreadResponse.Result.Response);
 
         }
+        
+        
     }
 }

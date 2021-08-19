@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.NoticeBoard;
 using backend_api.Exceptions.NoticeBoard;
@@ -33,33 +34,41 @@ namespace backend_api.Services.NoticeBoard
 
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
-            if (request == null)
+            try
             {
-                throw new InvalidNoticeBoardRequestException("Invalid AddNoticeBoardRequest object");
-            }
+                if (request == null)
+                {
+                    throw new InvalidNoticeBoardRequestException("Invalid AddNoticeBoardRequest object");
+                }
 
-            if (request.ThreadTitle.IsNullOrEmpty())
+                if (request.ThreadTitle.IsNullOrEmpty())
+                {
+                    throw new InvalidThreadTitleException("The thread title cannot be null or empty");
+                }
+
+                if (request.ThreadContent.IsNullOrEmpty())
+                {
+                    throw new InvalidThreadContentException("The thread content cannot be null or empty");
+                }
+
+                if (request.UserId <= 0)
+                {
+                    throw new InvalidUserIdException("UserID is invalid");
+                }
+
+                var userEmails = _userService.GetAllUserEmails();
+                var payload = "A new notice has been created, please go and check it out!";
+                var emailReq = new SendEmailNotificationRequest(payload, "New Notice Created! " + request.ThreadTitle,
+                    userEmails);
+
+                await _notificationService.SendEmailNotification(emailReq);
+
+                return await _noticeBoardRepository.AddNoticeBoardThread(request);
+            }
+            catch
             {
-                throw new InvalidThreadTitleException("The thread title cannot be null or empty");
+                return new AddNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
             }
-
-            if (request.ThreadContent.IsNullOrEmpty())
-            {
-                throw new InvalidThreadContentException("The thread content cannot be null or empty");
-            }
-
-            if (request.UserId <= 0)
-            {
-                throw new InvalidUserIdException("UserID is invalid");
-            }
-
-            var userEmails = _userService.GetAllUserEmails();
-            var payload = "A new notice has been created, please go and check it out!";
-            var emailReq = new SendEmailNotificationRequest(payload, "New Notice Created! " + request.ThreadTitle, userEmails);
-            
-            await _notificationService.SendEmailNotification(emailReq);
-            
-            return await _noticeBoardRepository.AddNoticeBoardThread(request);
         }
 
         public async Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(
