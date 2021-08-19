@@ -117,7 +117,7 @@ jobs:
           command: |
             dotnet test --filter RetrieveNotificationsTests
 
-  IntegrationTest_NotificationController:
+  IntegrationTest_NotificationServiceTests:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -126,7 +126,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
-            dotnet test --filter NotificationControllerTests
+            dotnet test --filter NotificationServiceTests
   ################################################### NOTIFICATION TESTS ########################################
 
   ################################################### NOTICEBOARD TESTS ######################################### 
@@ -283,7 +283,7 @@ workflows:
           requires:
             - Notification
 
-      - IntegrationTest_NotificationController:
+      - IntegrationTest_NotificationServiceTests:
           requires:
             - Notification
 
