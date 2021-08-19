@@ -62,6 +62,11 @@ namespace backend_api.Controllers.User
             return await _service.ViewProfile(request);
         }
 
+        /// <summary>
+        /// API enpoint to return all user profiles held within the system
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A list of user profiles</returns>
         [HttpGet, Authorize]
         [Route("GetUserProfiles")]
         public async Task<GetUserProfilesResponse> GetUserProfiles([FromQuery] GetUserProfilesRequest request)
