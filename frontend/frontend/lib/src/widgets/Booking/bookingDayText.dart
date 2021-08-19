@@ -187,14 +187,14 @@ class _BookingDayTextState extends State<BookingDayText> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.only(top: 15),
                 child: SizedBox(
                   width: 300,
                   height: 60,
                   child: ElevatedButton(
                     key: Key('BookingButton'),
                     style: ButtonStyle(
-                      elevation: MaterialStateProperty.all(11),
+                      elevation: MaterialStateProperty.all(0),
                       backgroundColor: MaterialStateProperty.all(
                         bookingColour,
                       ),

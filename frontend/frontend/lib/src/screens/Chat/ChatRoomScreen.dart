@@ -116,6 +116,8 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                   // return ListView(
                                   //     reverse: true, shrinkWrap: true, children: children);
                                   return ListView.builder(
+                                    padding:
+                                        EdgeInsets.only(left: 10, right: 10),
                                     reverse: true,
                                     itemCount: children.length,
                                     itemBuilder:

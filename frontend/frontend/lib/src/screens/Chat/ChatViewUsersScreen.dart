@@ -25,12 +25,13 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+            elevation: 0,
             automaticallyImplyLeading: false,
             backgroundColor: Colors.transparent,
             title: Center(
               child: Text(
                 'Users',
-                style: TextStyle(color: utilModel.greenColor, fontSize: 20),
+                style: TextStyle(color: utilModel.greenColor, fontSize: 35),
               ),
             )),
         backgroundColor: utilModel.greyColor,
