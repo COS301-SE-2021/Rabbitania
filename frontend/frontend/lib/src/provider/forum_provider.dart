@@ -203,7 +203,7 @@ class ForumProvider {
       if (response.statusCode == 201 ||
           response.statusCode == 200 ||
           response.statusCode == 100) {
-        return ("Successfully uploaded new notice");
+        return ("Successfully edited forum");
       } else if (response.statusCode == 401) {
         final authReponse = await http.post(
           Uri.parse(baseURL + '/api/Auth/Auth'),
