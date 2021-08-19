@@ -40,7 +40,8 @@ namespace backend_api.Services.Auth
             _repository = repository;
             _userService = userService;
         }
-
+        
+        /// <inheritdoc />
         public async Task<LoginResponse> checkEmailExists(GoogleSignInRequest request)
         {
             // throw new System.NotImplementedException();
@@ -64,7 +65,8 @@ namespace backend_api.Services.Auth
         {
             this._repository = repository;
         }
-
+        
+        /// <inheritdoc />
         public DomainResponse CheckEmailDomain(GoogleSignInRequest request)
         {
             var email = request.Email;
@@ -79,6 +81,8 @@ namespace backend_api.Services.Auth
                 return new DomainResponse(false);
             }
         }
+        
+        /// <inheritdoc />
         public JObject GetUser(GoogleSignInRequest request)
         {
             try
@@ -100,7 +104,8 @@ namespace backend_api.Services.Auth
                 throw e;
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<Models.User.Users> GetUserName(string name)
         {
             try
@@ -116,7 +121,8 @@ namespace backend_api.Services.Auth
             }
             
         }
-
+        
+        /// <inheritdoc />
         public async Task<Models.User.Users> GetUserId(GoogleSignInRequest request)
         {
             try
@@ -132,6 +138,7 @@ namespace backend_api.Services.Auth
             
         }
         
+        /// <inheritdoc />
         public async Task<Models.User.Users> GetUserAdminStatus(GoogleSignInRequest request)
         {
             try
@@ -146,7 +153,8 @@ namespace backend_api.Services.Auth
             }
             
         }
-
+        
+        /// <inheritdoc />
         public async Task<bool> Validate(Credentials credentials)
         {
             var email = credentials.Email;
@@ -162,7 +170,8 @@ namespace backend_api.Services.Auth
                 return false;
             }
         }
-
+        
+        /// <inheritdoc />
         public async Task<string> createJwt(Credentials credentials)
         {
             var settings = Startup.StaticConfig.GetSection("JwtSettings");
@@ -181,7 +190,7 @@ namespace backend_api.Services.Auth
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
+        
         public async Task<List<Claim>> GetClaims(Credentials credentials)
         {
             var claims = new List<Claim>
