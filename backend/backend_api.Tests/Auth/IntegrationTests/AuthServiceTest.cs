@@ -21,7 +21,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         private readonly Users _mockedUser;
         private readonly UserEmails _mockedEmail;
         private UserContext _userContext;
-        private readonly UserRepository userRepo;
+        private readonly IUserRepository userRepo;
         private readonly AuthService authService;
         
         
@@ -71,7 +71,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         }
         
         [Fact(DisplayName = "Should be True if a 'gmail.com' email is used to login")]
-        public async void ValidDomainLogin()
+        public void ValidDomainLogin()
         {
             //Arrange
             string email = "test@gmail.com";
