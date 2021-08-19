@@ -29,8 +29,8 @@ namespace backend_api.Tests.Auth.IntegrationTests
         {
             var serviceProvider = new ServiceCollection().AddEntityFrameworkNpgsql().BuildServiceProvider();
             var builder = new DbContextOptionsBuilder<UserContext>();
-            
-            builder.UseNpgsql("Server=ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432;Port=5432;Database=d924vmqoqh9aba;Username=jpbxojhfderusg;Password=a231e88acb43722af04a63aeab3cb65aeb770459b6e201e9498a7d7543a60d5c;SslMode=Require;Trust Server Certificate=true;")
+            var env = Environment.GetEnvironmentVariable("CONN_STRING");
+            builder.UseNpgsql(env)
                 .UseInternalServiceProvider(serviceProvider);
 
             _userContext = new UserContext(builder.Options);
