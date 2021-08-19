@@ -14,6 +14,7 @@ jobs:
           working_directory: ~/project/backend/backend_api.Tests
           name: Run tests
           command: |
+            export CONN_STRING=`echo $CONN_STRING`
             dotnet build
   ################################################### USER TESTS ############################################### 
   User:
