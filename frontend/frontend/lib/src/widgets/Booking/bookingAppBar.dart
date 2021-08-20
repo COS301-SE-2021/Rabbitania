@@ -6,7 +6,7 @@ class BookingAppBar extends StatelessWidget {
           children: <Widget>[
             TextButton(
               onPressed: () {},
-              child: Text(''),
+              child: Text('TEST'),
             ),
           ],
         ),
