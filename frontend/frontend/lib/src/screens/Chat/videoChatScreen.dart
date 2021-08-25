@@ -6,7 +6,7 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 
 const APP_ID = "e718dc1d125d4b59a3026ac5a600d65b";
 const token =
-    "006e718dc1d125d4b59a3026ac5a600d65bIAAbJd0mL9laIQYDZ1CQ7tu8jFcZ2cbMemBAZDpRdRXPf02x7RgAAAAAEACLgpZhjk8nYQEAAQCMTydh";
+    "006e718dc1d125d4b59a3026ac5a600d65bIACyP1j/7rQuD3anPYX7GBziaa5XPzi6FQ3qkAk02ZxfyYDvswcAAAAAEACLgpZhO1AnYQEAAQA5UCdh";
 
 class VideoChatScreen extends StatefulWidget {
   final String channelName;
@@ -83,7 +83,7 @@ class _VideoChatState extends State<VideoChatScreen> {
       },
     ));
 
-    await _engine.joinChannel(null, widget.channelName, null, 0);
+    await _engine.joinChannel(token, widget.channelName, null, 0);
   }
 
   Future<void> _initAgoraRtcEngine() async {
