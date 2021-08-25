@@ -19,8 +19,16 @@ namespace backend_api.Services.Chat
         {
             var key = _config.GetValue<string>("Encrypt:Key");
             var text = _config.GetValue<string>("RabbitaniaV2:AppID");
-            Console.WriteLine(key);
-    
+            if (key.Length <= 1)
+            {
+                throw new Exception("Key not found, check env/secrets");
+            }
+
+            if (text.Length <= 1)
+            {
+                throw new Exception("AppID not found, check env/secrets");
+            }
+
             byte[] i = new byte[16];
             byte[] arr;
             using (Aes aes = Aes.Create())
