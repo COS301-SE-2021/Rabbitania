@@ -8,6 +8,8 @@ import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
+import 'groupChatCreateScreen.dart';
+
 class ChatViewUsersScreen extends StatefulWidget {
   //id of currently logged in user
   //TODO:need to set up global accessor to get this value
@@ -100,7 +102,15 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
           visible: this.visible,
           child: IconButton(
             icon: Icon(FontAwesomeIcons.users, color: utilModel.greenColor),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GroupChatCreateScreen(
+                      groupChatHelper: this.groupChatHelper),
+                ),
+              );
+            },
           ),
         ),
         bottomNavigationBar: bnb(context),

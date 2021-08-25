@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Chat/ChatFirestoreUserModel.dart';
@@ -7,8 +9,6 @@ import 'package:rxdart/streams.dart';
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class FireStoreHelper {
-//TODO: get user id from db and create new message and user instance in firestore
-
   getUsersCollectionFromFireStore() {
     CollectionReference users = firestore.collection('users');
 
@@ -76,4 +76,12 @@ class FireStoreHelper {
 
   //function for getting all chats based off room name
   getGroupChatByRoomName(roomName) {}
+
+  //function for creating new groupchat room
+  createGroupChatRoom(String roomName, users) {
+    final refGroupRooms = firestore
+        .collection('groupChat')
+        .doc('$roomName')
+        .set({'participants': users});
+  }
 }
