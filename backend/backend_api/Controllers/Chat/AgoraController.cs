@@ -52,5 +52,13 @@ namespace backend_api.Controllers.Chat
 
             return Ok(new AgoraAuthResponse(request.channel, request.uid, tBuilder.build()));
         }
+        
+        [HttpGet]
+        public ActionResult<string> GetAppID()
+        {
+            var AppID = _config.GetValue<string>("RabbitaniaV2:AppID");
+            return Ok(AppID);
+        }
+        
     }
 }
