@@ -43,6 +43,7 @@
     <ItemGroup>
       <Folder Include="Auth\UnitTests" />
       <Folder Include="Booking\Unit" />
+      <Folder Include="Chat" />
     </ItemGroup>
 
 </Project>

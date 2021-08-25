@@ -51,10 +51,30 @@ namespace backend_api.Services.Auth
         /// <returns>User object</returns>
         Task<Models.User.Users> GetUserId(GoogleSignInRequest request);
         
+        /// <summary>
+        ///     Validates whether or not the user with the supplied details is
+        ///     and admin or not.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>User Object</returns>
         Task<Models.User.Users> GetUserAdminStatus(GoogleSignInRequest request);
-
+        
+        /// <summary>
+        ///     Validates whether the user with the supplied credentials
+        ///     exists within our system therefore meaning they are a
+        ///     Retro Rabbit employee.
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns>Returns a bool</returns>
         Task<bool> Validate(Credentials credentials);
 
+        /// <summary>
+        ///     Called by the Validate function. Generates a JWT for
+        ///     the user to use for the API authorization when interacting
+        ///     with the endpoints from the frontend device.
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns>string containing the JWT</returns>
         Task<string> createJwt(Credentials credentials);
     }
 }
