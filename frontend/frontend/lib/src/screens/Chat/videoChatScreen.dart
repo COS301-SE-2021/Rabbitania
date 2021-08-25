@@ -263,7 +263,6 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   void _onSwitchCamera() {
-    _engine.sendStreamMessage(streamId, "mute user...");
-    //_engine.switchCamera();
+    _engine.switchCamera();
   }
 }
