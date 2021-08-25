@@ -11,8 +11,6 @@ namespace backend_api.Models.Chat.Requests
         [Required]
         public dynamic uid { get; set; }
 
-        public uint expiredTokens { get; set; } = 0;
-
-        public int role { get; set; } = 1;
+        public uint expiredTokens { get; set; } = 60;
     }
 }
