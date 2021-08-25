@@ -73,4 +73,7 @@ class FireStoreHelper {
         .where('uid', isEqualTo: idUser)
         .snapshots();
   }
+
+  //function for getting all chats based off room name
+  getGroupChatByRoomName(roomName) {}
 }

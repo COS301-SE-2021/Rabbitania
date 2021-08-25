@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
+import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
@@ -16,24 +18,42 @@ class ChatViewUsersScreen extends StatefulWidget {
 }
 
 class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
+  final groupChatHelper = GroupChatHelper();
   final userProvider = UserProvider();
   final utilModel = UtilModel();
   final fireStoreHelper = FireStoreHelper();
+  bool visible = false;
+  _chatViewUserScreenState() {
+    this.groupChatHelper.addListener(() {
+      print(this.groupChatHelper.usersArray.length);
+      print(this.visible);
+      if (this.groupChatHelper.usersArray.length == 0) {
+        setState(() {
+          this.visible = false;
+        });
+      } else if (this.groupChatHelper.usersArray.length != 0) {
+        setState(() {
+          this.visible = true;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            title: Center(
-              child: Text(
-                'Users',
-                style: TextStyle(color: utilModel.greenColor, fontSize: 35),
-              ),
-            )),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          title: Center(
+            child: Text(
+              'Users',
+              style: TextStyle(color: utilModel.greenColor, fontSize: 35),
+            ),
+          ),
+        ),
         backgroundColor: utilModel.greyColor,
         body: FutureBuilder(
           future: userProvider.getUserID(),
@@ -50,13 +70,13 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
                       if (snapshot.data.docs[i]['uid'] != userId) {
                         children.add(
                           ChatUsersCard(
-                            displayName:
-                                snapshot.data.docs[i]['displayName'].toString(),
-                            displayImage:
-                                snapshot.data.docs[i]['avatar'].toString(),
-                            idUser: snapshot.data.docs[i]['uid'].toInt(),
-                            myId: userId,
-                          ),
+                              displayName: snapshot.data.docs[i]['displayName']
+                                  .toString(),
+                              displayImage:
+                                  snapshot.data.docs[i]['avatar'].toString(),
+                              idUser: snapshot.data.docs[i]['uid'].toInt(),
+                              myId: userId,
+                              groupChatHelper: this.groupChatHelper),
                         );
                       }
                     }
@@ -75,6 +95,13 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
               child: CircularProgressIndicator(color: utilModel.greenColor),
             );
           },
+        ),
+        floatingActionButton: Visibility(
+          visible: this.visible,
+          child: IconButton(
+            icon: Icon(FontAwesomeIcons.users, color: utilModel.greenColor),
+            onPressed: () {},
+          ),
         ),
         bottomNavigationBar: bnb(context),
       ),
