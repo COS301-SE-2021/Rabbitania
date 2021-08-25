@@ -5,6 +5,7 @@ using System.Text.Json;
 using AgoraIO.Media;
 using backend_api.Models.Chat.Requests;
 using backend_api.Models.Chat.Responses;
+using backend_api.Services.Chat;
 using MailKit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,10 +20,17 @@ namespace backend_api.Controllers.Chat
     {
         private readonly AgoraSettings _settings;
         private readonly IConfiguration _config;
+        private readonly IChat _chatService;
         
-        public AgoraController(IConfiguration config)
+        // public AgoraController(IConfiguration config)
+        // {
+        //     _config = config;
+        // }
+
+        public AgoraController(IConfiguration config, IChat chatService)
         {
             _config = config;
+            _chatService = chatService;
         }
 
         [HttpPost]
@@ -50,10 +58,16 @@ namespace backend_api.Controllers.Chat
             tBuilder.addPrivilege(Privileges.kJoinChannel, request.expiredTokens);
             tBuilder.addPrivilege(Privileges.kPublishAudioStream, request.expiredTokens);
             tBuilder.addPrivilege(Privileges.kPublishVideoStream, request.expiredTokens);
-            // tBuilder.addPrivilege(Privileges.kPublishDataStream, request.expiredTokens);
+            tBuilder.addPrivilege(Privileges.kPublishDataStream, request.expiredTokens);
             tBuilder.addPrivilege(Privileges.kRtmLogin, request.expiredTokens);
 
             return Ok(new AgoraAuthResponse(request.channel, request.uid, tBuilder.build()));
+        }
+        [Route("GetAppID")]
+        [HttpGet]
+        public ActionResult<string> GetEncryptedAppID()
+        {
+            return Ok(_chatService.Encrypt());
         }
     }
 }

@@ -14,6 +14,7 @@ using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
 using backend_api.Services.Booking;
+using backend_api.Services.Chat;
 using backend_api.Services.Enumerations;
 using backend_api.Services.Forum;
 using backend_api.Services.NoticeBoard;
@@ -174,6 +175,10 @@ namespace backend_api
             
             services.AddScoped<IForumRepository, ForumRepository>();
             services.AddScoped<IForumService, ForumService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            //Chat service
+            
+            services.AddScoped<IChat, Chat>();
             //----------------------------------------------------------------------------------------------------------------------
             
             services.AddControllers();
