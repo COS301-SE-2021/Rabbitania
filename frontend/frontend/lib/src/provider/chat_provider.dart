@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ChatProvider {
   UserHelper loggedUser = new UserHelper();
@@ -27,7 +29,18 @@ class ChatProvider {
       },
     );
     if (response.statusCode == 200) {
-      return response.body;
+      print(response
+          .body); //N5GpHv2UKNQcZHA3hiL+SUhwikDfo2DVJEve98gToGx/wqqlXRu88lc1TbRnd3lk
+      ChatHelper chatHelper = new ChatHelper();
+      var key = dotenv.env['ENC_KEY'];
+      print(key);
+
+      var decryptedKey = chatHelper.decryptData(
+        response.body.toString(),
+        key.toString(),
+      );
+
+      return decryptedKey;
     } else if (response.statusCode == 401) {
       final authReponse = await http.post(
         Uri.parse(baseURL + '/api/Auth/Auth'),

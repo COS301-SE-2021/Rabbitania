@@ -88,8 +88,13 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   Future<void> _initAgoraRtcEngine() async {
+    print(await chatProvider.getAgoraID());
+
     _engine = await RtcEngine.createWithConfig(
-        RtcEngineConfig(await chatProvider.getAgoraID()));
+      RtcEngineConfig(
+        await chatProvider.getAgoraID(),
+      ),
+    );
     await _engine.enableVideo();
 
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
