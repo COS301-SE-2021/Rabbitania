@@ -8,6 +8,7 @@
   </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="agora_rtc_sdk" Version="3.2.1.7" />
       <PackageReference Include="Crc32.NET" Version="1.2.0" />
       <PackageReference Include="DotNetTools" Version="0.0.2" />
       <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />

@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
 using AgoraIO.Media;
 using backend_api.Models.Chat.Requests;
@@ -28,6 +30,7 @@ namespace backend_api.Controllers.Chat
         {
             var AppID = _config.GetValue<string>("AppSettings:AppID");
             var Cert = _config.GetValue<string>("AppSettings:AppCertificate");
+
             
             if (string.IsNullOrEmpty(AppID) || string.IsNullOrEmpty(Cert))
             {
@@ -47,7 +50,7 @@ namespace backend_api.Controllers.Chat
             tBuilder.addPrivilege(Privileges.kJoinChannel, request.expiredTokens);
             tBuilder.addPrivilege(Privileges.kPublishAudioStream, request.expiredTokens);
             tBuilder.addPrivilege(Privileges.kPublishVideoStream, request.expiredTokens);
-            tBuilder.addPrivilege(Privileges.kPublishDataStream, request.expiredTokens);
+            // tBuilder.addPrivilege(Privileges.kPublishDataStream, request.expiredTokens);
             tBuilder.addPrivilege(Privileges.kRtmLogin, request.expiredTokens);
 
             return Ok(new AgoraAuthResponse(request.channel, request.uid, tBuilder.build()));
