@@ -111,7 +111,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
 
   Future<void> onJoin({required bool isBroadcaster}) async {
     await [Permission.camera, Permission.microphone].request();
-
+    print("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => VideoChatScreen(

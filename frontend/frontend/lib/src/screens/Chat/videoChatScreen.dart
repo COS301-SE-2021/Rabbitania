@@ -6,7 +6,7 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 
 const APP_ID = "e718dc1d125d4b59a3026ac5a600d65b";
 const token =
-    "006e718dc1d125d4b59a3026ac5a600d65bIABnoN+MP03aE03hryueCs638v4+ugwLvpqGqYoQn6zSe0VE42sAAAAAEACLgpZhYEgnYQEAAQBcSCdh";
+    "006e718dc1d125d4b59a3026ac5a600d65bIAAbJd0mL9laIQYDZ1CQ7tu8jFcZ2cbMemBAZDpRdRXPf02x7RgAAAAAEACLgpZhjk8nYQEAAQCMTydh";
 
 class VideoChatScreen extends StatefulWidget {
   final String channelName;
@@ -166,16 +166,26 @@ class _VideoChatState extends State<VideoChatScreen> {
   List<Widget> _getRenderViews() {
     final List<StatefulWidget> list = [];
     if (widget.isBroadcaster) {
-      list.add(RtcLocalView.SurfaceView());
+      list.add(
+        RtcLocalView.SurfaceView(),
+      );
     }
-    _users.forEach((int uid) => list.add(RtcRemoteView.SurfaceView(uid: uid)));
+    _users.forEach(
+      (int uid) => list.add(
+        RtcRemoteView.SurfaceView(uid: uid),
+      ),
+    );
     return list;
   }
 
   /// Video view row wrapper
   Widget _expandedVideoView(List<Widget> views) {
     final wrappedViews = views
-        .map<Widget>((view) => Expanded(child: Container(child: view)))
+        .map<Widget>(
+          (view) => Expanded(
+            child: Container(child: view),
+          ),
+        )
         .toList();
     return Expanded(
       child: Row(
@@ -192,31 +202,45 @@ class _VideoChatState extends State<VideoChatScreen> {
         return Container(
             child: Column(
           children: <Widget>[
-            _expandedVideoView([views[0]])
+            _expandedVideoView(
+              [views[0]],
+            )
           ],
         ));
       case 2:
         return Container(
             child: Column(
           children: <Widget>[
-            _expandedVideoView([views[0]]),
-            _expandedVideoView([views[1]])
+            _expandedVideoView(
+              [views[0]],
+            ),
+            _expandedVideoView(
+              [views[1]],
+            )
           ],
         ));
       case 3:
         return Container(
             child: Column(
           children: <Widget>[
-            _expandedVideoView(views.sublist(0, 2)),
-            _expandedVideoView(views.sublist(2, 3))
+            _expandedVideoView(
+              views.sublist(0, 2),
+            ),
+            _expandedVideoView(
+              views.sublist(2, 3),
+            )
           ],
         ));
       case 4:
         return Container(
             child: Column(
           children: <Widget>[
-            _expandedVideoView(views.sublist(0, 2)),
-            _expandedVideoView(views.sublist(2, 4))
+            _expandedVideoView(
+              views.sublist(0, 2),
+            ),
+            _expandedVideoView(
+              views.sublist(2, 4),
+            )
           ],
         ));
       default:
@@ -236,7 +260,7 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   void _onSwitchCamera() {
-    if (streamId != null) _engine.sendStreamMessage(streamId, "mute user blet");
+    _engine.sendStreamMessage(streamId, "mute user...");
     //_engine.switchCamera();
   }
 }
