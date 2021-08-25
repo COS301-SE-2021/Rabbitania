@@ -1,8 +1,11 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
 using AgoraIO.Media;
 using backend_api.Models.Chat.Requests;
 using backend_api.Models.Chat.Responses;
+using backend_api.Services.Chat;
 using MailKit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,10 +20,12 @@ namespace backend_api.Controllers.Chat
     {
         private readonly AgoraSettings _settings;
         private readonly IConfiguration _config;
-        
-        public AgoraController(IConfiguration config)
+        private readonly IChatService _chatService;
+
+        public AgoraController(IConfiguration config, IChatService chatService)
         {
             _config = config;
+            _chatService = chatService;
         }
 
         [HttpPost]
@@ -28,6 +33,7 @@ namespace backend_api.Controllers.Chat
         {
             var AppID = _config.GetValue<string>("AppSettings:AppID");
             var Cert = _config.GetValue<string>("AppSettings:AppCertificate");
+
             
             if (string.IsNullOrEmpty(AppID) || string.IsNullOrEmpty(Cert))
             {
@@ -52,13 +58,11 @@ namespace backend_api.Controllers.Chat
 
             return Ok(new AgoraAuthResponse(request.channel, request.uid, tBuilder.build()));
         }
-        
+        [Route("GetAppID")]
         [HttpGet]
-        public ActionResult<string> GetAppID()
+        public ActionResult<string> GetEncryptedAppID()
         {
-            var AppID = _config.GetValue<string>("RabbitaniaV2:AppID");
-            return Ok(AppID);
+            return Ok(_chatService.Encrypt());
         }
-        
     }
 }
