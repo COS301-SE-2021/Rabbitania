@@ -19,15 +19,15 @@ class _ChannelScreenState extends State<ChannelScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
+        centerTitle: true,
+        toolbarHeight: 100,
+        elevation: 1,
         backgroundColor: utilModel.greyColor,
-        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
-        title: Center(
-          child: Text(
-            'Meeting Room',
-            style: TextStyle(
-              color: utilModel.greenColor,
-              fontSize: 25,
-            ),
+        title: Text(
+          'Meeting Room',
+          style: TextStyle(
+            fontSize: 30,
+            color: Color.fromRGBO(171, 255, 79, 1),
           ),
         ),
       ),

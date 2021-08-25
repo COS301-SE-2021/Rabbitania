@@ -4,8 +4,7 @@ import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:frontend/src/models/util_model.dart';
-
-const APP_ID = "";
+import 'package:frontend/src/provider/chat_provider.dart';
 
 class VideoChatScreen extends StatefulWidget {
   final String channelName;
@@ -20,6 +19,7 @@ class VideoChatScreen extends StatefulWidget {
 }
 
 class _VideoChatState extends State<VideoChatScreen> {
+  ChatProvider chatProvider = new ChatProvider();
   final _users = <int>[];
   late RtcEngine _engine;
   bool muted = false;
@@ -88,7 +88,8 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   Future<void> _initAgoraRtcEngine() async {
-    _engine = await RtcEngine.createWithConfig(RtcEngineConfig(APP_ID));
+    _engine = await RtcEngine.createWithConfig(
+        RtcEngineConfig(await chatProvider.getAgoraID()));
     await _engine.enableVideo();
 
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
