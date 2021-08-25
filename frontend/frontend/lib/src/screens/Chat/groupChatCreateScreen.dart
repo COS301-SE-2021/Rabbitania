@@ -138,6 +138,8 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                     icon: Icon(FontAwesomeIcons.plus,
                         color: utilModel.greenColor),
                     onPressed: () {
+                      //TODO: figure out how to save images in firestore
+                      //TODO: navigate to new Chat screen
                       if (textController.text != '') {
                         firestoreHelper.createGroupChatRoom(textController.text,
                             widget.groupChatHelper.usersArray);
