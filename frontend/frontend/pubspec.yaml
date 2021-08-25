@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  encrypt: ^5.0.1
   flutter:
     sdk: flutter
   firebase_auth: ^2.0.0
@@ -50,6 +51,7 @@ dependencies:
 
   cloud_firestore: ^2.4.0
   rxdart: ^0.27.1
+  flutter_dotenv: ^5.0.2
   
 
 
