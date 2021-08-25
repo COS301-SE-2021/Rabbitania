@@ -6,11 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace backend_api.Services.Chat
 {
-    public class Chat : IChat
+    public class ChatService : IChatService
     {
         private static IConfiguration _config;
         
-        public Chat(IConfiguration config)
+        public ChatService(IConfiguration config)
         {
             _config = config;
         }

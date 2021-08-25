@@ -20,14 +20,9 @@ namespace backend_api.Controllers.Chat
     {
         private readonly AgoraSettings _settings;
         private readonly IConfiguration _config;
-        private readonly IChat _chatService;
-        
-        // public AgoraController(IConfiguration config)
-        // {
-        //     _config = config;
-        // }
+        private readonly IChatService _chatService;
 
-        public AgoraController(IConfiguration config, IChat chatService)
+        public AgoraController(IConfiguration config, IChatService chatService)
         {
             _config = config;
             _chatService = chatService;

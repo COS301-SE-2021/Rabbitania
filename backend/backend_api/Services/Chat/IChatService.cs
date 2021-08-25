@@ -1,6 +1,6 @@
 ﻿namespace backend_api.Services.Chat
 {
-    public interface IChat
+    public interface IChatService
     {
         string Encrypt();
     }
