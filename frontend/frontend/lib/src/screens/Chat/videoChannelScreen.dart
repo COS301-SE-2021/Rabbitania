@@ -17,17 +17,19 @@ class _ChannelScreenState extends State<ChannelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
+        backgroundColor: utilModel.greyColor,
         toolbarHeight: MediaQuery.of(context).size.height * 0.1,
         title: Center(
           child: Text(
             'Meeting Room',
             style: TextStyle(
               color: utilModel.greenColor,
+              fontSize: 25,
             ),
           ),
         ),
-        backgroundColor: Colors.transparent,
       ),
       resizeToAvoidBottomInset: true,
       body: Stack(
@@ -39,69 +41,138 @@ class _ChannelScreenState extends State<ChannelScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: TextFormField(
-                  controller: _channelName,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                    hintText: 'Channel Name',
-                  ),
-                ),
+              Expanded(
+                flex: 1,
+                child: Container(),
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.pink,
-                ),
-                onPressed: () => onJoin(
-                  isBroadcaster: true,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Join as Presentor  ',
-                      style: TextStyle(fontSize: 25),
-                    ),
-                    Icon(
-                      Icons.live_tv,
-                      size: 25,
-                    )
-                  ],
-                ),
-              ),
-              TextButton(
-                onPressed: () => onJoin(
-                  isBroadcaster: false,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Join as Viewer  ',
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: utilModel.greenColor,
+              Expanded(
+                flex: 3,
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      child: TextFormField(
+                        cursorColor: utilModel.greenColor,
+                        controller: _channelName,
+                        style: TextStyle(
+                          color: utilModel.greenColor,
+                          fontSize: 25,
+                        ),
+                        decoration: InputDecoration(
+                          fillColor: utilModel.greenColor,
+                          hoverColor: utilModel.greenColor,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: utilModel.greenColor,
+                              width: 2,
+                            ),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: utilModel.greenColor,
+                              width: 2,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: utilModel.greenColor,
+                              width: 2,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(
+                              color: utilModel.greenColor,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          hintText: 'Channel Name...',
+                          hintStyle: TextStyle(
+                            color: utilModel.greenColor,
+                            fontSize: 25,
+                          ),
+                        ),
                       ),
                     ),
-                    Icon(
-                      Icons.remove_red_eye,
-                      size: 25,
-                      color: utilModel.greenColor,
-                    )
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50, right: 50),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: utilModel.greyColor,
+                          side: BorderSide(
+                            style: BorderStyle.solid,
+                            color: Colors.blue,
+                            width: 2,
+                          ),
+                          primary: Colors.blue,
+                        ),
+                        onPressed: () => onJoin(
+                          isBroadcaster: true,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'JOIN AS PRESENTOR  ',
+                              style: TextStyle(
+                                fontSize: 22,
+                              ),
+                            ),
+                            Icon(
+                              Icons.video_call_rounded,
+                              size: 35,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20, left: 50, right: 50),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: utilModel.greyColor,
+                          side: BorderSide(
+                            style: BorderStyle.solid,
+                            color: Color.fromRGBO(57, 219, 188, 1),
+                            width: 2,
+                          ),
+                        ),
+                        onPressed: () => onJoin(
+                          isBroadcaster: false,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'JOIN AS VIEWER  ',
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Color.fromRGBO(57, 219, 188, 1),
+                              ),
+                            ),
+                            Icon(
+                              Icons.remove_red_eye,
+                              size: 30,
+                              color: Color.fromRGBO(57, 219, 188, 1),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Text(
+                      check,
+                      style: TextStyle(
+                        color: utilModel.whiteColor,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Text(
-                check,
-                style: TextStyle(
-                  color: Colors.red,
-                ),
-              )
             ],
           ),
         ],
@@ -111,7 +182,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
 
   Future<void> onJoin({required bool isBroadcaster}) async {
     await [Permission.camera, Permission.microphone].request();
-    print("HELLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => VideoChatScreen(

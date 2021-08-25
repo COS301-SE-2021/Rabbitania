@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
+import 'package:frontend/src/models/util_model.dart';
 
-const APP_ID = "e718dc1d125d4b59a3026ac5a600d65b";
-const token =
-    "006e718dc1d125d4b59a3026ac5a600d65bIAASFrU8lqCYhSDkVlybQttpwYaT73P5/C5mFXjxS5ct2IW+hcwAAAAAEACLgpZhdFInYQEAAQByUidh";
+const APP_ID = "";
 
 class VideoChatScreen extends StatefulWidget {
   final String channelName;
@@ -48,42 +47,44 @@ class _VideoChatState extends State<VideoChatScreen> {
     if (widget.isBroadcaster)
       streamId = (await _engine.createDataStream(false, false))!;
 
-    _engine.setEventHandler(RtcEngineEventHandler(
-      joinChannelSuccess: (channel, uid, elapsed) {
-        setState(() {
-          print('onJoinChannel: $channel, uid: $uid');
-        });
-      },
-      leaveChannel: (stats) {
-        setState(() {
-          print('onLeaveChannel');
-          _users.clear();
-        });
-      },
-      userJoined: (uid, elapsed) {
-        setState(() {
-          print('userJoined: $uid');
+    _engine.setEventHandler(
+      RtcEngineEventHandler(
+        joinChannelSuccess: (channel, uid, elapsed) {
+          setState(() {
+            print('onJoinChannel: $channel, uid: $uid');
+          });
+        },
+        leaveChannel: (stats) {
+          setState(() {
+            print('onLeaveChannel');
+            _users.clear();
+          });
+        },
+        userJoined: (uid, elapsed) {
+          setState(() {
+            print('userJoined: $uid');
 
-          _users.add(uid);
-        });
-      },
-      userOffline: (uid, elapsed) {
-        setState(() {
-          print('userOffline: $uid');
-          _users.remove(uid);
-        });
-      },
-      streamMessage: (_, __, message) {
-        final String info = "here is the message $message";
-        print(info);
-      },
-      streamMessageError: (_, __, error, ___, ____) {
-        final String info = "here is the error $error";
-        print(info);
-      },
-    ));
+            _users.add(uid);
+          });
+        },
+        userOffline: (uid, elapsed) {
+          setState(() {
+            print('userOffline: $uid');
+            _users.remove(uid);
+          });
+        },
+        streamMessage: (_, __, message) {
+          final String info = "here is the message $message";
+          print(info);
+        },
+        streamMessageError: (_, __, error, ___, ____) {
+          final String info = "here is the error $error";
+          print(info);
+        },
+      ),
+    );
 
-    await _engine.joinChannel(token, widget.channelName, null, 0);
+    await _engine.joinChannel(null, widget.channelName, null, 0);
   }
 
   Future<void> _initAgoraRtcEngine() async {
@@ -113,6 +114,8 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   Widget _toolbar() {
+    UtilModel utilModel = UtilModel();
+
     return widget.isBroadcaster
         ? Container(
             alignment: Alignment.bottomCenter,
@@ -124,19 +127,19 @@ class _VideoChatState extends State<VideoChatScreen> {
                   onPressed: _onToggleMute,
                   child: Icon(
                     muted ? Icons.mic_off : Icons.mic,
-                    color: muted ? Colors.white : Colors.blueAccent,
-                    size: 20.0,
+                    color: muted ? Colors.red : Colors.black,
+                    size: 25.0,
                   ),
                   shape: CircleBorder(),
                   elevation: 2.0,
-                  fillColor: muted ? Colors.blueAccent : Colors.white,
+                  fillColor: muted ? utilModel.greyColor : utilModel.greenColor,
                   padding: const EdgeInsets.all(12.0),
                 ),
                 RawMaterialButton(
                   onPressed: () => _onCallEnd(context),
                   child: Icon(
                     Icons.call_end,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 35.0,
                   ),
                   shape: CircleBorder(),
@@ -148,12 +151,12 @@ class _VideoChatState extends State<VideoChatScreen> {
                   onPressed: _onSwitchCamera,
                   child: Icon(
                     Icons.switch_camera,
-                    color: Colors.blueAccent,
-                    size: 20.0,
+                    color: Colors.black,
+                    size: 25.0,
                   ),
                   shape: CircleBorder(),
                   elevation: 2.0,
-                  fillColor: Colors.white,
+                  fillColor: utilModel.greenColor,
                   padding: const EdgeInsets.all(12.0),
                 ),
               ],
