@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/provider/chat_provider.dart';
 import 'package:frontend/src/screens/Chat/videoChatScreen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,8 +12,16 @@ class ChannelScreen extends StatefulWidget {
 
 class _ChannelScreenState extends State<ChannelScreen> {
   UtilModel utilModel = UtilModel();
+  ChatProvider chatProvider = new ChatProvider();
   final _channelName = TextEditingController();
   String check = '';
+  String appId = '';
+  void initState() {
+    super.initState();
+    chatProvider.getAgoraID().then((id) async {
+      appId = id;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,6 +197,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
         builder: (context) => VideoChatScreen(
           channelName: _channelName.text,
           isBroadcaster: isBroadcaster,
+          appId: appId,
         ),
       ),
     );

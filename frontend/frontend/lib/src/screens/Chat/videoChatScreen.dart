@@ -9,9 +9,12 @@ import 'package:frontend/src/provider/chat_provider.dart';
 class VideoChatScreen extends StatefulWidget {
   final String channelName;
   final bool isBroadcaster;
-
+  final String appId;
   const VideoChatScreen(
-      {Key? key, required this.channelName, required this.isBroadcaster})
+      {Key? key,
+      required this.channelName,
+      required this.isBroadcaster,
+      required this.appId})
       : super(key: key);
 
   @override
@@ -19,7 +22,6 @@ class VideoChatScreen extends StatefulWidget {
 }
 
 class _VideoChatState extends State<VideoChatScreen> {
-  ChatProvider chatProvider = new ChatProvider();
   final _users = <int>[];
   late RtcEngine _engine;
   bool muted = false;
@@ -88,13 +90,9 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   Future<void> _initAgoraRtcEngine() async {
-    print(await chatProvider.getAgoraID());
+    print("APP ID =====" + widget.appId);
 
-    _engine = await RtcEngine.createWithConfig(
-      RtcEngineConfig(
-        await chatProvider.getAgoraID(),
-      ),
-    );
+    _engine = await RtcEngine.createWithConfig(RtcEngineConfig(widget.appId));
     await _engine.enableVideo();
 
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);

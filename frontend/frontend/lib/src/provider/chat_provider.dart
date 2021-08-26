@@ -22,21 +22,18 @@ class ChatProvider {
     final token = await securityHelper.getToken();
 
     final response = await http.get(
-      Uri.parse(baseURL + '/api/Agora'),
+      Uri.parse(baseURL + '/api/Agora/GetAppID'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
       },
     );
     if (response.statusCode == 200) {
-      print(response
-          .body); //N5GpHv2UKNQcZHA3hiL+SUhwikDfo2DVJEve98gToGx/wqqlXRu88lc1TbRnd3lk
       ChatHelper chatHelper = new ChatHelper();
       var key = dotenv.env['ENC_KEY'];
-      print(key);
 
       var decryptedKey = chatHelper.decryptData(
-        response.body.toString(),
+        response.body,
         key.toString(),
       );
 
@@ -61,7 +58,7 @@ class ChatProvider {
         throw new Exception("Error with Authentication");
       }
     } else {
-      return "";
+      return "Agora ID was not returned: There was some error with the process.";
     }
   }
 }
