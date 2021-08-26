@@ -68,21 +68,21 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
                 ),
               ),
 
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      icon: Icon(
-                        FontAwesomeIcons.video,
-                        color: utilModel.greenColor,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-              ),
+              // Expanded(
+              //   flex: 1,
+              //   child: Container(
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(right: 10),
+              //       child: IconButton(
+              //         icon: Icon(
+              //           FontAwesomeIcons.video,
+              //           color: utilModel.greenColor,
+              //         ),
+              //         onPressed: () {},
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               Expanded(
                 flex: 1,
