@@ -4,6 +4,13 @@ from tensorflow import keras
 import tensorflow as tf
 from keras.models import load_model
 import numpy as np
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/index")
+def index():
+    return "Flask app running"
 
 class DecisionTree:
     def __init__(self):
