@@ -10,17 +10,22 @@ class DecisionTree:
         self.model_path = 'models'
         
     def train_and_save(self):
+        #Training dataset
         train_df = pandas.read_csv("dataset1.csv")
-
         test_ds = tfdf.keras.pd_dataframe_to_tf_dataset(train_df, label="corona_result")
 
+        #Evaluating dataset
+        evaluate_data = pandas.read_csv("dataset2.csv")
+        evaluate_dataset = tfdf.keras.pd_dataframe_to_tf_dataset(evaluate_data, label="corona_result")
+
+        #Train Random Forest
         model = tfdf.keras.RandomForestModel()
         model.fit(test_ds)
 
         model.summary()
         # Evaluate
         model.compile(metrics=["accuracy"])
-        print(model.evaluate(test_ds))
+        print(model.evaluate(evaluate_dataset))
         # >> 0.97
 
         model.save(self.model_path)
