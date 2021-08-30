@@ -18,11 +18,11 @@ class DecisionTree:
         
     def train_and_save(self):
         #Training dataset
-        train_df = pandas.read_csv("dataset3.csv")
+        train_df = pandas.read_csv("dataset4.csv")
         train_ds = tfdf.keras.pd_dataframe_to_tf_dataset(train_df, label="corona_result")
 
         #Evaluating dataset
-        evaluate_data = pandas.read_csv("dataset4.csv")
+        evaluate_data = pandas.read_csv("dataset3.csv")
 
         evaluate_dataset = tfdf.keras.pd_dataframe_to_tf_dataset(evaluate_data, label="corona_result")
 
