@@ -89,12 +89,30 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
                 child: Container(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                      icon: Icon(
-                        FontAwesomeIcons.phone,
-                        color: utilModel.greenColor,
-                      ),
-                      onPressed: () {},
+                    child: FutureBuilder(
+                      future:
+                          userProvider.getUserProfileFromUserId(widget.idUser),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        if (snapshot.hasData) {
+                          return IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.phone,
+                              color: utilModel.greenColor,
+                            ),
+                            onPressed: () {
+                              print(snapshot.data.phoneNumber);
+                            },
+                          );
+                        }
+                        return IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.phone,
+                            color: utilModel.greyColor,
+                          ),
+                          onPressed: () {},
+                        );
+                      },
                     ),
                   ),
                 ),
