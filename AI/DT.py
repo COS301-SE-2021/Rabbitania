@@ -27,7 +27,8 @@ class DecisionTree:
         evaluate_dataset = tfdf.keras.pd_dataframe_to_tf_dataset(evaluate_data, label="corona_result")
 
         #Train Random Forest using train_ds
-        model = tfdf.keras.RandomForestModel()
+        #model = tfdf.keras.RandomForestModel()
+        model=tfdf.keras.GradientBoostedTreesModel()
         model.fit(train_ds)
 
         model.summary()
