@@ -29,8 +29,7 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home:
-            ChatViewUsersScreen(), //InfoForm(FirebaseAuth.instance.currentUser),
+        home: Login(), //InfoForm(FirebaseAuth.instance.currentUser),
       ),
     );
   }
