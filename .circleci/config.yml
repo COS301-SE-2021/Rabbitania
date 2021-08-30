@@ -169,6 +169,25 @@ jobs:
             dotnet test --filter BookingServiceTests
 ################# BOOKING TESTS ##############
 
+################# DEPLOY #####################
+  HerokuDeployment:
+      docker:
+        - image: mcr.microsoft.com/dotnet/sdk:5.0
+      steps:
+        - checkout
+        - run:
+            working_directory: ~/project/backend/backend_api
+            name: Build and push Docker image
+            command: |
+              docker build -t backend_api .
+              heroku container:login
+              heroku container:push -a rabbitania-runtimeterrors web
+              heroku container:release -a rabbitania-runtimeterrors web
+              heroku container:logout
+################# DEPLOY #####################
+
+################# BOOKING TESTS ##############
+
 ################# WORKFLOW ################### 
 workflows:
   Rabbitania Testing:
@@ -189,6 +208,7 @@ workflows:
       - Booking:
           requires:
             - build
+    
       - User_UnitTests:
           requires:
             - User
@@ -213,6 +233,20 @@ workflows:
       - IntegrationTests_Booking:
           requires:
             - Booking
+
+      - HerokuDeployment:
+          requires:
+            - User_UnitTests
+            - User_IntegrationTests
+            - UnitTests_NoticeBoard
+            - UnitTests_NoticeBoard
+            - IntegrationTests_NoticeBoard
+            - UnitTest_Notification
+            - IntegrationTests_Notification
+            - IntegrationTests_Forum
+            - IntegrationTests_Booking
+          
+            
 
      
       
