@@ -23,6 +23,7 @@ class DecisionTree:
 
         #Evaluating dataset
         evaluate_data = pandas.read_csv("dataset4.csv")
+
         evaluate_dataset = tfdf.keras.pd_dataframe_to_tf_dataset(evaluate_data, label="corona_result")
 
         #Train Random Forest using train_ds
@@ -32,7 +33,7 @@ class DecisionTree:
         model.summary()
         # Evaluate
         model.compile(metrics=["accuracy"])
-        print(model.evaluate(evaluate_dataset))
+        # print(model.evaluate(evaluate_dataset))
         # >> 0.97
 
         model.save(self.model_path)
@@ -40,6 +41,7 @@ class DecisionTree:
         model.make_inspector().export_to_tensorboard("tensorboard_logs")
 
         tfdf.model_plotter.plot_model(model, tree_idx=0, max_depth=3)
+        print(model)
         return model
 
     def importModel(self):
@@ -62,7 +64,7 @@ class DecisionTree:
     
 dt = DecisionTree()
 
-dt.train_and_save()
+# dt.train_and_save()
 dt.prediction()
 #dt.exportToBoard()
 
