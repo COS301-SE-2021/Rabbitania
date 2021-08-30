@@ -11,11 +11,11 @@ class DecisionTree:
         
     def train_and_save(self):
         #Training dataset
-        train_df = pandas.read_csv("dataset1.csv")
+        train_df = pandas.read_csv("dataset3.csv")
         test_ds = tfdf.keras.pd_dataframe_to_tf_dataset(train_df, label="corona_result")
 
         #Evaluating dataset
-        evaluate_data = pandas.read_csv("dataset2.csv")
+        evaluate_data = pandas.read_csv("dataset4.csv")
         evaluate_dataset = tfdf.keras.pd_dataframe_to_tf_dataset(evaluate_data, label="corona_result")
 
         #Train Random Forest
@@ -55,7 +55,7 @@ class DecisionTree:
     
 dt = DecisionTree()
 
-#dt.train_and_save()
+dt.train_and_save()
 dt.prediction()
 #dt.exportToBoard()
 

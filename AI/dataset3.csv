@@ -864,7 +864,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,1,1,0,1,positive,No,male,Other
@@ -872,7 +872,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -1184,7 +1184,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -1936,14 +1936,14 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,1,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,1,positive,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,1,0,1,positive,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -1956,8 +1956,8 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -1973,7 +1973,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,positive,No,female,Contact with confirmed
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -2307,7 +2307,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -2350,7 +2350,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
-2020-11-12,1,0,0,0,0,other,,male,Other
+2020-11-12,1,0,0,0,0,positive,,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -2539,7 +2539,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -2712,7 +2712,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -2959,7 +2959,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -3097,7 +3097,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -3182,7 +3182,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -3516,7 +3516,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,,male,Other
+2020-11-12,0,0,0,0,0,positive,,male,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
@@ -3639,7 +3639,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -3686,7 +3686,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -3736,7 +3736,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Contact with confirmed
+2020-11-12,0,0,0,0,0,positive,Yes,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -3925,7 +3925,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -4102,7 +4102,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -4183,7 +4183,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -4885,7 +4885,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
@@ -5009,7 +5009,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -5287,7 +5287,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -5428,7 +5428,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -5446,7 +5446,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -5763,7 +5763,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -5868,7 +5868,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,0,1,0,0,0,negative,No,female,Other
@@ -6099,7 +6099,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Contact with confirmed
+2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -7173,7 +7173,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -7435,7 +7435,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
@@ -8149,7 +8149,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,1,1,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Contact with confirmed
+2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -8381,7 +8381,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -8734,7 +8734,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,,female,Other
+2020-11-12,0,0,0,0,0,positive,,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
@@ -8800,7 +8800,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,positive,No,female,Other
@@ -8846,7 +8846,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Contact with confirmed
+2020-11-12,0,0,0,0,0,positive,Yes,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -8987,7 +8987,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,1,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,1,1,0,0,0,negative,No,male,Other
-2020-11-12,1,0,0,0,0,other,No,female,Contact with confirmed
+2020-11-12,1,0,0,0,0,positive,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -9141,7 +9141,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,1,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
-2020-11-12,0,0,0,0,0,other,,male,Other
+2020-11-12,0,0,0,0,0,positive,,male,Other
 2020-11-12,0,0,0,0,0,positive,,male,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
@@ -9231,7 +9231,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -9312,7 +9312,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,1,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,1,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -9366,7 +9366,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -9411,7 +9411,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -9822,7 +9822,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -9854,7 +9854,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -9938,7 +9938,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -10024,7 +10024,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,,female,Other
+2020-11-12,0,0,0,0,0,positive,,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
@@ -10116,8 +10116,8 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -10382,7 +10382,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,1,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -10390,7 +10390,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
@@ -10496,7 +10496,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -10546,7 +10546,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -10560,7 +10560,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -10611,7 +10611,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -10622,7 +10622,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -10663,7 +10663,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
@@ -10813,7 +10813,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,1,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -11024,7 +11024,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -11097,7 +11097,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -11132,7 +11132,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,,male,Other
+2020-11-12,0,0,0,0,0,positive,,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -11241,9 +11241,9 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -11308,7 +11308,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -11397,7 +11397,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -11482,7 +11482,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
@@ -11503,7 +11503,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -11549,10 +11549,10 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -11667,7 +11667,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -11731,7 +11731,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -11816,7 +11816,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,1,0,0,positive,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,1,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -11938,7 +11938,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,,female,Other
+2020-11-12,0,0,0,0,0,positive,,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -11962,7 +11962,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -12088,7 +12088,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,positive,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,1,0,0,0,positive,Yes,male,Other
@@ -12187,7 +12187,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,positive,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -12288,9 +12288,9 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,1,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
@@ -12321,8 +12321,8 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -12404,7 +12404,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -12417,7 +12417,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -12490,7 +12490,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -12581,7 +12581,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,positive,Yes,female,Contact with confirmed
-2020-11-12,1,1,0,1,0,other,Yes,female,Other
+2020-11-12,1,1,0,1,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,positive,Yes,male,Other
@@ -12596,7 +12596,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -12717,7 +12717,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
-2020-11-12,0,0,0,0,0,other,,male,Other
+2020-11-12,0,0,0,0,0,positive,,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,,Other
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -12865,7 +12865,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -12938,7 +12938,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -12984,7 +12984,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -13018,7 +13018,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,,female,Other
+2020-11-12,0,0,0,0,0,positive,,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -13088,7 +13088,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Contact with confirmed
+2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -13293,7 +13293,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -13777,7 +13777,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -13871,7 +13871,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Contact with confirmed
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -13998,7 +13998,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
@@ -14094,7 +14094,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -14118,7 +14118,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,1,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Contact with confirmed
@@ -14433,7 +14433,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -14449,7 +14449,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,1,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,female,Other
+2020-11-12,0,0,0,0,0,positive,Yes,female,Other
 2020-11-12,0,1,0,0,0,positive,Yes,male,Other
 2020-11-12,1,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Contact with confirmed
@@ -14485,7 +14485,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -14508,14 +14508,14 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -14606,7 +14606,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -14640,7 +14640,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
@@ -14977,7 +14977,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,Yes,female,Other
 2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
-2020-11-12,0,0,0,0,0,other,No,male,Other
+2020-11-12,0,0,0,0,0,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -15019,7 +15019,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -15028,7 +15028,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,No,female,Other
+2020-11-12,0,0,0,0,0,positive,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -15114,7 +15114,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,1,0,0,0,0,positive,No,male,Other
 2020-11-12,1,1,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,1,0,0,1,0,positive,No,female,Contact with confirmed
-2020-11-12,0,0,0,0,0,other,No,male,Contact with confirmed
+2020-11-12,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-12,0,0,0,0,0,positive,Yes,male,Contact with confirmed
 2020-11-12,0,0,0,0,1,positive,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
@@ -15127,7 +15127,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,female,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
-2020-11-12,0,0,0,0,0,other,Yes,male,Other
+2020-11-12,0,0,0,0,0,positive,Yes,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
 2020-11-12,0,0,0,0,0,negative,No,male,Other
@@ -15209,10 +15209,10 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,,female,Other
 2020-11-11,0,0,0,0,0,negative,,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,,male,Other
 2020-11-11,0,0,0,0,0,negative,,male,Other
 2020-11-11,0,0,0,0,0,negative,,male,Other
@@ -16180,7 +16180,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Contact with confirmed
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -16209,7 +16209,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,1,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Contact with confirmed
+2020-11-11,0,0,0,0,0,positive,No,female,Contact with confirmed
 2020-11-11,1,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -17090,7 +17090,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,1,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,Yes,male,Other
+2020-11-11,0,0,0,0,0,positive,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -17198,7 +17198,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,1,0,0,0,0,positive,No,female,Contact with confirmed
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -17340,7 +17340,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -17379,7 +17379,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -17500,7 +17500,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -17603,7 +17603,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,1,1,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,male,Contact with confirmed
+2020-11-11,0,0,0,0,0,positive,No,male,Contact with confirmed
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -17622,7 +17622,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Contact with confirmed
+2020-11-11,0,0,0,0,0,positive,No,female,Contact with confirmed
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -17945,7 +17945,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
-2020-11-11,0,0,0,0,0,other,Yes,female,Other
+2020-11-11,0,0,0,0,0,positive,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -18045,7 +18045,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
-2020-11-11,0,0,0,0,0,other,Yes,male,Other
+2020-11-11,0,0,0,0,0,positive,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -18167,7 +18167,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,1,positive,No,male,Contact with confirmed
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -18254,7 +18254,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,,female,Other
 2020-11-11,0,0,0,0,0,negative,,male,Other
-2020-11-11,1,0,0,0,0,other,,,Other
+2020-11-11,1,0,0,0,0,positive,,,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -18439,7 +18439,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,Yes,female,Other
+2020-11-11,0,0,0,0,0,positive,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,1,0,0,0,negative,No,male,Other
@@ -18597,7 +18597,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -18649,7 +18649,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
@@ -18721,7 +18721,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -18730,10 +18730,10 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,Yes,female,Other
+2020-11-11,0,0,0,0,0,positive,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -18762,7 +18762,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Contact with confirmed
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -18770,7 +18770,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -18830,7 +18830,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -18963,11 +18963,11 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -18997,7 +18997,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -19054,7 +19054,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -19071,7 +19071,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -19213,7 +19213,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
-2020-11-11,0,0,0,0,0,other,Yes,female,Other
+2020-11-11,0,0,0,0,0,positive,Yes,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,1,1,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
@@ -19248,7 +19248,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
-2020-11-11,0,0,0,0,0,other,No,male,Other
+2020-11-11,0,0,0,0,0,positive,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,Yes,female,Other
@@ -19486,8 +19486,8 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,Yes,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
@@ -19539,7 +19539,7 @@ test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,ag
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
-2020-11-11,0,0,0,0,0,other,No,female,Other
+2020-11-11,0,0,0,0,0,positive,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
 2020-11-11,0,0,0,0,0,negative,No,female,Other
 2020-11-11,0,0,0,0,0,negative,No,male,Other
