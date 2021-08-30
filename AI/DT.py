@@ -26,7 +26,7 @@ class DecisionTree:
         model.summary()
         # Evaluate
         model.compile(metrics=["accuracy"])
-        # print(model.evaluate(evaluate_dataset))
+        print(model.evaluate(evaluate_dataset))
         # >> 0.97
 
         model.save(self.model_path)
@@ -34,7 +34,7 @@ class DecisionTree:
         model.make_inspector().export_to_tensorboard("tensorboard_logs")
 
         tfdf.model_plotter.plot_model(model, tree_idx=0, max_depth=3)
-        print(model)
+        # print(model)
         return model
 
     def importModel(self):
@@ -57,7 +57,7 @@ class DecisionTree:
     
 dt = DecisionTree()
 
-# dt.train_and_save()
+dt.train_and_save()
 dt.prediction()
 #dt.exportToBoard()
 
