@@ -1,2 +1,2 @@
-test_date,cough,fever,sore_throat,shortness_of_breath,head_ache,age_60_and_above,gender,test_indication
-2020-10-29,0,1,1,0,1,No,male,Other
+cough,fever,sore_throat,shortness_of_breath,head_ache,gender,test_indication
+1,0,1,0,1,male,Contact with confirmed
