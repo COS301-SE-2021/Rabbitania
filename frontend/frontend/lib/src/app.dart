@@ -12,6 +12,7 @@ import 'package:frontend/src/screens/Login/googleAuthTest.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Login/supplyInfoScreen.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
+import 'package:frontend/src/widgets/Questionnaire/questionnare_display.dart';
 import 'package:provider/provider.dart';
 import './widgets/expandable_button_widget.dart';
 import 'models/Testing/mockUser.dart';
