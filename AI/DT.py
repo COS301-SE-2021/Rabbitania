@@ -1,10 +1,11 @@
+import threading
 import tensorflow_decision_forests as tfdf
 import pandas
 from tensorflow import keras
 import tensorflow as tf
 from keras.models import load_model
 import numpy as np
-from flask import Flask
+from flask import Flask, jsonify, request 
 
 app = Flask(__name__)
 
@@ -63,10 +64,31 @@ class DecisionTree:
         print("-------------------------------------------------------------Predictions---------------------------------------------------------")
         print(predictions)
     
-dt = DecisionTree()
-
+dt = DecisionTree()    
 dt.train_and_save()
 dt.prediction()
+
+@app.route('/api/predict/', methods = ['GET'])
+def assumption():
+    dt = DecisionTree()
+
+    dt.train_and_save()
+    dt.prediction()
+    data = request.get_json()
+    cough = request.args.get("cough")
+    fever = data.get('fever','')
+    sore_throat = data.get('sore_throat','')
+    shortness_of_breath = data.get('shortness_of_breath')
+    head_ache = data.get('head_ache')
+    gender = data.get('gender')
+    test_indication = data.get('test_indication')
+    symptoms = [cough,fever, sore_throat, shortness_of_breath, head_ache, gender, test_indication]
+    dt.prediction(symptoms)
+    return "hello there"
+
+
+# if __name__ == '__main__':
+#     app.run(threaded = True, port = 5006)
 #dt.exportToBoard()
 
 
