@@ -95,7 +95,7 @@ Widget bnb(BuildContext context) {
                 color: Color.fromRGBO(33, 33, 33, 1),
               ),
               Text(
-                'Book',
+                'Bookings',
                 style: TextStyle(
                   color: Color.fromRGBO(33, 33, 33, 1),
                 ),
