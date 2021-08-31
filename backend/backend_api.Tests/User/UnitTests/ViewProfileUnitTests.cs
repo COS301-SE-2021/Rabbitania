@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.User;
-using backend_api.Exceptions.NoticeBoard;
 using backend_api.Exceptions.User;
-using backend_api.Models.NoticeBoard;
-using backend_api.Models.User;
 using backend_api.Models.User.Requests;
-using backend_api.Models.User.Responses;
 using backend_api.Services.User;
 using Moq;
 using Xunit;
 
-namespace backend_api.Tests
+namespace backend_api.Tests.User.UnitTests
 {
     public class ViewProfileUnitTests
     {
