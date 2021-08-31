@@ -54,7 +54,7 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FancyFab(
-          heroTag: "BookingScreenPage",
+          heroTag: "BookingSchedule",
           numberOfItems: 2,
           icon1: Icons.admin_panel_settings_sharp,
           onPressed1: () async {
