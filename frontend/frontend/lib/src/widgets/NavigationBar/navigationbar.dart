@@ -1,5 +1,7 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
@@ -38,51 +40,110 @@ Widget bnb(BuildContext context) {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.home,
-            color: Color.fromRGBO(33, 33, 33, 1),
-          ),
+        TextButton(
           onPressed: () {
             UtilModel.route(() => NoticeBoard(), context);
           },
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.forum_sharp,
-            color: Color.fromRGBO(33, 33, 33, 1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.home,
+                color: Color.fromRGBO(33, 33, 33, 1),
+              ),
+              Text(
+                'Home',
+                style: TextStyle(
+                  color: Color.fromRGBO(33, 33, 33, 1),
+                ),
+              ),
+            ],
           ),
+        ),
+        TextButton(
           onPressed: () {
             UtilModel.route(() => Forum(), context);
           },
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.book_sharp,
-            color: Color.fromRGBO(33, 33, 33, 1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.forum_sharp,
+                color: Color.fromRGBO(33, 33, 33, 1),
+              ),
+              Text(
+                'Forum',
+                style: TextStyle(
+                  color: Color.fromRGBO(33, 33, 33, 1),
+                ),
+              ),
+            ],
           ),
+        ),
+        TextButton(
           onPressed: () {
             UtilModel.route(() => BookingScreen(), context);
           },
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.message_sharp,
-            color: Color.fromRGBO(33, 33, 33, 1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.book_sharp,
+                color: Color.fromRGBO(33, 33, 33, 1),
+              ),
+              Text(
+                'Book',
+                style: TextStyle(
+                  color: Color.fromRGBO(33, 33, 33, 1),
+                ),
+              ),
+            ],
           ),
+        ),
+        TextButton(
           onPressed: () {
             UtilModel.route(() => ChatViewUsersScreen(), context);
           },
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.person,
-            color: Color.fromRGBO(33, 33, 33, 1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FaIcon(
+                FontAwesomeIcons.solidComments,
+                color: Color.fromRGBO(33, 33, 33, 1),
+              ),
+              Text(
+                'Chats',
+                style: TextStyle(
+                  color: Color.fromRGBO(33, 33, 33, 1),
+                ),
+              ),
+            ],
           ),
-          onPressed: () async {
-            //userProfile = await userP.getUserProfileObj();
+        ),
+        TextButton(
+          onPressed: () {
             UtilModel.route(() => ProfileScreen(), context);
           },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.account_circle,
+                color: Color.fromRGBO(33, 33, 33, 1),
+              ),
+              Text(
+                'Profile',
+                style: TextStyle(
+                  color: Color.fromRGBO(33, 33, 33, 1),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     ),
