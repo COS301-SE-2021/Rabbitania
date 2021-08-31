@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Chat/ChatFirestoreUserModel.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
+import 'package:frontend/src/models/Chat/GroupChatMessageModel.dart';
 import 'package:rxdart/streams.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -43,6 +44,13 @@ class FireStoreHelper {
         .snapshots();
   }
 
+  getGroupChats(String roomName) {
+    return firestore
+        .collection('groupChat/$roomName/messages')
+        .orderBy('dateCreated', descending: true)
+        .snapshots();
+  }
+
   Future sendMessage(int idUser, int myId, String message) async {
     //navigate to my messages
     final refMessagesMe = firestore.collection('chats/$myId/messages');
@@ -66,6 +74,22 @@ class FireStoreHelper {
     //final refUsers = firestore.collection('users/$idUser').doc().update({});
   }
 
+  //used to create new message in desired groupChat room
+  Future sendGroupChatMessage(String roomName, int myId, String message) async {
+    final refGroupMessages =
+        firestore.collection('groupChat/$roomName/messages');
+
+    final newGroupChatMessage = GroupChatMessageModel(
+      uid: myId,
+      message: message,
+      dateCreated: DateTime.now(),
+    );
+
+    await refGroupMessages.add(
+      newGroupChatMessage.toJson(),
+    );
+  }
+
   //function to get user object using user idUser
   Stream<QuerySnapshot<Map<String, dynamic>>> getUserById(idUser) {
     return firestore
@@ -82,6 +106,6 @@ class FireStoreHelper {
     final refGroupRooms = firestore
         .collection('groupChat')
         .doc('$roomName')
-        .set({'participants': users});
+        .set({'participants': users, 'roomName': roomName});
   }
 }
