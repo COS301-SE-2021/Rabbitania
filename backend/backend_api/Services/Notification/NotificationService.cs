@@ -76,11 +76,11 @@ namespace backend_api.Services.Notification
             }
             if (request.Payload.Equals("") || request.Payload == null)
             {
-                throw new EmailFailedToSendException("Invalid email address, either null or empty");
+                throw new EmailFailedToSendException("Invalid Payload, either null or empty");
             }
             if (request.Subject.Equals("") || request.Subject == null)
             {
-                throw new EmailFailedToSendException("Invalid email address, either null or empty");
+                throw new EmailFailedToSendException("Invalid Subject, either null or empty");
             }
             if (request == null)
             {

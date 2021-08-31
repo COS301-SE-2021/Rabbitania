@@ -6,6 +6,8 @@ import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
+import 'package:frontend/src/screens/Chat/videoChannelScreen.dart';
+import 'package:frontend/src/screens/Chat/videoChatScreen.dart';
 import 'package:frontend/src/screens/Login/googleAuthTest.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Login/supplyInfoScreen.dart';

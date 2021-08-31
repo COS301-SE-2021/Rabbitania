@@ -7,12 +7,9 @@ namespace backend_api.Models.Chat.Requests
         
         [Required] 
         public string channel { get; set; }
-        
-        [Required]
-        public dynamic uid { get; set; }
+
+        [Required] public dynamic uid { get; set; } = 0;
 
         public uint expiredTokens { get; set; } = 0;
-
-        public int role { get; set; } = 1;
     }
 }
