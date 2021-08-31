@@ -148,7 +148,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -286,15 +285,12 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -438,13 +434,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 1,1,0,0,1,positive,female,Contact with confirmed
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,positive,male,Other
 0,1,1,0,1,negative,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -653,7 +647,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -730,7 +723,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 1,0,0,1,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -920,7 +912,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -1190,7 +1181,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,1,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
@@ -1546,7 +1536,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -1655,7 +1644,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -2512,7 +2500,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,1,1,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,1,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -2523,7 +2510,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -2952,7 +2938,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -3278,7 +3263,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 1,1,0,0,1,positive,male,Contact with confirmed
 0,1,1,0,1,negative,female,Contact with confirmed
@@ -3354,7 +3338,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -4351,7 +4334,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -7057,7 +7039,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,positive,female,Other
 0,1,1,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -7574,7 +7555,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -7727,7 +7707,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
@@ -8258,7 +8237,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -8496,7 +8474,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,1,positive,female,Abroad
@@ -8510,7 +8487,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 1,0,0,1,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 1,0,0,0,1,positive,male,Other
 0,0,1,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -8743,7 +8719,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,1,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 1,0,1,1,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -8812,7 +8787,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,1,0,0,0,positive,male,Other
@@ -8921,7 +8895,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,1,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -8946,7 +8919,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
@@ -9589,7 +9561,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,1,0,1,0,positive,male,Contact with confirmed
@@ -9610,7 +9581,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -10174,13 +10144,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,negative,female,Contact with confirmed
 1,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 1,0,0,0,0,negative,female,Contact with confirmed
 1,0,0,0,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,1,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -10893,7 +10861,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,1,0,0,1,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -10901,7 +10868,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 1,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,1,0,positive,female,Contact with confirmed
@@ -11671,7 +11637,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,positive,female,Other
 0,1,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -11693,7 +11658,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,1,positive,female,Contact with confirmed
@@ -11753,7 +11717,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 1,1,1,0,1,positive,female,Other
-0,0,1,0,0,positive,male,Other
 0,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,1,positive,male,Contact with confirmed
@@ -11842,7 +11805,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
@@ -11850,7 +11812,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,1,1,1,1,negative,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Other
@@ -11859,7 +11820,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,0,positive,male,Other
 0,0,1,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -12304,9 +12264,7 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,negative,female,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 1,0,1,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Abroad
 0,0,0,0,0,positive,female,Other
 1,0,0,0,0,positive,Other
@@ -14591,7 +14549,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,1,0,1,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -14799,13 +14756,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 1,0,1,0,1,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,1,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
@@ -15397,7 +15352,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 1,1,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,positive,female,Other
@@ -15411,7 +15365,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,1,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 1,1,0,0,1,positive,male,Contact with confirmed
@@ -15460,8 +15413,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,positive,female,Other
-0,0,0,1,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,1,0,0,1,positive,male,Abroad
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -15734,7 +15685,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Other
@@ -15983,15 +15933,12 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 1,1,1,1,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -16866,7 +16813,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,1,1,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,0,0,0,1,negative,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 1,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -16893,7 +16839,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -17195,7 +17140,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Other
@@ -17293,7 +17237,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -17564,7 +17507,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -17664,7 +17606,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -18481,7 +18422,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 1,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,1,negative,female,Contact with confirmed
@@ -19100,7 +19040,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,1,positive,female,Contact with confirmed
 0,1,0,0,0,positive,male,Other
 0,1,0,0,1,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 1,1,0,0,0,positive,female,Other
@@ -19121,7 +19060,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -19150,7 +19088,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 1,0,0,0,0,positive,female,Other
@@ -19182,7 +19119,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -19424,7 +19360,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -19654,7 +19589,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -19752,7 +19686,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 1,1,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
@@ -20588,7 +20521,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,1,0,positive,female,Other
 1,0,1,1,1,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,positive,male,Contact with confirmed
@@ -20875,7 +20807,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -20906,7 +20837,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -21076,7 +21006,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,1,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -21379,7 +21308,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,1,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Abroad
 0,0,1,0,0,positive,male,Abroad
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -21558,7 +21486,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 1,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -22311,7 +22238,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,1,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
@@ -25018,7 +24944,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,1,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -25179,7 +25104,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
@@ -25801,13 +25725,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 1,1,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,negative,male,Contact with confirmed
 0,1,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 1,1,0,0,0,positive,male,Other
 1,0,0,0,0,positive,male,Other
@@ -26664,7 +26586,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -26724,7 +26645,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,1,0,0,0,negative,female,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -26801,7 +26721,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -27409,7 +27328,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -27563,7 +27481,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,male,Abroad
 0,0,0,1,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -28406,7 +28323,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 1,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,female,Contact with confirmed
@@ -29076,7 +28992,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Contact with confirmed
 0,1,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,0,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
@@ -29250,7 +29165,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,1,0,0,positive,female,Contact with confirmed
 0,1,1,0,1,positive,male,Contact with confirmed
 0,1,0,0,0,negative,male,Contact with confirmed
@@ -29846,7 +29760,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -31417,7 +31330,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,1,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Other
 1,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
@@ -31770,7 +31682,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -32143,7 +32054,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,1,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,1,0,1,negative,female,Contact with confirmed
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -32218,7 +32128,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -34125,7 +34034,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,1,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -35015,7 +34923,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 1,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -35136,12 +35043,10 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,1,0,positive,female,Other
 0,0,1,0,1,positive,female,Contact with confirmed
 1,1,0,0,1,positive,male,Contact with confirmed
 0,1,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -35187,7 +35092,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,1,0,positive,male,Other
 0,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
@@ -35276,7 +35180,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -37252,7 +37155,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -38163,7 +38065,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,1,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -38209,7 +38110,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -39039,7 +38939,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,1,1,1,positive,male,Other
 1,0,1,0,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
@@ -40271,7 +40170,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 1,1,0,0,1,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -40972,7 +40870,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -40984,7 +40881,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -42336,7 +42232,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,1,1,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -42692,7 +42587,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -43414,7 +43308,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,1,0,0,1,positive,female,Contact with confirmed
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,1,1,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -43920,7 +43813,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
@@ -44973,7 +44865,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -46034,7 +45925,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -46042,7 +45932,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -46098,7 +45987,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -46115,7 +46003,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,1,negative,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -46570,7 +46457,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -48368,7 +48254,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,1,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -50099,19 +49984,16 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,negative,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,1,1,0,1,positive,female,Other
 1,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,positive,male,Contact with confirmed
 1,1,0,0,0,positive,male,Contact with confirmed
 1,0,0,0,1,positive,male,Other
-0,0,0,0,1,positive,female,Other
 1,0,0,0,1,negative,female,Contact with confirmed
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,female,Contact with confirmed
@@ -50856,7 +50738,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -51013,32 +50894,27 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,1,positive,female,Contact with confirmed
 0,1,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,1,0,0,0,positive,male,Contact with confirmed
 0,0,1,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,1,positive,female,Contact with confirmed
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,1,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -51196,7 +51072,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -51207,7 +51082,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -52281,7 +52155,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
 0,1,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,0,1,1,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,1,positive,female,Contact with confirmed
@@ -52301,7 +52174,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 1,1,1,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -52571,7 +52443,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,positive,male,Contact with confirmed
 0,1,1,0,1,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,1,positive,male,Contact with confirmed
@@ -52763,7 +52634,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
@@ -53032,7 +52902,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -53246,7 +53115,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,1,0,0,positive,male,Other
 1,0,1,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,1,1,0,0,positive,male,Contact with confirmed
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -53439,13 +53307,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,0,1,0,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -54685,7 +54551,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -54708,7 +54573,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -54728,7 +54592,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,1,0,0,0,negative,male,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 1,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -55159,7 +55022,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -55479,7 +55341,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,1,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -55948,7 +55809,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Contact with confirmed
 0,1,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 1,0,1,0,0,positive,female,Contact with confirmed
@@ -56352,7 +56212,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -56373,7 +56232,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,1,positive,female,Contact with confirmed
 0,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -56470,7 +56328,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -57175,7 +57032,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -57907,13 +57763,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,1,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
@@ -58228,7 +58082,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -58843,7 +58696,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -58982,7 +58834,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,1,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
@@ -58994,7 +58845,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -59568,7 +59418,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,female,Other
 1,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,1,0,1,negative,female,Contact with confirmed
@@ -60235,7 +60084,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -60831,8 +60679,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,1,1,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -60854,7 +60700,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 1,0,0,0,0,positive,female,Other
 0,1,1,0,0,positive,female,Other
@@ -60997,7 +60842,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 1,1,1,0,1,positive,female,Contact with confirmed
@@ -61266,7 +61110,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,1,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -61285,7 +61128,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -61464,7 +61306,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,positive,female,Contact with confirmed
 0,1,0,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
@@ -62241,7 +62082,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -63254,7 +63094,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
@@ -63630,7 +63469,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -63659,7 +63497,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,1,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -63671,7 +63508,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 1,0,0,1,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,1,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -63924,7 +63760,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,1,negative,female,Contact with confirmed
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
@@ -64013,7 +63848,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -64373,7 +64207,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -64535,7 +64368,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -64573,7 +64405,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -64653,7 +64484,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,negative,female,Other
@@ -64981,7 +64811,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -65199,7 +65028,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -65643,7 +65471,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 1,1,0,0,1,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -65752,7 +65579,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,negative,female,Contact with confirmed
 0,0,0,0,1,negative,female,Contact with confirmed
 0,0,1,0,0,negative,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,positive,female,Abroad
 0,0,0,0,0,positive,male,Contact with confirmed
 1,0,0,0,0,negative,male,Contact with confirmed
@@ -65886,7 +65712,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -66040,7 +65865,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,0,1,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -67328,7 +67152,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,1,0,0,0,positive,male,Other
 0,1,1,0,0,positive,male,Contact with confirmed
 1,0,0,0,0,positive,female,Contact with confirmed
@@ -67750,7 +67573,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,1,0,1,0,negative,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
@@ -68210,7 +68032,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,1,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -68228,8 +68049,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
@@ -68240,7 +68059,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -68270,7 +68088,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 1,1,1,0,1,negative,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -68955,7 +68772,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -69436,9 +69252,7 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,1,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -69504,7 +69318,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,0,1,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,female,Abroad
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -69563,7 +69376,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 1,1,0,0,1,positive,female,Contact with confirmed
@@ -69623,7 +69435,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,1,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -70102,7 +69913,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,1,0,1,0,positive,male,Other
-0,0,0,1,0,positive,male,Other
 1,0,0,0,1,positive,male,Contact with confirmed
 0,1,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
@@ -70163,7 +69973,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 1,1,0,1,1,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -71280,7 +71089,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,1,0,0,negative,female,Other
 0,0,0,0,1,negative,female,Other
 1,0,0,0,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -71878,7 +71686,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
@@ -72133,10 +71940,8 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,1,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
@@ -72163,7 +71968,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -72198,9 +72002,7 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,1,0,0,0,negative,female,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -72484,7 +72286,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 1,1,0,0,0,positive,male,Contact with confirmed
 1,0,0,1,1,positive,female,Other
 1,0,1,0,1,positive,female,Contact with confirmed
@@ -72566,7 +72367,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
@@ -72928,7 +72728,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,1,0,1,positive,male,Contact with confirmed
 0,1,1,0,0,positive,female,Other
@@ -73094,7 +72893,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,1,0,0,0,positive,female,Other
 1,1,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
@@ -73102,7 +72900,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,positive,female,Contact with confirmed
 0,1,0,1,1,positive,male,Contact with confirmed
 1,1,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -73121,7 +72918,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,1,0,0,0,negative,female,Contact with confirmed
 0,1,1,0,1,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,1,0,1,positive,female,Contact with confirmed
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
@@ -73136,7 +72932,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,0,0,0,1,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 1,0,0,0,1,positive,female,Contact with confirmed
@@ -73193,7 +72988,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -73224,7 +73018,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
-0,0,1,0,0,positive,male,Other
 1,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -73237,7 +73030,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,positive,female,Contact with confirmed
@@ -73427,7 +73219,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 1,1,0,0,0,negative,female,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -73643,8 +73434,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,male,Other
-0,0,0,1,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,female,Other
@@ -73789,15 +73578,12 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,1,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,1,1,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 1,0,0,0,0,negative,male,Contact with confirmed
 0,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
@@ -74049,7 +73835,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -74348,7 +74133,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 1,1,0,0,0,negative,male,Other
@@ -74809,7 +74593,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,male,Other
 0,0,0,0,1,negative,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -74906,7 +74689,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 1,0,1,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -75025,7 +74807,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,1,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,1,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -75273,7 +75054,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,1,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,negative,female,Contact with confirmed
 1,1,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
@@ -75456,7 +75236,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -75680,7 +75459,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,female,Other
 1,0,0,0,1,positive,female,Contact with confirmed
 0,1,0,0,0,positive,female,Contact with confirmed
@@ -75858,7 +75636,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,0,1,0,1,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 1,1,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -75905,7 +75682,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
@@ -76419,7 +76195,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -76443,7 +76218,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -77591,7 +77365,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -77807,7 +77580,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -77922,7 +77694,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -79222,7 +78993,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 1,1,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -79769,13 +79539,11 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 1,0,0,0,0,positive,male,Other
 0,1,0,0,0,positive,male,Other
 1,1,1,0,0,positive,male,Other
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,female,Other
-0,0,0,0,1,positive,male,Other
 1,1,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -80423,7 +80191,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,negative,female,Other
@@ -80438,7 +80205,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,1,1,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
@@ -80602,7 +80368,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Contact with confirmed
 1,0,1,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -81584,7 +81349,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Contact with confirmed
-0,0,0,1,0,positive,female,Other
 1,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,male,Other
@@ -82131,7 +81895,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
@@ -82318,7 +82081,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 1,0,1,0,0,positive,female,Contact with confirmed
 1,0,1,0,1,positive,male,Other
@@ -82528,7 +82290,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 1,1,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
 1,1,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -82628,7 +82389,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,1,positive,male,Contact with confirmed
 0,1,0,0,1,positive,male,Contact with confirmed
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
@@ -82670,7 +82430,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,1,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -83281,7 +83040,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Other
@@ -83810,9 +83568,7 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,0,0,0,0,positive,female,Other
 0,0,0,0,0,positive,female,Other
 1,1,0,0,0,positive,female,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Other
@@ -83829,7 +83585,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Other
 0,1,0,0,0,positive,female,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,positive,male,Other
@@ -84227,7 +83982,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 1,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,female,Contact with confirmed
 1,0,0,0,0,negative,male,Contact with confirmed
 1,0,0,0,0,positive,male,Other
@@ -84736,7 +84490,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
-0,0,1,0,0,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -84830,7 +84583,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Contact with confirmed
 0,1,0,0,0,positive,male,Contact with confirmed
 1,0,0,0,0,positive,male,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
@@ -85161,7 +84913,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 1,1,0,1,1,positive,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 1,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
@@ -85404,7 +85155,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,1,0,1,positive,female,Other
 0,0,0,0,0,positive,male,Contact with confirmed
 0,0,0,0,0,positive,male,Other
-0,0,0,0,1,positive,female,Other
 0,1,1,0,1,positive,male,Contact with confirmed
 1,1,0,0,0,positive,male,Contact with confirmed
 1,0,0,1,0,positive,female,Other
@@ -85647,7 +85397,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
@@ -86675,10 +86424,8 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,1,0,0,0,positive,male,Other
 0,0,0,0,1,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Other
-0,0,0,0,1,positive,female,Other
 0,0,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,1,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,0,0,0,0,negative,female,Contact with confirmed
 0,1,0,0,0,positive,female,Contact with confirmed
 0,0,0,0,0,positive,female,Contact with confirmed
@@ -87054,7 +86801,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,1,positive,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,1,0,1,1,positive,female,Other
-0,0,0,1,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,1,0,0,0,positive,female,Contact with confirmed
 0,1,0,0,0,negative,female,Contact with confirmed
@@ -87105,7 +86851,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,1,0,0,1,positive,male,Other
 0,0,0,0,0,positive,female,Contact with confirmed
-0,0,0,0,1,positive,female,Other
 1,1,0,0,0,negative,male,Contact with confirmed
 0,0,0,0,0,positive,female,Other
 0,0,0,0,0,negative,female,Other
@@ -87118,7 +86863,6 @@ cough,fever,sore_throat,shortness_of_breath,head_ache,corona_result,gender,test_
 0,0,0,0,0,positive,male,Other
 0,0,0,0,0,positive,male,Other
 0,1,0,0,0,positive,male,Other
-0,0,0,0,1,positive,male,Other
 0,0,0,0,0,negative,male,Other
 0,0,0,0,0,negative,female,Other
 0,0,0,0,0,negative,male,Other
