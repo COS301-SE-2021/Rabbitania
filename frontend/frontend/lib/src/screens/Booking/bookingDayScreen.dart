@@ -186,19 +186,14 @@ class _BookingDayState extends State<BookingDayScreen> {
                   ),
                 ],
               ),
-              Center(
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.only(top: 50),
-                      child: BookingDayText(
-                          'Morning', this.displayText, widget.bookText),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 45),
-                    ),
-                  ],
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    child: BookingDayText(
+                        'Morning', this.displayText, widget.bookText),
+                  ),
+                ],
               ),
             ],
           ),
