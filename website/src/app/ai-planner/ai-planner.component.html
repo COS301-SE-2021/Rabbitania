@@ -1,13 +1,21 @@
+
+<h1>AI-Planner</h1>
 <div class="container">
 <div class="center">
     
- <div class="example-boundary">
-    <div cdkDrag class="example-box" cdkDragBoundary=".example-boundary" (cdkDragStarted)="dragStarted($event)" (cdkDragEnded)="dragEnded($event)" (cdkDragMoved)="dragMoved($event, 12,12)">
-  Drag Me
+ <div class="example-boundary" id="boarder">
+    <div cdkDrag class="example-box" id="box" cdkDragBoundary=".example-boundary" (cdkDragStarted)="dragStarted($event)" (cdkDragEnded)="dragEnded($event)" (cdkDragMoved)="dragMoved($event)">
+  <div class="example-handle" cdkDragHandle style="background-color:powderblue;">
+    <svg width="30px" fill="red" viewBox="0 0 35 40">
+      <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+    </svg>
+  </div>
 </div>
 </div>
 
     </div>
     <p>{{state}} {{position}}</p>
+    
 </div>
 

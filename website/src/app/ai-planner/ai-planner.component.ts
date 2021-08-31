@@ -16,19 +16,25 @@ export class AIPlannerComponent implements OnInit {
 
   state = '';
   position = '';
-  
 
+  
   dragStarted(event: CdkDragStart) {
     this.state = 'dragStarted';
+    
   }
 
   dragEnded(event: CdkDragEnd) {
     this.state = 'dragEnded';
+    
   }
 
-  dragMoved(event: CdkDragMove, x: any, y: any) {
-    
-    this.position = `> Position X: ${event.pointerPosition.x-x} - Y: ${event.pointerPosition.y-y}`;
+  dragMoved(event: CdkDragMove) {
+    var boarder = document.getElementById("boarder");
+    var leftOffset = boarder!.offsetLeft;
+    var toptOffset = boarder!.offsetTop;
+    this.position = `> Position X: ${event.pointerPosition.x-leftOffset-30} - Y: ${event.pointerPosition.y-toptOffset-30}`;
+
+  
   }
 
 }
