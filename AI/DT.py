@@ -65,7 +65,7 @@ class DecisionTree:
     
 dt = DecisionTree()
 
-# dt.train_and_save()
+dt.train_and_save()
 dt.prediction()
 #dt.exportToBoard()
 

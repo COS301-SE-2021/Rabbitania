@@ -1,17 +1,17 @@
 cough,fever,sore_throat,shortness_of_breath,head_ache,gender,test_indication
-1,0,1,0,1,male,Contact with confirmed
+1,0,1,0,1,male,Other
 1,0,0,1,0,female,Other
 0,0,0,0,0,male,Other
 0,0,0,0,0,male,Other
 0,0,0,0,0,male,Other
 0,0,0,0,0,female,Other
-0,1,0,0,0,male,Contact with confirmed
+0,1,0,0,0,male,Other
 0,0,0,0,0,male,Other
-0,0,1,1,1,female,Contact with confirmed
-0,0,0,0,0,female,Contact with confirmed
+0,0,1,1,1,female,Other
+0,0,0,0,0,female,Other
 0,0,0,0,1,male,Other
 1,0,0,0,0,female,Other
-0,1,0,0,0,female,Contact with confirmed
-0,0,1,0,0,female,Contact with confirmed
-0,0,0,1,0,male,Contact with confirmed
-0,0,0,0,1,female,Contact with confirmed
+0,1,0,0,0,female,Other
+0,0,1,0,0,female,Other
+0,0,0,1,0,male,Other
+0,0,0,0,1,female,Other
