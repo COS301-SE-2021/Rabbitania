@@ -74,16 +74,66 @@ class _BookingState extends State<BookingScreen> {
         bottomNavigationBar: bnb(context),
         appBar: AppBar(
           centerTitle: true,
+          toolbarHeight: 250,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Booking Home',
-            style: TextStyle(
-              fontSize: 35,
-              color: Color.fromRGBO(172, 255, 79, 1),
-            ),
-          ),
-          elevation: 0,
+          elevation: 1,
           backgroundColor: Colors.transparent,
+          flexibleSpace: Column(
+            children: <Widget>[
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.07,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      'Booking Home',
+                      style: TextStyle(
+                        fontSize: 35,
+                        color: Color.fromRGBO(172, 255, 79, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  BookingDayButton('M', Colors.transparent),
+                  BookingDayButton('Tu', Colors.transparent),
+                  BookingDayButton('W', Colors.transparent),
+                  BookingDayButton('Th', Colors.transparent),
+                  BookingDayButton('F', Colors.transparent),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      'No Day Selected',
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Color.fromRGBO(172, 255, 79, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
         // 63 63 63
@@ -93,41 +143,6 @@ class _BookingState extends State<BookingScreen> {
               SvgPicture.string(
                 utilModel.svg_background,
                 fit: BoxFit.contain,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      BookingDayButton('M', Colors.transparent),
-                      BookingDayButton('Tu', Colors.transparent),
-                      BookingDayButton('W', Colors.transparent),
-                      BookingDayButton('Th', Colors.transparent),
-                      BookingDayButton('F', Colors.transparent),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          'No Day Selected',
-                          style: TextStyle(
-                            fontSize: 28,
-                            color: Color.fromRGBO(172, 255, 79, 1),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using backend_api.Models.User;
 using backend_api.Services.User;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +22,7 @@ namespace backend_api
         public static void ConfigJwt(this IServiceCollection services, IConfiguration configuration)
         {
             var settings = configuration.GetSection("JwtSettings");
-            var secretKey = Environment.GetEnvironmentVariable("JWTSecret");
+
             services.AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,7 +37,7 @@ namespace backend_api
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = settings.GetSection("validIssuer").Value,
                     ValidAudience = settings.GetSection("validAudience").Value,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey ?? throw new InvalidOperationException()))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.GetSection("secret").Value))
                 };
             });
         }

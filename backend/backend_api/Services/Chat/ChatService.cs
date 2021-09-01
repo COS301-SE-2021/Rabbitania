@@ -17,8 +17,8 @@ namespace backend_api.Services.Chat
         
         public string Encrypt()
         {
-            var key = Environment.GetEnvironmentVariable("EncryptKey") ?? string.Empty;
-            var text = Environment.GetEnvironmentVariable("RabbitaniaAppID") ?? string.Empty;
+            var key = _config.GetValue<string>("Encrypt:Key");
+            var text = _config.GetValue<string>("RabbitaniaV2:AppID");
             if (key.Length <= 1)
             {
                 throw new Exception("Key not found, check env/secrets");
