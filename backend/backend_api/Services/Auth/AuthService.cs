@@ -157,6 +157,7 @@ namespace backend_api.Services.Auth
         /// <inheritdoc />
         public async Task<bool> Validate(Credentials credentials)
         {
+            
             var email = credentials.Email;
             var req = new GetUserByEmailRequest(email);
             
