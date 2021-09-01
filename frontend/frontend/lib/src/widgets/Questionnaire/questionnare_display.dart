@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:frontend/src/provider/questionnaire_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,11 +27,13 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
     'Headache': false,
     'Contact With Someone Who Has Covid': false,
   };
-  late var maleFemale = 0;
+  late String maleFemale = 'male';
 
   @override
   Widget build(BuildContext context) {
     UtilModel utilModel = UtilModel();
+    final QuestionnaireProvider questionnaireProvider =
+        new QuestionnaireProvider();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -78,7 +80,11 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                 inactiveFgColor: Colors.white,
                 labels: ['Male', 'Female'],
                 onToggle: (index) {
-                  print(index);
+                  if (maleFemale == 'male') {
+                    maleFemale = 'female';
+                  } else {
+                    maleFemale = 'male';
+                  }
                 },
               )),
               Expanded(
@@ -111,7 +117,8 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                   flex: 1),
               Container(
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        questionnaireProvider.predictAI(symptoms, maleFemale),
                     child: Text("Submit",
                         style: TextStyle(
                             color: utilModel.greenColor,
