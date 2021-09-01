@@ -46,8 +46,6 @@ namespace backend_api
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         private string _conn = null;
-        private String databaseURL;
-        private String encryptionKey;
         public IConfiguration Configuration { get; }
        
         
@@ -55,8 +53,6 @@ namespace backend_api
         {
            Configuration = configuration;
            StaticConfig = configuration;
-           databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL");
-           encryptionKey = Environment.GetEnvironmentVariable("EncryptKey");
         }
 
         public static IConfiguration StaticConfig { get; private set; }
@@ -89,18 +85,7 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-            
-            // For sending an email
-            var mail = Environment.GetEnvironmentVariable("EmailSettings_Mail");
-            var name = Environment.GetEnvironmentVariable("EmailSettings_DisplayName");
-            var pass = Environment.GetEnvironmentVariable("EmailSettings_Password");
-            JObject EmailSettings = new JObject(
-                new JProperty("Mail", mail),
-                new JProperty("DisplayName", name),
-                new JProperty("Password", pass),
-                new JProperty("Host", "smtp.gmail.com"),
-                new JProperty("Port", 465));
-            
+
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             
             
@@ -108,7 +93,7 @@ namespace backend_api
             // Enumeration DB Context
             services.AddDbContext<EnumContext>(options =>
                 options.UseNpgsql(
-                    databaseURL,
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(EnumContext).Assembly.FullName)));
 
             services.AddScoped<IEnumContext>(provider => provider.GetService<EnumContext>());
@@ -120,7 +105,7 @@ namespace backend_api
             // Booking DB Context
             services.AddDbContext<BookingContext>(options =>
                 options.UseNpgsql(
-                    databaseURL,
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(BookingContext).Assembly.FullName)));
 
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
@@ -132,7 +117,7 @@ namespace backend_api
             
             services.AddDbContext<BookingScheduleContext>(options =>
                 options.UseNpgsql(
-                    databaseURL,
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(BookingScheduleContext).Assembly.FullName)));
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
@@ -144,7 +129,7 @@ namespace backend_api
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString(databaseURL),
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
             services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
@@ -157,7 +142,7 @@ namespace backend_api
             //NoticeBoard DB Context
             services.AddDbContext<NoticeBoardContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString(databaseURL),
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(NoticeBoardContext).Assembly.FullName)));
 
             services.AddScoped<INoticeBoardContext>(provider => provider.GetService<NoticeBoardContext>());
@@ -170,7 +155,7 @@ namespace backend_api
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString(databaseURL),
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
@@ -185,7 +170,7 @@ namespace backend_api
             
             services.AddDbContext<ForumContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString(databaseURL),
+                    Environment.GetEnvironmentVariable("DATABASE_URL") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
 
             services.AddScoped<IForumContext>(provider => provider.GetService<ForumContext>());
