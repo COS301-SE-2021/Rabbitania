@@ -17,6 +17,7 @@ using backend_api.Models.Auth.Responses;
 using backend_api.Models.User.Requests;
 using backend_api.Services.User;
 using Castle.Core.Configuration;
+using FirebaseAdmin.Auth;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
@@ -212,16 +213,17 @@ namespace backend_api.Services.Auth
             try
             {
                 var validData = await GoogleJsonWebSignature.ValidateAsync(token);
+                Console.Write(validData);
                 if (validData != null)
                 {
                     valid = true;
                 }
             }
-            catch (Exception)
+            catch (InvalidJwtException e)
             {
-                throw new Exception("Error attempting to validate token with google services");
+                Console.Write(e.Message);
             }
-            
+
             // bool valid = false;
             // const string GoogleAPIURL = "https://oauth2.googleapis.com/tokeninfo?id_token={0}";
             // var httpClient = new HttpClient();
@@ -245,10 +247,6 @@ namespace backend_api.Services.Auth
             // var resp = httpResponseMessage.Content.ReadAsStringAsync().Result;
             // var googleTokenInfo = JsonConvert.DeserializeObject<GoogleToken>(resp);
             //
-            // if (!SupportedClientsIds.Contains(googleTokenInfo.aud))
-            // {
-            //     
-            // }
             return valid;
         }
     }
