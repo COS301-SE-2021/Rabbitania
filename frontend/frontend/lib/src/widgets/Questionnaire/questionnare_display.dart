@@ -109,6 +109,16 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                     ),
                   ),
                   flex: 1),
+              Container(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text("Submit",
+                        style: TextStyle(
+                            color: utilModel.greenColor,
+                            backgroundColor: utilModel.greyColor,
+                            fontSize: 30)),
+                  ),
+                  padding: EdgeInsets.only(bottom: 30)),
             ],
           ),
         ],
