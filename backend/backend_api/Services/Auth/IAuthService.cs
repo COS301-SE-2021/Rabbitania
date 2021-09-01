@@ -76,5 +76,13 @@ namespace backend_api.Services.Auth
         /// <param name="credentials"></param>
         /// <returns>string containing the JWT</returns>
         Task<string> createJwt(Credentials credentials);
+        /// <summary>
+        ///     Authenticates a valid google account is
+        ///     attempting to login.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns>bool value for valid or not</returns>
+        Task<bool> ValidateGoogleAccount(string token);
     }
+    
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,6 +19,7 @@ using backend_api.Services.User;
 using Castle.Core.Configuration;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace backend_api.Services.Auth
@@ -200,6 +202,32 @@ namespace backend_api.Services.Auth
             };
             
             return claims;
+        }
+
+        public async Task<bool> ValidateGoogleAccount(string token)
+        {
+            bool valid = false;
+            const string GoogleAPIURL = "https://oauth2.googleapis.com/tokeninfo?id_token={0}";
+            var httpClient = new HttpClient();
+            var requestUri = new Uri(string.Format(GoogleAPIURL, token));
+            
+            HttpResponseMessage httpResponseMessage;
+            try
+            {
+                httpResponseMessage = httpClient.GetAsync(requestUri).Result;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error trying to call Google authenticate endpoint to verify user login");
+            }
+
+            if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
+            {
+                return false;
+            }
+
+            var resp = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            var googleTokenInfo = JsonConvert.DeserializeObject<GoogleApiTokenInfo>(resp);
         }
     }
 }
