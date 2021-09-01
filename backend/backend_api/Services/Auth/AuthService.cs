@@ -17,10 +17,13 @@ using backend_api.Models.Auth.Responses;
 using backend_api.Models.User.Requests;
 using backend_api.Services.User;
 using Castle.Core.Configuration;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace backend_api.Services.Auth
 {
@@ -203,31 +206,50 @@ namespace backend_api.Services.Auth
             
             return claims;
         }
-
         public async Task<bool> ValidateGoogleAccount(string token)
         {
-            bool valid = false;
-            const string GoogleAPIURL = "https://oauth2.googleapis.com/tokeninfo?id_token={0}";
-            var httpClient = new HttpClient();
-            var requestUri = new Uri(string.Format(GoogleAPIURL, token));
-            
-            HttpResponseMessage httpResponseMessage;
+            var valid = false;
             try
             {
-                httpResponseMessage = httpClient.GetAsync(requestUri).Result;
+                var validData = await GoogleJsonWebSignature.ValidateAsync(token);
+                if (validData != null)
+                {
+                    valid = true;
+                }
             }
             catch (Exception)
             {
-                throw new Exception("Error trying to call Google authenticate endpoint to verify user login");
+                throw new Exception("Error attempting to validate token with google services");
             }
-
-            if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
-            {
-                return false;
-            }
-
-            var resp = httpResponseMessage.Content.ReadAsStringAsync().Result;
-            var googleTokenInfo = JsonConvert.DeserializeObject<GoogleApiTokenInfo>(resp);
+            
+            // bool valid = false;
+            // const string GoogleAPIURL = "https://oauth2.googleapis.com/tokeninfo?id_token={0}";
+            // var httpClient = new HttpClient();
+            // var requestUri = new Uri(string.Format(GoogleAPIURL, token));
+            //
+            // HttpResponseMessage httpResponseMessage;
+            // try
+            // {
+            //     httpResponseMessage = httpClient.GetAsync(requestUri).Result;
+            // }
+            // catch (Exception)
+            // {
+            //     throw new Exception("Error trying to call Google authenticate endpoint to verify user login");
+            // }
+            //
+            // if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
+            // {
+            //     return false;
+            // }
+            //
+            // var resp = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            // var googleTokenInfo = JsonConvert.DeserializeObject<GoogleToken>(resp);
+            //
+            // if (!SupportedClientsIds.Contains(googleTokenInfo.aud))
+            // {
+            //     
+            // }
+            return valid;
         }
     }
 }
