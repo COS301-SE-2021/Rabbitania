@@ -80,9 +80,7 @@ class DecisionTree:
         print(prediction)
 
 
-dt = DecisionTree()    
-dt.train_and_save()
-dt.predictionTest()
+
 
 # @app.route('/api/predict/', methods = ['GET'])
 # def assumption():
@@ -102,14 +100,14 @@ dt.predictionTest()
 #     return "hello there"
 
 
-@app.route('/api/train', method=['GET'])
+@app.route('/api/train', methods=['GET'])
 def train():
     #declare object of DecisionTree class
     dt = DecisionTree()
     #train model and save it in 'models'
     dt.train_and_save()
 
-@app.route('/api/predict', method=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def userPrediction():
     dt = DecisionTree()
     psymptoms = request.get_json()
