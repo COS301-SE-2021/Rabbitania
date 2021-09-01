@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_picker/flutter_picker.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 // Create a Form widget.
 class QuestionnaireForm extends StatefulWidget {
@@ -21,8 +25,10 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
     'Sore Throat': false,
     'Shortness Of Breath': false,
     'Headache': false,
-    'Contact With Someone With Covid': false,
+    'Contact With Someone Who Has Covid': false,
   };
+  late var maleFemale = 0;
+
   @override
   Widget build(BuildContext context) {
     UtilModel utilModel = UtilModel();
@@ -60,32 +66,49 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                   ),
                 ),
               ),
+              Center(
+                  child: ToggleSwitch(
+                cornerRadius: 20.0,
+                initialLabelIndex: 0,
+                totalSwitches: 2,
+                minWidth: 90.0,
+                activeBgColor: [utilModel.greenColor],
+                activeFgColor: utilModel.greyColor,
+                inactiveBgColor: Color.fromRGBO(232, 232, 232, 150),
+                inactiveFgColor: Colors.white,
+                labels: ['Male', 'Female'],
+                onToggle: (index) {
+                  print(index);
+                },
+              )),
               Expanded(
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: symptoms.keys
-                          .map((roomName) => CheckboxListTile(
-                                tileColor: Colors.transparent,
-                                checkColor: utilModel.greyColor,
-                                activeColor: utilModel.greenColor,
-                                title: Text(
-                                  roomName,
-                                  style: TextStyle(
-                                      color: utilModel.greenColor,
-                                      fontSize: 18),
-                                ),
-                                value: symptoms[roomName],
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    symptoms[roomName] = value;
-                                  });
-                                },
-                              ))
+                          .map(
+                            (symptom) => CheckboxListTile(
+                              tileColor: Colors.transparent,
+                              checkColor: utilModel.greyColor,
+                              activeColor: utilModel.greenColor,
+                              selectedTileColor: Colors.white,
+                              title: Text(
+                                symptom,
+                                style: TextStyle(
+                                    color: utilModel.greenColor, fontSize: 18),
+                              ),
+                              value: symptoms[symptom],
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  symptoms[symptom] = value;
+                                });
+                              },
+                            ),
+                          )
                           .toList(),
                     ),
                   ),
-                  flex: 1)
+                  flex: 1),
             ],
           ),
         ],
