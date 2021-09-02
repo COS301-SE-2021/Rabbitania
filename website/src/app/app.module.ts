@@ -13,10 +13,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { HomepageComponent } from './homepage/homepage.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AIPlannerComponent
+    AIPlannerComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
