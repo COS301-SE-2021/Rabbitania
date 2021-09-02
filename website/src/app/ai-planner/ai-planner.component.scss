@@ -27,15 +27,33 @@
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
                 0 3px 14px 2px rgba(0, 0, 0, 0.12);
   }
+
+  @mixin node {
+    
+  }
+
   
-  .example-boundary {
-    width: 1000px;
-    height: 800px;
+  @mixin boundaryMixin {
     position: relative;
-    border: dotted rgba(179, 255, 79,1) 2px;
+    border: solid rgba(179, 255, 79,1) 2px;
     background-image: url('../../test_variables/Officelayout-600x386.jpg');
     background-repeat: no-repeat;
-    background-size: 100% 100%;;
+  }
+
+  
+  .example-boundary {
+    width: 2000px;
+    height: 500px;
+    @include boundaryMixin;
+  }
+
+  @media (max-width: 768px) {
+    .example-boundary {
+      width: 450px;
+      height: 350px;
+      @include boundaryMixin;
+    }
+
   }
 
   .center {
@@ -54,8 +72,8 @@
 
   .container-fluid {
     background:rgba(33,33,33,1);
-    padding: 0 !important;
     height: 100%;
+    width: 100%;
   }
 
   .headings{
