@@ -40,6 +40,7 @@ class QuestionnaireProvider {
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
+      print(response.body);
       if (response.body == "True") {
         return true;
       } else {

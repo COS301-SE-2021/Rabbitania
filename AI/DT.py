@@ -82,6 +82,7 @@ class DecisionTree:
         print("------------------------Prediction------------------------")
         
         finalPrediction = prediction[0][0]
+        print(finalPrediction)
         if finalPrediction > 0.65:
             return "True"
         else:
