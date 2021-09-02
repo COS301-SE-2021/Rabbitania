@@ -12,6 +12,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
-    DragDropModule, NgbModule,MatCardModule,MatExpansionModule,MatDividerModule,MatListModule,MatButtonModule
+    DragDropModule, NgbModule,MatCardModule,MatExpansionModule,MatDividerModule,MatListModule,MatButtonModule,MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

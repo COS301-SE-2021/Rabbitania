@@ -6,3 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+
+$font-stack:"Merriweather Sans",sans-serif;
+$primary-color: rgba(179, 255, 79,1);
+$secondary-color: rgba(33,33,33,1);
