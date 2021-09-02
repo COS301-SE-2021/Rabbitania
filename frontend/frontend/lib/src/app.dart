@@ -33,7 +33,7 @@ class AppState extends State<App> {
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         home:
-            Login(), //InfoForm(FirebaseAuth.instance.currentUser),
+            QuestionnaireForm(), //InfoForm(FirebaseAuth.instance.currentUser),
       ),
     );
   }

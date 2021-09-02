@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:frontend/src/provider/questionnaire_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,11 +27,14 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
     'Headache': false,
     'Contact With Someone Who Has Covid': false,
   };
-  late var maleFemale = 0;
+  String maleFemale = 'male';
+  int toggleIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     UtilModel utilModel = UtilModel();
+    final QuestionnaireProvider questionnaireProvider =
+        new QuestionnaireProvider();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -69,7 +72,7 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
               Center(
                   child: ToggleSwitch(
                 cornerRadius: 20.0,
-                initialLabelIndex: 0,
+                initialLabelIndex: this.toggleIndex,
                 totalSwitches: 2,
                 minWidth: 90.0,
                 activeBgColor: [utilModel.greenColor],
@@ -77,8 +80,12 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                 inactiveBgColor: Color.fromRGBO(232, 232, 232, 150),
                 inactiveFgColor: Colors.white,
                 labels: ['Male', 'Female'],
-                onToggle: (index) {
-                  print(index);
+                onToggle: (toggleIndex) {
+                  if (maleFemale == 'male') {
+                    maleFemale = 'female';
+                  } else {
+                    maleFemale = 'male';
+                  }
                 },
               )),
               Expanded(
@@ -101,6 +108,12 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   symptoms[symptom] = value;
+                                  maleFemale = maleFemale;
+                                  if (maleFemale == 'male') {
+                                    toggleIndex = 0;
+                                  } else {
+                                    toggleIndex = 1;
+                                  }
                                 });
                               },
                             ),
@@ -109,6 +122,17 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                     ),
                   ),
                   flex: 1),
+              Container(
+                  child: TextButton(
+                    onPressed: () =>
+                        questionnaireProvider.predictAI(symptoms, maleFemale),
+                    child: Text("Submit",
+                        style: TextStyle(
+                            color: utilModel.greenColor,
+                            backgroundColor: utilModel.greyColor,
+                            fontSize: 30)),
+                  ),
+                  padding: EdgeInsets.only(bottom: 30)),
             ],
           ),
         ],
