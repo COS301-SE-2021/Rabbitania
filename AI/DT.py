@@ -1,6 +1,4 @@
 import threading
-
-from pandas.core.frame import DataFrame
 import tensorflow_decision_forests as tfdf
 import pandas
 from tensorflow import keras
@@ -74,29 +72,40 @@ class DecisionTree:
         print("model loaded successfully")
 
         print("Converting input to Dataframe")
-        jsonData = UserSymptoms
-        cough = jsonData.get('cough','')
-        fever = jsonData.get('fever', '')
-        sore_throat = jsonData.get('sore_throat','')
-        shortness_of_breath = jsonData.get('shortness_of_breath','')
-        head_ache = jsonData.get('head_ache', '')
-        input = [cough, fever,sore_throat,shortness_of_breath, head_ache]
+        #df = pandas.DataFrame.from_dict(UserSymptoms, orient="index")
+        df=pandas.json_normalize(UserSymptoms)
+        df.to_csv("data.csv", index = False)
+        dataframe = pandas.read_csv("data.csv")
+        ConvertedData = tfdf.keras.pd_dataframe_to_tf_dataset(dataframe)
 
-
-        #print("loaded test.json")
-        #df = pandas.DataFrame.from_dict(UserSymptoms).reset_index()
-        df = pandas.read_json(jsonData)
-        print(df)
-
-        prediction = loadedModel.predict(df)
+        prediction = loadedModel.predict(ConvertedData)
         print("------------------------Prediction------------------------")
-        print(prediction)
-        return prediction
+        
+        finalPrediction = prediction[0][0]
+        if finalPrediction > 0.65:
+            return "True"
+        else:
+            return "False"
+        
 
 
-dt = DecisionTree()    
-#dt.train_and_save()
-#dt.predictionTest()
+
+# @app.route('/api/predict/', methods = ['GET'])
+# def assumption():
+#     dt = DecisionTree()
+
+#     dt.predictionTest()
+#     data = request.get_json()
+#     cough = request.args.get("cough")
+#     fever = data.get('fever','')
+#     sore_throat = data.get('sore_throat','')
+#     shortness_of_breath = data.get('shortness_of_breath')
+#     head_ache = data.get('head_ache')
+#     gender = data.get('gender')
+#     test_indication = data.get('test_indication')
+#     symptoms = [cough,fever, sore_throat, shortness_of_breath, head_ache, gender, test_indication]
+#     dt.predictionTest(symptoms)
+#     return "hello there"
 
 
 @app.route('/api/train', methods=['GET'])
@@ -105,13 +114,11 @@ def train():
     dt = DecisionTree()
     #train model and save it in 'models'
     dt.train_and_save()
-    return "Training completed and model saved to models directory"
 
 @app.route('/api/predict', methods=['POST'])
 def userPrediction():
     dt = DecisionTree()
-    psymptoms = request.get_data()
-    print(psymptoms)
+    psymptoms = request.get_json()
     return dt.prediction(psymptoms)
     
 if __name__ == '__main__':

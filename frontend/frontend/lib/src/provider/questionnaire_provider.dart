@@ -40,11 +40,13 @@ class QuestionnaireProvider {
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
-      print("good it works!");
-      return (true);
+      if (response.body == "True") {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      print("Damn");
-      return (false);
+      return false;
     }
 
     // [1, 1, 0, 1, 0, 1]
