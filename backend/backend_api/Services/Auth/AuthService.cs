@@ -157,6 +157,7 @@ namespace backend_api.Services.Auth
         /// <inheritdoc />
         public async Task<bool> Validate(Credentials credentials)
         {
+            
             var email = credentials.Email;
             var req = new GetUserByEmailRequest(email);
             
@@ -175,10 +176,10 @@ namespace backend_api.Services.Auth
         public async Task<string> createJwt(Credentials credentials)
         {
             var settings = Startup.StaticConfig.GetSection("JwtSettings");
-            
+            var secret = Environment.GetEnvironmentVariable("JWTSecret") ?? string.Empty;
             var claims = await GetClaims(credentials);
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.GetSection("secret").Value));
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var signingCred = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             
             var token = new JwtSecurityToken(

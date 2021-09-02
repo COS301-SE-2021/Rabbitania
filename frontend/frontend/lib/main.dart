@@ -10,7 +10,7 @@ const ServerURL = "https://localhost:5001/ChatHub";
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   HttpOverrides.global = new MyHttpOverrides();
   runApp(App());
 }
