@@ -212,7 +212,7 @@ namespace backend_api
             }
             #endregion
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();

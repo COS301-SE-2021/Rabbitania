@@ -160,7 +160,7 @@ namespace backend_api.Controllers.Auth
             }
             else
             {
-                return BadRequest("Failed to authenticate token with google Oauth API via backend");
+                return BadRequest("Failed to authenticate token with google OAuth API via backend");
             }
         }
     }
