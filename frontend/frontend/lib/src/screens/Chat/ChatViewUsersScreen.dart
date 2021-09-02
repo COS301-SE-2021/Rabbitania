@@ -6,6 +6,7 @@ import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
+import 'package:frontend/src/widgets/Chat/groupChatCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 import 'groupChatCreateScreen.dart';
@@ -57,46 +58,61 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
           ),
         ),
         backgroundColor: utilModel.greyColor,
-        body: FutureBuilder(
-          future: userProvider.getUserID(),
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.hasData) {
-              int userId = snapshot.data;
-              return StreamBuilder<QuerySnapshot>(
-                stream:
-                    fireStoreHelper.getUsersDocumentsFromFireStoreAsStream(),
-                builder: (context, AsyncSnapshot snapshot) {
-                  List<Widget> children = [];
-                  if (snapshot.hasData) {
-                    for (int i = 0; i < snapshot.data.docs.length; i++) {
-                      if (snapshot.data.docs[i]['uid'] != userId) {
-                        children.add(
-                          ChatUsersCard(
-                              displayName: snapshot.data.docs[i]['displayName']
-                                  .toString(),
-                              displayImage:
-                                  snapshot.data.docs[i]['avatar'].toString(),
-                              idUser: snapshot.data.docs[i]['uid'].toInt(),
-                              myId: userId,
-                              groupChatHelper: this.groupChatHelper),
-                        );
+        body: Column(
+          children: [
+            FutureBuilder(
+              future: userProvider.getUserID(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData) {
+                  int userId = snapshot.data;
+                  return StreamBuilder<QuerySnapshot>(
+                    stream: fireStoreHelper
+                        .getUsersDocumentsFromFireStoreAsStream(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      List<Widget> children = [];
+                      if (snapshot.hasData) {
+                        for (int i = 0; i < snapshot.data.docs.length; i++) {
+                          if (snapshot.data.docs[i]['uid'] != userId) {
+                            children.add(
+                              ChatUsersCard(
+                                  displayName: snapshot
+                                      .data.docs[i]['displayName']
+                                      .toString(),
+                                  displayImage: snapshot.data.docs[i]['avatar']
+                                      .toString(),
+                                  idUser: snapshot.data.docs[i]['uid'].toInt(),
+                                  myId: userId,
+                                  groupChatHelper: this.groupChatHelper),
+                            );
+                          }
+                        }
+                        // return StreamBuilder<QuerySnapshot>(
+                        //   stream: fireStoreHelper.getGroupChats(userId),
+                        //   builder: (BuildContext context,
+                        //       AsyncSnapshot<dynamic> snapshot) {
+                        //     if (snapshot.hasData) {
+                        //       print(snapshot.data);
+                        //     } else {}
+                        //     return
+                        //   }
+                        // );
+                      } else {
+                        children.add(CircularProgressIndicator());
                       }
-                    }
-                  } else {
-                    children.add(CircularProgressIndicator());
-                  }
 
-                  return ListView(
-                    shrinkWrap: true,
-                    children: children,
+                      return ListView(
+                        shrinkWrap: true,
+                        children: children,
+                      );
+                    },
                   );
-                },
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(color: utilModel.greenColor),
-            );
-          },
+                }
+                return Center(
+                  child: CircularProgressIndicator(color: utilModel.greenColor),
+                );
+              },
+            ),
+          ],
         ),
         floatingActionButton: Visibility(
           visible: this.visible,

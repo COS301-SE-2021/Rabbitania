@@ -44,11 +44,9 @@ class FireStoreHelper {
         .snapshots();
   }
 
-  getGroupChats(String roomName) {
-    return firestore
-        .collection('groupChat/$roomName/messages')
-        .orderBy('dateCreated', descending: true)
-        .snapshots();
+  //get all group chats applicable to the current logged in user
+  getGroupChats(int myId) {
+    return firestore.collection('groupChat').snapshots();
   }
 
   Future sendMessage(int idUser, int myId, String message) async {
@@ -99,7 +97,12 @@ class FireStoreHelper {
   }
 
   //function for getting all chats based off room name
-  getGroupChatByRoomName(roomName) {}
+  getGroupChatByRoomName(roomName) {
+    firestore
+        .collection('groupChat/$roomName/messages')
+        .orderBy('dateCreated', descending: true)
+        .snapshots();
+  }
 
   //function for creating new groupchat room
   createGroupChatRoom(String roomName, users) {

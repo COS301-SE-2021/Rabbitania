@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
+import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
+import 'package:frontend/src/widgets/Chat/groupChatMessageBar.dart';
+import 'package:flutter_svg/svg.dart';
 
 class GroupChatRoomScreen extends StatefulWidget {
   final String roomName;
@@ -13,17 +18,126 @@ class GroupChatRoomScreen extends StatefulWidget {
 class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
   final userHelper = UserHelper();
   final utilModel = UtilModel();
+  final fireStoreHelper = FireStoreHelper();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: FutureBuilder(
-        future: userHelper.getUserID(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.hasData) {}
-          return CircularProgressIndicator(color: utilModel.greenColor);
-        },
+      child: Scaffold(
+        body: FutureBuilder(
+          future: userHelper.getUserID(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.hasData) {
+              int myId = snapshot.data;
+              print(myId);
+              return Scaffold(
+                backgroundColor: utilModel.greyColor,
+                appBar: AppBar(
+                  toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+                  backgroundColor: Colors.transparent,
+                ),
+                body: Stack(
+                  children: [
+                    SvgPicture.string(
+                      utilModel.svg_background,
+                      fit: BoxFit.contain,
+                    ),
+                    Column(
+                      children: [
+                        Expanded(
+                          flex: 12,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                  flex: 9,
+                                  child: StreamBuilder(
+                                    stream:
+                                        fireStoreHelper.getGroupChatByRoomName(
+                                            widget.roomName),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshotStream) {
+                                      List<Widget> children = [];
+                                      if (snapshotStream.hasData) {
+                                        //must loop through messages return object to filter throug
+                                        if (snapshot.data.docs.length == 0) {
+                                          children.add(
+                                            Center(
+                                              child: Text(
+                                                "You have no chat history with this user. Why don't you say hi",
+                                                style: TextStyle(
+                                                  color: utilModel.greenColor,
+                                                  fontSize: 25,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        } else {
+                                          for (int i = 0;
+                                              i <
+                                                  snapshotStream
+                                                      .data.docs.length;
+                                              i++) {
+                                            //messages correspond to current user and selected user
+
+                                            if (snapshotStream.data.docs[i]
+                                                    ['uid'] ==
+                                                myId) {
+                                              children.add(ChatMessageSender(
+                                                  textSentValue: snapshotStream
+                                                      .data
+                                                      .docs[i]['message']));
+                                            } else {
+                                              children.add(
+                                                ChatMessageReceiver(
+                                                  textSentValue: snapshotStream
+                                                      .data.docs[i]['message'],
+                                                  dateCreated: snapshotStream
+                                                      .data
+                                                      .docs[i]['dateCreated']
+                                                      .toString(),
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        }
+                                      } else {
+                                        children.add(Align());
+                                      }
+
+                                      //participantID matches clicked on id, means other persons message
+
+                                      // return ListView(
+                                      //     reverse: true, shrinkWrap: true, children: children);
+                                      return ListView.builder(
+                                        padding: EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        reverse: true,
+                                        itemCount: children.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return children[index];
+                                        },
+                                      );
+                                    },
+                                  )),
+                            ],
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(
+                                top: 10, right: 5, left: 5),
+                            child:
+                                GroupChatSendMessageBar(myId, widget.roomName)),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return CircularProgressIndicator(color: utilModel.greenColor);
+            }
+          },
+        ),
       ),
-    ));
+    );
   }
 }

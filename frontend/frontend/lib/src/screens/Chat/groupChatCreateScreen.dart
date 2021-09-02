@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Chat/GroupChatRoomScreen.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GroupChatCreateScreen extends StatefulWidget {
@@ -143,6 +144,13 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                       if (textController.text != '') {
                         firestoreHelper.createGroupChatRoom(textController.text,
                             widget.groupChatHelper.usersArray);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                GroupChatRoomScreen(textController.text),
+                          ),
+                        );
                       }
                     },
                   ),
