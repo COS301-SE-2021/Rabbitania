@@ -27,7 +27,8 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
     'Headache': false,
     'Contact With Someone Who Has Covid': false,
   };
-  late String maleFemale = 'male';
+  String maleFemale = 'male';
+  int toggleIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,7 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
               Center(
                   child: ToggleSwitch(
                 cornerRadius: 20.0,
-                initialLabelIndex: 0,
+                initialLabelIndex: this.toggleIndex,
                 totalSwitches: 2,
                 minWidth: 90.0,
                 activeBgColor: [utilModel.greenColor],
@@ -79,7 +80,7 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                 inactiveBgColor: Color.fromRGBO(232, 232, 232, 150),
                 inactiveFgColor: Colors.white,
                 labels: ['Male', 'Female'],
-                onToggle: (index) {
+                onToggle: (toggleIndex) {
                   if (maleFemale == 'male') {
                     maleFemale = 'female';
                   } else {
@@ -107,6 +108,12 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   symptoms[symptom] = value;
+                                  maleFemale = maleFemale;
+                                  if (maleFemale == 'male') {
+                                    toggleIndex = 0;
+                                  } else {
+                                    toggleIndex = 1;
+                                  }
                                 });
                               },
                             ),

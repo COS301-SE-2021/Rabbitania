@@ -24,19 +24,17 @@ class QuestionnaireProvider {
       contact = "Contact with confirmed";
     }
 
-    URLHelper url = new URLHelper();
-
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:5006/api/predict'),
+      Uri.parse('http://10.0.2.2:5006/api/predict'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
-        "cough": newSymptoms[0],
-        "fever": newSymptoms[1],
-        "sore_throat": newSymptoms[2],
-        "shortness_of_breath": newSymptoms[3],
-        "head_ache": newSymptoms[4],
+        "cough": newSymptoms[0].toString(),
+        "fever": newSymptoms[1].toString(),
+        "sore_throat": newSymptoms[2].toString(),
+        "shortness_of_breath": newSymptoms[3].toString(),
+        "head_ache": newSymptoms[4].toString(),
         "gender": maleFemale,
         "test_indication": contact,
       }),
@@ -44,10 +42,11 @@ class QuestionnaireProvider {
     if (response.statusCode == 201 || response.statusCode == 200) {
       print("good it works!");
       return (true);
+    } else {
+      print("Damn");
+      return (false);
     }
 
     // [1, 1, 0, 1, 0, 1]
-
-    return false;
   }
 }
