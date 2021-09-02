@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MovableNodes} from '../services/ai-planner/movable-nodes';
-import dummyData from '../../test_variables/dummy_node_json.json'
+import dummyData from '../../test_variables/dummy_node_json.json';
+
 @Component({
   selector: 'app-ai-planner',
   templateUrl: './ai-planner.component.html',
@@ -8,7 +9,7 @@ import dummyData from '../../test_variables/dummy_node_json.json'
 })
 export class AIPlannerComponent implements OnInit {
 
-  
+  panelOpenState = false;
   public nodeList:{deskNumber:string, x:string,y:string}[] = dummyData;
 
   ngOnInit(): void {
@@ -34,6 +35,11 @@ export class AIPlannerComponent implements OnInit {
       this.nodes.push(new MovableNodes(Number(dummyData[i].deskNumber),Number(dummyData[i].x),Number(dummyData[i].y)))
     }
     
+  }
+
+  addNode()
+  {
+    console.log("ADD NODE PAGE");
   }
 }
 

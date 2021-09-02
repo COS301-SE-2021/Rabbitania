@@ -51,3 +51,18 @@
     width: 20px;
     height: 20px;
   }
+
+  .container-fluid {
+    background:rgba(33,33,33,1);
+    padding: 0 !important;
+    height: 100%;
+  }
+
+  .headings{
+    color: #fff;
+    font-size: 400%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: "Merriweather Sans",sans-serif;
+    font-weight: 300;
+  }
