@@ -105,10 +105,14 @@ class FireStoreHelper {
   }
 
   //function for creating new groupchat room
-  createGroupChatRoom(String roomName, users) {
+  createGroupChatRoom(String roomName, users, imageBae64) {
     final refGroupRooms = firestore
         .collection('groupChat')
         .doc('$roomName')
-        .set({'participants': users, 'roomName': roomName});
+        .set({
+      'participants': users,
+      'roomName': roomName,
+      'avatar': imageBae64
+    });
   }
 }

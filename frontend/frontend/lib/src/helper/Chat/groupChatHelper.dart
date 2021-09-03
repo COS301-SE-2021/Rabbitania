@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 class GroupChatHelper extends ChangeNotifier {
   List<int> _usersArray = [];
-
+  var GroupChatImage;
   //to get length of users array
   get usersArray => _usersArray;
   //to get array with all userID's participating in group chat
