@@ -17,6 +17,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { MatIconModule } from '@angular/material/icon';
 import { HostListener } from "@angular/core";
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
