@@ -16,7 +16,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { HomepageComponent } from './homepage/homepage.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import { HostListener } from "@angular/core";
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
