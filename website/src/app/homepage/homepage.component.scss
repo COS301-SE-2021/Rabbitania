@@ -10,9 +10,10 @@ body {
 mat-toolbar {
     background: black;
     color: $greenColour;
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
 }
-
-
 
 mat-sidenav {
     margin: 20px;
@@ -23,10 +24,16 @@ mat-sidenav {
     border-radius: 10px;
     padding: 16px;
     text-align: center;
-
+    z-index: 1000;
     nav-divider{
         color: $greyColour;
     }
+}
+
+.logo-area a.logo {
+    padding-right: 10px;
+    display: inline-table;
+    text-decoration: none;
 }
 
 .content {
@@ -34,7 +41,6 @@ mat-sidenav {
     border-radius: 10px;
     margin: 16px;
     margin-left: 32px;
-
     display: flex;
     justify-content: center;
     align-items: center;
