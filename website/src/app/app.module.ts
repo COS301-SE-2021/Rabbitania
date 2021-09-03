@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatCardModule} from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AIPlannerComponent } from './ai-planner/ai-planner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -21,7 +20,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
-    AIPlannerComponent,
     HomepageComponent
   ],
   imports: [
