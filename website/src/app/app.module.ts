@@ -13,6 +13,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { HostListener } from "@angular/core";
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
-    DragDropModule, NgbModule,MatCardModule,MatExpansionModule,MatDividerModule,MatListModule,MatButtonModule,MatSidenavModule
+    DragDropModule, NgbModule,MatCardModule,
+    MatExpansionModule,MatDividerModule,
+    MatListModule,MatButtonModule,MatSidenavModule,MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
