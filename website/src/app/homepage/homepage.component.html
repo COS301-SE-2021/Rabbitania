@@ -1,1 +1,31 @@
-<p>homepage works!</p>
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    Menu
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
+
+        <h4 class="name">Rabbitania Main Menu</h4>
+
+        <mat-divider class="nav-divider"></mat-divider>
+            
+
+        <button mat-button class="menu-button">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+     
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content">
+            <img src="../../assets/svgs/landingrocket.svg" height="750px" width="750px">
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
