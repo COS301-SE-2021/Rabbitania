@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%;
+background: rgba(33, 33, 33, 1 );}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+$font-stack:"Merriweather Sans",sans-serif;
+$primary-color: rgba(179, 255, 79,1);
+$secondary-color: rgba(33,33,33,1);
