@@ -61,6 +61,7 @@ namespace backend_api
         public void ConfigureServices(IServiceCollection services)
         {
             FirebaseApp.Create();
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,

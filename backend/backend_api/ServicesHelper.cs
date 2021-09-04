@@ -22,6 +22,7 @@ namespace backend_api
 
         public static void ConfigJwt(this IServiceCollection services, IConfiguration configuration)
         {
+            //TODO: change to simply using Firebase tokens instead of creating our own JWT on top of their token
             var settings = configuration.GetSection("JwtSettings");
             var secretKey = Environment.GetEnvironmentVariable("JWTSecret");
             services.AddAuthentication(o =>
