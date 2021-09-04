@@ -207,48 +207,6 @@ namespace backend_api.Services.Auth
             
             return claims;
         }
-        public async Task<bool> ValidateGoogleAccount(string token)
-        {
-            var valid = false;
-            try
-            {
-                var validData = await GoogleJsonWebSignature.ValidateAsync(token);
-                Console.Write(validData);
-                if (validData != null)
-                {
-                    valid = true;
-                }
-            }
-            catch (InvalidJwtException e)
-            {
-                Console.Write(e.Message);
-            }
-
-            // bool valid = false;
-            // const string GoogleAPIURL = "https://oauth2.googleapis.com/tokeninfo?id_token={0}";
-            // var httpClient = new HttpClient();
-            // var requestUri = new Uri(string.Format(GoogleAPIURL, token));
-            //
-            // HttpResponseMessage httpResponseMessage;
-            // try
-            // {
-            //     httpResponseMessage = httpClient.GetAsync(requestUri).Result;
-            // }
-            // catch (Exception)
-            // {
-            //     throw new Exception("Error trying to call Google authenticate endpoint to verify user login");
-            // }
-            //
-            // if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
-            // {
-            //     return false;
-            // }
-            //
-            // var resp = httpResponseMessage.Content.ReadAsStringAsync().Result;
-            // var googleTokenInfo = JsonConvert.DeserializeObject<GoogleToken>(resp);
-            //
-            return valid;
-        }
 
         public async Task<bool> ValidateFirebaseToken(string token)
         {

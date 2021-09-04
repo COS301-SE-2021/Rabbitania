@@ -77,13 +77,13 @@ namespace backend_api.Services.Auth
         /// <returns>string containing the JWT</returns>
         Task<string> createJwt(Credentials credentials);
         /// <summary>
-        ///     Authenticates a valid google account is
-        ///     attempting to login.
+        ///     Authenticates a valid firebase token received
+        ///     when a user logs into the mobile app. This
+        ///     function will verify the token with Firebase
+        ///     before granting access to the user
         /// </summary>
         /// <param name="token"></param>
         /// <returns>bool value for valid or not</returns>
-        Task<bool> ValidateGoogleAccount(string token);
-        
         Task<bool> ValidateFirebaseToken(string token);
     }
     
