@@ -71,12 +71,6 @@ namespace backend_api
             });
             services.AddTransient<IAuthService, AuthService>();
             
-
-            //SignalR
-            services.AddSignalR(options =>
-            {
-                options.EnableDetailedErrors = true;
-            });            
             // services.AddResponseCaching();
             services.AddControllers();
             /*
