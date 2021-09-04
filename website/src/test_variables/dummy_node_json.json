@@ -1,13 +1,12 @@
 [
     {"deskNumber" : "1", "x" : "0","y":"0"},
-    {"deskNumber" : "2", "x" : "0","y":"0"},
-    {"deskNumber" : "3", "x" : "0","y":"0"},
-    {"deskNumber" : "4", "x" : "0","y":"0"},
-    {"deskNumber" : "5", "x" : "0","y":"0"},
-    {"deskNumber" : "6", "x" : "0","y":"0"},
-    {"deskNumber" : "7", "x" : "0","y":"0"},
-    {"deskNumber" : "8", "x" : "0","y":"0"},
-    {"deskNumber" : "9", "x" : "977","y":"777"}
-
+    {"deskNumber" : "2", "x" : "50","y":"50"},
+    {"deskNumber" : "3", "x" : "100","y":"75"},
+    {"deskNumber" : "4", "x" : "150","y":"100"},
+    {"deskNumber" : "5", "x" : "200","y":"125"},
+    {"deskNumber" : "6", "x" : "250","y":"150"},
+    {"deskNumber" : "7", "x" : "300","y":"175"},
+    {"deskNumber" : "8", "x" : "350","y":"200"},
+    {"deskNumber" : "9", "x" : "400","y":"225"}
    
     ]
