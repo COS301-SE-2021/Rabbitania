@@ -1,0 +1,16 @@
+Flask==2.0.1
+jsonpatch==1.22
+jsonpointer==2.0
+jsonschema==3.2.0
+six==1.15.0
+h5py==3.1.0
+Keras==2.4.3
+keras-models==0.0.7
+numpy==1.19.5
+opencv-python==4.5.3.56
+pandas==1.3.2
+pandas-io==0.0.1
+requests==2.22.0
+tensorflow-decision-forests==0.1.8
+tensorflow-cpu==2.5.0
+tensorflow==2.5.0
