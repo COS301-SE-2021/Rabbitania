@@ -249,5 +249,13 @@ namespace backend_api.Services.Auth
             //
             return valid;
         }
+
+        public async Task<bool> ValidateFirebaseToken(string token)
+        {
+            FirebaseToken firebaseToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(token);
+            string uid = firebaseToken.Uid;
+            
+            return true;
+        }
     }
 }

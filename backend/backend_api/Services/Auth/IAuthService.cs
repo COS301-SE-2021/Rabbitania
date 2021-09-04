@@ -83,6 +83,8 @@ namespace backend_api.Services.Auth
         /// <param name="token"></param>
         /// <returns>bool value for valid or not</returns>
         Task<bool> ValidateGoogleAccount(string token);
+        
+        Task<bool> ValidateFirebaseToken(string token);
     }
     
 }

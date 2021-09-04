@@ -146,7 +146,7 @@ namespace backend_api.Controllers.Auth
         [Route("Auth")]
         public async Task<IActionResult> Auth([FromBody] Credentials credentials)
         {
-            if (await _service.ValidateGoogleAccount(credentials.Token))
+            if (await _service.ValidateFirebaseToken(credentials.Token))
             {
                 if (!ModelState.IsValid)
                     return BadRequest();
