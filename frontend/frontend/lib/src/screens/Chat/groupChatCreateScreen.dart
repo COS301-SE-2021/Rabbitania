@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io' as Io;
 import 'dart:io';
 
@@ -148,6 +149,7 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                     builder: (BuildContext context,
                         AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData) {
+                        int myId = snapshot.data;
                         return IconButton(
                           icon: Icon(FontAwesomeIcons.plus,
                               color: utilModel.greenColor),
@@ -156,8 +158,7 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                             //TODO: navigate to new Chat screen
                             if (textController.text != '') {
                               //adds current logged in userID to participants array before creating groupChatroom
-                              widget.groupChatHelper
-                                  .addUserToArray(snapshot.data);
+                              widget.groupChatHelper.addUserToArray(myId);
                               _imageBase64 == null
                                   ? firestoreHelper.createGroupChatRoom(
                                       textController.text,
@@ -167,6 +168,7 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                                       textController.text,
                                       widget.groupChatHelper.usersArray,
                                       _imageBase64);
+                              print(widget.groupChatHelper.usersArray);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

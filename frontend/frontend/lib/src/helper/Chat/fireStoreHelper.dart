@@ -46,7 +46,10 @@ class FireStoreHelper {
 
   //get all group chats applicable to the current logged in user
   getGroupChats(int myId) {
-    return firestore.collection('groupChat').snapshots();
+    return firestore
+        .collection('groupChat')
+        .where('participants', arrayContains: myId)
+        .snapshots();
   }
 
   Future sendMessage(int idUser, int myId, String message) async {

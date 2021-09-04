@@ -64,45 +64,43 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
               future: userProvider.getUserID(),
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
-                  int userId = snapshot.data;
+                  int myId = snapshot.data;
+                  //users streambuilder
                   return StreamBuilder<QuerySnapshot>(
                     stream: fireStoreHelper
                         .getUsersDocumentsFromFireStoreAsStream(),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      List<Widget> children = [];
-                      if (snapshot.hasData) {
-                        for (int i = 0; i < snapshot.data.docs.length; i++) {
-                          if (snapshot.data.docs[i]['uid'] != userId) {
-                            children.add(
-                              ChatUsersCard(
-                                  displayName: snapshot
-                                      .data.docs[i]['displayName']
-                                      .toString(),
-                                  displayImage: snapshot.data.docs[i]['avatar']
-                                      .toString(),
-                                  idUser: snapshot.data.docs[i]['uid'].toInt(),
-                                  myId: userId,
-                                  groupChatHelper: this.groupChatHelper),
-                            );
+                    builder: (context, AsyncSnapshot snapshot1) {
+                      //groups streambuilder
+                      return StreamBuilder(
+                        stream: fireStoreHelper.getGroupChats(myId),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot2) {
+                          List<Widget> children = [];
+                          if (snapshot1.hasData && snapshot2.hasData) {
+                            for (int i = 0;
+                                i < snapshot1.data.docs.length;
+                                i++) {
+                              if (snapshot1.data.docs[i]['uid'] != myId) {
+                                children.add(
+                                  ChatUsersCard(
+                                      displayName: snapshot
+                                          .data.docs[i]['displayName']
+                                          .toString(),
+                                      displayImage: snapshot
+                                          .data.docs[i]['avatar']
+                                          .toString(),
+                                      idUser:
+                                          snapshot.data.docs[i]['uid'].toInt(),
+                                      myId: myId,
+                                      groupChatHelper: this.groupChatHelper),
+                                );
+                              }
+                            }
+                          } else {
+                            children.add(CircularProgressIndicator());
                           }
-                        }
-                        // return StreamBuilder<QuerySnapshot>(
-                        //   stream: fireStoreHelper.getGroupChats(userId),
-                        //   builder: (BuildContext context,
-                        //       AsyncSnapshot<dynamic> snapshot) {
-                        //     if (snapshot.hasData) {
-                        //       print(snapshot.data);
-                        //     } else {}
-                        //     return
-                        //   }
-                        // );
-                      } else {
-                        children.add(CircularProgressIndicator());
-                      }
-
-                      return ListView(
-                        shrinkWrap: true,
-                        children: children,
+                          return ListView(shrinkWrap: true, children: children);
+                        },
                       );
                     },
                   );
