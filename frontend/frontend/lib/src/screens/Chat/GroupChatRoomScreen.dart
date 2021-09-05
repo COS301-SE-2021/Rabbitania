@@ -28,56 +28,101 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
           int myId = snapshot.data;
           return Scaffold(
             backgroundColor: utilModel.greyColor,
-            body: Column(
+            appBar: AppBar(
+              toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+              backgroundColor: Colors.transparent,
+            ),
+            body: Stack(
               children: [
-                StreamBuilder(
-                  stream:
-                      fireStoreHelper.getGroupChatByRoomName(widget.roomName),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<dynamic> streamSnapshot) {
-                    if (streamSnapshot.hasData) {
-                      List<Widget> children = [];
-                      if (streamSnapshot.data.docs.length != 0) {
-                        for (int i = 0;
-                            i < streamSnapshot.data.docs.length;
-                            i++) {
-                          String message =
-                              streamSnapshot.data.docs[i]['message'];
-                          int uid = streamSnapshot.data.docs[i]['uid'];
-                          if (uid == myId) {
-                            children.add(
-                              ChatMessageSender(
-                                textSentValue: message,
-                              ),
-                            );
-                          } else {
-                            children.add(
-                              ChatMessageReceiver(
-                                textSentValue: message,
-                              ),
-                            );
-                          }
-                        }
-                        return ListView(shrinkWrap: true, children: children);
-                      }
-                    }
-                    return Center(
-                      child: CircularProgressIndicator(
-                          color: utilModel.greenColor),
-                    );
-                  },
+                SvgPicture.string(
+                  utilModel.svg_background,
+                  fit: BoxFit.contain,
+                ),
+                Column(
+                  children: [
+                    Expanded(
+                      flex: 12,
+                      child: Column(
+                        children: [
+                          Expanded(
+                              flex: 9,
+                              child: StreamBuilder(
+                                stream: fireStoreHelper
+                                    .getGroupChatByRoomName(widget.roomName),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot streamSnapshot) {
+                                  List<Widget> children = [];
+                                  if (streamSnapshot.hasData) {
+                                    //must loop through messages return object to filter throug
+                                    if (streamSnapshot.data.docs.length == 0) {
+                                      children.add(
+                                        Center(
+                                          child: Text(
+                                            "You have no chat history with this user. Why don't you say hi",
+                                            style: TextStyle(
+                                              color: utilModel.greenColor,
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      for (int i = 0;
+                                          i < streamSnapshot.data.docs.length;
+                                          i++) {
+                                        //messages correspond to current user and selected user
+
+                                        if (streamSnapshot.data.docs[i]
+                                                ['uid'] ==
+                                            myId) {
+                                          children.add(ChatMessageSender(
+                                              textSentValue: streamSnapshot
+                                                  .data.docs[i]['message']));
+                                        } else {
+                                          children.add(
+                                            ChatMessageReceiver(
+                                              textSentValue: streamSnapshot
+                                                  .data.docs[i]['message'],
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    }
+                                  } else {
+                                    children.add(CircularProgressIndicator());
+                                  }
+
+                                  //participantID matches clicked on id, means other persons message
+
+                                  // return ListView(
+                                  //     reverse: true, shrinkWrap: true, children: children);
+                                  return ListView.builder(
+                                    padding:
+                                        EdgeInsets.only(left: 10, right: 10),
+                                    reverse: true,
+                                    itemCount: children.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return children[index];
+                                    },
+                                  );
+                                },
+                              )),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 10, right: 5, left: 5),
+                      child: GroupChatSendMessageBar(myId, widget.roomName),
+                    ),
+                  ],
                 ),
               ],
             ),
-            bottomNavigationBar: GroupChatSendMessageBar(myId, widget.roomName),
           );
         }
-        return Container(
-          width: 50,
-          height: 50,
-          child: Center(
-              child: CircularProgressIndicator(color: utilModel.greenColor)),
-        );
+        return Center(
+            child: CircularProgressIndicator(color: utilModel.greenColor));
       },
     );
   }
