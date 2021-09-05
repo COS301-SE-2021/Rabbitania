@@ -22,6 +22,7 @@ using backend_api.Services.Notification;
 using backend_api.Services.User;
 using FirebaseAdmin;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +36,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Linq;
 using Npgsql;
@@ -190,7 +192,20 @@ namespace backend_api
             #endregion
             
             services.ConfigJwt(Configuration);
-            services.AddAuthentication();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = "https://securetoken.google.com/" +
+                                    Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT");
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "https://securetoken.google.com/" +
+                                  Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT"),
+                    ValidateAudience = true,
+                    ValidAudience = Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT"),
+                    ValidateLifetime = true
+                };
+            });
             services.AddAuthorization();
 
         }

@@ -12,18 +12,10 @@ namespace backend_api
 {
     public static class ServicesHelper
     {
-        public static void ConfigureIdentity(this IServiceCollection services)
-        {
-            var builder = services.AddIdentityCore<Users>(o =>
-            {
-                
-            }).AddDefaultTokenProviders();
-        }
-
         public static void ConfigJwt(this IServiceCollection services, IConfiguration configuration)
         {
             //TODO: change to simply using Firebase tokens instead of creating our own JWT on top of their token
-            var settings = configuration.GetSection("JwtSettings");
+            /*var settings = configuration.GetSection("JwtSettings");
             var secretKey = Environment.GetEnvironmentVariable("JWTSecret");
             services.AddAuthentication(o =>
             {
@@ -41,7 +33,7 @@ namespace backend_api
                     ValidAudience = settings.GetSection("validAudience").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey ?? throw new InvalidOperationException()))
                 };
-            });
+            });*/
         }
     }
 }

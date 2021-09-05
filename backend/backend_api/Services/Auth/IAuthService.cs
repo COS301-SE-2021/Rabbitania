@@ -75,7 +75,9 @@ namespace backend_api.Services.Auth
         /// </summary>
         /// <param name="credentials"></param>
         /// <returns>string containing the JWT</returns>
-        Task<string> createJwt(Credentials credentials);
+        /// 
+        // Task<string> createJwt(Credentials credentials);
+        
         /// <summary>
         ///     Authenticates a valid firebase token received
         ///     when a user logs into the mobile app. This
