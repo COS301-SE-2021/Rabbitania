@@ -58,59 +58,57 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
           ),
         ),
         backgroundColor: utilModel.greyColor,
-        body: Column(
-          children: [
-            FutureBuilder(
-              future: userProvider.getUserID(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (snapshot.hasData) {
-                  int myId = snapshot.data;
-                  //users streambuilder
-                  return StreamBuilder<QuerySnapshot>(
-                    stream: fireStoreHelper
-                        .getUsersDocumentsFromFireStoreAsStream(),
-                    builder: (context, AsyncSnapshot snapshot1) {
-                      //groups streambuilder
-                      return StreamBuilder(
-                        stream: fireStoreHelper.getGroupChats(myId),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<dynamic> snapshot2) {
-                          List<Widget> children = [];
-                          if (snapshot1.hasData && snapshot2.hasData) {
-                            for (int i = 0;
-                                i < snapshot1.data.docs.length;
-                                i++) {
-                              if (snapshot1.data.docs[i]['uid'] != myId) {
-                                children.add(
-                                  ChatUsersCard(
-                                      displayName: snapshot
-                                          .data.docs[i]['displayName']
-                                          .toString(),
-                                      displayImage: snapshot
-                                          .data.docs[i]['avatar']
-                                          .toString(),
-                                      idUser:
-                                          snapshot.data.docs[i]['uid'].toInt(),
-                                      myId: myId,
-                                      groupChatHelper: this.groupChatHelper),
-                                );
-                              }
-                            }
-                          } else {
-                            children.add(CircularProgressIndicator());
+        body: FutureBuilder(
+          future: userProvider.getUserID(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.hasData) {
+              int myId = snapshot.data;
+              //users streambuilder
+              return StreamBuilder<QuerySnapshot>(
+                stream:
+                    fireStoreHelper.getUsersDocumentsFromFireStoreAsStream(),
+                builder: (context, AsyncSnapshot snapshot1) {
+                  //groups streambuilder
+                  return StreamBuilder(
+                    stream: fireStoreHelper.getGroupChats(myId),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot2) {
+                      List<Widget> children = [];
+                      if (snapshot1.hasData && snapshot2.hasData) {
+                        for (int i = 0; i < snapshot1.data.docs.length; i++) {
+                          if (snapshot1.data.docs[i]['uid'] != myId) {
+                            children.add(
+                              ChatUsersCard(
+                                  displayName: snapshot1
+                                      .data.docs[i]['displayName']
+                                      .toString(),
+                                  displayImage: snapshot1.data.docs[i]['avatar']
+                                      .toString(),
+                                  idUser: snapshot1.data.docs[i]['uid'].toInt(),
+                                  myId: myId,
+                                  groupChatHelper: this.groupChatHelper),
+                            );
                           }
-                          return ListView(shrinkWrap: true, children: children);
-                        },
-                      );
+                        }
+                        for (int i = 0; i < snapshot2.data.docs.length; i++) {
+                          var avatar = snapshot2.data.docs[i]['avatar'];
+                          var roomName = snapshot2.data.docs[i]['roomName'];
+                          children.add(GroupChatCard(
+                              avatar: avatar, roomName: roomName));
+                        }
+                      } else {
+                        children.add(CircularProgressIndicator());
+                      }
+                      return ListView(shrinkWrap: true, children: children);
                     },
                   );
-                }
-                return Center(
-                  child: CircularProgressIndicator(color: utilModel.greenColor),
-                );
-              },
-            ),
-          ],
+                },
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(color: utilModel.greenColor),
+            );
+          },
         ),
         floatingActionButton: Visibility(
           visible: this.visible,
