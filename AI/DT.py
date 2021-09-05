@@ -3,11 +3,12 @@ import tensorflow_decision_forests as tfdf
 import pandas
 from tensorflow import keras
 import tensorflow as tf
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import numpy as np
 from flask import Flask, jsonify, request 
 import json
 from pandas.io.json import json_normalize
+import os
 
 app = Flask(__name__)
 
@@ -42,9 +43,6 @@ class DecisionTree:
 
         model.save(self.model_path)
 
-        model.make_inspector().export_to_tensorboard("tensorboard_logs")
-
-        tfdf.model_plotter.plot_model(model, tree_idx=0, max_depth=3)
         # print(model)
         return model
 
@@ -72,7 +70,6 @@ class DecisionTree:
         print("model loaded successfully")
 
         print("Converting input to Dataframe")
-        #df = pandas.DataFrame.from_dict(UserSymptoms, orient="index")
         df=pandas.json_normalize(UserSymptoms)
         df.to_csv("data.csv", index = False)
         dataframe = pandas.read_csv("data.csv")
@@ -90,31 +87,13 @@ class DecisionTree:
         
 
 
-
-# @app.route('/api/predict/', methods = ['GET'])
-# def assumption():
-#     dt = DecisionTree()
-
-#     dt.predictionTest()
-#     data = request.get_json()
-#     cough = request.args.get("cough")
-#     fever = data.get('fever','')
-#     sore_throat = data.get('sore_throat','')
-#     shortness_of_breath = data.get('shortness_of_breath')
-#     head_ache = data.get('head_ache')
-#     gender = data.get('gender')
-#     test_indication = data.get('test_indication')
-#     symptoms = [cough,fever, sore_throat, shortness_of_breath, head_ache, gender, test_indication]
-#     dt.predictionTest(symptoms)
-#     return "hello there"
-
-
 @app.route('/api/train', methods=['GET'])
 def train():
     #declare object of DecisionTree class
     dt = DecisionTree()
     #train model and save it in 'models'
     dt.train_and_save()
+    return "trained model and saved to models"
 
 @app.route('/api/predict', methods=['POST'])
 def userPrediction():
@@ -123,4 +102,5 @@ def userPrediction():
     return dt.prediction(psymptoms)
     
 if __name__ == '__main__':
-    app.run(threaded = True, port = 5006)
+    Port = os.getenv('PORT')
+    app.run(threaded = True,host='0.0.0.0' ,port = Port)
