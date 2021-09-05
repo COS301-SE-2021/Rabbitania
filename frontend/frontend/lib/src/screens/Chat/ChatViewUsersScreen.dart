@@ -75,6 +75,12 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
                         AsyncSnapshot<dynamic> snapshot2) {
                       List<Widget> children = [];
                       if (snapshot1.hasData && snapshot2.hasData) {
+                        for (int i = 0; i < snapshot2.data.docs.length; i++) {
+                          var avatar = snapshot2.data.docs[i]['avatar'];
+                          var roomName = snapshot2.data.docs[i]['roomName'];
+                          children.add(GroupChatCard(
+                              avatar: avatar, roomName: roomName));
+                        }
                         for (int i = 0; i < snapshot1.data.docs.length; i++) {
                           if (snapshot1.data.docs[i]['uid'] != myId) {
                             children.add(
@@ -89,12 +95,6 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
                                   groupChatHelper: this.groupChatHelper),
                             );
                           }
-                        }
-                        for (int i = 0; i < snapshot2.data.docs.length; i++) {
-                          var avatar = snapshot2.data.docs[i]['avatar'];
-                          var roomName = snapshot2.data.docs[i]['roomName'];
-                          children.add(GroupChatCard(
-                              avatar: avatar, roomName: roomName));
                         }
                       } else {
                         children.add(CircularProgressIndicator());

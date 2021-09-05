@@ -101,7 +101,7 @@ class FireStoreHelper {
 
   //function for getting all chats based off room name
   getGroupChatByRoomName(roomName) {
-    firestore
+    return firestore
         .collection('groupChat/$roomName/messages')
         .orderBy('dateCreated', descending: true)
         .snapshots();

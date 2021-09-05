@@ -99,9 +99,6 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                             ChatMessageReceiver(
                                               textSentValue: snapshot
                                                   .data.docs[i]['message'],
-                                              dateCreated: snapshot
-                                                  .data.docs[i]['dateCreated']
-                                                  .toString(),
                                             ),
                                           );
                                         }
