@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend_api.Data.Node;
+using backend_api.Exceptions.Node;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
 
@@ -28,6 +30,59 @@ namespace backend_api.Services.Node
                 throw new Exception("Request is null or node ID is missing");
             }
         }
-        
+
+        public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNodeException("Request is null or empty");
+            }
+            if (request.UserEmail.Equals(null))
+            {
+                throw new InvalidNodeException("User email is null");
+            }
+
+            var resp = await _nodeRepository.CreateNode(request);
+            return resp;
+        }
+
+        public async Task<EditNodeResponse> EditNode(EditNodeRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNodeException("Request is null or empty");
+            }
+
+            if (request.NodeId == null)
+            {
+                throw new InvalidNodeException("Null node ID specified to edit");
+            }
+            var resp = await _nodeRepository.EditNode(request);
+            return resp;
+        }
+
+        public async Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNodeException("Request is null or empty");
+            }
+
+            if (request.NodeId == null)
+            {
+                throw new InvalidNodeException("Null node ID specified to delete");
+            }
+
+            var resp = await _nodeRepository.DeleteNode(request);
+            return resp;
+        }
+
+        public async Task<IEnumerable<Models.Node.Node>> GetAllNodes()
+        {
+            var resp = await _nodeRepository.GetAllNodes();
+            return resp;
+        }
+
+
     }
 }
