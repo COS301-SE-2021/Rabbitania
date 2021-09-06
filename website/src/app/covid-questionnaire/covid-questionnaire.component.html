@@ -1,0 +1,63 @@
+<div class = "parent">
+
+<form [formGroup] = "covidQuestionnaire" (ngSubmit) = "onSubmit()">
+    <mat-card class = "form-container">
+        <mat-card-header>
+          <mat-card-title>Covid Questionnaire</mat-card-title>
+        </mat-card-header>
+          <div class = "row">
+              <mat-radio-group formControlName="gender" >
+                <mat-radio-button value = "male"> Male </mat-radio-button>
+                <mat-radio-button  value = "female"> Female </mat-radio-button>
+              </mat-radio-group>
+          </div>
+
+          <div class = "row">
+            <div class = "col-md-3">
+              <mat-checkbox formControlName="cough">
+                <mat-label>Cough</mat-label>
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-3">
+              <mat-checkbox formControlName="fever">
+                <mat-label>Fever</mat-label>
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-3">
+              <mat-checkbox formControlName="sore_throat">
+                <mat-label>Sore Throat</mat-label>
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-3">
+              <mat-checkbox formControlName="shortness_of_breath">
+                <mat-label>Shortness of Breath</mat-label>
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-3">
+              <mat-checkbox formControlName="head_ache">
+                <mat-label>Headache</mat-label>
+              </mat-checkbox>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-md-3">
+              <mat-checkbox formControlName="test_indication">
+                <mat-label>Contact With Covid</mat-label>
+              </mat-checkbox>
+            </div>
+          </div>
+        <mat-card-actions>
+          <button mat-raised-button type = "submit"> Submit </button>
+        </mat-card-actions>
+
+    </mat-card>
+</form>
+</div>
