@@ -97,7 +97,9 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
                           }
                         }
                       } else {
-                        children.add(CircularProgressIndicator());
+                        children.add(
+                          CircularProgressIndicator(),
+                        );
                       }
                       return ListView(shrinkWrap: true, children: children);
                     },

@@ -92,7 +92,7 @@ class FireStoreHelper {
   }
 
   //function to get user object using user idUser
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserById(idUser) {
+  getUserById(idUser) {
     return firestore
         .collection('users')
         .where('uid', isEqualTo: idUser)
@@ -104,6 +104,13 @@ class FireStoreHelper {
     return firestore
         .collection('groupChat/$roomName/messages')
         .orderBy('dateCreated', descending: true)
+        .snapshots();
+  }
+
+  getGroupRoomByRoomName(roomName) {
+    return firestore
+        .collection('groupChat')
+        .where('roomName', isEqualTo: roomName)
         .snapshots();
   }
 

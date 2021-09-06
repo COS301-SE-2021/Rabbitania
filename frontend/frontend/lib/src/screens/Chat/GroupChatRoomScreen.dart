@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
+import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:frontend/src/widgets/Chat/groupChatMessageBar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/widgets/Chat/groupChatParticipantBar.dart';
 
 class GroupChatRoomScreen extends StatefulWidget {
   final String roomName;
@@ -19,6 +21,7 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
   final userHelper = UserHelper();
   final utilModel = UtilModel();
   final fireStoreHelper = FireStoreHelper();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -29,6 +32,7 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
           return Scaffold(
             backgroundColor: utilModel.greyColor,
             appBar: AppBar(
+              title: GroupChatParticipantBar(roomName: widget.roomName),
               toolbarHeight: MediaQuery.of(context).size.height * 0.1,
               backgroundColor: Colors.transparent,
             ),
