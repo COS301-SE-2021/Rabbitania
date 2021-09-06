@@ -28,5 +28,13 @@ namespace backend_api.Models.Node
             this.yPos = yPos;
             this.active = active;
         }
+
+        public Node(string userEmail,  float xPos, float yPos, bool active)
+        {
+            this.userEmail = userEmail;
+            this.xPos = xPos;
+            this.yPos = yPos;
+            this.active = active;
+        }
     }
 }

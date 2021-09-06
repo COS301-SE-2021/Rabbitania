@@ -27,7 +27,6 @@ namespace backend_api.Data.Node
         {
             return await _nodes.Nodes.ToListAsync();
         }
-
         public async Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request)
         {
             var node = await _nodes.Nodes.FirstOrDefaultAsync(x => x.Id == request.NodeId);
@@ -78,6 +77,20 @@ namespace backend_api.Data.Node
             else
             {
                 return new EditNodeResponse("Node that you are trying to update is null");
+            }
+        }
+        public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
+        {
+            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, request.Actice);
+            try
+            {
+                await _nodes.Nodes.AddAsync(node);
+                await _nodes.SaveChangesAsync();
+                return new CreateNodeResponse("Node created successfully", HttpStatusCode.Created);
+            }
+            catch (Exception e)
+            {
+                return new CreateNodeResponse(e.Message, HttpStatusCode.BadRequest);
             }
         }
     }

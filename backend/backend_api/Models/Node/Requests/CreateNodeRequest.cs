@@ -5,14 +5,14 @@
         private string userEmail;
         private float xPos;
         private float yPos;
-        private bool actice;
+        private bool active;
 
         public CreateNodeRequest(string userEmail, float xPos, float yPos, bool actice)
         {
             this.userEmail = userEmail;
             this.xPos = xPos;
             this.yPos = yPos;
-            this.actice = actice;
+            this.active = actice;
         }
 
         public string UserEmail
@@ -35,8 +35,8 @@
 
         public bool Actice
         {
-            get => actice;
-            set => actice = value;
+            get => active;
+            set => active = value;
         }
     }
 }

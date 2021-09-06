@@ -9,6 +9,7 @@ namespace backend_api.Data.Node
     public interface INodeRepository
     {
         Task<GetNodeResponse> GetNode(GetNodeRequest request);
+        Task<CreateNodeResponse> CreateNode(CreateNodeRequest request);
         Task<IEnumerable<Models.Node.Node>> GetAllNodes();
         Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request);
         Task<EditNodeResponse> EditNode(EditNodeRequest request);
