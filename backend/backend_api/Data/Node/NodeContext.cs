@@ -5,7 +5,7 @@ namespace backend_api.Data.Node
 {
     public class NodeContext : DbContext, INodeContext
     {
-        public NodeContext(DbContextOptions options) : base(options)
+        public NodeContext(DbContextOptions<NodeContext> options) : base(options)
         {
         }
 
