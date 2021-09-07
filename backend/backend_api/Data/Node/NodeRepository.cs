@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using backend_api.Data.User;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +13,17 @@ namespace backend_api.Data.Node
     public class NodeRepository : INodeRepository
     {
         private readonly NodeContext _nodes;
+        private readonly UserContext _users;
 
         public NodeRepository(NodeContext nodes)
         {
             _nodes = nodes;
+        }
+
+        public NodeRepository(NodeContext nodes, UserContext users)
+        {
+            _nodes = nodes;
+            _users = users;
         }
 
         public async Task<GetNodeResponse> GetNode(GetNodeRequest request)
@@ -54,6 +63,7 @@ namespace backend_api.Data.Node
         public async Task<EditNodeResponse> EditNode(EditNodeRequest request)
         {
             var node = await _nodes.Nodes.FindAsync(request.NodeId);
+            
             if (node != null)
             {
                 try
@@ -82,11 +92,26 @@ namespace backend_api.Data.Node
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
             var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, request.Actice);
+            
             try
             {
-                await _nodes.Nodes.AddAsync(node);
+                var result = await _nodes.Nodes.AddAsync(node);
+                var nodeID = result.Entity.Id;
+                var user = await _users.UserEmail.FirstOrDefaultAsync(x => x.UsersEmail == request.UserEmail);
+                var userID = user.UserId;
+                
+                var nodeUpdate = await _nodes.Nodes.FirstOrDefaultAsync(x => x.Id == nodeID);
+                try
+                {
+                    nodeUpdate.user.UserId = userID;
+                    await _nodes.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 await _nodes.SaveChangesAsync();
-                return new CreateNodeResponse("Node created successfully", HttpStatusCode.Created);
+                return new CreateNodeResponse("Node created successfully with userID: "+userID+" and node ID: "+nodeID, HttpStatusCode.Created);
             }
             catch (Exception e)
             {
