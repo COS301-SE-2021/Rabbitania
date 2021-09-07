@@ -1,4 +1,4 @@
-export interface Questionnaire{
+export interface QuestionnaireRequest{
   cough: string,
   fever: string,
   sore_throat: string,
@@ -6,4 +6,8 @@ export interface Questionnaire{
   head_ache: string,
   gender: string,
   test_indication: string,
+}
+
+export interface QuestionnaireResponse{
+  result: string
 }

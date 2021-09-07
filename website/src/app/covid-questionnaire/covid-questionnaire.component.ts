@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Questionnaire} from '../interfaces/covid_questionnaire_interface';
+import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface';
+import { QuestionnaireResponse} from '../interfaces/covid_questionnaire_interface';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -9,9 +10,11 @@ import { Questionnaire} from '../interfaces/covid_questionnaire_interface';
   styleUrls: ['./covid-questionnaire.component.scss']
 })
 export class CovidQuestionnaireComponent {
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  result: any;
+  constructor(private fb: FormBuilder, private http: HttpClient, ) {
 
   }
+
 
 
   covidQuestionnaire = this.fb.group({
@@ -35,6 +38,7 @@ export class CovidQuestionnaireComponent {
     var _head_ache = "0";
     var _test_indication = "Other";
     var _gender = "male";
+    var _result = "";
 
     if(questionnaireObject.cough == true){
       _cough = "1";
@@ -66,7 +70,7 @@ export class CovidQuestionnaireComponent {
     console.log(_gender);
     console.log(_test_indication);
 
-    var response = this.http.post<Questionnaire>('https://rabbitania-ai.herokuapp.com/api/predict', {
+      this.http.post<QuestionnaireRequest>('https://rabbitania-ai.herokuapp.com/api/predict', {
       cough: _cough,
       fever: _fever,
       sore_throat: _sore_throat,
@@ -74,11 +78,23 @@ export class CovidQuestionnaireComponent {
       head_ache: _head_ache,
       gender: _gender,
       test_indication: _test_indication,
-    })
+    }).subscribe(
+      (data) => {
+        if (data) {
+          this.result = data;
 
-    response.subscribe({next(){}}
+        } else
+          console.log({ status: 'Error 500', message: 'Unable to process request' });
+      },
+      (error) => {
+        console.log(error);
+        alert('An unexpected error occurred');
+      }
+    );
+    console.log(this.result);
 
-    )
+
+
 
 
   }
