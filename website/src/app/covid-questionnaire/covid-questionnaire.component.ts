@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface';
 import { QuestionnaireResponse} from '../interfaces/covid_questionnaire_interface';
+import { AiServiceService } from '../../app/services/AI/ai-service.service';
+import { AIPlannerComponent } from '../ai-planner/ai-planner.component';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -10,8 +12,7 @@ import { QuestionnaireResponse} from '../interfaces/covid_questionnaire_interfac
   styleUrls: ['./covid-questionnaire.component.scss']
 })
 export class CovidQuestionnaireComponent {
-  result: any;
-  constructor(private fb: FormBuilder, private http: HttpClient, ) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private service : AiServiceService) {
 
   }
 
@@ -28,7 +29,7 @@ export class CovidQuestionnaireComponent {
     });
 
 
-  onSubmit(){
+  async onSubmit(){
     const questionnaireObject = this.covidQuestionnaire.value;
 
     var _cough = "0";
@@ -38,7 +39,6 @@ export class CovidQuestionnaireComponent {
     var _head_ache = "0";
     var _test_indication = "Other";
     var _gender = "male";
-    var _result = "";
 
     if(questionnaireObject.cough == true){
       _cough = "1";
@@ -62,36 +62,14 @@ export class CovidQuestionnaireComponent {
       _test_indication = "Contact with confirmed"
     }
 
-    console.log(_cough);
-    console.log(_fever);
-    console.log(_sore_throat);
-    console.log(_shortness_of_breath);
-    console.log(_head_ache);
-    console.log(_gender);
-    console.log(_test_indication);
+    (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication)).subscribe(data => {
+      if(data){
+        console.log(data)
 
-      this.http.post<QuestionnaireRequest>('https://rabbitania-ai.herokuapp.com/api/predict', {
-      cough: _cough,
-      fever: _fever,
-      sore_throat: _sore_throat,
-      shortness_of_breath: _shortness_of_breath,
-      head_ache: _head_ache,
-      gender: _gender,
-      test_indication: _test_indication,
-    }).subscribe(
-      (data) => {
-        if (data) {
-          this.result = data;
-
-        } else
-          console.log({ status: 'Error 500', message: 'Unable to process request' });
-      },
-      (error) => {
-        console.log(error);
-        alert('An unexpected error occurred');
       }
-    );
-    console.log(this.result);
+    });
+
+
 
 
 

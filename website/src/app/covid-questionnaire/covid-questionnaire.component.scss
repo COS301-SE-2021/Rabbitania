@@ -3,6 +3,18 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100%;
+  background-color: rgba(33,33,33,1);
+
+}
+
+.mat-card-header{
+  color: rgba(179,255,79,1);
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+.mat-card-actions{
+  margin-left:33%
 }
 
 .full-width{
@@ -10,19 +22,56 @@
 }
 
 .top-padding{
-  padding-top: 3px;
+  padding-top: 5%;
 }
+
+
 
 .margin-left mat-radio-button:not(:first-child){
   margin-left:10px;
 }
 
+.row{
+  padding-top: 6%;
+}
+
 .form-container{
-  margin-top: 10%;
+  border-style: solid;
+  border-color: rgba(179,255,79,1);
+  border-width: 3px;
+  background-color: rgb(56, 56, 56);
+  width: 100%;
 }
 
 .mat-radio-button {
   margin-left: 15px;
-
+  color: rgba(179,255,79,1);
 }
 
+.mat-checkbox{
+  color: rgba(179,255,79,1);
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color:rgba(56, 56, 56);
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgba(179,255,79,1);
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgba(179,255,79,1);   /*inner circle color change*/
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color:  rgba(179,255,79,1)!important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color:  rgba(33,33,33,1);
+}
+
+::ng-deep .mat-checkbox-label.mat-accent{
+  color: white;
+}
