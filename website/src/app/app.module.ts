@@ -15,18 +15,35 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { HostListener } from "@angular/core";
 import {MatTabsModule} from '@angular/material/tabs';
+import { CovidQuestionnaireComponent } from './covid-questionnaire/covid-questionnaire.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    AIPlannerComponent
+    AIPlannerComponent,
+    CovidQuestionnaireComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     DragDropModule, NgbModule,MatCardModule,
     MatExpansionModule,MatDividerModule,
     MatListModule,MatButtonModule,MatSidenavModule,MatTabsModule,
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -35,3 +52,4 @@ export class AppModule { }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
