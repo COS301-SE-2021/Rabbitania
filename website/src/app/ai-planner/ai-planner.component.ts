@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import {MovableNodes} from '../services/ai-planner/movable-nodes';
 import dummyData from '../../test_variables/dummy_node_json.json';
+import { FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-ai-planner',
@@ -13,8 +15,13 @@ export class AIPlannerComponent implements OnInit {
   //user gets 1m square space to themselves 1m x 1m
   //1600 -> 80 = (1600/10)/2  
   //
+  addNodeForm = this.fb.group({
+    title: null,
+    staff: null,
+  });
 
-  constructor(){
+  
+  constructor(private fb: FormBuilder){
     this.onResize();
   }
 
@@ -25,6 +32,10 @@ export class AIPlannerComponent implements OnInit {
     console.log("Starting");
     //APi call to get nodes pos/name/details
     this.onResize();
+    this.addNodeForm = this.fb.group({
+      title: null,
+      staff: null,
+    });
   }
 
 
@@ -94,6 +105,8 @@ export class AIPlannerComponent implements OnInit {
 
   }
 
+  onSubmit(){
+    console.log("submit");
+  }
+
 }
-
-
