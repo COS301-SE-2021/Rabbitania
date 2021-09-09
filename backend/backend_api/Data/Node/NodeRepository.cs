@@ -143,5 +143,18 @@ namespace backend_api.Data.Node
                 return new ActivateNodeResponse(e.Message, HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request)
+        {
+            var nodes = await _nodes.Nodes.ToListAsync();
+
+            foreach (var node in nodes)
+            {
+                node.active = false;
+            }
+
+            await _nodes.SaveChanges();
+            return new DeactivateAllNodesResponse("Nodes successfully deactivated", HttpStatusCode.OK);
+        }
     }
 }

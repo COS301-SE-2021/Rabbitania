@@ -5,6 +5,7 @@ using backend_api.Data.Node;
 using backend_api.Exceptions.Node;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
+using Hangfire;
 
 namespace backend_api.Services.Node
 {
@@ -97,6 +98,12 @@ namespace backend_api.Services.Node
             }
 
             var resp = await _nodeRepository.ActivateNode(request);
+            return resp;
+        }
+
+        public async Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request)
+        {
+            var resp = await _nodeRepository.DeactivateAllNodes(null);
             return resp;
         }
     }

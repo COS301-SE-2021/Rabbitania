@@ -12,6 +12,8 @@
       <PackageReference Include="Crc32.NET" Version="1.2.0" />
       <PackageReference Include="DotNetTools" Version="0.0.2" />
       <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
+      <PackageReference Include="Hangfire.AspNetCore" Version="1.8.0-beta3" />
+      <PackageReference Include="Hangfire.PostgreSql" Version="1.8.6" />
       <PackageReference Include="MailKit" Version="2.13.0" />
       <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.7" />

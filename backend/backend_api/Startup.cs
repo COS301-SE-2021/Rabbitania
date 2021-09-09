@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ using backend_api.Services.Node;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,7 +75,12 @@ namespace backend_api
                     });
             });
             services.AddTransient<IAuthService, AuthService>();
-            
+
+            services.AddHangfire(options =>
+            {
+                options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
+                
+            });
 
             //SignalR
             services.AddSignalR(options =>
@@ -89,8 +97,6 @@ namespace backend_api
             */
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-            
-            
             //----------------------------------------------------------------------------------------------------------------------
             // Enumeration DB Context
             services.AddDbContext<EnumContext>(options =>
@@ -217,6 +223,11 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var options = new BackgroundJobServerOptions()
+            {
+                WorkerCount = 1
+            };
+            
             
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
@@ -231,11 +242,16 @@ namespace backend_api
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer(options);
+            
             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+           
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
 using backend_api.Services.Node;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -84,16 +86,13 @@ namespace backend_api.Controllers.Node
         /// <param name="request"></param>
         /// <returns>CreateNodeResponse</returns>
         //[Authorize]
-        
-        
-        
-        
         [HttpPost]
         [Route("CreateNode")]
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
             if (request != null)
             {
+                RecurringJob.AddOrUpdate(() => _service.DeactivateAllNodes(null), "59 23 * * 1-6", TimeZoneInfo.Local);
                 return await _service.CreateNode(request);
             }
             else
@@ -124,11 +123,18 @@ namespace backend_api.Controllers.Node
             }
         }
 
+        /// <summary>
+        /// Activates node after covid questionnaire is submitted
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("ActivateNode")]
         public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
         {
             return await _service.ActivateNode(request);
         }
+
+        
     }
 }
