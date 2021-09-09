@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AiPlannerComponent } from './ai-planner.component';
+import { AIPlannerComponent } from './ai-planner.component';
 
 describe('AiPlannerComponent', () => {
-  let component: AiPlannerComponent;
-  let fixture: ComponentFixture<AiPlannerComponent>;
+  let component: AIPlannerComponent;
+  let fixture: ComponentFixture<AIPlannerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AiPlannerComponent ]
+      declarations: [ AIPlannerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AiPlannerComponent);
+    fixture = TestBed.createComponent(AIPlannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
