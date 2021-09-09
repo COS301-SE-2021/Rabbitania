@@ -84,5 +84,20 @@ namespace backend_api.Services.Node
         }
 
 
+        public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNodeException("Request is null or empty");
+            }
+
+            if (request.UserEmail == "")
+            {
+                throw new InvalidNodeException("Empty email is invalid");
+            }
+
+            var resp = await _nodeRepository.ActivateNode(request);
+            return resp;
+        }
     }
 }
