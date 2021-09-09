@@ -25,13 +25,17 @@ import { getAnalytics } from "firebase/analytics";
 import { HomepageComponent } from './homepage/homepage.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
+import { AIPlannerComponent } from './ai-planner/ai-planner.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    CovidQuestionnaireComponent
+    CovidQuestionnaireComponent,
+    AIPlannerComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatRadioModule,
     MatCheckboxModule,
     HttpClientModule,
+    MatExpansionModule,MatDividerModule,
+    MatListModule,MatButtonModule,MatSidenavModule,MatTabsModule,MatIconModule,MatFormFieldModule,FormsModule,ReactiveFormsModule,MatInputModule, MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
