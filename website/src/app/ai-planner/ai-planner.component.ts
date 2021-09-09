@@ -2,7 +2,9 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import {MovableNodes} from '../services/ai-planner/movable-nodes';
 import dummyData from '../../test_variables/dummy_node_json.json';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ai-planner',
@@ -19,9 +21,9 @@ export class AIPlannerComponent implements OnInit {
     title: null,
     staff: null,
   });
-
+  sidenav!: MatSidenav;
   
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private observer: BreakpointObserver){
     this.onResize();
   }
 
@@ -107,6 +109,18 @@ export class AIPlannerComponent implements OnInit {
 
   onSubmit(){
     console.log("submit");
+  }
+
+  ngAfterViewInit() {
+    this.observer.observe("").pipe(delay(0.5)).subscribe((result) => {
+        if (result.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+    });
   }
 
 }

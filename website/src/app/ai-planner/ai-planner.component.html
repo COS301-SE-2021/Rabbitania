@@ -1,5 +1,43 @@
 
+<mat-toolbar class="mat-elevation-z8">
+    &nbsp;
+    <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://retrorabbit.co.za">
+        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
+    </a>
+</mat-toolbar>
 
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
+
+        <h4 class="name">RABBITANIA MAIN MENU</h4>
+
+        <mat-divider class="nav-divider"></mat-divider>
+            
+
+        <button mat-button class="menu-button">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+        <button mat-button class="menu-button">
+            <mat-icon>code</mat-icon>
+            <span>The Dev Team</span>
+        </button>
+        <button mat-button class="menu-button">
+            <mat-icon class="material-icons-outlined">folder_shared</mat-icon>
+            <span>Admin Login</span>
+        </button>
+     
+    </mat-sidenav>
+    <mat-sidenav-content>
+        
+        
 <div class="container-fluid ">
   <div class="row">
   <div class="col-12 d-flex justify-content-center text-center">
@@ -161,3 +199,8 @@
   </div>
   <br><br>
 </div>
+
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
