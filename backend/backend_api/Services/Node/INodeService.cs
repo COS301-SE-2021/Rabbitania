@@ -51,6 +51,13 @@ namespace backend_api.Services.Node
         /// <param name="request"></param>
         /// <returns></returns>
         Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request);
+        
+        /// <summary>
+        ///     Deactivates all nodes at the end of each day (11:59 pm)
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request);
 
     }
 }
