@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/screens/Chat/groupChatViewGroupScreen.dart';
 import 'package:frontend/src/widgets/Chat/groupChatUserAvatar.dart';
 
 class GroupChatParticipantBar extends StatefulWidget {
@@ -23,10 +24,21 @@ class _GroupChatParticipantBarState extends State<GroupChatParticipantBar> {
             Center(
               child: Padding(
                 padding: EdgeInsets.only(right: 10),
-                child: Text(
-                  widget.roomName,
-                  style: TextStyle(
-                    fontSize: 30,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            GroupChatViewGroupScreen(roomName: widget.roomName),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    widget.roomName,
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ),
@@ -35,7 +47,7 @@ class _GroupChatParticipantBarState extends State<GroupChatParticipantBar> {
           //loop through participants to get each user avatar and display in circleavatar
           if (snapshot1.hasData) {
             var participants = snapshot1.data.docs[0]['participants'];
-            print(participants[0]);
+
             for (int i = 0; i < participants.length; i++) {
               children.add(StreamBuilder(
                 stream: firestoreHelper.getUserById(participants[i]),

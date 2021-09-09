@@ -125,4 +125,20 @@ class FireStoreHelper {
       'avatar': imageBae64
     });
   }
+
+  deleteGroupChatByRoomName(String roomName) async {
+    firestore.collection('groupChat').doc('$roomName').delete();
+  }
+
+  removeUserFromGroup(roomName, uid) {
+    firestore.collection('groupChat').doc('$roomName').update({
+      'participants': FieldValue.arrayRemove([uid])
+    });
+  }
+
+  addUserToGroup(roomName, uid) {
+    firestore.collection('groupChat').doc('$roomName').update({
+      'participants': FieldValue.arrayUnion([uid])
+    });
+  }
 }
