@@ -13,5 +13,7 @@ namespace backend_api.Data.Node
         Task<IEnumerable<Models.Node.Node>> GetAllNodes();
         Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request);
         Task<EditNodeResponse> EditNode(EditNodeRequest request);
+
+        Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request);
     }
 }

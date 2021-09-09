@@ -84,6 +84,10 @@ namespace backend_api.Controllers.Node
         /// <param name="request"></param>
         /// <returns>CreateNodeResponse</returns>
         //[Authorize]
+        
+        
+        
+        
         [HttpPost]
         [Route("CreateNode")]
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
@@ -118,6 +122,13 @@ namespace backend_api.Controllers.Node
             {
                 throw new Exception("Request object is null");
             }
+        }
+
+        [HttpPut]
+        [Route("ActivateNode")]
+        public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
+        {
+            return await _service.ActivateNode(request);
         }
     }
 }

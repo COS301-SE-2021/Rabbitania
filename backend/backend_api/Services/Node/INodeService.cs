@@ -44,5 +44,7 @@ namespace backend_api.Services.Node
         /// <returns> IEnumerable<Node> </returns>
         Task<IEnumerable<Models.Node.Node>> GetAllNodes();
 
+        Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request);
+
     }
 }

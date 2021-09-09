@@ -118,5 +118,30 @@ namespace backend_api.Data.Node
                 return new CreateNodeResponse(e.Message, HttpStatusCode.BadRequest);
             }
         }
+
+        public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
+        {
+            try
+            {
+                var user = await _users.UserEmail.FirstOrDefaultAsync(x => x.UsersEmail == request.UserEmail);
+
+                var nodeToUpdate = await _nodes.Nodes.FirstOrDefaultAsync(x => x.userEmail == user.UsersEmail);
+                try
+                {
+                    nodeToUpdate.active = true;
+                    await _nodes.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return new ActivateNodeResponse("Node successfully activated", HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return new ActivateNodeResponse(e.Message, HttpStatusCode.BadRequest);
+            }
+        }
     }
 }
