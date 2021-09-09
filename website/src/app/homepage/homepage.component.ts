@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
@@ -14,7 +14,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class HomepageComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  auth: any;
+  @Input() auth: any;
+  
   constructor(private observer: BreakpointObserver, private service: AuthService) {
 
   }

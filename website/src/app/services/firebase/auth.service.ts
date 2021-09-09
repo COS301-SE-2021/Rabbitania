@@ -9,13 +9,19 @@ export class AuthService {
 
   constructor(public authFire: AngularFireAuth) { }
 
-  signIn() {
+  async signIn() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    const details = this.authFire.signInWithPopup(googleAuthProvider);
-    return details;
+    const user = await this.authFire.signInWithPopup(googleAuthProvider);
+   
+    console.log(user.credential);
+    console.log(user.user?.providerData);
+    console.log(user.user?.displayName);
+    console.log(user.user?.email);
+
+    return user;
   }
 
-  signOut() {
-    this.authFire.signOut();
+  async signOut() {
+    await this.authFire.signOut();
   }
 }
