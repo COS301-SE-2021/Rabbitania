@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using backend_api.Data.Booking;
 using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
+using backend_api.Data.Node;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -17,6 +18,7 @@ using backend_api.Services.Booking;
 using backend_api.Services.Chat;
 using backend_api.Services.Enumerations;
 using backend_api.Services.Forum;
+using backend_api.Services.Node;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
@@ -174,6 +176,18 @@ namespace backend_api
             
             services.AddScoped<IForumRepository, ForumRepository>();
             services.AddScoped<IForumService, ForumService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            //Node DB Context
+            
+            services.AddDbContext<NodeContext>(options =>
+                options.UseNpgsql(
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
+                    b => b.MigrationsAssembly(typeof(NodeContext).Assembly.FullName)));
+
+            services.AddScoped<INodeContext>(provider => provider.GetService<NodeContext>());
+            
+            services.AddScoped<INodeRepository, NodeRepository>();
+            services.AddScoped<INodeService, NodeService>();
             //----------------------------------------------------------------------------------------------------------------------
             //Chat service
             
