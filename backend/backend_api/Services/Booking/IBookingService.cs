@@ -8,7 +8,7 @@ namespace backend_api.Services.Booking
     public interface IBookingService
     {
         /// <summary>
-        ///     Create booking service that checks the request object
+        ///     Create booking object that checks the request object
         ///     and makes sure all checks pass
         /// </summary>
         /// <param name="request"></param>
