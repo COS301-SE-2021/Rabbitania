@@ -44,5 +44,20 @@ namespace backend_api.Services.Node
         /// <returns> IEnumerable<Node> </returns>
         Task<IEnumerable<Models.Node.Node>> GetAllNodes();
 
+        /// <summary>
+        ///     Checks if node exists in the database and if so
+        ///     edits the active attribute.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request);
+        
+        /// <summary>
+        ///     Deactivates all nodes at the end of each day (11:59 pm)
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request);
+
     }
 }

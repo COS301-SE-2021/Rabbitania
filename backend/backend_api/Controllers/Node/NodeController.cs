@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
 using backend_api.Services.Node;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +29,7 @@ namespace backend_api.Controllers.Node
         /// <returns>IEnumerable<Node></returns>
         //[Authorize]
         [HttpGet]
+        [Route("GetAllNodes")]
         public async Task<IEnumerable<Models.Node.Node>> GetAllNodes()
         {
             return await _service.GetAllNodes();
@@ -41,6 +44,7 @@ namespace backend_api.Controllers.Node
         /// <returns>GetNodeResponse<Node></returns>
         //[Authorize]
         [HttpGet]
+        [Route("GetNode")]
         public async Task<GetNodeResponse> GetNode(int nodeID)
         {
             if (nodeID >= 0 && nodeID != null)
@@ -64,6 +68,7 @@ namespace backend_api.Controllers.Node
         /// <returns>EditNodeResponse</returns>
         //[Authorize]
         [HttpPut]
+        [Route("EditNode")]
         public async Task<EditNodeResponse> EditNode(EditNodeRequest request)
         {
             if (request != null || request.NodeId != null || request.NodeId < 0)
@@ -82,10 +87,12 @@ namespace backend_api.Controllers.Node
         /// <returns>CreateNodeResponse</returns>
         //[Authorize]
         [HttpPost]
+        [Route("CreateNode")]
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
             if (request != null)
             {
+                RecurringJob.AddOrUpdate(() => _service.DeactivateAllNodes(null), "59 23 * * 1-6", TimeZoneInfo.Local);
                 return await _service.CreateNode(request);
             }
             else
@@ -103,6 +110,7 @@ namespace backend_api.Controllers.Node
         /// <returns>DeleteNodeResponse</returns>
         //[Authorize]
         [HttpPost]
+        [Route("DeleteNode")]
         public async Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request)
         {
             if (request != null)
@@ -114,5 +122,19 @@ namespace backend_api.Controllers.Node
                 throw new Exception("Request object is null");
             }
         }
+
+        /// <summary>
+        /// Activates node after covid questionnaire is submitted
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("ActivateNode")]
+        public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
+        {
+            return await _service.ActivateNode(request);
+        }
+
+        
     }
 }

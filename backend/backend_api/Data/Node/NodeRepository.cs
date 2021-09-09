@@ -91,7 +91,7 @@ namespace backend_api.Data.Node
         }
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
-            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, request.Actice);
+            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, false);
             
             try
             {
@@ -117,6 +117,44 @@ namespace backend_api.Data.Node
             {
                 return new CreateNodeResponse(e.Message, HttpStatusCode.BadRequest);
             }
+        }
+
+        public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
+        {
+            try
+            {
+                var user = await _users.UserEmail.FirstOrDefaultAsync(x => x.UsersEmail == request.UserEmail);
+
+                var nodeToUpdate = await _nodes.Nodes.FirstOrDefaultAsync(x => x.userEmail == user.UsersEmail);
+                try
+                {
+                    nodeToUpdate.active = true;
+                    await _nodes.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return new ActivateNodeResponse("Node successfully activated", HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return new ActivateNodeResponse(e.Message, HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request)
+        {
+            var nodes = await _nodes.Nodes.ToListAsync();
+
+            foreach (var node in nodes)
+            {
+                node.active = false;
+            }
+
+            await _nodes.SaveChanges();
+            return new DeactivateAllNodesResponse("Nodes successfully deactivated", HttpStatusCode.OK);
         }
     }
 }
