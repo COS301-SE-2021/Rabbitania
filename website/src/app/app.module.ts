@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatCardModule} from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AIPlannerComponent } from './ai-planner/ai-planner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -23,12 +22,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { HomepageComponent } from './homepage/homepage.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AIPlannerComponent,
+    HomepageComponent,
     CovidQuestionnaireComponent
   ],
   imports: [
@@ -38,6 +40,8 @@ import { getAnalytics } from "firebase/analytics";
     DragDropModule, NgbModule,MatCardModule,
     MatExpansionModule,MatDividerModule,
     MatListModule,MatButtonModule,MatSidenavModule,MatTabsModule,
+    MatIconModule,
+    MatToolbarModule,
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,

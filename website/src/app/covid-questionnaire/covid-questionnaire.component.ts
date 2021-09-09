@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface';
 import { QuestionnaireResponse} from '../interfaces/covid_questionnaire_interface';
 import { AiServiceService } from '../../app/services/AI/ai-service.service';
-import { AIPlannerComponent } from '../ai-planner/ai-planner.component';
 
 @Component({
   selector: 'app-covid-questionnaire',
