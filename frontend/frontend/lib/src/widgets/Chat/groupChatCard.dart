@@ -92,28 +92,46 @@ class _GroupChatCardState extends State<GroupChatCard> {
                                 AsyncSnapshot<dynamic> snapshot) {
                               if (snapshot.hasData) {
                                 int myId = snapshot.data;
-                                return AlertDialog(
-                                  title: Text('Delete Group'),
-                                  content: Text(
-                                      'Are you sure you want to leave this group?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () async {
-                                        await firestoreHelper
-                                            .removeUserFromGroup(
-                                                widget.roomName, myId);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('Yes'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('No'),
-                                    ),
-                                  ],
-                                );
+                                return StreamBuilder(
+                                    stream: firestoreHelper.getUserById(myId),
+                                    builder: (context,
+                                        AsyncSnapshot<dynamic> streamSnapshot) {
+                                      if (streamSnapshot.hasData) {
+                                        var displayName = streamSnapshot
+                                            .data.docs[0]['displayName'];
+                                        return AlertDialog(
+                                          title: Text('Delete Group'),
+                                          content: Text(
+                                              'Are you sure you want to leave this group?'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () async {
+                                                await firestoreHelper
+                                                    .sendGroupChatMessage(
+                                                        widget.roomName,
+                                                        -1,
+                                                        '${displayName} has left ${widget.roomName}');
+                                                await firestoreHelper
+                                                    .removeUserFromGroup(
+                                                        widget.roomName, myId);
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('Yes'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('No'),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                      return Container(
+                                          width: 35,
+                                          height: 35,
+                                          child: CircularProgressIndicator());
+                                    });
                               }
                               return Container(
                                 height: 30,

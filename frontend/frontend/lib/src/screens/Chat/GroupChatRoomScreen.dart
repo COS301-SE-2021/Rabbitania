@@ -91,7 +91,12 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                                         .docs[i]['dateCreated']
                                                         .toDate())),
                                           );
-                                        } else {
+                                        } else if (streamSnapshot.data.docs[i]
+                                                    ['uid'] !=
+                                                myId &&
+                                            streamSnapshot.data.docs[i]
+                                                    ['uid'] !=
+                                                -1) {
                                           print(streamSnapshot.data.docs[i]
                                               ['dateCreated']);
                                           children.add(
@@ -105,6 +110,27 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                                         .data
                                                         .docs[i]['dateCreated']
                                                         .toDate())),
+                                          );
+                                        } else {
+                                          children.add(
+                                            Container(
+                                              padding: EdgeInsets.only(
+                                                  top: 10, bottom: 10),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.9,
+                                              child: Center(
+                                                child: Text(
+                                                  streamSnapshot.data.docs[i]
+                                                      ['message'],
+                                                  style: TextStyle(
+                                                      color:
+                                                          utilModel.whiteColor,
+                                                      fontSize: 20),
+                                                ),
+                                              ),
+                                            ),
                                           );
                                         }
                                       }

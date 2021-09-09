@@ -49,7 +49,7 @@ class _chatMessageSenderState extends State<ChatMessageSender> {
                         padding: EdgeInsets.all(10.0),
                         child: Text(
                           widget.textSentValue,
-                          textAlign: TextAlign.end,
+                          textAlign: TextAlign.start,
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,

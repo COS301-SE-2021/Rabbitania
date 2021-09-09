@@ -47,14 +47,14 @@ class _GroupChatAddUserCardState extends State<GroupChatAddUserCard> {
                   child: Container(
                     margin: EdgeInsets.all(10),
                     child: InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChatViewUsersProfileScreen(
-                                idUser: widget.idUser),
-                          ),
-                        );
+                      onTap: () async {
+                        await firestoreHelper.sendGroupChatMessage(
+                            widget.roomName,
+                            -1,
+                            '${widget.displayName} has joined ${widget.roomName}');
+                        await firestoreHelper.addUserToGroup(
+                            widget.roomName, widget.idUser);
+                        Navigator.pop(context);
                       },
                       child: CircleAvatar(
                         //backgroundColor: utilModel.greenColor,
@@ -71,6 +71,10 @@ class _GroupChatAddUserCardState extends State<GroupChatAddUserCard> {
                   radius: MediaQuery.of(context).size.width,
                   splashColor: utilModel.greenColor,
                   onTap: () async {
+                    await firestoreHelper.sendGroupChatMessage(
+                        widget.roomName,
+                        -1,
+                        '${widget.displayName} has joined ${widget.roomName}');
                     await firestoreHelper.addUserToGroup(
                         widget.roomName, widget.idUser);
                     Navigator.pop(context);
