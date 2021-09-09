@@ -5,6 +5,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { NodeServiceService } from '../../app/services/ai-planner/node-service.service';
 
 @Component({
   selector: 'app-ai-planner',
@@ -28,7 +30,7 @@ export class AIPlannerComponent implements OnInit {
 
   sidenav!: MatSidenav;
   
-  constructor(private fb: FormBuilder, private observer: BreakpointObserver){
+  constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService){
     this.onResize();
   }
 
@@ -105,7 +107,7 @@ export class AIPlannerComponent implements OnInit {
   }
 
   addNode(){
-
+  
   }
 
 

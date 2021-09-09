@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { NodeRequest } from 'src/app/interfaces/ai-planner-node-interface.ts';
+import { NodeRequest } from 'src/app/interfaces/ai-planner-node-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,13 @@ export class NodeServiceService {
 
   constructor(private http: HttpClient, ) { }
 
-  async Post(_userEmail: any, _xPos: any, _yPos: any, _actice: boolean): Promise<Observable<any>> {
+  async Post(_userEmail: any, _xPos: any, _yPos: any, _active: boolean): Promise<Observable<any>> {
 
       this.http.post<NodeRequest>('https://10.0.2.2:5001/api/Node/CreateNode', {
       userEmail: _userEmail,
       xPos: _xPos,
       yPos: _yPos,
-      actice: _actice,
+      active: _active,
     }).subscribe(
       (data) => {
         if (data) {

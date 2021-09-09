@@ -2,7 +2,7 @@ export interface NodeRequest{
   userEmail: string,
   xPos: number,
   yPos: number,
-  actice: boolean
+  active: boolean
 }
 
 export interface NodeResponse{
