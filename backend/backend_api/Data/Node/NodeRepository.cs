@@ -91,7 +91,7 @@ namespace backend_api.Data.Node
         }
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
-            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, request.Actice);
+            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, false);
             
             try
             {
