@@ -100,4 +100,8 @@ mat-divider {
     color: $greenColour;
     font-size: xx-large;
     justify-content: space-between;
-  }
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
