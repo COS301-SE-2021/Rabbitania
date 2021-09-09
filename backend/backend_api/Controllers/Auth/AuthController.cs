@@ -135,34 +135,5 @@ namespace backend_api.Controllers.Auth
             var adminStatus = resp.IsAdmin;
             return adminStatus;
         }
-        
-        
-        /// <summary>
-        ///     Api endpoint intended to authorize a user on valid login.
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <returns>A valid JWT token that will authorize the user to use our endpoints</returns>
-        
-        // [HttpPost]
-        // [Route("Auth")]
-        // public async Task<IActionResult> Auth([FromBody] Credentials credentials)
-        // {
-        //     if (await _service.ValidateFirebaseToken(credentials.Token))
-        //     {
-        //         if (!ModelState.IsValid)
-        //             return BadRequest();
-        //
-        //         if (!await _service.Validate(credentials))
-        //         {
-        //             return Unauthorized();
-        //         }
-        //
-        //         return Ok(new { token = await _service.createJwt(credentials) });
-        //     }
-        //     else
-        //     {
-        //         return BadRequest("Failed to authenticate token with google OAuth API via backend");
-        //     }
-        // }
-    }
+    } 
 }
