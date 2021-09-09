@@ -13,14 +13,19 @@ import { delay } from 'rxjs/operators';
 })
 export class AIPlannerComponent implements OnInit {
   //1600x900 AKA a 16:9 ratio
-  //80m x 45m screen
+  //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
   //1600 -> 80 = (1600/10)/2  
   //
   addNodeForm = this.fb.group({
-    title: null,
-    staff: null,
+    email: null,
   });
+
+  editNodeForm = this.fb.group({
+    email: null,
+  });
+
+
   sidenav!: MatSidenav;
   
   constructor(private fb: FormBuilder, private observer: BreakpointObserver){
@@ -31,21 +36,18 @@ export class AIPlannerComponent implements OnInit {
   public nodeList:{deskNumber:string, x:string,y:string}[] = dummyData;
 
   ngOnInit(): void {
-    console.log("Starting");
     //APi call to get nodes pos/name/details
     this.onResize();
+
     this.addNodeForm = this.fb.group({
-      title: null,
-      staff: null,
+      email: null,
     });
+
+    this.editNodeForm = this.fb.group({
+        email: null,
+      });
+
   }
-
-
-  // newMN1 = new MovableNodes(1,0,0);
-  // newMN2 = new MovableNodes(2,977,0);
-  // newMN3 = new MovableNodes(3,0,777);
-  // newMN4 = new MovableNodes(4,977,777);
-  // newMN5 = new MovableNodes(5,472,372);
 
   nodes: MovableNodes[] = [];
 
@@ -63,10 +65,6 @@ export class AIPlannerComponent implements OnInit {
     
   }
 
-  addNode()
-  {
-    console.log("ADD NODE PAGE");
-  }
 
   @HostListener("window:resize", [])
   onResize() {
@@ -100,16 +98,17 @@ export class AIPlannerComponent implements OnInit {
     { 
       this.getDummyNodes(0.8);
     }
-
-
-
-
-
   }
 
   onSubmit(){
     console.log("submit");
   }
+
+  addNode(){
+
+  }
+
+
 
   ngAfterViewInit() {
     this.observer.observe("").pipe(delay(0.5)).subscribe((result) => {

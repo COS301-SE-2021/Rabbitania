@@ -1,43 +1,5 @@
 
-<mat-toolbar class="mat-elevation-z8">
-    &nbsp;
-    <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
-    </button>
-    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://retrorabbit.co.za">
-        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
-    </a>
-</mat-toolbar>
 
-<mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-
-        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
-
-        <h4 class="name">RABBITANIA MAIN MENU</h4>
-
-        <mat-divider class="nav-divider"></mat-divider>
-            
-
-        <button mat-button class="menu-button">
-            <mat-icon>home</mat-icon>
-            <span>Home</span>
-        </button>
-        <button mat-button class="menu-button">
-            <mat-icon>code</mat-icon>
-            <span>The Dev Team</span>
-        </button>
-        <button mat-button class="menu-button">
-            <mat-icon class="material-icons-outlined">folder_shared</mat-icon>
-            <span>Admin Login</span>
-        </button>
-     
-    </mat-sidenav>
-    <mat-sidenav-content>
-        
-        
 <div class="container-fluid ">
   <div class="row">
   <div class="col-12 d-flex justify-content-center text-center">
@@ -100,7 +62,7 @@
       </mat-card> 
       </mat-tab >
       <mat-tab label="Add Desk">
-      <form [formGroup]="addNodeForm" novalidate (ngSubmit)="onSubmit()" >
+      <form [formGroup]="addNodeForm" novalidate (ngSubmit)="addNode()" >
   <mat-card class="addDesk-card">
     <mat-card-header>
       <mat-card-title>Create Desk</mat-card-title>
@@ -109,22 +71,14 @@
       <div class="row">
          <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="title" formControlName="title">
-            <mat-error *ngIf="addNodeForm.controls['title'].hasError('required')">
-              title name is <strong>required</strong>
+            <input matInput placeholder="email" formControlName="email">
+            <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
+              Email <strong>required</strong>
             </mat-error>
-            <mat-hint align="start">Desk title</mat-hint>
+            <mat-hint align="start">Assigned employee's email</mat-hint>
           </mat-form-field>
         </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="staff" formControlName="staff">
-            <mat-error *ngIf="addNodeForm.controls['staff'].hasError('required')">
-              Staff name is <strong>required</strong>
-            </mat-error>
-            <mat-hint align="start">Your staff name</mat-hint>
-          </mat-form-field>
-        </div>
+        
         </div>
     </mat-card-content>
     <mat-card-actions>
@@ -159,22 +113,14 @@
                           <div class="row">
                             <div class="col">
                               <mat-form-field class="full-width">
-                                <input matInput placeholder="title" formControlName="title">
-                                <mat-error *ngIf="addNodeForm.controls['title'].hasError('required')">
+                                <input matInput placeholder="email" formControlName="email">
+                                <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
                                   title name is <strong>required</strong>
                                 </mat-error>
                                 <mat-hint align="start">Desk title</mat-hint>
                               </mat-form-field>
                             </div>
-                            <div class="col">
-                              <mat-form-field class="full-width">
-                                <input matInput placeholder="staff" formControlName="staff">
-                                <mat-error *ngIf="addNodeForm.controls['staff'].hasError('required')">
-                                  Staff name is <strong>required</strong>
-                                </mat-error>
-                                <mat-hint align="start">Your staff name</mat-hint>
-                              </mat-form-field>
-                            </div>
+                            
                             </div>
                         </mat-card-content>
                         <mat-card-actions>
@@ -200,7 +146,4 @@
   <br><br>
 </div>
 
-        
-    </mat-sidenav-content>
-</mat-sidenav-container>
 
