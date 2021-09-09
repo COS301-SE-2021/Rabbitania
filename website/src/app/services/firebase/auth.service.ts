@@ -11,7 +11,8 @@ export class AuthService {
 
   signIn() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    this.authFire.signInWithPopup(googleAuthProvider);
+    const details = this.authFire.signInWithPopup(googleAuthProvider);
+    return details;
   }
 
   signOut() {

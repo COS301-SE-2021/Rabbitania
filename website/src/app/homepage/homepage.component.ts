@@ -3,6 +3,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
 import { AuthService } from '../services/firebase/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-homepage',
@@ -13,7 +14,7 @@ import { AuthService } from '../services/firebase/auth.service';
 export class HomepageComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-
+  auth: any;
   constructor(private observer: BreakpointObserver, private service: AuthService) {
 
   }
@@ -31,6 +32,10 @@ export class HomepageComponent {
   }
 
   signIn(){
-    return this.service.signIn();
+    this.auth = this.service.signIn();
+  }
+
+  signOut(){
+    this.auth = this.service.signOut();
   }
 }
