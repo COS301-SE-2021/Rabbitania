@@ -12,6 +12,7 @@ class GroupChatCard extends StatelessWidget {
   GroupChatCard({required this.avatar, required this.roomName});
 
   //function to convert base 64 to image file
+
   decodeBase64(String base64Image) {
     return Image.memory(
       Base64Decoder().convert(base64Image),

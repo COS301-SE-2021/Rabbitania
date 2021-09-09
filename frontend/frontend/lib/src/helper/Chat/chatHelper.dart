@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Chat/ChatUserModel.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
+import 'package:intl/intl.dart';
 
 class ChatHelper {
   List<ChatUserModel> selectedUsers = [];
@@ -33,5 +34,10 @@ class ChatHelper {
   //add selected user to list of selected users
   void addSelectedUser(ChatUserModel chatUser) {
     this.selectedUsers.add(chatUser);
+  }
+
+  String dateFormater(timestamp) {
+    String formatDate = DateFormat('kk:mm').format(timestamp);
+    return formatDate;
   }
 }

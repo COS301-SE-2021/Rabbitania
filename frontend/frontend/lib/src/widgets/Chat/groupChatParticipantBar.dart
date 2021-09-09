@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/widgets/Chat/groupChatUserAvatar.dart';
 
 class GroupChatParticipantBar extends StatefulWidget {
   final String roomName;
@@ -18,7 +19,19 @@ class _GroupChatParticipantBarState extends State<GroupChatParticipantBar> {
     return StreamBuilder(
         stream: firestoreHelper.getGroupRoomByRoomName(widget.roomName),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot1) {
-          List<Widget> children = [];
+          List<Widget> children = [
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Text(
+                  widget.roomName,
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            )
+          ];
           //loop through participants to get each user avatar and display in circleavatar
           if (snapshot1.hasData) {
             var participants = snapshot1.data.docs[0]['participants'];
@@ -30,9 +43,8 @@ class _GroupChatParticipantBarState extends State<GroupChatParticipantBar> {
                     (BuildContext context, AsyncSnapshot<dynamic> snapshot2) {
                   if (snapshot2.hasData) {
                     var avatar = snapshot2.data.docs[0]['avatar'];
-                    return CircleAvatar(
-                      backgroundImage: NetworkImage(avatar),
-                    );
+                    var uid = snapshot2.data.docs[0]['uid'];
+                    return GroupChatUserAvatar(avatar: avatar, uid: uid);
                   } else {
                     return CircularProgressIndicator();
                   }
@@ -42,7 +54,12 @@ class _GroupChatParticipantBarState extends State<GroupChatParticipantBar> {
           } else {
             return CircularProgressIndicator();
           }
-          return Row(children: children);
+          return SizedBox(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            child:
+                ListView(scrollDirection: Axis.horizontal, children: children),
+          );
         });
   }
 }

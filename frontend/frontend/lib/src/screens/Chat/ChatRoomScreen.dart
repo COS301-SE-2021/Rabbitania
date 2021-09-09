@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,7 +26,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
   final userProvider = UserProvider();
-
+  final chatHelper = ChatHelper();
   @override
   Widget build(BuildContext context) {
     //TODO: must filter to only see messages sent to current user
@@ -87,9 +88,16 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                                 myId &&
                                             snapshot.data.docs[i]['toUid'] ==
                                                 widget.idUser) {
-                                          children.add(ChatMessageSender(
+                                          children.add(
+                                            ChatMessageSender(
                                               textSentValue: snapshot
-                                                  .data.docs[i]['message']));
+                                                  .data.docs[i]['message'],
+                                              timestamp: chatHelper
+                                                  .dateFormater(snapshot.data
+                                                      .docs[i]['dateCreated']
+                                                      .toDate()),
+                                            ),
+                                          );
                                         } else if (snapshot.data.docs[i]
                                                     ['uid'] ==
                                                 widget.idUser &&
@@ -99,6 +107,10 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                             ChatMessageReceiver(
                                               textSentValue: snapshot
                                                   .data.docs[i]['message'],
+                                              timestamp: chatHelper
+                                                  .dateFormater(snapshot.data
+                                                      .docs[i]['dateCreated']
+                                                      .toDate()),
                                             ),
                                           );
                                         }

@@ -78,8 +78,11 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
                         for (int i = 0; i < snapshot2.data.docs.length; i++) {
                           var avatar = snapshot2.data.docs[i]['avatar'];
                           var roomName = snapshot2.data.docs[i]['roomName'];
-                          children.add(GroupChatCard(
-                              avatar: avatar, roomName: roomName));
+                          children.add(Padding(
+                            padding: EdgeInsets.only(top: 10, bottom: 10),
+                            child: GroupChatCard(
+                                avatar: avatar, roomName: roomName),
+                          ));
                         }
                         for (int i = 0; i < snapshot1.data.docs.length; i++) {
                           if (snapshot1.data.docs[i]['uid'] != myId) {

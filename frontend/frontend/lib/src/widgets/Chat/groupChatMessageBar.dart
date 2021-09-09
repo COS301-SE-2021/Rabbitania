@@ -20,7 +20,7 @@ class _groupChatsendMessageBarState extends State<GroupChatSendMessageBar> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
   final messageController = TextEditingController();
-  var icon = FontAwesomeIcons.microphone;
+  var icon = FontAwesomeIcons.paperPlane;
   @override
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width,
@@ -29,26 +29,13 @@ class _groupChatsendMessageBarState extends State<GroupChatSendMessageBar> {
             Expanded(
               flex: 9,
               child: TextField(
+                minLines: 1,
+                maxLines: 10,
                 cursorColor: utilModel.greenColor,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                 ),
-                onChanged: (value) {
-                  if (value != '') {
-                    setState(
-                      () {
-                        this.icon = FontAwesomeIcons.paperPlane;
-                      },
-                    );
-                  } else {
-                    setState(
-                      () {
-                        this.icon = FontAwesomeIcons.microphone;
-                      },
-                    );
-                  }
-                },
                 decoration: InputDecoration(
                   labelStyle: TextStyle(
                     fontSize: 25,
@@ -87,6 +74,7 @@ class _groupChatsendMessageBarState extends State<GroupChatSendMessageBar> {
                       fireStoreHelper.sendGroupChatMessage(
                           widget.roomName, widget.myId, messageController.text);
                     }
+                    messageController.text = '';
                   },
                 ),
               ),

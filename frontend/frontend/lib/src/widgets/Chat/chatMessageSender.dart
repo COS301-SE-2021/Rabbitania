@@ -4,8 +4,10 @@ import 'package:frontend/src/models/util_model.dart';
 //widget for messages being sent by user
 class ChatMessageSender extends StatefulWidget {
   final textSentValue;
-
-  ChatMessageSender({required this.textSentValue});
+  var uid;
+  var timestamp;
+  ChatMessageSender(
+      {required this.textSentValue, this.uid, required this.timestamp});
 
   @override
   State<StatefulWidget> createState() {
@@ -29,9 +31,9 @@ class _chatMessageSenderState extends State<ChatMessageSender> {
                   //width: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
                     borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(40.0),
-                      topRight: const Radius.circular(40.0),
-                      bottomLeft: const Radius.circular(40.0),
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0),
+                      bottomLeft: const Radius.circular(25.0),
                     ),
                     //color of recieved message border is grey
                     border: Border.all(
@@ -40,16 +42,33 @@ class _chatMessageSenderState extends State<ChatMessageSender> {
                     ),
                   ),
                   //get value sent through in the constructor
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      widget.textSentValue,
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          widget.textSentValue,
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                      FractionallySizedBox(
+                        alignment: Alignment.centerRight,
+                        widthFactor: 0.5,
+                        child: Text(
+                          widget.timestamp,
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
