@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
+import { AuthService } from '../services/firebase/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -13,7 +14,7 @@ export class HomepageComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver) {
+  constructor(private observer: BreakpointObserver, private service: AuthService) {
 
   }
 
@@ -27,5 +28,9 @@ export class HomepageComponent {
           this.sidenav.open();
         }
     });
+  }
+
+  signIn(){
+    return this.service.signIn();
   }
 }

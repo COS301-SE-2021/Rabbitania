@@ -29,6 +29,9 @@ import { MatInputModule } from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import { AIPlannerComponent } from './ai-planner/ai-planner.component';
 
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { AIPlannerComponent } from './ai-planner/ai-planner.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     BrowserAnimationsModule,
     DragDropModule, NgbModule,MatCardModule,
     MatExpansionModule,MatDividerModule,
