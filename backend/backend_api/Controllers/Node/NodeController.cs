@@ -27,6 +27,7 @@ namespace backend_api.Controllers.Node
         /// <returns>IEnumerable<Node></returns>
         //[Authorize]
         [HttpGet]
+        [Route("GetAllNodes")]
         public async Task<IEnumerable<Models.Node.Node>> GetAllNodes()
         {
             return await _service.GetAllNodes();
@@ -41,6 +42,7 @@ namespace backend_api.Controllers.Node
         /// <returns>GetNodeResponse<Node></returns>
         //[Authorize]
         [HttpGet]
+        [Route("GetNode")]
         public async Task<GetNodeResponse> GetNode(int nodeID)
         {
             if (nodeID >= 0 && nodeID != null)
@@ -64,6 +66,7 @@ namespace backend_api.Controllers.Node
         /// <returns>EditNodeResponse</returns>
         //[Authorize]
         [HttpPut]
+        [Route("EditNode")]
         public async Task<EditNodeResponse> EditNode(EditNodeRequest request)
         {
             if (request != null || request.NodeId != null || request.NodeId < 0)
@@ -82,6 +85,7 @@ namespace backend_api.Controllers.Node
         /// <returns>CreateNodeResponse</returns>
         //[Authorize]
         [HttpPost]
+        [Route("CreateNode")]
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
             if (request != null)
@@ -103,6 +107,7 @@ namespace backend_api.Controllers.Node
         /// <returns>DeleteNodeResponse</returns>
         //[Authorize]
         [HttpPost]
+        [Route("DeleteNode")]
         public async Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request)
         {
             if (request != null)
