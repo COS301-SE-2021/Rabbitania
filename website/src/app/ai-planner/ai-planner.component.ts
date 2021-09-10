@@ -107,7 +107,11 @@ export class AIPlannerComponent implements OnInit {
   }
 
   addNode(){
-  
+  await this.service.Post(addNodeForm.email,0,0,false)).subscribe(data => {
+      if(data){
+        console.log(data)
+      }
+    });
   }
 
 
