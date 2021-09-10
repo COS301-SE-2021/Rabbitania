@@ -125,7 +125,6 @@ namespace backend_api.Services.Auth
                 Console.WriteLine(e);
                 throw new InvalidUserRequest("The user does not exist in the database");
             }
-            
         }
         
         /// <inheritdoc />
@@ -141,7 +140,6 @@ namespace backend_api.Services.Auth
                 Console.WriteLine(e);
                 throw new InvalidUserRequest("The user does not exist in the database");
             }
-            
         }
         
         /// <inheritdoc />
@@ -177,27 +175,7 @@ namespace backend_api.Services.Auth
                 return false;
             }
         }
-        
-        /// <inheritdoc />
-        // public async Task<string> createJwt(Credentials credentials)
-        // {
-        //     var settings = Startup.StaticConfig.GetSection("JwtSettings");
-        //     var secret = Environment.GetEnvironmentVariable("JWTSecret") ?? string.Empty;
-        //     var claims = await GetClaims(credentials);
-        //
-        //     var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
-        //     var signingCred = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-        //     
-        //     var token = new JwtSecurityToken(
-        //         issuer: settings.GetSection("validIssuer").Value,
-        //         audience: settings.GetSection("validAudience").Value,
-        //         claims: claims,
-        //         expires: DateTime.Now.AddMinutes(120),
-        //         signingCredentials: signingCred
-        //         );
-        //     return new JwtSecurityTokenHandler().WriteToken(token);
-        // }
-        
+
         public async Task<List<Claim>> GetClaims(Credentials credentials)
         {
             var claims = new List<Claim>
@@ -206,14 +184,6 @@ namespace backend_api.Services.Auth
             };
             
             return claims;
-        }
-
-        public async Task<bool> ValidateFirebaseToken(string token)
-        {
-            FirebaseToken firebaseToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(token);
-            string uid = firebaseToken.Uid;
-            
-            return true;
         }
     }
 }

@@ -206,17 +206,18 @@ namespace backend_api
             #endregion
             
             services.ConfigJwt(Configuration);
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.Authority = "https://securetoken.google.com/" +
-                                    Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT");
+                                    Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT").ToString();
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidIssuer = "https://securetoken.google.com/" +
-                                  Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT"),
+                                  Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT").ToString(),
                     ValidateAudience = true,
-                    ValidAudience = Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT"),
+                    ValidAudience = Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT").ToString(),
                     ValidateLifetime = true
                 };
             });

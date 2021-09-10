@@ -21,6 +21,7 @@ using backend_api.Services.Auth;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -41,7 +42,6 @@ namespace backend_api.Controllers.Auth
             this._userService = userService;
             this._notificationService = notificationService;
         }
-
         /// <summary>
         ///     API endpoint for logging in with Google credentials
         ///     Checks if the email is of the correct domain and if it exists in the system
@@ -88,7 +88,6 @@ namespace backend_api.Controllers.Auth
                         await _notificationService.SendEmailNotification(emailReq);
                         
                         return Created("", "User has been created.");
-                        //throw new InvalidEmailException("Email does not exist in database");
                     }
                 }
                 else
@@ -100,8 +99,6 @@ namespace backend_api.Controllers.Auth
             {
                 throw e;
             }
-
-            // return response.json().ToString();
         }
         
         /// <summary>

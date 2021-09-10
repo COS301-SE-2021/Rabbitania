@@ -67,26 +67,7 @@ namespace backend_api.Services.Auth
         /// <param name="credentials"></param>
         /// <returns>Returns a bool</returns>
         Task<bool> Validate(Credentials credentials);
-
-        /// <summary>
-        ///     Called by the Validate function. Generates a JWT for
-        ///     the user to use for the API authorization when interacting
-        ///     with the endpoints from the frontend device.
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <returns>string containing the JWT</returns>
-        /// 
-        // Task<string> createJwt(Credentials credentials);
         
-        /// <summary>
-        ///     Authenticates a valid firebase token received
-        ///     when a user logs into the mobile app. This
-        ///     function will verify the token with Firebase
-        ///     before granting access to the user
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns>bool value for valid or not</returns>
-        Task<bool> ValidateFirebaseToken(string token);
     }
     
 }
