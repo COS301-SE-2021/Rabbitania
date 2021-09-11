@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
@@ -7,6 +7,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
+import { UserDetailsService } from '../services/user-details/user-details.service';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-homepage',
@@ -14,11 +16,17 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./homepage.component.scss']
 })
 
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  auth: any;
-  loggedIn = new BehaviorSubject<boolean>(false);
+
+  // Authorized User
+  authUser: User = {
+    "displayName": "",
+    "email": "",
+    "phoneNumber": "",
+    "googleImgUrl": ""
+  };
 
   // Font awesome icons
   faRocket = faRocket;
@@ -27,8 +35,21 @@ export class HomepageComponent {
   faThList = faThList;
   //
 
-  constructor(private observer: BreakpointObserver, private service: AuthService, private router: Router) {
+  constructor(
+    private observer: BreakpointObserver, 
+    private service: AuthService, 
+    private router: Router,
+    private userService: UserDetailsService) {
 
+  }
+
+  async ngOnInit(){
+    // await this.userService.retrieveUserDetails().subscribe((user:User) => {
+    //   this.authUser.displayName = user.displayName;
+    //   this.authUser.googleImgUrl = user.googleImgUrl;
+    // });
+    console.log(this.authUser.displayName);
+    console.log(this.authUser.googleImgUrl);
   }
 
   ngAfterViewInit() {
@@ -44,16 +65,22 @@ export class HomepageComponent {
   }
 
   async signIn() {
-    this.auth = await this.service.signIn();
-    if(this.auth){
-      this.loggedIn.next(true);
+    var res = await this.service.signIn();
+    if(res){
+      
     }else{
-      this.loggedIn.next(false);
+      
     }
+    this.ngOnInit();
   }
 
   async signOut(){
-    this.auth = await this.service.signOut();
-    this.loggedIn.next(false);
+    await this.service.signOut();
+    this.authUser = {
+      "displayName": "",
+      "email": "",
+      "phoneNumber": "",
+      "googleImgUrl": ""
+    };
   }
 }

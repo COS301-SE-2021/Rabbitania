@@ -10,10 +10,10 @@
     </a>
     <span class="toolbar-spacer"></span>
     
-    <button matTooltip="Login" mat-button *ngIf="loggedIn.getValue() === false" (click)="signIn()">
+    <button matTooltip="Login" mat-button (click)="signIn()">
         Login
     </button>
-    <button matTooltip="Logout" mat-button *ngIf="loggedIn.getValue() === true" (click)="signOut()">
+    <button matTooltip="Logout" mat-button (click)="signOut()">
         Logout
     </button>
 </mat-toolbar>

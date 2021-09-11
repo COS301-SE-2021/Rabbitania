@@ -29,7 +29,6 @@ export class AuthService {
   async signIn() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     const user = await this.authFire.signInWithPopup(googleAuthProvider);
-    var res = "";
     this.authSuccess = false;
 
     this.userobj = {
@@ -47,9 +46,9 @@ export class AuthService {
             this.userDetails.addUserDetails(this.userobj);   
           }
       })
-      .catch(() => {
-          alert('You are not allowed to log into this website. \n\n Retro Rabbit Employees only!');
-          return "Access Denied";
+      .catch((error) => {
+          console.log("Server error: " + error.message);
+          this.authSuccess = false;
         }
     );
     
