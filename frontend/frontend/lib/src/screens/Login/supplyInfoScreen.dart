@@ -420,13 +420,13 @@ class _infoForm extends State<InfoForm> {
                                         onPressed: () async {
                                           await httpCallUpdateUserInfo();
 
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) =>
-                                          //         NoticeBoard(),
-                                          //   ),
-                                          // );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NoticeBoard(),
+                                            ),
+                                          );
                                         },
                                       ),
                                     ),

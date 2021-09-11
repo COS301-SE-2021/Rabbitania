@@ -90,14 +90,13 @@ class _continueButton extends State<ContinueButton> {
       bool userStatus = await userProvider.getUserAdminStatus();
       userHelper.setUserID(userID);
       userHelper.setAdminStatus(userStatus);
-      setState(() {});
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => InfoForm(widget.user),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InfoForm(widget.user),
+          ),
+          (r) => false);
     } else {
       showDialog(
         context: context,

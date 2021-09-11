@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Chat/ChatUserModel.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
+import 'package:intl/intl.dart';
 
 class ChatHelper {
   List<ChatUserModel> selectedUsers = [];
@@ -37,6 +38,11 @@ class ChatHelper {
     this.selectedUsers.add(chatUser);
   }
 
+  String dateFormater(timestamp) {
+    String formatDate = DateFormat('kk:mm').format(timestamp);
+    return formatDate;
+  }
+
   String decryptData(encrypted, key) {
     final k = encrypt.Key.fromUtf8(key);
     final iv = encrypt.IV.fromLength(16);
@@ -49,14 +55,4 @@ class ChatHelper {
 
     return decrypted;
   }
-
-  /*
-    final key = Key.fromUtf8('15helloTCJTALK20');
-    final iv = IV.fromLength(16);
-    final encrypter = Encrypter(AES(key, iv, mode: AESMode.ecb));
-
-    final encrypted = Encrypted(Uint8List.fromList(data)); 
-
-    return encrypter.decrypt(encrypted).runes.toList();
-   */
 }

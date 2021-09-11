@@ -63,16 +63,18 @@ class UserHelper {
       case 1:
         return 'Designer';
       case 2:
-        return 'Care Taker';
+        return 'Administrator';
       case 3:
-        return 'Scrum Master';
+        return 'Care Taker';
       case 4:
-        return 'CAM';
+        return 'Scrum Master';
       case 5:
-        return 'Director';
+        return 'CAM';
       case 6:
-        return 'Graduate';
+        return 'Director';
       case 7:
+        return 'Graduate';
+      case 8:
         return 'Intern';
       default:
         return 'Unassigned';
