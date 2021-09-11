@@ -16,7 +16,7 @@ jobs:
           command: |
             export CONN_STRING=`echo $CONN_STRING`
             dotnet build
-  ################################################### USER TESTS ############################################### 
+  ##################### USER TESTS ##################### 
   User:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
@@ -27,41 +27,7 @@ jobs:
           name: Run tests
           command: |
             dotnet build
-
-  UnitTest_AuthServiceIntegrationTest:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
-            dotnet test --filter AuthIntegrationTests
-
-  UnitTest_AuthServiceTests:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
-            dotnet test --filter AuthServiceTests
-
-  UnitTest_ViewProfileUnitTests:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
-            dotnet test --filter ViewProfileUnitTests
-
-  UnitTest_EditProfileUnitTests:
+  User_UnitTests:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -71,8 +37,8 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter EditProfileUnitTests
-
-  IntegrationTest_AuthServiceTest:
+            dotnet test --filter ViewProfileUnitTests
+  User_IntegrationTests:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -82,9 +48,9 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter AuthServiceTest
-  ################################################### USER TESTS ################################################ 
+  ##################### USER TESTS ##################### 
 
-  ################################################### NOTIFICATION TESTS ######################################## 
+  ################ NOTIFICATION TESTS ################## 
   Notification:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
@@ -95,7 +61,7 @@ jobs:
           name: Run tests
           command: |
             dotnet build
-  UnitTest_CreateNotification:
+  UnitTest_Notification:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -105,19 +71,8 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter CreateNotificationTests
-
-  UnitTest_RetrieveNotifications:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
             dotnet test --filter RetrieveNotificationsTests
-
-  IntegrationTest_NotificationServiceTests:
+  IntegrationTests_Notification:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -127,9 +82,9 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter NotificationServiceTests
-  ################################################### NOTIFICATION TESTS ########################################
+  ################ NOTIFICATION TESTS ################
 
-  ################################################### NOTICEBOARD TESTS ######################################### 
+  ################ NOTICEBOARD TESTS ################# 
   Noticeboard:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
@@ -141,7 +96,7 @@ jobs:
           command: |
             dotnet build
 
-  UnitTest_CreateNoticeBoardThread:
+  UnitTests_NoticeBoard:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -151,30 +106,10 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter CreateNoticeBoardThreadTests
-
-  UnitTest_DeleteNoticeBoardThread:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
             dotnet test --filter DeleteNoticeBoardThreadTests
-
-  UnitTest_RetrieveNoticeBoardThread:
-    docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0
-    steps:
-      - checkout
-      - run:
-          working_directory: ~/project/backend/backend_api.Tests
-          name: Run tests
-          command: |
             dotnet test --filter RetrieveNoticeBoardThreadTests
             
-  IntegrationTest_NoticeBoardService:
+  IntegrationTests_NoticeBoard:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -184,8 +119,9 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter NoticeBoardService
-    ################################################### NOTICEBOARD TESTS #########################################
-    ################################################### FORUM TESTS #########################################
+  ################ NOTICEBOARD TESTS ################
+
+  ################# FORUM TESTS #####################
   Forum:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
@@ -197,7 +133,7 @@ jobs:
           command: |
             dotnet build
 
-  IntegrationTest_ForumServiceTest:
+  IntegrationTests_Forum:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -207,8 +143,9 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter ForumServiceTest
-    ################################################### FORUM TESTS #########################################
-    ################################################### BOOKING TESTS #########################################
+################# FORUM TESTS #################
+
+############### BOOKING TESTS ##################
   Booking:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
@@ -220,7 +157,7 @@ jobs:
           command: |
             dotnet build
 
-  IntegrationTest_BookingServiceTests:
+  IntegrationTests_Booking:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
@@ -230,10 +167,11 @@ jobs:
           name: Run tests
           command: |
             dotnet test --filter BookingServiceTests
-    ################################################### BOOKING TESTS #########################################
+################# BOOKING TESTS ##############
 
-    ################################################### WORKFLOW ################################################## 
+################# BOOKING TESTS ##############
 
+################# WORKFLOW ################### 
 workflows:
   Rabbitania Testing:
     jobs:
@@ -253,62 +191,34 @@ workflows:
       - Booking:
           requires:
             - build
-
-      - UnitTest_AuthServiceIntegrationTest:
+    
+      - User_UnitTests:
           requires:
             - User
-
-      - UnitTest_AuthServiceTests:
+      - User_IntegrationTests:
           requires:
             - User
-
-
-      -  IntegrationTest_AuthServiceTest:
-          requires:
-            - User
-
-      - UnitTest_ViewProfileUnitTests:
+      - UnitTests_NoticeBoard:
           requires:
             - Noticeboard
-
-      - UnitTest_EditProfileUnitTests:
+      - IntegrationTests_NoticeBoard:
           requires:
             - Noticeboard
-
-      - UnitTest_CreateNotification:
+      - UnitTest_Notification:
           requires:
             - Notification
-
-      - UnitTest_RetrieveNotifications:
+      - IntegrationTests_Notification:
           requires:
             - Notification
-
-      - IntegrationTest_NotificationServiceTests:
-          requires:
-            - Notification
-
-      - UnitTest_CreateNoticeBoardThread:
-          requires:
-            - Noticeboard
-
-      - UnitTest_DeleteNoticeBoardThread:
-          requires:
-            - Noticeboard
-
-      - UnitTest_RetrieveNoticeBoardThread:
-          requires:
-            - Noticeboard
-      - IntegrationTest_NoticeBoardService:
-          requires:
-            - Noticeboard
-
-      - IntegrationTest_ForumServiceTest:
+      - IntegrationTests_Forum:
           requires:
             - Forum
-
-      - IntegrationTest_BookingServiceTests:
+      - IntegrationTests_Booking:
           requires:
             - Booking
+            
+
+     
       
 
 

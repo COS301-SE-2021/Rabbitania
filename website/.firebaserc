@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "rabbitania-f761f": {
+      "hosting": {
+        "website": [
+          "rabbitania-f761f"
+        ]
+      }
+    }
+  }
+}

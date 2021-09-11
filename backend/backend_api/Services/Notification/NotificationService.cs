@@ -76,24 +76,28 @@ namespace backend_api.Services.Notification
             }
             if (request.Payload.Equals("") || request.Payload == null)
             {
-                throw new EmailFailedToSendException("Invalid email address, either null or empty");
+                throw new EmailFailedToSendException("Invalid Payload, either null or empty");
             }
             if (request.Subject.Equals("") || request.Subject == null)
             {
-                throw new EmailFailedToSendException("Invalid email address, either null or empty");
+                throw new EmailFailedToSendException("Invalid Subject, either null or empty");
             }
             if (request == null)
             {
                 throw new EmailFailedToSendException("Request is null");
             }
-
+            
+            var emailSettingsMail = Environment.GetEnvironmentVariable("EmailSettings_Mail");
+            var emailSettingsDisplayName = Environment.GetEnvironmentVariable("EmailSettings_DisplayName");
+            var emailSettingsPassword = Environment.GetEnvironmentVariable("EmailSettings_Password");
+            
             var email = new MimeMessage();
             var emailLists = new InternetAddressList();
             foreach (var address in request.Email)
             {
                 emailLists.Add(MailboxAddress.Parse(address));
             }
-            email.From.Add(new MailboxAddress(_settings.DisplayName,_settings.Mail));
+            email.From.Add(new MailboxAddress(emailSettingsDisplayName,emailSettingsMail));
             email.To.AddRange(emailLists);
             email.Subject = request.Subject;
             email.Body = new TextPart("plain")
@@ -105,7 +109,7 @@ namespace backend_api.Services.Notification
             try
             {
                 await client.ConnectAsync(_settings.Host, _settings.Port, true);
-                await client.AuthenticateAsync(_settings.Mail, _settings.Password);
+                await client.AuthenticateAsync(emailSettingsMail, emailSettingsPassword);
                 await client.SendAsync(email);
 
                 var response = new SendEmailNotificationResponse(HttpStatusCode.Accepted);

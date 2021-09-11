@@ -5,8 +5,13 @@ import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Chat/videoChannelScreen.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
+
 import 'package:frontend/src/widgets/Chat/groupChatCard.dart';
+
+import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
+
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 
 import 'groupChatCreateScreen.dart';
@@ -130,6 +135,22 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
               );
             },
           ),
+
+//         floatingActionButton: FancyFab(
+//           heroTag: "VideoChat",
+//           numberOfItems: 1,
+//           icon1: Icons.meeting_room,
+//           onPressed1: () async {
+//             UtilModel.route(
+//               () => ChannelScreen(),
+//               context,
+//             );
+//           },
+//           icon2: Icons.schedule,
+//           onPressed2: () {},
+//           icon3: Icons.edit,
+//           onPressed3: () {},
+//
         ),
         bottomNavigationBar: bnb(context),
       ),

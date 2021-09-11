@@ -139,5 +139,20 @@ namespace backend_api.Services.User
 
             return response;
         }
+
+        public async Task<MakeUserAdminResponse> MakeUserAdmin(MakeUserAdminRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequest("Request object cannot be null");
+            }
+
+            if (request.UserId.Equals(null))
+            {
+                throw new Exception("Error Missing UserID");
+            }
+
+            return await _userRepository.MakeUserAdmin(request);
+        }
     }
 }

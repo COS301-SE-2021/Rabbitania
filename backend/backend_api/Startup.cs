@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
 using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
+using backend_api.Data.Node;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -14,11 +17,15 @@ using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
 using backend_api.Services.Auth;
 using backend_api.Services.Booking;
+using backend_api.Services.Chat;
 using backend_api.Services.Enumerations;
 using backend_api.Services.Forum;
+using backend_api.Services.Node;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +41,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Linq;
 using Npgsql;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 
@@ -44,7 +52,8 @@ namespace backend_api
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         private string _conn = null;
         public IConfiguration Configuration { get; }
-
+       
+        
         public Startup(IConfiguration configuration)
         {
            Configuration = configuration;
@@ -63,10 +72,17 @@ namespace backend_api
                     builder =>
                     {
                         builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
                     });
             });
             services.AddTransient<IAuthService, AuthService>();
-            
+
+            services.AddHangfire(options =>
+            {
+                options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
+                
+            });
 
             //SignalR
             services.AddSignalR(options =>
@@ -81,16 +97,13 @@ namespace backend_api
             Line #5 mentions the Connection string name that we have already defined in appsettings.json.
             Line #6 Binds the Concrete Class and the Interface into our Application Container.
             */
-            
-            // For sending an email
+
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-            
-            
             //----------------------------------------------------------------------------------------------------------------------
             // Enumeration DB Context
             services.AddDbContext<EnumContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(EnumContext).Assembly.FullName)));
 
             services.AddScoped<IEnumContext>(provider => provider.GetService<EnumContext>());
@@ -102,7 +115,7 @@ namespace backend_api
             // Booking DB Context
             services.AddDbContext<BookingContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(BookingContext).Assembly.FullName)));
 
             services.AddScoped<IBookingContext>(provider => provider.GetService<BookingContext>());
@@ -114,7 +127,7 @@ namespace backend_api
             
             services.AddDbContext<BookingScheduleContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(BookingScheduleContext).Assembly.FullName)));
 
             services.AddScoped<IBookingScheduleContext>(provider => provider.GetService<BookingScheduleContext>());
@@ -126,7 +139,7 @@ namespace backend_api
             // Notification DB Context
             services.AddDbContext<NotificationContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(NotificationContext).Assembly.FullName)));
 
             services.AddScoped<INotificationContext>(provider => provider.GetService<NotificationContext>());
@@ -139,7 +152,7 @@ namespace backend_api
             //NoticeBoard DB Context
             services.AddDbContext<NoticeBoardContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(NoticeBoardContext).Assembly.FullName)));
 
             services.AddScoped<INoticeBoardContext>(provider => provider.GetService<NoticeBoardContext>());
@@ -152,7 +165,7 @@ namespace backend_api
             //User DB Context
             services.AddDbContext<UserContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(UserContext).Assembly.FullName)));
 
             services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
@@ -167,13 +180,29 @@ namespace backend_api
             
             services.AddDbContext<ForumContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("HerokuDatabase"),
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
                     b => b.MigrationsAssembly(typeof(ForumContext).Assembly.FullName)));
 
             services.AddScoped<IForumContext>(provider => provider.GetService<ForumContext>());
             
             services.AddScoped<IForumRepository, ForumRepository>();
             services.AddScoped<IForumService, ForumService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            //Node DB Context
+            
+            services.AddDbContext<NodeContext>(options =>
+                options.UseNpgsql(
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
+                    b => b.MigrationsAssembly(typeof(NodeContext).Assembly.FullName)));
+
+            services.AddScoped<INodeContext>(provider => provider.GetService<NodeContext>());
+            
+            services.AddScoped<INodeRepository, NodeRepository>();
+            services.AddScoped<INodeService, NodeService>();
+            //----------------------------------------------------------------------------------------------------------------------
+            //Chat service
+            
+            services.AddScoped<IChatService, ChatService>();
             //----------------------------------------------------------------------------------------------------------------------
             
             services.AddControllers();
@@ -186,15 +215,7 @@ namespace backend_api
             });
 
             #endregion
-
-            // services.AddIdentity<Users, AppRole>().AddEntityFrameworkStores<IdentityContext>();
-            // services.AddDbContext<IdentityContext>(o =>
-            // {
-            //     o.UseNpgsql(
-            //         Configuration.GetConnectionString("localhost"));
-            // });
             
-            // services.ConfigureIdentity();
             services.ConfigJwt(Configuration);
             services.AddAuthentication();
             services.AddAuthorization();
@@ -204,6 +225,11 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var options = new BackgroundJobServerOptions()
+            {
+                WorkerCount = 1
+            };
+            
             
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
@@ -218,12 +244,16 @@ namespace backend_api
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer(options);
+            
             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/ChatHub"); 
             });
+           
         }
     }
 }

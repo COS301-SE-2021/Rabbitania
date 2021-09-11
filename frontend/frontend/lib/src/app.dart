@@ -7,10 +7,15 @@ import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
 import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
 
+import 'package:frontend/src/screens/Chat/videoChannelScreen.dart';
+import 'package:frontend/src/screens/Chat/videoChatScreen.dart';
+
 import 'package:frontend/src/screens/Login/googleAuthTest.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Login/supplyInfoScreen.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
+
+import 'package:frontend/src/widgets/Questionnaire/questionnare_display.dart';
 
 import 'package:provider/provider.dart';
 import './widgets/expandable_button_widget.dart';
@@ -31,8 +36,8 @@ class AppState extends State<App> {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
-        home: Login(), //InfoForm(FirebaseAuth.instance.currentUser),
-      ),
+          home: Login() //InfoForm(FirebaseAuth.instance.currentUser),
+          ),
     );
   }
 }
