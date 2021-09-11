@@ -71,7 +71,7 @@ namespace backend_api.Controllers.Auth
                         var json = _service.GetUser(request);
 
                         //user exists, return missing info as json object
-                        return Ok(json);
+                        return Ok(true);
                     }
                     else //user doesn't exist and needs to be thrown
                     {
