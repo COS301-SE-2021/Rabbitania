@@ -11,3 +11,7 @@ export interface QuestionnaireRequest{
 export interface QuestionnaireResponse{
   result: string
 }
+
+export interface ActivateRequest{
+  userEmail: string,
+}
