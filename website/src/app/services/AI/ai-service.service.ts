@@ -48,5 +48,28 @@ return this.bs.asObservable();
 
 }
 
+async Activate(email:string){
+  this.http.put<QuestionnaireRequest>('https://localhost:5001/api/Node/ActivateNode', {
+    userEmail : email
+   }).subscribe((data) => {
+    if(data){
+      this.bs.next(data);
+      return this.bs.asObservable();
+    }
+    else{
+      this.bs.next("Error 401: Unable to process request");
+      return this.bs.asObservable();
+    }
+  },
+  (error)=> {
+    console.log(error);
+    alert('An unexpected error occurred');
+    return error;
+  }
+
+  );
+  return this.bs.asObservable();
+}
+
 
 }
