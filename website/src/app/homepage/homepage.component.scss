@@ -134,7 +134,14 @@ mat-divider {
 /*
      IMAGE AND TEXT POSITIONING
 */
-.welcome-text{
+.welcome-text1{
     position: relative;
+    right: -15%;
+    top: -25%;
+}
+
+.welcome-text2{
+    position: relative;
+    left: -15%;
     top: -25%;
 }
