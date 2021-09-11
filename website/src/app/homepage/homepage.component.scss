@@ -125,20 +125,26 @@ mat-divider {
 
 .main-image{
     z-index: 999;
-	position: absolute;
+
+    .landing-rocket {
+        height: 750px;
+        width: 750px;
+        -webkit-animation: mover 3s infinite  alternate;
+        animation: mover 3s infinite  alternate;
+    }
 
     .welcome-text1{
         position: absolute;
-        top: 25%;
-        left: -15%;
+        top: 28%;
+        left: 18%;
         font-size: x-large;
         color: $greenColour;
     }
     
     .welcome-text2{
         position: absolute;
-        top: 25%;
-        right: -15%;
+        top: 28%;
+        right: 18%;
         font-size: x-large;
         color: $greenColour;
     }
@@ -241,10 +247,6 @@ mat-divider {
 /*
      KEY FRAME MOVEMENTS 
 */
-.landing-rocket {
-    -webkit-animation: mover 3s infinite  alternate;
-    animation: mover 3s infinite  alternate;
-}
 @-webkit-keyframes mover {
     0% { 
         transform: translateY(0); 
