@@ -30,7 +30,7 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns>A list of users in the system</returns>
-        [HttpGet, Authorize]
+        [HttpGet]
         [Route("Admin/GetUser")]
         public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
         {
@@ -43,7 +43,7 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns> A response </returns>
-        [HttpPut, Authorize]
+        [HttpPut]
         [Route("EditProfile")]
         public async Task<EditProfileResponse> EditProfile([FromBody] EditProfileRequest request)
         {
@@ -55,7 +55,7 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns> A response </returns>
-        [HttpGet, Authorize]
+        [HttpGet]
         [Route("ViewProfile")]
         public async Task<ViewProfileResponse> ViewProfile([FromQuery] ViewProfileRequest request)
         {
@@ -72,7 +72,14 @@ namespace backend_api.Controllers.User
         public async Task<GetUserProfilesResponse> GetUserProfiles([FromQuery] GetUserProfilesRequest request)
         {
             return await _service.GetUserProfiles(request);
-        } 
+        }
+
+        [HttpPut]
+        [Route("MakeUserAdmin")]
+        public async Task<MakeUserAdminResponse> MakeUserAdmin([FromBody] MakeUserAdminRequest request)
+        {
+            return await _service.MakeUserAdmin(request);
+        }
         
     }
 }
