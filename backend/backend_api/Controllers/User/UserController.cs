@@ -67,7 +67,7 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns>A list of user profiles</returns>
-        [HttpGet, Authorize]
+        [HttpGet]
         [Route("GetUserProfiles")]
         public async Task<GetUserProfilesResponse> GetUserProfiles([FromQuery] GetUserProfilesRequest request)
         {
