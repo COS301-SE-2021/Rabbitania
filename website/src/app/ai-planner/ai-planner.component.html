@@ -62,7 +62,7 @@
       </mat-card> 
       </mat-tab >
       <mat-tab label="Add Desk">
-      <form [formGroup]="addNodeForm" novalidate (ngSubmit)="onSubmit()" >
+      <form [formGroup]="addNodeForm" novalidate (ngSubmit)="addNode()" >
   <mat-card class="addDesk-card">
     <mat-card-header>
       <mat-card-title>Create Desk</mat-card-title>
@@ -71,22 +71,14 @@
       <div class="row">
          <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="title" formControlName="title">
-            <mat-error *ngIf="addNodeForm.controls['title'].hasError('required')">
-              title name is <strong>required</strong>
+            <input matInput placeholder="email" formControlName="email">
+            <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
+              Email <strong>required</strong>
             </mat-error>
-            <mat-hint align="start">Desk title</mat-hint>
+            <mat-hint align="start">Assigned employee's email</mat-hint>
           </mat-form-field>
         </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="staff" formControlName="staff">
-            <mat-error *ngIf="addNodeForm.controls['staff'].hasError('required')">
-              Staff name is <strong>required</strong>
-            </mat-error>
-            <mat-hint align="start">Your staff name</mat-hint>
-          </mat-form-field>
-        </div>
+        
         </div>
     </mat-card-content>
     <mat-card-actions>
@@ -121,22 +113,14 @@
                           <div class="row">
                             <div class="col">
                               <mat-form-field class="full-width">
-                                <input matInput placeholder="title" formControlName="title">
-                                <mat-error *ngIf="addNodeForm.controls['title'].hasError('required')">
+                                <input matInput placeholder="email" formControlName="email">
+                                <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
                                   title name is <strong>required</strong>
                                 </mat-error>
                                 <mat-hint align="start">Desk title</mat-hint>
                               </mat-form-field>
                             </div>
-                            <div class="col">
-                              <mat-form-field class="full-width">
-                                <input matInput placeholder="staff" formControlName="staff">
-                                <mat-error *ngIf="addNodeForm.controls['staff'].hasError('required')">
-                                  Staff name is <strong>required</strong>
-                                </mat-error>
-                                <mat-hint align="start">Your staff name</mat-hint>
-                              </mat-form-field>
-                            </div>
+                            
                             </div>
                         </mat-card-content>
                         <mat-card-actions>
@@ -161,3 +145,5 @@
   </div>
   <br><br>
 </div>
+
+
