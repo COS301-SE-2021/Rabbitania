@@ -4,6 +4,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
 import { AuthService } from '../services/firebase/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-homepage',
@@ -16,7 +18,15 @@ export class HomepageComponent {
   sidenav!: MatSidenav;
   @Input() auth: any;
   
-  constructor(private observer: BreakpointObserver, private service: AuthService) {
+  // Font awesome icons
+  faRocket = faRocket;
+  faUsers = faUsers;
+  faBriefcase = faBriefcase;
+  faThList = faThList;
+  //
+
+
+  constructor(private observer: BreakpointObserver, private service: AuthService, private router: Router) {
 
   }
 
