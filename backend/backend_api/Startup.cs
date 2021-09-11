@@ -87,13 +87,7 @@ namespace backend_api
                 options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
                 
             });
-
-            //SignalR
-            services.AddSignalR(options =>
-            {
-                options.EnableDetailedErrors = true;
-            });            
-            // services.AddResponseCaching();
+            //services.AddResponseCaching();
             services.AddControllers();
             /*
             Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.
@@ -247,7 +241,6 @@ namespace backend_api
             {
                 WorkerCount = 1
             };
-            
             
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
