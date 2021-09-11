@@ -1,4 +1,6 @@
-
+  @import '../homepage/homepage.component.scss';
+  @import '../../styles.scss';
+  
 
   @mixin node {
     border: solid 1px #ccc;
@@ -22,8 +24,6 @@
                 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
-  
-  
   .example-box:active {
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -132,9 +132,10 @@
 
   .container-fluid {
     background:rgba(33,33,33,1);
-    height: 100%;
-    width: 100%;
+    
   }
+
+
 
   .headings{
     color: #fff;

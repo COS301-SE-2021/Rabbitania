@@ -7,6 +7,8 @@ export class MovableNodes {
     private _deskNumber: number;
     private _savedX: number;
     private _savedY: number;
+     //private _userEmail: string;
+     //private _active: boolean;
   
     constructor(deskNumber: number, x: number, y: number) 
     {
