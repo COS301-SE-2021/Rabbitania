@@ -59,5 +59,6 @@ namespace backend_api.Services.Node
         /// <returns></returns>
         Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request);
 
+        Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request);
     }
 }
