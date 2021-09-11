@@ -135,6 +135,13 @@ namespace backend_api.Controllers.Node
             return await _service.ActivateNode(request);
         }
 
+        [HttpPut]
+        [Route("SaveNodes")]
+        public async Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request)
+        {
+            return await _service.SaveNodes(request);
+        }
+
         
     }
 }
