@@ -1,7 +1,6 @@
 export interface User {
-    displayName?: string;
-    email?: string;
-    photoUrl?: string;
-    uid: string;
-    idToken: any;
+    displayName: string | null | undefined;
+    email: string | null | undefined;
+    phoneNumber: string | null | undefined;
+    googleImgUrl: string | null | undefined;
 }
