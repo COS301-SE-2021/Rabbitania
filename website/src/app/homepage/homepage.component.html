@@ -10,13 +10,17 @@
     </a>
     <span class="toolbar-spacer"></span>
     
-    <button matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
+    <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
         Login
     </button>
     <ng-template #other_content>
-        <button matTooltip="Logout" mat-button (click)="signOut()">
-            Logout
-        </button>
+        <div class="profile">
+            <span><img class="profile-pic" src="{{ user_googleUrl }}"/></span>&nbsp;
+            <span class="profile-text">{{ user_displayName }}</span>&nbsp;
+            <button class="log" matTooltip="Logout" mat-button (click)="signOut()"> 
+                Logout
+            </button>
+        </div>
     </ng-template>
 </mat-toolbar>
 
@@ -57,15 +61,22 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content">
+    
+            <div class="main-image">
+                <span class="welcome-text1">WELCOME TO </span>
+                <img class="landing-rocket" src="../../assets/svgs/landingrocket.svg" height="750px" width="750px">
+                <span class="welcome-text2"> RABBITANIA WEB </span>
+            </div>
 
-            <h1 class="welcome-text1">WELCOME TO </h1>
-
-            <img class="landing-rocket" src="../../assets/svgs/landingrocket.svg" height="750px" width="750px">
-
-            <h1 class="welcome-text2"> RABBITANIA WEB </h1>
-
-            <!-- <img class="bolders" src="../../assets/svgs/bolder.svg" height="200px" width="200px">
-            <img class="tree-islands" src="../../assets/svgs/tree-bolder.svg" height="200px" width="200px"> -->
+            <div class="background-objects">
+                <img class="bolder1" src="../../assets/svgs/bolder.svg">
+                <img class="tree-island1" src="../../assets/svgs/tree-bolder.svg">
+                <img class="tree-island2" src="../../assets/svgs/tree-bolder.svg">
+                <img class="bolder2" src="../../assets/svgs/bolder.svg">
+                <img class="bolder3" src="../../assets/svgs/bolder.svg">
+                <img class="small-bolder" src="../../assets/svgs/small-bolders.svg">
+                <img class="small-bolder1" src="../../assets/svgs/small-bolders.svg">
+            </div>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

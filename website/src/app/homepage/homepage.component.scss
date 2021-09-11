@@ -7,10 +7,6 @@ body {
     background-image: url(../../assets/png/background-rocks.png);
 }
 
-h1{ 
-    color: $greenColour;
-}
-
 mat-toolbar {
     background: $greyColour;
     color: $greenColour;
@@ -49,6 +45,25 @@ mat-sidenav {
     justify-content: center;
     align-items: center;
     background-image: url(../../assets/png/background-rocks.png);
+}
+
+.log{
+    border: solid 2px $greenColour;
+    border-radius: 10px;
+}
+
+.profile{
+   
+    .profile-text{
+        display: inline-block;
+        font-size: medium;
+    }
+    .profile-pic{
+        width: 30px;
+        height: 30px;
+        border: 2px solid;
+        border-radius: 50%;
+    }
 }
 
 mat-sidenav-container {
@@ -107,12 +122,128 @@ mat-divider {
     flex: 1 1 auto;
 }
 
+
+.main-image{
+    z-index: 999;
+	position: absolute;
+
+    .welcome-text1{
+        position: absolute;
+        top: 25%;
+        left: -15%;
+        font-size: x-large;
+        color: $greenColour;
+    }
+    
+    .welcome-text2{
+        position: absolute;
+        top: 25%;
+        right: -15%;
+        font-size: x-large;
+        color: $greenColour;
+    }
+}
+
+.background-objects{
+    z-index:-1000; 
+
+    .bolder1{
+        position: absolute;
+        z-index: 0;
+        height: 120px;
+        width: 120px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 8%;
+        top: 55%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.8s infinite  alternate;
+    }
+    
+    .tree-island1{
+        position: absolute;
+        z-index: 0;
+        height: 150px;
+        width: 150px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 10%;
+        top: 25%;
+        -webkit-animation: mover 1.6s infinite  alternate;
+        animation: mover 1.6s infinite  alternate;
+    } 
+
+    .tree-island2{
+        position: absolute;
+        z-index: 0;
+        height: 100px;
+        width: 100px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 30%;
+        top: 10%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+
+    .bolder2{
+        position: absolute;
+        z-index: 0;
+        height: 80px;
+        width: 80px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 4%;
+        top: 6%;
+        -webkit-animation: mover 1.6s infinite  alternate;
+        animation: mover 1.6s infinite  alternate;
+    }
+
+    .bolder3{
+        position: absolute;
+        z-index: 0;
+        height: 110px;
+        width: 110px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 20%;
+        top: 65%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+
+    .small-bolder{
+        position: absolute;
+        z-index: 0;
+        height: 140px;
+        width: 140px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 25%;
+        top: 5%;
+        -webkit-animation: mover 1.7s infinite  alternate;
+        animation: mover 1.7s infinite  alternate;
+    }
+
+    .small-bolder1{
+        position: absolute;
+        z-index: 0;
+        height: 180px;
+        width: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 10%;
+        top: 25%;
+        -webkit-animation: mover 1.9s infinite  alternate;
+        animation: mover 1.9s infinite  alternate;
+    }
+}
 /*
      KEY FRAME MOVEMENTS 
 */
 .landing-rocket {
-    -webkit-animation: mover 1.5s infinite  alternate;
-    animation: mover 1.5s infinite  alternate;
+    -webkit-animation: mover 3s infinite  alternate;
+    animation: mover 3s infinite  alternate;
 }
 @-webkit-keyframes mover {
     0% { 
@@ -134,14 +265,4 @@ mat-divider {
 /*
      IMAGE AND TEXT POSITIONING
 */
-.welcome-text1{
-    position: relative;
-    right: -15%;
-    top: -25%;
-}
 
-.welcome-text2{
-    position: relative;
-    left: -15%;
-    top: -25%;
-}
