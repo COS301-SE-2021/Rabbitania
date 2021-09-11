@@ -138,9 +138,7 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                   } else {
                                     children.add(CircularProgressIndicator());
                                   }
-
                                   //participantID matches clicked on id, means other persons message
-
                                   // return ListView(
                                   //     reverse: true, shrinkWrap: true, children: children);
                                   return ListView.builder(
