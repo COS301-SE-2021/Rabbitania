@@ -27,7 +27,7 @@ noticeboardCreateGetFromGallery() async {
   );
   if (pickedFile != null) {
     noticeboardCreateImageFile = File(pickedFile.path);
-
+    //used to convert image to base 64
     final bytes = Io.File(pickedFile.path).readAsBytesSync();
 
     noticeboardCreateImg64 = base64Encode(bytes);

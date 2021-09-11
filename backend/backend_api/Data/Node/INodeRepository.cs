@@ -15,5 +15,6 @@ namespace backend_api.Data.Node
         Task<EditNodeResponse> EditNode(EditNodeRequest request);
         Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request);
         Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request);
+        Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request);
     }
 }

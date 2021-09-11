@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
+using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Data.Node
@@ -155,6 +156,26 @@ namespace backend_api.Data.Node
 
             await _nodes.SaveChanges();
             return new DeactivateAllNodesResponse("Nodes successfully deactivated", HttpStatusCode.OK);
+        }
+
+        public async Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request)
+        {
+            try
+            {
+                var nodes = await _nodes.Nodes.ToListAsync();
+                for (var i = 0; i < nodes.Count; i++)
+                {
+                    nodes[i].xPos = request.Nodes[i].xPos;
+                    nodes[i].yPos = request.Nodes[i].yPos;
+                }
+
+                await _nodes.SaveChanges();
+                return new SaveNodesResponse("Nodes saved", HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return new SaveNodesResponse("Nodes were unable to be saved", HttpStatusCode.BadRequest);
+            }
         }
     }
 }

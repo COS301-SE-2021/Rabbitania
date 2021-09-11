@@ -61,11 +61,17 @@ export class CovidQuestionnaireComponent {
       _test_indication = "Contact with confirmed"
     }
 
-    (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication)).subscribe(data => {
-      if(data){
-        console.log(data)
+    var result = (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication))
 
+    var percentage;
+    result.subscribe(data => {
+      if(data){
+        console.log(data);
       }
+      this.service.Activate("runtimeterrors.301@gmail.com")
+
+
+
     });
 
 

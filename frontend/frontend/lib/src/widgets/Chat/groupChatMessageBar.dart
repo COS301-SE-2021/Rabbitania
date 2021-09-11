@@ -6,17 +6,17 @@ import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
 
-class ChatSendMessageBar extends StatefulWidget {
-  final idUser;
+class GroupChatSendMessageBar extends StatefulWidget {
+  final roomName;
   final myId;
-  ChatSendMessageBar(this.idUser, this.myId);
+  GroupChatSendMessageBar(this.myId, this.roomName);
   @override
   State<StatefulWidget> createState() {
-    return _chatSendMessageBarState();
+    return _groupChatsendMessageBarState();
   }
 }
 
-class _chatSendMessageBarState extends State<ChatSendMessageBar> {
+class _groupChatsendMessageBarState extends State<GroupChatSendMessageBar> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
   final messageController = TextEditingController();
@@ -71,8 +71,8 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
                   child: Icon(this.icon, color: utilModel.greyColor, size: 20),
                   onPressed: () {
                     if (messageController.text != '') {
-                      fireStoreHelper.sendMessage(
-                          widget.idUser, widget.myId, messageController.text);
+                      fireStoreHelper.sendGroupChatMessage(
+                          widget.roomName, widget.myId, messageController.text);
                     }
                     messageController.text = '';
                   },

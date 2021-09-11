@@ -75,6 +75,8 @@ namespace backend_api
                     builder =>
                     {
                         builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
                     });
             });
             services.AddTransient<IAuthService, AuthService>();

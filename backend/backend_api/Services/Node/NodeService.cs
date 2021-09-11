@@ -106,5 +106,20 @@ namespace backend_api.Services.Node
             var resp = await _nodeRepository.DeactivateAllNodes(null);
             return resp;
         }
+
+        public async Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNodeException("Request is null or empty");
+            }
+
+            if (request.Nodes.Count == 0)
+            {
+                throw new InvalidNodeException("Cannot save empty list of nodes");
+            }
+
+            return await _nodeRepository.SaveNodes(request);
+        }
     }
 }

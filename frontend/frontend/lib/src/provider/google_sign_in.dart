@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:frontend/src/models/google_user_model.dart';
 import 'package:http/http.dart' as http;
@@ -25,10 +26,10 @@ class GoogleSignInProvider extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
 
-    print("GOOGLE ACCESS TOKEN: " + googleAuth.accessToken.toString());
-    print("GOOGLE TOKEN ID: " + googleAuth.idToken.toString());
-
+    // print('accessToken: ${googleAuth.accessToken}');
     await firebaseAuth.signInWithCredential(credential);
+    log('accessToken: ${googleAuth.accessToken}');
+    log('IdToken: ${await FirebaseAuth.instance.currentUser!.getIdToken()}');
     notifyListeners();
   }
 

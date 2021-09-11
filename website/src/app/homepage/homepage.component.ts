@@ -6,6 +6,7 @@ import { AuthService } from '../services/firebase/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
@@ -16,15 +17,15 @@ import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-soli
 export class HomepageComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  @Input() auth: any;
-  
+  auth: any;
+  loggedIn = new BehaviorSubject<boolean>(false);
+
   // Font awesome icons
   faRocket = faRocket;
   faUsers = faUsers;
   faBriefcase = faBriefcase;
   faThList = faThList;
   //
-
 
   constructor(private observer: BreakpointObserver, private service: AuthService, private router: Router) {
 
@@ -42,11 +43,17 @@ export class HomepageComponent {
     });
   }
 
-  signIn(){
-    this.auth = this.service.signIn();
+  async signIn() {
+    this.auth = await this.service.signIn();
+    if(this.auth){
+      this.loggedIn.next(true);
+    }else{
+      this.loggedIn.next(false);
+    }
   }
 
-  signOut(){
-    this.auth = this.service.signOut();
+  async signOut(){
+    this.auth = await this.service.signOut();
+    this.loggedIn.next(false);
   }
 }

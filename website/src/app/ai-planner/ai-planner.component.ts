@@ -17,7 +17,7 @@ export class AIPlannerComponent implements OnInit {
   //1600x900 AKA a 16:9 ratio
   //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
-  //1600 -> 80 = (1600/10)/2  
+  //1600 -> 80 = (1600/10)/2
   //
   addNodeForm = this.fb.group({
     email: null,
@@ -29,7 +29,7 @@ export class AIPlannerComponent implements OnInit {
 
 
   sidenav!: MatSidenav;
-  
+
   constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService){
     this.onResize();
   }
@@ -64,14 +64,14 @@ export class AIPlannerComponent implements OnInit {
       //console.log(dummyData[i].deskNumber);
       this.nodes.push(new MovableNodes(Number(dummyData[i].deskNumber),Number(dummyData[i].x)*multiplier,Number(dummyData[i].y)*multiplier))
     }
-    
+
   }
 
 
   @HostListener("window:resize", [])
   onResize() {
-    
-    
+
+
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     //console.log(this.screenHeight, this.screenWidth);
@@ -97,7 +97,7 @@ export class AIPlannerComponent implements OnInit {
       this.getDummyNodes(1.0);
     }
     else
-    { 
+    {
       this.getDummyNodes(0.8);
     }
   }
@@ -106,12 +106,17 @@ export class AIPlannerComponent implements OnInit {
     console.log("submit");
   }
 
-  addNode(){
-  // await this.service.Post(addNodeForm.email,0,0,false)).subscribe(data => {
-  //     if(data){
-  //       console.log(data)
-  //     }
-  //   });
+  async addNode(){
+  const nodeObject = this.addNodeForm.value;
+  console.log(nodeObject.email);
+  var result = await this.service.Post(nodeObject.email,0.0,0.0,false);
+
+
+  result.subscribe(data => {
+      if(data){
+        console.log(data)
+      }
+    });
   }
 
 
