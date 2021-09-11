@@ -10,10 +10,10 @@
     </a>
     <span class="toolbar-spacer"></span>
     
-    <button matTooltip="Login" mat-button *ngIf="(auth | async) === null" (click)="signIn()">
+    <button matTooltip="Login" mat-button *ngIf="loggedIn.getValue() === false" (click)="signIn()">
         Login
     </button>
-    <button matTooltip="Logout" mat-button *ngIf="(auth | async)" (click)="signOut()">
+    <button matTooltip="Logout" mat-button *ngIf="loggedIn.getValue() === true" (click)="signOut()">
         Logout
     </button>
 </mat-toolbar>
@@ -35,14 +35,14 @@
             <fa-icon [icon]="faUsers"></fa-icon>&nbsp;
             <span>The Developer Team</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/ai-planner">
-            <fa-icon [icon]="faBriefcase"></fa-icon>&nbsp;
-            <span>Office Planner</span>
-        </button>
 
         <mat-divider class="nav-divider"></mat-divider>
         <h4 class="name">Administrator Dashboard</h4>
 
+        <button mat-button class="menu-button" routerLink="/ai-planner">
+            <fa-icon [icon]="faBriefcase"></fa-icon>&nbsp;
+            <span>Office Planner</span>
+        </button>
         <button mat-button class="menu-button">
             <mat-icon>people</mat-icon>
             <span>View Users</span>
