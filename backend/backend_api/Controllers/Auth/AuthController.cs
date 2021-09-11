@@ -51,7 +51,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPost]
+        [HttpPost,Authorize]
         [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
         {
