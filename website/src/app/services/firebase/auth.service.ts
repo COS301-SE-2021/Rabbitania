@@ -58,5 +58,6 @@ export class AuthService {
 
   async signOut() {
     await this.authFire.signOut();
+    this.userDetails.clearUserDetails(); 
   }
 }

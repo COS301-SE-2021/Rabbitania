@@ -16,4 +16,8 @@ export class UserDetailsService {
     return (JSON.parse(localStorage.getItem('userDetails') || '{}') || []);
   }
 
+  clearUserDetails(){
+    localStorage.removeItem('userDetails');
+  }
+
 }

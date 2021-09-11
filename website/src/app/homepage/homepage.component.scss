@@ -48,6 +48,7 @@ mat-sidenav {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(../../assets/png/background-rocks.png);
 }
 
 mat-sidenav-container {
@@ -104,4 +105,36 @@ mat-divider {
 
 .toolbar-spacer {
     flex: 1 1 auto;
+}
+
+/*
+     KEY FRAME MOVEMENTS 
+*/
+.landing-rocket {
+    -webkit-animation: mover 1.5s infinite  alternate;
+    animation: mover 1.5s infinite  alternate;
+}
+@-webkit-keyframes mover {
+    0% { 
+        transform: translateY(0); 
+    }
+    100% { 
+        transform: translateY(-20px); 
+    }
+}
+@keyframes mover {
+    0% { 
+        transform: translateY(0); 
+    }
+    100% { 
+        transform: translateY(-20px); 
+    }
+}
+
+/*
+     IMAGE AND TEXT POSITIONING
+*/
+.welcome-text{
+    position: relative;
+    top: -25%;
 }
