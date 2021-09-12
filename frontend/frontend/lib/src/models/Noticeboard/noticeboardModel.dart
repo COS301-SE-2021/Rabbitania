@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Noticeboard/noticeboardHelper.dart';
 import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/provider/noticeboard_provider.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardEditThread.dart';
 
@@ -28,16 +29,23 @@ class Thread {
   final String imageUrl;
   final int permittedUserRoles;
   final int userId;
+  final int icon1;
+  final int icon2;
+  final int icon3;
+  final int icon4;
 
-  Thread({
-    required this.threadId,
-    required this.threadTitle,
-    required this.threadContent,
-    required this.minEmployeeLevel,
-    required this.imageUrl,
-    required this.permittedUserRoles,
-    required this.userId,
-  });
+  Thread(
+      {required this.threadId,
+      required this.threadTitle,
+      required this.threadContent,
+      required this.minEmployeeLevel,
+      required this.imageUrl,
+      required this.permittedUserRoles,
+      required this.userId,
+      required this.icon1,
+      required this.icon2,
+      required this.icon3,
+      required this.icon4});
 
   factory Thread.fromJson(Map<String, dynamic> json) {
     return Thread(
@@ -48,6 +56,10 @@ class Thread {
       imageUrl: json['imageUrl'],
       permittedUserRoles: json['permittedUserRoles'],
       userId: json['userId'],
+      icon1: json['icon1'],
+      icon2: json['icon2'],
+      icon3: json['icon3'],
+      icon4: json['icon4'],
     );
   }
 }
@@ -58,11 +70,12 @@ class NoticeboardHomeCard extends StatelessWidget {
   final String theThreadContent;
   final String theImageURL;
 
-  const NoticeboardHomeCard(
-      {required this.id,
-      required this.theThreadTitle,
-      required this.theThreadContent,
-      required this.theImageURL});
+  const NoticeboardHomeCard({
+    required this.id,
+    required this.theThreadTitle,
+    required this.theThreadContent,
+    required this.theImageURL,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,15 +139,24 @@ class singleNoticeCardObj extends StatelessWidget {
   final String theThreadTitle;
   final String theThreadContent;
   final String imageFile;
+  final int icon1;
+  final int icon2;
+  final int icon3;
+  final int icon4;
 
-  const singleNoticeCardObj(
+  singleNoticeCardObj(
       {required this.id,
       required this.theThreadTitle,
       required this.theThreadContent,
-      required this.imageFile});
+      required this.imageFile,
+      required this.icon1,
+      required this.icon2,
+      required this.icon3,
+      required this.icon4});
 
   @override
   Widget build(BuildContext context) {
+    print(icon1);
     return Container(
       child: Card(
         color: Color.fromRGBO(57, 57, 57, 1),
@@ -165,12 +187,116 @@ class singleNoticeCardObj extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
             ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.06,
+                            bottom: MediaQuery.of(context).size.width * 0.06,
+                            right: MediaQuery.of(context).size.width * 0.06,
+                            top: MediaQuery.of(context).size.width * 0.01),
+                        child: Row(
+                          children: [
+                            NoticeboardReactions(
+                                icon1,
+                                Icons.thumb_up_alt_rounded,
+                                Color.fromRGBO(172, 255, 79, 1)),
+                            NoticeboardReactions(icon2,
+                                Icons.thumb_down_alt_rounded, Colors.red),
+                            NoticeboardReactions(icon3, Icons.emoji_emotions,
+                                Color.fromRGBO(172, 255, 79, 1)),
+                            NoticeboardReactions(
+                                icon4, Icons.bookmarks, Colors.red),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                ]),
           ],
         ),
       ),
     );
   }
 }
+
+class NoticeboardReactions extends StatefulWidget {
+  final int amount;
+  final IconData? iconSelected;
+  final Color colorSelected;
+  const NoticeboardReactions(
+      this.amount, this.iconSelected, this.colorSelected);
+
+  @override
+  NoticeboardReactionsState createState() => NoticeboardReactionsState();
+}
+
+class NoticeboardReactionsState extends State<NoticeboardReactions> {
+  int temp = 0;
+  void initState() {
+    super.initState();
+    temp = widget.amount;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.amount < 0) {
+      return SizedBox.shrink();
+    } else {
+      return InkWell(
+        onTap: () {
+          setState(() {
+            if (temp == widget.amount) {
+              temp++;
+              print(widget.iconSelected.toString());
+              IncreaseEmoji(widget.iconSelected.toString());
+              //++ Emoji amount in DB
+            } else {
+              temp--;
+              DecreaseEmoji(widget.iconSelected.toString());
+              //-- Emoji amount in DB
+            }
+          });
+        },
+        child: Card(
+            color: Color.fromRGBO(33, 33, 33, 33),
+            child: Row(
+              children: [
+                Icon(widget.iconSelected,
+                    size: 25, color: widget.colorSelected),
+                Text(
+                  temp.toString(),
+                  style: TextStyle(
+                      letterSpacing: 2.0, color: Colors.white, fontSize: 15),
+                ),
+              ],
+            )),
+      );
+    }
+  }
+}
+
+// Widget EmojiCard2(int num) {
+//   if (num > 0) {
+//     return Card(
+//         color: Color.fromRGBO(33, 33, 33, 33),
+//         child: Row(
+//           children: [
+//             Icon(Icons.thumb_down_alt_rounded, size: 25, color: Colors.red),
+//             Text(
+//               num.toString(),
+//               style: TextStyle(
+//                   letterSpacing: 2.0, color: Colors.white, fontSize: 15),
+//             ),
+//           ],
+//         ));
+//   } else {
+//     return SizedBox.shrink();
+//   }
+// }
 
 class noticeboardEditCard extends StatelessWidget {
   final int id;

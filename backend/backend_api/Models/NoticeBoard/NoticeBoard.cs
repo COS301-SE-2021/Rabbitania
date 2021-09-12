@@ -23,8 +23,16 @@ namespace backend_api.Models.NoticeBoard
         public int UserId { get; set; }
         public Users User { get; set; }
 
+        public int Icon1 { get; set; }
+
+        public int Icon2 { get; set; }
+
+        public int Icon3 { get; set; }
+
+        public int Icon4 { get; set; }
+
         public NoticeBoard(string threadTitle, string threadContent, int minLevel, string imageUrl,
-            UserRoles permittedUserRoles, int userId)
+            UserRoles permittedUserRoles, int userId, int icon1, int icon2, int icon3, int icon4)
         {
             ThreadTitle = threadTitle;
             ThreadContent = threadContent;
@@ -32,6 +40,12 @@ namespace backend_api.Models.NoticeBoard
             ImageUrl = imageUrl;
             PermittedUserRoles = permittedUserRoles;
             UserId = userId;
+            Icon1 = icon1;
+            Icon2 = icon2;
+            Icon3 = icon3;
+            Icon4 = icon4;
+
+
         }
 
         public NoticeBoard()
