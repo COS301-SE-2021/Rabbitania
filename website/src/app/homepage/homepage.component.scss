@@ -53,15 +53,14 @@ mat-sidenav {
 }
 
 .profile{
-   
     .profile-text{
         display: inline-block;
         font-size: medium;
     }
     .profile-pic{
-        width: 30px;
-        height: 30px;
-        border: 2px solid;
+        width: 35px;
+        height: 35px;
+        border: 2px solid $greyColour;
         border-radius: 50%;
     }
 }
@@ -122,6 +121,9 @@ mat-divider {
     flex: 1 1 auto;
 }
 
+/*
+     IMAGE AND TEXT POSITIONING
+*/
 
 .main-image{
     z-index: 999;
@@ -264,7 +266,4 @@ mat-divider {
     }
 }
 
-/*
-     IMAGE AND TEXT POSITIONING
-*/
 
