@@ -1,7 +1,7 @@
   @import '../homepage/homepage.component.scss';
   @import '../../styles.scss';
   
-
+  
   @mixin node {
     border: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
@@ -135,7 +135,10 @@
     
   }
 
-
+  .extra{
+    background:rgba(33,33,33,1);
+    height: 40em;
+  }
 
   .headings{
     color: #fff;
