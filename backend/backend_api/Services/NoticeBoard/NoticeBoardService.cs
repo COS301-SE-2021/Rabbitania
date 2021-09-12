@@ -114,5 +114,35 @@ namespace backend_api.Services.NoticeBoard
 
             return await _noticeBoardRepository.EditNoticeBoardThread(request);
         }
+
+        public async Task<IncreaseEmojiResponse> IncreaseEmoji(IncreaseEmojiRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid IncreaseEmoji Request Object");
+            }
+
+            if (request.NoticeboardId == 0)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
+            }
+
+            return await _noticeBoardRepository.IncreaseEmoji(request);
+        }
+
+        public async Task<DecreaseEmojiResponse> DecreaseEmoji(DecreaseEmojiRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid DecreaseEmoji Request Object");
+            }
+
+            if (request.NoticeboardId == 0)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
+            }
+
+            return await _noticeBoardRepository.DecreaseEmoji(request);
+        }
     }
 }
