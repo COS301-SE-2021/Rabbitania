@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
 
@@ -41,5 +42,22 @@ namespace backend_api.Services.NoticeBoard
         /// <param name="request"></param>
         /// <returns> EditNoticeBoardThreadResponse </returns>
         Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(EditNoticeBoardThreadRequest request);
+
+        /// <summary>
+        ///     Increases the selected emoji based on the request object
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<IncreaseEmojiResponse> IncreaseEmoji(IncreaseEmojiRequest request);
+
+        /// <summary>
+        ///     Decreases the selected emoji based on the request object
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<DecreaseEmojiResponse> DecreaseEmoji(DecreaseEmojiRequest request);
+
+
+
     }
 }

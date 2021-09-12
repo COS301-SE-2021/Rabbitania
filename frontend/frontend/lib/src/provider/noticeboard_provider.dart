@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
@@ -111,7 +112,11 @@ Future<String> addNewThread(
         'threadContent': content,
         'minLevel': 0,
         'imageUrl': noticeboardCreateInputImage,
-        'permittedUserRoles': 0
+        'permittedUserRoles': 0,
+        'icon1': 0,
+        'icon2': 0,
+        'icon3': 0,
+        'icon4': 0
       }),
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
@@ -141,6 +146,102 @@ Future<String> addNewThread(
     }
   } catch (Exception) {
     return ("Error: " + Exception.toString());
+  }
+}
+
+Future<String> IncreaseEmoji(String Emoji) async {
+  SecurityHelper securityHelper = new SecurityHelper();
+  UserHelper loggedUser = new UserHelper();
+  final token = await securityHelper.getToken();
+  try {
+    final response = await http.put(
+      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/IncreaseEmoji'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(<String, dynamic>{
+        "emojiUtf": Emoji.toString(),
+        "noticeboardId": noticeID
+      }),
+    );
+    if (response.statusCode == 201 ||
+        response.statusCode == 200 ||
+        response.statusCode == 100) {
+      return "Successfuly updated emoji";
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'email': fireBaseEmail,
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return IncreaseEmoji(Emoji);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      throw ("Failed to create new thread error" +
+          response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return Exception.toString();
+  }
+}
+
+Future<String> DecreaseEmoji(String Emoji) async {
+  SecurityHelper securityHelper = new SecurityHelper();
+  UserHelper loggedUser = new UserHelper();
+  final token = await securityHelper.getToken();
+  try {
+    final response = await http.put(
+      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/DecreaseEmoji'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token'
+      },
+      body: jsonEncode(<String, dynamic>{
+        "emojiUtf": Emoji.toString(),
+        "noticeboardId": noticeID
+      }),
+    );
+    if (response.statusCode == 201 ||
+        response.statusCode == 200 ||
+        response.statusCode == 100) {
+      return "Successfuly updated emoji";
+    } else if (response.statusCode == 401) {
+      final authReponse = await http.post(
+        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: jsonEncode(<String, dynamic>{
+          'email': fireBaseEmail,
+          'name': loggedUser.getUserName()
+        }),
+      );
+      if (authReponse.statusCode == 200) {
+        Map<String, dynamic> obj = jsonDecode(authReponse.body);
+        var token = '${obj['token']}';
+        securityHelper.setToken(token);
+        return IncreaseEmoji(Emoji);
+      } else {
+        throw new Exception("Error with Authentication");
+      }
+    } else {
+      throw ("Failed to create new thread error" +
+          response.statusCode.toString());
+    }
+  } catch (Exception) {
+    return Exception.toString();
   }
 }
 

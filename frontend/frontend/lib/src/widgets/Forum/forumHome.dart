@@ -54,7 +54,7 @@ class ForumHome extends StatelessWidget {
                       ),
                     );
                   } else {
-                    List<Widget> cards = [];
+                    cards = [];
                     while (iterate.moveNext()) {
                       cards.add(forumCard(
                           forumId: iterate.current.forumId,
