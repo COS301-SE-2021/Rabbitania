@@ -102,8 +102,8 @@ export class MovableNodes {
     if(screenWidth >= 1700)
     {
       this.position = 'Position X: '+xPosition/4+'cm - Y: '+yPosition/4+'cm';
-      this._newPosx = this._savedX/4 + xPosition/4;
-      this._newPosy= this._savedY/4 + yPosition/4;
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 1100)
     {

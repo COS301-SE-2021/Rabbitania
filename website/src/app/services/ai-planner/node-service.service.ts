@@ -13,7 +13,7 @@ export class NodeServiceService {
   constructor(private http: HttpClient, ) { }
 
   async Save(node: any){
-  console.log(node);
+  console.log("this is the node array :  " + node);
     this.http.put('https://localhost:5001/api/Node/SaveNodes', {
       nodes: node,
     }).subscribe(

@@ -84,10 +84,10 @@
   </div>
 
 <div class="row mx-auto">
-        <div class="col-12 justify-content-center text-center pb-5 pt-5">
+        <div class="col-12 justify-content-center text-center pb-3 pt-5">
           <button mat-raised-button color="primary" type="submit" style="width: 100%; display: block;" (click)="save()">Save Desk Positions</button>
         </div>
-        <div class="col-6 justify-content-center text-center" >
+        <div class="col-md-6 col-12 justify-content-center text-center pt-2" >
           <mat-card style="height: 100%;">
           <mat-card-title>Desks</mat-card-title>
           <mat-card-content>
@@ -139,7 +139,7 @@
           </mat-card-actions>
           </mat-card> 
         </div>
-        <div class="col-6 justify-content-center text-center">
+        <div class="col-md-6 col-12 justify-content-center text-center pt-2">
           <form [formGroup]="addNodeForm" novalidate (ngSubmit)="addNode()" >
             <mat-card style="height: 100%;" >
               

@@ -4,7 +4,7 @@ import dummyData from '../../test_variables/dummy_node_json.json';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { delay } from 'rxjs/operators';
+import { delay, first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { NodeServiceService } from '../../app/services/ai-planner/node-service.service';
 import { NodeGetAllRequest } from '../../app/interfaces/ai-planner-node-interface';
@@ -89,6 +89,7 @@ export class AIPlannerComponent implements OnInit {
     
   }
 
+  screenRatio: number = 1;
 
   @HostListener("window:resize", [])
   onResize() {
@@ -100,28 +101,38 @@ export class AIPlannerComponent implements OnInit {
 
     if(this.screenWidth >= 1700)
     {
-      this.getNodes(4);
+      this.screenRatio = 4
+      this.getNodes(this.screenRatio);
+      
     }
     else if(this.screenWidth >= 1100)
     {
-      this.getNodes(2.5);
+      this.screenRatio = 2.5;
+      this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 820)
     {
-      this.getNodes(2);
+      this.screenRatio = 2;
+      this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 720)
     {
-      this.getNodes(1.6);
+      this.screenRatio = 1.6;
+      this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 540)
     {
-      this.getNodes(1.0);
+      this.screenRatio = 1.0;
+      this.getNodes(this.screenRatio);
     }
     else
     {
-      this.getNodes(0.8);
+      this.screenRatio = 0.8;
+      this.getNodes(this.screenRatio);
+      
     }
+
+    
   }
 
   onSubmit(){
@@ -167,8 +178,8 @@ export class AIPlannerComponent implements OnInit {
         id: element.deskNumber,
         userEmail: element.userEmail,
         user: null,
-        xPos: element.newPosx,
-        yPos: element.newPosy,
+        xPos: element.newPosx/this.screenRatio,
+        yPos: element.newPosy/this.screenRatio,
         active: element.active,
       } ;
 
@@ -176,12 +187,20 @@ export class AIPlannerComponent implements OnInit {
     });
       //JSON.stringify(jsonObject);
       //console.log(JSON.stringify({nodes: this.nodeArray}));
+      
       var result = await this.service.Save(this.nodeArray);
-        result.subscribe(data => {
+        result.pipe(first()).subscribe(data => {
             if(data){
-              console.log(data)
+              console.log(data);
+              
             }
+            
           });
+
+          setTimeout(() => {
+            this.getNodes(this.screenRatio);
+        }, 500);
+          
   }
 
   
