@@ -28,18 +28,21 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import { AIPlannerComponent } from './ai-planner/ai-planner.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     CovidQuestionnaireComponent,
-    AIPlannerComponent
+    AIPlannerComponent,
+    SignOutComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatDialogModule,
     HttpClientModule,
     MatExpansionModule,MatDividerModule,
     MatListModule,MatButtonModule,MatSidenavModule,MatTabsModule,MatIconModule,MatFormFieldModule,FormsModule,ReactiveFormsModule,MatInputModule, MatMenuModule, 
