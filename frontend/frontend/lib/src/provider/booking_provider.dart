@@ -20,7 +20,7 @@ class BookingProvider {
   // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
     final loggedUserId = await loggedUser.getUserID();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
@@ -68,7 +68,7 @@ class BookingProvider {
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
     SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.post(
@@ -116,7 +116,7 @@ class BookingProvider {
   // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
     SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.delete(
       Uri.parse(baseURL + '/api/Booking/DeleteBooking?BookingId=$bookingId'),
@@ -154,7 +154,7 @@ class BookingProvider {
   //POST (CheckAvailability)
   Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
     SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.post(
       Uri.parse(baseURL + '/api/Booking/CheckIfBookingExists'),
@@ -199,7 +199,7 @@ class BookingProvider {
   //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
     SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.post(
       Uri.parse(baseURL + '/api/BookingSchedule/CheckAvailability?TimeSlot'),
@@ -243,7 +243,7 @@ class BookingProvider {
   //POST (CreateBookingSchedule)
   Future<bool> createBookingSchedule(timeslot, office, availability) async {
     SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.post(
       Uri.parse(baseURL + '/api/BookingSchedule/CreateBookingSchedule'),
@@ -287,7 +287,7 @@ class BookingProvider {
 
   // GET ALL SCHEDULES (GetBookingSchedules)
   Future<List<BookingScheduleModel>> fetchSchedulesAsync() async {
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
