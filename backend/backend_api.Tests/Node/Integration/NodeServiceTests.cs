@@ -4,6 +4,7 @@ using backend_api.Data.User;
 using backend_api.Services.Node;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit;
 
 namespace backend_api.Tests.Node.Integration
 {
@@ -22,8 +23,14 @@ namespace backend_api.Tests.Node.Integration
                 .UseInternalServiceProvider(serviceProvider);
             
             _context = new NodeContext(builder.Options);
-            
+        }
 
+        [Fact]
+        public void getAllNodesTest()
+        {
+            //Arrange
+            //Act
+            //Assert
         }
     }
 }
