@@ -31,7 +31,6 @@ class FireStoreHelper {
 //function adds user from inHouse api information to firestore users collection
   getUsersDocumentsFromFireStoreAsStream() {
     CollectionReference users = firestore.collection('users');
-
     return users.snapshots();
   }
 

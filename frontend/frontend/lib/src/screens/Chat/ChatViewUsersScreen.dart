@@ -48,9 +48,32 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Center(
-            child: Text(
-              'Chats',
-              style: TextStyle(color: utilModel.greenColor, fontSize: 35),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 9,
+                  child: Center(
+                    child: Text(
+                      'Chats',
+                      style:
+                          TextStyle(color: utilModel.greenColor, fontSize: 35),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      icon: Icon(FontAwesomeIcons.video,
+                          color: utilModel.greenColor),
+                      onPressed: () {
+                        UtilModel.route(
+                          () => ChannelScreen(),
+                          context,
+                        );
+                      }),
+                ),
+              ],
             ),
           ),
         ),

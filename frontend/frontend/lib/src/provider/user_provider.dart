@@ -295,8 +295,7 @@ Future<String> getLocationEnum(int officeInt) async {
     if (officeInt < 0 || officeInt > 9) {
       throw ("Error LocationID is Incorrect");
     }
-    UserHelper loggedUser = new UserHelper();
-    SecurityHelper securityHelper = new SecurityHelper();
+
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
