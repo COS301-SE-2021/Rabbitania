@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface';
 import { QuestionnaireResponse} from '../interfaces/covid_questionnaire_interface';
 import { AiServiceService } from '../../app/services/AI/ai-service.service';
+import { UserDetailsService } from '../services/user-details/user-details.service';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -11,11 +12,20 @@ import { AiServiceService } from '../../app/services/AI/ai-service.service';
   styleUrls: ['./covid-questionnaire.component.scss']
 })
 export class CovidQuestionnaireComponent {
-  constructor(private fb: FormBuilder, private http: HttpClient, private service : AiServiceService) {
+user_email = "";
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private service : AiServiceService,
+    private userService: UserDetailsService) {
 
   }
 
-
+ngOnInit(){
+  this.user_email = this.userService.retrieveUserDetails().email;
+  console.log(this.user_email);
+}
 
   covidQuestionnaire = this.fb.group({
     cough: false,
@@ -63,18 +73,21 @@ export class CovidQuestionnaireComponent {
 
     var result = (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication))
 
-    var percentage;
-    result.subscribe(data => {
+    result.subscribe(async data => {
       if(data){
         console.log(data);
       }
-      this.service.Activate("runtimeterrors.301@gmail.com")
+
+      await this.service.Activate(this.user_email);
 
 
 
     });
 
 
+    RadiusCheck(
+      
+    );
 
 
 
@@ -84,4 +97,8 @@ export class CovidQuestionnaireComponent {
 
 }
 
+
+function RadiusCheck() {
+
+}
 

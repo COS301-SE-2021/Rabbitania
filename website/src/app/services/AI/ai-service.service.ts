@@ -71,5 +71,4 @@ async Activate(email:string){
   return this.bs.asObservable();
 }
 
-
 }
