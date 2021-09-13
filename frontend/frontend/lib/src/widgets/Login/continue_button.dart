@@ -38,7 +38,8 @@ class _continueButton extends State<ContinueButton> {
   Future httpCall() async {
     final baseURL = await url.getBaseURL();
     final userHelper = UserHelper();
-    var idToken = await securityHelper.getFirestoreIdToken();
+    //var idToken = await securityHelper.getFirestoreIdToken();
+    var idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
     log(idToken);
     setState(() {});
     final response = await http.post(
