@@ -4,12 +4,35 @@
     About Us Page Stuff
 */ 
 
-.sensei{
-    height: 70vh;
-    width: 70vh;
-    opacity: 0.9;
-    -webkit-animation: mover 2s infinite  alternate;
-    animation: mover 2s infinite  alternate;
+
+.image_matt{
+    border-radius: 50%;
+    height: 40%;
+    width: 40%;
+}
+
+.image_div{
+    border-radius: 50%;
+    height: 40%;
+    width: 40%;
+}
+
+.image_james{
+    border-radius: 50%;
+    height: 40%;
+    width: 40%;
+}
+
+.image_joe{
+    border-radius: 50%;
+    height: 40%;
+    width: 40%;
+}
+
+.image_dean{
+    border-radius: 50%;
+    height: 40%;
+    width: 40%;
 }
 
 #about_matt{
@@ -21,6 +44,9 @@
     margin-left: 10%; 
     padding:25px;
     border: solid 2px $greenColour;
+    animation: linear infinite alternate;
+    animation-name: right;
+    animation-duration: 10s;
 }
 #about_div{
     background: black;
@@ -31,6 +57,9 @@
     float: right;
     padding:25px;
     border: solid 2px $greenColour;
+    animation: linear infinite alternate;
+    animation-name: left;
+    animation-duration: 10s;
 }
 #about_james{
     background: black;
@@ -41,6 +70,9 @@
     float: left;
     padding:25px;
     border: solid 2px $greenColour;
+    animation: linear infinite alternate;
+    animation-name: right;
+    animation-duration: 10s;
 }
 
 #about_joe{
@@ -52,6 +84,9 @@
     float: right;
     padding:25px;
     border: solid 2px $greenColour;
+    animation: linear infinite alternate;
+    animation-name: left;
+    animation-duration: 10s;
 }
 
 #about_dean{
@@ -63,7 +98,11 @@
     float: left;
     padding:25px;
     border: solid 2px $greenColour;
+    animation: linear infinite alternate;
+    animation-name: right;
+    animation-duration: 10s;
 }
+
 
 .about-us-header-text{
     color: $greenColour;
@@ -76,22 +115,128 @@
     }
 }
 
-.dojo-text1{
-    position: absolute;
-    top: 28%;
-    left: 18%;
-    font-size: 500%;
-    color: #FFB302;
-    text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+@media only screen and (max-width: 1980px) {
+    .dojo-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: 500%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .dojo-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: 500%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .sensei{
+        height: 70vh;
+        width: 70vh;
+        opacity: 0.9;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
 }
 
-.dojo-text2{
-    position: absolute;
-    top: 28%;
-    right: 18%;
-    font-size: 500%;
-    color: #FFB302;
-    text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+@media only screen and (max-width: 1300px) {
+    .dojo-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: 400%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .dojo-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: 400%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .sensei{
+        height: 50vh;
+        width: 50vh;
+        opacity: 0.9;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .dojo-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: 300%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .dojo-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: 300%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .sensei{
+        height: 35vh;
+        width: 35vh;
+        opacity: 0.9;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .dojo-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: 300%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .dojo-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: 300%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .dojo-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: 200%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .dojo-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: 200%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
 }
  
 
@@ -110,4 +255,26 @@
 	background-size: cover;
 	background-position: center center;
 	padding: 2rem;
+}
+
+@keyframes right {
+    0% {
+      right: 0;
+      transform: translateX(0);
+    }
+    100% {
+      right: 10%;
+      transform: translateX(10%);
+    }
+}
+
+@keyframes left {
+    0% {
+      left: 0;
+      transform: translateX(0);
+    }
+    100% {
+      left: -10%;
+      transform: translateX(-10%);
+    }
 }
