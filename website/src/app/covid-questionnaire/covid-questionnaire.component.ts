@@ -5,26 +5,45 @@ import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface
 import { QuestionnaireResponse} from '../interfaces/covid_questionnaire_interface';
 import { AiServiceService } from '../../app/services/AI/ai-service.service';
 import { UserDetailsService } from '../services/user-details/user-details.service';
+import { SignOutComponent } from '../sign-out/sign-out.component';
+import { AuthService } from '../services/firebase/auth.service';
+
 
 @Component({
   selector: 'app-covid-questionnaire',
   templateUrl: './covid-questionnaire.component.html',
   styleUrls: ['./covid-questionnaire.component.scss']
 })
-export class CovidQuestionnaireComponent {
+export class CovidQuestionnaireComponent implements OnInit{
 user_email = "";
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private service : AiServiceService,
+    private auth_service: AuthService,
     private userService: UserDetailsService) {
 
   }
 
-ngOnInit(){
-  this.user_email = this.userService.retrieveUserDetails().email;
-  console.log(this.user_email);
+  async ngOnInit(){
+    var userValid = this.userService.retrieveUserDetails().email;
+    if(userValid == {} ||userValid == undefined ||userValid == null ||userValid == "" ||userValid == []){
+      await this.signIn();
+    }
+    else{
+    console.log("Fuck this");
+    this.user_email = this.userService.retrieveUserDetails().email;
+    }
+}
+
+async signIn() {
+  var res = await this.auth_service.signIn();
+  if(res){
+
+  }else{
+
+  }
+  this.ngOnInit();
 }
 
   covidQuestionnaire = this.fb.group({
@@ -80,19 +99,10 @@ ngOnInit(){
 
       await this.service.Activate(this.user_email);
 
-
-
     });
-
-
     RadiusCheck(
-      
+
     );
-
-
-
-
-
   }
 
 }
