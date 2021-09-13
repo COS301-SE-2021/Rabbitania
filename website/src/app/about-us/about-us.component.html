@@ -1,1 +1,68 @@
-<p>about-us works!</p>
+<mat-toolbar class="mat-elevation-z8">
+    &nbsp;
+    <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://retrorabbit.co.za">
+        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
+    </a>
+    <span class="toolbar-spacer"></span>
+    
+    <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
+        Login
+    </button>
+    <ng-template #other_content>
+        <div class="profile">
+            <span><img class="profile-pic" src="{{ user_googleUrl }}"/></span>&nbsp;
+            <span class="profile-text">{{ user_displayName }}</span>&nbsp;
+            <button class="log" matTooltip="Logout" mat-button (click)="signOut()"> 
+                Logout
+            </button>
+        </div>
+    </ng-template>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
+
+        <h4 class="name">RABBITANIA MAIN MENU</h4>
+
+        <mat-divider class="nav-divider"></mat-divider>
+
+        <button mat-button class="menu-button" routerLink="/">
+            <fa-icon [icon]="faRocket"></fa-icon>&nbsp;
+            <span>Landing Page</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/about-us">
+            <fa-icon [icon]="faUsers"></fa-icon>&nbsp;
+            <span>The Developer Team</span>
+        </button>
+
+        <mat-divider class="nav-divider"></mat-divider>
+        <h4 class="name">Administrator Dashboard</h4>
+
+        <button mat-button class="menu-button" routerLink="/ai-planner">
+            <fa-icon [icon]="faBriefcase"></fa-icon>&nbsp;
+            <span>Office Planner</span>
+        </button>
+        <button mat-button class="menu-button">
+            <mat-icon>people</mat-icon>
+            <span>View Users</span>
+        </button>
+        <button mat-button class="menu-button">
+            <fa-icon [icon]="faThList"></fa-icon>&nbsp;
+            <span>View Bookings Schedule</span>
+        </button>
+     
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content">
+    
+           
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

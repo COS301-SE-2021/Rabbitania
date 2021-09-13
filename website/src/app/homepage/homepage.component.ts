@@ -51,8 +51,6 @@ export class HomepageComponent implements OnInit {
       this.user_displayName = this.userService.retrieveUserDetails().displayName;
       this.user_googleUrl = this.userService.retrieveUserDetails().googleImgUrl;
     }
-    console.log(this.user_displayName);
-    console.log(this.user_googleUrl);
   }
 
   ngAfterViewInit() {

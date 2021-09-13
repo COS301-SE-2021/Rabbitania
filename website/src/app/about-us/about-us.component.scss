@@ -1,0 +1,126 @@
+$greyColour: rgba(33, 33, 33, 1);
+$greenColour: rgba(171, 255, 79, 1);
+$whiteColour: rgba(238, 238, 238, 1);
+
+body {
+    background-color: $greyColour;
+    background-image: url(../../assets/png/background-rocks.png);
+}
+
+mat-toolbar {
+    background: $greyColour;
+    color: $greenColour;
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+}
+
+mat-sidenav {
+    margin: 20px;
+    width: 300px;
+    height: 80vh;
+    border-right: none;
+    background: $greyColour;
+    color: $greenColour;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+    nav-divider{
+        color: $greyColour;
+    }
+}
+
+.logo {
+    padding-right: 10px;
+    display: inline-table;
+    text-decoration: none;
+}
+
+.content {
+    height: 90vh;
+    margin: 16px;
+    margin-left: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/png/background-rocks.png);
+}
+
+.log{
+    border: solid 2px $greenColour;
+    border-radius: 10px;
+}
+
+.profile{
+    .profile-text{
+        display: inline-block;
+        font-size: medium;
+    }
+    .profile-pic{
+        width: 35px;
+        height: 35px;
+        border: 2px solid $greyColour;
+        border-radius: 50%;
+    }
+}
+
+mat-sidenav-container {
+    height: 100%;
+}
+
+.menu-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+
+    mat-icon {
+        margin-right: 8px;
+    }
+}
+
+.menu{
+    background-color: $greyColour;
+}
+
+.avatar {
+    margin-top: 16px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid $greenColour;
+
+}
+
+.name {
+    margin-top: 8px;
+    font-weight: normal;
+}
+
+.designation {
+    margin-top: 2px;
+    font-size: 0.7rem;
+    color: lightgrey;
+}
+
+mat-divider {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: $greenColour;
+}
+
+.card-container {
+    color: $greenColour;
+    font-size: xx-large;
+    justify-content: space-between;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+/*
+    About Us Page Stuff
+*/ 
