@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface';
@@ -7,7 +7,6 @@ import { AiServiceService } from '../../app/services/AI/ai-service.service';
 import { UserDetailsService } from '../services/user-details/user-details.service';
 import { SignOutComponent } from '../sign-out/sign-out.component';
 import { AuthService } from '../services/firebase/auth.service';
-
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -26,20 +25,13 @@ user_email = "";
   }
 
   async ngOnInit(){
-    var userValid = this.userService.retrieveUserDetails().email;
-    if(userValid == {} ||userValid == undefined ||userValid == null ||userValid == "" ||userValid == []){
-      await this.signIn();
-    }
-    else{
-    console.log("Fuck this");
-    this.user_email = this.userService.retrieveUserDetails().email;
-    }
+
 }
 
 async signIn() {
   var res = await this.auth_service.signIn();
   if(res){
-
+      this.user_email = this.userService.retrieveUserDetails().email;
   }else{
 
   }
@@ -57,7 +49,21 @@ async signIn() {
     });
 
 
+  checkOnline(){
+    if(this.user_email == "")
+    {
+      return false;
+    }
+    else return true;
+  }
+
   async onSubmit(){
+    console.log(this.checkOnline());
+    if(this.checkOnline()){
+      alert("Please log on first");
+    }
+
+
     const questionnaireObject = this.covidQuestionnaire.value;
 
     var _cough = "0";
@@ -96,13 +102,13 @@ async signIn() {
       if(data){
         console.log(data);
       }
-
-      await this.service.Activate(this.user_email);
-
     });
-    RadiusCheck(
+    var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
+      if(data){
+        console.log(data);
+      }
+    });
 
-    );
   }
 
 }
@@ -111,4 +117,5 @@ async signIn() {
 function RadiusCheck() {
 
 }
+
 
