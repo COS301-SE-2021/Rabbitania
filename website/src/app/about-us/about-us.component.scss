@@ -7,12 +7,89 @@
 .sensei{
     height: 70vh;
     width: 70vh;
-    opacity: 0.6;
+    opacity: 0.8;
     -webkit-animation: mover 2s infinite  alternate;
     animation: mover 2s infinite  alternate;
+}
+
+#about_matt{
+    background: black;
+    border-radius: 10px;
+    width: 80%;
+    float: left;
+    margin-bottom: 5%;
+    margin-left: 10%; 
+    padding:25px;
+    border: solid 2px $greenColour;
+}
+#about_div{
+    background: black;
+    border-radius: 10px;
+    width: 80%;
+    margin-right: 10%; 
+    margin-bottom: 5%;
+    float: right;
+    padding:25px;
+    border: solid 2px $greenColour;
+}
+#about_james{
+    background: black;
+    border-radius: 10px;
+    width: 80%;
+    margin-bottom: 5%;
+    margin-left: 10%; 
+    float: left;
+    padding:25px;
+    border: solid 2px $greenColour;
+}
+
+#about_joe{
+    background: black;
+    border-radius: 10px;
+    width: 80%;
+    margin-bottom: 5%;
+    margin-right: 10%; 
+    float: right;
+    padding:25px;
+    border: solid 2px $greenColour;
+}
+
+#about_dean{
+    background: black;
+    border-radius: 10px;
+    width: 80%;
+    margin-bottom: 5%;
+    margin-left: 10%; 
+    float: left;
+    padding:25px;
+    border: solid 2px $greenColour;
 }
 
 .about-us-header-text{
     color: $greenColour;
     font-size: xx-large;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .about {
+        margin-top: -60px;
+    }
+}
+ 
+
+.container-banner {
+	z-index: 1;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    border-radius: 25px;
+	height: 80vh;
+    width: 90%;
+	background-image: linear-gradient(to bottom,  rgba(255,168,76,0.6) 0%,rgba(255,123,13,0.6) 100%), url('../../assets/png/dojo.png');
+	background-blend-mode: soft-light;
+	background-size: cover;
+	background-position: center center;
+	padding: 2rem;
 }
