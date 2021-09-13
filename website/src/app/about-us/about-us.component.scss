@@ -7,7 +7,7 @@
 .sensei{
     height: 70vh;
     width: 70vh;
-    opacity: 0.8;
+    opacity: 0.9;
     -webkit-animation: mover 2s infinite  alternate;
     animation: mover 2s infinite  alternate;
 }
@@ -74,6 +74,24 @@
     .about {
         margin-top: -60px;
     }
+}
+
+.dojo-text1{
+    position: absolute;
+    top: 28%;
+    left: 18%;
+    font-size: 500%;
+    color: #FFB302;
+    text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+}
+
+.dojo-text2{
+    position: absolute;
+    top: 28%;
+    right: 18%;
+    font-size: 500%;
+    color: #FFB302;
+    text-shadow: 0 0 10px #000000, 0 0 10px #000000;
 }
  
 
