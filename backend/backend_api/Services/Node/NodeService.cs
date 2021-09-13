@@ -38,7 +38,7 @@ namespace backend_api.Services.Node
             {
                 throw new InvalidNodeException("Request is null or empty");
             }
-            if (request.UserEmail.Equals(null))
+            if (request.UserEmail.Equals(null) || request.UserEmail.Length == 0)
             {
                 throw new InvalidNodeException("User email is null");
             }
