@@ -52,6 +52,10 @@ mat-sidenav {
     border-radius: 10px;
 }
 
+.menu-icon + .menu-icon-text {
+    margin-left: 20px;
+}
+
 .profile{
     .profile-text{
         display: inline-block;
@@ -126,7 +130,7 @@ mat-divider {
 */
 
 .main-image{
-    z-index: 999;
+    z-index: 999; 
 
     .landing-rocket {
         height: 750px;

@@ -27,42 +27,63 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
-        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
+        <img class="avatar mat-elevation-z8" *ngIf="user_googleUrl == '';else googleUrl" src="../../assets/png/logo.png" />
+        <ng-template #googleUrl>
+            <img class="avatar mat-elevation-z8" src="{{ user_googleUrl }}" />
+        </ng-template>
 
         <h4 class="name">RABBITANIA MAIN MENU</h4>
 
         <mat-divider class="nav-divider"></mat-divider>
 
         <button mat-button class="menu-button" routerLink="/">
-            <fa-icon [icon]="faRocket"></fa-icon>&nbsp;
-            <span>Landing Page</span>
+            <span class="menu-icon"><fa-icon [icon]="faRocket"></fa-icon></span>
+            <span class="menu-icon-text"> Landing Page</span>
         </button>
         <button mat-button class="menu-button" routerLink="/about-us">
-            <fa-icon [icon]="faUsers"></fa-icon>&nbsp;
-            <span>The Developer Team</span>
+            <span class="menu-icon"><fa-icon [icon]="faUsers"></fa-icon></span>
+            <span class="menu-icon-text">The Developer Team</span>
         </button>
+
+        <mat-divider class="nav-divider"></mat-divider>
+        <h4 class="name">Employee Dashboard</h4>
+
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
+            <span class="menu-icon-text">View Bookings Schedule</span>
+        </button>
+
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><fa-icon [icon]="faBook"></fa-icon></span>
+            <span class="menu-icon-text">View Your Bookings</span>
+        </button>
+    
 
         <mat-divider class="nav-divider"></mat-divider>
         <h4 class="name">Administrator Dashboard</h4>
 
         <button mat-button class="menu-button" routerLink="/ai-planner">
-            <fa-icon [icon]="faBriefcase"></fa-icon>&nbsp;
-            <span>Office Planner</span>
+            <span class="menu-icon"><fa-icon [icon]="faBriefcase"></fa-icon></span>
+            <span class="menu-icon-text">Office Planner</span>
         </button>
         <button mat-button class="menu-button">
             <mat-icon>people</mat-icon>
-            <span>View Users</span>
-        </button>
-        <button mat-button class="menu-button">
-            <fa-icon [icon]="faThList"></fa-icon>&nbsp;
-            <span>View Bookings Schedule</span>
+            View Users
         </button>
      
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content">
-    
-           
+            <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <img class="sensei" src="../../assets/png/sensei-2.png">
+                  </div>
+                  <div class="col">
+                    <h1 class="about-us-header-text">TEAM RUNTIME TERRORS</h1>
+                  </div>
+                </div>
+              </div>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

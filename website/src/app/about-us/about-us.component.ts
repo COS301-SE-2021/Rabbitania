@@ -5,7 +5,7 @@ import { delay } from 'rxjs/operators';
 import { AuthService } from '../services/firebase/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
+import { faRocket, faUsers, faBriefcase, faThList, faBook } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
 import { UserDetailsService } from '../services/user-details/user-details.service';
 import { User } from '../interfaces/user';
@@ -31,6 +31,7 @@ export class AboutUsComponent implements OnInit {
   faUsers = faUsers;
   faBriefcase = faBriefcase;
   faThList = faThList;
+  faBook = faBook;
   //
 
   constructor(
