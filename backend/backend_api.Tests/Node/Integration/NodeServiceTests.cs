@@ -16,17 +16,25 @@ namespace backend_api.Tests.Node.Integration
         private readonly NodeService _service;
         private readonly INodeRepository _repository;
         private NodeContext _context;
+        private UserContext _userContext;
 
         public NodeServiceTests()
         {
             var serviceProvider = new ServiceCollection().AddEntityFrameworkNpgsql().BuildServiceProvider();
             var builder = new DbContextOptionsBuilder<NodeContext>();
+            var builderUser = new DbContextOptionsBuilder<UserContext>();
+            
             var env = Environment.GetEnvironmentVariable("CONN_STRING");
+            //Node Context builder
             builder.UseNpgsql(env.ToString())
                 .UseInternalServiceProvider(serviceProvider);
-            
+            //User context builder
+            builderUser.UseNpgsql(env.ToString())
+                .UseInternalServiceProvider(serviceProvider);
+
+            _userContext = new UserContext(builderUser.Options);
             _context = new NodeContext(builder.Options);
-            _repository = new NodeRepository(_context);
+            _repository = new NodeRepository(_context, _userContext);
             _service = new NodeService(_repository);
         }
 
@@ -68,5 +76,7 @@ namespace backend_api.Tests.Node.Integration
             //Assert
             await Assert.ThrowsAsync<InvalidNodeException>(async () => await _service.CreateNode(null));
         }
+        // [Fact]
+        // public async void 
     }
 }

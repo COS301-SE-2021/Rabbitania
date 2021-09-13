@@ -92,7 +92,7 @@ namespace backend_api.Data.Node
         }
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
-            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, false);
+            var node = new Models.Node.Node(request.UserEmail, request.XPos, request.YPos, request.Active);
             
             try
             {
@@ -112,7 +112,7 @@ namespace backend_api.Data.Node
                     Console.WriteLine(e.Message);
                 }
                 await _nodes.SaveChangesAsync();
-                return new CreateNodeResponse("Node created successfully with userID: "+userID+" and node ID: "+nodeID, HttpStatusCode.Created);
+                return new CreateNodeResponse("Node created successfully with userID: "+userID, HttpStatusCode.Created);
             }
             catch (Exception e)
             {

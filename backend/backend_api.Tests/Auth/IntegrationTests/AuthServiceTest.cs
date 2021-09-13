@@ -21,6 +21,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         private readonly Users _mockedUser;
         private readonly UserEmails _mockedEmail;
         private UserContext _userContext;
+        
         private readonly IUserRepository userRepo;
         private readonly AuthService authService;
         
@@ -238,18 +239,6 @@ namespace backend_api.Tests.Auth.IntegrationTests
             Assert.False(resp);// wucky true
         }
         
-        // [Fact(DisplayName = "Returns false when attempting to validate a use that doesn't exist")]
-        // public async void Validate_InvalidUser()
-        // {
-        //     //Arrange
-        //     var req = new Credentials();
-        //     req.Email = "test2@gmail.com";
-        //     req.Name = "Unit Tests";
-        //     //Act
-        //     var resp = await authService.Validate(req);
-        //     //Assert
-        //     Assert.True(resp);// wucky true
-        // }
         [Fact(DisplayName = "Returns a user with ID 7 as admin")]
         public async void GetUserAdmin_ValidAdmin()
         {
