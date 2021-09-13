@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NodeGetAllRequest, NodeRequest } from 'src/app/interfaces/ai-planner-node-interface';
 
 @Injectable({
@@ -37,9 +37,16 @@ export class NodeServiceService {
   }
 
   async Delete(nodeId: number){
-    this.http.post('https://localhost:5001/api/Node/DeleteNode', {
-      nodeId: nodeId,
-    }).subscribe(
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        nodeId: nodeId,
+      },
+    };
+
+    this.http.delete('https://localhost:5001/api/Node/DeleteNode', options).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);

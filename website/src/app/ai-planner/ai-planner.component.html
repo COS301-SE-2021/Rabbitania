@@ -74,9 +74,7 @@
           <div class="example-boundary" id="boarder">
               <div *ngFor="let node of nodes; index as i" cdkDrag style="position: absolute; left: {{node.savedX}}px;
                   top: {{node.savedY}}px;" class="example-box" id="{{node.deskNumber}}" cdkDragBoundary=".example-boundary" (cdkDragStarted)="node.dragStarted($event)" (cdkDragEnded)="node.dragEnded($event)" (cdkDragMoved)="node.dragMoved($event)">
-                  <div class="example-handle" cdkDragHandle >
-                          {{node.deskNumber}} {{node.position}}
-                  </div>
+                {{node.deskNumber}}
               </div>
           </div>
       </div>
@@ -121,7 +119,7 @@
                           
                           <mat-list-item>Saved Position: ( {{node.savedX}}cm ; {{node.savedY}}cm)</mat-list-item>
 
-                          <mat-list-item> <button mat-raised-button color="primary" type="submit">DELETE Desk {{node.deskNumber}}</button></mat-list-item>
+                          <mat-list-item> <button mat-raised-button color="primary" (click)="delete(node.deskNumber);">DELETE Desk {{node.deskNumber}}</button></mat-list-item>
                         
                         </mat-list>
                       

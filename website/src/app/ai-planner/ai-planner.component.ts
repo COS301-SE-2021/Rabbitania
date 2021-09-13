@@ -203,5 +203,20 @@ export class AIPlannerComponent implements OnInit {
           
   }
 
+  async delete(deskNumber: number){
+    
+    var result = await this.service.Delete(deskNumber);
+    result.subscribe(data => {
+        if(data){
+          console.log(data);
+        }
+        
+      });
+
+      setTimeout(() => {
+        this.getNodes(this.screenRatio);
+    }, 500);
+  }
+
   
 }
