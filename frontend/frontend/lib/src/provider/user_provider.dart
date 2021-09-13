@@ -33,7 +33,7 @@ class UserProvider {
 
   getUserAdminStatus() async {
     String userEmail = user.providerData[0].email!;
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
@@ -55,7 +55,7 @@ class UserProvider {
   Future<UserProfileModel> getUserProfile() async {
     final user = await getUserID();
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(baseURL + "/api/User/ViewProfile?UserId=$user"),
@@ -68,25 +68,6 @@ class UserProvider {
     if (response.statusCode == 200) {
       final userDetails = UserProfileModel.fromJSON(jsonDecode(response.body));
       return userDetails;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': user.providerData[0].email!,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getUserProfile();
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw Exception("Error with user profile");
     }
@@ -94,7 +75,7 @@ class UserProvider {
 
   Future<UserProfileModel> getUserProfileFromUserId(idUser) async {
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(baseURL + "/api/User/ViewProfile?UserId=$idUser"),
@@ -107,25 +88,6 @@ class UserProvider {
     if (response.statusCode == 200) {
       final userDetails = UserProfileModel.fromJSON(jsonDecode(response.body));
       return userDetails;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': user.providerData[0].email!,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getUserProfile();
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw Exception("Error with user profile");
     }
@@ -140,7 +102,7 @@ httpCall() async {
 
   final baseURL = await url.getBaseURL();
   final user = await userHttp.getUserID();
-  final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
   final response = await http.get(
     Uri.parse(baseURL + '/api/User/ViewProfile?UserId=$user'),
@@ -183,7 +145,7 @@ Future<String> SaveAllUserDetails(
   URLHelper url = new URLHelper();
 
   final baseURL = await url.getBaseURL();
-  final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
   print(userID.toString() +
       " " +
@@ -232,26 +194,6 @@ Future<String> SaveAllUserDetails(
         response.statusCode == 200 ||
         response.statusCode == 100) {
       return ("Successfully saved profile data");
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return SaveAllUserDetails(
-            userID, username, description, Role, Location, level, phoNum);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw ("Failed to save profile data error" +
           response.statusCode.toString());
@@ -268,7 +210,7 @@ Future<ProfileUser> getUserProfileObj() async {
   URLHelper url = new URLHelper();
 
   final baseURL = await url.getBaseURL();
-  final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   final response = await http.get(
     Uri.parse(baseURL + "/api/User/ViewProfile?UserId=$userID"),
     headers: <String, String>{
@@ -282,36 +224,10 @@ Future<ProfileUser> getUserProfileObj() async {
   if (tempDetails.phoneNumber != null) {
     number = tempDetails.phoneNumber!;
   }
-  print(response.statusCode);
-  if (response.statusCode == 401) {
-    final authReponse = await http.post(
-      Uri.parse(baseURL + '/api/Auth/Auth'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'
-      },
-      body: jsonEncode(<String, dynamic>{
-        'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
-        'name': loggedUser.getUserName()
-      }),
-    );
-    if (authReponse.statusCode == 200) {
-      Map<String, dynamic> obj = jsonDecode(authReponse.body);
-      var token = '${obj['token']}';
-      securityHelper.setToken(token);
-      return getUserProfileObj();
-    } else {
-      throw new Exception("Error with Authentication");
-    }
-  }
-  // print("The TEST");
-  // print(tempDetails.userRoles);
-  // print(tempDetails.officeLocation);
+
   String role = await (getRoleEnum(tempDetails.userRoles));
   String location = await (getLocationEnum(tempDetails.officeLocation));
 
-  // print(role);
-  // print(location);
-  // print("The TEST END");
   ProfileUser userData = new ProfileUser(
       userId: userID,
       userDescription: tempDetails.description,
@@ -334,7 +250,7 @@ Future<String> getRoleEnum(int roleInt) async {
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(
@@ -384,7 +300,7 @@ Future<String> getLocationEnum(int officeInt) async {
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(baseURL +
@@ -396,25 +312,6 @@ Future<String> getLocationEnum(int officeInt) async {
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
       return response.body;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getLocationEnum(officeInt);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw ("Failed to delete, error code" + response.statusCode.toString());
     }
@@ -433,7 +330,7 @@ Future<String> getRoleIdEnum(String role) async {
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(baseURL + "/api/Enumerations/GetUserRoleId?RoleName=$role"),
@@ -445,25 +342,6 @@ Future<String> getRoleIdEnum(String role) async {
 
     if (response.statusCode == 201 || response.statusCode == 200) {
       return response.body;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getRoleIdEnum(role);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw ("Failed to delete, error code" + response.statusCode.toString());
     }
@@ -482,7 +360,7 @@ Future<String> getLocationIdEnum(String office) async {
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(baseURL + "/api/Enumerations/GetOfficeId?OfficeName=$office"),
@@ -493,25 +371,6 @@ Future<String> getLocationIdEnum(String office) async {
     );
     if (response.statusCode == 201 || response.statusCode == 200) {
       return response.body;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getLocationIdEnum(office);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw ("Failed to delete, error code" + response.statusCode.toString());
     }
