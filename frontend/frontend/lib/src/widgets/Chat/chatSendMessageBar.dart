@@ -20,7 +20,7 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
   final messageController = TextEditingController();
-  var icon = FontAwesomeIcons.microphone;
+  var icon = FontAwesomeIcons.paperPlane;
   @override
   Widget build(BuildContext context) => Container(
         width: MediaQuery.of(context).size.width,
@@ -29,26 +29,13 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
             Expanded(
               flex: 9,
               child: TextField(
+                minLines: 1,
+                maxLines: 10,
                 cursorColor: utilModel.greenColor,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                 ),
-                onChanged: (value) {
-                  if (value != '') {
-                    setState(
-                      () {
-                        this.icon = FontAwesomeIcons.paperPlane;
-                      },
-                    );
-                  } else {
-                    setState(
-                      () {
-                        this.icon = FontAwesomeIcons.microphone;
-                      },
-                    );
-                  }
-                },
                 decoration: InputDecoration(
                   labelStyle: TextStyle(
                     fontSize: 25,
@@ -86,8 +73,8 @@ class _chatSendMessageBarState extends State<ChatSendMessageBar> {
                     if (messageController.text != '') {
                       fireStoreHelper.sendMessage(
                           widget.idUser, widget.myId, messageController.text);
-                      messageController.text = '';
                     }
+                    messageController.text = '';
                   },
                 ),
               ),

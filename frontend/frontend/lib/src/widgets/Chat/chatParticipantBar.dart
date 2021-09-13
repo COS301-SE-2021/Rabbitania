@@ -7,6 +7,7 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/screens/Chat/ChatViewUsersProfileScreen.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 //Widget used to display information about other chat participant
 class ChatParticipantBar extends StatefulWidget {
@@ -68,33 +69,52 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
                 ),
               ),
 
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      icon: Icon(
-                        FontAwesomeIcons.video,
-                        color: utilModel.greenColor,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-              ),
+              // Expanded(
+              //   flex: 1,
+              //   child: Container(
+              //     child: Padding(
+              //       padding: const EdgeInsets.only(right: 10),
+              //       child: IconButton(
+              //         icon: Icon(
+              //           FontAwesomeIcons.video,
+              //           color: utilModel.greenColor,
+              //         ),
+              //         onPressed: () {},
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
               Expanded(
                 flex: 1,
                 child: Container(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: IconButton(
-                      icon: Icon(
-                        FontAwesomeIcons.phone,
-                        color: utilModel.greenColor,
-                      ),
-                      onPressed: () {},
+                    child: FutureBuilder(
+                      future:
+                          userProvider.getUserProfileFromUserId(widget.idUser),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<dynamic> snapshot) {
+                        if (snapshot.hasData) {
+                          return IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.phone,
+                              color: utilModel.greenColor,
+                            ),
+                            onPressed: () async {
+                              await FlutterPhoneDirectCaller.callNumber(
+                                  snapshot.data.phoneNumber);
+                            },
+                          );
+                        }
+                        return IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.phone,
+                            color: utilModel.greyColor,
+                          ),
+                          onPressed: () {},
+                        );
+                      },
                     ),
                   ),
                 ),

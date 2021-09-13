@@ -130,7 +130,7 @@
 <div align="center">
    
 
-<img src="images_banners_logos/ReadME image.jpeg" width="190" height="250">
+<img src="images_banners_logos/ReadME image.jpeg" width="220" height="320">
 
 #### James Hulett | u16003251
 
@@ -153,7 +153,7 @@
 
 <div align="center">
    
-<img src="images_banners_logos/devilliers_self_picture.jpeg" width="250" height="250">
+<img src="images_banners_logos/devilliers_self_picture.jpeg" width="250" height="300">
 
 #### DeVilliers Meiring | u17074292
 
@@ -204,15 +204,18 @@
 
 # Documentation
 
-- [Software Requirements Specification 3 - Rabbitania](https://www.overleaf.com/read/rtbqmkkgvgcp)
+## Software Requirements Specification
+- [Software Requirements Specification Demo 1 - Rabbitania](https://www.overleaf.com/project/60afeae5d667afd0a58d4903)
+- [Software Requirements Specification Demo 2 - Rabbitania](https://www.overleaf.com/project/60caee3d3a4b654fdb048b16)
+- [Software Requirements Specification Demo 3 - Rabbitania](https://www.overleaf.com/read/rtbqmkkgvgcp)
 
-# Technical Installation
+## Technical Installation
 - [Technical Installation - Rabbitania](https://www.overleaf.com/read/hxdfpnkqpytk)
 
-# User Manual
+## User Manual
 - [User Manual - Rabbitania](https://www.overleaf.com/read/fythjbhjqjtc)
 
-# Coding Standards
+## Coding Standards
 - [Coding Standards - Rabbitania](https://www.overleaf.com/read/mwsygzynvrmx)
 
 

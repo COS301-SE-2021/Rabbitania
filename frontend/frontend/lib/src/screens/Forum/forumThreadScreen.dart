@@ -4,6 +4,7 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumEditForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
+import 'package:frontend/src/screens/Forum/forumThreadSearch.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -19,6 +20,7 @@ class ForumThreadScreen extends StatefulWidget {
 }
 
 // late Future<List<ForumThread>> futureForumThreads;
+late List<Widget> cards = [];
 
 class _ForumThreadScreen extends State<ForumThreadScreen> {
   final util = new UtilModel();
@@ -27,10 +29,9 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
     //futureForumThreads = fetchForumThreads(currentForumID);
   }
 
-  void refresh() {
-    UtilModel.route(() => ForumThreadScreen(), context);
+  void search() {
+    UtilModel.route(() => ForumThreadSearch(cards), context);
     setState(() {});
-    print("refresh");
   }
 
   @override
@@ -118,9 +119,9 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () {
-                  refresh();
+                  search();
                 },
-                child: Icon(Icons.refresh),
+                child: Icon(Icons.search),
               )),
         ],
       ),

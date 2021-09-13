@@ -73,6 +73,33 @@ namespace backend_api.Controllers.NoticeBoard
             return await _service.EditNoticeBoardThread(request);
         }
 
+        /// <summary>
+        /// API endpoint to increase the specified emoji by 1
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("IncreaseEmoji")]
+        public async Task<IncreaseEmojiResponse> IncreaseEmoji(
+            [FromBody] IncreaseEmojiRequest request)
+        {
+            return await _service.IncreaseEmoji(request);
+        }
+
+        /// <summary>
+        /// API endpoint to decrease the specified emoji by 1
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("DecreaseEmoji")]
+        public async Task<DecreaseEmojiResponse> DecreaseEmoji(
+            [FromBody] DecreaseEmojiRequest request)
+        {
+            return await _service.DecreaseEmoji(request);
+        }
+
 
     }
 }
+

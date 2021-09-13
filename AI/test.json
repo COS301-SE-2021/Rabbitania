@@ -1,0 +1,9 @@
+{
+    "cough":"0",
+    "fever":"1",
+    "sore_throat":"0",
+    "shortness_of_breath":"0",
+    "head_ache":"0",
+    "test_indication": "Other",
+    "gender": "male"
+}

@@ -1,9 +1,12 @@
+import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Chat/ChatUserModel.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
+import 'package:intl/intl.dart';
 
 class ChatHelper {
   List<ChatUserModel> selectedUsers = [];
@@ -33,5 +36,23 @@ class ChatHelper {
   //add selected user to list of selected users
   void addSelectedUser(ChatUserModel chatUser) {
     this.selectedUsers.add(chatUser);
+  }
+
+  String dateFormater(timestamp) {
+    String formatDate = DateFormat('kk:mm').format(timestamp);
+    return formatDate;
+  }
+
+  String decryptData(encrypted, key) {
+    final k = encrypt.Key.fromUtf8(key);
+    final iv = encrypt.IV.fromLength(16);
+
+    final value = encrypt.Encrypted.fromBase64(encrypted);
+
+    final encrypter =
+        encrypt.Encrypter(encrypt.AES(k, mode: encrypt.AESMode.cbc));
+    final decrypted = encrypter.decrypt(value, iv: iv);
+
+    return decrypted;
   }
 }
