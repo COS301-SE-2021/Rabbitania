@@ -19,8 +19,8 @@ class UserProvider {
   getUserID() async {
     final baseURL = await url.getBaseURL();
     var userEmail = user.providerData[0].email!;
-    final token = await securityHelper.getToken();
-
+    //final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final response = await http.get(
       Uri.parse(baseURL + '/api/Auth/GetID?email=$userEmail'),
       headers: <String, String>{

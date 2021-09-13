@@ -14,7 +14,8 @@ final fireBaseEmail = FirebaseAuth.instance.currentUser!.providerData[0].email!;
 
 Future<List<Thread>> fetchNotice() async {
   SecurityHelper securityHelper = new SecurityHelper();
-  final token = await securityHelper.getToken();
+  //final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   HttpClient client = new HttpClient();
   client.badCertificateCallback =
       ((X509Certificate cert, String host, int port) => true);
@@ -42,7 +43,8 @@ Future<List<Thread>> fetchNotice() async {
 Future<bool> deleteThread(int threadID) async {
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
-  final token = await securityHelper.getToken();
+  //final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     if (threadID < 0) {
       throw ("Error Thread ID is Incorrect");
@@ -91,7 +93,8 @@ Future<String> addNewThread(
     String title, String content, int noticeboardCreatorId) async {
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
-  final token = await securityHelper.getToken();
+  //final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
@@ -152,7 +155,8 @@ Future<String> addNewThread(
 Future<String> IncreaseEmoji(String Emoji) async {
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
-  final token = await securityHelper.getToken();
+  //final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/IncreaseEmoji'),
@@ -200,7 +204,8 @@ Future<String> IncreaseEmoji(String Emoji) async {
 Future<String> DecreaseEmoji(String Emoji) async {
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
-  final token = await securityHelper.getToken();
+  //final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     final response = await http.put(
       Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/DecreaseEmoji'),
@@ -249,7 +254,8 @@ Future<String> editNoticeboardThread(
     String title, String content, int noticeboardEditId) async {
   SecurityHelper securityHelper = new SecurityHelper();
   UserHelper loggedUser = new UserHelper();
-  final token = await securityHelper.getToken();
+  //final token = await securityHelper.getToken();
+  final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     if (title == "" || content == "") {
       throw ("Cannot Submit Empty Fields");
