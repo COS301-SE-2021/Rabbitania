@@ -7,6 +7,7 @@ import { AiServiceService } from '../../app/services/AI/ai-service.service';
 import { UserDetailsService } from '../services/user-details/user-details.service';
 import { SignOutComponent } from '../sign-out/sign-out.component';
 import { AuthService } from '../services/firebase/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -20,7 +21,8 @@ user_email = "";
     private fb: FormBuilder,
     private service : AiServiceService,
     private auth_service: AuthService,
-    private userService: UserDetailsService) {
+    private userService: UserDetailsService,
+    private router : Router) {
 
   }
 
@@ -28,15 +30,6 @@ user_email = "";
 
 }
 
-async signIn() {
-  var res = await this.auth_service.signIn();
-  if(res){
-      this.user_email = this.userService.retrieveUserDetails().email;
-  }else{
-
-  }
-  this.ngOnInit();
-}
 
   covidQuestionnaire = this.fb.group({
     cough: false,
@@ -59,63 +52,116 @@ async signIn() {
 
   async onSubmit(){
     console.log(this.checkOnline());
-    if(this.checkOnline()){
-      alert("Please log on first");
-    }
+    if(this.checkOnline() == false){
+      var res = await this.auth_service.signIn();
+      if(res){
+        this.user_email = this.userService.retrieveUserDetails().email;
+        const questionnaireObject = this.covidQuestionnaire.value;
 
+        var _cough = "0";
+        var _fever = "0";
+        var _sore_throat = "0";
+        var _shortness_of_breath = "0";
+        var _head_ache = "0";
+        var _test_indication = "Other";
+        var _gender = "male";
 
-    const questionnaireObject = this.covidQuestionnaire.value;
+          if(questionnaireObject.cough == true){
+            _cough = "1";
+          }
+          if(questionnaireObject.fever == true){
+            _fever = "1";
+          }
+          if(questionnaireObject.sore_throat == true){
+            _sore_throat = "1";
+          }
+          if(questionnaireObject.shortness_of_breath == true){
+            _shortness_of_breath = "1";
+          }
+          if(questionnaireObject.head_ache == true){
+            _head_ache = "1";
+          }
+          if(questionnaireObject.gender == "female"){
+            _gender = "female";
+          }
+          if(questionnaireObject.test_indication == true){
+            _test_indication = "Contact with confirmed"
+          }
 
-    var _cough = "0";
-    var _fever = "0";
-    var _sore_throat = "0";
-    var _shortness_of_breath = "0";
-    var _head_ache = "0";
-    var _test_indication = "Other";
-    var _gender = "male";
+          var result = (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication))
 
-    if(questionnaireObject.cough == true){
-      _cough = "1";
-    }
-    if(questionnaireObject.fever == true){
-      _fever = "1";
-    }
-    if(questionnaireObject.sore_throat == true){
-      _sore_throat = "1";
-    }
-    if(questionnaireObject.shortness_of_breath == true){
-      _shortness_of_breath = "1";
-    }
-    if(questionnaireObject.head_ache == true){
-      _head_ache = "1";
-    }
-    if(questionnaireObject.gender == "female"){
-      _gender = "female";
-    }
-    if(questionnaireObject.test_indication == true){
-      _test_indication = "Contact with confirmed"
-    }
+          result.subscribe(async data => {
+            if(data){
+              console.log(data);
+            }
+          });
+          var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
+            if(data){
+              console.log(data);
+            }
+          });
 
-    var result = (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication))
-
-    result.subscribe(async data => {
-      if(data){
-        console.log(data);
+        }
       }
-    });
-    var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
-      if(data){
-        console.log(data);
-      }
-    });
+      else{
+        this.user_email = this.userService.retrieveUserDetails().email;
+        const questionnaireObject = this.covidQuestionnaire.value;
 
-  }
+        var _cough = "0";
+        var _fever = "0";
+        var _sore_throat = "0";
+        var _shortness_of_breath = "0";
+        var _head_ache = "0";
+        var _test_indication = "Other";
+        var _gender = "male";
+
+          if(questionnaireObject.cough == true){
+            _cough = "1";
+          }
+          if(questionnaireObject.fever == true){
+            _fever = "1";
+          }
+          if(questionnaireObject.sore_throat == true){
+            _sore_throat = "1";
+          }
+          if(questionnaireObject.shortness_of_breath == true){
+            _shortness_of_breath = "1";
+          }
+          if(questionnaireObject.head_ache == true){
+            _head_ache = "1";
+          }
+          if(questionnaireObject.gender == "female"){
+            _gender = "female";
+          }
+          if(questionnaireObject.test_indication == true){
+            _test_indication = "Contact with confirmed"
+          }
+
+          var result = (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication))
+
+          result.subscribe(async data => {
+            if(data){
+              console.log(data);
+            }
+          });
+          var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
+            if(data){
+              console.log(data);
+            }
+          });
+
+
+
+      }
+      this.router.navigate(['/'], {
+        queryParams: {
+
+        },
+        skipLocationChange: false
+      });
+    }
 
 }
 
-
-function RadiusCheck() {
-
-}
 
 
