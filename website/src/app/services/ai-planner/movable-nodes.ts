@@ -108,32 +108,32 @@ export class MovableNodes {
     else if(screenWidth >= 1100)
     {
       this.position = 'Position X: '+xPosition/2.5+'cm - Y: '+yPosition/2.5+'cm';
-      this._newPosx = this._savedX + xPosition/2.5;
-      this._newPosy= this._savedY + yPosition/2.5;
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 820)
     {
       this.position = 'Position X: '+xPosition/2+'cm - Y: '+yPosition/2+'cm';
-      this._newPosx = this._savedX + xPosition/2;
-      this._newPosy= this._savedY + yPosition/2;
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 720)
     {
       this.position = 'Position X: '+xPosition/1.6+'cm - Y: '+yPosition/1.6+'cm';
-      this._newPosx = this._savedX + xPosition/1.6;
-      this._newPosy= this._savedY + yPosition/1.6;
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 540)
     {
       this.position = 'Position X: '+xPosition/1.0+'cm - Y: '+yPosition/1.0+'cm';
-      this._newPosx = this._savedX + xPosition/1.0;
-      this._newPosy= this._savedY + yPosition/1.0;
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
     }
     else
     { 
       this.position = 'Position X: '+xPosition/0.8+'cm - Y: '+yPosition/0.8+'cm';
-      this._newPosx = this._savedX + xPosition/0.8;
-      this._newPosy= this._savedY + yPosition/0.8;
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
     }
   
     }

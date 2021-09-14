@@ -1,6 +1,25 @@
   @import '../homepage/homepage.component.scss';
-  @import '../../styles.scss';
-  
+
+  .mat-raised-button.mat-primary{
+    background-color: rgb(33, 33, 33);
+    border: 1px solid rgb(179, 255, 79);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: inline-block;
+    font-family: "Merriweather Sans",sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0  rgb(179, 255, 79);
+    -webkit-transition: ease-out 0.5s;
+    -moz-transition: ease-out 0.5s;
+    transition: ease-out 0.5s;
+}
+.mat-raised-button.mat-primary:hover {
+  //box-shadow: inset 0px 0px 100px 0px rgb(33, 33, 33);
+  background-color: rgb(179, 255, 79);
+  color:rgb(33, 33, 33);
+}
   
   @mixin node {
     border: solid 1px #ccc;
@@ -153,3 +172,5 @@
     min-width: 120px;
     margin: 20px auto;
   }
+
+ 
