@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.User;
+using backend_api.Exceptions.Node;
 using backend_api.Models.Node.Requests;
 using backend_api.Models.Node.Responses;
 using Microsoft.Build.Execution;
@@ -30,6 +31,8 @@ namespace backend_api.Data.Node
         public async Task<GetNodeResponse> GetNode(GetNodeRequest request)
         {
             var resp = await _nodes.Nodes.FirstOrDefaultAsync(x => x.Id == request.NodeId);
+            if (resp == null)
+                throw new InvalidNodeException("Node does not exist with that ID");
             return new GetNodeResponse(resp);
         }
 
@@ -64,7 +67,6 @@ namespace backend_api.Data.Node
         public async Task<EditNodeResponse> EditNode(EditNodeRequest request)
         {
             var node = await _nodes.Nodes.FindAsync(request.NodeId);
-            
             if (node != null)
             {
                 try
@@ -87,7 +89,7 @@ namespace backend_api.Data.Node
             }
             else
             {
-                return new EditNodeResponse("Node that you are trying to update is null");
+                return new EditNodeResponse("Node that you are trying to update is null", HttpStatusCode.BadRequest);
             }
         }
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
@@ -129,7 +131,8 @@ namespace backend_api.Data.Node
                 var nodeToUpdate = await _nodes.Nodes.FirstOrDefaultAsync(x => x.userEmail == user.UsersEmail);
                 try
                 {
-                    nodeToUpdate.active = true;
+                    if(nodeToUpdate.active != true)
+                        nodeToUpdate.active = true;
                     await _nodes.SaveChangesAsync();
                 }
                 catch (Exception e)
