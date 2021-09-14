@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using backend_api.Data.Node;
 using backend_api.Data.User;
 using backend_api.Exceptions.Node;
@@ -40,6 +41,17 @@ namespace backend_api.Tests.Node.Integration
             _service = new NodeService(_repository);
         }
 
+        private async Task addMockedNode()
+        {
+            var nodeToDelete = new Models.Node.Node();
+            nodeToDelete.Id = 5;
+            nodeToDelete.active = false;
+            nodeToDelete.userEmail = "testt@gmail.com";
+            nodeToDelete.xPos = 1;
+            nodeToDelete.yPos = 1;
+            await _context.Nodes.AddAsync(nodeToDelete);
+            await _context.SaveChangesAsync();
+        }
         [Fact]
         public async void getAllNodesTest()
         {
@@ -136,6 +148,7 @@ namespace backend_api.Tests.Node.Integration
         public async void DeleteNode_ValidNode()
         {
             //Arrange
+            await addMockedNode();
             var addNode = new CreateNodeRequest("test@gmail.com", 100, 100, false);
             var request = new DeleteNodeRequest(5);
             //Act
@@ -252,24 +265,6 @@ namespace backend_api.Tests.Node.Integration
             //Assert
             await Assert.ThrowsAsync<InvalidNodeException>(async ()=> await _service.SaveNodes(null));
         }
-        [Fact]
-        public async void SaveNodes_ValidRequest()
-        {
-            //Arrange
-            var node1 = new Models.Node.Node("test@gmail.com", 40, 40, false);
-            var node2 = new Models.Node.Node("testest@gmail.com", 50, 50, false);
-            var node3 = new Models.Node.Node("test@gmail.com", 200, 50, false);
-            var node4 = new Models.Node.Node("test@gmail.com", 50, 120, false);
-            var list = new List<Models.Node.Node>();
-            list.Add(node1);
-            list.Add(node2);
-            list.Add(node3);
-            list.Add(node4);
-            var request = new SaveNodesRequest(list);
-            //Act
-            var resp = await _service.SaveNodes(request);
-            //Assert
-            Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
-        }
+        
     }
 }
