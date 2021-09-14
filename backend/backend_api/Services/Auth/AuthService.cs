@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,9 +17,14 @@ using backend_api.Models.Auth.Responses;
 using backend_api.Models.User.Requests;
 using backend_api.Services.User;
 using Castle.Core.Configuration;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace backend_api.Services.Auth
 {
@@ -119,7 +125,6 @@ namespace backend_api.Services.Auth
                 Console.WriteLine(e);
                 throw new InvalidUserRequest("The user does not exist in the database");
             }
-            
         }
         
         /// <inheritdoc />
@@ -135,7 +140,6 @@ namespace backend_api.Services.Auth
                 Console.WriteLine(e);
                 throw new InvalidUserRequest("The user does not exist in the database");
             }
-            
         }
         
         /// <inheritdoc />
@@ -171,27 +175,7 @@ namespace backend_api.Services.Auth
                 return false;
             }
         }
-        
-        /// <inheritdoc />
-        public async Task<string> createJwt(Credentials credentials)
-        {
-            var settings = Startup.StaticConfig.GetSection("JwtSettings");
-            var secret = Environment.GetEnvironmentVariable("JWTSecret") ?? string.Empty;
-            var claims = await GetClaims(credentials);
 
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
-            var signingCred = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-            
-            var token = new JwtSecurityToken(
-                issuer: settings.GetSection("validIssuer").Value,
-                audience: settings.GetSection("validAudience").Value,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(120),
-                signingCredentials: signingCred
-                );
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-        
         public async Task<List<Claim>> GetClaims(Credentials credentials)
         {
             var claims = new List<Claim>

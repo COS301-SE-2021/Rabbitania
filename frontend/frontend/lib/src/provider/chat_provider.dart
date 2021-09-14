@@ -19,7 +19,7 @@ class ChatProvider {
 
   Future<String> getAgoraID() async {
     final baseURL = await url.getBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
     final response = await http.get(
       Uri.parse(baseURL + '/api/Agora/GetAppID'),
@@ -38,25 +38,6 @@ class ChatProvider {
       );
 
       return decryptedKey;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getAgoraID();
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       return "Agora ID was not returned: There was some error with the process.";
     }

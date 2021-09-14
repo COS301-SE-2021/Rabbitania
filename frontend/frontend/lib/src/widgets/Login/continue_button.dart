@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
@@ -23,7 +24,7 @@ class ContinueButton extends StatefulWidget {
 
 class _continueButton extends State<ContinueButton> {
   UserProvider userProvider = UserProvider();
-  UserHelper userHelper = UserHelper();
+
   SecurityHelper securityHelper = SecurityHelper();
   URLHelper url = new URLHelper();
 
@@ -36,11 +37,16 @@ class _continueButton extends State<ContinueButton> {
 
   Future httpCall() async {
     final baseURL = await url.getBaseURL();
+    final userHelper = UserHelper();
+    //var idToken = await securityHelper.getFirestoreIdToken();
+    var idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
+    log(idToken);
     setState(() {});
     final response = await http.post(
       Uri.parse(baseURL + '/api/Auth/GoogleLogin'),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $idToken'
       },
       body: jsonEncode(<String, dynamic>{
         'displayName': widget.user.displayName,
@@ -58,23 +64,6 @@ class _continueButton extends State<ContinueButton> {
 
       setState(() {});
 
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': await widget.user.providerData[0].email,
-          'name': await widget.user.displayName
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {

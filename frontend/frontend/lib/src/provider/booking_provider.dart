@@ -20,7 +20,7 @@ class BookingProvider {
   // GET ALL (GetBookings)
   Future<List<ViewBookingModel>> fetchBookingsAsync() async {
     final loggedUserId = await loggedUser.getUserID();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
@@ -38,25 +38,6 @@ class BookingProvider {
             (bookings) => new ViewBookingModel.fromJson(bookings),
           )
           .toList();
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return fetchBookingsAsync();
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       List<ViewBookingModel> noBookings = List.empty();
 
@@ -67,8 +48,7 @@ class BookingProvider {
   // POST (CreateBooking)
   Future<String> createBookingAsync(
       String bookingDate, String timeSlot, int office, int userId) async {
-    SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.post(
@@ -86,25 +66,6 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return ("Created new Booking");
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return createBookingAsync(bookingDate, timeSlot, office, userId);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       return ("Failed to create booking, Code: " +
           response.statusCode.toString() +
@@ -115,8 +76,7 @@ class BookingProvider {
 
   // DELETE (DeleteBooking)
   Future<bool> deleteBookingAsync(int bookingId) async {
-    SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.delete(
       Uri.parse(baseURL + '/api/Booking/DeleteBooking?BookingId=$bookingId'),
@@ -127,25 +87,6 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return deleteBookingAsync(bookingId);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       return false;
     }
@@ -153,8 +94,7 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkIfBookingExists(timeSlot, office, userId) async {
-    SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.post(
       Uri.parse(baseURL + '/api/Booking/CheckIfBookingExists'),
@@ -172,25 +112,6 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true; // can make booking
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return checkIfBookingExists(timeSlot, office, userId);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       return false; // cannot make booking
     }
@@ -198,8 +119,7 @@ class BookingProvider {
 
   //POST (CheckAvailability)
   Future<bool> checkAvailibity(timeslot, office) async {
-    SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.post(
       Uri.parse(baseURL + '/api/BookingSchedule/CheckAvailability?TimeSlot'),
@@ -216,25 +136,6 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return checkAvailibity(timeslot, office);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       return false;
     }
@@ -242,8 +143,7 @@ class BookingProvider {
 
   //POST (CreateBookingSchedule)
   Future<bool> createBookingSchedule(timeslot, office, availability) async {
-    SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
     final response = await http.post(
       Uri.parse(baseURL + '/api/BookingSchedule/CreateBookingSchedule'),
@@ -261,25 +161,6 @@ class BookingProvider {
     );
     if (response.statusCode == 200) {
       return true;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return createBookingSchedule(timeslot, office, availability);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       return false;
     }
@@ -287,7 +168,7 @@ class BookingProvider {
 
   // GET ALL SCHEDULES (GetBookingSchedules)
   Future<List<BookingScheduleModel>> fetchSchedulesAsync() async {
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final baseURL = await url.getBaseURL();
 
     final response = await http.get(
@@ -306,25 +187,6 @@ class BookingProvider {
               .map((itemWord) => BookingScheduleModel.fromJson(itemWord))
               .toList();
       return schedules;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'userID': await loggedUser.getUserID(),
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return fetchSchedulesAsync();
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       List<BookingScheduleModel> noSchedules = List.empty();
       return noSchedules;
