@@ -6,32 +6,45 @@
 
 .image_matt{
     border-radius: 50%;
-    height: 40%;
-    width: 40%;
+    height: 50%;
+    width: 50%;
 }
 
 .image_div{
     border-radius: 50%;
-    height: 40%;
-    width: 40%;
+    height: 50%;
+    width: 50%;
 }
 
 .image_james{
     border-radius: 50%;
-    height: 40%;
-    width: 40%;
+    height: 50%;
+    width: 50%;
 }
 
 .image_joe{
     border-radius: 50%;
-    height: 40%;
-    width: 40%;
+    height: 50%;
+    width: 50%;
 }
 
 .image_dean{
     border-radius: 50%;
-    height: 40%;
-    width: 40%;
+    height: 50%;
+    width: 50%;
+}
+
+.about{
+    color: $greenColour;
+}
+
+.about2{
+    float: right;
+}
+
+.information{
+    font-style: italic;
+    font-size: large;
 }
 
 #about_matt{
@@ -128,8 +141,8 @@
         position: absolute;
         top: 28%;
         left: 18%;
-        font-size: 600%;
-        color: #FFB302;
+        font-size: 800%;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -137,8 +150,8 @@
         position: absolute;
         top: 28%;
         right: 18%;
-        font-size: 600%;
-        color: #FFB302;
+        font-size: 800%;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -160,8 +173,8 @@
         position: absolute;
         top: 28%;
         left: 18%;
-        font-size: 500%;
-        color: #FFB302;
+        font-size: 600%;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -169,8 +182,8 @@
         position: absolute;
         top: 28%;
         right: 18%;
-        font-size: 500%;
-        color: #FFB302;
+        font-size: 600%;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -193,7 +206,7 @@
         top: 28%;
         left: 18%;
         font-size: 400%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -202,7 +215,7 @@
         top: 28%;
         right: 18%;
         font-size: 400%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -225,7 +238,7 @@
         top: 28%;
         left: 18%;
         font-size: 300%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -234,7 +247,7 @@
         top: 28%;
         right: 18%;
         font-size: 300%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -257,7 +270,7 @@
         top: 28%;
         left: 18%;
         font-size: 300%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -266,7 +279,7 @@
         top: 28%;
         right: 18%;
         font-size: 300%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -281,7 +294,7 @@
         top: 28%;
         left: 18%;
         font-size: 200%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
@@ -290,7 +303,7 @@
         top: 28%;
         right: 18%;
         font-size: 200%;
-        color: #FFB302;
+        color: #d6c190;
         text-shadow: 0 0 10px #000000, 0 0 10px #000000;
     }
 
