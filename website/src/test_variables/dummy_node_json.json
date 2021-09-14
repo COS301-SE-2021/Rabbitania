@@ -1,12 +1,26 @@
 [
-    {"deskNumber" : "1", "x" : "0","y":"0"},
-    {"deskNumber" : "2", "x" : "50","y":"50"},
-    {"deskNumber" : "3", "x" : "100","y":"75"},
-    {"deskNumber" : "4", "x" : "150","y":"100"},
-    {"deskNumber" : "5", "x" : "200","y":"125"},
-    {"deskNumber" : "6", "x" : "250","y":"150"},
-    {"deskNumber" : "7", "x" : "300","y":"175"},
-    {"deskNumber" : "8", "x" : "350","y":"200"},
-    {"deskNumber" : "9", "x" : "400","y":"225"}
-   
-    ]
+    {
+      "id": 8,
+      "userEmail": "matthewnharty@gmail.com",
+      "user": null,
+      "xPos": 0,
+      "yPos": 0,
+      "active": false
+    },
+    {
+      "id": 9,
+      "userEmail": "jh.harraway@gmail.com",
+      "user": null,
+      "xPos": 0,
+      "yPos": 0,
+      "active": false
+    },
+    {
+      "id": 1,
+      "userEmail": "runtimeterrors.301@gmail.com",
+      "user": null,
+      "xPos": 0,
+      "yPos": 0,
+      "active": false
+    }
+  ]
