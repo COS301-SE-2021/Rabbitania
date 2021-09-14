@@ -43,7 +43,7 @@ export class AuthService {
           console.log(response.ok);
           if(response.ok === true || response.status === 201){
             this.authSuccess = true;
-            this.userDetails.addUserDetails(this.userobj);   
+            this.userDetails.addUserDetails(this.userobj);
           }
       })
       .catch((error) => {
@@ -51,12 +51,12 @@ export class AuthService {
           this.authSuccess = false;
         }
     );
-    
+
     return this.authSuccess;
   }
 
   async signOut() {
     await this.authFire.signOut();
-    this.userDetails.clearUserDetails(); 
+    this.userDetails.clearUserDetails();
   }
 }

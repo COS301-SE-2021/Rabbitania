@@ -21,14 +21,14 @@ namespace backend_api.Services.Node
         /// <inheritdoc />
         public async Task<GetNodeResponse> GetNode(GetNodeRequest request)
         {
-            if (request != null || request.NodeId != null)
+            if (request != null)
             {
                 var resp = await _nodeRepository.GetNode(request);
                 return resp;
             }
             else
             {
-                throw new Exception("Request is null or node ID is missing");
+                throw new InvalidNodeException("Request is null or node ID is missing");
             }
         }
 
@@ -38,7 +38,7 @@ namespace backend_api.Services.Node
             {
                 throw new InvalidNodeException("Request is null or empty");
             }
-            if (request.UserEmail.Equals(null))
+            if (request.UserEmail.Equals(null) || request.UserEmail.Length == 0)
             {
                 throw new InvalidNodeException("User email is null");
             }
@@ -103,8 +103,15 @@ namespace backend_api.Services.Node
 
         public async Task<DeactivateAllNodesResponse> DeactivateAllNodes(DeactivateAllNodesRequest request)
         {
-            var resp = await _nodeRepository.DeactivateAllNodes(null);
-            return resp;
+            if (request != null)
+            {
+                var resp = await _nodeRepository.DeactivateAllNodes(null);
+                return resp;
+            }
+            else
+            {
+                throw new InvalidNodeException("Request is null");
+            }
         }
 
         public async Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request)
