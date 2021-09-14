@@ -1,149 +1,173 @@
 
+<mat-toolbar class="mat-elevation-z8">
+    &nbsp;
+    <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://retrorabbit.co.za">
+        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
+    </a>
+    <span class="toolbar-spacer"></span>
+    
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
+
+        <h4 class="name">RABBITANIA MAIN MENU</h4>
+
+        <mat-divider class="nav-divider"></mat-divider>
+
+        <button mat-button class="menu-button" routerLink="/">
+            <fa-icon [icon]="faRocket"></fa-icon>&nbsp;
+            <span>Landing Page</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/">
+            <fa-icon [icon]="faUsers"></fa-icon>&nbsp;
+            <span>The Developer Team</span>
+        </button>
+
+        <mat-divider class="nav-divider"></mat-divider>
+        <h4 class="name">Administrator Dashboard</h4>
+
+        <button mat-button class="menu-button" routerLink="/ai-planner">
+            <fa-icon [icon]="faBriefcase"></fa-icon>&nbsp;
+            <span>Office Planner</span>
+        </button>
+        <button mat-button class="menu-button">
+            <mat-icon>people</mat-icon>
+            <span>View Users</span>
+        </button>
+        <button mat-button class="menu-button">
+            <fa-icon [icon]="faThList"></fa-icon>&nbsp;
+            <span>View Bookings Schedule</span>
+        </button>
+     
+    </mat-sidenav>
+    <mat-sidenav-content>
+  
+
+
+
+
+
+
+
 
 <div class="container-fluid ">
   <div class="row">
-  <div class="col-12 d-flex justify-content-center text-center">
+    <div class="col-12 d-flex justify-content-center text-center">
       <h1 class="headings">AI Floor Planner</h1>
     </div>
-    
   </div>
-<div class="row">
 
+  <div class="row">
  </div>
+
   <div class="row">
     <div class="col-12 d-flex justify-content-center text-center">
       <div>
           <div class="example-boundary" id="boarder">
               <div *ngFor="let node of nodes; index as i" cdkDrag style="position: absolute; left: {{node.savedX}}px;
                   top: {{node.savedY}}px;" class="example-box" id="{{node.deskNumber}}" cdkDragBoundary=".example-boundary" (cdkDragStarted)="node.dragStarted($event)" (cdkDragEnded)="node.dragEnded($event)" (cdkDragMoved)="node.dragMoved($event)">
-                  <div class="example-handle" cdkDragHandle >
-                          {{node.deskNumber}} {{node.position}}
-                  </div>
+                {{node.deskNumber}}
               </div>
           </div>
       </div>
     </div>
   </div>
-<br><br>
-  <div class="row">
-  <div class="col-12 d-flex justify-content-center text-center">
-  <mat-tab-group animationDuration="0ms" >
-  <mat-tab label="Desks">  <mat-card>
-      <mat-card-title>Desks</mat-card-title>
-      <mat-card-content>
-           
-                   <mat-accordion *ngFor="let node of nodes; index as i">
+
+<div class="row mx-auto">
+        <div class="col-12 justify-content-center text-center pb-3 pt-5">
+          <button mat-raised-button color="primary" type="submit" style="width: 100%; display: block;" (click)="save()">Save Desk Positions</button>
+        </div>
+        <div class="col-md-6 col-12 justify-content-center text-center pt-2" >
+          <mat-card style="height: 100%;">
+          <mat-card-title>Desks</mat-card-title>
+          <mat-card-content>
+         <mat-accordion>
                 <mat-expansion-panel >
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      Desk {{node.deskNumber}}
+                      Desks
                     </mat-panel-title>
                     <mat-panel-description>
-                      Information About the Desk
-                      
+                      Information About the Desks
                     </mat-panel-description>
                   </mat-expansion-panel-header>
-                  <mat-list>
-                  <mat-divider></mat-divider>
-                    <mat-list-item>Allocated Staff Member: Castello</mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item>Other information: Stuff HERE</mat-list-item>
-                    <mat-divider></mat-divider>
-                    <mat-list-item>Saved Position: (X: {{node.savedX}} ; Y: {{node.savedY}})</mat-list-item>
-                    <mat-divider></mat-divider>
-                  </mat-list>
-                 
+
+                  <mat-accordion *ngFor="let node of nodes; index as i">
+                      <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                            Desk {{node.deskNumber}}
+                          </mat-panel-title>
+                          <mat-panel-description>
+                            Information About the Desk
+                            
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-list>
+                        
+                          <mat-list-item>Allocated Email: {{node.userEmail}}</mat-list-item>
+                          
+                          <mat-list-item>Activated: {{node.active}}</mat-list-item>
+                          
+                          <mat-list-item>Saved Position: ( {{node.savedX}}cm ; {{node.savedY}}cm)</mat-list-item>
+
+                          <mat-list-item> <button mat-raised-button color="primary" (click)="delete(node.deskNumber);">DELETE Desk {{node.deskNumber}}</button></mat-list-item>
+                        
+                        </mat-list>
+                      
+                      </mat-expansion-panel>
+                  </mat-accordion>
+                  
+                    
+                  
                 </mat-expansion-panel>
             </mat-accordion>
+          
            
-     </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
-      </mat-card> 
-      </mat-tab >
-      <mat-tab label="Add Desk">
-      <form [formGroup]="addNodeForm" novalidate (ngSubmit)="addNode()" >
-  <mat-card class="addDesk-card">
-    <mat-card-header>
-      <mat-card-title>Create Desk</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-         <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="email" formControlName="email">
-            <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
-              Email <strong>required</strong>
-            </mat-error>
-            <mat-hint align="start">Assigned employee's email</mat-hint>
-          </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+          </mat-card-actions>
+          </mat-card> 
+        </div>
+        <div class="col-md-6 col-12 justify-content-center text-center pt-2">
+          <form [formGroup]="addNodeForm" novalidate (ngSubmit)="addNode()" >
+            <mat-card style="height: 100%;" >
+              
+                <mat-card-title>Create Desk</mat-card-title>
+            
+              <mat-card-content>
+              
+                    <mat-form-field class="full-width">
+                      <input matInput placeholder="email" formControlName="email">
+                      <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
+                        Email <strong>required</strong>
+                      </mat-error>
+                      <mat-hint align="start">Assigned employee's email</mat-hint>
+                    </mat-form-field>
+               
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="primary" type="submit">Submit</button>
+              </mat-card-actions>
+            </mat-card>
+          </form>
         </div>
         
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
-      </mat-tab>
-   <mat-tab label="Editer">   <mat-card>
-      <mat-card-title>Desks</mat-card-title>
-      <mat-card-content>
-           
-                   <mat-accordion *ngFor="let node of nodes; index as i">
-                <mat-expansion-panel >
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Desk {{node.deskNumber}}
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Information About the Desk
-
-                    </mat-panel-description>
-
-
-                  </mat-expansion-panel-header>
-                  <form [formGroup]="addNodeForm" novalidate (ngSubmit)="onSubmit()" >
-                      <mat-card class="addDesk-card">
-                        <mat-card-header>
-                          <mat-card-title>Edit Desk</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                          <div class="row">
-                            <div class="col">
-                              <mat-form-field class="full-width">
-                                <input matInput placeholder="email" formControlName="email">
-                                <mat-error *ngIf="addNodeForm.controls['email'].hasError('required')">
-                                  title name is <strong>required</strong>
-                                </mat-error>
-                                <mat-hint align="start">Desk title</mat-hint>
-                              </mat-form-field>
-                            </div>
-                            
-                            </div>
-                        </mat-card-content>
-                        <mat-card-actions>
-                          <button mat-raised-button color="primary" type="submit">Submit</button>
-                        </mat-card-actions>
-                      </mat-card>
-                    </form>
-                 <mat-action-row>
-                    <button mat-button color="warn" >Delete</button>
-                  </mat-action-row>
-                </mat-expansion-panel>
-            </mat-accordion>
-           
-     </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
-      </mat-card> </mat-tab>
-
-</mat-tab-group>
-</div>
-
-  </div>
+    </div>
+  
   <br><br>
 </div>
 
-
+<div class="extra" >
+ </div>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>

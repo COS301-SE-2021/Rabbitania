@@ -104,7 +104,9 @@ namespace backend_api.Controllers.Node
         /// </summary>
         /// <param name="request"></param>
         /// <returns>DeleteNodeResponse</returns>
-        [HttpPost, Authorize]
+
+        //[Authorize]
+        [HttpDelete, Authorize]
         [Route("DeleteNode")]
         public async Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request)
         {
