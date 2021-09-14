@@ -8,5 +8,7 @@ namespace backend_api.Models.Auth
         public string Email { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public string Token { get; set; }
     }
 }

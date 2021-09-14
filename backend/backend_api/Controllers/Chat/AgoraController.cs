@@ -7,6 +7,7 @@ using backend_api.Models.Chat.Requests;
 using backend_api.Models.Chat.Responses;
 using backend_api.Services.Chat;
 using MailKit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -28,7 +29,7 @@ namespace backend_api.Controllers.Chat
             _chatService = chatService;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         public ActionResult<AgoraAuthResponse> index(AgoraAuthRequest request)
         {
             var AppID = _config.GetValue<string>("AppSettings:AppID");
@@ -59,7 +60,7 @@ namespace backend_api.Controllers.Chat
             return Ok(new AgoraAuthResponse(request.channel, request.uid, tBuilder.build()));
         }
         [Route("GetAppID")]
-        [HttpGet]
+        [HttpGet, Authorize]
         public ActionResult<string> GetEncryptedAppID()
         {
             return Ok(_chatService.Encrypt());
