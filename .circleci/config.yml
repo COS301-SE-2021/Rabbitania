@@ -169,7 +169,30 @@ jobs:
             dotnet test --filter BookingServiceTests
 ################# BOOKING TESTS ##############
 
-################# BOOKING TESTS ##############
+################# NODE TESTS ##############
+  Node:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet build
+
+  IntegrationTests_Node:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          working_directory: ~/project/backend/backend_api.Tests
+          name: Run tests
+          command: |
+            dotnet test --filter NodeServiceTests
+################# NODE TESTS ##############
+
 
 ################# WORKFLOW ################### 
 workflows:
@@ -189,6 +212,9 @@ workflows:
           requires:
             - build
       - Booking:
+          requires:
+            - build
+      - Node:
           requires:
             - build
     
@@ -216,6 +242,9 @@ workflows:
       - IntegrationTests_Booking:
           requires:
             - Booking
+      - IntegrationTests_Node:
+          requires:
+            - Node
             
 
      

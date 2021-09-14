@@ -36,8 +36,8 @@ export class HomepageComponent implements OnInit {
   //
 
   constructor(
-    private observer: BreakpointObserver, 
-    private service: AuthService, 
+    private observer: BreakpointObserver,
+    private service: AuthService,
     router: Router,
     public model: MatDialog,
     private userService: UserDetailsService) {
@@ -69,9 +69,9 @@ export class HomepageComponent implements OnInit {
   async signIn() {
     var res = await this.service.signIn();
     if(res){
-      
+
     }else{
-      
+
     }
     this.ngOnInit();
   }
