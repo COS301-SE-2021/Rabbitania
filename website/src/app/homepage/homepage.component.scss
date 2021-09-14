@@ -129,31 +129,123 @@ mat-divider {
 /*
      IMAGE AND TEXT POSITIONING
 */
-
-.main-image{
-    z-index: 999; 
-
-    .landing-rocket {
-        height: 750px;
-        width: 750px;
-        -webkit-animation: mover 3s infinite  alternate;
-        animation: mover 3s infinite  alternate;
-    }
-
-    .welcome-text1{
-        position: absolute;
-        top: 28%;
-        left: 18%;
-        font-size: x-large;
-        color: $greenColour;
-    }
+@media only screen and (max-width: 1980px) {
+    .main-image{
+        z-index: 999; 
     
-    .welcome-text2{
-        position: absolute;
-        top: 28%;
-        right: 18%;
-        font-size: x-large;
-        color: $greenColour;
+        .landing-rocket {
+            height: 1050px;
+            width: 1050px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 750px;
+            width: 750px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: x-large;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: x-large;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 550px;
+            width: 550px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: medium;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: medium;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 350;
+            width: 350px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: small;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: small;
+            color: $greenColour;
+        }
     }
 }
 
@@ -251,6 +343,7 @@ mat-divider {
         animation: mover 1.9s infinite  alternate;
     }
 }
+
 /*
      KEY FRAME MOVEMENTS 
 */
@@ -269,6 +362,19 @@ mat-divider {
     100% { 
         transform: translateY(-20px); 
     }
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-80%);
+      }
+      to { 
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
 }
 
 
