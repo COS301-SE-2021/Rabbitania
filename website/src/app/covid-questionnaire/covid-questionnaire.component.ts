@@ -12,6 +12,8 @@ import { NodeServiceService } from '../services/ai-planner/node-service.service'
 import { first } from 'rxjs/operators';
 import { generate } from 'rxjs';
 import { MovableNodes } from '../services/ai-planner/movable-nodes';
+import { Graph } from '../interfaces/Graph';
+import { GraphServiceService } from '../services/graph/graph-service.service';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -26,6 +28,7 @@ screenWidth!: number;
 screenRatio: number = 1;
 
 
+
   constructor(
     private fb: FormBuilder,
     private service : AiServiceService,
@@ -33,6 +36,7 @@ screenRatio: number = 1;
     private userService: UserDetailsService,
     private router : Router,
     private nodeService: NodeServiceService,
+    private graphService: GraphServiceService,
     ) { }
 
   async ngOnInit(){
@@ -69,11 +73,9 @@ screenRatio: number = 1;
   {
     this.screenRatio = 0.8;
     this.getNodes(this.screenRatio);
-
   }
+  this.graphService.CreateGraph(this.nodes);
 }
-
-
 
 async getNodes(multiplier: number)
 {
@@ -89,11 +91,7 @@ async getNodes(multiplier: number)
         console.log(this.nodes);
     }
   });
-
-
 }
-
-
 
   covidQuestionnaire = this.fb.group({
     cough: false,
@@ -105,7 +103,6 @@ async getNodes(multiplier: number)
     gender: "male",
     });
 
-
   checkOnline(){
     if(this.user_email == "")
     {
@@ -113,7 +110,6 @@ async getNodes(multiplier: number)
     }
     else return true;
   }
-
 
   async onSubmit(){
     console.log(this.checkOnline());
@@ -216,9 +212,6 @@ async getNodes(multiplier: number)
           });
         }
 
-        
-
-
       this.router.navigate(['/'], {
         queryParams: {
 
@@ -226,8 +219,8 @@ async getNodes(multiplier: number)
         skipLocationChange: false
       });
     }
-
 }
+
 
 
 
