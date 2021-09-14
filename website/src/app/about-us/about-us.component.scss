@@ -123,6 +123,38 @@
     font-size: xx-large;
 }
 
+@media only screen and (max-width: 3000px) {
+    .dojo-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: 600%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .dojo-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: 600%;
+        color: #FFB302;
+        text-shadow: 0 0 10px #000000, 0 0 10px #000000;
+    }
+
+    .sensei{
+        height: 90vh;
+        width: 90vh;
+        opacity: 0.9;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+
+    h1{
+        font-size: x-large;
+    }
+}
+
 @media only screen and (max-width: 1980px) {
     .dojo-text1{
         position: absolute;

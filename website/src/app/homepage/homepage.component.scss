@@ -126,6 +126,36 @@ mat-divider {
 /*
      IMAGE AND TEXT POSITIONING
 */
+@media only screen and (max-width: 3000px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 1500px;
+            width: 1500px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+    }
+}
+
 @media only screen and (max-width: 1980px) {
     .main-image{
         z-index: 999; 
