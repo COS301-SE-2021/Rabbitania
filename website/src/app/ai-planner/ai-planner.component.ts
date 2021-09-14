@@ -143,10 +143,9 @@ export class AIPlannerComponent implements OnInit {
         console.log(data)
       }
     });
-    setTimeout(() => {
+    
       this.openDialog();
-      this.getNodes(this.screenRatio);
-  }, 500);
+ 
     
   }
 
@@ -206,7 +205,7 @@ export class AIPlannerComponent implements OnInit {
     this.dialog.open(AiPopupComponent);
     setTimeout(() => {
       this.getNodes(this.screenRatio);
-  }, 500);
+  }, 700);
   }
   
   
