@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core';
+import { Component, HostListener, OnInit, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { QuestionnaireRequest} from '../interfaces/covid_questionnaire_interface';
@@ -8,6 +8,10 @@ import { UserDetailsService } from '../services/user-details/user-details.servic
 import { SignOutComponent } from '../sign-out/sign-out.component';
 import { AuthService } from '../services/firebase/auth.service';
 import { Router } from '@angular/router';
+import { NodeServiceService } from '../services/ai-planner/node-service.service';
+import { first } from 'rxjs/operators';
+import { generate } from 'rxjs';
+import { MovableNodes } from '../services/ai-planner/movable-nodes';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -16,19 +20,79 @@ import { Router } from '@angular/router';
 })
 export class CovidQuestionnaireComponent implements OnInit{
 user_email = "";
+nodes: MovableNodes[] = [];
+screenHeight!: number;
+screenWidth!: number;
+screenRatio: number = 1;
+
 
   constructor(
     private fb: FormBuilder,
     private service : AiServiceService,
     private auth_service: AuthService,
     private userService: UserDetailsService,
-    private router : Router) {
-
-  }
+    private router : Router,
+    private nodeService: NodeServiceService,
+    ) { }
 
   async ngOnInit(){
+  this.screenHeight = window.innerHeight;
+  this.screenWidth = window.innerWidth;
+  //console.log(this.screenHeight, this.screenWidth);
+
+  if(this.screenWidth >= 1700)
+  {
+    this.screenRatio = 4
+    this.getNodes(this.screenRatio);
+  }
+  else if(this.screenWidth >= 1100)
+  {
+    this.screenRatio = 2.5;
+    this.getNodes(this.screenRatio);
+  }
+  else if(this.screenWidth >= 820)
+  {
+    this.screenRatio = 2;
+    this.getNodes(this.screenRatio);
+  }
+  else if(this.screenWidth >= 720)
+  {
+    this.screenRatio = 1.6;
+    this.getNodes(this.screenRatio);
+  }
+  else if(this.screenWidth >= 540)
+  {
+    this.screenRatio = 1.0;
+    this.getNodes(this.screenRatio);
+  }
+  else
+  {
+    this.screenRatio = 0.8;
+    this.getNodes(this.screenRatio);
+
+  }
+}
+
+
+
+async getNodes(multiplier: number)
+{
+
+  var result = await this.nodeService.Get();
+  result.subscribe(data => {
+    if(data){
+      this.nodes = [];
+        for(var i =0; i< data.length;i++)
+        {
+          this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos)*multiplier,Number(data[i].yPos)*multiplier,data[i].userEmail,data[i].active))
+        }
+        console.log(this.nodes);
+    }
+  });
+
 
 }
+
 
 
   covidQuestionnaire = this.fb.group({
@@ -49,6 +113,7 @@ user_email = "";
     }
     else return true;
   }
+
 
   async onSubmit(){
     console.log(this.checkOnline());
@@ -104,7 +169,7 @@ user_email = "";
         }
       }
       else{
-        this.user_email = this.userService.retrieveUserDetails().email;
+        this.user_email = await this.userService.retrieveUserDetails().email;
         const questionnaireObject = this.covidQuestionnaire.value;
 
         var _cough = "0";
@@ -149,10 +214,11 @@ user_email = "";
               console.log(data);
             }
           });
+        }
+
+        
 
 
-
-      }
       this.router.navigate(['/'], {
         queryParams: {
 

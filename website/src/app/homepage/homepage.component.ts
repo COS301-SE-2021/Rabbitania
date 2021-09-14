@@ -43,13 +43,13 @@ export class HomepageComponent implements OnInit {
       this.router = router;
   }
 
-  ngOnInit(){
+  async ngOnInit(){
     var display = this.userService.retrieveUserDetails().displayName;
     if(display == undefined || null){
       console.log("Logged Out");
     }else{
-      this.user_displayName = this.userService.retrieveUserDetails().displayName;
-      this.user_googleUrl = this.userService.retrieveUserDetails().googleImgUrl;
+      this.user_displayName = await this.userService.retrieveUserDetails().displayName;
+      this.user_googleUrl = await this.userService.retrieveUserDetails().googleImgUrl;
     }
     console.log(this.user_displayName);
     console.log(this.user_googleUrl);
