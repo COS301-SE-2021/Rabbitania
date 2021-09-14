@@ -48,7 +48,6 @@ namespace backend_api.Data.Booking
             var booking = await _bookings.Bookings.FirstOrDefaultAsync(x => x.BookingId == request.BookingId);
             try
             {
-                //_bookings.Bookings.Remove(booking);
                 _bookings.Entry(booking).State = EntityState.Deleted;
                 var deleted = await _bookings.SaveChangesAsync();
                 if (deleted >= 0)
@@ -72,7 +71,6 @@ namespace backend_api.Data.Booking
                 toUpdate.Office = request.Office;
                 toUpdate.TimeSlot = request.TimeSlot;
                 toUpdate.BookingDate = request.Date;
-                // _bookings.Entry(toUpdate).State = EntityState.Modified;
                 await _bookings.SaveChangesAsync();
                 return HttpStatusCode.Accepted;
             }
@@ -88,9 +86,7 @@ namespace backend_api.Data.Booking
             var bookingDate = request.BookingDate;
             var bookingOffice = request.Office;
             var timeSlot = request.TimeSlot;
-            //var user = _users.Users.Where(x => x.UserId == request.UserId);
-            
-            
+
             var bookingUserId = request.UserId;
             var booking = new Models.Booking.Booking(bookingDate, timeSlot, bookingOffice, bookingUserId);
             try

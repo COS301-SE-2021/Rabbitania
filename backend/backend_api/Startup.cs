@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using backend_api.Data.Booking;
 using backend_api.Data.Enumerations;
 using backend_api.Data.Forum;
+using backend_api.Data.Node;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
@@ -18,9 +20,12 @@ using backend_api.Services.Booking;
 using backend_api.Services.Chat;
 using backend_api.Services.Enumerations;
 using backend_api.Services.Forum;
+using backend_api.Services.Node;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -67,10 +72,17 @@ namespace backend_api
                     builder =>
                     {
                         builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyHeader();
                     });
             });
             services.AddTransient<IAuthService, AuthService>();
-            
+
+            services.AddHangfire(options =>
+            {
+                options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
+                
+            });
 
             //SignalR
             services.AddSignalR(options =>
@@ -87,8 +99,6 @@ namespace backend_api
             */
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-            
-            
             //----------------------------------------------------------------------------------------------------------------------
             // Enumeration DB Context
             services.AddDbContext<EnumContext>(options =>
@@ -178,6 +188,18 @@ namespace backend_api
             services.AddScoped<IForumRepository, ForumRepository>();
             services.AddScoped<IForumService, ForumService>();
             //----------------------------------------------------------------------------------------------------------------------
+            //Node DB Context
+            
+            services.AddDbContext<NodeContext>(options =>
+                options.UseNpgsql(
+                    Environment.GetEnvironmentVariable("MAIN_CONN_STRING") ?? string.Empty,
+                    b => b.MigrationsAssembly(typeof(NodeContext).Assembly.FullName)));
+
+            services.AddScoped<INodeContext>(provider => provider.GetService<NodeContext>());
+            
+            services.AddScoped<INodeRepository, NodeRepository>();
+            services.AddScoped<INodeService, NodeService>();
+            //----------------------------------------------------------------------------------------------------------------------
             //Chat service
             
             services.AddScoped<IChatService, ChatService>();
@@ -203,6 +225,11 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var options = new BackgroundJobServerOptions()
+            {
+                WorkerCount = 1
+            };
+            
             
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
@@ -217,11 +244,16 @@ namespace backend_api
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer(options);
+            
             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+           
         }
     }
 }

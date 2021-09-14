@@ -14,5 +14,8 @@ namespace backend_api.Data.NoticeBoard
         Task<DeleteNoticeBoardThreadResponse> DeleteNoticeBoardThread(DeleteNoticeBoardThreadRequest request);
 
         Task<EditNoticeBoardThreadResponse> EditNoticeBoardThread(EditNoticeBoardThreadRequest request);
+
+        Task<IncreaseEmojiResponse> IncreaseEmoji(IncreaseEmojiRequest request);
+        Task<DecreaseEmojiResponse> DecreaseEmoji(DecreaseEmojiRequest request);
     }
 }

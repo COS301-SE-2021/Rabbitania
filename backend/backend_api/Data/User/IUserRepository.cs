@@ -33,5 +33,7 @@ namespace backend_api.Data.User
 
         ViewProfileResponse ViewProfileAsp(ViewProfileRequest request);
 
+        Task<MakeUserAdminResponse> MakeUserAdmin(MakeUserAdminRequest request);
+
     }
 }

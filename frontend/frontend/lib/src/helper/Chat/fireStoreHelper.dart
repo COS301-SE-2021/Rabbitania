@@ -1,14 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Chat/ChatFirestoreUserModel.dart';
 import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
+import 'package:frontend/src/models/Chat/GroupChatMessageModel.dart';
 import 'package:rxdart/streams.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class FireStoreHelper {
-//TODO: get user id from db and create new message and user instance in firestore
-
   getUsersCollectionFromFireStore() {
     CollectionReference users = firestore.collection('users');
 
@@ -43,6 +44,14 @@ class FireStoreHelper {
         .snapshots();
   }
 
+  //get all group chats applicable to the current logged in user
+  getGroupChats(int myId) {
+    return firestore
+        .collection('groupChat')
+        .where('participants', arrayContains: myId)
+        .snapshots();
+  }
+
   Future sendMessage(int idUser, int myId, String message) async {
     //navigate to my messages
     final refMessagesMe = firestore.collection('chats/$myId/messages');
@@ -66,11 +75,70 @@ class FireStoreHelper {
     //final refUsers = firestore.collection('users/$idUser').doc().update({});
   }
 
+  //used to create new message in desired groupChat room
+  Future sendGroupChatMessage(String roomName, int myId, String message) async {
+    final refGroupMessages =
+        firestore.collection('groupChat/$roomName/messages');
+
+    final newGroupChatMessage = GroupChatMessageModel(
+      uid: myId,
+      message: message,
+      dateCreated: DateTime.now(),
+    );
+
+    await refGroupMessages.add(
+      newGroupChatMessage.toJson(),
+    );
+  }
+
   //function to get user object using user idUser
-  Stream<QuerySnapshot<Map<String, dynamic>>> getUserById(idUser) {
+  getUserById(idUser) {
     return firestore
         .collection('users')
         .where('uid', isEqualTo: idUser)
         .snapshots();
+  }
+
+  //function for getting all chats based off room name
+  getGroupChatByRoomName(roomName) {
+    return firestore
+        .collection('groupChat/$roomName/messages')
+        .orderBy('dateCreated', descending: true)
+        .snapshots();
+  }
+
+  getGroupRoomByRoomName(roomName) {
+    return firestore
+        .collection('groupChat')
+        .where('roomName', isEqualTo: roomName)
+        .snapshots();
+  }
+
+  //function for creating new groupchat room
+  createGroupChatRoom(String roomName, users, imageBae64) {
+    final refGroupRooms = firestore
+        .collection('groupChat')
+        .doc('$roomName')
+        .set({
+      'participants': users,
+      'roomName': roomName,
+      'avatar': imageBae64
+    });
+  }
+
+  deleteGroupChatByRoomName(String roomName) async {
+    firestore.collection('groupChat').doc('$roomName').delete();
+  }
+
+  removeUserFromGroup(roomName, uid) {
+    firestore.collection('groupChat').doc('$roomName').update({
+      'participants': FieldValue.arrayRemove([uid])
+    });
+  }
+
+  addUserToGroup(roomName, uid) {
+    firestore.collection('groupChat').doc('$roomName').update({
+      'participants': FieldValue.arrayUnion([uid])
+    });
   }
 }

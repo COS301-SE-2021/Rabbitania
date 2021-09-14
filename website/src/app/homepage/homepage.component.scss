@@ -1,0 +1,269 @@
+$greyColour: rgba(33, 33, 33, 1);
+$greenColour: rgba(171, 255, 79, 1);
+$whiteColour: rgba(238, 238, 238, 1);
+
+body {
+    background-color: $greyColour;
+    background-image: url(../../assets/png/background-rocks.png);
+}
+
+mat-toolbar {
+    background: $greyColour;
+    color: $greenColour;
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+}
+
+mat-sidenav {
+    margin: 20px;
+    width: 300px;
+    height: 80vh;
+    border-right: none;
+    background: $greyColour;
+    color: $greenColour;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+    nav-divider{
+        color: $greyColour;
+    }
+}
+
+.logo {
+    padding-right: 10px;
+    display: inline-table;
+    text-decoration: none;
+}
+
+.content {
+    height: 90vh;
+    margin: 16px;
+    margin-left: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/png/background-rocks.png);
+}
+
+.log{
+    border: solid 2px $greenColour;
+    border-radius: 10px;
+}
+
+.profile{
+    .profile-text{
+        display: inline-block;
+        font-size: medium;
+    }
+    .profile-pic{
+        width: 35px;
+        height: 35px;
+        border: 2px solid $greyColour;
+        border-radius: 50%;
+    }
+}
+
+mat-sidenav-container {
+    height: 100%;
+}
+
+.menu-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+
+    mat-icon {
+        margin-right: 8px;
+    }
+}
+
+.menu{
+    background-color: $greyColour;
+}
+
+.avatar {
+    margin-top: 16px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid $greenColour;
+
+}
+
+.name {
+    margin-top: 8px;
+    font-weight: normal;
+}
+
+.designation {
+    margin-top: 2px;
+    font-size: 0.7rem;
+    color: lightgrey;
+}
+
+mat-divider {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: $greenColour;
+}
+
+.card-container {
+    color: $greenColour;
+    font-size: xx-large;
+    justify-content: space-between;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+/*
+     IMAGE AND TEXT POSITIONING
+*/
+
+.main-image{
+    z-index: 999;
+
+    .landing-rocket {
+        height: 750px;
+        width: 750px;
+        -webkit-animation: mover 3s infinite  alternate;
+        animation: mover 3s infinite  alternate;
+    }
+
+    .welcome-text1{
+        position: absolute;
+        top: 28%;
+        left: 18%;
+        font-size: x-large;
+        color: $greenColour;
+    }
+    
+    .welcome-text2{
+        position: absolute;
+        top: 28%;
+        right: 18%;
+        font-size: x-large;
+        color: $greenColour;
+    }
+}
+
+.background-objects{
+    z-index:-1000; 
+
+    .bolder1{
+        position: absolute;
+        z-index: 0;
+        height: 120px;
+        width: 120px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 8%;
+        top: 55%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.8s infinite  alternate;
+    }
+    
+    .tree-island1{
+        position: absolute;
+        z-index: 0;
+        height: 150px;
+        width: 150px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 10%;
+        top: 25%;
+        -webkit-animation: mover 1.6s infinite  alternate;
+        animation: mover 1.6s infinite  alternate;
+    } 
+
+    .tree-island2{
+        position: absolute;
+        z-index: 0;
+        height: 100px;
+        width: 100px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 30%;
+        top: 10%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+
+    .bolder2{
+        position: absolute;
+        z-index: 0;
+        height: 80px;
+        width: 80px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 4%;
+        top: 6%;
+        -webkit-animation: mover 1.6s infinite  alternate;
+        animation: mover 1.6s infinite  alternate;
+    }
+
+    .bolder3{
+        position: absolute;
+        z-index: 0;
+        height: 110px;
+        width: 110px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 20%;
+        top: 65%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+
+    .small-bolder{
+        position: absolute;
+        z-index: 0;
+        height: 140px;
+        width: 140px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 25%;
+        top: 5%;
+        -webkit-animation: mover 1.7s infinite  alternate;
+        animation: mover 1.7s infinite  alternate;
+    }
+
+    .small-bolder1{
+        position: absolute;
+        z-index: 0;
+        height: 180px;
+        width: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 10%;
+        top: 25%;
+        -webkit-animation: mover 1.9s infinite  alternate;
+        animation: mover 1.9s infinite  alternate;
+    }
+}
+/*
+     KEY FRAME MOVEMENTS 
+*/
+@-webkit-keyframes mover {
+    0% { 
+        transform: translateY(0); 
+    }
+    100% { 
+        transform: translateY(-20px); 
+    }
+}
+@keyframes mover {
+    0% { 
+        transform: translateY(0); 
+    }
+    100% { 
+        transform: translateY(-20px); 
+    }
+}
+
+

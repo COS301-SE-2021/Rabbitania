@@ -1,0 +1,96 @@
+.parent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgba(33,33,33,1);
+  width: 100%;
+
+}
+
+.mat-card-header{
+  color: rgba(179,255,79,1);
+  padding-top: 10%;
+  size: 20px;
+}
+
+.mat-card-header-text{
+  font-size: 45px;
+}
+
+.mat-card-title{
+  text-align: center;
+}
+
+.mat-card-actions{
+  text-align: center;
+  font-size: 35px;
+  margin-top: 2%;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.top-padding{
+  padding-top: 5%;
+}
+
+.mat-raised-button{
+  font-size: 35px;
+  padding: 10px;
+}
+
+.margin-left mat-radio-button:not(:first-child){
+  margin-left:10px;
+}
+
+.row{
+  padding-top: 6%;
+text-align: center;
+font-size: 35px;
+border-color: aliceblue;
+border-width: 10px;
+}
+
+.form-container{
+  border-style: solid;
+  border-color: rgba(179,255,79,1);
+  border-width: 3px;
+  background-color: rgb(56, 56, 56);
+  width: 100%;
+}
+
+.mat-radio-button {
+  margin-left: 15px;
+  color: rgba(179,255,79,1);
+}
+
+.mat-checkbox{
+  color: rgba(179,255,79,1);
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color:rgba(179,255,79,1);
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgba(179,255,79,1);
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgba(179,255,79,1);   /*inner circle color change*/
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color:  rgba(179,255,79,1)!important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color:  rgba(179,255,79,1);
+}
+
+::ng-deep .mat-checkbox-label.mat-accent{
+  color: white;
+}

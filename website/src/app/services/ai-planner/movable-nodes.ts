@@ -7,6 +7,8 @@ export class MovableNodes {
     private _deskNumber: number;
     private _savedX: number;
     private _savedY: number;
+     //private _userEmail: string;
+     //private _active: boolean;
   
     constructor(deskNumber: number, x: number, y: number) 
     {
@@ -80,7 +82,38 @@ export class MovableNodes {
       // var leftOffset = boarder!.offsetLeft;
       // var toptOffset = boarder!.offsetTop;
       //this.position = `> Position X: ${event.pointerPosition.x-leftOffset-30} - Y: ${event.pointerPosition.y-toptOffset-30}`;
-      this.position = `> Position X: ${event.source.getFreeDragPosition().x} - Y: ${event.source.getFreeDragPosition().y}`;
+      var pixelCorrection = 1.5999;
+      var xPosition =event.source.getFreeDragPosition().x + pixelCorrection;
+      var yPosition =event.source.getFreeDragPosition().y + pixelCorrection;
+      var screenHeight = window.innerHeight;
+      var screenWidth = window.innerWidth;
+
+      //this.position = `> Position X: ${event.source.getFreeDragPosition().x+1.59} - Y: ${event.source.getFreeDragPosition().y+1.59}`;
+
+    if(screenWidth >= 1700)
+    {
+      this.position = 'Position X: '+xPosition/4+'cm - Y: '+yPosition/4+'cm';
+    }
+    else if(screenWidth >= 1100)
+    {
+      this.position = 'Position X: '+xPosition/2.5+'cm - Y: '+yPosition/2.5+'cm';
+    }
+    else if(screenWidth >= 820)
+    {
+      this.position = 'Position X: '+xPosition/2+'cm - Y: '+yPosition/2+'cm';
+    }
+    else if(screenWidth >= 720)
+    {
+      this.position = 'Position X: '+xPosition/1.6+'cm - Y: '+yPosition/1.6+'cm';
+    }
+    else if(screenWidth >= 540)
+    {
+      this.position = 'Position X: '+xPosition/1.0+'cm - Y: '+yPosition/1.0+'cm';
+    }
+    else
+    { 
+      this.position = 'Position X: '+xPosition/0.8+'cm - Y: '+yPosition/0.8+'cm';
+    }
   
     }
   

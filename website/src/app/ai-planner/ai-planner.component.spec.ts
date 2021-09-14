@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AIPlannerComponent } from './ai-planner.component';
 
-describe('AIPlannerComponent', () => {
+describe('AiPlannerComponent', () => {
   let component: AIPlannerComponent;
   let fixture: ComponentFixture<AIPlannerComponent>;
 
