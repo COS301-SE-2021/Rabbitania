@@ -51,7 +51,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
         {
@@ -107,7 +107,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="email"></param>
         /// <returns>integer</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetID")]
         public async Task<int> GetUserId(string email)
         {
@@ -123,7 +123,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="email"></param>
         /// <returns>integer</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetAdminStatus")]
         public async Task<bool> GetUserAdminStatus(string email)
         {
