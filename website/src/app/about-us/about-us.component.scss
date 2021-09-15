@@ -43,7 +43,6 @@
 }
 
 .information{
-    font-style: italic;
     font-size: large;
 }
 
@@ -137,13 +136,16 @@
     z-index: 500;
 }
 
-
 .about-us-header-text{
     color: $greenColour;
     font-size: xx-large;
 }
 
-i{
+li{
+    list-style-type: "🌱";
+}
+
+.icon-links{
     font-size: 150% !important;
 }
 
