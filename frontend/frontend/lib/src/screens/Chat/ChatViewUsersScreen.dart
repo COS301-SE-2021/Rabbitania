@@ -7,20 +7,12 @@ import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/screens/Chat/videoChannelScreen.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
-
 import 'package:frontend/src/widgets/Chat/groupChatCard.dart';
-
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
-
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-
 import 'groupChatCreateScreen.dart';
 
 class ChatViewUsersScreen extends StatefulWidget {
-  //id of currently logged in user
-  //TODO:need to set up global accessor to get this value
-  //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
-
   @override
   State<StatefulWidget> createState() => _chatViewUserScreenState();
 }
@@ -56,9 +48,32 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           title: Center(
-            child: Text(
-              'Users',
-              style: TextStyle(color: utilModel.greenColor, fontSize: 35),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 9,
+                  child: Center(
+                    child: Text(
+                      'Chats',
+                      style:
+                          TextStyle(color: utilModel.greenColor, fontSize: 35),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                      icon: Icon(FontAwesomeIcons.video,
+                          color: utilModel.greenColor),
+                      onPressed: () {
+                        UtilModel.route(
+                          () => ChannelScreen(),
+                          context,
+                        );
+                      }),
+                ),
+              ],
             ),
           ),
         ),

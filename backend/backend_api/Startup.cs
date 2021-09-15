@@ -11,7 +11,6 @@ using backend_api.Data.Node;
 using backend_api.Data.NoticeBoard;
 using backend_api.Data.Notification;
 using backend_api.Data.User;
-using backend_api.Hubs;
 using backend_api.Models.Notification;
 using backend_api.Models.Notification.Requests;
 using backend_api.Models.User;
@@ -26,7 +25,9 @@ using backend_api.Services.Notification;
 using backend_api.Services.User;
 using Hangfire;
 using Hangfire.PostgreSql;
+using FirebaseAdmin;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,6 +41,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Linq;
 using Npgsql;
@@ -65,6 +67,7 @@ namespace backend_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //FirebaseApp.Create();
             
             services.AddCors(options =>
             {
@@ -77,19 +80,14 @@ namespace backend_api
                     });
             });
             services.AddTransient<IAuthService, AuthService>();
+            
 
             services.AddHangfire(options =>
             {
                 options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
                 
             });
-
-            //SignalR
-            services.AddSignalR(options =>
-            {
-                options.EnableDetailedErrors = true;
-            });            
-            // services.AddResponseCaching();
+            //services.AddResponseCaching();
             services.AddControllers();
             /*
             Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.
@@ -217,7 +215,21 @@ namespace backend_api
             #endregion
             
             services.ConfigJwt(Configuration);
-            services.AddAuthentication();
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = "https://securetoken.google.com/" +
+                                    Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT").ToString();
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "https://securetoken.google.com/" +
+                                  Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT").ToString(),
+                    ValidateAudience = true,
+                    ValidAudience = Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT").ToString(),
+                    ValidateLifetime = true
+                };
+            });
             services.AddAuthorization();
 
         }
@@ -230,7 +242,6 @@ namespace backend_api
                 WorkerCount = 1
             };
             
-            
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 #region Swagger
@@ -239,7 +250,7 @@ namespace backend_api
             }
             #endregion
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
@@ -248,12 +259,10 @@ namespace backend_api
             app.UseHangfireDashboard();
             app.UseHangfireServer(options);
             
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-           
         }
     }
 }

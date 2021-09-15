@@ -21,6 +21,7 @@ using backend_api.Services.Auth;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -41,7 +42,6 @@ namespace backend_api.Controllers.Auth
             this._userService = userService;
             this._notificationService = notificationService;
         }
-
         /// <summary>
         ///     API endpoint for logging in with Google credentials
         ///     Checks if the email is of the correct domain and if it exists in the system
@@ -51,7 +51,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="request"></param>
         /// <returns>Http response code</returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("GoogleLogin")]
         public async Task<ActionResult> GoogleResponse(GoogleSignInRequest request)
         {
@@ -88,7 +88,6 @@ namespace backend_api.Controllers.Auth
                         await _notificationService.SendEmailNotification(emailReq);
                         
                         return Created("", "User has been created.");
-                        //throw new InvalidEmailException("Email does not exist in database");
                     }
                 }
                 else
@@ -100,8 +99,6 @@ namespace backend_api.Controllers.Auth
             {
                 throw e;
             }
-
-            // return response.json().ToString();
         }
         
         /// <summary>
@@ -110,7 +107,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="email"></param>
         /// <returns>integer</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetID")]
         public async Task<int> GetUserId(string email)
         {
@@ -126,7 +123,7 @@ namespace backend_api.Controllers.Auth
         /// </summary>
         /// <param name="email"></param>
         /// <returns>integer</returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetAdminStatus")]
         public async Task<bool> GetUserAdminStatus(string email)
         {
@@ -135,25 +132,5 @@ namespace backend_api.Controllers.Auth
             var adminStatus = resp.IsAdmin;
             return adminStatus;
         }
-        
-        
-        /// <summary>
-        ///     Api endpoint intended to authorize a user on valid login.
-        /// </summary>
-        /// <param name="credentials"></param>
-        /// <returns>A valid JWT token that will authorize the user to use our endpoints</returns>
-        [HttpPost]
-        [Route("Auth")]
-        public async Task<IActionResult> Auth([FromBody] Credentials credentials)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
-            if (!await _service.Validate(credentials))
-            {
-                return Unauthorized();
-            }
-            return Ok(new {token = await _service.createJwt(credentials)});
-        }
-    }
+    } 
 }

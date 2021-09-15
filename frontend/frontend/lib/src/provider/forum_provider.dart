@@ -26,7 +26,7 @@ class ForumProvider {
     URLHelper urlBase = new URLHelper();
     final baseURL = await urlBase.getBaseURL();
     final baseAltURL = await urlBase.getAltBaseURL();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     client.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
     String url = baseAltURL + '/api/Forum/RetrieveForums';
@@ -82,7 +82,7 @@ class ForumProvider {
       URLHelper url = new URLHelper();
 
       final baseURL = await url.getBaseURL();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.delete(
         Uri.parse(baseURL + '/api/Forum/DeleteForum'),
         headers: <String, String>{
@@ -96,25 +96,6 @@ class ForumProvider {
 
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse('https://10.0.2.2:5001/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return deleteForum(cid);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Failed to delete, error code" + response.statusCode.toString());
       }
@@ -134,7 +115,7 @@ class ForumProvider {
       String Date = datetime.replaceAll(" ", "T");
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.post(
         Uri.parse(baseURL + '/api/Forum/CreateForum'),
         headers: <String, String>{
@@ -152,25 +133,6 @@ class ForumProvider {
       );
       if (response.statusCode == 201 || response.statusCode == 200) {
         return ("Successfully uploaded new Form");
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return addNewForum(title, userID);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Failed to create new thread error" +
             response.statusCode.toString());
@@ -190,7 +152,7 @@ class ForumProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.put(
         Uri.parse(baseURL + '/api/Forum/EditForum'),
         headers: <String, String>{
@@ -204,25 +166,6 @@ class ForumProvider {
           response.statusCode == 200 ||
           response.statusCode == 100) {
         return ("Successfully edited forum");
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return editNewForum(title);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Failed to create new thread error" +
             response.statusCode.toString());
@@ -253,7 +196,7 @@ class ForumThreadProvider {
         '/api/Forum/RetrieveForumThreads?ForumID=' +
         forumIdentifier.toString();
     SecurityHelper securityHelper = new SecurityHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     HttpClientRequest request = await client.getUrl(Uri.parse(url));
     request.headers.set('content-type', 'application/json');
     request.headers.set('Authorization', 'Bearer $token');
@@ -261,26 +204,7 @@ class ForumThreadProvider {
     HttpClientResponse response1 = await request.close();
     String reply = await response1.transform(utf8.decoder).join();
     //print(jsonDecode(reply));
-    if (response1.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': fireBaseEmail,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return fetchForumThreads(forumIdentifier);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
-    }
+
     List? tList = ForumThreads.fromJson(jsonDecode(reply)).forumThreadList;
 
     List<ForumThread> threadObj = [];
@@ -306,7 +230,7 @@ class ForumThreadProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.delete(
         Uri.parse(baseURL + '/api/Forum/DeleteForumThread'),
         headers: <String, String>{
@@ -320,25 +244,6 @@ class ForumThreadProvider {
 
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return deleteForumThread(currentThreadID);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Falied to delete, error code" + response.statusCode.toString());
       }
@@ -364,7 +269,7 @@ class ForumThreadProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       String datetime = DateTime.now().toString();
       String Date = datetime.replaceAll(" ", "T");
       final response = await http.post(
@@ -386,25 +291,6 @@ class ForumThreadProvider {
       if (response.statusCode == 201 || response.statusCode == 200) {
         ForumCreateImageFile = null;
         return ("Successfully uploaded new Forum Thread");
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return addNewForumThread(currentId, title, body, userId);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         ForumCreateImageFile = null;
         throw ("Failed to create new thread error" +
@@ -433,7 +319,7 @@ class ForumThreadProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       String datetime = DateTime.now().toString();
       String Date = datetime.replaceAll(" ", "T");
 
@@ -463,25 +349,6 @@ class ForumThreadProvider {
           //dont do anytthing jsut return success
           return ("Successfully uploaded new Forum Thread");
         }
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return addNewForumThread(currentId, title, body, userId);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         ForumCreateImageFile = null;
         throw ("Failed to create new thread error" +
@@ -506,7 +373,7 @@ class ForumThreadProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.put(
         Uri.parse(baseURL + '/api/Forum/EditForumThread'),
         headers: <String, String>{
@@ -524,25 +391,6 @@ class ForumThreadProvider {
           response.statusCode == 200 ||
           response.statusCode == 100) {
         return ("Successfully Edited Forum Thread");
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return editForumThread(title, body);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Failed Edit Forum Thread" + response.statusCode.toString());
       }
@@ -571,7 +419,7 @@ class ForumThreadCommentProvider {
         ThreadIdentifier.toString();
     SecurityHelper securityHelper = new SecurityHelper();
     UserHelper loggedUser = new UserHelper();
-    final token = await securityHelper.getToken();
+    final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     HttpClientRequest request = await client.getUrl(Uri.parse(url));
     request.headers.set('content-type', 'application/json');
     request.headers.set('Authorization', 'Bearer $token');
@@ -579,26 +427,6 @@ class ForumThreadCommentProvider {
     String reply = await response1.transform(utf8.decoder).join();
     print(jsonDecode(reply));
 
-    if (response1.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': fireBaseEmail,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return fetchThreadComments(ThreadIdentifier);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
-    }
     List? cList =
         ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
 
@@ -626,7 +454,7 @@ class ForumThreadCommentProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.delete(
         Uri.parse(baseURL + '/api/Forum/DeleteThreadComment'),
         headers: <String, String>{
@@ -642,25 +470,6 @@ class ForumThreadCommentProvider {
       //print("CODE ============" + response.statusCode.toString());
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return deleteComment(currentCommentId);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Failed to delete, error code" + response.statusCode.toString());
       }
@@ -678,7 +487,7 @@ class ForumThreadCommentProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.put(
         Uri.parse(baseURL + '/api/Forum/EditThreadComment'),
         headers: <String, String>{
@@ -697,25 +506,6 @@ class ForumThreadCommentProvider {
           response.statusCode == 200 ||
           response.statusCode == 100) {
         return ("Successfully Edited Comment");
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return editForumThreadComment(body);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         throw ("Failed To Edit Comment" + response.statusCode.toString());
       }
@@ -733,7 +523,7 @@ class ForumThreadCommentProvider {
       }
       SecurityHelper securityHelper = new SecurityHelper();
       UserHelper loggedUser = new UserHelper();
-      final token = await securityHelper.getToken();
+      final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       String datetime = DateTime.now().toString();
       String Date = datetime.replaceAll(" ", "T");
       final response = await http.post(
@@ -757,25 +547,6 @@ class ForumThreadCommentProvider {
           response.statusCode == 200 ||
           response.statusCode == 100) {
         return ("Success");
-      } else if (response.statusCode == 401) {
-        final authReponse = await http.post(
-          Uri.parse(baseURL + '/api/Auth/Auth'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8'
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': fireBaseEmail,
-            'name': loggedUser.getUserName()
-          }),
-        );
-        if (authReponse.statusCode == 200) {
-          Map<String, dynamic> obj = jsonDecode(authReponse.body);
-          var token = '${obj['token']}';
-          securityHelper.setToken(token);
-          return addNewComment(comment, userId);
-        } else {
-          throw new Exception("Error with Authentication");
-        }
       } else {
         //print("Failed to Send Message" + response.statusCode.toString());
         throw ("Failed to Send Message" + response.statusCode.toString());
