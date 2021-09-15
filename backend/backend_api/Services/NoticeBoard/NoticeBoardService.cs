@@ -129,7 +129,7 @@ namespace backend_api.Services.NoticeBoard
                 throw new InvalidNoticeBoardRequestException("Invalid IncreaseEmoji Request Object");
             }
 
-            if (request.NoticeboardId == 0)
+            if (request.NoticeboardId <= 0)
             {
                 throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
             }

@@ -277,5 +277,54 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             await Assert.ThrowsAsync<InvalidNoticeBoardRequestException>(async () =>
                 await _service.DecreaseEmoji(request));
         }
+        [Fact]
+        public async void IncreaseEmoji_InvalidRequest_IDNegative()
+        {
+            //Arrange
+            var request = new IncreaseEmojiRequest("emoji",-1);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidNoticeBoardRequestException>(async () =>
+                await _service.IncreaseEmoji(request));
+        }
+        [Fact]
+        public async void IncreaseEmoji_InvalidRequest_IDZero()
+        {
+            //Arrange
+            var request = new IncreaseEmojiRequest("emoji",0);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidNoticeBoardRequestException>(async () =>
+                await _service.IncreaseEmoji(request));
+        }
+        [Fact]
+        public async void IncreaseEmoji_InvalidRequest_Null()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidNoticeBoardRequestException>(async () =>
+                await _service.IncreaseEmoji(null));
+        }
+        [Fact]
+        public async void IncreaseEmoji_ValidRequest()
+        {
+            //Arrange
+            var request = new IncreaseEmojiRequest("IconData(U+F0230)",1);
+            //Act
+            var resp = await _service.IncreaseEmoji(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, resp.Response);
+        }
+        [Fact]
+        public async void DecreaseEmoji_ValidRequest()
+        {
+            //Arrange
+            var request = new DecreaseEmojiRequest("IconData(U+F0230)",1);
+            //Act
+            var resp = await _service.DecreaseEmoji(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, resp.Response);
+        }
     }
 }
