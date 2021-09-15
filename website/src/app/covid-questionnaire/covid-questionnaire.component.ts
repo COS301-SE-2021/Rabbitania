@@ -74,7 +74,6 @@ screenRatio: number = 1;
     this.screenRatio = 0.8;
     this.getNodes(this.screenRatio);
   }
-  this.graphService.CreateGraph(this.nodes);
 }
 
 async getNodes(multiplier: number)
@@ -154,6 +153,9 @@ async getNodes(multiplier: number)
           result.subscribe(async data => {
             if(data){
               console.log(data);
+              if(data > 0.70){
+                this.graphService.CreateGraph(this.nodes, this.user_email);
+              }
             }
           });
           var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
@@ -205,11 +207,15 @@ async getNodes(multiplier: number)
               console.log(data);
             }
           });
+
+
           var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
             if(data){
               console.log(data);
             }
           });
+
+
         }
 
       this.router.navigate(['/'], {

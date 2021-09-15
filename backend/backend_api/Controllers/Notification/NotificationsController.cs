@@ -48,7 +48,7 @@ namespace backend_api.Controllers.Notification
         /// </summary>
         /// <param name="request"></param>
         /// <returns> HTTP Status response </returns>
-        [HttpPost, Authorize]
+        [HttpPost]
         [Route("SendEmailNotification")]
         public async Task<ActionResult> SendEmailNotification([FromBody] SendEmailNotificationRequest request)
         {
