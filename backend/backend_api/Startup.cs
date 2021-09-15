@@ -253,8 +253,8 @@ namespace backend_api
             
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
-            /*app.UseAuthentication();
-            app.UseAuthorization();*/
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseHangfireDashboard();
             app.UseHangfireServer(options);

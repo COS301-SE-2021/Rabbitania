@@ -25,7 +25,7 @@ namespace backend_api.TFIDF
         private string _newTitle;
         private string _newBody;
 
-        private const string Url = "http://127.0.0.1:5002/TFIDF";
+        private const string Url = "https://rabbitania-ai.herokuapp.com/api/tfidf";
         private string _urlParameters = "";
         
         
