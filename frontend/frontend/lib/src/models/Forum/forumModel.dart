@@ -5,16 +5,13 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:frontend/src/helper/Forum/forumHelper.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
-import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/Forum/forumLatestThread.dart';
 import '../util_model.dart';
 
-//GLOBAL VARIABLES
 var currentForumID = -1;
 var currentForumName = "ForumName";
 var currentThreadID = -1;
@@ -23,11 +20,9 @@ var currentThreadBody = "Body";
 var currentCommentId = -1;
 var currentCommentBody = "Body";
 var currentThreadImage = "";
-//
 
-////////////////////////////////////////////////////////////////
-/// Forum Getting Forums
-///////////////////////////////////////////////////////////////
+// Forum Getting Forums
+
 class ForumObjs {
   final List<dynamic> forumThreadList;
 
@@ -65,9 +60,8 @@ class ForumObj {
   }
 }
 
-////////////////////////////////////////////////////////////////
-/// Forum Getting Forum Threads
-///////////////////////////////////////////////////////////////
+// Forum Getting Forum Threads
+//model for modeling and creating dorum threads
 class ForumThreads {
   final List<dynamic>? forumThreadList;
 
@@ -183,11 +177,9 @@ class ThreadComments {
   }
 }
 
-//////////////////////////////////////
-/// CommentBox
-/////////////////////////////////////
-// ignore: must_be_immutable
-class RRCommentBox extends StatelessWidget {
+// CommentBox
+
+class prCommentBox extends StatelessWidget {
   Widget? child;
   dynamic formKey;
   dynamic sendButtonMethod;
@@ -201,7 +193,7 @@ class RRCommentBox extends StatelessWidget {
   bool withBorder;
   Widget? header;
   FocusNode? focusNode;
-  RRCommentBox(
+  prCommentBox(
       {this.child,
       this.header,
       this.sendButtonMethod,
@@ -216,6 +208,7 @@ class RRCommentBox extends StatelessWidget {
       this.backgroundColor,
       this.textColor});
 
+  //method to create and return a form for commenting on forum pages
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -270,9 +263,7 @@ class RRCommentBox extends StatelessWidget {
   }
 }
 
-////////////////////////////////////////////////////////////////////////
 /// ForumHome
-////////////////////////////////////////////////////////////////////////
 class forumCard extends StatelessWidget {
   final int forumId;
   final String forumTitle;
@@ -284,7 +275,7 @@ class forumCard extends StatelessWidget {
       required this.forumTitle,
       required this.createdDate,
       required this.userId});
-
+  //method to build an dreturn a forum card widget
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -343,10 +334,7 @@ class forumCard extends StatelessWidget {
   }
 }
 
-////////////////////////////////////////////////////////////////////////
-/// ForumThreadsCards
-////////////////////////////////////////////////////////////////////////
-
+// ForumThreadsCards
 class forumThreadCard extends StatelessWidget {
   final int forumThreadId;
   final String forumThreadTitle;
@@ -363,6 +351,7 @@ class forumThreadCard extends StatelessWidget {
       required this.imageURL,
       required this.userId});
 
+  //method to create and return a forum thread card widget
   @override
   Widget build(BuildContext context) {
     final ForumThreadProvider forumThreadProvider = new ForumThreadProvider();
@@ -463,7 +452,6 @@ class forumThreadCard extends StatelessWidget {
                       ),
                       tooltip: 'Cancel',
                       onPressed: () {
-                        //final deleteResponse = await deleteThread(this.id);
                         Navigator.pop(context);
                       },
                     ),
@@ -481,8 +469,6 @@ class forumThreadCard extends StatelessWidget {
           icon: Icons.edit,
           onTap: () {
             currentThreadID = this.forumThreadId;
-
-            //currentCommentBody = this.commentBody;
             UtilModel.route(() => ForumEditThreadScreen(), context);
           },
         ),
@@ -491,10 +477,7 @@ class forumThreadCard extends StatelessWidget {
   }
 }
 
-/////////////////////////////////
-////EditForumCard
-/////////////////////////////////
-
+///EditForumCard
 class EditForumCard extends StatelessWidget {
   final int forumId;
   final String forumTitle;
@@ -506,7 +489,7 @@ class EditForumCard extends StatelessWidget {
       required this.forumTitle,
       required this.createdDate,
       required this.userId});
-
+  //method for creating and returning forum card editable widget
   @override
   Widget build(BuildContext context) {
     forumEditTitleController.text = forumTitle;
@@ -539,10 +522,7 @@ class EditForumCard extends StatelessWidget {
   }
 }
 
-/////////////////////////////////
-////EditForumThreadCard
-/////////////////////////////////
-
+//EditForumThreadCard
 class EditForumThreadCard extends StatelessWidget {
   final int forumThreadId;
   final String forumThreadTitle;
@@ -558,7 +538,7 @@ class EditForumThreadCard extends StatelessWidget {
       required this.createdDate,
       required this.imageURL,
       required this.userId});
-
+  //method to create and return forum thread editable widget
   @override
   Widget build(BuildContext context) {
     forumThreadEditTitleController.text = forumThreadTitle;
@@ -633,10 +613,7 @@ class EditForumThreadCard extends StatelessWidget {
   }
 }
 
-/////////////////////////////////
-////EditForumThreadCommentCard
-/////////////////////////////////
-
+//EditForumThreadCommentCard
 class EditForumThreadCommentCard extends StatelessWidget {
   final int threadCommentId;
   final String commentBody;
@@ -661,7 +638,7 @@ class EditForumThreadCommentCard extends StatelessWidget {
     required this.forumThreadId,
     required this.userId,
   });
-
+  //method to create and return fprum thread editable widget
   @override
   Widget build(BuildContext context) {
     return Container(

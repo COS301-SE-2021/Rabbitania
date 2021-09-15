@@ -1,3 +1,4 @@
+//model used to model a booking object
 class ViewBookingModel {
   final int id;
   final String bookingDate;
