@@ -41,11 +41,12 @@ export class AIPlannerComponent implements OnInit {
   editNodeForm = this.fb.group({
     email: null,
   });
-
+  Math: any;
 
 
   constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog){
     this.onResize();
+    this.Math = Math;
   }
 
   ngOnInit(): void {
@@ -99,32 +100,32 @@ export class AIPlannerComponent implements OnInit {
 
     if(this.screenWidth >= 1700)
     {
-      this.screenRatio = 4
+      this.screenRatio = 0.4
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 1100)
     {
-      this.screenRatio = 2.5;
+      this.screenRatio = 0.25;
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 820)
     {
-      this.screenRatio = 2;
+      this.screenRatio = 0.2;
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 720)
     {
-      this.screenRatio = 1.6;
+      this.screenRatio = 0.16;
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 540)
     {
-      this.screenRatio = 1.0;
+      this.screenRatio = 0.10;
       this.getNodes(this.screenRatio);
     }
     else
     {
-      this.screenRatio = 0.8;
+      this.screenRatio = 0.08;
       this.getNodes(this.screenRatio);
     }
   }

@@ -117,7 +117,7 @@
                           
                           <mat-list-item>Activated: {{node.active}}</mat-list-item>
                           
-                          <mat-list-item>Saved Position: ( {{node.savedX/screenRatio}}cm ; {{node.savedY/screenRatio}}cm)</mat-list-item>
+                          <mat-list-item>Saved Position: ( {{(Math.round(node.savedX/screenRatio))/100}}m , {{(Math.round(node.savedY/screenRatio))/100}}m)</mat-list-item>
 
                           <mat-list-item> <button mat-raised-button (click)="delete(node.deskNumber);">DELETE Desk {{node.deskNumber}}</button></mat-list-item>
                         

@@ -93,7 +93,7 @@ export class MovableNodes {
   
     dragMoved(event: CdkDragMove) {
       
-      var pixelCorrection = 1.5999;
+      var pixelCorrection = 1.59998888;
       var xPosition =event.source.getFreeDragPosition().x + pixelCorrection;
       var yPosition =event.source.getFreeDragPosition().y + pixelCorrection;
       var screenHeight = window.innerHeight;
@@ -101,37 +101,37 @@ export class MovableNodes {
 
     if(screenWidth >= 1700)
     {
-      this.position = 'Position X: '+xPosition/4+'cm - Y: '+yPosition/4+'cm';
+      this.position = 'Position X: '+xPosition/0.4+'cm - Y: '+yPosition/0.4+'cm';
       this._newPosx = this._savedX + xPosition;
       this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 1100)
     {
-      this.position = 'Position X: '+xPosition/2.5+'cm - Y: '+yPosition/2.5+'cm';
+      this.position = 'Position X: '+xPosition/0.25+'cm - Y: '+yPosition/0.25+'cm';
       this._newPosx = this._savedX + xPosition;
       this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 820)
     {
-      this.position = 'Position X: '+xPosition/2+'cm - Y: '+yPosition/2+'cm';
+      this.position = 'Position X: '+xPosition/0.2+'cm - Y: '+yPosition/0.2+'cm';
       this._newPosx = this._savedX + xPosition;
       this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 720)
     {
-      this.position = 'Position X: '+xPosition/1.6+'cm - Y: '+yPosition/1.6+'cm';
+      this.position = 'Position X: '+xPosition/0.16+'cm - Y: '+yPosition/0.16+'cm';
       this._newPosx = this._savedX + xPosition;
       this._newPosy= this._savedY + yPosition;
     }
     else if(screenWidth >= 540)
     {
-      this.position = 'Position X: '+xPosition/1.0+'cm - Y: '+yPosition/1.0+'cm';
+      this.position = 'Position X: '+xPosition/0.10+'cm - Y: '+yPosition/0.10+'cm';
       this._newPosx = this._savedX + xPosition;
       this._newPosy= this._savedY + yPosition;
     }
     else
     { 
-      this.position = 'Position X: '+xPosition/0.8+'cm - Y: '+yPosition/0.8+'cm';
+      this.position = 'Position X: '+xPosition/0.08+'cm - Y: '+yPosition/0.08+'cm';
       this._newPosx = this._savedX + xPosition;
       this._newPosy= this._savedY + yPosition;
     }
