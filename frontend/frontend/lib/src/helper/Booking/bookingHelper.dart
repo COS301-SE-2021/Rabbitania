@@ -8,7 +8,7 @@ import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 class BookingHelper {
   final bookingProvider = BookingProvider();
   final userProvider = UserProvider();
-  final loggedUser = new UserHelper();
+  final userHelper = new UserHelper();
   //function to perform all logic required when making a booking
   Future<String> checkAndMakeBooking({
     timeslot,
@@ -16,14 +16,14 @@ class BookingHelper {
     bookingDate,
   }) async {
     //Get User Id of the currently logged in user
-    final loggedUserId = await loggedUser.getUserID();
+    final userId = await userHelper.getUserID();
 
     // return the createBookingAsync method which creates a future to book.
     return bookingProvider.createBookingAsync(
       bookingDate,
       timeslot,
       office,
-      loggedUserId,
+      userId,
     );
   }
 
@@ -32,9 +32,9 @@ class BookingHelper {
     office,
   }) async {
     //Get User Id of the currently logged in user
-    final loggedUserId = await loggedUser.getUserID();
+    final userId = await userHelper.getUserID();
     // return the createBookingAsync method which creates a future to book.
-    return bookingProvider.checkIfBookingExists(timeslot, office, loggedUserId);
+    return bookingProvider.checkIfBookingExists(timeslot, office, userId);
   }
 
   Future<bool> createBookingSchedule({timeslot, office, availability}) async {

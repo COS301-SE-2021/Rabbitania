@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io' as Io;
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:image_picker/image_picker.dart';
 
-Widget ForumCreateIsImageWidget() {
+//function ot create and return image widget
+Widget forumCreateIsImageWidget() {
   try {
     return Image.file(
       ForumCreateImageFile!,
@@ -20,7 +20,8 @@ Widget ForumCreateIsImageWidget() {
   }
 }
 
-ForumCreateGetFromGallery() async {
+//function to fetch image from device gallery and encode image in base64
+forumCreateGetFromGallery() async {
   PickedFile? pickedFile = await ImagePicker().getImage(
     source: ImageSource.gallery,
     maxWidth: 1800,
@@ -33,13 +34,13 @@ ForumCreateGetFromGallery() async {
   }
 }
 
-Widget editForumThreadIsImageWidget(String ImageF) {
+//decode, create and return widget from base64 image file
+Widget editForumThreadIsImageWidget(String imageF) {
   try {
-    if (ImageF.isNotEmpty && editForumThreadImageFile == null) {
-      editForumThreadInputImage = ImageF;
-      //if the image in the DB is not Empty and the current selected file is null display as below
+    if (imageF.isNotEmpty && editForumThreadImageFile == null) {
+      editForumThreadInputImage = imageF;
       return Image.memory(
-        Base64Decoder().convert(ImageF),
+        Base64Decoder().convert(imageF),
         fit: BoxFit.fill,
       );
     } else {
@@ -55,6 +56,7 @@ Widget editForumThreadIsImageWidget(String ImageF) {
   }
 }
 
+// function to encode image to base 64 when picked from gallery
 editForumThreadGetFromGallery() async {
   PickedFile? pickedFile = await ImagePicker().getImage(
     source: ImageSource.gallery,
@@ -63,9 +65,7 @@ editForumThreadGetFromGallery() async {
   );
   if (pickedFile != null) {
     editForumThreadImageFile = File(pickedFile.path);
-
     final bytes = Io.File(pickedFile.path).readAsBytesSync();
-
     editForumThreadImg64 = base64Encode(bytes);
   }
 }

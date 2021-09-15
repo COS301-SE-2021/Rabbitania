@@ -2,23 +2,16 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/Chat/ChatFirestoreUserModel.dart';
-import 'package:frontend/src/models/Chat/ChatMessageModel.dart';
-import 'package:frontend/src/models/Chat/GroupChatMessageModel.dart';
+import 'package:frontend/src/models/Chat/chatFirestoreUserModel.dart';
+import 'package:frontend/src/models/Chat/chatMessageModel.dart';
+import 'package:frontend/src/models/Chat/groupChatMessageModel.dart';
 import 'package:rxdart/streams.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class FireStoreHelper {
-  getUsersCollectionFromFireStore() {
-    CollectionReference users = firestore.collection('users');
-
-    print(users.doc().get());
-  }
-
   createNewUsersDocsWithUid(uid, displayName, email, avatar) async {
     var refCollection = firestore.collection('users');
-    var refChatsCollection = firestore.collection('chats').doc('$uid').set({});
     ChatFirestoreUserModel newUser = ChatFirestoreUserModel(
       uid: uid,
       displayName: displayName,
@@ -28,15 +21,14 @@ class FireStoreHelper {
     refCollection.add(newUser.toJson());
   }
 
-//function adds user from inHouse api information to firestore users collection
+  //function adds user from inHouse api information to firestore users collection
   getUsersDocumentsFromFireStoreAsStream() {
     CollectionReference users = firestore.collection('users');
     return users.snapshots();
   }
 
+  //function to get direct messages chats from firestore
   getChat(int idUser, int myId) {
-    //get chats of user i want to talk to
-    //filter those messages by searching for messages he sent to me
     return firestore
         .collection('chats/$myId/messages')
         .orderBy('dateCreated', descending: true)
@@ -51,40 +43,33 @@ class FireStoreHelper {
         .snapshots();
   }
 
+  //send direct message chat to participant
   Future sendMessage(int idUser, int myId, String message) async {
-    //navigate to my messages
     final refMessagesMe = firestore.collection('chats/$myId/messages');
     final refMessagesThem = firestore.collection('chats/$idUser/messages');
-    //create new message and show that you sent it
     final newMessage = ChatMessageModel(
       uid: myId,
       toUid: idUser,
       message: message,
       dateCreated: DateTime.now(),
     );
-
-    //add new message to recipeint collection
     await refMessagesMe.add(
       newMessage.toJson(),
     );
     await refMessagesThem.add(
       newMessage.toJson(),
     );
-    //update messaged user that he/she has a new message
-    //final refUsers = firestore.collection('users/$idUser').doc().update({});
   }
 
   //used to create new message in desired groupChat room
   Future sendGroupChatMessage(String roomName, int myId, String message) async {
     final refGroupMessages =
         firestore.collection('groupChat/$roomName/messages');
-
     final newGroupChatMessage = GroupChatMessageModel(
       uid: myId,
       message: message,
       dateCreated: DateTime.now(),
     );
-
     await refGroupMessages.add(
       newGroupChatMessage.toJson(),
     );
@@ -125,16 +110,19 @@ class FireStoreHelper {
     });
   }
 
+  //function to delete group chat room in firebase
   deleteGroupChatByRoomName(String roomName) async {
     firestore.collection('groupChat').doc('$roomName').delete();
   }
 
+  //function to unsubscribe user from a group chat
   removeUserFromGroup(roomName, uid) {
     firestore.collection('groupChat').doc('$roomName').update({
       'participants': FieldValue.arrayRemove([uid])
     });
   }
 
+  //function to add a user to an existing group chat
   addUserToGroup(roomName, uid) {
     firestore.collection('groupChat').doc('$roomName').update({
       'participants': FieldValue.arrayUnion([uid])
