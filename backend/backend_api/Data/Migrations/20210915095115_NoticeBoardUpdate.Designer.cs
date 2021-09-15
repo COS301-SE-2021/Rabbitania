@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_api.Data.NoticeBoard;
 
 namespace backend_api.Data.Migrations
 {
     [DbContext(typeof(NoticeBoardContext))]
-    partial class NoticeBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20210915095115_NoticeBoardUpdate")]
+    partial class NoticeBoardUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace backend_api.Data.Migrations
 
                     b.ToTable("NoticeBoard");
                 });
-
+            
             modelBuilder.Entity("backend_api.Models.NoticeBoard.NoticeBoard", b =>
                 {
                     b.HasOne("backend_api.Models.User.Users", "User")
