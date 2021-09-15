@@ -12,11 +12,13 @@ using backend_api.Models.Forum.Responses;
 using backend_api.Models.NoticeBoard;
 using backend_api.Models.NoticeBoard.Requests;
 using backend_api.Models.NoticeBoard.Responses;
+using backend_api.Models.Notification;
 using backend_api.Services.NoticeBoard;
 using backend_api.Services.Notification;
 using backend_api.Services.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -128,17 +130,6 @@ namespace backend_api.Tests.Noticeboard.IntegrationTests
             //Assert
             await Assert.ThrowsAsync<InvalidUserIdException>(async () =>
                 await _service.AddNoticeBoardThread(request));
-        }
-        [Fact]
-        public async void AddNoticeBoardThread_ValidThread()
-        {
-            //Arrange
-            var request =
-                new AddNoticeBoardThreadRequest(1, "Test", "Test", 0, "image.png", UserRoles.Designer, 1, 1, 1, 1, 1);
-            //Act
-            var resp = await _service.AddNoticeBoardThread(request);
-            //Assert
-            Assert.Equal(HttpStatusCode.Created, resp.Response);
         }
 
         [Fact]
