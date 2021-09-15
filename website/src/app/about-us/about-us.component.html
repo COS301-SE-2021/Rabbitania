@@ -11,7 +11,13 @@
     <span class="toolbar-spacer"></span>
     
     <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
-        Login
+        <div *ngIf="loggingIn;else login">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Logging In
+        </div>
+        <ng-template #login>
+            <i class="bi bi-google"> Login </i>
+        </ng-template>
     </button>
     <ng-template #other_content>
         <div class="profile">
@@ -41,8 +47,8 @@
             <span class="menu-icon-text"> Landing Page</span>
         </button>
         <button mat-button class="menu-button" routerLink="/about-us">
-            <span class="menu-icon"><fa-icon [icon]="faUsers"></fa-icon></span>
-            <span class="menu-icon-text">The Developer Team</span>
+            <span class="menu-icon"><i class="bi bi-terminal"></i></span>
+            <span class="menu-icon-text">About The Developers</span>
         </button>
 
         <mat-divider class="nav-divider"></mat-divider>
@@ -67,8 +73,8 @@
             <span class="menu-icon-text">Office Planner</span>
         </button>
         <button mat-button class="menu-button">
-            <mat-icon>people</mat-icon>
-            View Users
+            <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
+            <span class="menu-icon-text">View Users</span>
         </button>
      
     </mat-sidenav>
@@ -89,6 +95,21 @@
                     <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
                         <div class="member">
                             <img class="image_matt" src="../../assets/png/matt.png"/>
+                            <br>
+                            <br>
+                            <div class="links">
+                                <a href="https://github.com/M-Harty21">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/matthew-harty-8a40a3204">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin"></i>
+                                    </button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
@@ -96,14 +117,14 @@
                             <h1>
                                 Matthew Harty
                             </h1>
-                            <h1>
+                            <h1 style="opacity: 0.9;">
                                 BSc Information and Knowledge Systems
                             </h1>
                         </div>
                         <br>
                         <div class="about2">
                             <h1 class="information">
-                                Matthew Harty
+                                Roles & Contributions:
                                 <br>
                                 BSc Information and Knowledge Systems
                             </h1>
@@ -120,20 +141,34 @@
                         <div class="member">
                             <img class="image_div" src="../../assets/png/div.jpeg"/>
                         </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/DeMeiring">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/james-hulett-255748177">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin"></i>
+                                    </button>
+                                </a>
+                            </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
                         <div class="about">
                             <h1>
                                 De Villiers Meiring
                             </h1>
-                            <h1>
+                            <h1 style="opacity: 0.9;">
                                 BSc Information and Knowledge Systems
                             </h1>
                         </div>
                         <br>
                         <div class="about2">
                             <h1 class="information">
-                                De Villiers Meiring
+                                Roles & Contributions:
                                 <br>
                                 BSc Information and Knowledge Systems
                             </h1>
@@ -150,20 +185,34 @@
                         <div class="member">
                             <img class="image_james" src="../../assets/png/james.jpeg"/>
                         </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/jmshltt">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/james-hulett-255748177">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin"></i>
+                                    </button>
+                                </a>
+                            </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
                         <div class="about">
                             <h1>
                                 James Hulett
                             </h1>
-                            <h1>
+                            <h1 style="opacity: 0.9;">
                                 BSc Information and Knowledge Systems
                             </h1>
                         </div>
                         <br>
                         <div class="about2">
                             <h1 class="information">
-                                James Hulett
+                                Roles & Contributions:
                                 <br>
                                 BSc Information and Knowledge Systems
                             </h1>
@@ -180,20 +229,34 @@
                         <div class="member">
                             <img class="image_joe" src="../../assets/png/joe.jfif"/>
                         </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/JojoMojo-svg">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/joseph-harraway-968113210">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin"></i>
+                                    </button>
+                                </a>
+                            </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
                         <div class="about">
                             <h1>
                                 Joseph Harrway
                             </h1>
-                            <h1>
+                            <h1 style="opacity: 0.9;">
                                 BSc Computer Science
                             </h1>
                         </div>
                         <br>
                         <div class="about2">
                             <h1 class="information">
-                                Joseph Harrway
+                                Roles & Contributions:
                                 <br>
                                 BSc Computer Science
                             </h1>
@@ -210,20 +273,34 @@
                         <div class="member">
                             <img class="image_dean" src="../../assets/png/dean.jfif"/>
                         </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/Deannortje">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/dean-nortje-63419b210">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin"></i>
+                                    </button>
+                                </a>
+                            </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
                         <div class="about">
                             <h1>
                                 Dean Nortje
                             </h1>
-                            <h1>
+                            <h1 style="opacity: 0.9;">
                                 BSc Information and Knowledge Systems
                             </h1>
                         </div>
                         <br>
                         <div class="about2">
                             <h1 class="information">
-                                Hello
+                                Roles & Contributions:
                                 <br>
                                 Hello
                             </h1>

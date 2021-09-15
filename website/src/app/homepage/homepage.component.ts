@@ -35,6 +35,8 @@ export class HomepageComponent implements OnInit {
   faBook = faBook;
   //
 
+  loggingIn = false;
+
   constructor(
     private observer: BreakpointObserver,
     private service: AuthService,
@@ -67,9 +69,10 @@ export class HomepageComponent implements OnInit {
   }
 
   async signIn() {
+    this.loggingIn = true;
     var res = await this.service.signIn();
     if(res){
-
+      this.loggingIn = false;
     }else{
 
     }

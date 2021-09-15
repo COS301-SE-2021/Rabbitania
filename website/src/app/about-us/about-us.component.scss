@@ -47,6 +47,13 @@
     font-size: large;
 }
 
+.links{
+    margin-left: 12%;
+}
+.member{
+    align-items: center;
+}
+
 #about_matt{
     background: black;
     border-radius: 10px;
@@ -134,6 +141,10 @@
 .about-us-header-text{
     color: $greenColour;
     font-size: xx-large;
+}
+
+i{
+    font-size: 150% !important;
 }
 
 @media only screen and (max-width: 3000px) {

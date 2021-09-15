@@ -10,8 +10,16 @@
     </a>
     <span class="toolbar-spacer"></span>
 
+    
+    
     <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
-        Login
+        <div *ngIf="loggingIn;else login">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Logging In
+        </div>
+        <ng-template #login>
+            <i class="bi bi-google"> Login </i>
+        </ng-template>
     </button>
     <ng-template #other_content>
         <div class="profile">
@@ -41,8 +49,8 @@
             <span class="menu-icon-text"> Landing Page</span>
         </button>
         <button mat-button class="menu-button" routerLink="/about-us">
-            <span class="menu-icon"><fa-icon [icon]="faUsers"></fa-icon></span>
-            <span class="menu-icon-text">The Developer Team</span>
+            <span class="menu-icon"><i class="bi bi-terminal"></i></span>
+            <span class="menu-icon-text">About The Developers</span>
         </button>
 
         <mat-divider class="nav-divider"></mat-divider>
@@ -67,8 +75,8 @@
             <span class="menu-icon-text">Office Planner</span>
         </button>
         <button mat-button class="menu-button">
-            <mat-icon>people</mat-icon>
-            View Users
+            <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
+            <span class="menu-icon-text">View Users</span>
         </button>
 
     </mat-sidenav>
