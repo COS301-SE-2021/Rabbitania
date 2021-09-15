@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Console } from 'console';
+// import { Console } from 'console';
 import { MovableNodes } from '../ai-planner/movable-nodes';
 
 @Injectable({
@@ -18,18 +18,18 @@ export class GraphServiceService {
       }
     }
   }
-  AddVertex(vertex){
+  // AddVertex(vertex){
 
-  }
-  addEdge(vertex1, vertex2, weight){
+  // }
+  // addEdge(vertex1, vertex2, weight){
 
-  }
-  removeEdge(vertex1, vertex2){
+  // }
+  // removeEdge(vertex1, vertex2){
 
-  }
-  calculateWeight(vertext1, vertex2){
+  // }
+  // calculateWeight(vertext1, vertex2){
 
-  }
+  // }
 
   constructor() { }
 }
