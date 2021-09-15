@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit {
     if(res){
       this.loggingIn = false;
     }else{
-
+      this.loggingIn = false;
     }
     this.ngOnInit();
   }
