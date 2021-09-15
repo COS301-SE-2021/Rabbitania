@@ -78,7 +78,7 @@ namespace backend_api.Controllers.NoticeBoard
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("IncreaseEmoji")]
         public async Task<IncreaseEmojiResponse> IncreaseEmoji(
             [FromBody] IncreaseEmojiRequest request)
@@ -91,7 +91,7 @@ namespace backend_api.Controllers.NoticeBoard
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("DecreaseEmoji")]
         public async Task<DecreaseEmojiResponse> DecreaseEmoji(
             [FromBody] DecreaseEmojiRequest request)

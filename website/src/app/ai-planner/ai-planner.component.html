@@ -82,7 +82,7 @@
   </div>
 
 <div class="row mx-auto">
-        <div class="col-12 justify-content-center text-center pb-3 pt-5">
+        <div class="col-12 justify-content-center text-center pb-3 pt-4">
           <button mat-raised-button color="primary" type="submit" style="width: 100%; display: block;" (click)="save()">Save Desk Positions</button>
         </div>
         <div class="col-md-6 col-12 justify-content-center text-center pt-2" >
@@ -117,9 +117,9 @@
                           
                           <mat-list-item>Activated: {{node.active}}</mat-list-item>
                           
-                          <mat-list-item>Saved Position: ( {{node.savedX}}cm ; {{node.savedY}}cm)</mat-list-item>
+                          <mat-list-item>Saved Position: ( {{(Math.round(node.savedX/screenRatio))/100}}m , {{(Math.round(node.savedY/screenRatio))/100}}m)</mat-list-item>
 
-                          <mat-list-item> <button mat-raised-button color="primary" (click)="delete(node.deskNumber);">DELETE Desk {{node.deskNumber}}</button></mat-list-item>
+                          <mat-list-item> <button mat-raised-button (click)="delete(node.deskNumber);">DELETE Desk {{node.deskNumber}}</button></mat-list-item>
                         
                         </mat-list>
                       
@@ -167,7 +167,7 @@
 </div>
 
 <div class="extra" >
- </div>
+</div>
         
     </mat-sidenav-content>
 </mat-sidenav-container>

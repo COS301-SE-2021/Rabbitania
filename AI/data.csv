@@ -1,2 +1,2 @@
-cough,fever,sore_throat,shortness_of_breath,head_ache,gender,test_indication
-1,1,1,1,1,female,Contact with confirmed
+cough,fever,sore_throat,shortness_of_breath,head_ache,test_indication,gender
+0,1,0,0,0,Other,male
