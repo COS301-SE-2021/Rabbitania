@@ -16,7 +16,7 @@ namespace backend_api.Tests.Node.Integration
 {
     public class NodeServiceTests
     {
-        private readonly NodeService _service;
+        private readonly INodeService _service;
         private readonly INodeRepository _repository;
         private NodeContext _context;
         private UserContext _userContext;
@@ -40,7 +40,11 @@ namespace backend_api.Tests.Node.Integration
             _repository = new NodeRepository(_context, _userContext);
             _service = new NodeService(_repository);
         }
-
+        /// <summary>
+        ///     Inserts a mock node into the testing DB so that there
+        ///     is a specific node to be deleted each time the tests
+        ///     are executed.
+        /// </summary>
         private async Task addMockedNode()
         {
             var nodeToDelete = new Models.Node.Node();
