@@ -73,8 +73,14 @@
       <div>
           <div class="example-boundary" id="boarder">
               <div *ngFor="let node of nodes; index as i" cdkDrag style="position: absolute; left: {{node.savedX}}px;
-                  top: {{node.savedY}}px;" class="example-box" id="{{node.deskNumber}}" cdkDragBoundary=".example-boundary" (cdkDragStarted)="node.dragStarted($event)" (cdkDragEnded)="node.dragEnded($event)" (cdkDragMoved)="node.dragMoved($event)">
-                {{node.deskNumber}}
+                  top: {{node.savedY}}px;" class="{{node.active}}" id="{{node.deskNumber}}" cdkDragBoundary=".example-boundary" (cdkDragStarted)="node.dragStarted($event)" (cdkDragEnded)="node.dragEnded($event)" (cdkDragMoved)="node.dragMoved($event)">
+              
+               <button mat-button [matMenuTriggerFor]="menu" style="color: rgba(255, 255, 255,0)">.</button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>{{node.userEmail}}</button>
+                  
+                </mat-menu>
+
               </div>
           </div>
       </div>
