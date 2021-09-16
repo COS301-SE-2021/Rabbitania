@@ -49,6 +49,10 @@ namespace backend_api.Data.NoticeBoard
         {
             var threadID = request.ThreadId;
             var toUpdate = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == threadID);
+            if (toUpdate == null)
+            {
+                return new EditNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
+            }
             toUpdate.ImageUrl = request.ImageUrl;
             toUpdate.ThreadContent = request.ThreadContent;
             toUpdate.ThreadTitle = request.ThreadTitle;
@@ -81,7 +85,7 @@ namespace backend_api.Data.NoticeBoard
         {
             try
             {
-                var threadToDelete = _noticeBoard.NoticeBoard.Find(request.ThreadId);
+                var threadToDelete = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == request.ThreadId);
                 if (threadToDelete != null)
                 {
                     _noticeBoard.NoticeBoard.Remove(threadToDelete);

@@ -36,6 +36,7 @@ import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { AiPopupComponent } from './ai-popup/ai-popup.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     CovidQuestionnaireComponent,
     AIPlannerComponent,
     SignOutComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AiPopupComponent
   ],
   imports: [
     BrowserModule,

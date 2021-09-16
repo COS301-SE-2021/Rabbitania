@@ -10,6 +10,8 @@ import { NodeServiceService } from '../../app/services/ai-planner/node-service.s
 import { NodeGetAllRequest } from '../../app/interfaces/ai-planner-node-interface';
 import { Router } from '@angular/router';
 import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { AiPopupComponent } from '../ai-popup/ai-popup.component';
 
 @Component({
   selector: 'app-ai-planner',
@@ -21,6 +23,8 @@ export class AIPlannerComponent implements OnInit {
   //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
   //1600 -> 80 = (1600/10)/2
+
+
 
   faRocket = faRocket;
   faUsers = faUsers;
@@ -37,11 +41,12 @@ export class AIPlannerComponent implements OnInit {
   editNodeForm = this.fb.group({
     email: null,
   });
+  Math: any;
 
 
-
-  constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService){
+  constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog){
     this.onResize();
+    this.Math = Math;
   }
 
   ngOnInit(): void {
@@ -64,7 +69,6 @@ export class AIPlannerComponent implements OnInit {
 
   getDummyNodes(multiplier: number)
   {
-    
     this.nodes = [];
     for(var i =0; i< dummyData.length;i++)
     {
@@ -74,7 +78,6 @@ export class AIPlannerComponent implements OnInit {
 
   async getNodes(multiplier: number)
   {
-    
     var result = await this.service.Get();
     result.subscribe(data => {
       if(data){
@@ -85,8 +88,6 @@ export class AIPlannerComponent implements OnInit {
           }
       }
     });
-
-    
   }
 
   screenRatio: number = 1;
@@ -94,45 +95,39 @@ export class AIPlannerComponent implements OnInit {
   @HostListener("window:resize", [])
   onResize() {
 
-
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    //console.log(this.screenHeight, this.screenWidth);
 
     if(this.screenWidth >= 1700)
     {
-      this.screenRatio = 4
+      this.screenRatio = 0.4
       this.getNodes(this.screenRatio);
-      
     }
     else if(this.screenWidth >= 1100)
     {
-      this.screenRatio = 2.5;
+      this.screenRatio = 0.25;
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 820)
     {
-      this.screenRatio = 2;
+      this.screenRatio = 0.2;
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 720)
     {
-      this.screenRatio = 1.6;
+      this.screenRatio = 0.16;
       this.getNodes(this.screenRatio);
     }
     else if(this.screenWidth >= 540)
     {
-      this.screenRatio = 1.0;
+      this.screenRatio = 0.10;
       this.getNodes(this.screenRatio);
     }
     else
     {
-      this.screenRatio = 0.8;
+      this.screenRatio = 0.08;
       this.getNodes(this.screenRatio);
-      
     }
-
-    
   }
 
   onSubmit(){
@@ -141,18 +136,19 @@ export class AIPlannerComponent implements OnInit {
 
   async addNode(){
   const nodeObject = this.addNodeForm.value;
-  console.log(nodeObject.email);
+  
   var result = await this.service.Post(nodeObject.email,0.0,0.0,false);
-
 
   result.subscribe(data => {
       if(data){
         console.log(data)
       }
     });
+    
+      this.openDialog();
+ 
+    
   }
-
-
 
   ngAfterViewInit() {
     this.observer.observe("").pipe(delay(0.5)).subscribe((result) => {
@@ -185,26 +181,15 @@ export class AIPlannerComponent implements OnInit {
 
       this.nodeArray.push(singleNode);
     });
-      //JSON.stringify(jsonObject);
-      //console.log(JSON.stringify({nodes: this.nodeArray}));
-      
       var result = await this.service.Save(this.nodeArray);
         result.pipe(first()).subscribe(data => {
-            if(data){
-              console.log(data);
-              
-            }
-            
+         
           });
 
-          setTimeout(() => {
-            this.getNodes(this.screenRatio);
-        }, 500);
-          
+          this.openDialog();
   }
 
   async delete(deskNumber: number){
-    
     var result = await this.service.Delete(deskNumber);
     result.subscribe(data => {
         if(data){
@@ -213,10 +198,16 @@ export class AIPlannerComponent implements OnInit {
         
       });
 
-      setTimeout(() => {
-        this.getNodes(this.screenRatio);
-    }, 500);
+      this.openDialog();
   }
 
+  openDialog() {
+
+    this.dialog.open(AiPopupComponent);
+    setTimeout(() => {
+      this.getNodes(this.screenRatio);
+  }, 700);
+  }
+  
   
 }
