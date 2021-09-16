@@ -60,8 +60,6 @@ export class AuthService {
       "googleImgUrl": user.user?.photoURL
     };
 
-    await this.getToken();
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

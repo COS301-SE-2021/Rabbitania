@@ -37,16 +37,36 @@ export class AboutUsComponent implements OnInit {
 
   loggingIn = false;
 
+  token = {
+    token: ''
+  };
+  async getToken() : Promise<any> {
+    await this.authFire.currentUser.then(async (data) => {
+      await data?.getIdToken().then((returned) => {
+        this.token = {
+          token: returned,
+        }
+      });
+    });
+  }
+
+  async Token(){
+    await this.getToken();
+    return this.token.token;
+  }
+
   constructor(
+    public authFire: AngularFireAuth,
     private observer: BreakpointObserver, 
     private service: AuthService, 
     router: Router,
     public model: MatDialog,
+    private auth: AuthService,
     private userService: UserDetailsService) {
       this.router = router;
   }
 
-  ngOnInit(){
+  async ngOnInit(){
     var display = this.userService.retrieveUserDetails().displayName;
     if(display == undefined || null){
       console.log("Logged Out");
@@ -54,6 +74,9 @@ export class AboutUsComponent implements OnInit {
       this.user_displayName = this.userService.retrieveUserDetails().displayName;
       this.user_googleUrl = this.userService.retrieveUserDetails().googleImgUrl;
     }
+
+
+    console.log("Token: " + await this.Token());
   }
 
   ngAfterViewInit() {
