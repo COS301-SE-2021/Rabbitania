@@ -5,7 +5,7 @@ import { delay } from 'rxjs/operators';
 import { AuthService } from '../services/firebase/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
+import { faRocket, faUsers, faBriefcase, faThList, faBook } from '@fortawesome/free-solid-svg-icons';
 import { BehaviorSubject } from 'rxjs';
 import { UserDetailsService } from '../services/user-details/user-details.service';
 import { User } from '../interfaces/user';
@@ -32,7 +32,10 @@ export class HomepageComponent implements OnInit {
   faUsers = faUsers;
   faBriefcase = faBriefcase;
   faThList = faThList;
+  faBook = faBook;
   //
+
+  loggingIn = false;
 
   constructor(
     private observer: BreakpointObserver,
@@ -51,8 +54,6 @@ export class HomepageComponent implements OnInit {
       this.user_displayName = await this.userService.retrieveUserDetails().displayName;
       this.user_googleUrl = await this.userService.retrieveUserDetails().googleImgUrl;
     }
-    console.log(this.user_displayName);
-    console.log(this.user_googleUrl);
   }
 
   ngAfterViewInit() {
@@ -68,11 +69,12 @@ export class HomepageComponent implements OnInit {
   }
 
   async signIn() {
+    this.loggingIn = true;
     var res = await this.service.signIn();
     if(res){
-
+      this.loggingIn = false;
     }else{
-
+      this.loggingIn = false;
     }
     this.ngOnInit();
   }

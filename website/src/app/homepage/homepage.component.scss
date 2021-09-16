@@ -45,11 +45,16 @@ mat-sidenav {
     justify-content: center;
     align-items: center;
     background-image: url(../../assets/png/background-rocks.png);
+    background-attachment: fixed;
 }
 
 .log{
     border: solid 2px $greenColour;
     border-radius: 10px;
+}
+
+.menu-icon + .menu-icon-text {
+    margin-left: 20px;
 }
 
 .profile{
@@ -121,31 +126,153 @@ mat-divider {
 /*
      IMAGE AND TEXT POSITIONING
 */
-
-.main-image{
-    z-index: 999;
-
-    .landing-rocket {
-        height: 750px;
-        width: 750px;
-        -webkit-animation: mover 3s infinite  alternate;
-        animation: mover 3s infinite  alternate;
-    }
-
-    .welcome-text1{
-        position: absolute;
-        top: 28%;
-        left: 18%;
-        font-size: x-large;
-        color: $greenColour;
-    }
+@media only screen and (max-width: 3000px) {
+    .main-image{
+        z-index: 999; 
     
-    .welcome-text2{
-        position: absolute;
-        top: 28%;
-        right: 18%;
-        font-size: x-large;
-        color: $greenColour;
+        .landing-rocket {
+            height: 1500px;
+            width: 1500px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 1980px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 1050px;
+            width: 1050px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: xx-large;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 750px;
+            width: 750px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: x-large;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: x-large;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 550px;
+            width: 550px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: medium;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: medium;
+            color: $greenColour;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .main-image{
+        z-index: 999; 
+    
+        .landing-rocket {
+            height: 350;
+            width: 350px;
+            animation: dropIn 5s;
+            // -webkit-animation: mover 3s infinite  alternate;
+            // animation: mover 3s infinite  alternate;
+        }
+    
+        .welcome-text1{
+            position: absolute;
+            top: 28%;
+            left: 18%;
+            font-size: small;
+            color: $greenColour;
+        }
+        
+        .welcome-text2{
+            position: absolute;
+            top: 28%;
+            right: 18%;
+            font-size: small;
+            color: $greenColour;
+        }
     }
 }
 
@@ -155,8 +282,8 @@ mat-divider {
     .bolder1{
         position: absolute;
         z-index: 0;
-        height: 120px;
-        width: 120px;
+        height: 140px;
+        width: 140px;
         background-size: cover;
         background-repeat: no-repeat;
         left: 8%;
@@ -168,8 +295,8 @@ mat-divider {
     .tree-island1{
         position: absolute;
         z-index: 0;
-        height: 150px;
-        width: 150px;
+        height: 180px;
+        width: 180px;
         background-size: cover;
         background-repeat: no-repeat;
         right: 10%;
@@ -181,8 +308,8 @@ mat-divider {
     .tree-island2{
         position: absolute;
         z-index: 0;
-        height: 100px;
-        width: 100px;
+        height: 120px;
+        width: 120px;
         background-size: cover;
         background-repeat: no-repeat;
         left: 30%;
@@ -194,8 +321,8 @@ mat-divider {
     .bolder2{
         position: absolute;
         z-index: 0;
-        height: 80px;
-        width: 80px;
+        height: 100px;
+        width: 100px;
         background-size: cover;
         background-repeat: no-repeat;
         left: 4%;
@@ -207,12 +334,12 @@ mat-divider {
     .bolder3{
         position: absolute;
         z-index: 0;
-        height: 110px;
-        width: 110px;
+        height: 130px;
+        width: 130px;
         background-size: cover;
         background-repeat: no-repeat;
         right: 20%;
-        top: 65%;
+        top: 85%;
         -webkit-animation: mover 1.5s infinite  alternate;
         animation: mover 1.5s infinite  alternate;
     }
@@ -220,8 +347,8 @@ mat-divider {
     .small-bolder{
         position: absolute;
         z-index: 0;
-        height: 140px;
-        width: 140px;
+        height: 160px;
+        width: 160px;
         background-size: cover;
         background-repeat: no-repeat;
         right: 25%;
@@ -233,8 +360,8 @@ mat-divider {
     .small-bolder1{
         position: absolute;
         z-index: 0;
-        height: 180px;
-        width: 180px;
+        height: 200px;
+        width: 200px;
         background-size: cover;
         background-repeat: no-repeat;
         left: 10%;
@@ -243,6 +370,7 @@ mat-divider {
         animation: mover 1.9s infinite  alternate;
     }
 }
+
 /*
      KEY FRAME MOVEMENTS 
 */
@@ -261,6 +389,19 @@ mat-divider {
     100% { 
         transform: translateY(-20px); 
     }
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-80%);
+      }
+      to { 
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
 }
 
 

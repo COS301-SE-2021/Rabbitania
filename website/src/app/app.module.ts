@@ -35,8 +35,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SignOutComponent } from './sign-out/sign-out.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 import { AiPopupComponent } from './ai-popup/ai-popup.component';
-
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { AiPopupComponent } from './ai-popup/ai-popup.component';
     CovidQuestionnaireComponent,
     AIPlannerComponent,
     SignOutComponent,
+    AboutUsComponent,
     AiPopupComponent
   ],
   imports: [
