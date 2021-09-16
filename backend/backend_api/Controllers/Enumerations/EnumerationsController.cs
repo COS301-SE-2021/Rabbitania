@@ -6,6 +6,7 @@ using backend_api.Models.Enumerations.Requests;
 using backend_api.Services.Booking;
 using backend_api.Services.Enumerations;
 using backend_api.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend_api.Controllers.Enumerations
@@ -21,7 +22,7 @@ namespace backend_api.Controllers.Enumerations
             _enumService = enumService;
         }
         
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetOfficeName")]
         public async Task<ActionResult> GetOfficeName([FromQuery] GetOfficeNameRequest request)
         {
@@ -43,7 +44,7 @@ namespace backend_api.Controllers.Enumerations
             }
         }
         
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetUserRoleType")]
         public async Task<ActionResult> GetUserRoleType([FromQuery] GetUserRoleTypeRequest request)
         {
@@ -64,7 +65,7 @@ namespace backend_api.Controllers.Enumerations
                 return BadRequest("Request is null or empty");
             }
         }
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetOfficeId")]
         public async Task<ActionResult> GetOfficeId([FromQuery] GetOfficeIdRequest request)
         {
@@ -86,7 +87,7 @@ namespace backend_api.Controllers.Enumerations
             }
         }
         
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetUserRoleId")]
         public async Task<ActionResult> GetUserRoleId([FromQuery] GetUserRoleIdRequest request)
         {

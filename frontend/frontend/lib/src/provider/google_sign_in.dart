@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
+import 'package:frontend/src/helper/JWT/securityHelper.dart';
+
 import 'package:frontend/src/models/google_user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 final googleSignIn = GoogleSignIn();
 final firebaseAuth = FirebaseAuth.instance;
+final securityHelper = SecurityHelper();
 
 class GoogleSignInProvider extends ChangeNotifier {
   GoogleSignInAccount? _user;
@@ -25,7 +29,13 @@ class GoogleSignInProvider extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
 
+    // print('accessToken: ${googleAuth.accessToken}');
     await firebaseAuth.signInWithCredential(credential);
+    log('accessToken: ${googleAuth.accessToken}');
+    log('IdToken: ${await FirebaseAuth.instance.currentUser!.getIdToken()}');
+    var token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    securityHelper.setFirestoreIdToken(token);
+
     notifyListeners();
   }
 

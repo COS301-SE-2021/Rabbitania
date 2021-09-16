@@ -72,7 +72,14 @@ namespace backend_api.Controllers.User
         public async Task<GetUserProfilesResponse> GetUserProfiles([FromQuery] GetUserProfilesRequest request)
         {
             return await _service.GetUserProfiles(request);
-        } 
+        }
+
+        [HttpPut, Authorize]
+        [Route("MakeUserAdmin")]
+        public async Task<MakeUserAdminResponse> MakeUserAdmin([FromBody] MakeUserAdminRequest request)
+        {
+            return await _service.MakeUserAdmin(request);
+        }
         
     }
 }

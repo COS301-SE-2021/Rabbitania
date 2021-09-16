@@ -3,13 +3,20 @@ import tensorflow_decision_forests as tfdf
 import pandas
 from tensorflow import keras
 import tensorflow as tf
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import numpy as np
 from flask import Flask, jsonify, request 
 import json
 from pandas.io.json import json_normalize
+import os
+from flask_cors import CORS
+import nltk, string
+from sklearn.feature_extraction.text import TfidfVectorizer
+nltk.download('punkt')
+
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route("/index")
 def index():
@@ -26,7 +33,6 @@ class DecisionTree:
 
         #Evaluating dataset
         evaluate_data = pandas.read_csv("dataset3.csv")
-
         evaluate_dataset = tfdf.keras.pd_dataframe_to_tf_dataset(evaluate_data, label="corona_result")
 
         #Train Random Forest using train_ds
@@ -42,9 +48,6 @@ class DecisionTree:
 
         model.save(self.model_path)
 
-        model.make_inspector().export_to_tensorboard("tensorboard_logs")
-
-        tfdf.model_plotter.plot_model(model, tree_idx=0, max_depth=3)
         # print(model)
         return model
 
@@ -72,7 +75,6 @@ class DecisionTree:
         print("model loaded successfully")
 
         print("Converting input to Dataframe")
-        #df = pandas.DataFrame.from_dict(UserSymptoms, orient="index")
         df=pandas.json_normalize(UserSymptoms)
         df.to_csv("data.csv", index = False)
         dataframe = pandas.read_csv("data.csv")
@@ -83,31 +85,8 @@ class DecisionTree:
         
         finalPrediction = prediction[0][0]
         print(finalPrediction)
-        if finalPrediction > 0.65:
-            return "True"
-        else:
-            return "False"
+        return json.dumps(str(finalPrediction))
         
-
-
-
-# @app.route('/api/predict/', methods = ['GET'])
-# def assumption():
-#     dt = DecisionTree()
-
-#     dt.predictionTest()
-#     data = request.get_json()
-#     cough = request.args.get("cough")
-#     fever = data.get('fever','')
-#     sore_throat = data.get('sore_throat','')
-#     shortness_of_breath = data.get('shortness_of_breath')
-#     head_ache = data.get('head_ache')
-#     gender = data.get('gender')
-#     test_indication = data.get('test_indication')
-#     symptoms = [cough,fever, sore_throat, shortness_of_breath, head_ache, gender, test_indication]
-#     dt.predictionTest(symptoms)
-#     return "hello there"
-
 
 @app.route('/api/train', methods=['GET'])
 def train():
@@ -115,12 +94,64 @@ def train():
     dt = DecisionTree()
     #train model and save it in 'models'
     dt.train_and_save()
+    dt.predictionTest()
+    return "trained model and saved to models"
 
 @app.route('/api/predict', methods=['POST'])
 def userPrediction():
     dt = DecisionTree()
     psymptoms = request.get_json()
     return dt.prediction(psymptoms)
+
+@app.route('/api/tfidf', methods=['GET'])
+def respond():
+    threadTitle = request.args.get("threadTitle").split(',')
+    threadBody = request.args.get("threadBody").split(',')
+    newThreadTitle = request.args.get("newThreadTitle")
+    newThreadBody = request.args.get("newThreadBody")
+
+    response = {}
+    stemmer = nltk.stem.porter.PorterStemmer()
+
+    #Remove unnecessary punctuation from the body of text
+    remove_punctuation_map = dict((ord(char), None) for char in string.punctuation)
+
+    #Stemmer will remove unnecessary characters from words and act as a filter.
+    def stem_tokens(tokens):
+        return [stemmer.stem(item) for item in tokens]
+
+    #tokenize the body of text after removing punctuation, and making the entire text lower case
+    def normalize(text):
+        return stem_tokens(nltk.word_tokenize(text.lower().translate(remove_punctuation_map)))
+
+    # vectorize the given bodies of text, removing words that are most prevelant in the english language such as 'a' and 'the', 
+    # in order to leave only the most important words.
+    vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words='english')
+
+
+    #Calculate the cosine similarity between the two vectors
+    def cosine_sim(text1, text2):
+        tfidf = vectorizer.fit_transform([text1, text2])
+        return (tfidf * tfidf.T)[0,1]
+
+    count = 0
+    total_cosine = 0.0
     
+    for i in range (0, len(threadTitle)):
+        cosine_similarity = cosine_sim(newThreadTitle, threadTitle[i])
+        print(cosine_similarity)
+        if(cosine_similarity > 0.5):
+            return "true"
+    
+    for i in range (0, len(threadBody)):
+        cosine_similarity = cosine_sim(newThreadBody, threadBody[i])
+        print(cosine_similarity)
+        if(cosine_similarity > 0.5):
+            return "true"
+    
+    return "false"
+
+
 if __name__ == '__main__':
-    app.run(threaded = True, port = 5006)
+    Port = os.getenv('PORT')
+    app.run(threaded = True,host='0.0.0.0' ,port = Port)

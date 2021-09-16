@@ -31,7 +31,13 @@ namespace backend_api.Services.NoticeBoard
             _userService = userService;
             _notificationService = notificationService;
         }
-        
+
+        public NoticeBoardService(INoticeBoardRepository noticeBoardRepository, IUserService userService)
+        {
+            _noticeBoardRepository = noticeBoardRepository;
+            _userService = userService;
+        }
+
         /// <inheritdoc />
         public async Task<AddNoticeBoardThreadResponse> AddNoticeBoardThread(AddNoticeBoardThreadRequest request)
         {
@@ -60,7 +66,7 @@ namespace backend_api.Services.NoticeBoard
                 var payload = "A new notice has been created, please go and check it out!";
                 var emailReq = new SendEmailNotificationRequest(payload, "New Notice Created! " + request.ThreadTitle,
                     userEmails);
-
+                
                 await _notificationService.SendEmailNotification(emailReq);
 
                 return await _noticeBoardRepository.AddNoticeBoardThread(request);
@@ -70,13 +76,14 @@ namespace backend_api.Services.NoticeBoard
         public async Task<RetrieveNoticeBoardThreadsResponse> RetrieveNoticeBoardThreads(
             RetrieveNoticeBoardThreadsRequest request)
         {
-            RetrieveNoticeBoardThreadsResponse response = new RetrieveNoticeBoardThreadsResponse(
-                await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request));
-
             if (request == null)
             {
                 throw new InvalidNoticeBoardRequestException("Invalid RetrieveNoticeBoardThreadsRequest object");
             }
+            
+            
+            RetrieveNoticeBoardThreadsResponse response = new RetrieveNoticeBoardThreadsResponse(
+                await _noticeBoardRepository.RetrieveAllNoticeBoardThreads(request));
 
             return response;
         }
@@ -90,7 +97,7 @@ namespace backend_api.Services.NoticeBoard
                 throw new InvalidNoticeBoardRequestException("Invalid DeleteNoticeBoardThreadRequest Object");
             }
 
-            if (request.ThreadId == 0)
+            if (request.ThreadId <= 0)
             {
                 throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
             }
@@ -113,6 +120,36 @@ namespace backend_api.Services.NoticeBoard
             }
 
             return await _noticeBoardRepository.EditNoticeBoardThread(request);
+        }
+
+        public async Task<IncreaseEmojiResponse> IncreaseEmoji(IncreaseEmojiRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid IncreaseEmoji Request Object");
+            }
+
+            if (request.NoticeboardId <= 0)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
+            }
+
+            return await _noticeBoardRepository.IncreaseEmoji(request);
+        }
+
+        public async Task<DecreaseEmojiResponse> DecreaseEmoji(DecreaseEmojiRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid DecreaseEmoji Request Object");
+            }
+
+            if (request.NoticeboardId <= 0)
+            {
+                throw new InvalidNoticeBoardRequestException("Invalid ThreadId");
+            }
+
+            return await _noticeBoardRepository.DecreaseEmoji(request);
         }
     }
 }

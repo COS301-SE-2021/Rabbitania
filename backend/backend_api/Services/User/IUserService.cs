@@ -31,6 +31,7 @@ namespace backend_api.Services.User
         Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request);
 
         List<string> GetAllUserEmails();
+        Task<MakeUserAdminResponse> MakeUserAdmin(MakeUserAdminRequest request);
 
     }
 }

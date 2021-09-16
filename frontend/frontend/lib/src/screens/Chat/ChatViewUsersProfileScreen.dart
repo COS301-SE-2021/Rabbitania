@@ -18,6 +18,7 @@ class _ChatViewUsersProfileScreenState
   final utilModel = UtilModel();
   final userProvider = UserProvider();
   final userHelper = UserHelper();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -39,22 +40,26 @@ class _ChatViewUsersProfileScreenState
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ProfilePicture(45,
-                                  altDisplayImage: snapshot.data.userImage),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 15, left: 20),
-                                child: Text(
-                                  '${snapshot.data.name}',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 30, color: utilModel.greyColor),
-                                ),
-                              )
-                            ],
+                          InkWell(
+                            onLongPress: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ProfilePicture(45,
+                                    altDisplayImage: snapshot.data.userImage),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 15, left: 20),
+                                  child: Text(
+                                    '${snapshot.data.name}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 30,
+                                        color: utilModel.greyColor),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15.0),

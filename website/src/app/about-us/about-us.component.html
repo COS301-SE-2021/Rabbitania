@@ -1,0 +1,356 @@
+<mat-toolbar class="mat-elevation-z8">
+    &nbsp;
+    <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://retrorabbit.co.za">
+        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
+    </a>
+    <span class="toolbar-spacer"></span>
+    
+    <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
+        <div *ngIf="loggingIn;else login">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Logging In
+        </div>
+        <ng-template #login>
+            <i class="bi bi-google"> Login </i>
+        </ng-template>
+    </button>
+    <ng-template #other_content>
+        <div class="profile">
+            <span><img class="profile-pic" src="{{ user_googleUrl }}"/></span>&nbsp;
+            <span class="profile-text">{{ user_displayName }}</span>&nbsp;
+            <button class="log" matTooltip="Logout" mat-button (click)="signOut()"> 
+                Logout
+            </button>
+        </div>
+    </ng-template>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+
+        <img class="avatar mat-elevation-z8" *ngIf="user_googleUrl == '';else googleUrl" src="../../assets/png/logo.png" />
+        <ng-template #googleUrl>
+            <img class="avatar mat-elevation-z8" src="{{ user_googleUrl }}" />
+        </ng-template>
+
+        <h4 class="name">RABBITANIA MAIN MENU</h4>
+
+        <mat-divider class="nav-divider"></mat-divider>
+
+        <button mat-button class="menu-button" routerLink="/">
+            <span class="menu-icon"><fa-icon [icon]="faRocket"></fa-icon></span>
+            <span class="menu-icon-text"> Landing Page</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/about-us">
+            <span class="menu-icon"><i class="bi bi-terminal"></i></span>
+            <span class="menu-icon-text">About The Developers</span>
+        </button>
+
+        <mat-divider class="nav-divider"></mat-divider>
+        <h4 class="name">Employee Dashboard</h4>
+
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
+            <span class="menu-icon-text">View Bookings Schedule</span>
+        </button>
+
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><fa-icon [icon]="faBook"></fa-icon></span>
+            <span class="menu-icon-text">View Your Bookings</span>
+        </button>
+    
+
+        <mat-divider class="nav-divider"></mat-divider>
+        <h4 class="name">Administrator Dashboard</h4>
+
+        <button mat-button class="menu-button" routerLink="/ai-planner">
+            <span class="menu-icon"><fa-icon [icon]="faBriefcase"></fa-icon></span>
+            <span class="menu-icon-text">Office Planner</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
+            <span class="menu-icon-text">View Users</span>
+        </button>
+     
+    </mat-sidenav>
+    <mat-sidenav-content>
+        
+        <div class="content">
+            <div class="container-banner">
+                <span class="dojo-text1"> DEV </span>
+                <img class="sensei" src="../../assets/png/sensei-2.png">
+                <span class="dojo-text2"> DOJO </span>        
+            </div>
+        </div>
+
+        <div class="info-container">
+        
+            <div class="container" id="about_matt">
+                <div class="row align-items-center">
+                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
+                        <div class="member">
+                            <img class="image_matt" src="../../assets/png/matt.png"/>
+                            <br>
+                            <br>
+                            <div class="links">
+                                <a href="https://github.com/M-Harty21">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github icon-links"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/matthew-harty-8a40a3204">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin icon-links"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
+                        <div class="about">
+                            <h1>
+                                Matthew Harty
+                            </h1>
+                            <h1 style="opacity: 0.9;">
+                                BSc Information and Knowledge Systems
+                            </h1>
+                        </div>
+                        <br>
+                        <div class="about2">
+                            <h1 class="information">
+                                Roles & Contributions:
+                                <br>
+                                <ul style="float:left;">
+                                    <li> Backend & Frontend </li>
+                                    <li> Backend Testing </li>
+                                    <li> CI/CD Setup </li>
+                                </ul>
+                                <ul style="float:right;">
+                                    <li> Web Application & Security</li>
+                                    <li> Deployment </li>
+                                </ul>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br>
+                <br>
+                <br>
+            <div class="container" id="about_div">
+                <div class="row align-items-center">
+                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
+                        <div class="member">
+                            <img class="image_div" src="../../assets/png/div.jpeg"/>
+                        </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/DeMeiring">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github icon-links"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/james-hulett-255748177">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin icon-links"></i>
+                                    </button>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
+                        <div class="about">
+                            <h1>
+                                De Villiers Meiring
+                            </h1>
+                            <h1 style="opacity: 0.9;">
+                                BSc Information and Knowledge Systems
+                            </h1>
+                        </div>
+                        <br>
+                        <div class="about2">
+                            <h1 class="information">
+                                Roles & Contributions:
+                                <br>
+                                <ul style="float: left;">
+                                    <li> Frontend </li>
+                                    <li> Firebase & Firestore </li>
+                                </ul>
+                                <ul style="float: right;">
+                                    <li> APK Deployment </li>
+                                    <li> Frontend Coding Standards </li>
+                                </ul>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br>
+                <br>
+                <br>
+            <div class="container" id="about_james">
+                <div class="row align-items-center">
+                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
+                        <div class="member">
+                            <img class="image_james" src="../../assets/png/james.jpeg"/>
+                        </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/jmshltt">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github icon-links"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/james-hulett-255748177">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin icon-links"></i>
+                                    </button>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
+                        <div class="about">
+                            <h1>
+                                James Hulett
+                            </h1>
+                            <h1 style="opacity: 0.9;">
+                                BSc Information and Knowledge Systems
+                            </h1>
+                        </div>
+                        <br>
+                        <div class="about2">
+                            <h1 class="information">
+                                Roles & Contributions:
+                                <br>
+                                <ul style="float: left;">
+                                    <li> Backend and Security</li>
+                                    <li> Backend Testing </li>
+                                    <li> A.I. </li>
+                                </ul>
+                                <ul style="float: right;">
+                                    <li> CI/CD Setup </li>
+                                    <li> Deployment </li>
+                                </ul>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br>
+                <br>
+                <br>
+            <div class="container" id="about_joe">
+                <div class="row align-items-center">
+                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
+                        <div class="member">
+                            <img class="image_joe" src="../../assets/png/joe.jfif"/>
+                        </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/JojoMojo-svg">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github icon-links"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/joseph-harraway-968113210">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin icon-links"></i>
+                                    </button>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
+                        <div class="about">
+                            <h1>
+                                Joseph Harrway
+                            </h1>
+                            <h1 style="opacity: 0.9;">
+                                BSc Computer Science
+                            </h1>
+                        </div>
+                        <br>
+                        <div class="about2">
+                            <h1 class="information">
+                                Roles & Contributions:
+                                <br>
+                                <ul style="float: left;">
+                                    <li> Backend & Frontend</li>
+                                    <li> Backend Testing </li>
+                                    <li> A.I. </li>
+                                </ul>
+                                <ul style="float: right;">
+                                    <li> APK Deployment </li>
+                                    <li> Web Application </li>
+                                    <li> Natural Language Processor (NLP) </li>
+                                </ul>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br>
+                <br>
+                <br>
+            <div class="container" id="about_dean">
+                <div class="row align-items-center">
+                    <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
+                        <div class="member">
+                            <img class="image_dean" src="../../assets/png/dean.jfif"/>
+                        </div>
+                        <br>
+                            <div class="links">
+                                <a href="https://github.com/Deannortje">
+                                    <button mat-mini-fab color="dark">
+                                        <i class="bi bi-github icon-links"></i>
+                                    </button>
+                                </a>
+                                &nbsp;
+                                <a href="https://www.linkedin.com/in/dean-nortje-63419b210">
+                                    <button mat-mini-fab style="background-color: #2867B2;">
+                                        <i class="bi bi-linkedin icon-links"></i>
+                                    </button>
+                                </a>
+                            </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
+                        <div class="about">
+                            <h1>
+                                Dean Nortje
+                            </h1>
+                            <h1 style="opacity: 0.9;">
+                                BSc Information and Knowledge Systems
+                            </h1>
+                        </div>
+                        <br>
+                        <div class="about2">
+                            <h1 class="information">
+                                Roles & Contributions:
+                                <br>
+                                <ul style="float: left;">
+                                    <li> Frontend </li>
+                                    <li> Firebase </li>
+                                </ul>
+                                <ul style="float: right;">
+                                    <li> CI/CD Setup </li>
+                                    <li> Web Application </li>
+                                </ul>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div>
+                <br>
+            </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

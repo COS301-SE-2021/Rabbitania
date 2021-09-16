@@ -30,9 +30,13 @@ namespace backend_api.Data.NoticeBoard
             var imageUrl = request.ImageUrl;
             var permittedUserRoles = request.PermittedUserRoles;
             var userId = request.UserId;
+            var icon1 = request.Icon1;
+            var icon2 = request.Icon2;
+            var icon3 = request.Icon3;
+            var icon4 = request.Icon4;
 
             Models.NoticeBoard.NoticeBoard noticeBoardThread = new Models.NoticeBoard.NoticeBoard(threadTitle,
-                threadContent, minLevel, imageUrl, permittedUserRoles, userId);
+                threadContent, minLevel, imageUrl, permittedUserRoles, userId, icon1, icon2, icon3, icon4);
 
             _noticeBoard.NoticeBoard.Add(noticeBoardThread);
             await _noticeBoard.SaveChanges();
@@ -45,9 +49,17 @@ namespace backend_api.Data.NoticeBoard
         {
             var threadID = request.ThreadId;
             var toUpdate = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == threadID);
+            if (toUpdate == null)
+            {
+                return new EditNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
+            }
             toUpdate.ImageUrl = request.ImageUrl;
             toUpdate.ThreadContent = request.ThreadContent;
             toUpdate.ThreadTitle = request.ThreadTitle;
+            toUpdate.Icon1 = request.Icon1;
+            toUpdate.Icon2 = request.Icon2;
+            toUpdate.Icon3 = request.Icon3;
+            toUpdate.Icon4 = request.Icon4;
             try
             {
                 _noticeBoard.NoticeBoard.Update(toUpdate).State = EntityState.Modified;
@@ -73,7 +85,7 @@ namespace backend_api.Data.NoticeBoard
         {
             try
             {
-                var threadToDelete = _noticeBoard.NoticeBoard.Find(request.ThreadId);
+                var threadToDelete = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == request.ThreadId);
                 if (threadToDelete != null)
                 {
                     _noticeBoard.NoticeBoard.Remove(threadToDelete);
@@ -90,6 +102,68 @@ namespace backend_api.Data.NoticeBoard
             catch(InvalidNoticeBoardRequestException e)
             {
                 return new DeleteNoticeBoardThreadResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<IncreaseEmojiResponse> IncreaseEmoji(IncreaseEmojiRequest request)
+        {
+            try
+            {
+                var toUpdate = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == request.NoticeboardId);
+                if (request.EmojiUtf == "IconData(U+F0230)")
+                {
+                    toUpdate.Icon1++;
+                }
+                else if (request.EmojiUtf == "IconData(U+F022D)")
+                {
+                    toUpdate.Icon2++;
+                }
+                else if (request.EmojiUtf == "IconData(U+0E22B)")
+                {
+                    toUpdate.Icon3++;
+                }
+                else if (request.EmojiUtf == "IconData(U+0E0F6)")
+                {
+                    toUpdate.Icon4++;
+                }
+
+                await _noticeBoard.SaveChanges();
+                return new IncreaseEmojiResponse("Increased Emoji", HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return new IncreaseEmojiResponse("Unexpected Error occured", HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<DecreaseEmojiResponse> DecreaseEmoji(DecreaseEmojiRequest request)
+        {
+            try
+            {
+                var toUpdate = await _noticeBoard.NoticeBoard.FirstOrDefaultAsync(x => x.ThreadId == request.NoticeboardId);
+                if (request.EmojiUtf == "IconData(U+F0230)")
+                {
+                    toUpdate.Icon1--;
+                }
+                else if (request.EmojiUtf == "IconData(U+F022D)")
+                {
+                    toUpdate.Icon2--;
+                }
+                else if (request.EmojiUtf == "IconData(U+0E22B)")
+                {
+                    toUpdate.Icon3--;
+                }
+                else if (request.EmojiUtf == "IconData(U+0E0F6)")
+                {
+                    toUpdate.Icon4--;
+                }
+
+                await _noticeBoard.SaveChanges();
+                return new DecreaseEmojiResponse("Decreased Emoji", HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return new DecreaseEmojiResponse("Unexpected Error occured", HttpStatusCode.BadRequest);
             }
         }
     }

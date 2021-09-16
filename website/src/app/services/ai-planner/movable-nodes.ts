@@ -7,34 +7,50 @@ export class MovableNodes {
     private _deskNumber: number;
     private _savedX: number;
     private _savedY: number;
-  
-    constructor(deskNumber: number, x: number, y: number) 
+    private _userEmail: string;
+    private _active: boolean;
+    private _newPosx: number;
+  public get newPosx(): number {
+    return this._newPosx;
+  }
+  public set newPosx(value: number) {
+    this._newPosx = value;
+  }
+    private _newPosy: number;
+  public get newPosy(): number {
+    return this._newPosy;
+  }
+  public set newPosy(value: number) {
+    this._newPosy = value;
+  }
+
+    constructor(deskNumber: number, x: number, y: number, userEmail: string, active: boolean) 
     {
       this._state = "";
       this._position = "";
       this._deskNumber = deskNumber;
       this._savedX = x;
       this._savedY = y;
-    }
-  
-    //   getMovableNodes(): MovableNodesService[]
-    //   {
-    //     //return obj from API
-    //     let newMN1 = new MovableNodesService(1,0,0);
-    //     let newMN2 = new MovableNodesService(2,977,0);
-    //     let newMN3 = new MovableNodesService(3,0,777);
-    //     let newMN4 = new MovableNodesService(4,977,777);
-    //     let newMN5 = new MovableNodesService(5,472,372);
+      this._userEmail = userEmail;
+      this._active = active;
+      this._newPosx = x;
+      this._newPosy = y;
 
-    //     this.nodes1 = [
-    //         newMN1,
-    //         newMN2,
-    //         newMN3,
-    //         newMN4,
-    //         newMN5,
-    //       ];
-    //     return this.nodes1;
-    //   }
+    }
+
+    public get active(): boolean {
+      return this._active;
+    }
+    public set active(value: boolean) {
+      this._active = value;
+    }
+    
+    public get userEmail(): string {
+      return this._userEmail;
+    }
+    public set userEmail(value: string) {
+      this._userEmail = value;
+    }
 
     public get savedY(): number {
       return this._savedY;
@@ -76,11 +92,49 @@ export class MovableNodes {
     }
   
     dragMoved(event: CdkDragMove) {
-      // var boarder = document.getElementById(this._deskNumber.toString());
-      // var leftOffset = boarder!.offsetLeft;
-      // var toptOffset = boarder!.offsetTop;
-      //this.position = `> Position X: ${event.pointerPosition.x-leftOffset-30} - Y: ${event.pointerPosition.y-toptOffset-30}`;
-      this.position = `> Position X: ${event.source.getFreeDragPosition().x} - Y: ${event.source.getFreeDragPosition().y}`;
+      
+      var pixelCorrection = 1.59998888;
+      var xPosition =event.source.getFreeDragPosition().x + pixelCorrection;
+      var yPosition =event.source.getFreeDragPosition().y + pixelCorrection;
+      var screenHeight = window.innerHeight;
+      var screenWidth = window.innerWidth;
+
+    if(screenWidth >= 1700)
+    {
+      this.position = 'Position X: '+xPosition/0.4+'cm - Y: '+yPosition/0.4+'cm';
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
+    }
+    else if(screenWidth >= 1100)
+    {
+      this.position = 'Position X: '+xPosition/0.25+'cm - Y: '+yPosition/0.25+'cm';
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
+    }
+    else if(screenWidth >= 820)
+    {
+      this.position = 'Position X: '+xPosition/0.2+'cm - Y: '+yPosition/0.2+'cm';
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
+    }
+    else if(screenWidth >= 720)
+    {
+      this.position = 'Position X: '+xPosition/0.16+'cm - Y: '+yPosition/0.16+'cm';
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
+    }
+    else if(screenWidth >= 540)
+    {
+      this.position = 'Position X: '+xPosition/0.10+'cm - Y: '+yPosition/0.10+'cm';
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
+    }
+    else
+    { 
+      this.position = 'Position X: '+xPosition/0.08+'cm - Y: '+yPosition/0.08+'cm';
+      this._newPosx = this._savedX + xPosition;
+      this._newPosy= this._savedY + yPosition;
+    }
   
     }
   

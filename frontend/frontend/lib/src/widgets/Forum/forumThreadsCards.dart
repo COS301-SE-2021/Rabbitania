@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
+import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 
 class ForumThreadsCards extends StatelessWidget {
   final ForumThreadProvider ForumThreadCardProvider = new ForumThreadProvider();
@@ -53,7 +54,7 @@ class ForumThreadsCards extends StatelessWidget {
                       ),
                     );
                   } else {
-                    List<Widget> cards = [];
+                    cards = [];
                     while (iterate.moveNext()) {
                       cards.add(forumThreadCard(
                           forumThreadId: iterate.current.forumThreadId,

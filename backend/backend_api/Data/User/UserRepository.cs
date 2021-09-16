@@ -232,5 +232,29 @@ namespace backend_api.Data.User
             
             return emails;
         }
+
+        public async Task<MakeUserAdminResponse> MakeUserAdmin(MakeUserAdminRequest request)
+        {
+            try
+            {
+                var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == request.UserId);
+
+                try
+                {
+                    user.IsAdmin = true;
+                    await _users.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                return new MakeUserAdminResponse("User successfully made Admin", HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return new MakeUserAdminResponse(e.Message, HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

@@ -26,6 +26,18 @@ namespace backend_api.Data.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("Icon1")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Icon2")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Icon3")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Icon4")
+                        .HasColumnType("integer");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
@@ -50,45 +62,6 @@ namespace backend_api.Data.Migrations
 
                     b.ToTable("NoticeBoard");
                 });
-
-            /*modelBuilder.Entity("backend_api.Models.User.Users", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EmployeeLevel")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("OfficeLocation")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<List<int>>("PinnedUserIds")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("UserDescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserImgUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserRole")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-                });*/
 
             modelBuilder.Entity("backend_api.Models.NoticeBoard.NoticeBoard", b =>
                 {
