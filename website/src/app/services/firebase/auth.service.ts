@@ -66,8 +66,6 @@ export class AuthService {
       "googleImgUrl": user.user?.photoURL
     };
 
-    
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

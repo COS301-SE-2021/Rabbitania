@@ -90,9 +90,9 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns>bool</returns>
-        [HttpGet, Authorize]
+        [HttpPost, Authorize]
         [Route("CheckAdmin")]
-        public async Task<bool> CheckAdmin([FromQuery] CheckAdminStatusRequest request)
+        public async Task<bool> CheckAdmin([FromBody] CheckAdminStatusRequest request)
         {
             var resp = await _service.CheckAdmin(request);
             return resp.Result;

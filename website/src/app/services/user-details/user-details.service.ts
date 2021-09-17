@@ -5,6 +5,9 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserDetailsService {
+  adminObj:any = {
+    "userEmail": ""
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -18,12 +21,17 @@ export class UserDetailsService {
 
   clearUserDetails(){
     localStorage.removeItem('userDetails');
+    localStorage.removeItem('isAdmin');
   }
 
   async checkAdmin(email : string | null | undefined) {
     if(email == null || email == undefined ){
       return;
     }
+
+    this.adminObj = {
+      "userEmail": email
+    };
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -32,22 +40,18 @@ export class UserDetailsService {
       }),
       observe: 'response' as const,
     };
-    await this.http.post('https://localhost:5001/api/Auth/GoogleLogin', email, httpOptions).toPromise()
+    await this.http.post('https://localhost:5001/api/User/CheckAdmin', this.adminObj, httpOptions).toPromise()
         .then((response) => {
             console.log(response.ok);
             if(response.ok === true){
               if(response.body == true){
                 localStorage.setItem('isAdmin', true.toString());
-                return true;
               }else if(response.body == false){
                 localStorage.setItem('isAdmin', false.toString());
-                return false;
               }else{
                 localStorage.setItem('isAdmin', 'Error: unknown');
-                return false;
               }
             }
-            return false;
         })
         .catch((error) => {
             console.log("Server error: " + error.message);
