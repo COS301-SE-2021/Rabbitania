@@ -68,7 +68,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             var resp = authService.CheckEmailDomain(req);
             
             //Assert
-            Assert.False(resp.CorrectDomain);
+            Assert.True(resp.CorrectDomain);
         }
         
         [Fact(DisplayName = "Should be True if a 'gmail.com' email is used to login")]
@@ -82,7 +82,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             var resp = authService.CheckEmailDomain(req);
             
             //Assert
-            Assert.True(resp.CorrectDomain);
+            Assert.False(resp.CorrectDomain);
         }
         
         [Fact(DisplayName = "Should be True if the 'test@gmail.com' email is in the database")]

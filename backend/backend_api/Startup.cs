@@ -214,8 +214,6 @@ namespace backend_api
 
             #endregion
             
-            services.ConfigJwt(Configuration);
-            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.Authority = "https://securetoken.google.com/" +

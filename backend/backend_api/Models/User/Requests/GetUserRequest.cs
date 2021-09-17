@@ -4,21 +4,8 @@ namespace backend_api.Models.User.Requests
 {
     public class GetUserRequest
     {
-        //TODO: implement request to use jwt token from google Oauth
-        //private JsonWebToken jwt;
-        
-        // public GetUserRequest(JsonWebToken jwt)
-        // {
-        //     this.jwt = jwt;
-        // }
-
-        // public JsonWebToken getToken()
-        // {
-        //     return jwt;
-        // }
-        //----------------------------------------------------------------------------------
-        private string firstname;
-        private string surname;
+        private string _firstname;
+        private string _surname;
 
         public GetUserRequest()
         {
@@ -27,18 +14,18 @@ namespace backend_api.Models.User.Requests
         
         public GetUserRequest(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.surname = lastname;
+            this._firstname = firstname;
+            this._surname = lastname;
         }
 
         public string getName()
         {
-            return this.firstname;
+            return this._firstname;
         }
 
         public string getSurname()
         {
-            return this.surname;
+            return this._surname;
         }
     }
 }

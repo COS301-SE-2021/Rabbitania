@@ -2,17 +2,17 @@
 {
     public class GetUserByIDRequest
     {
-        private int UserID;
+        private int _UserID;
 
         public GetUserByIDRequest(int userId)
         {
-            UserID = userId;
+            _UserID = userId;
         }
 
         public int UserId
         {
-            get => UserID;
-            set => UserID = value;
+            get => _UserID;
+            set => _UserID = value;
         }
     }
 }
