@@ -73,12 +73,29 @@ namespace backend_api.Controllers.User
         {
             return await _service.GetUserProfiles(request);
         }
-
+        /// <summary>
+        ///     API endpoint to make a normal user
+        ///     an admin
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Http Status code</returns>
         [HttpPut, Authorize]
         [Route("MakeUserAdmin")]
         public async Task<MakeUserAdminResponse> MakeUserAdmin([FromBody] MakeUserAdminRequest request)
         {
             return await _service.MakeUserAdmin(request);
+        }
+        /// <summary>
+        ///     API endpoint to check if a user is an admin
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>bool</returns>
+        [HttpGet, Authorize]
+        [Route("CheckAdmin")]
+        public async Task<bool> CheckAdmin([FromQuery] CheckAdminStatusRequest request)
+        {
+            var resp = await _service.CheckAdmin(request);
+            return resp.Result;
         }
         
     }
