@@ -9,10 +9,13 @@ import { HttpClient } from '@angular/common/http';
 import { NodeServiceService } from '../../app/services/ai-planner/node-service.service';
 import { NodeGetAllRequest } from '../../app/interfaces/ai-planner-node-interface';
 import { Router } from '@angular/router';
-import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
+import { faRocket, faUsers, faBriefcase, faThList, faBook } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { AiPopupComponent } from '../ai-popup/ai-popup.component';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '../services/firebase/auth.service';
+import { UserDetailsService } from '../services/user-details/user-details.service';
+import { SignOutComponent } from '../sign-out/sign-out.component';
 
 @Component({
   selector: 'app-ai-planner',
@@ -25,6 +28,11 @@ export class AIPlannerComponent implements OnInit {
   //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
   //1600 -> 80 = (1600/10)/2
+
+   // Authorized User Detials
+   user_displayName = "";
+   user_googleUrl = "";
+   faBook = faBook;
 
   nodeStyle = "example-box";
 
@@ -41,6 +49,7 @@ export class AIPlannerComponent implements OnInit {
     return this.nodeStyle;
   }
 
+  loggingIn = false;
 
   faRocket = faRocket;
   faUsers = faUsers;
@@ -60,7 +69,17 @@ export class AIPlannerComponent implements OnInit {
   Math: any;
 
 
-  constructor(public authFire: AngularFireAuth,private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog, public router: Router){
+  constructor(
+    public authFire: AngularFireAuth,
+    private fb: FormBuilder, 
+    private observer: BreakpointObserver,
+    private http: HttpClient,
+    private service: NodeServiceService, 
+    public dialog: MatDialog, 
+    public router: Router, 
+    private authService: AuthService, 
+    private userService: UserDetailsService,
+    public model: MatDialog){
     this.onResize();
     this.Math = Math;
   }
@@ -68,6 +87,13 @@ export class AIPlannerComponent implements OnInit {
 
   ngOnInit(): void {
     //APi call to get nodes pos/name/details
+    var display = this.userService.retrieveUserDetails().displayName;
+    if(display == undefined || null){
+      console.log("Logged Out");
+    }else{
+      this.user_displayName = this.userService.retrieveUserDetails().displayName;
+      this.user_googleUrl = this.userService.retrieveUserDetails().googleImgUrl;
+    }
 
     this.onResize();
 
@@ -78,6 +104,45 @@ export class AIPlannerComponent implements OnInit {
     this.editNodeForm = this.fb.group({
         email: null,
       });
+  }
+
+  ngAfterViewInit() {
+    this.observer.observe("").pipe(delay(0.5)).subscribe((result) => {
+        if (result.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+    });
+  }
+
+  async signIn() {
+    this.loggingIn = true;
+    var res = await this.authService.signIn();
+    if(res){
+      this.loggingIn = false;
+    }else{
+      this.loggingIn = false;
+    }
+    this.ngOnInit();
+  }
+
+  async signOut(){
+    let modelRef = this.model.open(SignOutComponent,{
+      width: '250px'
+    });
+
+    modelRef.afterClosed().subscribe(result => {
+      if(result == "yes"){
+        this.authService.signOut();
+        window.location.reload();
+      }
+      if(result == "no"){
+        // do nothing
+      }
+    });
   }
 
   nodes: MovableNodes[] = [];
@@ -170,19 +235,6 @@ export class AIPlannerComponent implements OnInit {
         this.router.navigate([currentUrl]);
     });
 }
-
-
-  ngAfterViewInit() {
-    this.observer.observe("").pipe(delay(0.5)).subscribe((result) => {
-        if (result.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-    });
-  }
 
   nodeArray: NodeGetAllRequest[] = [];
 
