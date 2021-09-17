@@ -35,8 +35,6 @@ export class AboutUsComponent implements OnInit {
   faBook = faBook;
   //
 
-  loggingIn = false;
-
   constructor(
     public authFire: AngularFireAuth,
     private observer: BreakpointObserver, 
@@ -47,6 +45,8 @@ export class AboutUsComponent implements OnInit {
     private userService: UserDetailsService) {
       this.router = router;
   }
+
+  loggingIn = false;
 
   async ngOnInit(){
     var display = this.userService.retrieveUserDetails().displayName;

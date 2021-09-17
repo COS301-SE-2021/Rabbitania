@@ -33,18 +33,24 @@ export class AuthService {
 
     }
   
-  async getToken() : Promise<any> {
+  async setToken() : Promise<any> {
     await this.authFire.currentUser.then(async (data) => {
       await data?.getIdTokenResult().then((returned) => {
         this.token = {
           token: returned.token,
         }
+        sessionStorage.setItem('token' , returned.token);
       });
     });
   }
 
+  getToken(){
+    var token = sessionStorage.getItem('token');
+    return token;
+  }
+
   async Token(){
-    await this.getToken();
+    await this.setToken();
     return this.token.token;
   }
 
