@@ -85,15 +85,6 @@ export class AIPlannerComponent implements OnInit {
   screenHeight!: number;
   screenWidth!: number;
 
-  getDummyNodes(multiplier: number)
-  {
-    this.nodes = [];
-    for(var i =0; i< dummyData.length;i++)
-    {
-      this.nodes.push(new MovableNodes(Number(dummyData[i].id),Number(dummyData[i].xPos)*multiplier,Number(dummyData[i].yPos)*multiplier,dummyData[i].userEmail,dummyData[i].active.toString()))
-    }
-  }
-
   async getNodes(multiplier: number)
   {
 
