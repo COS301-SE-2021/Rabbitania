@@ -6,7 +6,7 @@ namespace backend_api.Models.User.Requests
     public class ViewProfileRequest
     {
    
-        private int UserID;
+        private int _UserID;
 
         public ViewProfileRequest()
         {
@@ -15,13 +15,13 @@ namespace backend_api.Models.User.Requests
         
         public ViewProfileRequest(int UserID)
         {
-            this.UserID = UserID;
+            this._UserID = UserID;
         }
 
         public int UserId
         {
-            get => UserID;
-            set => UserID = value;
+            get => _UserID;
+            set => _UserID = value;
         }
 
     }

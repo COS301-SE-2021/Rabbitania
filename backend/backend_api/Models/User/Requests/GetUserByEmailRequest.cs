@@ -2,11 +2,11 @@
 {
     public class GetUserByEmailRequest
     {
-        private string email;
+        private string _email;
 
         public GetUserByEmailRequest(string email)
         {
-            this.email = email;
+            this._email = email;
         }
 
         public GetUserByEmailRequest()
@@ -15,8 +15,8 @@
 
         public string Email
         {
-            get => email;
-            set => email = value;
+            get => _email;
+            set => _email = value;
         }
     }
 }

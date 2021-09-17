@@ -5,13 +5,13 @@ namespace backend_api.Models.Booking.Requests
 {
     public class CancelBookingScheduleRequest
     {
-        private string timeSlot;
-        private OfficeLocation office;
+        private string _timeSlot;
+        private OfficeLocation _office;
 
         public CancelBookingScheduleRequest(string timeSlot, OfficeLocation office)
         {
-            this.timeSlot = timeSlot;
-            this.office = office;
+            this._timeSlot = timeSlot;
+            this._office = office;
         }
 
         public CancelBookingScheduleRequest()
@@ -20,14 +20,14 @@ namespace backend_api.Models.Booking.Requests
 
         public string TimeSlot
         {
-            get => timeSlot;
-            set => timeSlot = value;
+            get => _timeSlot;
+            set => _timeSlot = value;
         }
 
         public OfficeLocation Office
         {
-            get => office;
-            set => office = value;
+            get => _office;
+            set => _office = value;
         }
     }
 }
