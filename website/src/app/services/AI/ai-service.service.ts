@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { QuestionnaireRequest } from 'src/app/interfaces/covid_questionnaire_interface';
 
 
@@ -49,9 +49,16 @@ return this.bs.asObservable();
 }
 
 async Activate(email:string){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }),
+    'observe': 'response' as const,
+  };
   this.http.put<QuestionnaireRequest>('https://localhost:5001/api/Node/ActivateNode', {
     userEmail : email
-   }).subscribe((data) => {
+   },httpOptions).subscribe((data) => {
     if(data){
       this.bs.next(data);
       return this.bs.asObservable();

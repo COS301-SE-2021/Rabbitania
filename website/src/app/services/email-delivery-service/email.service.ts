@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { EmailRequest } from 'src/app/interfaces/email';
@@ -13,11 +13,18 @@ export class EmailService {
   constructor(private http: HttpClient, ) { }
 
   async SendEmail(_payload : any, _subject : any, _email : any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      }),
+      'observe': 'response' as const,
+    };
     this.http.post<EmailRequest>('https://localhost:5001/api/Notifications/SendEmailNotification',{
       payload : _payload,
       subject : _subject,
       email : _email,
-    }).subscribe(
+    },httpOptions).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);

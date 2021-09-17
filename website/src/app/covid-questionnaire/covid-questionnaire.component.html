@@ -1,3 +1,32 @@
+<mat-toolbar class="mat-elevation-z8">
+    &nbsp;
+    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://retrorabbit.co.za">
+        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
+    </a>
+    <span class="toolbar-spacer"></span>
+
+    <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
+        <div *ngIf="loggingIn;else login">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            Logging In
+        </div>
+        <ng-template #login>
+            <i class="bi bi-google"> Login </i>
+        </ng-template>
+    </button>
+    <ng-template #other_content>
+        <div class="profile">
+            <span><img class="profile-pic" src="{{ user_googleUrl }}"/></span>&nbsp;
+            <span class="profile-text">{{ user_displayName }}</span>&nbsp;
+            <button class="log" matTooltip="Logout" mat-button (click)="signOut()">
+                Logout
+            </button>
+        </div>
+    </ng-template>
+</mat-toolbar>
+
+
 <div class = "parent">
 <form [formGroup] = "covidQuestionnaire" (ngSubmit) = "onSubmit()" class = "col-sm-6">
     <mat-card class = "form-container" style = "text-align: center;">
@@ -52,7 +81,7 @@
             </div>
           </div>
         <mat-card-actions>
-          <button mat-raised-button type = "submit" > Submit </button>
+          <button mat-raised-button type = "submit" [disabled] = "isDisabled"> Submit </button>
         </mat-card-actions>
 
     </mat-card>
