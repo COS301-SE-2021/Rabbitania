@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NodeGetAllRequest, NodeRequest } from 'src/app/interfaces/ai-planner-node-interface';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,25 @@ export class NodeServiceService {
 
   private bs = new BehaviorSubject<any>(null);
 
-  constructor(private http: HttpClient, ) { }
+  constructor(private http: HttpClient,public authFire: AngularFireAuth ) { }
+
+  token = {
+    token: ' '
+  };
+  //functionality
+  async getToken() : Promise<any> {
+    await this.authFire.currentUser.then(async (data) => {
+      await data?.getIdToken().then((returned) => {
+        this.token = {
+          token: returned,
+        }
+      });
+    });
+  }
+  async Token(){
+    await this.getToken();
+    return this.token.token;
+  }
 
   async Save(node: any){
   console.log("this is the node array :  " + node);
@@ -66,9 +84,19 @@ export class NodeServiceService {
   return this.bs.asObservable();
   }
 
+
+  
   async Get(){
-    this.http.get('https://localhost:5001/api/Node/GetAllNodes', {
-    }).subscribe(
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + await this.Token()
+      }),
+      observe: 'response' as const,
+    };
+
+    this.http.get('https://localhost:5001/api/Node/GetAllNodes',httpOptions).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
