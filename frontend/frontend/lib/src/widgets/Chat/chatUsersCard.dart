@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersProfileScreen.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
-import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
+import 'package:frontend/src/models/utilModel.dart';
+import 'package:frontend/src/screens/Chat/chatRoomScreen.dart';
+import 'package:frontend/src/screens/Chat/chatViewUsersProfileScreen.dart';
 
 class ChatUsersCard extends StatefulWidget {
   var groupChatHelper = GroupChatHelper();
@@ -30,9 +27,7 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
   final utilModel = UtilModel();
   final chatHelper = ChatHelper();
   bool isSelected = false;
-  //TODO: create function for setting hasNotification to true if count > 0
   bool hasNotifications = false;
-  //TODO: make to get notification count with http to server
   int notificationCount = 1;
 
   void toggle() {
@@ -67,8 +62,6 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //profile picture of the user
-
               Expanded(
                 flex: 3,
                 child: Container(
@@ -93,7 +86,6 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
                         );
                       },
                       child: CircleAvatar(
-                        //backgroundColor: utilModel.greenColor,
                         backgroundImage: NetworkImage(widget.displayImage),
                         radius: 30,
                       ),

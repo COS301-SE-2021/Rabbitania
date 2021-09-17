@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
 import 'package:frontend/src/screens/Chat/groupChatViewGroupScreen.dart';
 import 'package:frontend/src/widgets/Chat/groupChatUserAvatar.dart';
 
@@ -44,7 +43,6 @@ class _GroupChatParticipantBarState extends State<GroupChatParticipantBar> {
               ),
             )
           ];
-          //loop through participants to get each user avatar and display in circleavatar
           if (snapshot1.hasData) {
             var participants = snapshot1.data.docs[0]['participants'];
 
