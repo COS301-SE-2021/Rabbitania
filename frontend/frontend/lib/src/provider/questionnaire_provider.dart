@@ -23,7 +23,7 @@ class QuestionnaireProvider {
     }
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:5006/api/predict'),
+      Uri.parse('http://rabbitania-runtimeterrors.herokuapp.com:5006/api/predict'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

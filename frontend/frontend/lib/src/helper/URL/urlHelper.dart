@@ -12,6 +12,6 @@ class URLHelper {
 
   //function ot return alternative development url
   getAltBaseURL() async {
-    return devAlt;
+    return deploy;
   }
 }

@@ -14,14 +14,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "248471898739-260571vdokjdufohrke7g6im5kbb8h66.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.frontend",
-            "certificate_hash": "fb5cabae1fffb0cbc4f6f291c9709e4d61130001"
-          }
-        },
-        {
           "client_id": "248471898739-419nh0ituue074vtl2bmcblv6ikmu3kt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -51,6 +43,14 @@
           "android_info": {
             "package_name": "com.example.frontend",
             "certificate_hash": "d65ec1382a63827ee9184557f0e4bd1363f8e53d"
+          }
+        },
+        {
+          "client_id": "248471898739-uh3v2l62nj26orsbme94oapi7jq5fsmf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "46cf2687a331ede1122d4ded26e4329a1a6f4c00"
           }
         },
         {
@@ -91,6 +91,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "248471898739-6521unfuv5nqhn0mbdjl64i2cvarg4ok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "46cf2687a331ede1122d4ded26e4329a1a6f4c00"
+          }
+        },
+        {
           "client_id": "248471898739-d7l37jp27mjumbtknqjhe6j0j1v4f7a8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -112,14 +120,6 @@
           "android_info": {
             "package_name": "com.rabbitania.frontend",
             "certificate_hash": "4c807a711df3242e54fc7a74ec7eaa6e4fdadc5c"
-          }
-        },
-        {
-          "client_id": "248471898739-ovu9dq6k16rms2vlkb9v663b9i3nuq07.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.rabbitania.frontend",
-            "certificate_hash": "fb5cabae1fffb0cbc4f6f291c9709e4d61130001"
           }
         },
         {
