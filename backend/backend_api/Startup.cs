@@ -82,11 +82,11 @@ namespace backend_api
             services.AddTransient<IAuthService, AuthService>();
             
 
-            /*services.AddHangfire(options =>
+            services.AddHangfire(options =>
             {
                 options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
                 
-            });*/
+            });
             //services.AddResponseCaching();
             services.AddControllers();
             /*
@@ -256,8 +256,8 @@ namespace backend_api
             app.UseAuthentication();
             app.UseAuthorization();
 
-            /*app.UseHangfireDashboard();
-            app.UseHangfireServer(options);*/
+            app.UseHangfireDashboard();
+            app.UseHangfireServer(options);
             
             app.UseEndpoints(endpoints =>
             {
