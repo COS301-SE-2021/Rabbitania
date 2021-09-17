@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/provider/chat_provider.dart';
+import 'package:frontend/src/models/utilModel.dart';
 
 class VideoChatScreen extends StatefulWidget {
   final String channelName;
@@ -29,9 +27,7 @@ class _VideoChatState extends State<VideoChatScreen> {
 
   @override
   void dispose() {
-    // clear users
     _users.clear();
-    // destroy sdk and leave channel
     _engine.destroy();
     super.dispose();
   }
@@ -39,7 +35,6 @@ class _VideoChatState extends State<VideoChatScreen> {
   @override
   void initState() {
     super.initState();
-    // initialize agora sdk
     initializeAgora();
   }
 

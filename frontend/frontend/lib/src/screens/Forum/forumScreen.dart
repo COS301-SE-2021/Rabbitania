@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/provider/forum_provider.dart';
-import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Forum/forumCreateForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumSearch.dart';
-import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumHome.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../Noticeboard/noticeboardScreen.dart';
 
 class Forum extends StatefulWidget {
   createState() {
@@ -19,7 +13,6 @@ class Forum extends StatefulWidget {
   }
 }
 
-//late Future<List<ForumObj>> futureForum;
 late Future<List<ForumThread>> futureForumLatestThread;
 late List<Widget> cards = [];
 
@@ -27,7 +20,6 @@ class _Forum extends State<Forum> {
   final util = new UtilModel();
   void initState() {
     super.initState();
-    //futureForum = fetchForum();
   }
 
   void search() {
@@ -39,15 +31,11 @@ class _Forum extends State<Forum> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
-
           UtilModel.route(() => ForumCreateScreen(), context);
         },
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.add, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -78,11 +66,9 @@ class _Forum extends State<Forum> {
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
-          //HERE is the stack for the forum page, the stack fills back to front (last child will be on the top of the stack)
           children: <Widget>[
-            // Children of type widget
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(padding: EdgeInsets.only(bottom: 0), child: ForumHome()),

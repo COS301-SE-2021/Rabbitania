@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
-import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ForumCreateThreadScreen extends StatefulWidget {
@@ -25,19 +22,19 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
   final util = new UtilModel();
   UserHelper userHelper = UserHelper();
 
-  int ForumThreadCreatorId = 0;
+  int forumThreadCreatorId = 0;
   void initState() {
     super.initState();
     userHelper.getUserID().then((value) {
       setState(() {
-        this.ForumThreadCreatorId = value;
+        this.forumThreadCreatorId = value;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    ForumThreadProvider ForumCreateThreadProvider = new ForumThreadProvider();
+    ForumThreadProvider forumCreateThreadProvider = new ForumThreadProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
@@ -46,11 +43,11 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
             context: context,
             builder: (context) {
               return FutureBuilder<String>(
-                future: ForumCreateThreadProvider.addNewForumThreadNLP(
+                future: forumCreateThreadProvider.addNewForumThreadNLP(
                     currentForumID,
                     forumThreadTitleController.text,
                     forumThreadBodyController.text,
-                    ForumThreadCreatorId),
+                    forumThreadCreatorId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data! != "true") {
                     return AlertDialog(
@@ -73,7 +70,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           onPressed: () async {
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
-                            ForumCreateImg64 = "";
+                            forumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),
@@ -99,15 +96,15 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           ),
                           tooltip: 'Continue',
                           onPressed: () async {
-                            ForumCreateThreadProvider.addNewForumThread(
+                            forumCreateThreadProvider.addNewForumThread(
                                 currentForumID,
                                 forumThreadTitleController.text,
                                 forumThreadBodyController.text,
-                                ForumThreadCreatorId);
+                                forumThreadCreatorId);
 
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
-                            ForumCreateImg64 = "";
+                            forumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),
@@ -121,7 +118,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
                           onPressed: () async {
                             forumThreadTitleController.text = "";
                             forumThreadBodyController.text = "";
-                            ForumCreateImg64 = "";
+                            forumCreateImg64 = "";
                             UtilModel.route(() => Forum(), context);
                           },
                         ),
@@ -142,8 +139,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
             },
           );
         },
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside ),
+        child: Icon(Icons.add, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -170,7 +166,7 @@ class _ForumCreateThreadScreen extends State<ForumCreateThreadScreen> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

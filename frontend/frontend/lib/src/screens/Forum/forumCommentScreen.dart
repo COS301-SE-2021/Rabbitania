@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadCommentsCards.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -39,7 +39,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ForumThreadCommentProvider CommentProvider =
+    ForumThreadCommentProvider commentProvider =
         new ForumThreadCommentProvider();
     return Scaffold(
       bottomNavigationBar: bnb(context),
@@ -78,13 +78,13 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
         fit: StackFit.expand,
         children: [
           SvgPicture.string(
-            util.svg_background,
+            util.svgBackground,
             fit: BoxFit.contain,
           ),
           InkWell(
             onTap: () =>
                 {FocusScope.of(context).unfocus(), commentController.clear()},
-            child: RRCommentBox(
+            child: PRCommentBox(
               userImage: "",
               child: Card(
                   color: Color.fromRGBO(57, 57, 57, 1),
@@ -99,7 +99,7 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               errorText: 'Comment cannot be blank',
               sendButtonMethod: () async {
                 print(commentController.text);
-                await CommentProvider.addNewComment(
+                await commentProvider.addNewComment(
                     commentController.text, threadCommentCreatorId);
                 commentController.clear();
                 FocusScope.of(context).unfocus();
