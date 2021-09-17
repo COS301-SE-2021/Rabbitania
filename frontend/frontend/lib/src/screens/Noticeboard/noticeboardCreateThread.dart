@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/noticeboard_provider.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -18,7 +18,7 @@ final titleControllerNoticeboardCreate = TextEditingController();
 final contentControllerNoticeboardCreate = TextEditingController();
 
 class _NoticeThreadBoard extends State<NoticeBoardThread> {
-  final util = new UtilModel();
+  final utilModel = new UtilModel();
   UserHelper userHelper = UserHelper();
 
   int noticeboardCreatorId = 0;
@@ -39,10 +39,8 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
         onPressed: () {
-          //code to execute on button press
           showDialog(
             context: context,
             builder: (context) {
@@ -92,8 +90,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
             },
           );
         },
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.add, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -120,7 +117,7 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              utilModel.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

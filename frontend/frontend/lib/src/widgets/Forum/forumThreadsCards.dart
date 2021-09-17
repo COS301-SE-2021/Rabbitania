@@ -5,7 +5,7 @@ import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 
 class ForumThreadsCards extends StatelessWidget {
-  final ForumThreadProvider ForumThreadCardProvider = new ForumThreadProvider();
+  final ForumThreadProvider forumThreadCardProvider = new ForumThreadProvider();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -16,7 +16,7 @@ class ForumThreadsCards extends StatelessWidget {
             //Children in the list
 
             FutureBuilder<List<ForumThread>>(
-              future: ForumThreadCardProvider.fetchForumThreads(currentForumID),
+              future: forumThreadCardProvider.fetchForumThreads(currentForumID),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var iterate = snapshot.data!.iterator;
@@ -56,7 +56,7 @@ class ForumThreadsCards extends StatelessWidget {
                   } else {
                     cards = [];
                     while (iterate.moveNext()) {
-                      cards.add(forumThreadCard(
+                      cards.add(ForumThreadCard(
                           forumThreadId: iterate.current.forumThreadId,
                           forumThreadTitle: iterate.current.forumThreadTitle,
                           forumThreadBody: iterate.current.forumThreadBody,

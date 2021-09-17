@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/src/models/Booking/bookingModel.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/provider/booking_provider.dart';
-import 'package:frontend/src/provider/user_provider.dart';
-import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
-import 'package:frontend/src/widgets/Booking/bookingButton.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Booking/bookingGridSchedule.dart';
-import 'package:frontend/src/widgets/Booking/bookingViewButton.dart';
-import 'package:frontend/src/widgets/Booking/viewBookingCard.dart';
 
 class BookingSchedules extends StatefulWidget {
   @override
@@ -40,7 +30,7 @@ class _BookingScheduleState extends State<BookingSchedules> {
           child: Stack(
             children: <Widget>[
               SvgPicture.string(
-                utilModel.svg_background,
+                utilModel.svgBackground,
                 fit: BoxFit.contain,
               ),
               BookingGridSchedule(),

@@ -1,15 +1,13 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io' as Io;
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/GroupChatRoomScreen.dart';
+import 'package:frontend/src/models/utilModel.dart';
+import 'package:frontend/src/screens/Chat/groupChatRoomScreen.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GroupChatCreateScreen extends StatefulWidget {
@@ -154,10 +152,7 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                           icon: Icon(FontAwesomeIcons.plus,
                               color: utilModel.greenColor),
                           onPressed: () {
-                            //TODO: figure out how to save images in firestore
-                            //TODO: navigate to new Chat screen
                             if (textController.text != '') {
-                              //adds current logged in userID to participants array before creating groupChatroom
                               widget.groupChatHelper.addUserToArray(myId);
                               _imageBase64 == null
                                   ? firestoreHelper.createGroupChatRoom(

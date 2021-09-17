@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 
 class ForumThreadSearch extends StatefulWidget {
@@ -144,7 +144,7 @@ class _ForumThreadSearchState extends State<ForumThreadSearch> {
     searchresult.clear();
     if (_isSearching != false) {
       for (int i = 0; i < _list.length; i++) {
-        forumThreadCard data = _list[i];
+        ForumThreadCard data = _list[i];
         if (data.forumThreadTitle
             .toString()
             .toLowerCase()

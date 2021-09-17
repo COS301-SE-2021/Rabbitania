@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 
 //widget for messages being sent by user
 class ChatMessageReceiver extends StatefulWidget {
@@ -12,11 +12,11 @@ class ChatMessageReceiver extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _chatMessageReceiverState();
+    return ChatMessageReceiverState();
   }
 }
 
-class _chatMessageReceiverState extends State<ChatMessageReceiver> {
+class ChatMessageReceiverState extends State<ChatMessageReceiver> {
   final utilModel = UtilModel();
   final firestoreHelper = FireStoreHelper();
   @override
@@ -30,20 +30,17 @@ class _chatMessageReceiverState extends State<ChatMessageReceiver> {
                 child: Container(
                   margin: EdgeInsets.only(
                       right: MediaQuery.of(context).size.width * 0.1),
-                  //width: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
                     borderRadius: new BorderRadius.only(
                       topRight: const Radius.circular(25.0),
                       bottomRight: const Radius.circular(25.0),
                       topLeft: const Radius.circular(25.0),
                     ),
-                    //color of recieved message border is grey
                     border: Border.all(
                       color: utilModel.greenColor,
                       width: 2,
                     ),
                   ),
-                  //get value sent through in the constructor
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { AiPopupComponent } from '../ai-popup/ai-popup.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-ai-planner',
@@ -19,11 +20,26 @@ import { AiPopupComponent } from '../ai-popup/ai-popup.component';
   styleUrls: ['./ai-planner.component.scss']
 })
 export class AIPlannerComponent implements OnInit {
+  
   //1600x900 AKA a 16:9 ratio
   //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
   //1600 -> 80 = (1600/10)/2
 
+  nodeStyle = "example-box";
+
+  checkActive(active:boolean)
+  {
+    if(active)
+    {
+      this.nodeStyle = "example-box";
+    }
+    else{
+      this.nodeStyle = "example-box2";
+    }
+
+    return this.nodeStyle;
+  }
 
 
   faRocket = faRocket;
@@ -44,13 +60,15 @@ export class AIPlannerComponent implements OnInit {
   Math: any;
 
 
-  constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog){
+  constructor(public authFire: AngularFireAuth,private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog, public router: Router){
     this.onResize();
     this.Math = Math;
   }
 
+
   ngOnInit(): void {
     //APi call to get nodes pos/name/details
+    
     this.onResize();
 
     this.addNodeForm = this.fb.group({
@@ -72,19 +90,20 @@ export class AIPlannerComponent implements OnInit {
     this.nodes = [];
     for(var i =0; i< dummyData.length;i++)
     {
-      this.nodes.push(new MovableNodes(Number(dummyData[i].id),Number(dummyData[i].xPos)*multiplier,Number(dummyData[i].yPos)*multiplier,dummyData[i].userEmail,dummyData[i].active))
+      this.nodes.push(new MovableNodes(Number(dummyData[i].id),Number(dummyData[i].xPos)*multiplier,Number(dummyData[i].yPos)*multiplier,dummyData[i].userEmail,dummyData[i].active.toString()))
     }
   }
 
   async getNodes(multiplier: number)
   {
+    
     var result = await this.service.Get();
     result.subscribe(data => {
       if(data){
         this.nodes = [];
           for(var i =0; i< data.length;i++)
           {
-            this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos)*multiplier,Number(data[i].yPos)*multiplier,data[i].userEmail,data[i].active))
+            this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos)*multiplier,Number(data[i].yPos)*multiplier,data[i].userEmail,data[i].active.toString()))
           }
       }
     });
@@ -135,20 +154,32 @@ export class AIPlannerComponent implements OnInit {
   }
 
   async addNode(){
+  
   const nodeObject = this.addNodeForm.value;
   
   var result = await this.service.Post(nodeObject.email,0.0,0.0,false);
-
+  var received = true;
   result.subscribe(data => {
       if(data){
-        console.log(data)
+        if(received){ 
+          this.openDialog();
+         
+          received = false;
+        }
+        console.log(data);
       }
     });
     
-      this.openDialog();
- 
+   
     
   }
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
+}
+
 
   ngAfterViewInit() {
     this.observer.observe("").pipe(delay(0.5)).subscribe((result) => {
@@ -166,8 +197,19 @@ export class AIPlannerComponent implements OnInit {
 
   async save()
   {
+   
     this.nodeArray = [];
     this.nodes.forEach(element => {
+
+      var activeElement = false;
+      if(element.active=="true")
+      {
+        activeElement = true;
+      }
+      else
+      {
+        activeElement = false;
+      }
       
       var singleNode:NodeGetAllRequest =
       {
@@ -176,7 +218,7 @@ export class AIPlannerComponent implements OnInit {
         user: null,
         xPos: element.newPosx/this.screenRatio,
         yPos: element.newPosy/this.screenRatio,
-        active: element.active,
+        active: activeElement,
       } ;
 
       this.nodeArray.push(singleNode);
@@ -190,6 +232,7 @@ export class AIPlannerComponent implements OnInit {
   }
 
   async delete(deskNumber: number){
+   
     var result = await this.service.Delete(deskNumber);
     result.subscribe(data => {
         if(data){
@@ -207,6 +250,7 @@ export class AIPlannerComponent implements OnInit {
     setTimeout(() => {
       this.getNodes(this.screenRatio);
   }, 700);
+  this.reloadCurrentRoute();
   }
   
   

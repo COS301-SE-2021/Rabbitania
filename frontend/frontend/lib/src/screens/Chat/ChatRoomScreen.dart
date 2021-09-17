@@ -1,22 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:frontend/src/widgets/Chat/chatParticipantBar.dart';
 import 'package:frontend/src/widgets/Chat/chatSendMessageBar.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   final idUser;
-  //1== runtimeTerrors , 2==James, 3==diff , 4==matt, 5==Dean, 6==Joe
-
-  //i am currently retard
-  // final int myId = 2
   ChatRoomScreen(this.idUser);
   @override
   State<StatefulWidget> createState() => _chatRoomScreenState();
@@ -29,7 +23,6 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
   final chatHelper = ChatHelper();
   @override
   Widget build(BuildContext context) {
-    //TODO: must filter to only see messages sent to current user
     return FutureBuilder(
       future: userProvider.getUserID(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -45,7 +38,7 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
             body: Stack(
               children: [
                 SvgPicture.string(
-                  utilModel.svg_background,
+                  utilModel.svgBackground,
                   fit: BoxFit.contain,
                 ),
                 Column(
@@ -65,7 +58,6 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
 
                                   List<Widget> children = [];
                                   if (snapshot.hasData) {
-                                    //must loop through messages return object to filter throug
                                     if (snapshot.data.docs.length == 0) {
                                       children.add(
                                         Center(
@@ -82,8 +74,6 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                       for (int i = 0;
                                           i < snapshot.data.docs.length;
                                           i++) {
-                                        //messages correspond to current user and selected user
-
                                         if (snapshot.data.docs[i]['uid'] ==
                                                 myId &&
                                             snapshot.data.docs[i]['toUid'] ==
@@ -120,10 +110,6 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                     children.add(CircularProgressIndicator());
                                   }
 
-                                  //participantID matches clicked on id, means other persons message
-
-                                  // return ListView(
-                                  //     reverse: true, shrinkWrap: true, children: children);
                                   return ListView.builder(
                                     padding:
                                         EdgeInsets.only(left: 10, right: 10),

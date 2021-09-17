@@ -8,7 +8,7 @@ export class MovableNodes {
     private _savedX: number;
     private _savedY: number;
     private _userEmail: string;
-    private _active: boolean;
+    private _active: string;
     private _newPosx: number;
   public get newPosx(): number {
     return this._newPosx;
@@ -24,7 +24,7 @@ export class MovableNodes {
     this._newPosy = value;
   }
 
-    constructor(deskNumber: number, x: number, y: number, userEmail: string, active: boolean) 
+    constructor(deskNumber: number, x: number, y: number, userEmail: string, active: string) 
     {
       this._state = "";
       this._position = "";
@@ -38,10 +38,10 @@ export class MovableNodes {
 
     }
 
-    public get active(): boolean {
+    public get active(): string {
       return this._active;
     }
-    public set active(value: boolean) {
+    public set active(value: string) {
       this._active = value;
     }
     

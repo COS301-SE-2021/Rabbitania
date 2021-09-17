@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumCard.dart';
@@ -17,22 +16,20 @@ TextEditingController forumEditTitleController = new TextEditingController();
 
 class _ForumEditForumScreen extends State<ForumEditForumScreen> {
   final util = new UtilModel();
-  final ForumProvider ForumEditProvider = new ForumProvider();
+  final ForumProvider forumEditProvider = new ForumProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
           showDialog(
             context: context,
             builder: (context) {
               if (forumEditTitleController.text != "") {
                 return FutureBuilder<String>(
-                  future: ForumEditProvider.editNewForum(
-                      forumEditTitleController.text),
+                  future: forumEditProvider
+                      .editNewForum(forumEditTitleController.text),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return AlertDialog(
@@ -78,8 +75,7 @@ class _ForumEditForumScreen extends State<ForumEditForumScreen> {
             },
           );
         },
-        child: Icon(Icons.edit,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.edit, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -106,7 +102,7 @@ class _ForumEditForumScreen extends State<ForumEditForumScreen> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

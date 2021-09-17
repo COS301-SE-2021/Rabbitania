@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersProfileScreen.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
-import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
+import 'package:frontend/src/models/utilModel.dart';
 
 class GroupChatAddUserCard extends StatefulWidget {
   final roomName;
@@ -39,8 +33,6 @@ class _GroupChatAddUserCardState extends State<GroupChatAddUserCard> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //profile picture of the user
-
               Expanded(
                 flex: 3,
                 child: Container(
@@ -57,7 +49,6 @@ class _GroupChatAddUserCardState extends State<GroupChatAddUserCard> {
                         Navigator.pop(context);
                       },
                       child: CircleAvatar(
-                        //backgroundColor: utilModel.greenColor,
                         backgroundImage: NetworkImage(widget.displayImage),
                         radius: 30,
                       ),

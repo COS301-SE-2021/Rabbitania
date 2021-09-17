@@ -17,17 +17,15 @@ class NoticeCard extends StatelessWidget {
               List<Widget> cards = [];
               while (iterate.moveNext()) {
                 if (iterate.current.threadId == noticeID) {
-                  cards.add(singleNoticeCardObj(
-                    id: iterate.current.threadId,
-                    theThreadTitle: iterate.current.threadTitle,
-                    theThreadContent: iterate.current.threadContent,
-                    imageFile: iterate.current.imageUrl,
-                    icon1: iterate.current.icon1,
-                    icon2: iterate.current.icon2,
-                    icon3: iterate.current.icon3,
-                    icon4: iterate.current.icon4
-
-                  ));
+                  cards.add(SingleNoticeCardObj(
+                      id: iterate.current.threadId,
+                      theThreadTitle: iterate.current.threadTitle,
+                      theThreadContent: iterate.current.threadContent,
+                      imageFile: iterate.current.imageUrl,
+                      icon1: iterate.current.icon1,
+                      icon2: iterate.current.icon2,
+                      icon3: iterate.current.icon3,
+                      icon4: iterate.current.icon4));
                 }
               }
               return new Column(children: cards);

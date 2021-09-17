@@ -25,7 +25,7 @@ namespace backend_api.Tests.User.UnitTests
         [Fact(DisplayName = "When the request object is null, Invalid User Request error must be thrown")]
         public async Task EditUser_ExceptionOnNullRequestObject()
         {
-            var exception = await Assert.ThrowsAsync<InvalidUserRequest>(() => _sut.EditProfile(null));
+            var exception = await Assert.ThrowsAsync<InvalidUserRequestException>(() => _sut.EditProfile(null));
             Assert.Equal("Request object cannot be null", exception.Message);
         }
 

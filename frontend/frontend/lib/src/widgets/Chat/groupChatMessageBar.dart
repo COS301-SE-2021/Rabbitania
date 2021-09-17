@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
+import 'package:frontend/src/models/utilModel.dart';
 
 class GroupChatSendMessageBar extends StatefulWidget {
   final roomName;
@@ -12,11 +9,11 @@ class GroupChatSendMessageBar extends StatefulWidget {
   GroupChatSendMessageBar(this.myId, this.roomName);
   @override
   State<StatefulWidget> createState() {
-    return _groupChatsendMessageBarState();
+    return _GroupChatsendMessageBarState();
   }
 }
 
-class _groupChatsendMessageBarState extends State<GroupChatSendMessageBar> {
+class _GroupChatsendMessageBarState extends State<GroupChatSendMessageBar> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
   final messageController = TextEditingController();

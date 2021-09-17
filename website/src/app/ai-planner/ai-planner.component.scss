@@ -29,7 +29,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: rgba(179, 255, 79,1);
+    background: rgba(179, 255, 79, 0.35);
+    border-color: rgba(179, 255, 79,1);
     border-radius: 50%;
     margin-right: 25px;
     position: absolute;
@@ -41,29 +42,36 @@
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
                 0 2px 2px 0 rgba(0, 0, 0, 0.14),
                 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  }
 
-  .example-box:active {
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    &:hover{
+      background: rgba(179, 255, 79,1);
+    }
   }
+  
   
   @mixin boundaryMixin {
     position: relative;
     border: solid rgba(179, 255, 79,1) 2px;
     //background-image: url('../../test_variables/1600x900FloorPlan.jpg');
     //background-image: url('../../test_variables/Officelayout-600x386.jpg');
-    background-image: url('../../test_variables/NewModel.png');
+    background-image: url('../../test_variables/floorPlan.png');
     background-color: #fff;
     background-repeat: no-repeat;
     background-size: 100%, 100%;
   }
 
-  .example-box {
+  .true{
     width: 80px;
     height: 80px;
     @include node;
+    
+  }
+
+  .false {
+    width: 80px;
+    height: 80px;
+    @include node;
+    background: rgba(31, 30, 30, 0.35);
     
   }
 
@@ -79,10 +87,18 @@
       height: 612.5px;
       @include boundaryMixin;
     }
-    .example-box {
+    .true{
       width: 50px;
       height: 50px;
       @include node;
+      
+    }
+    .false {
+      width: 50px;
+      height: 50px;
+      @include node;
+      background: rgba(31, 30, 30, 0.35);
+      
     }
   }
 
@@ -92,10 +108,17 @@
       height: 490px;
       @include boundaryMixin;
     }
-    .example-box {
+    .true {
       width: 40px;
       height: 40px;
       @include node;
+    }
+    .false {
+      width: 40px;
+      height: 40px;
+      @include node;
+      background: rgba(31, 30, 30, 0.35);
+      
     }
   }
   
@@ -105,10 +128,17 @@
       height: 392px;
       @include boundaryMixin;
     }
-    .example-box {
+    .true {
       width: 32px;
       height: 32px;
       @include node;
+    }
+    .false {
+      width: 32px;
+      height: 32px;
+      @include node;
+      background: rgba(31, 30, 30, 0.35);
+      
     }
   }
 
@@ -118,10 +148,17 @@
       height: 247px;
       @include boundaryMixin;
     }
-    .example-box {
+    .true {
       width: 20px;
       height: 20px;
       @include node;
+    }
+    .false {
+      width: 20px;
+      height: 20px;
+      @include node;
+      background: rgba(31, 30, 30, 0.35);
+      
     }
   }
   @media (max-width: 540px) {
@@ -130,10 +167,17 @@
       height: 202px;
       @include boundaryMixin;
     }
-    .example-box {
+    .true {
       width: 16px;
       height: 16px;
       @include node;
+    }
+    .false {
+      width: 16px;
+      height: 16px;
+      @include node;
+      background: rgba(31, 30, 30, 0.35);
+      
     }
   }
 

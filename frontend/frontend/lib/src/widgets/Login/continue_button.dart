@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
@@ -11,18 +10,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardScreen.dart';
 import 'package:frontend/src/screens/Login/supplyInfoScreen.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ContinueButton extends StatefulWidget {
   final user;
   ContinueButton(this.user);
   @override
   State<StatefulWidget> createState() {
-    return _continueButton();
+    return _ContinueButton();
   }
 }
 
-class _continueButton extends State<ContinueButton> {
+class _ContinueButton extends State<ContinueButton> {
   UserProvider userProvider = UserProvider();
 
   SecurityHelper securityHelper = SecurityHelper();
@@ -32,15 +30,13 @@ class _continueButton extends State<ContinueButton> {
   @mustCallSuper
   void initState() {
     super.initState();
-    httpCall();
+    googleLoginHttpCall();
   }
 
-  Future httpCall() async {
+  Future googleLoginHttpCall() async {
     final baseURL = await url.getBaseURL();
     final userHelper = UserHelper();
-    //var idToken = await securityHelper.getFirestoreIdToken();
     var idToken = await FirebaseAuth.instance.currentUser!.getIdToken();
-    log(idToken);
     setState(() {});
     final response = await http.post(
       Uri.parse(baseURL + '/api/Auth/GoogleLogin'),
@@ -68,8 +64,6 @@ class _continueButton extends State<ContinueButton> {
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
     } else if (response.statusCode == 201) {
       final fireStoreHelper = FireStoreHelper();
-      //function to add user to firestore when created on our db
-
       int userID = await userProvider.getUserID();
       await fireStoreHelper.createNewUsersDocsWithUid(
           userID,
@@ -121,7 +115,7 @@ class _continueButton extends State<ContinueButton> {
             ),
           ),
           onPressed: () {
-            httpCall();
+            googleLoginHttpCall();
           },
         ),
       );

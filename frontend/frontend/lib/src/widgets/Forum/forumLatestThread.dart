@@ -1,20 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
-import 'package:frontend/src/screens/Forum/forumScreen.dart';
 
 Widget ForumLatestThread(int forumIdentifier) {
   final utilModel = UtilModel();
-  ForumThreadProvider ForumLatestThreadProvider = new ForumThreadProvider();
+  ForumThreadProvider forumLatestThreadProvider = new ForumThreadProvider();
 
   return Center(
     child: Column(
       children: [
         FutureBuilder<List<ForumThread>>(
-          future: ForumLatestThreadProvider.fetchForumThreads(forumIdentifier),
+          future: forumLatestThreadProvider.fetchForumThreads(forumIdentifier),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.length == 0) {

@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Noticeboard/noticeboardHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/noticeboard_provider.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardEditThread.dart';
 
+//model to model a notice board thread object
 class NoticeBoardThreads {
   final List<dynamic> threadList;
 
@@ -21,6 +22,7 @@ class NoticeBoardThreads {
   }
 }
 
+//model to model a Thread object
 class Thread {
   final int threadId;
   final String threadTitle;
@@ -98,9 +100,6 @@ class NoticeboardHomeCard extends StatelessWidget {
               ListTile(
                 contentPadding:
                     EdgeInsets.only(bottom: 10.0, top: 10, left: 20, right: 10),
-                // leading: Icon(
-                //   Icons.announcement_outlined, size: 45,
-                //   color: Color.fromRGBO(171, 255, 79, 1),),
                 title: Container(
                   padding: EdgeInsets.only(bottom: 8),
                   child: Text(
@@ -134,7 +133,7 @@ class NoticeboardHomeCard extends StatelessWidget {
   }
 }
 
-class singleNoticeCardObj extends StatelessWidget {
+class SingleNoticeCardObj extends StatelessWidget {
   final int id;
   final String theThreadTitle;
   final String theThreadContent;
@@ -144,7 +143,7 @@ class singleNoticeCardObj extends StatelessWidget {
   final int icon3;
   final int icon4;
 
-  singleNoticeCardObj(
+  SingleNoticeCardObj(
       {required this.id,
       required this.theThreadTitle,
       required this.theThreadContent,
@@ -252,11 +251,11 @@ class NoticeboardReactionsState extends State<NoticeboardReactions> {
             if (temp == widget.amount) {
               temp++;
               print(widget.iconSelected.toString());
-              IncreaseEmoji(widget.iconSelected.toString());
+              increaseEmoji(widget.iconSelected.toString());
               //++ Emoji amount in DB
             } else {
               temp--;
-              DecreaseEmoji(widget.iconSelected.toString());
+              decreaseEmoji(widget.iconSelected.toString());
               //-- Emoji amount in DB
             }
           });
@@ -279,32 +278,13 @@ class NoticeboardReactionsState extends State<NoticeboardReactions> {
   }
 }
 
-// Widget EmojiCard2(int num) {
-//   if (num > 0) {
-//     return Card(
-//         color: Color.fromRGBO(33, 33, 33, 33),
-//         child: Row(
-//           children: [
-//             Icon(Icons.thumb_down_alt_rounded, size: 25, color: Colors.red),
-//             Text(
-//               num.toString(),
-//               style: TextStyle(
-//                   letterSpacing: 2.0, color: Colors.white, fontSize: 15),
-//             ),
-//           ],
-//         ));
-//   } else {
-//     return SizedBox.shrink();
-//   }
-// }
-
-class noticeboardEditCard extends StatelessWidget {
+class NoticeboardEditCard extends StatelessWidget {
   final int id;
   final String theThreadTitle;
   final String theThreadContent;
   final String theThreadImageFile;
 
-  const noticeboardEditCard(
+  const NoticeboardEditCard(
       {required this.id,
       required this.theThreadTitle,
       required this.theThreadContent,

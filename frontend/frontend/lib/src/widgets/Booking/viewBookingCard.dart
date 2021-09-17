@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
-import 'package:frontend/src/widgets/Booking/cancelBookingButton.dart';
 
 class BookingListView extends StatefulWidget {
   @override
@@ -121,7 +120,6 @@ class _BookingListView extends State<BookingListView> {
           onDismissed: (direction) {
             bookingProvider.deleteBookingAsync(data[index].id).then((value) {
               if (value) {
-                //Successful
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -144,7 +142,6 @@ class _BookingListView extends State<BookingListView> {
                   ),
                 );
               } else {
-                //Server error
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
@@ -214,7 +211,6 @@ class _BookingListView extends State<BookingListView> {
   }
 }
 
-// ignore: must_be_immutable
 class CustomListItem extends StatelessWidget {
   CustomListItem(
       this.icon, this.timeslot, this.office, this.bookingDate, this.id);
@@ -228,12 +224,11 @@ class CustomListItem extends StatelessWidget {
   late var splitSlot = timeslot.split(",");
   late String day = splitSlot[0];
   late String slot = splitSlot[1];
-  // Will be deleted
+
   late String tempOfficeName;
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Delete this and replace with HTTP call
     if (office == 0) {
       tempOfficeName = "Pretoria";
     } else if (office == 1) {

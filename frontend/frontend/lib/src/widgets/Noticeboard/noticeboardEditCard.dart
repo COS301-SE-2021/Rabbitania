@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 File? noticeboardEditImageFile;
 String noticeboardEditInputImage = "";
-//Uint8List? base64String;
 String noticeboardEditImg64 = "";
 Future<String>? futureStringReceived;
 
@@ -24,7 +23,7 @@ class NoticeboardEditThreadCard extends StatelessWidget {
               List<Widget> cards = [];
               while (iterate.moveNext()) {
                 if (iterate.current.threadId == noticeID) {
-                  return noticeboardEditCard(
+                  return NoticeboardEditCard(
                       id: iterate.current.threadId,
                       theThreadTitle: iterate.current.threadTitle,
                       theThreadContent: iterate.current.threadContent,

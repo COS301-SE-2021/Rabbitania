@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminScheduleScreen.dart';
-import 'package:frontend/src/screens/Booking/bookingDayScreen.dart';
 
 class BookingScheduleButton extends StatefulWidget {
   final String displayText;

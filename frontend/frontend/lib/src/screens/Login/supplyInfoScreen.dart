@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/provider/google_sign_in.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
-import 'loginScreen.dart';
 import '../Noticeboard/noticeboardScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
 class InfoForm extends StatefulWidget {
@@ -19,11 +15,11 @@ class InfoForm extends StatefulWidget {
   InfoForm(this.user);
   @override
   State<StatefulWidget> createState() {
-    return _infoForm();
+    return InfoFormState();
   }
 }
 
-class _infoForm extends State<InfoForm> {
+class InfoFormState extends State<InfoForm> {
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
   URLHelper url = new URLHelper();
@@ -47,7 +43,6 @@ class _infoForm extends State<InfoForm> {
   httpCallGetUser() async {
     final userProvider = new UserProvider();
     final userID = await userProvider.getUserID();
-
     return userID;
   }
 
@@ -57,7 +52,7 @@ class _infoForm extends State<InfoForm> {
       officeLocationInt = 1;
     }
 
-    DetermineRole(_dropDownRoleValue) {
+    determineRole(_dropDownRoleValue) {
       switch (_dropDownRoleValue) {
         case "developer":
           return 0;
@@ -80,7 +75,7 @@ class _infoForm extends State<InfoForm> {
       }
     }
 
-    int userRole = DetermineRole(_dropDownRoleValue);
+    int userRole = determineRole(_dropDownRoleValue);
 
     final token = await securityHelper.getToken();
     final baseURL = await url.getBaseURL();
@@ -106,25 +101,6 @@ class _infoForm extends State<InfoForm> {
     if (response.statusCode == 200) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => NoticeBoard()));
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': user.providerData[0].email,
-          'name': await loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return httpCallUpdateUserInfo();
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       showDialog(
         context: context,
@@ -149,7 +125,7 @@ class _infoForm extends State<InfoForm> {
           backgroundColor: Color.fromRGBO(33, 33, 33, 1),
           body: Stack(
             children: <Widget>[
-              SvgPicture.string(utilModel.svg_background),
+              SvgPicture.string(utilModel.svgBackground),
               Container(
                 alignment: Alignment.center,
                 child: Form(

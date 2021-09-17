@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersProfileScreen.dart';
+import 'package:frontend/src/screens/Chat/chatRoomScreen.dart';
+import 'package:frontend/src/screens/Chat/chatViewUsersProfileScreen.dart';
 
 class GroupChatUserAvatar extends StatefulWidget {
   final avatar;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
@@ -86,12 +86,11 @@ class _BookingState extends State<BookingScreen> {
           backgroundColor: Colors.transparent,
         ),
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-        // 63 63 63
         body: Center(
           child: Stack(
             children: <Widget>[
               SvgPicture.string(
-                utilModel.svg_background,
+                utilModel.svgBackground,
                 fit: BoxFit.contain,
               ),
               Column(

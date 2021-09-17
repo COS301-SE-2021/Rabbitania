@@ -1,6 +1,7 @@
+//model used to model a booking schedule model
 class BookingScheduleModel {
-  final String timeSlot; // composite key
-  final int office; // composite key
+  final String timeSlot;
+  final int office;
   final int availability;
 
   BookingScheduleModel(

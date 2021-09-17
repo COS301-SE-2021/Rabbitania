@@ -123,7 +123,7 @@ namespace backend_api.Services.Auth
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw new InvalidUserRequest("The user does not exist in the database");
+                throw new InvalidUserRequestException("The user does not exist in the database");
             }
         }
         
@@ -138,7 +138,7 @@ namespace backend_api.Services.Auth
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw new InvalidUserRequest("The user does not exist in the database");
+                throw new InvalidUserRequestException("The user does not exist in the database");
             }
         }
         
@@ -153,7 +153,7 @@ namespace backend_api.Services.Auth
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw new InvalidUserRequest("The user does not exist in the database");
+                throw new InvalidUserRequestException("The user does not exist in the database");
             }
             
         }

@@ -1,3 +1,4 @@
+//model to model a user object for viewing current user profile
 class ProfileUser {
   final int userId;
   final String userName;

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
-import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
-import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
-import 'package:frontend/src/widgets/Forum/forumEditForumCard.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,21 +19,19 @@ TextEditingController forumThreadEditBodyController =
 
 class _ForumEditThreadScreen extends State<ForumEditThreadScreen> {
   final util = new UtilModel();
-  final ForumThreadProvider ForumEditThreadProvider = new ForumThreadProvider();
+  final ForumThreadProvider forumEditThreadProvider = new ForumThreadProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
           showDialog(
             context: context,
             builder: (context) {
               if (forumThreadEditTitleController.text != "") {
                 return FutureBuilder<String>(
-                  future: ForumEditThreadProvider.editForumThread(
+                  future: forumEditThreadProvider.editForumThread(
                       forumThreadEditTitleController.text,
                       forumThreadEditBodyController.text),
                   builder: (context, snapshot) {
@@ -85,8 +80,7 @@ class _ForumEditThreadScreen extends State<ForumEditThreadScreen> {
             },
           );
         },
-        child: Icon(Icons.edit,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.edit, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -113,7 +107,7 @@ class _ForumEditThreadScreen extends State<ForumEditThreadScreen> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(
