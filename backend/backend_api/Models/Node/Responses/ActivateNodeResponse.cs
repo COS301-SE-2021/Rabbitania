@@ -4,19 +4,19 @@ namespace backend_api.Models.Node.Responses
 {
     public class ActivateNodeResponse
     {
-        private string response;
+        private string _response;
         private HttpStatusCode _statusCode;
         
         public ActivateNodeResponse(string response, HttpStatusCode statusCode)
         {
-            this.response = response;
+            this._response = response;
             _statusCode = statusCode;
         }
 
         public string Response
         {
-            get => response;
-            set => response = value;
+            get => _response;
+            set => _response = value;
         }
 
         public HttpStatusCode StatusCode
@@ -27,7 +27,7 @@ namespace backend_api.Models.Node.Responses
 
         public ActivateNodeResponse(string response)
         {
-            this.response = response;
+            this._response = response;
         }
     }
     

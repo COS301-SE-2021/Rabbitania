@@ -9,28 +9,28 @@ namespace backend_api.Models.User.Responses
     {
         public ViewProfileResponse(HttpStatusCode message, string name, string userImage, string description, string phoneNumber, int empLevel, UserRoles userRole, OfficeLocation officeLocation)
         {
-            this.response = message;
-            this.name = name;
-            this.userImage = userImage;
-            this.description = description;
-            this.phoneNumber = phoneNumber;
-            this.empLevel = empLevel;
-            this.officeLocation = officeLocation;
-            this.userRoles = userRole;
+            this._response = message;
+            this._name = name;
+            this._userImage = userImage;
+            this._description = description;
+            this._phoneNumber = phoneNumber;
+            this._empLevel = empLevel;
+            this._officeLocation = officeLocation;
+            this._userRoles = userRole;
         }
 
-        public HttpStatusCode response { get; set; }
-        public string name { get; set; }
-        public string userImage { get; set; }
-        public string description { get; set; }
-        public string phoneNumber { get; set; }
-        public int empLevel { get; set; }
-        public OfficeLocation officeLocation { get; set; }
-        public UserRoles userRoles { get; set; }
+        public HttpStatusCode _response { get; set; }
+        public string _name { get; set; }
+        public string _userImage { get; set; }
+        public string _description { get; set; }
+        public string _phoneNumber { get; set; }
+        public int _empLevel { get; set; }
+        public OfficeLocation _officeLocation { get; set; }
+        public UserRoles _userRoles { get; set; }
 
         public ViewProfileResponse(HttpStatusCode response)
         {
-            this.response = response;
+            this._response = response;
         }
         
 
