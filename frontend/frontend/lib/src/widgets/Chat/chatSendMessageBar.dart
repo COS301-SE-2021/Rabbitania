@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/ChatRoomScreen.dart';
+import 'package:frontend/src/models/utilModel.dart';
 
 class ChatSendMessageBar extends StatefulWidget {
   final idUser;
@@ -12,11 +9,11 @@ class ChatSendMessageBar extends StatefulWidget {
   ChatSendMessageBar(this.idUser, this.myId);
   @override
   State<StatefulWidget> createState() {
-    return _chatSendMessageBarState();
+    return ChatSendMessageBarState();
   }
 }
 
-class _chatSendMessageBarState extends State<ChatSendMessageBar> {
+class ChatSendMessageBarState extends State<ChatSendMessageBar> {
   final fireStoreHelper = FireStoreHelper();
   final utilModel = UtilModel();
   final messageController = TextEditingController();

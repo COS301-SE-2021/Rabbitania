@@ -5,15 +5,12 @@ import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateThreadCard.dart';
 import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:http/http.dart' as http;
 
-////////////////////////////////////////////////////////////////
-/// Forum Requests
-///////////////////////////////////////////////////////////////
-///
+// Forum Requests
 class ForumProvider {
   final fireBaseEmail =
       FirebaseAuth.instance.currentUser!.providerData[0].email!;
@@ -71,16 +68,11 @@ class ForumProvider {
   }
 
   Future<bool> deleteForum(int currentForumID) async {
-    //This
-    var cid = currentForumID;
     try {
       if (currentForumID < 0) {
         throw ("Error Forum ID is Incorrect");
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
       URLHelper url = new URLHelper();
-
       final baseURL = await url.getBaseURL();
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.delete(
@@ -112,9 +104,7 @@ class ForumProvider {
         throw ("Cannot Submit Empty Fields");
       }
       String datetime = DateTime.now().toString();
-      String Date = datetime.replaceAll(" ", "T");
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
+      String date = datetime.replaceAll(" ", "T");
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.post(
         Uri.parse(baseURL + '/api/Forum/CreateForum'),
@@ -122,12 +112,10 @@ class ForumProvider {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token'
         },
-        //"2021-08-04T13:45:13.091Z"
-
         body: jsonEncode(<String, dynamic>{
           "forumId": 0,
           "forumTitle": title,
-          "createdDate": Date,
+          "createdDate": date,
           "userId": userID
         }),
       );
@@ -150,8 +138,6 @@ class ForumProvider {
       if (title == "") {
         throw ("Cannot Submit Empty Fields");
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.put(
         Uri.parse(baseURL + '/api/Forum/EditForum'),
@@ -176,26 +162,21 @@ class ForumProvider {
   }
 }
 
-////////////////////////////////////////////////////////////////
-/// Forum Threads
-///////////////////////////////////////////////////////////////
+// Forum Threads
+
 class ForumThreadProvider {
   final fireBaseEmail =
       FirebaseAuth.instance.currentUser!.providerData[0].email!;
 
   Future<List<ForumThread>> fetchForumThreads(int forumIdentifier) async {
     HttpClient client = new HttpClient();
-    UserHelper loggedUser = new UserHelper();
     URLHelper urlBase = new URLHelper();
     final baseAltURL = await urlBase.getAltBaseURL();
-    final baseURL = await urlBase.getBaseURL();
-
     client.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => true);
     String url = baseAltURL +
         '/api/Forum/RetrieveForumThreads?ForumID=' +
         forumIdentifier.toString();
-    SecurityHelper securityHelper = new SecurityHelper();
     final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     HttpClientRequest request = await client.getUrl(Uri.parse(url));
     request.headers.set('content-type', 'application/json');
@@ -203,7 +184,6 @@ class ForumThreadProvider {
 
     HttpClientResponse response1 = await request.close();
     String reply = await response1.transform(utf8.decoder).join();
-    //print(jsonDecode(reply));
 
     List? tList = ForumThreads.fromJson(jsonDecode(reply)).forumThreadList;
 
@@ -228,8 +208,6 @@ class ForumThreadProvider {
       if (currentThreadID < 0) {
         throw ("Error: Forum Thread ID is Incorrect");
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.delete(
         Uri.parse(baseURL + '/api/Forum/DeleteForumThread'),
@@ -262,16 +240,14 @@ class ForumThreadProvider {
         throw ("Cannot Submit Empty Title");
       }
 
-      if (ForumCreateImg64 != "") {
-        ForumCreateInputImage = ForumCreateImg64;
+      if (forumCreateImg64 != "") {
+        forumCreateInputImage = forumCreateImg64;
       } else {
-        ForumCreateInputImage = util.defaultImage;
+        forumCreateInputImage = util.defaultImage;
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       String datetime = DateTime.now().toString();
-      String Date = datetime.replaceAll(" ", "T");
+      String date = datetime.replaceAll(" ", "T");
       final response = await http.post(
         Uri.parse(baseURL + '/api/Forum/CreateForumThread'),
         headers: <String, String>{
@@ -282,22 +258,22 @@ class ForumThreadProvider {
           "forumThreadId": 0,
           "forumThreadTitle": title,
           "forumThreadBody": body,
-          "createdDate": Date,
-          "imageUrl": ForumCreateInputImage,
+          "createdDate": date,
+          "imageUrl": forumCreateInputImage,
           "userId": userId,
           "forumId": currentForumID
         }),
       );
       if (response.statusCode == 201 || response.statusCode == 200) {
-        ForumCreateImageFile = null;
+        forumCreateImageFile = null;
         return ("Successfully uploaded new Forum Thread");
       } else {
-        ForumCreateImageFile = null;
+        forumCreateImageFile = null;
         throw ("Failed to create new thread error" +
             response.statusCode.toString());
       }
     } catch (Exception) {
-      ForumCreateImageFile = null;
+      forumCreateImageFile = null;
       return ("Error: " + Exception.toString());
     }
   }
@@ -312,16 +288,14 @@ class ForumThreadProvider {
         throw ("Cannot Submit Empty Title");
       }
 
-      if (ForumCreateImg64 != "") {
-        ForumCreateInputImage = ForumCreateImg64;
+      if (forumCreateImg64 != "") {
+        forumCreateInputImage = forumCreateImg64;
       } else {
-        ForumCreateInputImage = util.defaultImage;
+        forumCreateInputImage = util.defaultImage;
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       String datetime = DateTime.now().toString();
-      String Date = datetime.replaceAll(" ", "T");
+      String date = datetime.replaceAll(" ", "T");
 
       final response = await http.post(
         Uri.parse(baseURL + '/api/Forum/CreateForumThreadAPI'),
@@ -333,29 +307,27 @@ class ForumThreadProvider {
           "forumThreadId": 0,
           "forumThreadTitle": title,
           "forumThreadBody": body,
-          "createdDate": Date,
-          "imageUrl": ForumCreateInputImage,
+          "createdDate": date,
+          "imageUrl": forumCreateInputImage,
           "userId": userId,
           "forumId": currentForumID
         }),
       );
       if (response.statusCode == 201 || response.statusCode == 200) {
-        ForumCreateImageFile = null;
+        forumCreateImageFile = null;
 
         if (response.body == "true") {
-          //bring up an alert etc...
           return (response.body.toString());
         } else {
-          //dont do anytthing jsut return success
           return ("Successfully uploaded new Forum Thread");
         }
       } else {
-        ForumCreateImageFile = null;
+        forumCreateImageFile = null;
         throw ("Failed to create new thread error" +
             response.statusCode.toString());
       }
     } catch (Exception) {
-      ForumCreateImageFile = null;
+      forumCreateImageFile = null;
       return ("Error: " + Exception.toString());
     }
   }
@@ -371,8 +343,7 @@ class ForumThreadProvider {
       if (editForumThreadImg64 != "") {
         editForumThreadInputImage = editForumThreadImg64;
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
+
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.put(
         Uri.parse(baseURL + '/api/Forum/EditForumThread'),
@@ -400,15 +371,13 @@ class ForumThreadProvider {
   }
 }
 
-///////////////////////////////////////////////////////////////////
-/// ForumThreadComments
-///////////////////////////////////////////////////////////////
+// ForumThreadComments
+
 class ForumThreadCommentProvider {
   final fireBaseEmail =
       FirebaseAuth.instance.currentUser!.providerData[0].email!;
-  Future<List<ThreadComments>> fetchThreadComments(int ThreadIdentifier) async {
+  Future<List<ThreadComments>> fetchThreadComments(int threadIdentifier) async {
     URLHelper urlBase = new URLHelper();
-    final baseURL = await urlBase.getBaseURL();
     final baseAltURL = await urlBase.getAltBaseURL();
 
     HttpClient client = new HttpClient();
@@ -416,9 +385,7 @@ class ForumThreadCommentProvider {
         ((X509Certificate cert, String host, int port) => true);
     String url = baseAltURL +
         '/api/Forum/RetrieveThreadComments?ForumThreadID=' +
-        ThreadIdentifier.toString();
-    SecurityHelper securityHelper = new SecurityHelper();
-    UserHelper loggedUser = new UserHelper();
+        threadIdentifier.toString();
     final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     HttpClientRequest request = await client.getUrl(Uri.parse(url));
     request.headers.set('content-type', 'application/json');
@@ -430,17 +397,17 @@ class ForumThreadCommentProvider {
     List? cList =
         ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
 
-    List<ThreadComments> CommentObj = [];
+    List<ThreadComments> commentObj = [];
 
     if (cList != null) {
       for (var t in cList) {
-        CommentObj.add(ThreadComments.fromJson(t));
+        commentObj.add(ThreadComments.fromJson(t));
       }
 
       client.close();
-      return CommentObj;
+      return commentObj;
     } else {
-      return CommentObj;
+      return commentObj;
     }
   }
 
@@ -452,8 +419,7 @@ class ForumThreadCommentProvider {
       if (currentCommentId < 0) {
         throw ("Error: Comment Id is invalid");
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
+
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.delete(
         Uri.parse(baseURL + '/api/Forum/DeleteThreadComment'),
@@ -467,7 +433,6 @@ class ForumThreadCommentProvider {
           },
         ),
       );
-      //print("CODE ============" + response.statusCode.toString());
       if (response.statusCode == 201 || response.statusCode == 200) {
         return true;
       } else {
@@ -485,8 +450,7 @@ class ForumThreadCommentProvider {
       if (body == "") {
         throw ("Cannot Submit Empty Comment");
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
+
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       final response = await http.put(
         Uri.parse(baseURL + '/api/Forum/EditThreadComment'),
@@ -521,11 +485,10 @@ class ForumThreadCommentProvider {
       if (comment == "") {
         throw ("Cannot Submit Empty Fields");
       }
-      SecurityHelper securityHelper = new SecurityHelper();
-      UserHelper loggedUser = new UserHelper();
+
       final token = await FirebaseAuth.instance.currentUser!.getIdToken();
       String datetime = DateTime.now().toString();
-      String Date = datetime.replaceAll(" ", "T");
+      String date = datetime.replaceAll(" ", "T");
       final response = await http.post(
         Uri.parse(baseURL + '/api/Forum/CreateThreadComment'),
         headers: <String, String>{
@@ -535,7 +498,7 @@ class ForumThreadCommentProvider {
         body: jsonEncode(<String, dynamic>{
           "threadCommentId": 0,
           "commentBody": comment,
-          "createdDate": Date,
+          "createdDate": date,
           "imageUrl": "string",
           "likes": 0,
           "dislikes": 0,
@@ -548,11 +511,9 @@ class ForumThreadCommentProvider {
           response.statusCode == 100) {
         return ("Success");
       } else {
-        //print("Failed to Send Message" + response.statusCode.toString());
         throw ("Failed to Send Message" + response.statusCode.toString());
       }
     } catch (Exception) {
-      //print("Error: " + Exception.toString());
       return ("Error: " + Exception.toString());
     }
   }

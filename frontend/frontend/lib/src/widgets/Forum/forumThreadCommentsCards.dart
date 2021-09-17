@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumCommentScreen.dart';
 import 'package:frontend/src/screens/Forum/forumEditThreadCommentScreen.dart';
@@ -10,18 +10,18 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_reaction_button/flutter_reaction_button.dart';
 
 class ForumThreadCommentsCards extends StatelessWidget {
-  ForumThreadCommentProvider ForumThreadCommentsProvider =
+  ForumThreadCommentProvider forumThreadCommentsProvider =
       new ForumThreadCommentProvider();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ThreadComments>>(
-      future: ForumThreadCommentsProvider.fetchThreadComments(currentThreadID),
+      future: forumThreadCommentsProvider.fetchThreadComments(currentThreadID),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var iterate = snapshot.data!.iterator;
           if (snapshot.data!.length == 0) {
             return ListView(children: [
-              CurrentQuestionWidget(),
+              currentQuestionWidget(),
               Card(
                 color: Color.fromRGBO(57, 57, 57, 25),
                 shadowColor: Colors.black,
@@ -64,7 +64,7 @@ class ForumThreadCommentsCards extends StatelessWidget {
                   forumThreadId: iterate.current.forumThreadId,
                   userId: iterate.current.userId));
             }
-            comments.add(CurrentQuestionWidget());
+            comments.add(currentQuestionWidget());
             return new ListView(children: comments.reversed.toList());
           }
         } else if (snapshot.hasError) {
@@ -81,7 +81,7 @@ class ForumThreadCommentsCards extends StatelessWidget {
   }
 }
 
-Widget CurrentQuestionWidget() {
+Widget currentQuestionWidget() {
   return Card(
     color: Color.fromRGBO(57, 57, 57, 25),
     shadowColor: Colors.black,
@@ -153,7 +153,7 @@ class forumCommentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ForumThreadCommentProvider ForumThreadCommentsDeleteProvider =
+    ForumThreadCommentProvider forumThreadCommentsDeleteProvider =
         new ForumThreadCommentProvider();
     return new Slidable(
       actionPane: SlidableDrawerActionPane(),
@@ -185,7 +185,7 @@ class forumCommentCard extends StatelessWidget {
           Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
-              children: <Widget>[Reactions(context)]),
+              children: <Widget>[reactions(context)]),
           new Divider(
             height: 0.0,
             thickness: 0.3,
@@ -222,8 +222,8 @@ class forumCommentCard extends StatelessWidget {
                       onPressed: () async {
                         // ignore: unused_local_variable
                         currentCommentId = this.threadCommentId;
-                        await ForumThreadCommentsDeleteProvider.deleteComment(
-                            currentCommentId);
+                        await forumThreadCommentsDeleteProvider
+                            .deleteComment(currentCommentId);
                         UtilModel.route(() => ForumCommentScreen(), context);
                       },
                     ),
@@ -235,7 +235,6 @@ class forumCommentCard extends StatelessWidget {
                       ),
                       tooltip: 'Cancel',
                       onPressed: () {
-                        //final deleteResponse = await deleteThread(this.id);
                         Navigator.pop(context);
                       },
                     ),
@@ -262,7 +261,7 @@ class forumCommentCard extends StatelessWidget {
   }
 }
 
-Widget Reactions(BuildContext context) {
+Widget reactions(BuildContext context) {
   return FlutterReactionButtonCheck(
     boxColor: Color.fromRGBO(33, 33, 33, 1),
     boxItemsSpacing: 7,

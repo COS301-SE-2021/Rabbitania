@@ -1,4 +1,4 @@
-//model used for creating user card objects to be displayed
+//model used to model user model in view chat screen
 class ChatUserModel {
   final uid;
   final displayName;

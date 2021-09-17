@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersProfileScreen.dart';
+import 'package:frontend/src/screens/Chat/chatViewUsersProfileScreen.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
@@ -15,12 +14,11 @@ class ChatParticipantBar extends StatefulWidget {
   ChatParticipantBar(this.idUser);
   @override
   State<StatefulWidget> createState() {
-    return _chatParticipantBar();
+    return ChatParticipantBarState();
   }
 }
 
-class _chatParticipantBar extends State<ChatParticipantBar> {
-  //provider class for getting basic user information
+class ChatParticipantBarState extends State<ChatParticipantBar> {
   UtilModel utilModel = UtilModel();
   UserProvider userProvider = UserProvider();
   final userHelper = UserHelper();
@@ -34,8 +32,6 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //profile picture container
-
               Expanded(
                 flex: 6,
                 child: Container(
@@ -68,23 +64,6 @@ class _chatParticipantBar extends State<ChatParticipantBar> {
                   ),
                 ),
               ),
-
-              // Expanded(
-              //   flex: 1,
-              //   child: Container(
-              //     child: Padding(
-              //       padding: const EdgeInsets.only(right: 10),
-              //       child: IconButton(
-              //         icon: Icon(
-              //           FontAwesomeIcons.video,
-              //           color: utilModel.greenColor,
-              //         ),
-              //         onPressed: () {},
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
               Expanded(
                 flex: 1,
                 child: Container(

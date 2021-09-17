@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 
@@ -24,7 +23,6 @@ class _ChatViewUsersProfileScreenState
     return FutureBuilder(
       future: userProvider.getUserProfileFromUserId(widget.idUser),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        List<Widget> children = [];
         if (snapshot.hasData) {
           return SafeArea(
             child: Center(
@@ -103,7 +101,6 @@ class _ChatViewUsersProfileScreenState
                                       color: Colors.white, fontSize: 40),
                                 ),
                               ]),
-                              //group for empLevel
                               Expanded(
                                 flex: 3,
                                 child: Column(
@@ -122,8 +119,6 @@ class _ChatViewUsersProfileScreenState
                                       ),
                                     ]),
                               ),
-
-                              //group for userRoles
                               Expanded(
                                 flex: 3,
                                 child: Column(
@@ -142,8 +137,6 @@ class _ChatViewUsersProfileScreenState
                                       ),
                                     ]),
                               ),
-
-                              //group for phonenumber
                               Expanded(
                                 flex: 3,
                                 child: Column(

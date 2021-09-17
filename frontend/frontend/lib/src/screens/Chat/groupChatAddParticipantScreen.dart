@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/widgets/Chat/groupChatAddUserCard.dart';
 
 class GroupChatAddParticipantScreen extends StatefulWidget {

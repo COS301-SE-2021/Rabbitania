@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:frontend/src/helper/Booking/bookingHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BookingScheduleSpinbox extends StatefulWidget {
@@ -119,13 +119,11 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
             } else if (widget.officeName == "ASMTERDAM OFFICE") {
               office = 2;
             }
-            // Morning Slot
             String slotMorning = widget.day + ",Morning";
             var create1 = await bookingHelper.createBookingSchedule(
                 timeslot: slotMorning,
                 office: office,
                 availability: this.spinBoxMorning.toInt().toString());
-            //Afternoon Slot
             String slotAfternoon = widget.day + ",Afternoon";
             var create2 = await bookingHelper.createBookingSchedule(
                 timeslot: slotAfternoon,

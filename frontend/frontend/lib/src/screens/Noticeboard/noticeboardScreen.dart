@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Noticeboard/noticeboardModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/noticeboard_provider.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
-import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import '../../widgets/Noticeboard/noticeboardHome.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'noticeboardCreateThread.dart';
 
 class NoticeBoard extends StatefulWidget {
@@ -26,7 +24,6 @@ class _NoticeBoard extends State<NoticeBoard> {
   void initState() {
     super.initState();
     futureThread = fetchNotice();
-    // deleteResponse = deleteThread(-1);
   }
 
   void refresh() {
@@ -41,13 +38,11 @@ class _NoticeBoard extends State<NoticeBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //Floating action button on Scaffold
         onPressed: () {
           UtilModel.route(() => NoticeBoardThread(), context);
         },
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        child: Icon(Icons.add,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.add, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -70,7 +65,7 @@ class _NoticeBoard extends State<NoticeBoard> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

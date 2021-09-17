@@ -1,5 +1,5 @@
+//model used to model a direct message object
 class ChatMessageModel {
-  //type must be send or receive
   final uid;
   final toUid;
   final message;

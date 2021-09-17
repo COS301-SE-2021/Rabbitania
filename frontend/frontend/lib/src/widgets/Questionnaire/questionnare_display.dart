@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:frontend/src/provider/questionnaire_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 // Create a Form widget.
@@ -53,7 +51,7 @@ class QuestionnaireFormState extends State<QuestionnaireForm> {
       body: Stack(
         children: <Widget>[
           SvgPicture.string(
-            utilModel.svg_background,
+            utilModel.svgBackground,
             fit: BoxFit.contain,
           ),
           Column(

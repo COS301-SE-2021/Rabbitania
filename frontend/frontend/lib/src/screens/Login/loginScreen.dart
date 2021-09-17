@@ -2,22 +2,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/widgets/Login/continue_button.dart';
 import 'package:frontend/src/widgets/Login/login_fab.dart';
-import '../../models/util_model.dart';
+import '../../models/utilModel.dart';
 
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _loginState();
+    return LoginState();
   }
 }
 
-class _loginState extends State<Login> {
+class LoginState extends State<Login> {
   final utilModel = new UtilModel();
-  UserHelper loginHelper = UserHelper();
+  UserHelper userHelper = UserHelper();
 
   Widget build(context) => Scaffold(
         backgroundColor: Color.fromRGBO(33, 33, 33, 1),
@@ -46,7 +45,7 @@ class _loginState extends State<Login> {
         ),
         body: Stack(
           children: <Widget>[
-            SvgPicture.string(utilModel.svg_background),
+            SvgPicture.string(utilModel.svgBackground),
             Container(
               child: Center(
                 child: Container(

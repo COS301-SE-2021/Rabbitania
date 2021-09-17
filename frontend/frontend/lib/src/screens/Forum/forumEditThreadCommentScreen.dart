@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
-import 'package:frontend/src/screens/Forum/forumThreadScreen.dart';
 import 'package:frontend/src/widgets/Forum/ForumEditThreadCommentCard.dart';
-import 'package:frontend/src/widgets/Forum/forumEditForumThreadCard.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'forumCommentScreen.dart';
@@ -24,7 +21,7 @@ class _ForumEditThreadCommentScreen
 
   @override
   Widget build(BuildContext context) {
-    final ForumThreadCommentProvider ForumEditProvider =
+    final ForumThreadCommentProvider forumEditProvider =
         new ForumThreadCommentProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -37,7 +34,7 @@ class _ForumEditThreadCommentScreen
             builder: (context) {
               if (threadCommentEditBodyController.text != "") {
                 return FutureBuilder<String>(
-                  future: ForumEditProvider.editForumThreadComment(
+                  future: forumEditProvider.editForumThreadComment(
                     threadCommentEditBodyController.text,
                   ),
                   builder: (context, snapshot) {
@@ -114,7 +111,7 @@ class _ForumEditThreadCommentScreen
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

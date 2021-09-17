@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
 import 'package:frontend/src/widgets/Forum/forumCreateForumCard.dart';
@@ -32,7 +32,7 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ForumProvider ForumCreateProvider = new ForumProvider();
+    final ForumProvider forumCreateProvider = new ForumProvider();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
@@ -41,7 +41,7 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
             context: context,
             builder: (context) {
               return FutureBuilder<String>(
-                future: ForumCreateProvider.addNewForum(
+                future: forumCreateProvider.addNewForum(
                     forumCreateTitleController.text, forumCreatorId),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
@@ -113,7 +113,7 @@ class _ForumCreateScreen extends State<ForumCreateScreen> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

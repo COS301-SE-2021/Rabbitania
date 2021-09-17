@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Forum/forumModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/forum_provider.dart';
 import 'package:frontend/src/screens/Forum/forumEditForumScreen.dart';
 import 'package:frontend/src/screens/Forum/forumScreen.dart';
@@ -8,7 +8,6 @@ import 'package:frontend/src/screens/Forum/forumThreadSearch.dart';
 import 'package:frontend/src/widgets/Forum/forumThreadsCards.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'forumCreateThreadScreen.dart';
@@ -19,14 +18,12 @@ class ForumThreadScreen extends StatefulWidget {
   }
 }
 
-// late Future<List<ForumThread>> futureForumThreads;
 late List<Widget> cards = [];
 
 class _ForumThreadScreen extends State<ForumThreadScreen> {
   final util = new UtilModel();
   void initState() {
     super.initState();
-    //futureForumThreads = fetchForumThreads(currentForumID);
   }
 
   void search() {
@@ -36,7 +33,7 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ForumProvider ForumThreadProvider = new ForumProvider();
+    ForumProvider forumThreadProvider = new ForumProvider();
     return Scaffold(
       floatingActionButton: FancyFab(
         heroTag: "ForumThreadPage",
@@ -66,9 +63,7 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
                     ),
                     tooltip: 'Delete',
                     onPressed: () async {
-                      // ignore: unused_local_variable
-                      final deleteResponse =
-                          await ForumThreadProvider.deleteForum(currentForumID);
+                      await forumThreadProvider.deleteForum(currentForumID);
                       UtilModel.route(() => Forum(), context);
                     },
                   ),
@@ -80,7 +75,6 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
                     ),
                     tooltip: 'Cancel',
                     onPressed: () {
-                      //final deleteResponse = await deleteThread(this.id);
                       UtilModel.route(() => Forum(), context);
                     },
                   ),
@@ -91,7 +85,6 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
         },
         icon3: Icons.edit,
         onPressed3: () {
-          //print(currentForumID);
           UtilModel.route(() => ForumEditForumScreen(), context);
         },
       ),
@@ -128,11 +121,9 @@ class _ForumThreadScreen extends State<ForumThreadScreen> {
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
       body: Center(
         child: Stack(
-          //HERE is the stack for the forum page, the stack fills back to front (last child will be on the top of the stack)
           children: <Widget>[
-            // Children of type widget
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(
