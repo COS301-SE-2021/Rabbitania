@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { faRocket, faUsers, faBriefcase, faThList } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { AiPopupComponent } from '../ai-popup/ai-popup.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-ai-planner',
@@ -19,7 +20,7 @@ import { AiPopupComponent } from '../ai-popup/ai-popup.component';
   styleUrls: ['./ai-planner.component.scss']
 })
 export class AIPlannerComponent implements OnInit {
-  [x: string]: any;
+  
   //1600x900 AKA a 16:9 ratio
   //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
@@ -59,13 +60,15 @@ export class AIPlannerComponent implements OnInit {
   Math: any;
 
 
-  constructor(private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog, public router: Router){
+  constructor(public authFire: AngularFireAuth,private fb: FormBuilder, private observer: BreakpointObserver,private http: HttpClient,private service: NodeServiceService, public dialog: MatDialog, public router: Router){
     this.onResize();
     this.Math = Math;
   }
 
+
   ngOnInit(): void {
     //APi call to get nodes pos/name/details
+    
     this.onResize();
 
     this.addNodeForm = this.fb.group({
@@ -93,6 +96,7 @@ export class AIPlannerComponent implements OnInit {
 
   async getNodes(multiplier: number)
   {
+    
     var result = await this.service.Get();
     result.subscribe(data => {
       if(data){
@@ -150,6 +154,7 @@ export class AIPlannerComponent implements OnInit {
   }
 
   async addNode(){
+  
   const nodeObject = this.addNodeForm.value;
   
   var result = await this.service.Post(nodeObject.email,0.0,0.0,false);
@@ -192,6 +197,7 @@ export class AIPlannerComponent implements OnInit {
 
   async save()
   {
+   
     this.nodeArray = [];
     this.nodes.forEach(element => {
 
@@ -226,6 +232,7 @@ export class AIPlannerComponent implements OnInit {
   }
 
   async delete(deskNumber: number){
+   
     var result = await this.service.Delete(deskNumber);
     result.subscribe(data => {
         if(data){

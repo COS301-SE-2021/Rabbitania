@@ -27,14 +27,22 @@ export class NodeServiceService {
   }
   async Token(){
     await this.getToken();
+    console.log("TOKEN IN TOKEN:"+this.token.token);
     return this.token.token;
   }
 
   async Save(node: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + await this.Token()
+      }),
+      'observe': 'response' as const,
+    };
   console.log("this is the node array :  " + node);
     this.http.put('https://localhost:5001/api/Node/SaveNodes', {
       nodes: node,
-    }).subscribe(
+    },httpOptions).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
@@ -58,6 +66,7 @@ export class NodeServiceService {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + await this.Token()
       }),
       body: {
         nodeId: nodeId,
@@ -88,15 +97,10 @@ export class NodeServiceService {
   
   async Get(){
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        Authorization: 'Bearer ' + await this.Token()
-      }),
-      observe: 'response' as const,
-    };
-
-    this.http.get('https://localhost:5001/api/Node/GetAllNodes',httpOptions).subscribe(
+    const headers = { 'Authorization': 'Bearer ' + await this.Token()};
+   
+    console.log("GET functions token  =   "+ await this.Token());
+    this.http.get('https://localhost:5001/api/Node/GetAllNodes',{headers}).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
@@ -118,14 +122,20 @@ export class NodeServiceService {
 
   async Post(_userEmail: string, _xPos: any, _yPos: any, _active: boolean): Promise<Observable<any>> {
 
-    const headers = { 'Content-Type': 'text/plain', };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + await this.Token()
+      }),
+      'observe': 'response' as const,
+    };
 
-      this.http.post<NodeRequest>('https://localhost:5001/api/Node/CreateNode', {headers,
+      this.http.post<NodeRequest>('https://localhost:5001/api/Node/CreateNode', {
       userEmail: _userEmail,
       xPos: _xPos,
       yPos: _yPos,
       active: _active
-    }).subscribe(
+    },httpOptions).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
