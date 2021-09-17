@@ -2,7 +2,7 @@
 {
     public class GetBookingRequest
     {
-        private int _bookingID;
+        private int bookingID;
 
         public GetBookingRequest()
         {
@@ -10,13 +10,13 @@
 
         public GetBookingRequest(int bookingId)
         {
-            _bookingID = bookingId;
+            bookingID = bookingId;
         }
 
         public int BookingId
         {
-            get => _bookingID;
-            set => _bookingID = value;
+            get => bookingID;
+            set => bookingID = value;
         }
     }
 }

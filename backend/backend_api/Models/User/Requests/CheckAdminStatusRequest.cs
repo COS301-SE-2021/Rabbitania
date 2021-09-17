@@ -2,17 +2,16 @@
 {
     public class CheckAdminStatusRequest
     {
-        private string _userEmail;
-
+        private string userEmail;
         public CheckAdminStatusRequest(string userEmail)
         {
-            this._userEmail = userEmail;
+            this.userEmail = userEmail;
         }
 
         public string UserEmail
         {
-            get => _userEmail;
-            set => _userEmail = value;
+            get => userEmail;
+            set => userEmail = value;
         }
     }
 }

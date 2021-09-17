@@ -4,7 +4,7 @@ namespace backend_api.Models.User.Responses
 {
     public class CreateEmailResponse
     {
-        private string _response;
+        private string response;
     
         public CreateEmailResponse()
         {
@@ -12,13 +12,13 @@ namespace backend_api.Models.User.Responses
 
         public CreateEmailResponse(string response)
         {
-            this._response = response;
+            this.response = response;
         }
 
         public string Response
         {
-            get => _response;
-            set => _response = value;
+            get => response;
+            set => response = value;
         }
     }
 }

@@ -4,8 +4,8 @@ namespace backend_api.Models.User.Requests
 {
     public class GetUserRequest
     {
-        private string _firstname;
-        private string _surname;
+        private string firstname;
+        private string surname;
 
         public GetUserRequest()
         {
@@ -14,18 +14,18 @@ namespace backend_api.Models.User.Requests
         
         public GetUserRequest(string firstname, string lastname)
         {
-            this._firstname = firstname;
-            this._surname = lastname;
+            this.firstname = firstname;
+            this.surname = lastname;
         }
 
         public string getName()
         {
-            return this._firstname;
+            return this.firstname;
         }
 
         public string getSurname()
         {
-            return this._surname;
+            return this.surname;
         }
     }
 }

@@ -6,11 +6,11 @@ namespace backend_api.Models.Booking.Requests
 {
     public class UpdateBookingRequest
     {
-        private int _bookingID;
-        private string _date;
-        private float _duration;
-        private string _timeSlot;
-        private OfficeLocation _office;
+        private int bookingID;
+        private string date;
+        private float duration;
+        private string timeSlot;
+        private OfficeLocation office;
 
         public UpdateBookingRequest()
         {
@@ -18,41 +18,41 @@ namespace backend_api.Models.Booking.Requests
 
         public UpdateBookingRequest(int bookingId, string date, float duration, string timeSlot, OfficeLocation office)
         {
-            _bookingID = bookingId;
-            this._date = date;
-            this._duration = duration;
-            this._timeSlot = timeSlot;
-            this._office = office;
+            bookingID = bookingId;
+            this.date = date;
+            this.duration = duration;
+            this.timeSlot = timeSlot;
+            this.office = office;
         }
 
         public string TimeSlot
         {
-            get => _timeSlot;
-            set => _timeSlot = value;
+            get => timeSlot;
+            set => timeSlot = value;
         }
 
         public OfficeLocation Office
         {
-            get => _office;
-            set => _office = value;
+            get => office;
+            set => office = value;
         }
 
         public int BookingId
         {
-            get => _bookingID;
-            set => _bookingID = value;
+            get => bookingID;
+            set => bookingID = value;
         }
 
         public string Date
         {
-            get => _date;
-            set => _date = value;
+            get => date;
+            set => date = value;
         }
 
         public float Duration
         {
-            get => _duration;
-            set => _duration = value;
+            get => duration;
+            set => duration = value;
         }
     }
 }

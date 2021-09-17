@@ -5,25 +5,25 @@ namespace backend_api.Models.Booking.Requests
 {
     public class CheckScheduleAvailabilityRequest
     {
-        private string _timeSlot;
-        private OfficeLocation _office;
+        private string timeSlot;
+        private OfficeLocation office;
 
         public CheckScheduleAvailabilityRequest(string timeSlot, OfficeLocation office)
         {
-            this._timeSlot = timeSlot;
-            this._office = office;
+            this.timeSlot = timeSlot;
+            this.office = office;
         }
 
         public string TimeSlot
         {
-            get => _timeSlot;
-            set => _timeSlot = value;
+            get => timeSlot;
+            set => timeSlot = value;
         }
 
         public OfficeLocation Office
         {
-            get => _office;
-            set => _office = value;
+            get => office;
+            set => office = value;
         }
     }
 }
