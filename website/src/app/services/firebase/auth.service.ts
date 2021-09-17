@@ -6,6 +6,8 @@ import firebase from "firebase/compat/app";
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { UserDetailsService } from '../user-details/user-details.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DomainCheckComponent } from 'src/app/domain-check/domain-check.component';
 
 
 @Injectable({
@@ -29,6 +31,7 @@ export class AuthService {
   constructor(
     public authFire: AngularFireAuth,
     private http: HttpClient,
+    public model: MatDialog,
     private userDetails: UserDetailsService) {
 
     }
@@ -84,7 +87,15 @@ export class AuthService {
         })
         .catch((error) => {
             console.log("Server error: " + error.message);
-            this.authSuccess = false;
+            let modelRef = this.model.open(DomainCheckComponent,{
+              width: '250px'
+            });
+        
+            modelRef.afterClosed().subscribe(result => {
+              if(result == "close"){
+                this.authSuccess = false;
+              }
+            });
         }
       );
 
