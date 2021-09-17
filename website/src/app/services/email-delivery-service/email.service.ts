@@ -24,7 +24,7 @@ export class EmailService {
       payload : _payload,
       subject : _subject,
       email : _email,
-    }).subscribe(
+    },httpOptions).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);

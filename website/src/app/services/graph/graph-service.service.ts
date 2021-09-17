@@ -32,6 +32,7 @@ export class GraphServiceService {
     });
 
     this.AdjacencyList.forEach((element: any) => {
+      console.log(element.distance);
       if(element.distance <= this.RedRadius){
         this.RedEmails.push(element.userEmail);
       }

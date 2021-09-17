@@ -91,7 +91,7 @@ async signOut(){
 }
 
 
-async getNodes(multiplier: number)
+async getNodes()
 {
   var result = await this.nodeService.Get();
   result.subscribe(data => {
@@ -99,7 +99,7 @@ async getNodes(multiplier: number)
       this.nodes = [];
         for(var i =0; i< data.length;i++)
         {
-          this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos)*multiplier,Number(data[i].yPos)*multiplier,data[i].userEmail,data[i].active))
+          this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos),Number(data[i].yPos),data[i].userEmail,data[i].active))
         }
         console.log(this.nodes);
     }
@@ -125,53 +125,10 @@ async getNodes(multiplier: number)
   }
 
 
-  manage() {
-    if(this.loggedIn == false){
-      this.isDisabled = true;
-    }
-    else if (this.loggedIn == true){
-      this.isDisabled = false;
-    }
-}
-
   async onSubmit(){
         this.user_email = this.userService.retrieveUserDetails().email;
         const questionnaireObject = this.covidQuestionnaire.value;
-
-        this.screenHeight = window.innerHeight;
-  this.screenWidth = window.innerWidth;
-  //console.log(this.screenHeight, this.screenWidth);
-
-  if(this.screenWidth >= 1700)
-  {
-    this.screenRatio = 4
-    this.getNodes(this.screenRatio);
-  }
-  else if(this.screenWidth >= 1100)
-  {
-    this.screenRatio = 2.5;
-    this.getNodes(this.screenRatio);
-  }
-  else if(this.screenWidth >= 820)
-  {
-    this.screenRatio = 2;
-    this.getNodes(this.screenRatio);
-  }
-  else if(this.screenWidth >= 720)
-  {
-    this.screenRatio = 1.6;
-    this.getNodes(this.screenRatio);
-  }
-  else if(this.screenWidth >= 540)
-  {
-    this.screenRatio = 1.0;
-    this.getNodes(this.screenRatio);
-  }
-  else
-  {
-    this.screenRatio = 0.8;
-    this.getNodes(this.screenRatio);
-  }
+        this.getNodes();
 
         var _cough = "0";
         var _fever = "0";
