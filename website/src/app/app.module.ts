@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatCardModule} from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +28,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import { AIPlannerComponent } from './ai-planner/ai-planner.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -39,6 +40,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { AiPopupComponent } from './ai-popup/ai-popup.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { DomainCheckComponent } from './domain-check/domain-check.component';
+import { ViewUsersAdminComponent } from './view-users-admin/view-users-admin.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { DomainCheckComponent } from './domain-check/domain-check.component';
     AboutUsComponent,
     AiPopupComponent,
     AccessDeniedComponent,
-    DomainCheckComponent
+    DomainCheckComponent,
+    ViewUsersAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { DomainCheckComponent } from './domain-check/domain-check.component';
     AngularFireAuthModule,
     BrowserAnimationsModule,
     DragDropModule, NgbModule,MatCardModule,
+    MatGridListModule,
     MatExpansionModule,MatDividerModule,
     MatListModule,MatButtonModule,MatSidenavModule,MatTabsModule,
     MatIconModule,
