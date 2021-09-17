@@ -104,8 +104,6 @@ export class NodeServiceService {
   async Get(){
 
     const headers = { 'Authorization': 'Bearer ' + await this.Token()};
-   
-    console.log("GET functions token  =   "+ await this.Token());
     this.http.get('https://localhost:5001/api/Node/GetAllNodes',{headers}).subscribe(
       (data) => {
         if (data) {
@@ -117,7 +115,7 @@ export class NodeServiceService {
         }
       },
       (error) => {
-        console.log(error);
+        console.log("UNKNOWN ERROR...");
         return error;
       }
 
