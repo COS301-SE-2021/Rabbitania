@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 Widget forumCreateIsImageWidget() {
   try {
     return Image.file(
-      ForumCreateImageFile!,
+      forumCreateImageFile!,
       height: 250,
       width: 350,
       fit: BoxFit.cover,
@@ -28,9 +28,9 @@ forumCreateGetFromGallery() async {
     maxHeight: 1800,
   );
   if (pickedFile != null) {
-    ForumCreateImageFile = File(pickedFile.path);
+    forumCreateImageFile = File(pickedFile.path);
     final bytes = Io.File(pickedFile.path).readAsBytesSync();
-    ForumCreateImg64 = base64Encode(bytes);
+    forumCreateImg64 = base64Encode(bytes);
   }
 }
 

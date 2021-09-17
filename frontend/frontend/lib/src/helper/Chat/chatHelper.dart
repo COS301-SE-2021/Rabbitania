@@ -1,11 +1,7 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:frontend/src/models/Chat/chatMessageModel.dart';
-import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Chat/chatUserModel.dart';
-import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
-import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:intl/intl.dart';
 
 class ChatHelper {

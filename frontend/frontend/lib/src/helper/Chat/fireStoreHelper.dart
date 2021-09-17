@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Chat/chatFirestoreUserModel.dart';
 import 'package:frontend/src/models/Chat/chatMessageModel.dart';
 import 'package:frontend/src/models/Chat/groupChatMessageModel.dart';
-import 'package:rxdart/streams.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
