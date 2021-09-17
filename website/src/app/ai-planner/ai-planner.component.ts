@@ -20,7 +20,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./ai-planner.component.scss']
 })
 export class AIPlannerComponent implements OnInit {
-  
+
   //1600x900 AKA a 16:9 ratio
   //80m x 45m screen -> 40m x 22.5m screen
   //user gets 1m square space to themselves 1m x 1m
@@ -68,7 +68,7 @@ export class AIPlannerComponent implements OnInit {
 
   ngOnInit(): void {
     //APi call to get nodes pos/name/details
-    
+
     this.onResize();
 
     this.addNodeForm = this.fb.group({
@@ -96,7 +96,7 @@ export class AIPlannerComponent implements OnInit {
 
   async getNodes(multiplier: number)
   {
-    
+
     var result = await this.service.Get();
     result.subscribe(data => {
       if(data){
@@ -154,24 +154,24 @@ export class AIPlannerComponent implements OnInit {
   }
 
   async addNode(){
-  
+
   const nodeObject = this.addNodeForm.value;
-  
+
   var result = await this.service.Post(nodeObject.email,0.0,0.0,false);
   var received = true;
   result.subscribe(data => {
       if(data){
-        if(received){ 
+        if(received){
           this.openDialog();
-         
+
           received = false;
         }
         console.log(data);
       }
     });
-    
-   
-    
+
+
+
   }
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
@@ -197,7 +197,7 @@ export class AIPlannerComponent implements OnInit {
 
   async save()
   {
-   
+
     this.nodeArray = [];
     this.nodes.forEach(element => {
 
@@ -210,7 +210,7 @@ export class AIPlannerComponent implements OnInit {
       {
         activeElement = false;
       }
-      
+
       var singleNode:NodeGetAllRequest =
       {
         id: element.deskNumber,
@@ -225,20 +225,20 @@ export class AIPlannerComponent implements OnInit {
     });
       var result = await this.service.Save(this.nodeArray);
         result.pipe(first()).subscribe(data => {
-         
+
           });
 
           this.openDialog();
   }
 
   async delete(deskNumber: number){
-   
+
     var result = await this.service.Delete(deskNumber);
     result.subscribe(data => {
         if(data){
           console.log(data);
         }
-        
+
       });
 
       this.openDialog();
@@ -252,6 +252,5 @@ export class AIPlannerComponent implements OnInit {
   }, 700);
   this.reloadCurrentRoute();
   }
-  
-  
+
 }

@@ -13,7 +13,9 @@ import { first } from 'rxjs/operators';
 import { generate } from 'rxjs';
 import { MovableNodes } from '../services/ai-planner/movable-nodes';
 import { Graph } from '../interfaces/Graph';
+import { MatDialog } from '@angular/material/dialog';
 import { GraphServiceService } from '../services/graph/graph-service.service';
+import { transpileModule } from 'typescript';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -22,10 +24,16 @@ import { GraphServiceService } from '../services/graph/graph-service.service';
 })
 export class CovidQuestionnaireComponent implements OnInit{
 user_email = "";
+user_displayName = "";
+user_googleUrl = "";
 nodes: MovableNodes[] = [];
 screenHeight!: number;
 screenWidth!: number;
 screenRatio: number = 1;
+
+loggingIn = false;
+loggedIn = false;
+isDisabled  = true;
 
 
 
@@ -37,10 +45,100 @@ screenRatio: number = 1;
     private router : Router,
     private nodeService: NodeServiceService,
     private graphService: GraphServiceService,
+    public model: MatDialog,
     ) { }
 
   async ngOnInit(){
-  this.screenHeight = window.innerHeight;
+    var display = this.userService.retrieveUserDetails().displayName;
+    if(display == undefined || null){
+      console.log("Logged Out");
+    }else{
+      this.user_displayName = this.userService.retrieveUserDetails().displayName;
+      this.user_googleUrl = this.userService.retrieveUserDetails().googleImgUrl;
+      this.loggedIn = true;
+      this.isDisabled = false;
+    }
+}
+
+
+async signIn() {
+  this.loggingIn = true;
+  var res = await this.auth_service.signIn();
+  if(res){
+    this.loggingIn = false;
+    this.loggedIn = true;
+  }else{
+    this.loggingIn = false;
+    this.loggedIn = false;
+  }
+  this.ngOnInit();
+}
+
+async signOut(){
+  let modelRef = this.model.open(SignOutComponent,{
+    width: '250px'
+  });
+
+  modelRef.afterClosed().subscribe(result => {
+    if(result == "yes"){
+      this.auth_service.signOut();
+      window.location.reload();
+    }
+    if(result == "no"){
+      // do nothing
+    }
+  });
+}
+
+
+async getNodes(multiplier: number)
+{
+  var result = await this.nodeService.Get();
+  result.subscribe(data => {
+    if(data){
+      this.nodes = [];
+        for(var i =0; i< data.length;i++)
+        {
+          this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos)*multiplier,Number(data[i].yPos)*multiplier,data[i].userEmail,data[i].active))
+        }
+        console.log(this.nodes);
+    }
+  });
+}
+
+  covidQuestionnaire = this.fb.group({
+    cough: false,
+    fever: false,
+    sore_throat: false,
+    shortness_of_breath: false,
+    head_ache: false,
+    test_indication: false,
+    gender: "male",
+    });
+
+  checkOnline(){
+    if(this.user_email == "")
+    {
+      return false;
+    }
+    else return true;
+  }
+
+
+  manage() {
+    if(this.loggedIn == false){
+      this.isDisabled = true;
+    }
+    else if (this.loggedIn == true){
+      this.isDisabled = false;
+    }
+}
+
+  async onSubmit(){
+        this.user_email = this.userService.retrieveUserDetails().email;
+        const questionnaireObject = this.covidQuestionnaire.value;
+
+        this.screenHeight = window.innerHeight;
   this.screenWidth = window.innerWidth;
   //console.log(this.screenHeight, this.screenWidth);
 
@@ -74,49 +172,6 @@ screenRatio: number = 1;
     this.screenRatio = 0.8;
     this.getNodes(this.screenRatio);
   }
-}
-
-async getNodes(multiplier: number)
-{
-
-  var result = await this.nodeService.Get();
-  result.subscribe(data => {
-    if(data){
-      this.nodes = [];
-        for(var i =0; i< data.length;i++)
-        {
-          this.nodes.push(new MovableNodes(Number(data[i].id),Number(data[i].xPos)*multiplier,Number(data[i].yPos)*multiplier,data[i].userEmail,data[i].active))
-        }
-        console.log(this.nodes);
-    }
-  });
-}
-
-  covidQuestionnaire = this.fb.group({
-    cough: false,
-    fever: false,
-    sore_throat: false,
-    shortness_of_breath: false,
-    head_ache: false,
-    test_indication: false,
-    gender: "male",
-    });
-
-  checkOnline(){
-    if(this.user_email == "")
-    {
-      return false;
-    }
-    else return true;
-  }
-
-  async onSubmit(){
-    console.log(this.checkOnline());
-    if(this.checkOnline() == false){
-      var res = await this.auth_service.signIn();
-      if(res){
-        this.user_email = this.userService.retrieveUserDetails().email;
-        const questionnaireObject = this.covidQuestionnaire.value;
 
         var _cough = "0";
         var _fever = "0";
@@ -163,61 +218,6 @@ async getNodes(multiplier: number)
               console.log(data);
             }
           });
-
-        }
-      }
-      else{
-        this.user_email = await this.userService.retrieveUserDetails().email;
-        const questionnaireObject = this.covidQuestionnaire.value;
-
-        var _cough = "0";
-        var _fever = "0";
-        var _sore_throat = "0";
-        var _shortness_of_breath = "0";
-        var _head_ache = "0";
-        var _test_indication = "Other";
-        var _gender = "male";
-
-          if(questionnaireObject.cough == true){
-            _cough = "1";
-          }
-          if(questionnaireObject.fever == true){
-            _fever = "1";
-          }
-          if(questionnaireObject.sore_throat == true){
-            _sore_throat = "1";
-          }
-          if(questionnaireObject.shortness_of_breath == true){
-            _shortness_of_breath = "1";
-          }
-          if(questionnaireObject.head_ache == true){
-            _head_ache = "1";
-          }
-          if(questionnaireObject.gender == "female"){
-            _gender = "female";
-          }
-          if(questionnaireObject.test_indication == true){
-            _test_indication = "Contact with confirmed"
-          }
-
-          var result = (await this.service.Post(_cough, _fever, _sore_throat, _shortness_of_breath, _head_ache, _gender, _test_indication))
-
-          result.subscribe(async data => {
-            if(data){
-              console.log(data);
-            }
-          });
-
-
-          var activateResult = (await (this.service.Activate(this.user_email))).subscribe(async data => {
-            if(data){
-              console.log(data);
-            }
-          });
-
-
-        }
-
       this.router.navigate(['/'], {
         queryParams: {
 
@@ -226,7 +226,3 @@ async getNodes(multiplier: number)
       });
     }
 }
-
-
-
-
