@@ -58,7 +58,7 @@ export class AuthService {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     const user = await this.authFire.signInWithPopup(googleAuthProvider);
     this.authSuccess = false;
-
+    
     this.userobj = {
       "displayName": user.user?.displayName,
       "email": user.user?.email,
@@ -79,6 +79,7 @@ export class AuthService {
             if(response.ok === true || response.status === 201){
               this.authSuccess = true;
               this.userDetails.addUserDetails(this.userobj);
+              this.userDetails.checkAdmin(this.userobj.email);
             }
         })
         .catch((error) => {
@@ -92,6 +93,7 @@ export class AuthService {
 
   async signOut() {
     await this.authFire.signOut();
+    sessionStorage.removeItem('token');
     this.userDetails.clearUserDetails();
   }
 
