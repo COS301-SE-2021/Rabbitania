@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NodeGetAllRequest, NodeRequest } from 'src/app/interfaces/ai-planner-node-interface';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '../firebase/auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,8 +28,20 @@ export class NodeServiceService {
   }
   async Token(){
     await this.getToken();
-    console.log("TOKEN IN TOKEN:"+this.token.token);
-    return this.token.token;
+    var token = sessionStorage.getItem('token');
+    
+    if((this.token.token).length <10)
+    {
+      console.log(token);
+      return token;
+    }
+    else
+    {
+      console.log(this.token.token);
+      return this.token.token;      
+    }
+
+    
   }
 
   async Save(node: any){
