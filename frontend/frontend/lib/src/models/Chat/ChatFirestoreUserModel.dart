@@ -1,3 +1,4 @@
+//model used to model a user object in direct message screen
 class ChatFirestoreUserModel {
   final uid;
   final email;
