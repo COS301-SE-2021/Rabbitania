@@ -66,6 +66,8 @@ export class AuthService {
       "googleImgUrl": user.user?.photoURL
     };
 
+    
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -79,6 +81,7 @@ export class AuthService {
             if(response.ok === true || response.status === 201){
               this.authSuccess = true;
               this.userDetails.addUserDetails(this.userobj);
+              this.userDetails.checkAdmin(this.userobj.email);
             }
         })
         .catch((error) => {
