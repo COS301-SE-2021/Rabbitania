@@ -213,7 +213,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Act
             
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserId(req));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await authService.GetUserId(req));
         }
         
         [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should thrown an exception for null email")]
@@ -224,7 +224,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Act
             
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserId(req));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await authService.GetUserId(req));
         }
         [Fact(DisplayName = "Returns true when attempting to validate an existing user")]
         public async void Validate_ValidUser()
@@ -257,7 +257,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Act
 
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserAdminStatus(req));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await authService.GetUserAdminStatus(req));
 
         }
         [Fact(DisplayName = "Throws InvalidUserRequest when trying to get Admin of Null user")]
@@ -266,7 +266,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Arrange
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequest>(async () => await authService.GetUserAdminStatus(null));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await authService.GetUserAdminStatus(null));
         }
         
         // [Fact]

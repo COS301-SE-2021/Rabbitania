@@ -33,5 +33,7 @@ namespace backend_api.Services.User
         List<string> GetAllUserEmails();
         Task<MakeUserAdminResponse> MakeUserAdmin(MakeUserAdminRequest request);
 
+        Task<CheckAdminStatusResponse> CheckAdmin(CheckAdminStatusRequest request);
+
     }
 }

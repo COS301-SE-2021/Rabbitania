@@ -22,7 +22,7 @@ namespace backend_api.Tests.User.UnitTests
         public async Task ViewProfile_ThrowInvalidUserRequestOnNullObject()
         {
             var exception =
-                await Assert.ThrowsAsync<InvalidUserRequest>(
+                await Assert.ThrowsAsync<InvalidUserRequestException>(
                     () => _sut.ViewProfile(null));
             Assert.Equal("Request object cannot be null", exception.Message);
         }

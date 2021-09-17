@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Notifications;
 using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
+using backend_api.Models.User;
 using backend_api.Models.User.Requests;
 using backend_api.Models.User.Responses;
 using backend_api.Services.Notification;
@@ -57,7 +59,7 @@ namespace backend_api.Services.User
             }
             else
             {
-                throw new InvalidUserRequest("User does not exist");
+                throw new InvalidUserRequestException("User does not exist");
             }
         }
         public async Task<GetUserResponse> GetUserByEmail(GetUserByEmailRequest request)
@@ -69,7 +71,7 @@ namespace backend_api.Services.User
             }
             else
             {
-                throw new InvalidUserRequest("User does not exist");
+                throw new InvalidUserRequestException("User does not exist");
             }
         }
 
@@ -77,7 +79,7 @@ namespace backend_api.Services.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
             if (request.UserId <= 0)
             {
@@ -91,7 +93,7 @@ namespace backend_api.Services.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
             if (request.UserId.Equals(null))
             {
@@ -101,7 +103,7 @@ namespace backend_api.Services.User
             ViewProfileResponse returnObject = await _userRepository.ViewProfile(request);
             if (returnObject.name == null)
             {
-                throw new InvalidUserRequest("User does not exist");
+                throw new InvalidUserRequestException("User does not exist");
             }
 
             return returnObject;
@@ -110,7 +112,7 @@ namespace backend_api.Services.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
             if (request.UserId.Equals(null))
             {
@@ -123,7 +125,7 @@ namespace backend_api.Services.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
 
             return await _userRepository.GetUserProfiles();
@@ -144,7 +146,7 @@ namespace backend_api.Services.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
 
             if (request.UserId.Equals(null))
@@ -154,5 +156,37 @@ namespace backend_api.Services.User
 
             return await _userRepository.MakeUserAdmin(request);
         }
+
+        public async Task<CheckAdminStatusResponse> CheckAdmin(CheckAdminStatusRequest request)
+        {
+            if (request == null)
+            {
+                throw new InvalidUserRequestException("Request is null");
+            }
+
+            if (request.UserEmail == null || request.UserEmail.Length <= 0)
+            {
+                throw new InvalidUserRequestException("Request email is null or empty");
+            }
+
+            var email = request.UserEmail;
+            try
+            {
+                var user = await _userRepository.GetUserByEmail(email);
+                if (user.IsAdmin)
+                {
+                    return new CheckAdminStatusResponse(true, HttpStatusCode.OK);
+                }
+                else
+                {
+                    return new CheckAdminStatusResponse(false, HttpStatusCode.OK);
+                }
+            }
+            catch (Exception e)
+            {
+                return new CheckAdminStatusResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
     }
 }
