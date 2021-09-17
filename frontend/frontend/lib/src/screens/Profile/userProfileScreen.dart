@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/screens/Login/loginScreen.dart';
@@ -11,11 +11,11 @@ import 'package:flutter_svg/svg.dart';
 
 class ProfileScreen extends StatefulWidget {
   createState() {
-    return _profileState();
+    return ProfileState();
   }
 }
 
-class _profileState extends State<ProfileScreen> {
+class ProfileState extends State<ProfileScreen> {
   final utilModel = new UtilModel();
   final userProvider = UserProvider();
   UserHelper userHelper = UserHelper();
@@ -62,7 +62,7 @@ class _profileState extends State<ProfileScreen> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              utilModel.svg_background,
+              utilModel.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(
@@ -83,7 +83,6 @@ class _profileState extends State<ProfileScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData) {
             dropdownLocationValue = snapshot.data.userOfficeLocation;
-
             children = <Widget>[
               Column(
                 children: <Widget>[
@@ -113,15 +112,6 @@ class _profileState extends State<ProfileScreen> {
                       ),
                     ],
                   ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(top: 5),
-                  //   child: Divider(
-                  //     color: Color.fromRGBO(171, 255, 79, 1),
-                  //     indent: MediaQuery.of(context).size.width * 0.10,
-                  //     endIndent: MediaQuery.of(context).size.width * 0.10,
-                  //     thickness: 1,
-                  //   ),
-                  // ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -188,7 +178,7 @@ class _profileState extends State<ProfileScreen> {
                                           width: 1,
                                         ),
                                       ),
-                                      child: DropdownOffice(),
+                                      child: dropdownOffice(),
                                     ),
                                   ),
                                 ),
@@ -284,7 +274,7 @@ class _profileState extends State<ProfileScreen> {
                                                             builder: (context) {
                                                               return FutureBuilder<
                                                                   String>(
-                                                                future: SaveAllUserDetails(
+                                                                future: saveAllUserDetails(
                                                                     profileUserId,
                                                                     snapshot
                                                                         .data
@@ -392,7 +382,6 @@ class _profileState extends State<ProfileScreen> {
                                                         ),
                                                         tooltip: 'Cancel',
                                                         onPressed: () {
-                                                          //final deleteResponse = await deleteThread(this.id);
                                                           UtilModel.route(
                                                               () =>
                                                                   ProfileScreen(),
@@ -441,7 +430,6 @@ class _profileState extends State<ProfileScreen> {
                                               MaterialPageRoute(
                                                   builder: (context) =>
                                                       Login()),
-                                              //(Route<dynamic> route) => true,
                                             );
                                           },
                                           child: Text(
@@ -553,7 +541,7 @@ class _profileState extends State<ProfileScreen> {
     );
   }
 
-  Widget DropdownOffice() {
+  Widget dropdownOffice() {
     if (dropdownLocationHolder == "") {
       dropdownLocationHolder = dropdownLocationValue;
     }
