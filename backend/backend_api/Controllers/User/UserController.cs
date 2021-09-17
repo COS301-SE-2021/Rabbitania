@@ -34,7 +34,6 @@ namespace backend_api.Controllers.User
         [Route("Admin/GetUser")]
         public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
         {
-            // return await _context.users.ToListAsync();
             return _service.getUser(request);
         }
 
@@ -63,7 +62,7 @@ namespace backend_api.Controllers.User
         }
 
         /// <summary>
-        /// API enpoint to return all user profiles held within the system
+        ///     API endpoint to return all user profiles held within the system
         /// </summary>
         /// <param name="request"></param>
         /// <returns>A list of user profiles</returns>
@@ -90,9 +89,9 @@ namespace backend_api.Controllers.User
         /// </summary>
         /// <param name="request"></param>
         /// <returns>bool</returns>
-        [HttpGet, Authorize]
+        [HttpPost, Authorize]
         [Route("CheckAdmin")]
-        public async Task<bool> CheckAdmin([FromQuery] CheckAdminStatusRequest request)
+        public async Task<bool> CheckAdmin([FromBody] CheckAdminStatusRequest request)
         {
             var resp = await _service.CheckAdmin(request);
             return resp.Result;

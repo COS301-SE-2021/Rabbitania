@@ -4,13 +4,13 @@ namespace backend_api.Models.Node.Responses
 {
     public class DeactivateAllNodesResponse
     {
-        private string response;
+        private string _response;
         private HttpStatusCode _statusCode;
 
         public DeactivateAllNodesResponse(string response, HttpStatusCode statusCode)
         {
             _statusCode = statusCode;
-            this.response = response;
+            this._response = response;
         }
 
         public HttpStatusCode StatusCode
@@ -21,13 +21,13 @@ namespace backend_api.Models.Node.Responses
 
         public string Response
         {
-            get => response;
-            set => response = value;
+            get => _response;
+            set => _response = value;
         }
 
         public DeactivateAllNodesResponse(string response)
         {
-            this.response = response;
+            this._response = response;
         }
     }
 }

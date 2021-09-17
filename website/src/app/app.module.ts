@@ -37,6 +37,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { AiPopupComponent } from './ai-popup/ai-popup.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { DomainCheckComponent } from './domain-check/domain-check.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AiPopupComponent } from './ai-popup/ai-popup.component';
     AIPlannerComponent,
     SignOutComponent,
     AboutUsComponent,
-    AiPopupComponent
+    AiPopupComponent,
+    AccessDeniedComponent,
+    DomainCheckComponent
   ],
   imports: [
     BrowserModule,

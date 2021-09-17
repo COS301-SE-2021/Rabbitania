@@ -6,6 +6,8 @@ import firebase from "firebase/compat/app";
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { UserDetailsService } from '../user-details/user-details.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DomainCheckComponent } from 'src/app/domain-check/domain-check.component';
 
 
 @Injectable({
@@ -29,6 +31,7 @@ export class AuthService {
   constructor(
     public authFire: AngularFireAuth,
     private http: HttpClient,
+    public model: MatDialog,
     private userDetails: UserDetailsService) {
 
     }
@@ -58,7 +61,7 @@ export class AuthService {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     const user = await this.authFire.signInWithPopup(googleAuthProvider);
     this.authSuccess = false;
-
+    
     this.userobj = {
       "displayName": user.user?.displayName,
       "email": user.user?.email,
@@ -79,11 +82,20 @@ export class AuthService {
             if(response.ok === true || response.status === 201){
               this.authSuccess = true;
               this.userDetails.addUserDetails(this.userobj);
+              this.userDetails.checkAdmin(this.userobj.email);
             }
         })
         .catch((error) => {
             console.log("Server error: " + error.message);
-            this.authSuccess = false;
+            let modelRef = this.model.open(DomainCheckComponent,{
+              width: '250px'
+            });
+        
+            modelRef.afterClosed().subscribe(result => {
+              if(result == "close"){
+                this.authSuccess = false;
+              }
+            });
         }
       );
 
@@ -92,6 +104,7 @@ export class AuthService {
 
   async signOut() {
     await this.authFire.signOut();
+    sessionStorage.removeItem('token');
     this.userDetails.clearUserDetails();
   }
 
