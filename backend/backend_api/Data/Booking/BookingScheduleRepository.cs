@@ -12,7 +12,7 @@ namespace backend_api.Data.Booking
     {
         private readonly BookingScheduleContext _schedules;
         private readonly BookingContext _bookings;
-        private readonly object availabilityLock = new object();
+        private readonly object _availabilityLock = new object();
 
 
         public BookingScheduleRepository(BookingScheduleContext schedules)
@@ -85,7 +85,7 @@ namespace backend_api.Data.Booking
 
             try
             {
-                lock (availabilityLock)
+                lock (_availabilityLock)
                 {
                     bookingSchedule.Availability -= 1;
                 }
@@ -106,7 +106,7 @@ namespace backend_api.Data.Booking
 
             try
             {
-                lock (availabilityLock)
+                lock (_availabilityLock)
                 {
                     bookingSchedule.Availability += 1;
                 }
@@ -126,7 +126,7 @@ namespace backend_api.Data.Booking
             
             try
             {
-                lock (availabilityLock)
+                lock (_availabilityLock)
                 {
                     bookingSchedule.Availability = request.Availability;
                 }

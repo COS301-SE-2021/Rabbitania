@@ -5,19 +5,19 @@ namespace backend_api.Models.User.Responses
     public class MakeUserAdminResponse
     {
         
-        private string response;
+        private string _response;
         private HttpStatusCode _statusCode;
 
         public MakeUserAdminResponse(string response, HttpStatusCode statusCode)
         {
-            this.response = response;
-            _statusCode = statusCode;
+            this._response = response;
+            this._statusCode = statusCode;
         }
         
         public string Response
         {
-            get => response;
-            set => response = value;
+            get => _response;
+            set => _response = value;
         }
 
         public HttpStatusCode StatusCode

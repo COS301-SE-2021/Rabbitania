@@ -4,14 +4,14 @@ namespace backend_api.Models.Node.Responses
 {
     public class EditNodeResponse
     {
-        private string response;
+        private string _response;
         private HttpStatusCode _statusCode;
         
 
         public EditNodeResponse(string response, HttpStatusCode statusCode)
         {
-            _statusCode = statusCode;
-            this.response = response;
+            this._statusCode = statusCode;
+            this._response = response;
         }
 
         public HttpStatusCode StatusCode
@@ -22,13 +22,13 @@ namespace backend_api.Models.Node.Responses
 
         public string Response
         {
-            get => response;
-            set => response = value;
+            get => _response;
+            set => _response = value;
         }
 
         public EditNodeResponse(string response)
         {
-            this.response = response;
+            this._response = response;
         }
     }
 }
