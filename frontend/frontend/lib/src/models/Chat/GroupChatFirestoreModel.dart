@@ -1,4 +1,4 @@
-//each group chat has a avatar and list of participants when being created
+//model used to model a group chat room object
 class GroupChatFirestoreModel {
   final avatar;
   final participants;

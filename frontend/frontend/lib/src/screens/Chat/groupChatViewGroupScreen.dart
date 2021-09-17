@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Chat/groupChatAddParticipantScreen.dart';
 import 'package:frontend/src/widgets/Chat/chatUsersCard.dart';
 

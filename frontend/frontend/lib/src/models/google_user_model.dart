@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class GoogleUser {
   final String token;
   final String email;

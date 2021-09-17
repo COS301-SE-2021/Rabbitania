@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Booking/bookingHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/provider/booking_provider.dart';
-import 'package:frontend/src/screens/Booking/bookingHomeScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingCircularProgressIndicator.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
-import 'package:frontend/src/widgets/Booking/bookingSucessSnackBar.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:intl/intl.dart';
 
 class BookingDayText extends StatefulWidget {
@@ -281,9 +276,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                                 },
                                 context: context,
                               );
-                              //if successful, change state of button to reflect successful booking
                             } else {
-                              //if booking could not be made, show alertdialog to let users know that booking has not been made and they must try again
                               return showDialog<void>(
                                 builder: (BuildContext context) {
                                   return AlertDialog(
@@ -321,7 +314,6 @@ class _BookingDayTextState extends State<BookingDayText> {
                             }
                           });
                         } else {
-                          //Error booking already exists
                           return showDialog<void>(
                             builder: (BuildContext context) {
                               return AlertDialog(
@@ -365,6 +357,3 @@ class _BookingDayTextState extends State<BookingDayText> {
         ),
       );
 }
-
-//function for creating FutureBuilder on button click
-

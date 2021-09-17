@@ -8,10 +8,11 @@ import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
 import 'package:image_picker/image_picker.dart';
 
-Widget noticeboardCreateImageWidget(File? ImageFile) {
+//function to create image widget from imageFile
+Widget noticeboardCreateImageWidget(File? imageFile) {
   try {
     return Image.file(
-      ImageFile!,
+      imageFile!,
       height: 250,
       width: 350,
       fit: BoxFit.cover,
@@ -21,6 +22,7 @@ Widget noticeboardCreateImageWidget(File? ImageFile) {
   }
 }
 
+//function to select image file from device gallery and encode it to base 64
 noticeboardCreateGetFromGallery() async {
   PickedFile? pickedFile = await ImagePicker().getImage(
     source: ImageSource.gallery,
@@ -29,20 +31,18 @@ noticeboardCreateGetFromGallery() async {
   );
   if (pickedFile != null) {
     noticeboardCreateImageFile = File(pickedFile.path);
-
     final bytes = Io.File(pickedFile.path).readAsBytesSync();
-
     noticeboardCreateImg64 = base64Encode(bytes);
   }
 }
 
-Widget noticeboardEditIsImageWidget(String ImageF) {
+//function to decode image file from base 64 and return an image widget
+Widget noticeboardEditIsImageWidget(String imageF) {
   try {
-    if (ImageF.isNotEmpty && noticeboardEditImageFile == null) {
-      noticeboardEditInputImage = ImageF;
-      //if the image in the DB is not Empty and the current selected file is null display as below
+    if (imageF.isNotEmpty && noticeboardEditImageFile == null) {
+      noticeboardEditInputImage = imageF;
       return Image.memory(
-        Base64Decoder().convert(ImageF),
+        Base64Decoder().convert(imageF),
         fit: BoxFit.fill,
       );
     } else {
@@ -58,6 +58,7 @@ Widget noticeboardEditIsImageWidget(String ImageF) {
   }
 }
 
+//function to get image file from device gallery and encode to base64
 noticeboardEditGetFromGallery() async {
   PickedFile? pickedFile = await ImagePicker().getImage(
     source: ImageSource.gallery,
@@ -66,14 +67,13 @@ noticeboardEditGetFromGallery() async {
   );
   if (pickedFile != null) {
     noticeboardEditImageFile = File(pickedFile.path);
-
     final bytes = Io.File(pickedFile.path).readAsBytesSync();
-
     noticeboardEditImg64 = base64Encode(bytes);
   }
 }
 
-Widget Reactions(BuildContext context) {
+//function to return container widget with reaction icons and functionality
+Widget reactions(BuildContext context) {
   return FlutterReactionButtonCheck(
     boxColor: Color.fromRGBO(33, 33, 33, 1),
     boxItemsSpacing: 7,

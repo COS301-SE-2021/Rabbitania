@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
-import 'package:frontend/src/widgets/Booking/bookingButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -122,7 +118,7 @@ class _BookingDayState extends State<BookingDayScreen> {
           child: Stack(
             children: <Widget>[
               SvgPicture.string(
-                utilModel.svg_background,
+                utilModel.svgBackground,
                 fit: BoxFit.contain,
               ),
               Column(

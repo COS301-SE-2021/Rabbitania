@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/noticeboard_provider.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeboardEditThread.dart';
 import 'package:frontend/src/screens/Profile/userProfileScreen.dart';
@@ -16,7 +16,7 @@ class Notice extends StatefulWidget {
   }
 }
 
-var noticeID = -1; //get changed eveytime a new notice is tapped
+var noticeID = -1;
 
 class _Notice extends State<Notice> {
   final util = new UtilModel();
@@ -59,8 +59,7 @@ class _Notice extends State<Notice> {
                     ),
                     tooltip: 'Delete',
                     onPressed: () async {
-                      // ignore: unused_local_variable
-                      final deleteResponse = await deleteThread(noticeID);
+                      await deleteThread(noticeID);
                       UtilModel.route(() => NoticeBoard(), context);
                     },
                   ),
@@ -72,7 +71,6 @@ class _Notice extends State<Notice> {
                     ),
                     tooltip: 'Cancel',
                     onPressed: () {
-                      //final deleteResponse = await deleteThread(this.id);
                       UtilModel.route(() => NoticeBoard(), context);
                     },
                   ),
@@ -106,14 +104,12 @@ class _Notice extends State<Notice> {
         ),
         actions: [],
       ),
-
       backgroundColor: Color.fromRGBO(33, 33, 33, 1),
-      //bottomNavigationBar: navigationBar(),
       body: Center(
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

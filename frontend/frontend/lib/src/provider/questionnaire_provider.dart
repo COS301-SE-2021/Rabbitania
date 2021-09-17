@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:http/http.dart' as http;
 
 class QuestionnaireProvider {
@@ -49,7 +47,5 @@ class QuestionnaireProvider {
     } else {
       return false;
     }
-
-    // [1, 1, 0, 1, 0, 1]
   }
 }

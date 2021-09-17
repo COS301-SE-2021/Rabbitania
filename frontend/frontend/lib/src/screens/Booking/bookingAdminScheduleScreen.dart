@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Booking/bookingAdminHomeScreen.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
-import 'package:frontend/src/widgets/Booking/bookingButton.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
+
 import 'package:frontend/src/widgets/Booking/bookingScheduleButton.dart';
 import 'package:frontend/src/widgets/Booking/bookingScheduleSpinBox.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
@@ -26,7 +20,7 @@ class BookingScheduleScreen extends StatefulWidget {
 class _BookingScheduleState extends State<BookingScheduleScreen> {
   var displayText;
   final utilModel = UtilModel();
-  UserHelper loggedUser = new UserHelper();
+  UserHelper userHelper = new UserHelper();
   determineDisplayText() {
     switch (widget.displayText) {
       case 'M':
@@ -47,6 +41,7 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
     }
   }
 
+  @override
   initState() {
     determineDisplayText();
   }
@@ -58,8 +53,8 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
           numberOfItems: 2,
           icon1: Icons.admin_panel_settings_sharp,
           onPressed1: () async {
-            var name = await loggedUser.getUserName();
-            if (await loggedUser.getAdminStatus()) {
+            var name = await userHelper.getUserName();
+            if (await userHelper.getAdminStatus()) {
               UtilModel.route(() => BookingAdminScreen(), context);
             } else {
               return showDialog<void>(
@@ -147,32 +142,31 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
                       ? new BookingScheduleButton(
                           'M',
                           Color.fromRGBO(63, 63, 63, 1),
-                        ) //if true
-                      : new BookingScheduleButton(
-                          'M', Colors.transparent), //else
+                        )
+                      : new BookingScheduleButton('M', Colors.transparent),
                   this.displayText == 'Tuesday'
                       ? new BookingScheduleButton(
                           'Tu',
                           Color.fromRGBO(63, 63, 63, 1),
-                        ) //if true
+                        )
                       : new BookingScheduleButton('Tu', Colors.transparent), //
                   this.displayText == 'Wednesday'
                       ? new BookingScheduleButton(
                           'W',
                           Color.fromRGBO(63, 63, 63, 1),
-                        ) //if true
+                        )
                       : new BookingScheduleButton('W', Colors.transparent),
                   this.displayText == 'Thursday'
                       ? new BookingScheduleButton(
                           'Th',
                           Color.fromRGBO(63, 63, 63, 1),
-                        ) //if true
+                        )
                       : new BookingScheduleButton('Th', Colors.transparent),
                   this.displayText == 'Friday'
                       ? new BookingScheduleButton(
                           'F',
                           Color.fromRGBO(63, 63, 63, 1),
-                        ) //if true
+                        )
                       : new BookingScheduleButton('F', Colors.transparent),
                 ],
               ),
@@ -198,10 +192,6 @@ class _BookingScheduleState extends State<BookingScheduleScreen> {
         body: Center(
           child: Stack(
             children: <Widget>[
-              // SvgPicture.string(
-              //   utilModel.svg_background,
-              //   fit: BoxFit.contain,
-              // ),
               ListView(
                 shrinkWrap: true,
                 children: <Widget>[

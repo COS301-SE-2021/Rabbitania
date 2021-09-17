@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/noticeboard_provider.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
-import 'package:frontend/src/widgets/expandable_button_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
 
@@ -45,9 +44,7 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(172, 255, 79, 1),
-        //Floating action button on Scaffold
         onPressed: () {
-          //code to execute on button press
           showDialog(
             context: context,
             builder: (context) {
@@ -100,8 +97,7 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
             },
           );
         },
-        child: Icon(Icons.edit,
-            color: Color.fromRGBO(33, 33, 33, 1)), //icon inside button
+        child: Icon(Icons.edit, color: Color.fromRGBO(33, 33, 33, 1)),
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(
@@ -128,7 +124,7 @@ class _NoticeBoardEditThread extends State<NoticeBoardEditThread> {
         child: Stack(
           children: <Widget>[
             SvgPicture.string(
-              util.svg_background,
+              util.svgBackground,
               fit: BoxFit.contain,
             ),
             Container(

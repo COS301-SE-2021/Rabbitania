@@ -35,19 +35,19 @@ class UtilModel {
     return this._defaultImage;
   }
 
-  get svg_background {
+  get svgBackground {
     return this._svg_background;
   }
 
-  get svg_bolder {
+  get svgBolder {
     return this._svg_bolder;
   }
 
-  get svg_rabbit {
+  get svgRabbit {
     return this._svg_rabbit;
   }
 
-  get svg_google {
+  get svgGoogle {
     return this._svg_google;
   }
 

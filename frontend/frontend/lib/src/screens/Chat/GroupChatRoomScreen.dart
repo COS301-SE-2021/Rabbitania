@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/Chat/chatHelper.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
-import 'package:frontend/src/helper/Chat/groupChatHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:frontend/src/widgets/Chat/groupChatMessageBar.dart';
@@ -41,7 +40,7 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
             body: Stack(
               children: [
                 SvgPicture.string(
-                  utilModel.svg_background,
+                  utilModel.svgBackground,
                   fit: BoxFit.contain,
                 ),
                 Column(
@@ -59,7 +58,6 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                     AsyncSnapshot streamSnapshot) {
                                   List<Widget> children = [];
                                   if (streamSnapshot.hasData) {
-                                    //must loop through messages return object to filter throug
                                     if (streamSnapshot.data.docs.length == 0) {
                                       children.add(
                                         Center(
@@ -76,8 +74,6 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                       for (int i = 0;
                                           i < streamSnapshot.data.docs.length;
                                           i++) {
-                                        //messages correspond to current user and selected user
-
                                         if (streamSnapshot.data.docs[i]
                                                 ['uid'] ==
                                             myId) {
@@ -138,9 +134,6 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                   } else {
                                     children.add(CircularProgressIndicator());
                                   }
-                                  //participantID matches clicked on id, means other persons message
-                                  // return ListView(
-                                  //     reverse: true, shrinkWrap: true, children: children);
                                   return ListView.builder(
                                     padding:
                                         EdgeInsets.only(left: 10, right: 10),

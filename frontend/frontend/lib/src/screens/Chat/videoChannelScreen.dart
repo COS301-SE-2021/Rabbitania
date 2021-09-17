@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/chat_provider.dart';
 import 'package:frontend/src/screens/Chat/videoChatScreen.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -44,7 +44,7 @@ class _ChannelScreenState extends State<ChannelScreen> {
       body: Stack(
         children: [
           SvgPicture.string(
-            utilModel.svg_background,
+            utilModel.svgBackground,
             fit: BoxFit.contain,
           ),
           Column(

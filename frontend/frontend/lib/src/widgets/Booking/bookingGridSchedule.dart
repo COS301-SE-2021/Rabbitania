@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/models/Booking/bookingScheduleModel.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 
 class BookingGridSchedule extends StatefulWidget {
@@ -18,9 +18,6 @@ class _BookingGridState extends State<BookingGridSchedule> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<BookingScheduleModel>? data = snapshot.data;
-          // print(snapshot.data!.map((element) {
-          //   return element.timeSlot;
-          // }));
           if (snapshot.data!.length == 0) {
             return GridView.count(
               crossAxisCount: 2,

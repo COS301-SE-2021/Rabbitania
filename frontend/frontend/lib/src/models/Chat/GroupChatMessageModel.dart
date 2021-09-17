@@ -1,7 +1,6 @@
+//model used to model a group chat message for group chat message room
 class GroupChatMessageModel {
-  //type must be send or receive
   final uid;
-
   final message;
   final dateCreated;
   GroupChatMessageModel({this.uid, this.message, this.dateCreated});

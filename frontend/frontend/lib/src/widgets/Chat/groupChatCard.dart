@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
-import 'package:frontend/src/screens/Chat/GroupChatRoomScreen.dart';
+import 'package:frontend/src/models/utilModel.dart';
+import 'package:frontend/src/screens/Chat/groupChatRoomScreen.dart';
 
 class GroupChatCard extends StatefulWidget {
   final String avatar;
@@ -110,7 +109,7 @@ class _GroupChatCardState extends State<GroupChatCard> {
                                                     .sendGroupChatMessage(
                                                         widget.roomName,
                                                         -1,
-                                                        '${displayName} has left ${widget.roomName}');
+                                                        '$displayName has left ${widget.roomName}');
                                                 await firestoreHelper
                                                     .removeUserFromGroup(
                                                         widget.roomName, myId);

@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
 import 'package:frontend/src/models/Booking/bookingScheduleModel.dart';
-import 'package:frontend/src/provider/user_provider.dart';
 import 'package:http/http.dart' as http;
 
 class BookingProvider {
@@ -179,8 +177,6 @@ class BookingProvider {
       },
     );
     if (response.statusCode == 200) {
-      //var schedules = BookingScheduleModel.fromJson(jsonDecode(response.body));
-      // List<BookingScheduleModel> jsonResponse = json.decode(response.body);
       final jsonMap = json.decode(response.body);
       List<BookingScheduleModel> schedules =
           (jsonMap['bookingSchedules'] as List)
