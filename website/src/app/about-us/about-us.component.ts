@@ -35,18 +35,20 @@ export class AboutUsComponent implements OnInit {
   faBook = faBook;
   //
 
-  loggingIn = false;
-
   constructor(
+    public authFire: AngularFireAuth,
     private observer: BreakpointObserver, 
     private service: AuthService, 
     router: Router,
     public model: MatDialog,
+    private auth: AuthService,
     private userService: UserDetailsService) {
       this.router = router;
   }
 
-  ngOnInit(){
+  loggingIn = false;
+
+  async ngOnInit(){
     var display = this.userService.retrieveUserDetails().displayName;
     if(display == undefined || null){
       console.log("Logged Out");
