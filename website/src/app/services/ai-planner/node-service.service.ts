@@ -90,7 +90,9 @@ export class NodeServiceService {
 
   async Post(_userEmail: string, _xPos: any, _yPos: any, _active: boolean): Promise<Observable<any>> {
 
-      this.http.post<NodeRequest>('https://localhost:5001/api/Node/CreateNode', {
+    const headers = { 'Content-Type': 'text/plain', };
+
+      this.http.post<NodeRequest>('https://localhost:5001/api/Node/CreateNode', {headers,
       userEmail: _userEmail,
       xPos: _xPos,
       yPos: _yPos,

@@ -27,7 +27,7 @@ namespace backend_api.Controllers.Node
         /// </summary>
         /// <param name=""></param>
         /// <returns>IEnumerable<Node></returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetAllNodes")]
         public async Task<IEnumerable<Models.Node.Node>> GetAllNodes()
         {
@@ -41,7 +41,7 @@ namespace backend_api.Controllers.Node
         /// </summary>
         /// <param name="nodeID"></param>
         /// <returns>GetNodeResponse<Node></returns>
-        [HttpGet]
+        [HttpGet, Authorize]
         [Route("GetNode")]
         public async Task<GetNodeResponse> GetNode(int nodeID)
         {
@@ -64,7 +64,7 @@ namespace backend_api.Controllers.Node
         /// </summary>
         /// <param name="request"></param>
         /// <returns>EditNodeResponse</returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("EditNode")]
         public async Task<EditNodeResponse> EditNode(EditNodeRequest request)
         {
@@ -82,7 +82,7 @@ namespace backend_api.Controllers.Node
         /// </summary>
         /// <param name="request"></param>
         /// <returns>CreateNodeResponse</returns>
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("CreateNode")]
         public async Task<CreateNodeResponse> CreateNode(CreateNodeRequest request)
         {
@@ -106,7 +106,7 @@ namespace backend_api.Controllers.Node
         /// <returns>DeleteNodeResponse</returns>
 
         //[Authorize]
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("DeleteNode")]
         public async Task<DeleteNodeResponse> DeleteNode(DeleteNodeRequest request)
         {
@@ -125,14 +125,14 @@ namespace backend_api.Controllers.Node
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("ActivateNode")]
         public async Task<ActivateNodeResponse> ActivateNode(ActivateNodeRequest request)
         {
             return await _service.ActivateNode(request);
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         [Route("SaveNodes")]
         public async Task<SaveNodesResponse> SaveNodes(SaveNodesRequest request)
         {
