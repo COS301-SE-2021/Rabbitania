@@ -4,32 +4,32 @@ namespace backend_api.Models.Node.Responses
 {
     public class CreateNodeResponse
     {
-        private string _response;
-        private HttpStatusCode _statusCode;
+        private string response;
+        private HttpStatusCode statusCode;
 
         public CreateNodeResponse(string response, HttpStatusCode statusCode)
         {
-            this._response = response;
-            this._statusCode = statusCode;
+            this.response = response;
+            this.statusCode = statusCode;
         }
 
 
         public CreateNodeResponse(string response)
         {
-            this._response = response;
+            this.response = response;
         }
 
         public string Response
         {
-            get => _response;
-            set => _response = value;
+            get => response;
+            set => response = value;
         }
         
 
         public HttpStatusCode StatusCode
         {
-            get => _statusCode;
-            set => _statusCode = value;
+            get => statusCode;
+            set => statusCode = value;
         }
     }
 }

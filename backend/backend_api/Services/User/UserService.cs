@@ -101,7 +101,7 @@ namespace backend_api.Services.User
             }
             
             ViewProfileResponse returnObject = await _userRepository.ViewProfile(request);
-            if (returnObject._name == null)
+            if (returnObject.name == null)
             {
                 throw new InvalidUserRequestException("User does not exist");
             }

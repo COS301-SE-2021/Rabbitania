@@ -2,11 +2,11 @@
 {
     public class CheckScheduleAvailabilityResponse
     {
-        private bool _successful;
+        private bool successful;
 
         public CheckScheduleAvailabilityResponse(bool successful)
         {
-            this._successful = successful;
+            this.successful = successful;
         }
 
         public CheckScheduleAvailabilityResponse()
@@ -15,8 +15,8 @@
 
         public bool Successful
         {
-            get => _successful;
-            set => _successful = value;
+            get => successful;
+            set => successful = value;
         }
     }
 }
