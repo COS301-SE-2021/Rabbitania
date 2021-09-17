@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:frontend/src/helper/JWT/securityHelper.dart';
-import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/screens/Noticeboard/noticeSingleScreen.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardCreateCard.dart';
 import 'package:frontend/src/widgets/Noticeboard/noticeboardEditCard.dart';
@@ -106,7 +103,7 @@ Future<String> addNewThread(
   }
 }
 
-Future<String> IncreaseEmoji(String Emoji) async {
+Future<String> increaseEmoji(String emoji) async {
   final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     final response = await http.put(
@@ -116,7 +113,7 @@ Future<String> IncreaseEmoji(String Emoji) async {
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode(<String, dynamic>{
-        "emojiUtf": Emoji.toString(),
+        "emojiUtf": emoji.toString(),
         "noticeboardId": noticeID
       }),
     );
@@ -133,7 +130,7 @@ Future<String> IncreaseEmoji(String Emoji) async {
   }
 }
 
-Future<String> DecreaseEmoji(String Emoji) async {
+Future<String> decreaseEmoji(String emoji) async {
   final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     final response = await http.put(
@@ -143,7 +140,7 @@ Future<String> DecreaseEmoji(String Emoji) async {
         'Authorization': 'Bearer $token'
       },
       body: jsonEncode(<String, dynamic>{
-        "emojiUtf": Emoji.toString(),
+        "emojiUtf": emoji.toString(),
         "noticeboardId": noticeID
       }),
     );

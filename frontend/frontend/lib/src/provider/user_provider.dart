@@ -4,7 +4,7 @@ import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/Profile/profileModel.dart';
-import 'package:frontend/src/models/userProfile_model.dart';
+import 'package:frontend/src/models/userProfileModel.dart';
 import 'package:http/http.dart' as http;
 
 class UserProvider {
@@ -19,7 +19,6 @@ class UserProvider {
   getUserID() async {
     final baseURL = await url.getBaseURL();
     var userEmail = user.providerData[0].email!;
-    //final token = await securityHelper.getToken();
     final token = await FirebaseAuth.instance.currentUser!.getIdToken();
     final response = await http.get(
       Uri.parse(baseURL + '/api/Auth/GetID?email=$userEmail'),
@@ -95,16 +94,15 @@ class UserProvider {
 }
 
 httpCall() async {
-  var userHttp = new UserProvider();
+  var userProvider = new UserProvider();
   UserHelper loggedUser = new UserHelper();
   SecurityHelper securityHelper = new SecurityHelper();
   URLHelper url = new URLHelper();
-
   final baseURL = await url.getBaseURL();
-  final user = await userHttp.getUserID();
+  final user = await userProvider.getUserID();
   final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
-  final response = await http.get(
+  await http.get(
     Uri.parse(baseURL + '/api/User/ViewProfile?UserId=$user'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -131,17 +129,16 @@ httpCall() async {
   }
 }
 
-Future<String> SaveAllUserDetails(
+Future<String> saveAllUserDetails(
     int userID,
     String username,
     String description,
-    String Role,
-    String Location,
+    String role,
+    String location,
     int level,
     String phoNum) async {
   final user = FirebaseAuth.instance.currentUser!;
-  UserHelper loggedUser = new UserHelper();
-  SecurityHelper securityHelper = new SecurityHelper();
+
   URLHelper url = new URLHelper();
 
   final baseURL = await url.getBaseURL();
@@ -153,25 +150,24 @@ Future<String> SaveAllUserDetails(
       " " +
       description +
       " " +
-      Role.toString() +
+      role.toString() +
       " " +
-      Location.toString() +
+      location.toString() +
       " " +
       level.toString() +
       " " +
       phoNum);
 
   try {
-    if (Role == "" ||
-        Location == "" ||
+    if (role == "" ||
+        location == "" ||
         level < 0 ||
         level > 9 ||
         phoNum.length < 8) {
       throw ("Cannot Submit Empty Fields");
     }
 
-    //String roleInt = await getRoleIdEnum(Role);
-    String officeLocation = await (getLocationIdEnum(Location));
+    String officeLocation = await (getLocationIdEnum(location));
 
     final response = await http.put(
       Uri.parse(baseURL + '/api/User/EditProfile'),
@@ -206,7 +202,6 @@ Future<String> SaveAllUserDetails(
 Future<ProfileUser> getUserProfileObj() async {
   UserHelper loggedUser = new UserHelper();
   final userID = await loggedUser.getUserID();
-  SecurityHelper securityHelper = new SecurityHelper();
   URLHelper url = new URLHelper();
 
   final baseURL = await url.getBaseURL();
@@ -245,8 +240,7 @@ Future<String> getRoleEnum(int roleInt) async {
     if (roleInt < -1 || roleInt > 10) {
       throw ("Error RoleID is Incorrect");
     }
-    UserHelper loggedUser = new UserHelper();
-    SecurityHelper securityHelper = new SecurityHelper();
+
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
@@ -263,25 +257,6 @@ Future<String> getRoleEnum(int roleInt) async {
 
     if (response.statusCode == 201 || response.statusCode == 200) {
       return response.body;
-    } else if (response.statusCode == 401) {
-      final authReponse = await http.post(
-        Uri.parse(baseURL + '/api/Auth/Auth'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: jsonEncode(<String, dynamic>{
-          'email': FirebaseAuth.instance.currentUser!.providerData[0].email!,
-          'name': loggedUser.getUserName()
-        }),
-      );
-      if (authReponse.statusCode == 200) {
-        Map<String, dynamic> obj = jsonDecode(authReponse.body);
-        var token = '${obj['token']}';
-        securityHelper.setToken(token);
-        return getRoleEnum(roleInt);
-      } else {
-        throw new Exception("Error with Authentication");
-      }
     } else {
       throw ("Failed to delete, error code" + response.statusCode.toString());
     }
@@ -324,8 +299,6 @@ Future<String> getRoleIdEnum(String role) async {
     if (role == "") {
       throw ("Error Role is Incorrect");
     }
-    UserHelper loggedUser = new UserHelper();
-    SecurityHelper securityHelper = new SecurityHelper();
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
@@ -354,8 +327,7 @@ Future<String> getLocationIdEnum(String office) async {
     if (office == "") {
       throw ("Error LocationID is Incorrect");
     }
-    UserHelper loggedUser = new UserHelper();
-    SecurityHelper securityHelper = new SecurityHelper();
+
     URLHelper url = new URLHelper();
 
     final baseURL = await url.getBaseURL();
