@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
-import 'package:frontend/src/models/util_model.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/screens/Booking/bookingScheduleScreen.dart';
-import 'package:frontend/src/widgets/Booking/bookingAppBar.dart';
-import 'package:frontend/src/widgets/Booking/bookingButton.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayButton.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayScreenButton.dart';
-import 'package:frontend/src/widgets/Booking/bookingDayText.dart';
 import 'package:frontend/src/widgets/Booking/bookingScheduleButton.dart';
 import 'package:frontend/src/widgets/NavigationBar/actionBar.dart';
 import 'package:frontend/src/widgets/NavigationBar/navigationbar.dart';
@@ -22,8 +16,7 @@ class BookingAdminScreen extends StatefulWidget {
 
 class _BookingAdminState extends State<BookingAdminScreen> {
   UtilModel utilModel = UtilModel();
-  UserHelper loggedUser = new UserHelper();
-  initState() {}
+  UserHelper userHelper = new UserHelper();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -32,8 +25,8 @@ class _BookingAdminState extends State<BookingAdminScreen> {
           numberOfItems: 2,
           icon1: Icons.admin_panel_settings_sharp,
           onPressed1: () async {
-            var name = await loggedUser.getUserName();
-            if (await loggedUser.getAdminStatus()) {
+            var name = await userHelper.getUserName();
+            if (await userHelper.getAdminStatus()) {
               UtilModel.route(() => BookingAdminScreen(), context);
             } else {
               return showDialog<void>(
@@ -97,7 +90,7 @@ class _BookingAdminState extends State<BookingAdminScreen> {
           child: Stack(
             children: <Widget>[
               SvgPicture.string(
-                utilModel.svg_background,
+                utilModel.svgBackground,
                 fit: BoxFit.contain,
               ),
               Column(

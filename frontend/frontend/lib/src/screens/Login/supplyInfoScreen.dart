@@ -4,7 +4,6 @@ import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
 import 'package:frontend/src/models/utilModel.dart';
-import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/provider/user_provider.dart';
 import 'package:frontend/src/widgets/Profile/profile_picture_widget.dart';
 import 'package:flutter_svg/svg.dart';

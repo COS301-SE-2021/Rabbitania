@@ -29,10 +29,6 @@ class NoticeboardCard extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.only(
                             bottom: 10.0, top: 10, left: 20, right: 10),
-
-                        // leading: Icon(
-                        //   Icons.announcement_outlined, size: 45,
-                        //   color: Color.fromRGBO(171, 255, 79, 1),),
                         title: Container(
                           padding: EdgeInsets.only(bottom: 8),
                           child: Text(

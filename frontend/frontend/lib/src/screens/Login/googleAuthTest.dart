@@ -16,7 +16,6 @@ class Test extends StatelessWidget {
           ),
           floatingActionButton: ElevatedButton.icon(
             onPressed: () {
-              print(user);
               final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.googleLogout();

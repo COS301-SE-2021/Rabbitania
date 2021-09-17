@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +23,7 @@ class GoogleSignInProvider extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
 
-    // print('accessToken: ${googleAuth.accessToken}');
     await firebaseAuth.signInWithCredential(credential);
-    log('accessToken: ${googleAuth.accessToken}');
-    log('IdToken: ${await FirebaseAuth.instance.currentUser!.getIdToken()}');
     var token = await FirebaseAuth.instance.currentUser!.getIdToken();
     securityHelper.setFirestoreIdToken(token);
 
