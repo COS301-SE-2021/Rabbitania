@@ -91,7 +91,7 @@ namespace backend_api.Data.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
             var selectedUser = _aspUser.Users.Where(x => x.UserId == request.UserId);
             
@@ -124,7 +124,7 @@ namespace backend_api.Data.User
         {
             if (request == null)
             {
-                throw new InvalidUserRequest("Request object cannot be null");
+                throw new InvalidUserRequestException("Request object cannot be null");
             }
 
             var selectedUser =  _users.Users.Where(x => x.UserId == request.UserId);
