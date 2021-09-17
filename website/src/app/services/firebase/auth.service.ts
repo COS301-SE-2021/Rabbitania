@@ -33,22 +33,18 @@ export class AuthService {
 
     }
   
-  async getToken(auth: AngularFireAuth) : Promise<any> {
-    var token = {
-      token: ''
-    }
-    await auth.currentUser.then(async (data) => {
+  async getToken() : Promise<any> {
+    await this.authFire.currentUser.then(async (data) => {
       await data?.getIdTokenResult().then((returned) => {
-        token = {
+        this.token = {
           token: returned.token,
         }
       });
     });
-    return token;
   }
 
   async Token(){
-    await this.getToken(this.authFire);
+    await this.getToken();
     return this.token.token;
   }
 
