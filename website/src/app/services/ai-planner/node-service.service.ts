@@ -10,7 +10,6 @@ import { AuthService } from '../firebase/auth.service';
 export class NodeServiceService {
 
   private bs = new BehaviorSubject<any>(null);
-
   constructor(private http: HttpClient,public authFire: AngularFireAuth ) { }
 
   token = {
@@ -29,19 +28,14 @@ export class NodeServiceService {
   async Token(){
     await this.getToken();
     var token = sessionStorage.getItem('token');
-    
     if((this.token.token).length <10)
     {
-      console.log(token);
       return token;
     }
     else
     {
-      console.log(this.token.token);
       return this.token.token;      
     }
-
-    
   }
 
   async Save(node: any){
@@ -52,7 +46,6 @@ export class NodeServiceService {
       }),
       'observe': 'response' as const,
     };
-  console.log("this is the node array :  " + node);
     this.http.put('https://localhost:5001/api/Node/SaveNodes', {
       nodes: node,
     },httpOptions).subscribe(
@@ -61,13 +54,13 @@ export class NodeServiceService {
           this.bs.next(data);
           return this.bs.asObservable();
         } else{
-          this.bs.next("Error 401: Unable to process request");
+          console.log("Error 401: Unable to process request");
           return this.bs.asObservable();
         }
       },
       (error) => {
         console.log(error);
-        alert('An unexpected error occurred');
+        console.log('An unexpected error occurred');
         return error;
       }
 
@@ -98,7 +91,7 @@ export class NodeServiceService {
       },
       (error) => {
         console.log(error);
-        alert('An unexpected error occurred');
+        console.log('An unexpected error occurred');
         return error;
       }
 
@@ -111,21 +104,18 @@ export class NodeServiceService {
   async Get(){
 
     const headers = { 'Authorization': 'Bearer ' + await this.Token()};
-   
-    console.log("GET functions token  =   "+ await this.Token());
     this.http.get('https://localhost:5001/api/Node/GetAllNodes',{headers}).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
           return this.bs.asObservable();
         } else{
-          this.bs.next("Error 401: Unable to process request");
+          console.log("Error 401: Unable to process request");
           return this.bs.asObservable();
         }
       },
       (error) => {
-        console.log(error);
-        alert('An unexpected error occurred');
+        console.log("UNKNOWN ERROR...");
         return error;
       }
 
@@ -153,20 +143,16 @@ export class NodeServiceService {
         if (data) {
           this.bs.next(data);
           return this.bs.asObservable();
-
         } else{
-          this.bs.next("Error 401: Unable to process request");
+          console.log("Error 401: Unable to process request")
           return this.bs.asObservable();
         }
       },
       (error) => {
         console.log(error);
-        alert('An unexpected error occurred');
         return error;
       }
-
     );
   return this.bs.asObservable();
-
   }
 }
