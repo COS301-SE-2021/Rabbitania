@@ -123,6 +123,42 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.NotNull(resp);
         }
-
+//-------------------------GetUserByEmail------------------------
+        [Fact]
+        public async void GetUserByEmail_InvalidRequest_NullRequest()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.GetUserByEmail(null));
+        }
+        [Fact]
+        public async void GetUserByEmail_InvalidRequest_NullEmail()
+        {
+            //Arrange
+            var request = new GetUserByEmailRequest();
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
+        }
+        [Fact]
+        public async void GetUserByEmail_InvalidRequest_EmptyEmail()
+        {
+            //Arrange
+            var request = new GetUserByEmailRequest("");
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
+        }
+        [Fact]
+        public async void GetUserByEmail_ValidRequest_EmailDoesntExist()
+        {
+            //Arrange
+            var request = new GetUserByEmailRequest("t@tuks.co.za");
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
+        }
+        
     }
 }

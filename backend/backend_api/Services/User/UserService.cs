@@ -78,14 +78,24 @@ namespace backend_api.Services.User
         }
         public async Task<GetUserResponse> GetUserByEmail(GetUserByEmailRequest request)
         {
-            var user = await _userRepository.GetUserByEmail(request.Email);
-            if (!user.Equals(null))
+            if (request == null)
             {
+                throw new InvalidUserRequestException("Request is null");
+            }
+
+            if (string.IsNullOrEmpty(request.Email))
+            {
+                throw new InvalidUserEmailRequest("User email is null in request object");
+            }
+
+            try
+            {
+                var user = await _userRepository.GetUserByEmail(request.Email);
                 return new GetUserResponse(user, user.Name,user.EmployeeLevel,user.IsAdmin,user.UserDescription,user.UserId,user.PhoneNumber,user.UserRole,user.UserImgUrl,user.OfficeLocation,user.PinnedUserIds);
             }
-            else
+            catch (Exception e)
             {
-                throw new InvalidUserRequestException("User does not exist");
+                throw new InvalidUserEmailRequest("User does not exist with email: "+request.Email);
             }
         }
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
