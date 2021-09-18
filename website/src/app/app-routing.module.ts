@@ -19,10 +19,7 @@ const routes: Routes = [
   },
   {
     path: "ai-planner", component: AIPlannerComponent, canActivate: [PlannerIsadminGuard]
-  },
-  {
-    path: "view-users", component: ViewUsersAdminComponent, canActivate: [PlannerIsadminGuard]
-  },
+  }
 ];
 
 @NgModule({
