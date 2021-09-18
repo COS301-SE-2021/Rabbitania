@@ -1,53 +1,86 @@
 
 <mat-toolbar class="mat-elevation-z8">
-    &nbsp;
-    <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-        <mat-icon *ngIf="sidenav.opened">close</mat-icon>
-    </button>
-    <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://retrorabbit.co.za">
-        <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
-    </a>
-    <span class="toolbar-spacer"></span>
-    
+  &nbsp;
+  <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+  </button>
+  <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://retrorabbit.co.za">
+      <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
+  </a>
+  <span class="toolbar-spacer"></span>
+
+  
+  
+  <button class="log" matTooltip="Login" mat-button *ngIf="user_displayName == '';else other_content" (click)="signIn()">
+      <div *ngIf="loggingIn;else login">
+          <span class="spinner-border spinner-border-sm mr-1"></span>
+          Logging In
+      </div>
+      <ng-template #login>
+          <i class="bi bi-google"> Login </i>
+      </ng-template>
+  </button>
+  <ng-template #other_content>
+      <div class="profile">
+          <span><img class="profile-pic" src="{{ user_googleUrl }}"/></span>&nbsp;
+          <span class="profile-text">{{ user_displayName }}</span>&nbsp;
+          <button class="log" matTooltip="Logout" mat-button (click)="signOut()">
+              Logout
+          </button>
+      </div>
+  </ng-template>
 </mat-toolbar>
 
 <mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
-        <img class="avatar mat-elevation-z8" src="../../assets/png/logo.png" />
+    <img class="avatar mat-elevation-z8" *ngIf="user_googleUrl == '';else googleUrl" src="../../assets/png/logo.png" />
+    <ng-template #googleUrl>
+        <img class="avatar mat-elevation-z8" src="{{ user_googleUrl }}" />
+    </ng-template>
 
-        <h4 class="name">RABBITANIA MAIN MENU</h4>
+    <h4 class="name">RABBITANIA MAIN MENU</h4>
 
-        <mat-divider class="nav-divider"></mat-divider>
+    <mat-divider class="nav-divider"></mat-divider>
 
-        <button mat-button class="menu-button" routerLink="/">
-            <fa-icon [icon]="faRocket"></fa-icon>&nbsp;
-            <span>Landing Page</span>
-        </button>
-        <button mat-button class="menu-button" routerLink="/">
-            <fa-icon [icon]="faUsers"></fa-icon>&nbsp;
-            <span>The Developer Team</span>
-        </button>
+    <button mat-button class="menu-button" routerLink="/">
+        <span class="menu-icon"><fa-icon [icon]="faRocket"></fa-icon></span>
+        <span class="menu-icon-text"> Landing Page</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/about-us">
+        <span class="menu-icon"><i class="bi bi-terminal"></i></span>
+        <span class="menu-icon-text">About The Developers</span>
+    </button>
 
-        <mat-divider class="nav-divider"></mat-divider>
-        <h4 class="name">Administrator Dashboard</h4>
+    <mat-divider class="nav-divider"></mat-divider>
+    <h4 class="name">Employee Dashboard</h4>
 
-        <button mat-button class="menu-button" routerLink="/ai-planner">
-            <fa-icon [icon]="faBriefcase"></fa-icon>&nbsp;
-            <span>Office Planner</span>
-        </button>
-        <button mat-button class="menu-button">
-            <mat-icon>people</mat-icon>
-            <span>View Users</span>
-        </button>
-        <button mat-button class="menu-button">
-            <fa-icon [icon]="faThList"></fa-icon>&nbsp;
-            <span>View Bookings Schedule</span>
-        </button>
-     
-    </mat-sidenav>
+    <button mat-button class="menu-button">
+        <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
+        <span class="menu-icon-text">View Bookings Schedule</span>
+    </button>
+
+    <button mat-button class="menu-button">
+        <span class="menu-icon"><fa-icon [icon]="faBook"></fa-icon></span>
+        <span class="menu-icon-text">View Your Bookings</span>
+    </button>
+
+
+    <mat-divider class="nav-divider"></mat-divider>
+    <h4 class="name">Administrator Dashboard</h4>
+
+    <button mat-button class="menu-button" routerLink="/ai-planner">
+        <span class="menu-icon"><fa-icon [icon]="faBriefcase"></fa-icon></span>
+        <span class="menu-icon-text">Office Planner</span>
+    </button>
+    <button mat-button class="menu-button">
+        <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
+        <span class="menu-icon-text">View Users</span>
+    </button>
+
+</mat-sidenav>
     <mat-sidenav-content>
   
 
@@ -61,7 +94,8 @@
 <div class="container-fluid ">
   <div class="row">
     <div class="col-12 d-flex justify-content-center text-center">
-      <h1 class="headings">AI Floor Planner</h1>
+      <br>
+      <br>
     </div>
   </div>
 
