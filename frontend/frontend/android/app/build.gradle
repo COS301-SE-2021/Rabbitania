@@ -21,16 +21,16 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
- def keystoreProperties = new Properties()
+def keystoreProperties = new Properties()
    def keystorePropertiesFile = rootProject.file('key.properties')
    if (keystorePropertiesFile.exists()) {
        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
    }
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion 30
@@ -55,17 +55,13 @@ android {
     //         signingConfig signingConfigs.debug
     //     }
     // }
-      signingConfigs {
+       buildTypes {
        release {
-           keyAlias keystoreProperties['keyAlias']
-           keyPassword keystoreProperties['keyPassword']
-           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-           storePassword keystoreProperties['storePassword']
-       }
-   }
-   buildTypes {
-       release {
-           signingConfig signingConfigs.release
+           // TODO: Add your own signing config for the release build.
+           // Signing with the debug keys for now,
+           // so `flutter run --release` works.
+           debuggable true
+           signingConfig signingConfigs.debug
        }
    }
 }
@@ -73,12 +69,6 @@ android {
 flutter {
     source '../..'
 }
-
-// dependencies {
-//     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//     implementation platform('com.google.firebase:firebase-bom:28.2.0')
-//     implementation 'com.google.firebase:firebase-analytics-ktx'
-// }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
