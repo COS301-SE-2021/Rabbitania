@@ -35,13 +35,7 @@ namespace backend_api.Data.User
             _users = users;
             _aspUser = aspUser;
         }
-
-        public async Task<Models.User.Users> GetUser(int userID)
-        {
-            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
-            
-        }
-
+        
         public async Task<Models.User.Users> GetUserByEmail(string email)
         {
             var userEmail = _users.UserEmail.Where(x => x.UsersEmail == email).FirstOrDefaultAsync();

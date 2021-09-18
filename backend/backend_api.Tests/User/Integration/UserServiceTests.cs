@@ -159,6 +159,42 @@ namespace backend_api.Tests.User.Integration
             //Assert
             await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
         }
-        
+        [Fact]
+        public async void GetUserByEmail_ValidRequest_UserExists()
+        {
+            //Arrange
+            var request = new GetUserByEmailRequest("integrationTest@tuks.co.za");
+            //Act
+            var resp = await _userService.GetUserByEmail(request);
+            //Assert
+            Assert.NotNull(resp);
+        }
+//----------------------------------EditProfile------------------------------
+        [Fact]
+        public async void EditProfile_InvalidRequest_NullRequest()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(null));
+        }
+        [Fact]
+        public async void EditProfile_InvalidRequest_UserIDNUll()
+        {
+            //Arrange
+            var request = new EditProfileRequest();
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(request));
+        }
+        [Fact]
+        public async void EditProfile_InvalidRequest_UserIDNUll()
+        {
+            //Arrange
+            var request = new EditProfileRequest();
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(request));
+        }
     }
 }
