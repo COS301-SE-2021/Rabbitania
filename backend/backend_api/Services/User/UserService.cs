@@ -126,9 +126,9 @@ namespace backend_api.Services.User
             {
                 throw new InvalidUserRequestException("Request object cannot be null");
             }
-            if (request.UserId.Equals(null))
+            if (request.UserId <= 0)
             {
-                throw new Exception("Error Missing UserID");
+                throw new InvalidUserIdException("Error Missing UserID");
             }
             
             ViewProfileResponse returnObject = await _userRepository.ViewProfile(request);
@@ -142,12 +142,18 @@ namespace backend_api.Services.User
 
         public async Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request)
         {
-            if (request == null)
+            if (request == null )
             {
                 throw new InvalidUserRequestException("Request object cannot be null");
             }
-
-            return await _userRepository.GetUserProfiles();
+            try
+            {
+                return await _userRepository.GetUserProfiles();
+            }
+            catch (Exception e)
+            {
+                throw new InvalidUserRequestException("Users do not exist");
+            }
         }
 
         public List<string> GetAllUserEmails()
@@ -168,11 +174,11 @@ namespace backend_api.Services.User
                 throw new InvalidUserRequestException("Request object cannot be null");
             }
 
-            if (request.UserId.Equals(null))
+            if (request.UserId.Equals(null) || request.UserId <= 0)
             {
-                throw new Exception("Error Missing UserID");
+                throw new InvalidUserIdException("Error Missing UserID");
             }
-
+            
             return await _userRepository.MakeUserAdmin(request);
         }
 

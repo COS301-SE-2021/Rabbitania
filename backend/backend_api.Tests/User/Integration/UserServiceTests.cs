@@ -27,12 +27,12 @@ namespace backend_api.Tests.User.Integration
             var env = Environment.GetEnvironmentVariable("CONN_STRING");
             builder.UseNpgsql(env.ToString())
                 .UseInternalServiceProvider(serviceProvider);
-            
+
             _userContext = new UserContext(builder.Options);
             _userRepository = new UserRepository(_userContext);
             _userService = new UserService(_userRepository);
-            
         }
+
         /// <summary>
         ///     Inserts a mock User into the testing DB so that there
         ///     is a specific User to be deleted each time the tests
@@ -49,16 +49,18 @@ namespace backend_api.Tests.User.Integration
             await _context.Nodes.AddAsync(nodeToDelete);
             await _context.SaveChangesAsync();*/
         }
+
 //--------------------------------------CreateUser-------------------------------------
         [Fact]
         public async void CreateUser_InvalidRequest_NullRequest()
         {
             //Arrange
-            
+
             //Act
             //Assert
             await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.CreateUser(null));
         }
+
         [Fact]
         public async void CreateUser_InvalidRequest_InvalidEmail()
         {
@@ -68,16 +70,19 @@ namespace backend_api.Tests.User.Integration
             //Assert
             await Assert.ThrowsAsync<InvalidUserEmailRequest>(async () => await _userService.CreateUser(request));
         }
+
         [Fact]
         public async void CreateUser_ValidRequest()
         {
             //Arrange
-            var request = new GoogleSignInRequest("Integration test", "integrationTest@tuks.co.za", "1234567890", "image.png");
+            var request = new GoogleSignInRequest("Integration test", "integrationTest@tuks.co.za", "1234567890",
+                "image.png");
             //Act
             var resp = await _userService.CreateUser(request);
             //Assert
             Assert.Equal("User Successfully Created", resp.Response);
         }
+
 //---------------------------------------GetUser-------------------------------------
         [Fact]
         public async void GetUser_InvalidRequest_NullRequest()
@@ -85,17 +90,19 @@ namespace backend_api.Tests.User.Integration
             //Arrange
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.getUser(null));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.getUser(null));
         }
+
         [Fact]
         public async void GetUser_InvalidRequest_EmptyName()
         {
             //Arrange
-            var request = new GetUserRequest(null,"test");
+            var request = new GetUserRequest(null, "test");
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.getUser(request));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.getUser(request));
         }
+
         [Fact]
         public async void GetUser_InvalidRequest_EmptySurnname()
         {
@@ -103,8 +110,9 @@ namespace backend_api.Tests.User.Integration
             var request = new GetUserRequest("test", null);
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.getUser(request));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.getUser(request));
         }
+
         [Fact]
         public async void GetUser_ValidRequest_InvalidUser()
         {
@@ -113,8 +121,9 @@ namespace backend_api.Tests.User.Integration
             //Act
             //var resp = await _userService.getUser(request);
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.getUser(request));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.getUser(request));
         }
+
         [Fact]
         public async void GetUser_ValidRequest_ValidUser()
         {
@@ -125,6 +134,7 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.NotNull(resp);
         }
+
 //-------------------------GetUserByEmail-----------------------------------
         [Fact]
         public async void GetUserByEmail_InvalidRequest_NullRequest()
@@ -132,8 +142,9 @@ namespace backend_api.Tests.User.Integration
             //Arrange
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.GetUserByEmail(null));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.GetUserByEmail(null));
         }
+
         [Fact]
         public async void GetUserByEmail_InvalidRequest_NullEmail()
         {
@@ -141,8 +152,9 @@ namespace backend_api.Tests.User.Integration
             var request = new GetUserByEmailRequest();
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
+            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async () => await _userService.GetUserByEmail(request));
         }
+
         [Fact]
         public async void GetUserByEmail_InvalidRequest_EmptyEmail()
         {
@@ -150,8 +162,9 @@ namespace backend_api.Tests.User.Integration
             var request = new GetUserByEmailRequest("");
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
+            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async () => await _userService.GetUserByEmail(request));
         }
+
         [Fact]
         public async void GetUserByEmail_ValidRequest_EmailDoesntExist()
         {
@@ -159,8 +172,9 @@ namespace backend_api.Tests.User.Integration
             var request = new GetUserByEmailRequest("t@tuks.co.za");
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async ()=> await _userService.GetUserByEmail(request));
+            await Assert.ThrowsAsync<InvalidUserEmailRequest>(async () => await _userService.GetUserByEmail(request));
         }
+
         [Fact]
         public async void GetUserByEmail_ValidRequest_UserExists()
         {
@@ -171,6 +185,7 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.NotNull(resp);
         }
+
 //----------------------------------EditProfile------------------------------
         [Fact]
         public async void EditProfile_InvalidRequest_NullRequest()
@@ -178,8 +193,9 @@ namespace backend_api.Tests.User.Integration
             //Arrange
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(null));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.EditProfile(null));
         }
+
         [Fact]
         public async void EditProfile_InvalidRequest_UserIDNUll()
         {
@@ -187,27 +203,32 @@ namespace backend_api.Tests.User.Integration
             var request = new EditProfileRequest();
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserIdException>(async ()=> await _userService.EditProfile(request));
+            await Assert.ThrowsAsync<InvalidUserIdException>(async () => await _userService.EditProfile(request));
         }
+
         [Fact]
         public async void EditProfile_ValidRequest_InvalidUser()
         {
             //Arrange
-            var request = new EditProfileRequest(19999, "test", "12121212", "Test", "", false, 3, UserRoles.Developer, OfficeLocation.Pretoria);
+            var request = new EditProfileRequest(19999, "test", "12121212", "Test", "", false, 3, UserRoles.Developer,
+                OfficeLocation.Pretoria);
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(request));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.EditProfile(request));
         }
+
         [Fact]
         public async void EditProfile_ValidRequest_ValidUser()
         {
             //Arrange
-            var request = new EditProfileRequest(2, "test3", "12121212", "Integration update est", "", false, 3, UserRoles.Developer, OfficeLocation.Pretoria);
+            var request = new EditProfileRequest(2, "test3", "12121212", "Integration update est", "", false, 3,
+                UserRoles.Developer, OfficeLocation.Pretoria);
             //Act
             var resp = await _userService.EditProfile(request);
             //Assert
             Assert.Equal(HttpStatusCode.Accepted, resp.Response);
         }
+
 //--------------------------------------ViewProfile----------------------------------
         [Fact]
         public async void ViewProfile_InvalidRequest_NullRequest()
@@ -215,15 +236,114 @@ namespace backend_api.Tests.User.Integration
             //Arrange
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.ViewProfile(null));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.ViewProfile(null));
         }
+
         [Fact]
-        public async void ViewProfile_InvalidRequest_NullRequest()
+        public async void ViewProfile_InvalidRequest_NegativeID()
+        {
+            //Arrange
+            var request = new ViewProfileRequest(-1);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserIdException>(async () => await _userService.ViewProfile(request));
+        }
+
+        [Fact]
+        public async void ViewProfile_InvalidRequest_ZeroID()
+        {
+            //Arrange
+            var request = new ViewProfileRequest(0);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserIdException>(async () => await _userService.ViewProfile(request));
+        }
+
+        [Fact]
+        public async void ViewProfile_ValidRequest_UserDoesntExist()
+        {
+            //Arrange
+            var request = new ViewProfileRequest(200000);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.ViewProfile(request));
+        }
+
+        [Fact]
+        public async void ViewProfile_ValidRequest_ValidUser()
+        {
+            //Arrange
+            var request = new ViewProfileRequest(1);
+            //Act
+            var resp = await _userService.ViewProfile(request);
+            //Assert
+            Assert.Equal("test", resp.name);
+        }
+
+        //--------------------------------------GetUserProfiles----------------------------------
+        [Fact]
+        public async void GetUserProfiles_InvalidRequest_NullRequest()
         {
             //Arrange
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.ViewProfile(null));
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.GetUserProfiles(null));
+        }
+        [Fact]
+        public async void GetUserProfiles_ValidRequest()
+        {
+            //Arrange
+            var request = new GetUserProfilesRequest();
+            //Act
+            var resp = await _userService.GetUserProfiles(request);
+            //Assert
+            Assert.NotNull(resp);
+        }
+        //--------------------------------------GetAllUserEmails----------------------------------
+        [Fact]
+        public async void GetAllUserEmails()
+        {
+            //Arrange
+            //Act
+            //Assert
+            Assert.NotNull(_userService.GetAllUserEmails());
+        }
+        //--------------------------------------MakeUserAdmin----------------------------------
+        [Fact]
+        public async void MakeUserAdmin_InvalidRequest_NullRequest()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.MakeUserAdmin(null));
+        }
+        [Fact]
+        public async void MakeUserAdmin_InvalidRequest_NegativeID()
+        {
+            //Arrange
+            var request = new MakeUserAdminRequest(-1);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserIdException>(async () => await _userService.MakeUserAdmin(request));
+        }
+        [Fact]
+        public async void MakeUserAdmin_InvalidRequest_ZeroID()
+        {
+            //Arrange
+            var request = new MakeUserAdminRequest(0);
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserIdException>(async () => await _userService.MakeUserAdmin(request));
+        }
+        [Fact]
+        public async void MakeUserAdmin_ValidRequest_InvalidUser()
+        {
+            //Arrange
+            var request = new MakeUserAdminRequest(1000902);
+            //Act
+            var resp = await _userService.MakeUserAdmin(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
         }
     }
 }
