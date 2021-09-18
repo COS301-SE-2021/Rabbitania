@@ -32,9 +32,9 @@ namespace backend_api.Controllers.User
         /// <returns>A list of users in the system</returns>
         [HttpGet, Authorize]
         [Route("Admin/GetUser")]
-        public GetUserResponse GetUsers([FromQuery] GetUserRequest request)
+        public async Task<GetUserResponse> GetUsers([FromQuery] GetUserRequest request)
         {
-            return _service.getUser(request);
+            return await _service.getUser(request);
         }
 
         /// <summary>

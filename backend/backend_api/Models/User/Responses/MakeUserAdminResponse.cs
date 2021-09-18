@@ -26,6 +26,10 @@ namespace backend_api.Models.User.Responses
             set => _statusCode = value;
         }
 
-       
+
+        public MakeUserAdminResponse(HttpStatusCode statusCode)
+        {
+            _statusCode = statusCode;
+        }
     }
 }

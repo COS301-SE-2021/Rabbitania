@@ -41,5 +41,6 @@ namespace backend_api.Models.User.Responses
             this.user = user;
 
         }
+        
     }
 }
