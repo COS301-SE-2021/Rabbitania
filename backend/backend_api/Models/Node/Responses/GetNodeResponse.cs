@@ -2,17 +2,17 @@
 {
     public class GetNodeResponse
     {
-        private Node _node;
+        private Node node;
 
         public GetNodeResponse(Node node)
         {
-            this._node = node;
+            this.node = node;
         }
 
         public Node Node
         {
-            get => _node;
-            set => _node = value;
+            get => node;
+            set => node = value;
         }
     }
 }
