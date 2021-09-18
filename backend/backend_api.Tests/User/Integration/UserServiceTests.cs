@@ -38,17 +38,6 @@ namespace backend_api.Tests.User.Integration
         ///     is a specific User to be deleted each time the tests
         ///     are executed.
         /// </summary>
-        private async Task addMockedUsere()
-        {
-            /*var nodeToDelete = new Models.Node.Node();
-            nodeToDelete.Id = 5;
-            nodeToDelete.active = false;
-            nodeToDelete.userEmail = "testt@gmail.com";
-            nodeToDelete.xPos = 1;
-            nodeToDelete.yPos = 1;
-            await _context.Nodes.AddAsync(nodeToDelete);
-            await _context.SaveChangesAsync();*/
-        }
 
 //--------------------------------------CreateUser-------------------------------------
         [Fact]
@@ -344,6 +333,56 @@ namespace backend_api.Tests.User.Integration
             var resp = await _userService.MakeUserAdmin(request);
             //Assert
             Assert.Equal(HttpStatusCode.BadRequest, resp.StatusCode);
+        }
+        [Fact]
+        public async void MakeUserAdmin_ValidRequest()
+        {
+            //Arrange
+            var request = new MakeUserAdminRequest(1);
+            //Act
+            var resp = await _userService.MakeUserAdmin(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
+        }
+        //--------------------------------------CheckAdmin----------------------------------
+        [Fact]
+        public async void CheckAdmin_InvalidRequest_NullRequest()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.CheckAdmin(null));
+        }
+        [Fact]
+        public async void CheckAdmin_InvalidRequest_InvalidEmail()
+        {
+            //Arrange
+            var request = new CheckAdminStatusRequest("");
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await _userService.CheckAdmin(request));
+        }
+
+        [Fact]
+        public async void CheckAdmin_ValidRequest_InvalidUser()
+        {
+            //Arrange
+            var request = new CheckAdminStatusRequest("t@tuks.co.za");
+            //Act
+            var resp = await _userService.CheckAdmin(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.BadRequest, resp.Status);
+        }
+        [Fact]
+        public async void CheckAdmin_ValidRequest_ValidUser()
+        {
+            //Arrange
+            var request = new CheckAdminStatusRequest("integrationTest@tuks.co.za");
+            //Act
+            var resp = await _userService.CheckAdmin(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, resp.Status);
+            Assert.False(resp.Result);
         }
     }
 }
