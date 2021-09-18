@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.User;
 using backend_api.Exceptions.Notifications;
 using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
+using backend_api.Models.Enumerations;
 using backend_api.Models.User.Requests;
 using backend_api.Services.User;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +49,7 @@ namespace backend_api.Tests.User.Integration
             await _context.Nodes.AddAsync(nodeToDelete);
             await _context.SaveChangesAsync();*/
         }
-//------------------------------------CreateUser------------------------------
+//--------------------------------------CreateUser-------------------------------------
         [Fact]
         public async void CreateUser_InvalidRequest_NullRequest()
         {
@@ -76,7 +78,7 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.Equal("User Successfully Created", resp.Response);
         }
-//--------------------------GetUser--------------------------
+//---------------------------------------GetUser-------------------------------------
         [Fact]
         public async void GetUser_InvalidRequest_NullRequest()
         {
@@ -123,7 +125,7 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.NotNull(resp);
         }
-//-------------------------GetUserByEmail------------------------
+//-------------------------GetUserByEmail-----------------------------------
         [Fact]
         public async void GetUserByEmail_InvalidRequest_NullRequest()
         {
@@ -185,16 +187,43 @@ namespace backend_api.Tests.User.Integration
             var request = new EditProfileRequest();
             //Act
             //Assert
-            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(request));
+            await Assert.ThrowsAsync<InvalidUserIdException>(async ()=> await _userService.EditProfile(request));
         }
         [Fact]
-        public async void EditProfile_InvalidRequest_UserIDNUll()
+        public async void EditProfile_ValidRequest_InvalidUser()
         {
             //Arrange
-            var request = new EditProfileRequest();
+            var request = new EditProfileRequest(19999, "test", "12121212", "Test", "", false, 3, UserRoles.Developer, OfficeLocation.Pretoria);
             //Act
             //Assert
             await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.EditProfile(request));
+        }
+        [Fact]
+        public async void EditProfile_ValidRequest_ValidUser()
+        {
+            //Arrange
+            var request = new EditProfileRequest(2, "test3", "12121212", "Integration update est", "", false, 3, UserRoles.Developer, OfficeLocation.Pretoria);
+            //Act
+            var resp = await _userService.EditProfile(request);
+            //Assert
+            Assert.Equal(HttpStatusCode.Accepted, resp.Response);
+        }
+//--------------------------------------ViewProfile----------------------------------
+        [Fact]
+        public async void ViewProfile_InvalidRequest_NullRequest()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.ViewProfile(null));
+        }
+        [Fact]
+        public async void ViewProfile_InvalidRequest_NullRequest()
+        {
+            //Arrange
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async ()=> await _userService.ViewProfile(null));
         }
     }
 }

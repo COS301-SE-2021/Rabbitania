@@ -39,14 +39,14 @@ namespace backend_api.Services.User
             
             else
             {
-                if (request.Email!= null || request.Email.Length > 0)
+                if (request == null)
                 {
-                    throw new InvalidUserEmailRequest("Create User request is null or user email is empty");
+                    throw new InvalidUserRequestException("Create User request is null");
 
                 }
                 else
                 {
-                    throw new InvalidUserRequestException("Create User request is null or user email is empty");
+                    throw new InvalidUserEmailRequest("Create user email is empty");
 
                 }
             }
@@ -108,8 +108,16 @@ namespace backend_api.Services.User
             {
                 throw new InvalidUserIdException("UserID is invalid");
             }
+
+            try
+            {
+                return await _userRepository.EditProfile(request);
+            }
+            catch (Exception e)
+            {
+                throw new InvalidUserRequestException(e.Message);
+            }
             
-            return await _userRepository.EditProfile(request);
         }
         
         public async Task<ViewProfileResponse> ViewProfile(ViewProfileRequest request)
@@ -130,18 +138,6 @@ namespace backend_api.Services.User
             }
 
             return returnObject;
-        }
-        public async Task<ViewProfileResponse> ViewProfileAsp(ViewProfileRequest request)
-        {
-            if (request == null)
-            {
-                throw new InvalidUserRequestException("Request object cannot be null");
-            }
-            if (request.UserId.Equals(null))
-            {
-                throw new Exception("Error Missing UserID");
-            }
-            return _userRepository.ViewProfileAsp(request);
         }
 
         public async Task<GetUserProfilesResponse> GetUserProfiles(GetUserProfilesRequest request)
