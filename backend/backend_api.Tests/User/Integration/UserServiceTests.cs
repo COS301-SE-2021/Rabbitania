@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using backend_api.Data.User;
+using backend_api.Exceptions.Notifications;
 using backend_api.Exceptions.User;
 using backend_api.Models.Auth.Requests;
 using backend_api.Models.User.Requests;
@@ -46,7 +47,7 @@ namespace backend_api.Tests.User.Integration
             await _context.Nodes.AddAsync(nodeToDelete);
             await _context.SaveChangesAsync();*/
         }
-
+//------------------------------------CreateUser------------------------------
         [Fact]
         public async void CreateUser_InvalidRequest_NullRequest()
         {
@@ -75,7 +76,7 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.Equal("User Successfully Created", resp.Response);
         }
-
+//--------------------------GetUser--------------------------
         [Fact]
         public async void GetUser_InvalidRequest_NullRequest()
         {
@@ -122,6 +123,6 @@ namespace backend_api.Tests.User.Integration
             //Assert
             Assert.NotNull(resp);
         }
-        
+
     }
 }

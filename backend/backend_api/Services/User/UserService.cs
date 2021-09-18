@@ -76,19 +76,6 @@ namespace backend_api.Services.User
             }
             
         }
-        
-        public async Task<GetUserResponse> GetUserByID(GetUserByIDRequest request)
-        {
-            var user = await _userRepository.GetUser(request.UserId);
-            if (!user.Equals(null))
-            {
-                return new GetUserResponse(user, user.Name,user.EmployeeLevel,user.IsAdmin,user.UserDescription,user.UserId,user.PhoneNumber,user.UserRole,user.UserImgUrl,user.OfficeLocation,user.PinnedUserIds);
-            }
-            else
-            {
-                throw new InvalidUserRequestException("User does not exist");
-            }
-        }
         public async Task<GetUserResponse> GetUserByEmail(GetUserByEmailRequest request)
         {
             var user = await _userRepository.GetUserByEmail(request.Email);
@@ -101,7 +88,6 @@ namespace backend_api.Services.User
                 throw new InvalidUserRequestException("User does not exist");
             }
         }
-
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             if (request == null)
