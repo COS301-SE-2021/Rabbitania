@@ -22,7 +22,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         private readonly UserEmails _mockedEmail;
         private UserContext _userContext;
         
-        private readonly IUserRepository userRepo;
+        private readonly IUserRepository _userRepo;
         private readonly AuthService authService;
         
         
@@ -52,8 +52,8 @@ namespace backend_api.Tests.Auth.IntegrationTests
             // _userContext.Users.Add(_mockedUser);
             // _userContext.UserEmail.Add(_mockedEmail);
             // await _userContext.SaveChanges();
-            userRepo = new UserRepository(_userContext);
-            authService = new AuthService(userRepo);
+            _userRepo = new UserRepository(_userContext);
+            authService = new AuthService(_userRepo);
 
         }
 

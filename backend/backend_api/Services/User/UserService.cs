@@ -32,22 +32,49 @@ namespace backend_api.Services.User
 
         public async Task<CreateUserResponse> CreateUser(GoogleSignInRequest request)
         {
-            return await _userRepository.CreateUser(request);
+            if (request != null && request.Email!= null && request.Email.Length > 0)
+            {
+                return await _userRepository.CreateUser(request);
+            }
+            
+            else
+            {
+                if (request.Email!= null || request.Email.Length > 0)
+                {
+                    throw new InvalidUserEmailRequest("Create User request is null or user email is empty");
+
+                }
+                else
+                {
+                    throw new InvalidUserRequestException("Create User request is null or user email is empty");
+
+                }
+            }
         }
 
-        public GetUserResponse getUser(GetUserRequest request)
+        public async Task<GetUserResponse> getUser(GetUserRequest request)
         {
             //TODO: implement GetUSerResponse to use the jwt token from google login API
             //JsonWebToken token = request.getToken();
             //String email = token.getEmail();
-
+            if (request == null || request.getName() == null || request.getSurname() == null)
+            {
+                throw new InvalidUserRequestException("Get User request is null");
+            }
             String name = request.getName();
            
             //search for user
-            Models.User.Users user = _userRepository.GetUser(name).Result[0];
+            try
+            {
+                Models.User.Users user = _userRepository.GetUser(name).Result[0];
+                GetUserResponse response = new GetUserResponse(user, name, user.EmployeeLevel, user.IsAdmin, user.UserDescription, user.UserId, user.PhoneNumber, user.UserRole, user.UserImgUrl, user.OfficeLocation, user.PinnedUserIds);
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw new InvalidUserRequestException(e.Message);
+            }
             
-            GetUserResponse response = new GetUserResponse(user, name, user.EmployeeLevel, user.IsAdmin, user.UserDescription, user.UserId, user.PhoneNumber, user.UserRole, user.UserImgUrl, user.OfficeLocation, user.PinnedUserIds);
-            return response;
         }
         
         public async Task<GetUserResponse> GetUserByID(GetUserByIDRequest request)

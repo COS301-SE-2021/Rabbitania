@@ -51,7 +51,13 @@ namespace backend_api.Data.User
 
         public async Task<List<Models.User.Users>> GetUser(String name)
         {
-            return await _users.Users.Where(x => x.Name == name).ToListAsync();
+            var resp = await _users.Users.Where(x => x.Name == name).ToListAsync();
+            if (resp.Count == 0)
+            {
+                throw new InvalidUserRequestException("User: "+name+" does not exist in the database");
+            }
+
+            return resp;
         }
 
 

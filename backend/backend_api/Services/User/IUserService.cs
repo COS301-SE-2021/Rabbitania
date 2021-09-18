@@ -19,7 +19,7 @@ namespace backend_api.Services.User
         * @return Returns a response containing a GetUserResponse object which contains getters for each attribute of the user (details obtained from GetUserRequest object).
         */
         Task<CreateUserResponse> CreateUser(GoogleSignInRequest request);
-        GetUserResponse getUser(GetUserRequest request);
+        Task<GetUserResponse> getUser(GetUserRequest request);
 
         Task<EditProfileResponse> EditProfile(EditProfileRequest request);
 
