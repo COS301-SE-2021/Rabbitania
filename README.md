@@ -14,19 +14,29 @@
 
 
 ## Project Description
-<p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.</p>
+<p>The Covid 19 pandemic brought with it several challenges that almost every business has had to face. One of these major challenges is that companies have been forced to move from an environment where all interactions were in-person, to one where communication had to become digital. Rabbitania will offer a totally digital work environment by offering a collection of tools that will make interactions between colleagues as seamless as it would be if they were sitting directly next to one another.
+
+🖥️ Rabbiania Web : https://www.rabbitania.co.za
+<br>
+<br>
+</p>
 
 ## Technology Stack
 
    <h4>Back-End:</h4>
    <img src="https://img.shields.io/badge/.NET_Core-5C2D91?style=for-the-badge&logo=dot-net&logoColor=white" >
    <h4>Front-End:</h4>
-   <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" >
+   <p>
+      <img src="https://img.shields.io/badge/Flutter Mobile-02569B?style=for-the-badge&logo=flutter&logoColor=white" >
+      <img src="https://img.shields.io/badge/Angular Web-F44336?style=for-the-badge&logo=angular&logoColor=white" > 
+   </p>
    <h4>Database:</h4>
    <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" >
+   <h4>A.I:</h4>
+   <img src="https://img.shields.io/badge/Python-4B8BB?style=for-the-badge&logo=python&logoColor=white" >
    <h4>Other:</h4>
    <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" >
-
+   
 -----------------------------------------------------------------------------------
 
 ## GitHub Structure: 
