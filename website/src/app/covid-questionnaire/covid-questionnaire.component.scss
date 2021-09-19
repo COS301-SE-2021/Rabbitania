@@ -11,6 +11,112 @@
 
 }
 
+
+@media only screen and (max-width: 4000px){
+  mat-label{
+    font-size: xx-large;
+  }
+  .mat-raised-button{
+    font-size: xx-large;
+    padding: 10px;
+  }
+  .submit{
+    font-size: xx-large;
+  }
+}
+
+
+@media only screen and (max-width: 3000px){
+  mat-label{
+    font-size: xx-large;
+  }
+  mat-radio-button{
+    font-size: xx-large;
+  }
+  .mat-raised-button{
+    font-size: xx-large;
+    padding: 10px;
+  }
+  .submit{
+    font-size: xx-large;
+  }
+}
+
+
+@media only screen and (max-width: 1980px){
+  mat-label{
+    font-size: x-large;
+  }
+  mat-radio-button{
+    font-size: x-large;
+  }
+  .mat-raised-button{
+    font-size: x-large;
+    padding: 10px;
+  }
+  .submit{
+    font-size: x-large;
+  }
+}
+
+@media only screen and (max-width: 1200px){
+  mat-label{
+    font-size: large;
+  }
+  mat-radio-button{
+    font-size: large;
+  }
+  .mat-raised-button{
+    font-size: large;
+    padding: 10px;
+  }
+  .submit{
+    font-size: large;
+  }
+}
+
+
+@media only screen and (max-width: 750px){
+  mat-label{
+    font-size: medium;
+  }
+  mat-radio-button{
+    font-size: medium;
+  }
+  .mat-raised-button{
+    font-size: medium;
+    padding: 10px;
+  }
+  .submit{
+    font-size: medium;
+  }
+}
+
+@media only screen and (max-width: 350px){
+  mat-label{
+    font-size: medium;
+  }
+  mat-radio-button{
+    font-size: medium;
+  }
+  .mat-raised-button{
+    font-size: medium;
+    padding: 10px;
+  }
+  .submit{
+    font-size: medium;
+  }
+}
+
+.form-container{
+  border-style: solid;
+  border-color: rgba(179,255,79,1);
+  border-width: 3px;
+  background-color: rgb(56, 56, 56);
+  width: 100%;
+  height: 100%;
+}
+
 .mat-card-header{
   color: rgba(179,255,79,1);
   padding-top: 10%;
@@ -39,11 +145,6 @@
   padding-top: 5%;
 }
 
-.mat-raised-button{
-  font-size: 35px;
-  padding: 10px;
-}
-
 .margin-left mat-radio-button:not(:first-child){
   margin-left:10px;
 }
@@ -54,14 +155,6 @@ text-align: center;
 font-size: 35px;
 border-color: aliceblue;
 border-width: 10px;
-}
-
-.form-container{
-  border-style: solid;
-  border-color: rgba(179,255,79,1);
-  border-width: 3px;
-  background-color: rgb(56, 56, 56);
-  width: 100%;
 }
 
 .mat-radio-button {

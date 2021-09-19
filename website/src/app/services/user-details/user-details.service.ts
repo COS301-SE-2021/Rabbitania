@@ -40,7 +40,7 @@ export class UserDetailsService {
       }),
       observe: 'response' as const,
     };
-    await this.http.post('https://localhost:5001/api/User/CheckAdmin', this.adminObj, httpOptions).toPromise()
+    await this.http.post('https://rabbitania-runtimeterrors.herokuapp.com/api/User/CheckAdmin', this.adminObj, httpOptions).toPromise()
         .then((response) => {
             console.log(response.ok);
             if(response.ok === true){

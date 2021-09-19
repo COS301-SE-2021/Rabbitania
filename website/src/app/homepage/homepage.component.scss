@@ -35,7 +35,19 @@ mat-sidenav {
     padding-right: 10px;
     display: inline-table;
     text-decoration: none;
+    height: 225px;
+    width: 200px;
 }
+
+@media only screen and (max-width: 450px){
+    .logo {
+        padding-right: 10px;
+        display: inline-table;
+        text-decoration: none;
+        height: 0px;
+        width: 0px;
+    }
+  }
 
 .content {
     height: 90vh;
@@ -47,7 +59,6 @@ mat-sidenav {
     background-image: url(../../assets/png/background-rocks.png);
     background-attachment: fixed;
 }
-
 .log{
     border: solid 2px $greenColour;
     border-radius: 10px;
