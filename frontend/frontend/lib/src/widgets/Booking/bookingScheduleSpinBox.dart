@@ -166,18 +166,9 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
                     content: Text(
                         "There seems to be an error with creating a schedule... Please contact technical support if this error persists."),
                     actions: [
-                      TextButton(
+                      IconButton(
                         onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text(
-                          "Close",
-                          style: TextStyle(
-                              color: Color.fromRGBO(33, 33, 33, 1),
-                              fontSize: 20),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          shape: StadiumBorder(),
-                        ),
+                        icon: Icon(Icons.close, color: Colors.red),
                       ),
                     ],
                   );
