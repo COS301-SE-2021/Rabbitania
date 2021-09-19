@@ -16,7 +16,7 @@ Future<List<Thread>> fetchNotice() async {
       ((X509Certificate cert, String host, int port) => true);
 
   String url =
-      'http://10.0.2.2:5000/api/NoticeBoard/RetrieveNoticeBoardThreads';
+      'https://rabbitania-runtimeterrors.herokuapp.com/api/NoticeBoard/RetrieveNoticeBoardThreads';
   HttpClientRequest request = await client.getUrl(Uri.parse(url));
   request.headers.set('content-type', 'application/json');
   request.headers.set('Authorization', 'Bearer $token');
@@ -43,7 +43,7 @@ Future<bool> deleteThread(int threadID) async {
     }
     final response = await http.delete(
       Uri.parse(
-          'https://10.0.2.2:5001/api/NoticeBoard/DeleteNoticeBoardThread'),
+          'https://rabbitania-runtimeterrors.herokuapp.com/api/NoticeBoard/DeleteNoticeBoardThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -74,7 +74,8 @@ Future<String> addNewThread(
       noticeboardCreateInputImage = noticeboardCreateImg64;
     }
     final response = await http.post(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/AddNoticeBoardThread'),
+      Uri.parse(
+          'https://rabbitania-runtimeterrors.herokuapp.com/api/NoticeBoard/AddNoticeBoardThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -107,7 +108,8 @@ Future<String> increaseEmoji(String emoji) async {
   final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/IncreaseEmoji'),
+      Uri.parse(
+          'https://rabbitania-runtimeterrors.herokuapp.com/api/NoticeBoard/IncreaseEmoji'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -134,7 +136,8 @@ Future<String> decreaseEmoji(String emoji) async {
   final token = await FirebaseAuth.instance.currentUser!.getIdToken();
   try {
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/DecreaseEmoji'),
+      Uri.parse(
+          'https://rabbitania-runtimeterrors.herokuapp.com/api/NoticeBoard/DecreaseEmoji'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'
@@ -169,7 +172,8 @@ Future<String> editNoticeboardThread(
       noticeboardEditInputImage = noticeboardEditImg64;
     }
     final response = await http.put(
-      Uri.parse('https://10.0.2.2:5001/api/NoticeBoard/EditNoticeBoardThread'),
+      Uri.parse(
+          'https://rabbitania-runtimeterrors.herokuapp.com/api/NoticeBoard/EditNoticeBoardThread'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token'

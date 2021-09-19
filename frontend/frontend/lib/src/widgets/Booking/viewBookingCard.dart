@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/src/models/Booking/bookingModel.dart';
+import 'package:frontend/src/models/utilModel.dart';
 import 'package:frontend/src/provider/booking_provider.dart';
 
 class BookingListView extends StatefulWidget {
@@ -10,7 +11,7 @@ class BookingListView extends StatefulWidget {
 
 class _BookingListView extends State<BookingListView> {
   final _bookingProvider = new BookingProvider();
-
+  final utilModel = UtilModel();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ViewBookingModel>>(
@@ -88,30 +89,13 @@ class _BookingListView extends State<BookingListView> {
                   content:
                       Text("Are you sure you want to delete this booking?"),
                   actions: [
-                    TextButton(
+                    IconButton(
                       onPressed: () => Navigator.of(context).pop(false),
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(
-                            color: Color.fromRGBO(33, 33, 33, 1), fontSize: 20),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                        shape: StadiumBorder(),
-                      ),
+                      icon: Icon(Icons.close, color: Colors.red),
                     ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
-                      child: const Text(
-                        "Confirm",
-                        style: TextStyle(
-                            color: Color.fromRGBO(33, 33, 33, 1), fontSize: 20),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(171, 255, 79, 1),
-                        shape: StadiumBorder(),
-                      ),
-                    ),
+                    IconButton(
+                        onPressed: () => Navigator.of(context).pop(true),
+                        icon: Icon(Icons.check, color: utilModel.greenColor)),
                   ],
                 );
               },
