@@ -266,9 +266,7 @@ Widget reactions(BuildContext context) {
     boxColor: Color.fromRGBO(33, 33, 33, 1),
     boxItemsSpacing: 7,
     boxPadding: EdgeInsets.only(top: 3, bottom: 3, left: 3),
-    onReactionChanged: (reaction, index, isChecked) {
-      print('reaction selected index: $index');
-    },
+    onReactionChanged: (reaction, index, isChecked) {},
     reactions: <Reaction>[
       Reaction(
         previewIcon: Icon(Icons.thumb_up_alt_rounded,

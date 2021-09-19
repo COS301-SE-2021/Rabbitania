@@ -133,7 +133,7 @@ class ForumProvider {
   Future<String> editNewForum(String title) async {
     URLHelper url = new URLHelper();
     final baseURL = await url.getBaseURL();
-    print(title);
+
     try {
       if (title == "") {
         throw ("Cannot Submit Empty Fields");
@@ -392,7 +392,6 @@ class ForumThreadCommentProvider {
     request.headers.set('Authorization', 'Bearer $token');
     HttpClientResponse response1 = await request.close();
     String reply = await response1.transform(utf8.decoder).join();
-    print(jsonDecode(reply));
 
     List? cList =
         ForumThreadComments.fromJson(jsonDecode(reply)).forumCommentsList;
@@ -415,7 +414,6 @@ class ForumThreadCommentProvider {
     URLHelper urlBase = new URLHelper();
     final baseURL = await urlBase.getBaseURL();
     try {
-      print(currentCommentId);
       if (currentCommentId < 0) {
         throw ("Error: Comment Id is invalid");
       }

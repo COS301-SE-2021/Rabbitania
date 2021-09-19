@@ -211,7 +211,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                     ),
                     onPressed: () {
                       int office = this.getOfficeIndex(this.dropdownValue);
-                      print(office);
+
                       DateTime date = DateTime.now();
                       //convert date variable to string using format
                       String formattedDate =
@@ -236,7 +236,6 @@ class _BookingDayTextState extends State<BookingDayText> {
                                   office: office,
                                   bookingDate: formattedDate)
                               .then((value) {
-                            print(value);
                             if (value == "Created new Booking") {
                               return showDialog<void>(
                                 builder: (BuildContext context) {

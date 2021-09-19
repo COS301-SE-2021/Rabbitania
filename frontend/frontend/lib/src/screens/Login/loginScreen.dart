@@ -67,7 +67,6 @@ class LoginState extends State<Login> {
                               ConnectionState.waiting) {
                             return Center(child: CircularProgressIndicator());
                           } else if (snapshot.hasData) {
-                            print(snapshot.data);
                             return Container(
                               child: ContinueButton(snapshot.data),
                             );

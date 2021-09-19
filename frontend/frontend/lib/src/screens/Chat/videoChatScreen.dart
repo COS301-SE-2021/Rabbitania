@@ -47,36 +47,28 @@ class _VideoChatState extends State<VideoChatScreen> {
     _engine.setEventHandler(
       RtcEngineEventHandler(
         joinChannelSuccess: (channel, uid, elapsed) {
-          setState(() {
-            print('onJoinChannel: $channel, uid: $uid');
-          });
+          setState(() {});
         },
         leaveChannel: (stats) {
           setState(() {
-            print('onLeaveChannel');
             _users.clear();
           });
         },
         userJoined: (uid, elapsed) {
           setState(() {
-            print('userJoined: $uid');
-
             _users.add(uid);
           });
         },
         userOffline: (uid, elapsed) {
           setState(() {
-            print('userOffline: $uid');
             _users.remove(uid);
           });
         },
         streamMessage: (_, __, message) {
           final String info = "here is the message $message";
-          print(info);
         },
         streamMessageError: (_, __, error, ___, ____) {
           final String info = "here is the error $error";
-          print(info);
         },
       ),
     );
@@ -85,8 +77,6 @@ class _VideoChatState extends State<VideoChatScreen> {
   }
 
   Future<void> _initAgoraRtcEngine() async {
-    print("APP ID =====" + widget.appId);
-
     _engine = await RtcEngine.createWithConfig(RtcEngineConfig(widget.appId));
     await _engine.enableVideo();
 
