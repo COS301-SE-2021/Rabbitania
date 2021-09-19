@@ -14,7 +14,7 @@ import { DomainCheckComponent } from 'src/app/domain-check/domain-check.componen
   providedIn: 'root'
 })
 export class AuthService {
-  
+
   authSuccess: boolean = false;
 
   token = {
@@ -35,7 +35,7 @@ export class AuthService {
     private userDetails: UserDetailsService) {
 
     }
-  
+
   async setToken() : Promise<any> {
     await this.authFire.currentUser.then(async (data) => {
       await data?.getIdTokenResult().then((returned) => {
@@ -61,7 +61,7 @@ export class AuthService {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     const user = await this.authFire.signInWithPopup(googleAuthProvider);
     this.authSuccess = false;
-    
+
     this.userobj = {
       "displayName": user.user?.displayName,
       "email": user.user?.email,
@@ -76,7 +76,7 @@ export class AuthService {
       }),
       observe: 'response' as const,
     };
-    await this.http.post('https://localhost:5001/api/Auth/GoogleLogin', this.userobj, httpOptions).toPromise()
+    await this.http.post('https://rabbitania-runtimeterrors.herokuapp.com/api/Auth/GoogleLogin', this.userobj, httpOptions).toPromise()
         .then((response) => {
             console.log(response.ok);
             if(response.ok === true || response.status === 201){
@@ -90,7 +90,7 @@ export class AuthService {
             let modelRef = this.model.open(DomainCheckComponent,{
               width: '250px'
             });
-        
+
             modelRef.afterClosed().subscribe(result => {
               if(result == "close"){
                 this.authSuccess = false;

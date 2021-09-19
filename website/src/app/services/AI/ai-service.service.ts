@@ -56,7 +56,7 @@ async Activate(email:string){
     }),
     'observe': 'response' as const,
   };
-  this.http.put<QuestionnaireRequest>('https://localhost:5001/api/Node/ActivateNode', {
+  this.http.put<QuestionnaireRequest>('https://rabbitania-runtimeterrors.herokuapp.com/api/Node/ActivateNode', {
     userEmail : email
    },httpOptions).subscribe((data) => {
     if(data){
