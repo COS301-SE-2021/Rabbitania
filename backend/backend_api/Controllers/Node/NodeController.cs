@@ -79,6 +79,7 @@ namespace backend_api.Controllers.Node
         }
         /// <summary>
         ///     API endpoint for creating a new node in the DB.
+        ///     API endpoint for creating a new node in the DB.
         /// </summary>
         /// <param name="request"></param>
         /// <returns>CreateNodeResponse</returns>
@@ -88,7 +89,7 @@ namespace backend_api.Controllers.Node
         {
             if (request != null)
             {
-                RecurringJob.AddOrUpdate(() => _service.DeactivateAllNodes(null), "59 23 * * 1-6", TimeZoneInfo.Local);
+                RecurringJob.AddOrUpdate(() => _service.DeactivateAllNodes(null), "59 23 * * 1-6", TimeZoneInfo.FindSystemTimeZoneById("South African Standard Time"));
                 return await _service.CreateNode(request);
             }
             else
