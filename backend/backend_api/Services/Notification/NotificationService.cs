@@ -108,7 +108,7 @@ namespace backend_api.Services.Notification
             var client = new SmtpClient();
             try
             {
-                await client.ConnectAsync(_settings.Host, _settings.Port, true);
+                await client.ConnectAsync("smtp.gmail.com", 465, true);
                 await client.AuthenticateAsync(emailSettingsMail, emailSettingsPassword);
                 await client.SendAsync(email);
 
