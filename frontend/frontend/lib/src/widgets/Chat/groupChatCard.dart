@@ -99,11 +99,20 @@ class _GroupChatCardState extends State<GroupChatCard> {
                                         var displayName = streamSnapshot
                                             .data.docs[0]['displayName'];
                                         return AlertDialog(
+                                          elevation: 5,
+                                          backgroundColor:
+                                              Color.fromRGBO(33, 33, 33, 1),
+                                          titleTextStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 32),
+                                          contentTextStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
                                           title: Text('Delete Group'),
                                           content: Text(
                                               'Are you sure you want to leave this group?'),
                                           actions: [
-                                            TextButton(
+                                            IconButton(
                                               onPressed: () async {
                                                 await firestoreHelper
                                                     .sendGroupChatMessage(
@@ -115,13 +124,15 @@ class _GroupChatCardState extends State<GroupChatCard> {
                                                         widget.roomName, myId);
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('Yes'),
+                                              icon: Icon(Icons.check,
+                                                  color: utilModel.greenColor),
                                             ),
-                                            TextButton(
+                                            IconButton(
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text('No'),
+                                              icon: Icon(Icons.close,
+                                                  color: Colors.red),
                                             ),
                                           ],
                                         );

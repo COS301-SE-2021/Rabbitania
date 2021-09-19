@@ -24,8 +24,6 @@ class _chatViewUserScreenState extends State<ChatViewUsersScreen> {
   bool visible = false;
   _chatViewUserScreenState() {
     this.groupChatHelper.addListener(() {
-      print(this.groupChatHelper.usersArray.length);
-      print(this.visible);
       if (this.groupChatHelper.usersArray.length < 2) {
         setState(() {
           this.visible = false;

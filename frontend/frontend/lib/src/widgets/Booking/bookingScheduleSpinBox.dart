@@ -131,27 +131,28 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
                 availability: this.spinBoxAfternoon.toInt().toString());
 
             if (create1 && create2) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Schedule Successfully Created!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color.fromRGBO(171, 255, 79, 1),
-                      fontSize: 20,
-                    ),
-                  ),
-                  duration: const Duration(milliseconds: 5000),
-                  width: 300.0,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8.0,
-                  ),
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-              );
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      elevation: 5,
+                      backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+                      titleTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 32),
+                      contentTextStyle:
+                          TextStyle(color: Colors.white, fontSize: 16),
+                      title: Text('Schedule Updated'),
+                      content: Text('Booking schedule updated successfully'),
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.check, color: utilModel.greenColor),
+                        ),
+                      ],
+                    );
+                  });
             } else {
               return showDialog<void>(
                 builder: (BuildContext context) {
@@ -166,18 +167,9 @@ class _BookingScheduleSpinboxState extends State<BookingScheduleSpinbox> {
                     content: Text(
                         "There seems to be an error with creating a schedule... Please contact technical support if this error persists."),
                     actions: [
-                      TextButton(
+                      IconButton(
                         onPressed: () => Navigator.of(context).pop(false),
-                        child: const Text(
-                          "Close",
-                          style: TextStyle(
-                              color: Color.fromRGBO(33, 33, 33, 1),
-                              fontSize: 20),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                          shape: StadiumBorder(),
-                        ),
+                        icon: Icon(Icons.close, color: Colors.red),
                       ),
                     ],
                   );

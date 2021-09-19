@@ -31,7 +31,6 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
   void refresh() {
     UtilModel.route(() => ForumCommentScreen(), context);
     setState(() {});
-    print("refresh");
   }
 
   final formKey = GlobalKey<FormState>();
@@ -98,7 +97,6 @@ class _ForumCommentScreen extends State<ForumCommentScreen> {
               withBorder: false,
               errorText: 'Comment cannot be blank',
               sendButtonMethod: () async {
-                print(commentController.text);
                 await commentProvider.addNewComment(
                     commentController.text, threadCommentCreatorId);
                 commentController.clear();

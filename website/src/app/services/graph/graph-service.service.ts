@@ -10,6 +10,7 @@ export class GraphServiceService {
   private AdjacencyList: Array<any> = [];
   private RedEmails : Array<string> = [];
   private OrangeEmails : Array<string> = [];
+  private CovidEmail: Array<string> = [];
   private CovidNode!: MovableNodes;
   private RedRadius!: number;
   private OrangeRadius!: number;
@@ -19,8 +20,13 @@ export class GraphServiceService {
     //Find the correct node for which the adjacency list will be constructed
     this.CovidNode = nodes.find((x: { userEmail: string; }) => x.userEmail == userEmail);
 
+
+    this.CovidEmail.push(userEmail);
     console.log(this.CovidNode);
+    console.log(this.CovidEmail);
     console.log(nodes);
+    console.log(userEmail);
+
 
     nodes.forEach((element: any) => {
       if(element.userEmail != userEmail){
@@ -51,6 +57,8 @@ export class GraphServiceService {
     if(this.OrangeEmails.length > 0 ){
       this.emailService.SendEmail("There is a small likelihood that you have come in contact with someone who has covid. We advise you get tested if you experience any symptoms within the next week.", "Covid Warning!", this.OrangeEmails);
     }
+
+    this.emailService.SendEmail("There is a large possibility that you have contracted Covid recently, make sure to get a covid test as soon as possible and wear a mask while interacting with other employees", "Covid Warning", this.CovidEmail);
   }
 
   //sqrt(square(x2 - x1) + square(y2 - y1))

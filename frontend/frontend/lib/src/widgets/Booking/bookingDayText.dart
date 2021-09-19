@@ -211,7 +211,7 @@ class _BookingDayTextState extends State<BookingDayText> {
                     ),
                     onPressed: () {
                       int office = this.getOfficeIndex(this.dropdownValue);
-                      print(office);
+
                       DateTime date = DateTime.now();
                       //convert date variable to string using format
                       String formattedDate =
@@ -236,7 +236,6 @@ class _BookingDayTextState extends State<BookingDayText> {
                                   office: office,
                                   bookingDate: formattedDate)
                               .then((value) {
-                            print(value);
                             if (value == "Created new Booking") {
                               return showDialog<void>(
                                 builder: (BuildContext context) {
@@ -256,19 +255,12 @@ class _BookingDayTextState extends State<BookingDayText> {
                                         this.dropdownValue +
                                         " successfully created!"),
                                     actions: [
-                                      TextButton(
+                                      IconButton(
                                         onPressed: () =>
                                             Navigator.of(context).pop(false),
-                                        child: const Text(
-                                          "Close",
-                                          style: TextStyle(
-                                              color:
-                                                  Color.fromRGBO(33, 33, 33, 1),
-                                              fontSize: 20),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.red,
-                                          shape: StadiumBorder(),
+                                        icon: Icon(
+                                          Icons.close,
+                                          color: Colors.red,
                                         ),
                                       ),
                                     ],
@@ -291,20 +283,11 @@ class _BookingDayTextState extends State<BookingDayText> {
                                     content: Text(
                                         "There are no booking slots currently availible. Please try again later."),
                                     actions: [
-                                      TextButton(
+                                      IconButton(
                                         onPressed: () =>
                                             Navigator.of(context).pop(false),
-                                        child: const Text(
-                                          "Close",
-                                          style: TextStyle(
-                                              color:
-                                                  Color.fromRGBO(33, 33, 33, 1),
-                                              fontSize: 20),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Colors.red,
-                                          shape: StadiumBorder(),
-                                        ),
+                                        icon: Icon(Icons.close,
+                                            color: Colors.red),
                                       ),
                                     ],
                                   );
@@ -327,19 +310,10 @@ class _BookingDayTextState extends State<BookingDayText> {
                                 content: Text(
                                     "You have already booked for this slot for the week!"),
                                 actions: [
-                                  TextButton(
+                                  IconButton(
                                     onPressed: () =>
                                         Navigator.of(context).pop(false),
-                                    child: const Text(
-                                      "Close",
-                                      style: TextStyle(
-                                          color: Color.fromRGBO(33, 33, 33, 1),
-                                          fontSize: 20),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.red,
-                                      shape: StadiumBorder(),
-                                    ),
+                                    icon: Icon(Icons.close, color: Colors.red),
                                   ),
                                 ],
                               );

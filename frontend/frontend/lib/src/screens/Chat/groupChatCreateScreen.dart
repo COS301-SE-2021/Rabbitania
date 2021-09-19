@@ -163,7 +163,7 @@ class _GroupChatCreateScreenState extends State<GroupChatCreateScreen> {
                                       textController.text,
                                       widget.groupChatHelper.usersArray,
                                       _imageBase64);
-                              print(widget.groupChatHelper.usersArray);
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

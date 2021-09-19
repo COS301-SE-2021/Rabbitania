@@ -144,20 +144,6 @@ Future<String> saveAllUserDetails(
   final baseURL = await url.getBaseURL();
   final token = await FirebaseAuth.instance.currentUser!.getIdToken();
 
-  print(userID.toString() +
-      " " +
-      username +
-      " " +
-      description +
-      " " +
-      role.toString() +
-      " " +
-      location.toString() +
-      " " +
-      level.toString() +
-      " " +
-      phoNum);
-
   try {
     if (role == "" ||
         location == "" ||

@@ -80,9 +80,7 @@ class _Notice extends State<Notice> {
           );
         },
         icon3: Icons.airplane_ticket,
-        onPressed3: () {
-          print("Fab 3");
-        },
+        onPressed3: () {},
       ),
       bottomNavigationBar: bnb(context),
       appBar: AppBar(

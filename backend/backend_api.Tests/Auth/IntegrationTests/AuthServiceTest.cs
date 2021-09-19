@@ -22,7 +22,7 @@ namespace backend_api.Tests.Auth.IntegrationTests
         private readonly UserEmails _mockedEmail;
         private UserContext _userContext;
         
-        private readonly IUserRepository userRepo;
+        private readonly IUserRepository _userRepo;
         private readonly AuthService authService;
         
         
@@ -52,8 +52,8 @@ namespace backend_api.Tests.Auth.IntegrationTests
             // _userContext.Users.Add(_mockedUser);
             // _userContext.UserEmail.Add(_mockedEmail);
             // await _userContext.SaveChanges();
-            userRepo = new UserRepository(_userContext);
-            authService = new AuthService(userRepo);
+            _userRepo = new UserRepository(_userContext);
+            authService = new AuthService(_userRepo);
 
         }
 
@@ -175,12 +175,11 @@ namespace backend_api.Tests.Auth.IntegrationTests
         public async void GetUserName_NullUser()
         {
             //Arrange
-            var name = "Unit Tests";
-            //Act
-            var respone = await authService.GetUserName(null);
-            //Assert
-            Assert.Null(respone);
             
+            //Act
+            //Assert
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await authService.GetUserName(null));
+
         }
         
         [Fact(DisplayName = "Checks that the user exists in the database and returns the user from a given name, should return null")]
@@ -189,9 +188,8 @@ namespace backend_api.Tests.Auth.IntegrationTests
             //Arrange
             var name = "Unit";
             //Act
-            var respone = await authService.GetUserName(name);
             //Assert
-            Assert.Null(respone);
+            await Assert.ThrowsAsync<InvalidUserRequestException>(async () => await authService.GetUserName(name));
         }
         
         [Fact(DisplayName = "Checks that the user exists and returns it from a given email, should return a user of ID 7")]

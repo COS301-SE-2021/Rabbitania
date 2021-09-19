@@ -155,7 +155,6 @@ class SingleNoticeCardObj extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(icon1);
     return Container(
       child: Card(
         color: Color.fromRGBO(57, 57, 57, 1),
@@ -250,7 +249,7 @@ class NoticeboardReactionsState extends State<NoticeboardReactions> {
           setState(() {
             if (temp == widget.amount) {
               temp++;
-              print(widget.iconSelected.toString());
+
               increaseEmoji(widget.iconSelected.toString());
               //++ Emoji amount in DB
             } else {

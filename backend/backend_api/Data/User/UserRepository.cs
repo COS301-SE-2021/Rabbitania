@@ -36,12 +36,6 @@ namespace backend_api.Data.User
             _aspUser = aspUser;
         }
 
-        public async Task<Models.User.Users> GetUser(int userID)
-        {
-            return await _users.Users.Where(x => x.UserId == userID).FirstOrDefaultAsync();
-            
-        }
-
         public async Task<Models.User.Users> GetUserByEmail(string email)
         {
             var userEmail = _users.UserEmail.Where(x => x.UsersEmail == email).FirstOrDefaultAsync();
@@ -51,7 +45,13 @@ namespace backend_api.Data.User
 
         public async Task<List<Models.User.Users>> GetUser(String name)
         {
-            return await _users.Users.Where(x => x.Name == name).ToListAsync();
+            var resp = await _users.Users.Where(x => x.Name == name).ToListAsync();
+            if (resp.Count == 0)
+            {
+                throw new InvalidUserRequestException("User: " + name + " does not exist in the database");
+            }
+
+            return resp;
         }
 
 
@@ -67,13 +67,13 @@ namespace backend_api.Data.User
             newUser.EmployeeLevel = 0;
             newUser.UserRole = UserRoles.Unassigned;
             newUser.OfficeLocation = OfficeLocation.Unassigned;
-            
+
             await _users.Users.AddAsync(newUser);
             await _users.SaveChangesAsync();
-            
+
             var newEmail = new UserEmails(request.Email, newUser.UserId);
             await _users.UserEmail.AddAsync(newEmail);
-            
+
             await _users.SaveChangesAsync();
 
             return new CreateUserResponse("User Successfully Created");
@@ -93,8 +93,9 @@ namespace backend_api.Data.User
             {
                 throw new InvalidUserRequestException("Request object cannot be null");
             }
+
             var selectedUser = _aspUser.Users.Where(x => x.UserId == request.UserId);
-            
+
             var name = "";
             var userImage = "";
             var description = "";
@@ -127,8 +128,8 @@ namespace backend_api.Data.User
                 throw new InvalidUserRequestException("Request object cannot be null");
             }
 
-            var selectedUser =  _users.Users.Where(x => x.UserId == request.UserId);
-            
+            var selectedUser = _users.Users.Where(x => x.UserId == request.UserId);
+
             var name = "";
             var userImage = "";
             var description = "";
@@ -149,15 +150,16 @@ namespace backend_api.Data.User
             }
 
             if (name == "")
-            { 
+            {
                 return new ViewProfileResponse(HttpStatusCode.BadGateway);
             }
+
             var response = new ViewProfileResponse(HttpStatusCode.OK, name,
                 userImage, description, phoneNumber, empLevel, userRole, officeLocation);
 
             return response;
         }
-        
+
         public async Task<GetUserProfilesResponse> GetUserProfiles()
         {
             var users = _users.Users;
@@ -168,7 +170,8 @@ namespace backend_api.Data.User
 
             foreach (var user in listOfUsers)
             {
-                listOfUserProfiles.Add(new Users(user.UserId, user.Name, user.PhoneNumber, user.UserImgUrl, user.UserDescription, user.EmployeeLevel, user.OfficeLocation, user.UserRole));
+                listOfUserProfiles.Add(new Users(user.UserId, user.Name, user.PhoneNumber, user.UserImgUrl,
+                    user.UserDescription, user.EmployeeLevel, user.OfficeLocation, user.UserRole));
             }
 
             return new GetUserProfilesResponse(listOfUserProfiles);
@@ -177,9 +180,9 @@ namespace backend_api.Data.User
         public async Task<EditProfileResponse> EditProfile(EditProfileRequest request)
         {
             var toUpdate = await _users.Users.FirstOrDefaultAsync(uu => uu.UserId == request.UserId);
-            
+
             /*if(request.Name != )*/
-            
+
             toUpdate.Name = request.Name;
             toUpdate.PhoneNumber = request.PhoneNumber;
             toUpdate.UserImgUrl = request.UserImage;
@@ -229,7 +232,7 @@ namespace backend_api.Data.User
         public List<string> GetAllUserEmails()
         {
             var emails = _users.UserEmail.Select(e => e.UsersEmail).Distinct().ToList();
-            
+
             return emails;
         }
 
@@ -238,18 +241,24 @@ namespace backend_api.Data.User
             try
             {
                 var user = await _users.Users.FirstOrDefaultAsync(x => x.UserId == request.UserId);
-
-                try
+                if (user != null && user.Name.Length > 0)
                 {
-                    user.IsAdmin = true;
-                    await _users.SaveChangesAsync();
+                    try
+                    {
+                        user.IsAdmin = true;
+                        await _users.SaveChangesAsync();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    return new MakeUserAdminResponse("User successfully made Admin", HttpStatusCode.OK);
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.Message);
-                }
+                    return new MakeUserAdminResponse(HttpStatusCode.BadRequest);
 
-                return new MakeUserAdminResponse("User successfully made Admin", HttpStatusCode.OK);
+                }
             }
             catch (Exception e)
             {

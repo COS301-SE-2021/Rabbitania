@@ -36,7 +36,6 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
         () {
           this.isSelected = true;
           widget.groupChatHelper.addUserToArray(widget.idUser);
-          print(widget.groupChatHelper.usersArray);
         },
       );
     } else if (this.isSelected == true) {
@@ -44,7 +43,6 @@ class _ChatUsersCardState extends State<ChatUsersCard> {
         () {
           this.isSelected = false;
           widget.groupChatHelper.removeUserFromArray(widget.idUser);
-          print(widget.groupChatHelper.usersArray);
         },
       );
     }
