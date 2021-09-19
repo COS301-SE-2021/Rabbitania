@@ -13,12 +13,12 @@ export class EmailService {
   constructor(private http: HttpClient, ) { }
 
   async SendEmail(_payload : any, _subject : any, _email : any){
+    console.log(sessionStorage.getItem('token'));
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
       }),
-      'observe': 'response' as const,
     };
     this.http.post<EmailRequest>('https://localhost:5001/api/Notifications/SendEmailNotification',{
       payload : _payload,

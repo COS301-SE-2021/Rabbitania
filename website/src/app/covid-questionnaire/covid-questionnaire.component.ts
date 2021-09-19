@@ -16,6 +16,7 @@ import { Graph } from '../interfaces/Graph';
 import { MatDialog } from '@angular/material/dialog';
 import { GraphServiceService } from '../services/graph/graph-service.service';
 import { transpileModule } from 'typescript';
+import { EmailService } from '../services/email-delivery-service/email.service';
 
 @Component({
   selector: 'app-covid-questionnaire',
@@ -46,6 +47,7 @@ isDisabled  = true;
     private nodeService: NodeServiceService,
     private graphService: GraphServiceService,
     public model: MatDialog,
+    public emailService: EmailService
     ) { }
 
   async ngOnInit(){
@@ -166,6 +168,7 @@ async getNodes()
             if(data){
               console.log(data);
               if(data > 0.70){
+               
                 this.graphService.CreateGraph(this.nodes, this.user_email);
               }
             }
