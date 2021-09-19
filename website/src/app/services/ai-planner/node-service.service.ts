@@ -34,7 +34,7 @@ export class NodeServiceService {
     }
     else
     {
-      return this.token.token;      
+      return this.token.token;
     }
   }
 
@@ -46,7 +46,7 @@ export class NodeServiceService {
       }),
       'observe': 'response' as const,
     };
-    this.http.put('https://localhost:5001/api/Node/SaveNodes', {
+    this.http.put('https://rabbitania-runtimeterrors.herokuapp.com/api/Node/SaveNodes', {
       nodes: node,
     },httpOptions).subscribe(
       (data) => {
@@ -79,7 +79,7 @@ export class NodeServiceService {
       },
     };
 
-    this.http.delete('https://localhost:5001/api/Node/DeleteNode', options).subscribe(
+    this.http.delete('https://rabbitania-runtimeterrors.herokuapp.com/api/Node/DeleteNode', options).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
@@ -100,11 +100,11 @@ export class NodeServiceService {
   }
 
 
-  
+
   async Get(){
 
     const headers = { 'Authorization': 'Bearer ' + await this.Token()};
-    this.http.get('https://localhost:5001/api/Node/GetAllNodes',{headers}).subscribe(
+    this.http.get('https://rabbitania-runtimeterrors.herokuapp.com/api/Node/GetAllNodes',{headers}).subscribe(
       (data) => {
         if (data) {
           this.bs.next(data);
@@ -133,7 +133,7 @@ export class NodeServiceService {
       'observe': 'response' as const,
     };
 
-      this.http.post<NodeRequest>('https://localhost:5001/api/Node/CreateNode', {
+      this.http.post<NodeRequest>('https://rabbitania-runtimeterrors.herokuapp.com/api/Node/CreateNode', {
       userEmail: _userEmail,
       xPos: _xPos,
       yPos: _yPos,
