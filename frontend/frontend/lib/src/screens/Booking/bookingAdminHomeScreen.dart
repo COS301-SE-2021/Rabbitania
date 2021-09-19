@@ -76,7 +76,7 @@ class _BookingAdminState extends State<BookingAdminScreen> {
           centerTitle: true,
           elevation: 0,
           title: Text(
-            'Admin Booking',
+            'Admin Schedule',
             style: TextStyle(
               fontSize: 35,
               color: Color.fromRGBO(172, 255, 79, 1),

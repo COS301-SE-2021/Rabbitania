@@ -28,7 +28,6 @@ class ChatParticipantBarState extends State<ChatParticipantBar> {
       stream: fireStoreHelper.getUserById(widget.idUser),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          print(snapshot.data.docs[0]['avatar']);
           return Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

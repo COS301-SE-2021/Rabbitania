@@ -54,8 +54,6 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
                                     widget.idUser, myId),
                                 builder: (BuildContext context,
                                     AsyncSnapshot snapshot) {
-                                  print(widget.idUser);
-
                                   List<Widget> children = [];
                                   if (snapshot.hasData) {
                                     if (snapshot.data.docs.length == 0) {

@@ -93,8 +93,6 @@ class _GroupChatRoomScreenState extends State<GroupChatRoomScreen> {
                                             streamSnapshot.data.docs[i]
                                                     ['uid'] !=
                                                 -1) {
-                                          print(streamSnapshot.data.docs[i]
-                                              ['dateCreated']);
                                           children.add(
                                             ChatMessageReceiver(
                                                 textSentValue: streamSnapshot
