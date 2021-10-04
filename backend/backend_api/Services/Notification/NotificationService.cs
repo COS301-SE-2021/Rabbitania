@@ -110,11 +110,11 @@ namespace backend_api.Services.Notification
             //var client = new SmtpClient();
             var client = new RestClient();
             client.BaseUrl = new Uri ("https://api.mailgun.net/v3");
-            client.Authenticator = new HttpBasicAuthenticator ("https://api.mailgun.net/v3/sandbox87cff19f76a242bf84fc0e46c46ce56f.mailgun.org",
-                "b0b3f8a432b021a7cc3afa2fd4ab5129-90346a2d-a444a055");
+            client.Authenticator = new HttpBasicAuthenticator ("",
+                "");
             RestRequest Restrequest = new RestRequest ();
             Restrequest.AddParameter ("from", "Excited User <mailgun@YOUR_DOMAIN_NAME>");
-            Restrequest.AddParameter ("to", "jms.hltt@gmail.com");
+            Restrequest.AddParameter ("to", "");
             Restrequest.AddParameter ("subject", "Hello");
             Restrequest.AddParameter ("text", "Testing some Mailgun awesomness!");
             Restrequest.Method = Method.POST;
