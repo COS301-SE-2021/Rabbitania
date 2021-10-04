@@ -9,6 +9,8 @@ using backend_api.Models.Notification.Responses;
 using Castle.Core.Internal;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using RestSharp;
+using RestSharp.Authenticators;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace backend_api.Services.Notification
@@ -87,44 +89,56 @@ namespace backend_api.Services.Notification
                 throw new EmailFailedToSendException("Request is null");
             }
             
-            var emailSettingsMail = Environment.GetEnvironmentVariable("EmailSettings_Mail");
-            var emailSettingsDisplayName = Environment.GetEnvironmentVariable("EmailSettings_DisplayName");
-            var emailSettingsPassword = Environment.GetEnvironmentVariable("EmailSettings_Password");
-            
-            var email = new MimeMessage();
-            var emailLists = new InternetAddressList();
-            foreach (var address in request.Email)
-            {
-                emailLists.Add(MailboxAddress.Parse(address));
-            }
-            email.From.Add(new MailboxAddress(emailSettingsDisplayName,emailSettingsMail));
-            email.To.AddRange(emailLists);
-            email.Subject = request.Subject;
-            email.Body = new TextPart("plain")
-            {
-                Text = request.Payload
-            };
+            // var emailSettingsMail = Environment.GetEnvironmentVariable("EmailSettings_Mail");
+            // var emailSettingsDisplayName = Environment.GetEnvironmentVariable("EmailSettings_DisplayName");
+            // var emailSettingsPassword = Environment.GetEnvironmentVariable("EmailSettings_Password");
+            //
+            // var email = new MimeMessage();
+            // var emailLists = new InternetAddressList();
+            // foreach (var address in request.Email)
+            // {
+            //     emailLists.Add(MailboxAddress.Parse(address));
+            // }
+            // email.From.Add(new MailboxAddress(emailSettingsDisplayName,emailSettingsMail));
+            // email.To.AddRange(emailLists);
+            // email.Subject = request.Subject;
+            // email.Body = new TextPart("plain")
+            // {
+            //     Text = request.Payload
+            // };
 
-            var client = new SmtpClient();
-            try
-            {
-                await client.ConnectAsync("smtp.gmail.com", 465, true);
-                await client.AuthenticateAsync(emailSettingsMail, emailSettingsPassword);
-                await client.SendAsync(email);
-
-                var response = new SendEmailNotificationResponse(HttpStatusCode.Accepted);
-                return response;
-            }
-            catch (Exception e)
-            {
-                var error = new SendEmailNotificationResponse(HttpStatusCode.BadRequest);
-                return error;
-            }
-            finally
-            {
-                await client.DisconnectAsync(true);
-                client.Dispose();
-            }
+            //var client = new SmtpClient();
+            var client = new RestClient();
+            client.BaseUrl = new Uri ("https://api.mailgun.net/v3");
+            client.Authenticator = new HttpBasicAuthenticator ("https://api.mailgun.net/v3/sandbox87cff19f76a242bf84fc0e46c46ce56f.mailgun.org",
+                "b0b3f8a432b021a7cc3afa2fd4ab5129-90346a2d-a444a055");
+            RestRequest Restrequest = new RestRequest ();
+            Restrequest.AddParameter ("from", "Excited User <mailgun@YOUR_DOMAIN_NAME>");
+            Restrequest.AddParameter ("to", "jms.hltt@gmail.com");
+            Restrequest.AddParameter ("subject", "Hello");
+            Restrequest.AddParameter ("text", "Testing some Mailgun awesomness!");
+            Restrequest.Method = Method.POST;
+            client.Execute(Restrequest);
+            // try
+            // {
+            //     await client.ConnectAsync("smtp.gmail.com", 465, true);
+            //     await client.AuthenticateAsync(emailSettingsMail, emailSettingsPassword);
+            //     await client.SendAsync(email);
+            //
+            //     var response = new SendEmailNotificationResponse(HttpStatusCode.Accepted);
+            //     return response;
+            // }
+            // catch (Exception e)
+            // {
+            //     var error = new SendEmailNotificationResponse(HttpStatusCode.BadRequest);
+            //     return error;
+            // }
+            // finally
+            // {
+            //     await client.DisconnectAsync(true);
+            //     client.Dispose();
+            // }
+            return new SendEmailNotificationResponse(HttpStatusCode.Accepted);
         }
     }
 }
