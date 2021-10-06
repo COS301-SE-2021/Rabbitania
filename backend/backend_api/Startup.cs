@@ -82,12 +82,12 @@ namespace backend_api
             services.AddTransient<IAuthService, AuthService>();
             
 
-            services.AddHangfire(options =>
-            {
-                options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
-                
-            });
-            //services.AddResponseCaching();
+             services.AddHangfire(options =>
+             {
+                 options.UsePostgreSqlStorage(Environment.GetEnvironmentVariable("MAIN_CONN_STRING"));
+                 
+             });
+            services.AddResponseCaching();
             services.AddControllers();
             /*
             Line #3 defined the name of the context class to be added. In our cases it is DatabaseContext.

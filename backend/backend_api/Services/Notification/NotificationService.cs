@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using backend_api.Data.Notification;
@@ -9,6 +10,10 @@ using backend_api.Models.Notification.Responses;
 using Castle.Core.Internal;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using RestSharp;
+using RestSharp.Authenticators;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace backend_api.Services.Notification
@@ -86,44 +91,38 @@ namespace backend_api.Services.Notification
             {
                 throw new EmailFailedToSendException("Request is null");
             }
+            var displayName = Environment.GetEnvironmentVariable("EmailSettings_DisplayName");
+            var mailAddressFrom = Environment.GetEnvironmentVariable("EmailSettings_Mail");
             
-            var emailSettingsMail = Environment.GetEnvironmentVariable("EmailSettings_Mail");
-            var emailSettingsDisplayName = Environment.GetEnvironmentVariable("EmailSettings_DisplayName");
-            var emailSettingsPassword = Environment.GetEnvironmentVariable("EmailSettings_Password");
-            
-            var email = new MimeMessage();
-            var emailLists = new InternetAddressList();
+            var emailsTo = new List<EmailAddress>();
             foreach (var address in request.Email)
             {
-                emailLists.Add(MailboxAddress.Parse(address));
+                emailsTo.Add(new EmailAddress(address));
             }
-            email.From.Add(new MailboxAddress(emailSettingsDisplayName,emailSettingsMail));
-            email.To.AddRange(emailLists);
-            email.Subject = request.Subject;
-            email.Body = new TextPart("plain")
+            var apikey = Environment.GetEnvironmentVariable("SENDGRID_PASSWORD");
+            var client = new SendGridClient(apikey);
+            var from = new EmailAddress(mailAddressFrom, displayName);
+            var bodyContent = new TextPart("plain")
             {
                 Text = request.Payload
             };
-
-            var client = new SmtpClient();
-            try
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, emailsTo, request.Subject, bodyContent.Text, "");
+            
+            try 
             {
-                await client.ConnectAsync("smtp.gmail.com", 465, true);
-                await client.AuthenticateAsync(emailSettingsMail, emailSettingsPassword);
-                await client.SendAsync(email);
-
-                var response = new SendEmailNotificationResponse(HttpStatusCode.Accepted);
-                return response;
+                 var response = await client.SendEmailAsync(msg);
+                 if (response.IsSuccessStatusCode)
+                 {
+                     return new SendEmailNotificationResponse(HttpStatusCode.Accepted);
+                 }
+                 else
+                 {
+                     return new SendEmailNotificationResponse(HttpStatusCode.InternalServerError);
+                 }
             }
             catch (Exception e)
             {
-                var error = new SendEmailNotificationResponse(HttpStatusCode.BadRequest);
-                return error;
-            }
-            finally
-            {
-                await client.DisconnectAsync(true);
-                client.Dispose();
+                return new SendEmailNotificationResponse(HttpStatusCode.BadRequest); 
             }
         }
     }
