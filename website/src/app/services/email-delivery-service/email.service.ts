@@ -20,7 +20,7 @@ export class EmailService {
         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
       }),
     };
-    this.http.post<EmailRequest>('https://localhost:5001/api/Notifications/SendEmailNotification',{
+    this.http.post<EmailRequest>('https://rabbitania-runtimeterrors.herokuapp.com/api/Notifications/SendEmailNotification',{
       payload : _payload,
       subject : _subject,
       email : _email,
