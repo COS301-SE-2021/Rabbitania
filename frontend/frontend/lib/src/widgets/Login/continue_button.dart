@@ -4,7 +4,9 @@ import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/helper/JWT/securityHelper.dart';
 import 'package:frontend/src/helper/URL/urlHelper.dart';
 import 'package:frontend/src/helper/UserInformation/userHelper.dart';
+import 'package:frontend/src/provider/google_sign_in.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Login/loginScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -84,13 +86,45 @@ class _ContinueButton extends State<ContinueButton> {
       showDialog(
         context: context,
         builder: (context) => new AlertDialog(
+          elevation: 5,
+          backgroundColor: Color.fromRGBO(33, 33, 33, 1),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 32),
+          contentTextStyle: TextStyle(color: Colors.white, fontSize: 16),
           title: new Text("Login Error"),
-          content: new Text("There was an error"),
+          content:
+              new Text("The login email you are trying to use is not valid"),
           actions: <Widget>[
             ElevatedButton(
-              child: Text('Close me!'),
-              onPressed: () {
-                Navigator.of(context).pop();
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0),
+                backgroundColor: MaterialStateProperty.all(
+                  Color.fromRGBO(172, 255, 79, 1),
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(
+                      style: BorderStyle.none,
+                    ),
+                  ),
+                ),
+              ),
+              child: Text(
+                'Retry',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
+              ),
+              onPressed: () async {
+                final googleProvider = GoogleSignInProvider();
+                await googleProvider.googleLogout();
+                await userHelper.clearPersitantUserData();
+                await userHelper.clearPersitantUserName();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
               },
             )
           ],
