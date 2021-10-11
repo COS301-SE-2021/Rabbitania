@@ -70,6 +70,10 @@ class _NoticeThreadBoard extends State<NoticeBoardThread> {
                           ),
                           tooltip: 'Continue',
                           onPressed: () async {
+                            titleControllerNoticeboardCreate.text = "";
+                            contentControllerNoticeboardCreate.text = "";
+                            noticeboardCreateImg64 = "";
+                            noticeboardCreateImageFile = null;
                             UtilModel.route(() => NoticeBoard(), context);
                           },
                         ),
