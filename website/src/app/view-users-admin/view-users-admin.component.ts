@@ -16,45 +16,9 @@ import { FormControl } from '@angular/forms';
 
 interface Country {
   name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
-  }
-];
-
-function search(text: string, pipe: PipeTransform): Country[] {
-  return COUNTRIES.filter(country => {
-    const term = text.toLowerCase();
-    return country.name.toLowerCase().includes(term)
-        || pipe.transform(country.area).includes(term)
-        || pipe.transform(country.population).includes(term);
-  });
+  number: string;
+  description: string;
+  imgUrl: string;
 }
 
 @Component({
@@ -68,8 +32,37 @@ export class ViewUsersAdminComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   private router:Router;
+
+  // User Information 
   countries$: Observable<Country[]>;
   filter = new FormControl('');
+
+  USERS: Country[] = [
+    {
+      name: 'Matthew Harty',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'De Villiers Meiring',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'James Hullet',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'Joseph Harraway',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    }
+  ];
 
   // Authorized User Detials
   user_displayName = "";
@@ -95,8 +88,15 @@ export class ViewUsersAdminComponent implements OnInit {
       this.router = router;
       this.countries$ = this.filter.valueChanges.pipe(
         startWith(''),
-        map(text => search(text, pipe))
+        map(text => this.searchUsers(text, pipe))
       );
+  }
+
+  searchUsers(text: string, pipe: PipeTransform): Country[] {
+    return this.USERS.filter(user => {
+      const term = text.toLowerCase();
+      return user.name.toLowerCase().includes(term);
+    });
   }
 
   async ngOnInit(){

@@ -81,19 +81,19 @@
               <table class="table table-striped">
                 <thead>
                 <tr>
-                  <th scope="col">Country</th>
-                  <th scope="col">Area</th>
-                  <th scope="col">Population</th>
+                  <th scope="col">User's Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Phone Number</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let country of countries$ | async; index as i">
                   <td>
-                    <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+                    <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.number" class="mr-2" style="width: 20px"> -->
                     <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
                   </td>
-                  <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
-                  <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="country.description" [term]="filter.value"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="country.imgUrl" [term]="filter.value"></ngb-highlight></td>
                 </tr>
                 </tbody>
             </table>
