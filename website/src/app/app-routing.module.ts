@@ -19,6 +19,9 @@ const routes: Routes = [
   },
   {
     path: "ai-planner", component: AIPlannerComponent, canActivate: [PlannerIsadminGuard]
+  },
+  {
+    path: "view-users-admin", component: ViewUsersAdminComponent, canActivate: [PlannerIsadminGuard]
   }
 ];
 

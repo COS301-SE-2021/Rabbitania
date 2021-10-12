@@ -1,5 +1,9 @@
 @import '../homepage/homepage.component.scss';
 
-mat-grid-tile {
-    background: $greenColour;
+table{
+    color: $greenColour;
+}
+
+.form-control{
+    background-color: $greenColour;
 }

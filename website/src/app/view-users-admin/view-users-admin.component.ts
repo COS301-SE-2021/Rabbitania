@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, PipeTransform, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
-import { delay } from 'rxjs/operators';
+import { delay, map, startWith } from 'rxjs/operators';
 import { AuthService } from '../services/firebase/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -10,54 +10,66 @@ import { UserDetailsService } from '../services/user-details/user-details.servic
 import { User } from '../interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { SignOutComponent } from '../sign-out/sign-out.component';
+import { DecimalPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+
+interface Country {
+  name: string;
+  flag: string;
+  area: number;
+  population: number;
+}
+
+const COUNTRIES: Country[] = [
+  {
+    name: 'Russia',
+    flag: 'f/f3/Flag_of_Russia.svg',
+    area: 17075200,
+    population: 146989754
+  },
+  {
+    name: 'Canada',
+    flag: 'c/cf/Flag_of_Canada.svg',
+    area: 9976140,
+    population: 36624199
+  },
+  {
+    name: 'United States',
+    flag: 'a/a4/Flag_of_the_United_States.svg',
+    area: 9629091,
+    population: 324459463
+  },
+  {
+    name: 'China',
+    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
+    area: 9596960,
+    population: 1409517397
+  }
+];
+
+function search(text: string, pipe: PipeTransform): Country[] {
+  return COUNTRIES.filter(country => {
+    const term = text.toLowerCase();
+    return country.name.toLowerCase().includes(term)
+        || pipe.transform(country.area).includes(term)
+        || pipe.transform(country.population).includes(term);
+  });
+}
 
 @Component({
   selector: 'app-view-users-admin',
   templateUrl: './view-users-admin.component.html',
-  styleUrls: ['./view-users-admin.component.scss']
+  styleUrls: ['./view-users-admin.component.scss'],
+  providers: [DecimalPipe]
 })
+
 export class ViewUsersAdminComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   private router:Router;
-
-  users = [
-    {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-  ];
+  countries$: Observable<Country[]>;
+  filter = new FormControl('');
 
   // Authorized User Detials
   user_displayName = "";
@@ -72,14 +84,19 @@ export class ViewUsersAdminComponent implements OnInit {
   //
 
   loggingIn = false;
-
+  
   constructor(
     private observer: BreakpointObserver,
     private service: AuthService,
     router: Router,
     public model: MatDialog,
+    pipe: DecimalPipe,
     private userService: UserDetailsService) {
       this.router = router;
+      this.countries$ = this.filter.valueChanges.pipe(
+        startWith(''),
+        map(text => search(text, pipe))
+      );
   }
 
   async ngOnInit(){

@@ -52,29 +52,19 @@
         </button>
 
         <mat-divider class="nav-divider"></mat-divider>
-        <h4 class="name">Employee Dashboard</h4>
-
-        <button mat-button class="menu-button">
-            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
-            <span class="menu-icon-text">View Bookings Schedule</span>
-        </button>
-
-        <button mat-button class="menu-button">
-            <span class="menu-icon"><fa-icon [icon]="faBook"></fa-icon></span>
-            <span class="menu-icon-text">View Your Bookings</span>
-        </button>
-    
-
-        <mat-divider class="nav-divider"></mat-divider>
         <h4 class="name">Administrator Dashboard</h4>
 
         <button mat-button class="menu-button" routerLink="/ai-planner">
             <span class="menu-icon"><fa-icon [icon]="faBriefcase"></fa-icon></span>
             <span class="menu-icon-text">Office Planner</span>
         </button>
-        <button mat-button class="menu-button">
+        <button mat-button class="menu-button" routerLink="/view-users-admin">
             <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
             <span class="menu-icon-text">View Users</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
+            <span class="menu-icon-text">View Bookings Schedule</span>
         </button>
      
     </mat-sidenav>
