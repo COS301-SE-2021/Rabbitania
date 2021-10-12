@@ -4,6 +4,7 @@ import 'package:frontend/src/helper/Chat/fireStoreHelper.dart';
 import 'package:frontend/src/models/utilModel.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:frontend/src/provider/user_provider.dart';
+import 'package:frontend/src/screens/Chat/ChatViewUsersScreen.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageReceiver.dart';
 import 'package:frontend/src/widgets/Chat/chatMessageSender.dart';
 import 'package:frontend/src/widgets/Chat/chatParticipantBar.dart';
@@ -31,6 +32,11 @@ class _chatRoomScreenState extends State<ChatRoomScreen> {
           return Scaffold(
             backgroundColor: utilModel.greyColor,
             appBar: AppBar(
+              leading: BackButton(
+                onPressed: () {
+                  UtilModel.route(() => ChatViewUsersScreen(), context);
+                },
+              ),
               toolbarHeight: MediaQuery.of(context).size.height * 0.1,
               title: ChatParticipantBar(widget.idUser),
               backgroundColor: Colors.transparent,
