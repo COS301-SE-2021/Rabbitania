@@ -61,6 +61,30 @@ export class ViewUsersAdminComponent implements OnInit {
       number: 'f/f3/Flag_of_Russia.svg',
       description: 'Hello',
       imgUrl: 'img'
+    },
+    {
+      name: 'James Hullet',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'Joseph Harraway',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'James Hullet',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'Joseph Harraway',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
     }
   ];
 

@@ -1,7 +1,29 @@
 @import '../homepage/homepage.component.scss';
 
+.view{
+    padding: 5%;
+}
+
+.search-text{
+    color: $greenColour;
+}
+
 table{
     color: $greenColour;
+    padding: 5%;
+
+    td{
+        border: 1px solid $greenColour;
+    }
+
+    th{
+        border: 1px solid $greenColour;
+    }
+
+    thead{
+        background-color: black;
+        color: $greenColour;
+    }
 }
 
 .form-control{
