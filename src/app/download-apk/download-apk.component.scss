@@ -13,6 +13,21 @@
     animation: mover 1.5s infinite  alternate;
 }
 
+@media only screen and (max-width: 750px){
+    .dragonslayers{
+        position: absolute;
+        z-index: 0;
+        height: 150px;
+        width: 150px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 10%;
+        top: 5%;
+        -webkit-animation: mover 1.5s infinite  alternate;
+        animation: mover 1.5s infinite  alternate;
+    }
+}
+
 .temple{
     position: absolute;
     z-index: 0;
@@ -26,6 +41,21 @@
     animation: mover 2.5s infinite  alternate;
 }
 
+@media only screen and (max-width: 750px){
+    .temple{
+        position: absolute;
+        z-index: 0;
+        height: 180px;
+        width: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        right: 3%;
+        top: 20%;
+        -webkit-animation: mover 2.5s infinite  alternate;
+        animation: mover 2.5s infinite  alternate;
+    }
+}
+
 .worship{
     position: absolute;
     z-index: 0;
@@ -37,4 +67,19 @@
     top: 58%;
     -webkit-animation: mover 2.5s infinite  alternate;
     animation: mover 2.5s infinite  alternate;
+}
+
+@media only screen and (max-width: 750px){
+    .worship{
+        position: absolute;
+        z-index: 0;
+        height: 200px;
+        width: 200px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        left: 10%;
+        top: 68%;
+        -webkit-animation: mover 2.5s infinite  alternate;
+        animation: mover 2.5s infinite  alternate;
+    }
 }
