@@ -38,6 +38,14 @@
           }
         },
         {
+          "client_id": "248471898739-hv1b9i41ntgqqaveedf89r95rdp6nrom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rabbitania.frontend",
+            "certificate_hash": "b90fe5f72d231025a769792ba82acd83cb104773"
+          }
+        },
+        {
           "client_id": "248471898739-lkip4l1dhmr2cg4qif8qr868045jcp3o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
