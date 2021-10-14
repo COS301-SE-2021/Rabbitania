@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rabbitania.frontend">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="rabbitania"
         android:requestLegacyExternalStorage="true"
@@ -41,7 +42,6 @@
             android:value="2" />
 
     </application>
-    <!-- Required to fetch data from the internet. -->
-    <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>
