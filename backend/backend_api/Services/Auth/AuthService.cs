@@ -78,7 +78,7 @@ namespace backend_api.Services.Auth
             var email = request.Email;
             var arr = email.Split('@');
             //TODO: Change to retrorabbit.co.za once we have a test email to work with
-            if (arr[1].Equals("gmail.com") || arr[1].Equals("tuks.co.za"))
+            if (arr[1].Equals("tuks.co.za"))
             {
                 return new DomainResponse(true);
             }
