@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, PipeTransform, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
-import { delay } from 'rxjs/operators';
+import { delay, map, startWith } from 'rxjs/operators';
 import { AuthService } from '../services/firebase/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
@@ -10,53 +10,82 @@ import { UserDetailsService } from '../services/user-details/user-details.servic
 import { User } from '../interfaces/user';
 import { MatDialog } from '@angular/material/dialog';
 import { SignOutComponent } from '../sign-out/sign-out.component';
+import { DecimalPipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+
+interface Country {
+  name: string;
+  number: string;
+  description: string;
+  imgUrl: string;
+}
 
 @Component({
   selector: 'app-view-users-admin',
   templateUrl: './view-users-admin.component.html',
-  styleUrls: ['./view-users-admin.component.scss']
+  styleUrls: ['./view-users-admin.component.scss'],
+  providers: [DecimalPipe]
 })
+
 export class ViewUsersAdminComponent implements OnInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   private router:Router;
 
-  users = [
+  // User Information 
+  countries$: Observable<Country[]>;
+  filter = new FormControl('');
+
+  USERS: Country[] = [
     {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+      name: 'Matthew Harty',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
     },
     {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+      name: 'De Villiers Meiring',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
     },
     {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+      name: 'James Hullet',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
     },
     {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+      name: 'Joseph Harraway',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
     },
     {
-      name: 'Card Title 1',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card content',
-      phoneNumber: 'Button',
-      isAdmin: true,
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
+      name: 'James Hullet',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
     },
+    {
+      name: 'Joseph Harraway',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'James Hullet',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    },
+    {
+      name: 'Joseph Harraway',
+      number: 'f/f3/Flag_of_Russia.svg',
+      description: 'Hello',
+      imgUrl: 'img'
+    }
   ];
 
   // Authorized User Detials
@@ -72,14 +101,26 @@ export class ViewUsersAdminComponent implements OnInit {
   //
 
   loggingIn = false;
-
+  
   constructor(
     private observer: BreakpointObserver,
     private service: AuthService,
     router: Router,
     public model: MatDialog,
+    pipe: DecimalPipe,
     private userService: UserDetailsService) {
       this.router = router;
+      this.countries$ = this.filter.valueChanges.pipe(
+        startWith(''),
+        map(text => this.searchUsers(text, pipe))
+      );
+  }
+
+  searchUsers(text: string, pipe: PipeTransform): Country[] {
+    return this.USERS.filter(user => {
+      const term = text.toLowerCase();
+      return user.name.toLowerCase().includes(term);
+    });
   }
 
   async ngOnInit(){

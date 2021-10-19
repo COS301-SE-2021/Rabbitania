@@ -5,7 +5,7 @@
         <mat-icon *ngIf="sidenav.opened">close</mat-icon>
     </button>
     <div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://retrorabbit.co.za">
+    <a routerLink="/">
         <img height="225px" width="200px" src="../../assets/svgs/retrorabbit_banner.svg" class="logo"/>
     </a>
     <span class="toolbar-spacer"></span>
@@ -52,20 +52,10 @@
             <span class="menu-icon"><i class="bi bi-terminal"></i></span>
             <span class="menu-icon-text">About The Developers</span>
         </button>
-
-        <mat-divider class="nav-divider"></mat-divider>
-        <h4 class="name">Employee Dashboard</h4>
-
-        <button mat-button class="menu-button">
-            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
-            <span class="menu-icon-text">View Bookings Schedule</span>
+        <button mat-button class="menu-button" routerLink="/download-apk">
+            <span class="menu-icon"><i class="bi bi bi-phone"></i></span>
+            <span class="menu-icon-text">Download Mobile App</span>
         </button>
-
-        <button mat-button class="menu-button">
-            <span class="menu-icon"><fa-icon [icon]="faBook"></fa-icon></span>
-            <span class="menu-icon-text">View Your Bookings</span>
-        </button>
-    
 
         <mat-divider class="nav-divider"></mat-divider>
         <h4 class="name">Administrator Dashboard</h4>
@@ -74,11 +64,7 @@
             <span class="menu-icon"><fa-icon [icon]="faBriefcase"></fa-icon></span>
             <span class="menu-icon-text">Office Planner</span>
         </button>
-        <button mat-button class="menu-button" routerLink="/view-users">
-            <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
-            <span class="menu-icon-text">View Users</span>
-        </button>
-
+        
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content">
@@ -98,7 +84,11 @@
                 <img class="small-bolder" src="../../assets/svgs/small-bolders.svg">
                 <img class="small-bolder1" src="../../assets/svgs/small-bolders.svg">
             </div>
+
+            
         </div>
+        
+        
     </mat-sidenav-content>
 </mat-sidenav-container>
 

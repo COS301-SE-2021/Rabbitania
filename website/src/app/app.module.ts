@@ -41,6 +41,7 @@ import { AiPopupComponent } from './ai-popup/ai-popup.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { DomainCheckComponent } from './domain-check/domain-check.component';
 import { ViewUsersAdminComponent } from './view-users-admin/view-users-admin.component';
+import { DownloadApkComponent } from './download-apk/download-apk.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ViewUsersAdminComponent } from './view-users-admin/view-users-admin.com
     AiPopupComponent,
     AccessDeniedComponent,
     DomainCheckComponent,
-    ViewUsersAdminComponent
+    ViewUsersAdminComponent,
+    DownloadApkComponent
   ],
   imports: [
     BrowserModule,
