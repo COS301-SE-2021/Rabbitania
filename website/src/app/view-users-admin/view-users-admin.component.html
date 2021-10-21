@@ -1,3 +1,4 @@
+
 <mat-toolbar class="mat-elevation-z8">
     &nbsp;
     <button class="menu" mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
@@ -54,20 +55,6 @@
         </button>
 
         <mat-divider class="nav-divider"></mat-divider>
-        <h4 class="name">Employee Dashboard</h4>
-
-        <button mat-button class="menu-button">
-            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
-            <span class="menu-icon-text">View Bookings Schedule</span>
-        </button>
-
-        <button mat-button class="menu-button">
-            <span class="menu-icon"><fa-icon [icon]="faBook"></fa-icon></span>
-            <span class="menu-icon-text">View Your Bookings</span>
-        </button>
-    
-
-        <mat-divider class="nav-divider"></mat-divider>
         <h4 class="name">Administrator Dashboard</h4>
 
         <button mat-button class="menu-button" routerLink="/ai-planner">
@@ -78,26 +65,51 @@
             <span class="menu-icon"><i class="bi bi-person-bounding-box"></i></span>
             <span class="menu-icon-text">View Users</span>
         </button>
+        <button mat-button class="menu-button">
+            <span class="menu-icon"><fa-icon [icon]="faThList"></fa-icon></span>
+            <span class="menu-icon-text">View Bookings Schedule</span>
+        </button>
 
     </mat-sidenav>
     <mat-sidenav-content>
-        <div class="content">
-            <div class="col-md-3 mx-auto my-5" *ngFor="let user of users">
-                <mat-card>
-                <img mat-card-image src="{{user.img}}" alt="Photo of a Shiba Inu">
-                    <mat-card-title>
-                      <h4>{{user.name}}</h4>
-                    </mat-card-title>
-          
-                    <mat-card-content>
-                      {{user.description}}
-                    </mat-card-content>
-          
-                    <mat-card-actions>
-                        <button mat-button>Make Admin</button>
-                      </mat-card-actions>
-                </mat-card>
-            </div>
+    <body>
+        <div class="view">
+              <form>
+                <div class="form-group form-inline" style="padding:10px; margin-left:35%;">
+                    <p class="search-text"> <b style="font-size: large;">Search Users:</b> &nbsp;&nbsp; <input placeholder="User's name or email..." class="form-control ml" type="text" [formControl]="filter"/></p>
+                </div>
+              </form>
+              <br>
+              <br>
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">User's Name</th>
+                  <th scope="col">User's Email</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Admin Status</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let users of countries$ | async; index as i">
+                  <td>
+                    <!-- <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.number" class="mr-2" style="width: 20px"> -->
+                    <ngb-highlight [result]="users.name" [term]="filter.value"></ngb-highlight>
+                  </td>
+                  <td><ngb-highlight [result]="users.description" [term]="filter.value"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="users.imgUrl" [term]="filter.value"></ngb-highlight></td>
+                  <td>Admin</td>
+                  <td>
+                        &nbsp;&nbsp;
+                    <button class="btn btn-warning">Make Admin</button>
+                        &nbsp;&nbsp;
+                    <button class="btn btn-danger">Remove User</button>
+                  </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </body>
     </mat-sidenav-content>
 </mat-sidenav-container>

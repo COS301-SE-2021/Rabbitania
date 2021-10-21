@@ -1,0 +1,40 @@
+@import '../homepage/homepage.component.scss';
+
+.dragonslayers{
+    position: absolute;
+    z-index: 0;
+    height: 300px;
+    width: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 29%;
+    top: 5%;
+    -webkit-animation: mover 1.5s infinite  alternate;
+    animation: mover 1.5s infinite  alternate;
+}
+
+.temple{
+    position: absolute;
+    z-index: 0;
+    height: 400px;
+    width: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    right: 10%;
+    top: 46%;
+    -webkit-animation: mover 2.5s infinite  alternate;
+    animation: mover 2.5s infinite  alternate;
+}
+
+.worship{
+    position: absolute;
+    z-index: 0;
+    height: 400px;
+    width: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 10%;
+    top: 58%;
+    -webkit-animation: mover 2.5s infinite  alternate;
+    animation: mover 2.5s infinite  alternate;
+}
